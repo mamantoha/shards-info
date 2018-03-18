@@ -2,6 +2,7 @@ require "kemal"
 require "kilt/slang"
 require "cache"
 require "crest"
+require "emoji"
 
 require "./github"
 

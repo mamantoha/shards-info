@@ -8,6 +8,10 @@ shards:
     github: mamantoha/crest
     version: 0.9.8
 
+  emoji:
+    github: veelenga/emoji.cr
+    commit: 1588ecc2bd5b40496980c05b9ac872193c968ce7
+
   kemal:
     github: kemalcr/kemal
     version: 0.22.0

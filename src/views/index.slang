@@ -17,7 +17,7 @@ div class="tab-content"
             h3.shards__shard_name
               = repo.name
             p.shards__shard_desc
-              = repo.description
+              = Emoji.emojize(repo.description.to_s)
           .shards__shard_owner
             .shards__shard_owner_avatar
               img src="#{repo.owner.avatar_url}"
@@ -43,7 +43,7 @@ div class="tab-content"
             h3.shards__shard_name
               = repo.name
             p.shards__shard_desc
-              = repo.description
+              = Emoji.emojize(repo.description.to_s)
           .shards__shard_owner
             .shards__shard_owner_avatar
               img src="#{repo.owner.avatar_url}"
