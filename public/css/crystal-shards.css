@@ -1,0 +1,14 @@
+.shards__shard {
+	padding-top: 24px;
+	padding-bottom: 24px;
+	border-bottom: 1px solid #eee;
+}
+
+.shards__shard_owner_avatar img {
+	width: 20px;
+	margin-right: 5px;
+}
+
+.shards__shard_owner {
+	display: inline-flex;
+}
