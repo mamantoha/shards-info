@@ -2,7 +2,7 @@ version: 1.0
 shards:
   cache:
     github: mamantoha/cache
-    version: 0.0.1
+    version: 0.0.2
 
   kemal:
     github: kemalcr/kemal
