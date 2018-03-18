@@ -1,6 +1,7 @@
 require "kemal"
 require "kilt/slang"
 require "cache"
+require "crest"
 
 require "./github"
 
@@ -8,12 +9,8 @@ REPOS_CACHE = Cache::MemoryStore(String, Github::Repos).new(expires_in: 30.minut
 
 get "/" do
   repos = REPOS_CACHE.fetch("repos") do
-    client = HTTP::Client.new("api.github.com", 443, true)
-    client.basic_auth ENV["GITHUB_USER"], ENV["GITHUB_KEY"]
-    url = "/search/repositories?q=language=Crystal"
-    response = client.get(url)
-
-    Github::Repos.from_json(response.body)
+    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+    github_client.best_matched_repos
   end
 
   render "src/views/index.slang", "src/views/layouts/layout.slang"

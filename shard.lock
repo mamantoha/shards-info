@@ -4,6 +4,10 @@ shards:
     github: mamantoha/cache
     version: 0.0.2
 
+  crest:
+    github: mamantoha/crest
+    version: 0.9.8
+
   kemal:
     github: kemalcr/kemal
     version: 0.22.0
