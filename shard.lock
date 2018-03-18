@@ -1,0 +1,22 @@
+version: 1.0
+shards:
+  cache:
+    github: mamantoha/cache
+    version: 0.0.1
+
+  kemal:
+    github: kemalcr/kemal
+    version: 0.22.0
+
+  kilt:
+    github: jeromegn/kilt
+    version: 0.4.0
+
+  radix:
+    github: luislavena/radix
+    version: 0.3.8
+
+  slang:
+    github: jeromegn/slang
+    commit: 4ba04a04a352a8b3b43bd723dbff80cf1050f7cd
+

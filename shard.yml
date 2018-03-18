@@ -1,0 +1,25 @@
+name: crystal-shards
+version: 0.1.0
+
+authors:
+  - Anton Maminov <anton.linux@gmail.com>
+
+targets:
+  crystal-shards:
+    main: src/crystal-shards.cr
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+    version: ~> 0.22.0
+  slang:
+    github: jeromegn/slang
+    branch: master
+  cache:
+    github: mamantoha/cache
+    version: ~> 0.0.1
+
+
+crystal: 0.24.2
+
+license: MIT
