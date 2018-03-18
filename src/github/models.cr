@@ -17,7 +17,7 @@ module Github
       owner:             Owner,
       private:           Bool,
       html_url:          String,
-      description:       String,
+      description:       String?,
       fork:              Bool,
       url:               String,
       forks_url:         String,
