@@ -6,16 +6,21 @@ require "emoji"
 
 require "./github"
 
-RECENTLY_CACHE = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
-POPULAR_CACHE = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
+if ENV["HEROKU"]?
+  recently_cache = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
+  popular_cache = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
+else
+  recently_cache = Cache::RedisStore(String, String).new(expires_in: 30.minutes)
+  popular_cache = Cache::RedisStore(String, String).new(expires_in: 30.minutes)
+end
 
 get "/" do
-  recently_repos = RECENTLY_CACHE.fetch("repos") do
+  recently_repos = recently_cache.fetch("repos") do
     github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
     github_client.recently_updated.to_json
   end
 
-  popular_repos = POPULAR_CACHE.fetch("repos") do
+  popular_repos = popular_cache.fetch("repos") do
     github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
     github_client.popular.to_json
   end
