@@ -6,8 +6,8 @@ require "emoji"
 
 require "./github"
 
-RECENTLY_CACHE = Cache::RedisStore(String, String).new(expires_in: 30.minutes)
-POPULAR_CACHE = Cache::RedisStore(String, String).new(expires_in: 30.minutes)
+RECENTLY_CACHE = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
+POPULAR_CACHE = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
 
 get "/" do
   recently_repos = RECENTLY_CACHE.fetch("repos") do
