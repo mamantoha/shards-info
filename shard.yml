@@ -17,7 +17,7 @@ dependencies:
     branch: master
   cache:
     github: mamantoha/cache
-    version: ~> 0.0.1
+    version: ~> 0.0.4
   crest:
     github: mamantoha/crest
     version: ~> 0.9.8

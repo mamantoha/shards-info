@@ -2,7 +2,7 @@ version: 1.0
 shards:
   cache:
     github: mamantoha/cache
-    version: 0.0.2
+    version: 0.0.4
 
   crest:
     github: mamantoha/crest
@@ -23,6 +23,10 @@ shards:
   radix:
     github: luislavena/radix
     version: 0.3.8
+
+  redis:
+    github: stefanwille/crystal-redis
+    version: 1.9.0
 
   slang:
     github: jeromegn/slang
