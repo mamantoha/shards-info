@@ -12,6 +12,14 @@ shards:
     github: veelenga/emoji.cr
     commit: 1588ecc2bd5b40496980c05b9ac872193c968ce7
 
+  humanize_time:
+    github: mamantoha/humanize_time
+    commit: 4db0cae5fd6309b13404af542ed69804543973b7
+
+  i18n:
+    github: TechMagister/i18n.cr
+    version: 0.1.0
+
   kemal:
     github: kemalcr/kemal
     version: 0.22.0

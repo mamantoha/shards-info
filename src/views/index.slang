@@ -27,8 +27,7 @@ div class="tab-content"
             .col-4
               = repo.license_name
             .col-8
-              ' Updated on:
-              = repo.updated_at
+              = "Updated #{HumanizeTime.distance_of_time_in_words(repo.pushed_at, Time.now)} ago"
         .col-2
           i class="fas fa-star"
           = repo.watchers_count
@@ -53,8 +52,7 @@ div class="tab-content"
             .col-4
               = repo.license_name
             .col-8
-              ' Updated on:
-              = repo.updated_at
+              = "Updated #{HumanizeTime.distance_of_time_in_words(repo.pushed_at, Time.now)} ago"
         .col-2
           i class="fas fa-star"
           = repo.watchers_count

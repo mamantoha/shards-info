@@ -3,6 +3,7 @@ require "kilt/slang"
 require "cache"
 require "crest"
 require "emoji"
+require "humanize_time"
 
 require "./github"
 

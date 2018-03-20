@@ -24,6 +24,10 @@ dependencies:
   emoji:
     github: veelenga/emoji.cr
     branch: master
+  humanize_time:
+    github: mamantoha/humanize_time
+    branch: master
+
 
 crystal: 0.24.2
 
