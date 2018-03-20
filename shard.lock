@@ -2,7 +2,7 @@ version: 1.0
 shards:
   cache:
     github: mamantoha/cache
-    version: 0.0.4
+    version: 0.0.5
 
   crest:
     github: mamantoha/crest

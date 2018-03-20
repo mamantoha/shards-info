@@ -15,12 +15,12 @@ else
 end
 
 get "/" do
-  recently_repos = recently_cache.fetch("repos") do
+  recently_repos = recently_cache.fetch("recently_repos", expires_in: 5.minutes) do
     github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
     github_client.recently_updated.to_json
   end
 
-  popular_repos = popular_cache.fetch("repos") do
+  popular_repos = popular_cache.fetch("popular_repos") do
     github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
     github_client.popular.to_json
   end
