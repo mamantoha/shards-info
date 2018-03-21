@@ -14,7 +14,7 @@ shards:
 
   humanize_time:
     github: mamantoha/humanize_time
-    commit: 4db0cae5fd6309b13404af542ed69804543973b7
+    commit: 31e0f57420535ab43549c480f7de7b6e03c8f616
 
   i18n:
     github: TechMagister/i18n.cr
