@@ -4,15 +4,11 @@ TODO: Write a description here
 
 ## Installation
 
-TODO: Write installation instructions here
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-TODO: Write development instructions here
+* Install Redis
+* [Install](https://crystal-lang.org/docs/installation/) Crystal
+* Clone this repository
+* Install dependencies `shards install`
+* Run it `crystal src/crystal-shards.cr`
 
 ### Deploy
 
@@ -30,7 +26,7 @@ GITHUB_KEY
 
 ## Contributing
 
-1. Fork it ( https://github.com/[your-github-name]/crystal-shards/fork )
+1. Fork it ( https://github.com/mamantoha/crystal-shards/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
@@ -38,4 +34,4 @@ GITHUB_KEY
 
 ## Contributors
 
-- [[your-github-name]](https://github.com/[your-github-name]) Anton Maminov - creator, maintainer
+- [mamantoha](https://github.com/mamantoha) Anton Maminov - creator, maintainer
