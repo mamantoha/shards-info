@@ -1,3 +1,26 @@
+body {
+  padding-top: 4.5rem;
+}
+
+.search-wrap {
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
+  width: 100%;
+}
+
+.search-wrap .search-icon {
+  top: 10px;
+  right: 10px;
+  border: none;
+  background-color: transparent;
+  font-size: 18px;
+  font-family: "icomoon";
+  color: #007bff;
+  position: absolute;
+  cursor: pointer;
+}
+
 .navbar {
   margin-bottom: 1rem;
 }
