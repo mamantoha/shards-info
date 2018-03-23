@@ -3,5 +3,5 @@ nav aria-label="breadcrumb"
     li class="breadcrumb-item"
       a href="/" Home
     li class="breadcrumb-item"
-      a href="/#{user}" = user
+      a href="/repos/#{owner}" = owner
     li class="breadcrumb-item active" aria-current="page" = repo

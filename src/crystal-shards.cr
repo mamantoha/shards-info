@@ -32,14 +32,14 @@ get "/" do
   render "src/views/index.slang", "src/views/layouts/layout.slang"
 end
 
-get "/:user" do |env|
-  user = env.params.url["user"]
+get "/repos/:owner" do |env|
+  owner = env.params.url["owner"]
 
-  render "src/views/user.slang", "src/views/layouts/layout.slang"
+  render "src/views/owner.slang", "src/views/layouts/layout.slang"
 end
 
-get "/:user/:repo" do |env|
-  user = env.params.url["user"]
+get "/repos/:owner/:repo" do |env|
+  owner = env.params.url["owner"]
   repo = env.params.url["repo"]
 
   render "src/views/repo.slang", "src/views/layouts/layout.slang"
