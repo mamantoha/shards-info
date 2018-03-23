@@ -32,4 +32,17 @@ get "/" do
   render "src/views/index.slang", "src/views/layouts/layout.slang"
 end
 
+get "/:user" do |env|
+  user = env.params.url["user"]
+
+  render "src/views/user.slang", "src/views/layouts/layout.slang"
+end
+
+get "/:user/:repo" do |env|
+  user = env.params.url["user"]
+  repo = env.params.url["repo"]
+
+  render "src/views/repo.slang", "src/views/layouts/layout.slang"
+end
+
 Kemal.run
