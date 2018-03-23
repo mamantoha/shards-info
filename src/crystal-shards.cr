@@ -11,8 +11,8 @@ if ENV["HEROKU"]?
   recently_cache = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
   popular_cache = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
 else
-  recently_cache = Cache::RedisStore(String, String).new(expires_in: 30.minutes)
-  popular_cache = Cache::RedisStore(String, String).new(expires_in: 30.minutes)
+  recently_cache = Cache::NullStore(String, String).new(expires_in: 30.minutes)
+  popular_cache = Cache::NullStore(String, String).new(expires_in: 30.minutes)
 end
 
 get "/" do
