@@ -24,6 +24,8 @@ GITHUB_USER
 GITHUB_KEY
 ```
 
+Go to https://github.com/settings/tokens and generate new token (select `repo` scope).
+
 ## Contributing
 
 1. Fork it ( https://github.com/mamantoha/crystal-shards/fork )
