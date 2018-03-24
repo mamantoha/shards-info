@@ -41,6 +41,10 @@ get "/repos/:owner/:repo" do |env|
 
   repo = Github::Repo.from_json(repo)
 
+  unless repo.language == "Crystal"
+    env.redirect "/"
+  end
+
   render "src/views/repo.slang", "src/views/layouts/layout.slang"
 end
 
