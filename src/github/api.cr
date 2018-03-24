@@ -20,11 +20,18 @@ module Github
       search_repositories("", "updated", 1, 10)
     end
 
-    def repo_get(owner : String, repo : String)
-      url = "/repos/#{owner}/#{repo}"
+    def repo_get(full_name : String)
+      url = "/repos/#{full_name}"
       response = client[url].get
 
       Github::Repo.from_json(response.body)
+    end
+
+    def repo_releases(full_name : String)
+      url = "/repos/#{full_name}/releases"
+      response = client[url].get
+
+      Github::Releases.from_json(response.body)
     end
 
     # https://developer.github.com/v3/search/#search-repositories

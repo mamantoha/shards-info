@@ -8,6 +8,11 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
+li {
+  list-style-type: none;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -71,4 +76,26 @@ body {
   margin-bottom: 32px;
   padding-bottom: 30px;
   border-bottom: 1px solid #c1c4ca;
+}
+
+.shard__releases {
+  margin-bottom: 12px;
+}
+
+.shard__owner {
+  padding-top: 30px;
+  border-top: 1px solid #c1c4ca;
+  clear: both;
+}
+
+
+.shard__release-wrap {
+  font-weight: 800;
+}
+
+.list__heading {
+  font-weight: 800;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #a6aab2;
 }

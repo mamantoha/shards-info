@@ -4,7 +4,6 @@ TODO: Write a description here
 
 ## Installation
 
-* Install Redis
 * [Install](https://crystal-lang.org/docs/installation/) Crystal
 * Clone this repository
 * Install dependencies `shards install`
@@ -18,8 +17,6 @@ watches files, and rebuilds/restarts app on file changes.
 ```
 sentry
 ```
-
-Set env variable `REDIS` to use Redis cache store.
 
 ### Deploy
 
