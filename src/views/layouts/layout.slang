@@ -18,11 +18,12 @@ html lang="en"
   body
     nav class="navbar navbar-dark bg-dark fixed-top"
       .container
-        a class="navbar-brand" href="#"
+        a class="navbar-brand" href="/"
           /img src="/assets/brand/todo.svg" width="30" height="30" class="d-inline-block align-top" alt=""
           ' CrystalShards
     .container
       == content
+    div.space
     footer.footer
       .container
         span class="text-muted" CrystalShards

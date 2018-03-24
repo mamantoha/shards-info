@@ -1,0 +1,10 @@
+== render "src/views/partials/search_input.slang"
+
+div
+  h4.page__heading.text-right
+    = repos.total_count
+    ' shards found
+- if repos.total_count != 0
+  == render "src/views/partials/pagination.slang"
+  == render "src/views/partials/repos.slang"
+  == render "src/views/partials/pagination.slang"

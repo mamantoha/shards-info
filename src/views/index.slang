@@ -1,8 +1,4 @@
-.search-wrap
-  form
-    .form-group
-      input class="form-control form-control-lg" type="text" placeholder="Search shards..."
-      input type="submit" value="⌕" class="search-icon" data-disable-with="⌕"
+== render "src/views/partials/search_input.slang"
 
 ul class="nav nav-tabs" id="reposTab" role="tablist"
   li class="nav-item"

@@ -7,7 +7,7 @@ require "humanize_time"
 
 require "./github"
 
-CACHE = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
+CACHE         = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
 GITHUB_CLIENT = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
 get "/" do
@@ -23,6 +23,24 @@ get "/" do
   popular_repos = Github::Repos.from_json(popular_repos)
 
   render "src/views/index.slang", "src/views/layouts/layout.slang"
+end
+
+get "/repos" do |env|
+  if env.params.query.[]?("query").nil?
+    env.redirect "/"
+  else
+    query = env.params.query["query"].as(String)
+    page = env.params.query["page"]? || ""
+    page = page.to_i? || 1
+
+    repos = CACHE.fetch("search_#{query}_#{page}") do
+      GITHUB_CLIENT.filter(query, page).to_json
+    end
+
+    repos = Github::Repos.from_json(repos)
+
+    render "src/views/filter.slang", "src/views/layouts/layout.slang"
+  end
 end
 
 get "/repos/:owner" do |env|
