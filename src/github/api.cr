@@ -55,7 +55,7 @@ module Github
     # https://developer.github.com/v3/search/#search-repositories
     private def search_repositories(word = "", sort = "stars", page = 1, limit = 100, after_date = 1.years.ago)
       date_filter = after_date.to_s("%Y-%m-%d")
-      word = word != "" ? "#{word}+" : ""
+      word = word != "" ? "\"#{URI.escape(word)}+\"" : ""
       pushed = date_filter != "" ? "+pushed:>#{date_filter}" : ""
 
       url = "/search/repositories?q=#{word}language:crystal#{pushed}&per_page=#{limit}&sort=#{sort}&page=#{page}"

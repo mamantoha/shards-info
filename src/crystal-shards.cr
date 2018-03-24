@@ -21,6 +21,7 @@ get "/" do
 
   recently_repos = Github::Repos.from_json(recently_repos)
   popular_repos = Github::Repos.from_json(popular_repos)
+  query = ""
 
   render "src/views/index.slang", "src/views/layouts/layout.slang"
 end
@@ -30,6 +31,7 @@ get "/repos" do |env|
     env.redirect "/"
   else
     query = env.params.query["query"].as(String)
+
     page = env.params.query["page"]? || ""
     page = page.to_i? || 1
 
