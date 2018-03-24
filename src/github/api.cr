@@ -52,6 +52,17 @@ module Github
       Github::Releases.from_json(response.body)
     end
 
+    def dependent_repos(full_name : String)
+      query = URI.escape("github: #{full_name}")
+      filename = "shard.yml"
+      type = "Code"
+
+      url = "/search/code?q=#{query}+filename:#{filename}&type=#{type}"
+      response = client[url].get
+
+      Github::CodeSearches.from_json(response.body)
+    end
+
     # https://developer.github.com/v3/search/#search-repositories
     private def search_repositories(word = "", sort = "stars", page = 1, limit = 100, after_date = 1.years.ago)
       date_filter = after_date.to_s("%Y-%m-%d")

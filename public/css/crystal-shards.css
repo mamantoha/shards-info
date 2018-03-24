@@ -95,6 +95,10 @@ li {
   margin-bottom: 12px;
 }
 
+.shard__dependent_shards a {
+  color: #141c22;
+}
+
 .shard__owner {
   padding-top: 30px;
   border-top: 1px solid #c1c4ca;

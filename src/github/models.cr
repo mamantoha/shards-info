@@ -217,6 +217,77 @@ module Github
     end
   end
 
+  class CodeSearches
+    JSON.mapping({
+      total_count:        Int32,
+      incomplete_results: Bool,
+      items:              Array(CodeSearchResult),
+    })
+  end
+
+  class CodeSearchResult
+    JSON.mapping({
+      name:       String,
+      path:       String,
+      sha:        String,
+      url:        String,
+      git_url:    String,
+      html_url:   String,
+      repository: Repository,
+      score:      Float64,
+    })
+  end
+
+  class Repository
+    JSON.mapping({
+      id:                Int32,
+      name:              String,
+      full_name:         String,
+      owner:             Owner,
+      private:           Bool,
+      html_url:          String,
+      description:       String?,
+      fork:              Bool,
+      url:               String,
+      forks_url:         String,
+      keys_url:          String,
+      collaborators_url: String,
+      teams_url:         String,
+      hooks_url:         String,
+      issue_events_url:  String,
+      events_url:        String,
+      assignees_url:     String,
+      branches_url:      String,
+      tags_url:          String,
+      blobs_url:         String,
+      git_tags_url:      String,
+      git_refs_url:      String,
+      trees_url:         String,
+      statuses_url:      String,
+      languages_url:     String,
+      stargazers_url:    String,
+      contributors_url:  String,
+      subscribers_url:   String,
+      subscription_url:  String,
+      commits_url:       String,
+      git_commits_url:   String,
+      comments_url:      String,
+      issue_comment_url: String,
+      contents_url:      String,
+      compare_url:       String,
+      merges_url:        String,
+      archive_url:       String,
+      downloads_url:     String,
+      issues_url:        String,
+      pulls_url:         String,
+      milestones_url:    String,
+      notifications_url: String,
+      labels_url:        String,
+      releases_url:      String,
+      deployments_url:   String,
+    })
+  end
+
   alias Releases = Array(Release)
 
   class Release

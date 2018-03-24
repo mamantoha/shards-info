@@ -13,15 +13,25 @@ nav aria-label="breadcrumb"
         = repo.latest_release
     .shard__intro
       = Emoji.emojize(repo.description.to_s)
-    .shard__releases
-      h3.list__heading Releases:
-      ul.list__items
-        - repo.releases.first(5).each do |release|
-          li.shard__release-wrap
-            = release.tag_name
-            small
-              ' -
-              = release.published_at.to_s("%B %-d, %Y")
+    .row
+      .col-6
+        .shard__releases
+          h3.list__heading Releases:
+          ul.list__items
+            - repo.releases.first(5).each do |release|
+              li.shard__release-wrap
+                = release.tag_name
+                small
+                  ' -
+                  = release.published_at.to_s("%B %-d, %Y")
+      .col-6
+        .shard__dependent_shards
+          h3.list__heading = "Dependent shards(#{dependent_repos.total_count}):"
+          ul.list__items
+            - dependent_repos.items.each do |item|
+              li
+                i class="fab fa-github"
+                a href="/repos/#{item.repository.full_name}" = item.repository.name
     .shard__owner
       h3.list__heading Owner:
       .shards__shard_owner

@@ -59,7 +59,12 @@ get "/repos/:owner/:repo" do |env|
     GITHUB_CLIENT.repo_get("#{owner}/#{repo_name}").to_json
   end
 
+  dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}") do
+    GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}").to_json
+  end
+
   repo = Github::Repo.from_json(repo)
+  dependent_repos = Github::CodeSearches.from_json(dependent_repos)
 
   unless repo.language == "Crystal"
     env.redirect "/"
