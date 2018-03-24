@@ -68,6 +68,11 @@ li {
   border-bottom: 1px solid #c1c4ca;
 }
 
+.page__subheading {
+  font-size: 60%;
+  color: #a6aab2;
+}
+
 .shard__main {
   border-right: 1px solid #c1c4ca;
 }
@@ -88,6 +93,17 @@ li {
   clear: both;
 }
 
+.shard__statistic {
+  padding-left: 10px;
+}
+
+.shard__links {
+  padding-left: 10px;
+}
+
+.shard__links a {
+  color: #141c22;
+}
 
 .shard__release-wrap {
   font-weight: 800;

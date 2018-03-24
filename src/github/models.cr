@@ -95,6 +95,22 @@ module Github
         end
       end
     end
+
+    def releases
+      releases = CACHE.fetch("releases_#{full_name}") do
+        GITHUB_CLIENT.repo_releases(full_name).to_json
+      end
+
+      Github::Releases.from_json(releases)
+    end
+
+    def latest_release
+      releases.first?.try do |release|
+        return release.tag_name
+      end
+
+      ""
+    end
  end
 
   class Repo
@@ -174,12 +190,30 @@ module Github
       subscribers_count: Int32,
     })
 
+    def license_name
+      @license.try do |license|
+        if license.name
+          license.name
+        else
+          ""
+        end
+      end
+    end
+
     def releases
       releases = CACHE.fetch("releases_#{full_name}") do
         GITHUB_CLIENT.repo_releases(full_name).to_json
       end
 
       Github::Releases.from_json(releases)
+    end
+
+    def latest_release
+      releases.first?.try do |release|
+        return release.tag_name
+      end
+
+      ""
     end
   end
 

@@ -9,8 +9,10 @@ nav aria-label="breadcrumb"
   .col-8.shard__main
     h1.page__heading
       = repo.name
+      i.page__subheading
+        = repo.latest_release
     .shard__intro
-      = repo.description
+      = Emoji.emojize(repo.description.to_s)
     .shard__releases
       h3.list__heading Releases:
       ul.list__items
@@ -22,5 +24,30 @@ nav aria-label="breadcrumb"
               = release.published_at.to_s("%B %-d, %Y")
     .shard__owner
       h3.list__heading Owner:
-      = repo.owner.login
+      .shards__shard_owner
+        .shards__shard_owner_avatar
+          img src="#{repo.owner.avatar_url}"
+        .shards__shard_owner_name
+          a href="/repos/#{repo.owner.login}" = repo.owner.login
   .col-4
+    .list__heading Github statistic:
+    ul.shard__statistic
+      li
+        i class="fas fa-star" title="Stars"
+        = repo.watchers_count
+      li
+        i class="fas fa-code-branch" title="Forks"
+        = repo.forks_count
+      li
+        i class="fas fa-eye" title="Watchers"
+        = repo.subscribers_count
+      li
+        i class="fas fa-exclamation-circle" title="Open issues"
+        = repo.open_issues_count
+    h3.list__heading License:
+    p
+      = repo.license_name
+    h3.list__heading Links:
+    ul.shard__links
+      li
+        a href="#{repo.html_url}" target="_blank" Homepage
