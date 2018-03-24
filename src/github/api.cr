@@ -20,6 +20,13 @@ module Github
       search_repositories("", "updated", 1, 10)
     end
 
+    def repo_get(owner : String, repo : String)
+      url = "/repos/#{owner}/#{repo}"
+      response = client[url].get
+
+      Github::Repo.from_json(response.body)
+    end
+
     # https://developer.github.com/v3/search/#search-repositories
     private def search_repositories(word = "", sort = "stars", page = 1, limit = 100, after_date = 1.years.ago)
       date_filter = after_date.to_s("%Y-%m-%d")

@@ -10,6 +10,17 @@ TODO: Write a description here
 * Install dependencies `shards install`
 * Run it `crystal src/crystal-shards.cr`
 
+## Development
+
+Install [sentry](https://github.com/samueleaton/sentry) to build/runs application,
+watches files, and rebuilds/restarts app on file changes.
+
+```
+sentry
+```
+
+Set env variable `REDIS` to use Redis cache store.
+
 ### Deploy
 
 ```

@@ -1,0 +1,5 @@
+# The list of patterns of files for sentry to watch.
+watch:
+  - ./src/**/*.cr
+  - ./src/**/*.ecr
+  - ./src/**/*.slang

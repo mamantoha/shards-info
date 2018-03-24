@@ -8,21 +8,21 @@ require "humanize_time"
 require "./github"
 
 if ENV["HEROKU"]?
-  recently_cache = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
-  popular_cache = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
+  cache = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
+elsif ENV["REDIS"]?
+  cache = Cache::RedisStore(String, String).new(expires_in: 30.minutes)
 else
-  recently_cache = Cache::NullStore(String, String).new(expires_in: 30.minutes)
-  popular_cache = Cache::NullStore(String, String).new(expires_in: 30.minutes)
+  cache = Cache::NullStore(String, String).new(expires_in: 30.minutes)
 end
 
+github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+
 get "/" do
-  recently_repos = recently_cache.fetch("recently_repos", expires_in: 5.minutes) do
-    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+  recently_repos = cache.fetch("recently_repos", expires_in: 5.minutes) do
     github_client.recently_updated.to_json
   end
 
-  popular_repos = popular_cache.fetch("popular_repos") do
-    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+  popular_repos = cache.fetch("popular_repos") do
     github_client.popular.to_json
   end
 
@@ -40,7 +40,13 @@ end
 
 get "/repos/:owner/:repo" do |env|
   owner = env.params.url["owner"]
-  repo = env.params.url["repo"]
+  repo_name = env.params.url["repo"]
+
+  repo = cache.fetch("repos_#{owner}_#{repo_name}") do
+    github_client.repo_get(owner, repo_name).to_json
+  end
+
+  repo = Github::Repo.from_json(repo)
 
   render "src/views/repo.slang", "src/views/layouts/layout.slang"
 end

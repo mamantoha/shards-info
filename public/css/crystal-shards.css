@@ -42,16 +42,33 @@ body {
 }
 
 .shards__shard {
-	padding-top: 24px;
-	padding-bottom: 24px;
-	border-bottom: 1px solid #eee;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eee;
 }
 
 .shards__shard_owner_avatar img {
-	width: 20px;
-	margin-right: 5px;
+  width: 20px;
+  margin-right: 5px;
 }
 
 .shards__shard_owner {
-	display: inline-flex;
+  display: inline-flex;
+}
+
+.page__heading {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #c1c4ca;
+}
+
+.shard__main {
+  border-right: 1px solid #c1c4ca;
+}
+
+.shard__intro {
+  margin-bottom: 32px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #c1c4ca;
 }
