@@ -10,5 +10,3 @@ nav aria-label="Search result pages"
         a class="page-link" href="/repos?query=#{query}&page=#{p}" = p
     li class="page-item #{page == pages_count ? "disabled" : "no"}"
       a class="page-link" href="/repos?query=#{query}&page=#{page + 1}" Next
-
-
