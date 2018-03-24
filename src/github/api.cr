@@ -1,4 +1,16 @@
+require "crest"
+
 module Github
+  class Logger < Crest::Logger
+    def request(request)
+      @logger.info ">> | %s | %s" % [request.method, request.url]
+    end
+
+    def response(response)
+      @logger.info "<< | %s | %s" % [response.status_code, response.url]
+    end
+  end
+
   class API
     getter client, base_url
 
@@ -8,7 +20,9 @@ module Github
       @client = Crest::Resource.new(
         base_url,
         user: user,
-        password: key
+        password: key,
+        logging: true,
+        logger: Logger.new
       )
     end
 
