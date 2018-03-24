@@ -4,8 +4,6 @@
       .shards__shard_info
         h3.shards__shard_name
           a href="/repos/#{repo.owner.login}/#{repo.name}" = repo.name
-          i.page__subheading
-            = repo.latest_release
         p.shards__shard_desc
           = Emoji.emojize(repo.description.to_s)
       .shards__shard_owner
