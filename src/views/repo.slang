@@ -54,6 +54,10 @@ nav aria-label="breadcrumb"
       li
         i class="fas fa-exclamation-circle" title="Open issues"
         = repo.open_issues_count
+      li
+        i class="fas fa-code" title="Last update"
+        = "#{HumanizeTime.distance_of_time_in_words(repo.pushed_at, Time.now)} ago"
+
     h3.list__heading License:
     p
       = repo.license_name
