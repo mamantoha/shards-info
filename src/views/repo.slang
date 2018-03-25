@@ -6,7 +6,7 @@ nav aria-label="breadcrumb"
       a href="/repos/#{repo.owner.login}" = repo.owner.login
     li class="breadcrumb-item active" aria-current="page" = repo.name
 .row
-  .col-8.shard__main
+  .col-md-8.col-sm-12.shard__main
     h1.page__heading
       = repo.name
       i.page__subheading
@@ -14,7 +14,7 @@ nav aria-label="breadcrumb"
     .shard__intro
       = Emoji.emojize(repo.description.to_s)
     .row
-      .col-6
+      .col-md-6
         .shard__releases
           h3.list__heading Releases:
           ul.list__items
@@ -24,7 +24,7 @@ nav aria-label="breadcrumb"
                 small
                   ' -
                   = release.published_at.to_s("%B %-d, %Y")
-      .col-6
+      .col-md-6
         .shard__dependent_shards
           h3.list__heading = "Dependent shards(#{dependent_repos.total_count}):"
           ul.list__items
@@ -39,7 +39,7 @@ nav aria-label="breadcrumb"
           img src="#{repo.owner.avatar_url}"
         .shards__shard_owner_name
           a href="/repos/#{repo.owner.login}" = repo.owner.login
-  .col-4
+  .col-md-4.col-sm-12
     .list__heading Github statistic:
     ul.shard__statistic
       li

@@ -56,8 +56,13 @@ li {
 
 .shards__shard {
   padding-top: 24px;
-  padding-bottom: 24px;
+  padding-bottom: 12px;
   border-bottom: 1px solid #eee;
+}
+
+.shards__shard_owner {
+  display: inline-flex;
+  margin-bottom: 5px;
 }
 
 .shards__shard_owner_avatar img {
@@ -65,8 +70,22 @@ li {
   margin-right: 5px;
 }
 
-.shards__shard_owner {
-  display: inline-flex;
+.shards__shard_updated {
+  color: #a6aab2;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.shards__shard_github ul {
+  padding-left: 0;
+  padding-top: 5px;
+  margin-bottom: 0;
+}
+
+.shards__shard_github ul li {
+  display: inline;
+  padding-right: 5px;
+  font-size: 14px;
 }
 
 .page__heading {
