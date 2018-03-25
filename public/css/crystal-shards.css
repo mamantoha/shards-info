@@ -9,6 +9,10 @@ body {
   margin-bottom: 60px;
 }
 
+ul {
+  padding-left: 0px;
+}
+
 li {
   list-style-type: none;
 }
@@ -62,7 +66,7 @@ li {
 
 .shards__shard_owner {
   display: inline-flex;
-  margin-bottom: 5px;
+  padding-bottom: 1rem;
 }
 
 .shards__shard_owner_avatar img {
@@ -125,11 +129,11 @@ li {
 }
 
 .shard__statistic {
-  padding-left: 10px;
+  padding-left: 0px;
 }
 
 .shard__links {
-  padding-left: 10px;
+  padding-left: 0px;
 }
 
 .shard__links a {
