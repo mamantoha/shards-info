@@ -39,7 +39,7 @@ module Github
     end
 
     def user_repos(owner : String)
-      url = "/users/#{owner}/repos"
+      url = "/users/#{owner}/repos?sort=updated"
 
       response = client[url].get
 
