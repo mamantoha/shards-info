@@ -1,4 +1,4 @@
-- repos.items.each do |repo|
+- repos_array.each do |repo|
   .shards__shard.row
     .col-8
       .shards__shard_info

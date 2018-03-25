@@ -12,8 +12,8 @@ ul class="nav nav-tabs" id="reposTab" role="tablist"
 
 div class="tab-content"
   div role="tabpanel" class="tab-pane fade show active" id="popular" aria-labelledby="popular-tab"
-    - repos = popular_repos
+    - repos_array = popular_repos.items
     == render "src/views/partials/repos.slang"
  div role="tabpanel" class="tab-pane fade" id="recently" aria-labelledby="recently-tab"
-    - repos = recently_repos
+    - repos_array = recently_repos.items
     == render "src/views/partials/repos.slang"

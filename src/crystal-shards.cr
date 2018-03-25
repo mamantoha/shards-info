@@ -48,6 +48,12 @@ end
 get "/repos/:owner" do |env|
   owner = env.params.url["owner"]
 
+  repos = CACHE.fetch("#{owner}_repos") do
+    GITHUB_CLIENT.user_repos(owner).to_json
+  end
+
+  repos = Github::UserRepos.from_json(repos)
+
   render "src/views/owner.slang", "src/views/layouts/layout.slang"
 end
 

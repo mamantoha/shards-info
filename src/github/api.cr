@@ -38,6 +38,15 @@ module Github
       search_repositories(query, "stars", page, 10)
     end
 
+    def user_repos(owner : String)
+      url = "/users/#{owner}/repos"
+
+      response = client[url].get
+
+      repos = Github::UserRepos.from_json(response.body)
+      repos.select { |repo| repo.language == "Crystal" && repo.fork == false }
+    end
+
     def repo_get(full_name : String)
       url = "/repos/#{full_name}"
       response = client[url].get

@@ -171,7 +171,7 @@ module Github
       size:              Int32,
       stargazers_count:  Int32,
       watchers_count:    Int32,
-      language:          String,
+      language:          String?,
       has_issues:        Bool,
       has_projects:      Bool,
       has_downloads:     Bool,
@@ -186,8 +186,8 @@ module Github
       open_issues:       Int32,
       watchers:          Int32,
       default_branch:    String,
-      network_count:     Int32,
-      subscribers_count: Int32,
+      network_count:     Int32?,
+      subscribers_count: Int32?,
     })
 
     def license_name
@@ -216,6 +216,8 @@ module Github
       ""
     end
   end
+
+  alias UserRepos = Array(Repo)
 
   class CodeSearches
     JSON.mapping({
