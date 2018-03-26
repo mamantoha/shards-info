@@ -1,4 +1,4 @@
-# shards-nfo
+# shards-info
 
 View of all repositories on GitHub that have Crystal code in them.
 
