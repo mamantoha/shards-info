@@ -72,6 +72,15 @@ module Github
       Github::CodeSearches.from_json(response.body)
     end
 
+    def repo_contents(owner : String, repo : String, path = "shard.yml")
+      url ="/repos/#{owner}/#{repo}/contents/#{path}"
+      response = client[url].get
+
+      Github::Content.from_json(response.body)
+    rescue Crest::RequestFailed
+      nil
+    end
+
     # https://developer.github.com/v3/search/#search-repositories
     private def search_repositories(word = "", sort = "stars", page = 1, limit = 100, after_date = 1.years.ago)
       date_filter = after_date.to_s("%Y-%m-%d")

@@ -1,3 +1,4 @@
+require "yaml"
 require "kemal"
 require "kilt/slang"
 require "cache"
@@ -63,6 +64,29 @@ get "/repos/:owner/:repo" do |env|
 
   repo = CACHE.fetch("repos_#{owner}_#{repo_name}") do
     GITHUB_CLIENT.repo_get("#{owner}/#{repo_name}").to_json
+  end
+
+  dependencies = {} of String => Hash(String, String)
+  development_dependencies = {} of String => Hash(String, String)
+
+  content = CACHE.fetch("content_#{owner}_#{repo_name}") do
+    response = GITHUB_CLIENT.repo_contents(owner, repo_name)
+    puts response.to_json
+    response.to_json
+  end
+
+  content = Github::Content.from_json(content) rescue nil
+
+  if content && content.name == "shard.yml" && content.download_url
+    shard_file = Crest.get(content.download_url.not_nil!).body
+    shard = YAML.parse(shard_file)
+
+    if shard["dependencies"]?
+      dependencies = shard["dependencies"]
+    end
+    if shard["development_dependencies"]?
+      development_dependencies = shard["development_dependencies"]
+    end
   end
 
   dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}") do
