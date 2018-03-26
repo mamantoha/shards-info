@@ -1,14 +1,15 @@
 doctype html
 html lang="en"
   head
-    /! Global site tag (gtag.js) - Google Analytics
-    script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-116339937-1"
-    javascript:
-      | window.dataLayer = window.dataLayer || [];
-      | function gtag(){dataLayer.push(arguments);}
-      | gtag('js', new Date());
+    - if ENV["GOOGLE_ANALYTICS_ID"]?
+      /! Global site tag (gtag.js) - Google Analytics
+      script async="" src="https://www.googletagmanager.com/gtag/js?id=#{ENV["GOOGLE_ANALYTICS_ID"]}"
+      javascript:
+        | window.dataLayer = window.dataLayer || [];
+        | function gtag(){dataLayer.push(arguments);}
+        | gtag('js', new Date());
 
-      | gtag('config', 'UA-116339937-1');
+        | gtag('config', '#{ENV["GOOGLE_ANALYTICS_ID"]}');
 
     meta charset="utf-8"
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
