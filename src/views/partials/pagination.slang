@@ -1,4 +1,4 @@
-- pages_count = (repos.total_count / 10 + 1).to_i
+- pages_count = ((repos.total_count + 10 -1) / 10).to_i
 
 nav aria-label="Search result pages"
   ul class="pagination justify-content-center flex-wrap"
