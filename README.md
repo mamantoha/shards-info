@@ -1,6 +1,6 @@
 # shards-nfo
 
-TODO: Write a description here
+View of all repositories on GitHub that have Crystal code in them.
 
 ## Installation
 
@@ -22,7 +22,6 @@ sentry
 
 ```
 heroku buildpacks:add https://github.com/crystal-lang/heroku-buildpack-crystal.git
-heroku buildpacks:add -i 1 https://github.com/heroku/heroku-buildpack-redis.git
 ```
 
 And set environment variables with `heroku config:set VAR=VAL`:
