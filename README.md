@@ -1,4 +1,4 @@
-# crystal-shards
+# shards-nfo
 
 TODO: Write a description here
 
@@ -7,7 +7,7 @@ TODO: Write a description here
 * [Install](https://crystal-lang.org/docs/installation/) Crystal
 * Clone this repository
 * Install dependencies `shards install`
-* Run it `crystal src/crystal-shards.cr`
+* Run it `crystal src/shards-info.cr`
 
 ## Development
 
@@ -36,7 +36,7 @@ Go to https://github.com/settings/tokens and generate new token (select `repo` s
 
 ## Contributing
 
-1. Fork it ( https://github.com/mamantoha/crystal-shards/fork )
+1. Fork it ( https://github.com/mamantoha/shards-info/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
