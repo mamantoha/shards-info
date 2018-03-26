@@ -26,8 +26,8 @@ module Github
       )
     end
 
-    def popular
-      search_repositories("", "stars", 1, 10)
+    def trending
+      search_repositories("", "stars", 1, 10, after_date: 1.week.ago)
     end
 
     def recently_updated

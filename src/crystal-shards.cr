@@ -15,12 +15,12 @@ get "/" do
     GITHUB_CLIENT.recently_updated.to_json
   end
 
-  popular_repos = CACHE.fetch("popular_repos") do
-    GITHUB_CLIENT.popular.to_json
+  trending_repos = CACHE.fetch("trending_repos") do
+    GITHUB_CLIENT.trending.to_json
   end
 
   recently_repos = Github::Repos.from_json(recently_repos)
-  popular_repos = Github::Repos.from_json(popular_repos)
+  trending_repos = Github::Repos.from_json(trending_repos)
   query = ""
 
   render "src/views/index.slang", "src/views/layouts/layout.slang"

@@ -2,17 +2,17 @@
 
 ul class="nav nav-tabs" id="reposTab" role="tablist"
   li class="nav-item"
-    a class="nav-link active" id="popular-tab" href="#popular" role="tab" data-toggle="tab" aria-controls="popular" aria-selected="true"
+    a class="nav-link active" id="trending-tab" href="#yrending" role="tab" data-toggle="tab" aria-controls="trending" aria-selected="true"
       i class="fas fa-fire"
-      ' Most popular
+      ' Trending
   li class="nav-item"
     a class="nav-link" id="recently-tab" href="#recently" role="tab" data-toggle="tab" aria-controls="recently" aria-selected="false"
       i class="fas fa-clock"
-      ' Recently updated
+      ' Recent
 
 div class="tab-content"
-  div role="tabpanel" class="tab-pane fade show active" id="popular" aria-labelledby="popular-tab"
-    - repos_array = popular_repos.items
+  div role="tabpanel" class="tab-pane fade show active" id="trending" aria-labelledby="trending-tab"
+    - repos_array = trending_repos.items
     == render "src/views/partials/repos.slang"
  div role="tabpanel" class="tab-pane fade" id="recently" aria-labelledby="recently-tab"
     - repos_array = recently_repos.items
