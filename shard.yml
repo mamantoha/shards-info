@@ -28,7 +28,6 @@ dependencies:
     github: mamantoha/humanize_time
     branch: master
 
-
 crystal: 0.24.2
 
 license: MIT

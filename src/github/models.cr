@@ -301,7 +301,7 @@ module Github
       id:               Int32,
       tag_name:         String,
       target_commitish: String,
-      name:             String,
+      name:             String?,
       draft:            Bool,
       author:           Author,
       prerelease:       Bool,
@@ -310,7 +310,7 @@ module Github
       assets:           Array(JSON::Any),
       tarball_url:      String,
       zipball_url:      String,
-      body:             String,
+      body:             String?,
     })
   end
 
