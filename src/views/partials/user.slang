@@ -1,8 +1,9 @@
 .user__avatar
   img src="#{user.avatar_url}"
 .user__name
-  .name
-    = user.name
+  - if user.name
+    .name
+      = user.name
   .login
     a href="#{user.html_url}" target="_blank"
       i class="fab fa-github"

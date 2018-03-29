@@ -20,7 +20,7 @@ module Github
       received_events_url: String,
       type:                String,
       site_admin:          Bool,
-      name:                String,
+      name:                String?,
       company:             String?,
       blog:                String,
       location:            String?,
