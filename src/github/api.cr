@@ -26,6 +26,14 @@ module Github
       )
     end
 
+    def user(username : String)
+      url = "/users/#{username}"
+
+      response = client[url].get
+
+      Github::User.from_json(response.body)
+    end
+
     def trending
       search_repositories("", "stars", 1, 10, after_date: 1.week.ago)
     end
@@ -73,7 +81,7 @@ module Github
     end
 
     def repo_contents(owner : String, repo : String, path = "shard.yml")
-      url ="/repos/#{owner}/#{repo}/contents/#{path}"
+      url = "/repos/#{owner}/#{repo}/contents/#{path}"
       response = client[url].get
 
       Github::Content.from_json(response.body)

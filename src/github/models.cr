@@ -1,6 +1,41 @@
 require "json"
 
 module Github
+  class User
+    JSON.mapping({
+      login:               String,
+      id:                  Int32,
+      avatar_url:          String,
+      gravatar_id:         String,
+      url:                 String,
+      html_url:            String,
+      followers_url:       String,
+      following_url:       String,
+      gists_url:           String,
+      starred_url:         String,
+      subscriptions_url:   String,
+      organizations_url:   String,
+      repos_url:           String,
+      events_url:          String,
+      received_events_url: String,
+      type:                String,
+      site_admin:          Bool,
+      name:                String,
+      company:             String?,
+      blog:                String,
+      location:            String?,
+      email:               String?,
+      hireable:            Bool?,
+      bio:                 String?,
+      public_repos:        Int32,
+      public_gists:        Int32,
+      followers:           Int32,
+      following:           Int32,
+      created_at:          Time,
+      updated_at:          Time,
+    })
+  end
+
   class Repos
     JSON.mapping({
       total_count:        Int32,
@@ -377,23 +412,23 @@ module Github
 
   class Content
     JSON.mapping({
-      type: String,
-      size: Int32,
-      name: String,
-      path: String,
-      sha: String,
-      url: String,
-      git_url: String,
-      html_url: String,
+      type:         String,
+      size:         Int32,
+      name:         String,
+      path:         String,
+      sha:          String,
+      url:          String,
+      git_url:      String,
+      html_url:     String,
       download_url: String?,
-      links: { key: "_links", type: Links }
+      links:        {key: "_links", type: Links},
     })
 
     class Links
       JSON.mapping({
         self: String,
-        git: String,
-        html: String
+        git:  String,
+        html: String,
       })
     end
   end

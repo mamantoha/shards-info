@@ -58,6 +58,34 @@ li {
   margin-bottom: 1rem;
 }
 
+.user__avatar img {
+  width: 230px;
+  height: 230px;
+}
+
+.user__name .name {
+  font-size: 26px;
+  line-height: 30px;
+}
+
+.user__name .login {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 24px;
+  color: #666;
+}
+
+.user__info {
+  display: flex;
+  padding-top: 15px;
+}
+
+.user__info_item {
+  color: #586069;
+  font-size: 14px;
+  padding-right: 10px;
+}
+
 .shards__shard {
   padding-top: 24px;
   padding-bottom: 12px;
