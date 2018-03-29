@@ -27,7 +27,7 @@ hr
   .user__email
     i class="fas fa-at"
     a href="mailto:#{user.email}" = user.email
-- if user.blog
+- if user.blog && !user.blog.empty?
   .user__blog
     i class="fas fa-rss"
     a href="#{user.blog}" target="_blank" = user.blog
