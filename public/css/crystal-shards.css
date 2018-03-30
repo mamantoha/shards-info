@@ -9,11 +9,11 @@ body {
   margin-bottom: 60px;
 }
 
-ul {
+ul.not-list {
   padding-left: 0px;
 }
 
-li {
+ul.not-list li {
   list-style-type: none;
 }
 

@@ -27,7 +27,7 @@
 
   .col-md-4.col-sm-12
     .list__heading Github statistic:
-    ul.shard__statistic
+    ul.shard__statistic.not-list
       li
         i class="fas fa-star" title="Stars"
         = repo.watchers_count
@@ -48,6 +48,6 @@
     p
       = repo.license_name
     h3.list__heading Links:
-    ul.shard__links
+    ul.shard__links.not-list
       li
         a href="#{repo.html_url}" target="_blank" Homepage
