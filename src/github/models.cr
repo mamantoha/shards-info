@@ -423,13 +423,30 @@ module Github
       download_url: String?,
       links:        {key: "_links", type: Links},
     })
+  end
 
-    class Links
-      JSON.mapping({
-        self: String,
-        git:  String,
-        html: String,
-      })
-    end
+  class Readme
+    JSON.mapping({
+      type:         String,
+      encoding:     String,
+      size:         Int32,
+      name:         String,
+      path:         String,
+      content:      String,
+      sha:          String,
+      url:          String,
+      git_url:      String,
+      html_url:     String,
+      download_url: String,
+      links:        {key: "_links", type: Links},
+    })
+  end
+
+  class Links
+    JSON.mapping({
+      self: String,
+      git:  String,
+      html: String,
+    })
   end
 end

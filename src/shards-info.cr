@@ -5,6 +5,7 @@ require "cache"
 require "crest"
 require "emoji"
 require "humanize_time"
+require "markd"
 
 require "./github"
 
@@ -76,7 +77,6 @@ get "/repos/:owner/:repo" do |env|
 
   content = CACHE.fetch("content_#{owner}_#{repo_name}") do
     response = GITHUB_CLIENT.repo_contents(owner, repo_name)
-    puts response.to_json
     response.to_json
   end
 
@@ -89,9 +89,22 @@ get "/repos/:owner/:repo" do |env|
     if shard["dependencies"]?
       dependencies = shard["dependencies"]
     end
+
     if shard["development_dependencies"]?
       development_dependencies = shard["development_dependencies"]
     end
+  end
+
+  readme = CACHE.fetch("readme_#{owner}_#{repo_name}") do
+    response = GITHUB_CLIENT.repo_readme(owner, repo_name)
+    response.to_json
+  end
+
+  readme = Github::Readme.from_json(readme)
+
+  if readme && readme.download_url
+    readme_file = Crest.get(readme.download_url.not_nil!).body
+    readme_html = Markd.to_html(readme_file)
   end
 
   dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}") do

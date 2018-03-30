@@ -27,6 +27,8 @@ dependencies:
   humanize_time:
     github: mamantoha/humanize_time
     branch: master
+  markd:
+    github: icyleaf/markd
 
 crystal: 0.24.2
 

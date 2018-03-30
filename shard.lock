@@ -28,6 +28,10 @@ shards:
     github: jeromegn/kilt
     version: 0.4.0
 
+  markd:
+    github: icyleaf/markd
+    version: 0.1.1
+
   radix:
     github: luislavena/radix
     version: 0.3.8

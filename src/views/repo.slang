@@ -6,57 +6,25 @@
         = repo.latest_release
     .shard__intro
       = Emoji.emojize(repo.description.to_s)
-    .row
-      .col-md-6
-        .shard__releases
-          h3.list__heading Releases:
-          ul.list__items
-            - repo.releases.first(5).each do |release|
-              li.shard__release-wrap
-                = release.tag_name
-                small
-                  ' -
-                  = release.published_at.to_s("%B %-d, %Y")
-      .col-md-6
-        .shard__dependencies
-          h3.list__heading Dependencies:
-          ul.list__items
-            - dependencies.each do |key, value|
-              li
-                i class="fab fa-github"
-                - if value["github"]?
-                  a href="/repos/#{value["github"]}" = key
-                - else
-                  = key
-   .row
-      .col-md-6
-        .shard__dependent_shards
-          h3.list__heading = "Dependent shards(#{dependent_repos.total_count}):"
-          ul.list__items
-            - dependent_repos.items.each do |item|
-              li
-                i class="fab fa-github"
-                a href="/repos/#{item.repository.full_name}" = item.repository.name
-     .col-md-6
-        .shard__development_dependencies
-          h3.list__heading Development dependencies:
-          ul.list__items
-            - development_dependencies.each do |key, value|
-              li
-                i class="fab fa-github"
-                - if value["github"]?
-                  a href="/repos/#{value["github"]}" = key
-                - else
-                  = key
-   .row
-     .col-12
-       .shard__owner
-         h3.list__heading Owner:
-         .shards__shard_owner
-           .shards__shard_owner_avatar
-             img src="#{repo.owner.avatar_url}"
-           .shards__shard_owner_name
-             a href="/repos/#{repo.owner.login}" = repo.owner.login
+
+    ul class="nav nav-tabs" id="infoTab" role="tablist"
+      li class="nav-item"
+        a class="nav-link active" id="info-tab" href="#info" role="tab" data-toggle="tab" aria-controls="info" aria-selected="true"
+          i class="fas fa-info-circle"
+          ' Info
+      li class="nav-item"
+        a class="nav-link" id="readme-tab" href="#readme" role="tab" data-toggle="tab" aria-controls="readme" aria-selected="false"
+          i class="fas fa-book"
+          ' Readme
+
+    div class="tab-content"
+      div role="tabpanel" class="tab-pane fade show active" id="info" aria-labelledby="info-tab"
+        == render "src/views/partials/repo_info.slang"
+     div role="tabpanel" class="tab-pane fade" id="readme" aria-labelledby="readme-tab"
+       .row
+         .col-md-12.shard__readme
+           == readme_html
+
   .col-md-4.col-sm-12
     .list__heading Github statistic:
     ul.shard__statistic
