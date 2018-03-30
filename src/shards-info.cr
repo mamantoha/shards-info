@@ -72,18 +72,30 @@ get "/repos/:owner/:repo" do |env|
     GITHUB_CLIENT.repo_get("#{owner}/#{repo_name}").to_json
   end
 
-  dependencies = {} of String => Hash(String, String)
-  development_dependencies = {} of String => Hash(String, String)
+  repo = Github::Repo.from_json(repo)
 
-  content = CACHE.fetch("content_#{owner}_#{repo_name}") do
-    response = GITHUB_CLIENT.repo_contents(owner, repo_name)
+  shard_content = CACHE.fetch("content_#{owner}_#{repo_name}_shard.yml") do
+    response = GITHUB_CLIENT.repo_contents(owner, repo_name, "shard.yml")
     response.to_json
   end
 
-  content = Github::Content.from_json(content) rescue nil
+  shard_content = Github::Content.from_json(shard_content) rescue nil
 
-  if content && content.name == "shard.yml" && content.download_url
-    shard_file = Crest.get(content.download_url.not_nil!).body
+  unless shard_content
+    env.redirect "/"
+  end
+
+  dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}") do
+    GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}").to_json
+  end
+
+  dependent_repos = Github::CodeSearches.from_json(dependent_repos)
+
+  dependencies = {} of String => Hash(String, String)
+  development_dependencies = {} of String => Hash(String, String)
+
+  if shard_content && shard_content.name == "shard.yml" && shard_content.download_url
+    shard_file = Crest.get(shard_content.download_url.not_nil!).body
     shard = YAML.parse(shard_file)
 
     if shard["dependencies"]?
@@ -98,24 +110,15 @@ get "/repos/:owner/:repo" do |env|
   readme = CACHE.fetch("readme_#{owner}_#{repo_name}") do
     response = GITHUB_CLIENT.repo_readme(owner, repo_name)
     response.to_json
+  rescue Crest::RequestFailed
+    ""
   end
 
-  readme = Github::Readme.from_json(readme)
+  readme = readme.empty? ? nil : Github::Readme.from_json(readme)
 
   if readme && readme.download_url
     readme_file = Crest.get(readme.download_url.not_nil!).body
     readme_html = Markd.to_html(readme_file)
-  end
-
-  dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}") do
-    GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}").to_json
-  end
-
-  repo = Github::Repo.from_json(repo)
-  dependent_repos = Github::CodeSearches.from_json(dependent_repos)
-
-  unless repo.language == "Crystal"
-    env.redirect "/"
   end
 
   render "src/views/repo.slang", "src/views/layouts/layout.slang"

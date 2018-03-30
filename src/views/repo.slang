@@ -23,7 +23,8 @@
      div role="tabpanel" class="tab-pane fade" id="readme" aria-labelledby="readme-tab"
        .row
          .col-md-12.shard__readme
-           == readme_html
+           - if readme
+            == readme_html
 
   .col-md-4.col-sm-12
     .list__heading Github statistic:
