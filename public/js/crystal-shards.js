@@ -9,3 +9,7 @@ $(function(){
     $('html,body').scrollTop(scrollmem);
   });
 });
+
+$(document).ready(function() {
+  hljs.initHighlightingOnLoad();
+});
