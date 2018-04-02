@@ -35,11 +35,11 @@ module Github
     end
 
     def trending
-      search_repositories("", "stars", 1, 10, after_date: 1.week.ago)
+      search_repositories("", "stars", 1, 20, after_date: 1.week.ago)
     end
 
     def recently_updated
-      search_repositories("", "updated", 1, 10)
+      search_repositories("", "updated", 1, 20)
     end
 
     def filter(query : String, page = 1)
