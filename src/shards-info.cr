@@ -23,7 +23,6 @@ get "/" do
 
   recently_repos = Github::Repos.from_json(recently_repos)
   trending_repos = Github::Repos.from_json(trending_repos)
-  query = ""
 
   render "src/views/index.slang", "src/views/layouts/layout.slang"
 end

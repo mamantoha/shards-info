@@ -1,5 +1,3 @@
-== render "src/views/partials/search_input.slang"
-
 div
   h4.page__heading.text-right
     = repos.total_count

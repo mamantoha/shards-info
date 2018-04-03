@@ -18,11 +18,16 @@ html lang="en"
     link rel="stylesheet" href="/css/crystal-shards.css"
     title Crystal Shards
   body
-    nav class="navbar navbar-dark bg-dark fixed-top"
+    nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
       .container
         a class="navbar-brand" href="/"
           img src="/logo.svg" width="30" height="30" class="d-inline-block align-top" alt=""
           ' Crystal Shards
+        button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+          span class="navbar-toggler-icon"
+        div class="collapse navbar-collapse" id="navbarSupportedContent"
+          ul class="navbar-nav mr-auto"
+          == render "src/views/partials/search_input.slang"
     .container
       == content
     div.space

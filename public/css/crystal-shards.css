@@ -40,14 +40,21 @@ ul.not-list li {
 }
 
 .search-wrap {
-  margin-right: auto;
+  margin-top: 0;
   margin-left: auto;
   position: relative;
-  width: 100%;
+  width: 40%;
+}
+
+@media (max-width: 576px) {
+  .search-wrap {
+    margin-top: 10px;
+    width: 100%;
+  }
 }
 
 .search-wrap .search-icon {
-  top: 10px;
+  top: 5px;
   right: 10px;
   border: none;
   background-color: transparent;
