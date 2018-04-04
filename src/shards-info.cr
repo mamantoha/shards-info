@@ -8,6 +8,7 @@ require "humanize_time"
 require "markd"
 
 require "./github"
+require "./config"
 
 CACHE         = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
 GITHUB_CLIENT = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
@@ -23,6 +24,8 @@ get "/" do
 
   recently_repos = Github::Repos.from_json(recently_repos)
   trending_repos = Github::Repos.from_json(trending_repos)
+
+  Config.config.page_title = "Crystal Shards"
 
   render "src/views/index.slang", "src/views/layouts/layout.slang"
 end
@@ -42,6 +45,8 @@ get "/repos" do |env|
 
     repos = Github::Repos.from_json(repos)
 
+    Config.config.page_title = "Crystal Shards: search '#{query}'"
+
     render "src/views/filter.slang", "src/views/layouts/layout.slang"
   end
 end
@@ -59,6 +64,8 @@ get "/repos/:owner" do |env|
 
   user = Github::User.from_json(user)
   repos = Github::UserRepos.from_json(repos)
+
+  Config.config.page_title = "#{user.login} shards"
 
   render "src/views/owner.slang", "src/views/layouts/layout.slang"
 end
@@ -119,6 +126,8 @@ get "/repos/:owner/:repo" do |env|
     readme_file = Crest.get(readme.download_url.not_nil!).body
     readme_html = Markd.to_html(readme_file)
   end
+
+  Config.config.page_title = "#{repo.full_name}: #{repo.description}"
 
   render "src/views/repo.slang", "src/views/layouts/layout.slang"
 end
