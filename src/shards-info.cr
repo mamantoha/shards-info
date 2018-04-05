@@ -1,5 +1,7 @@
 require "yaml"
 require "kemal"
+require "kemal-session"
+require "kemal-flash"
 require "kilt/slang"
 require "cache"
 require "crest"
@@ -10,10 +12,14 @@ require "markd"
 require "./github"
 require "./config"
 
+Kemal::Session.config do |config|
+  config.secret = "my_super_secret"
+end
+
 CACHE         = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
 GITHUB_CLIENT = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
-get "/" do
+get "/" do |env|
   recently_repos = CACHE.fetch("recently_repos", expires_in: 5.minutes) do
     GITHUB_CLIENT.recently_updated.to_json
   end
@@ -88,7 +94,10 @@ get "/repos/:owner/:repo" do |env|
   shard_content = Github::Content.from_json(shard_content) rescue nil
 
   unless shard_content
+    env.flash["notice"] = "Repository <strong>#{repo.full_name}</strong> does not have a <strong>shard.yml</strong> file"
+
     env.redirect "/"
+    next
   end
 
   dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}") do

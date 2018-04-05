@@ -12,6 +12,8 @@ dependencies:
   kemal:
     github: kemalcr/kemal
     version: ~> 0.22.0
+  kemal-session:
+    github: kemalcr/kemal-session
   slang:
     github: jeromegn/slang
     branch: master
@@ -29,6 +31,8 @@ dependencies:
     branch: master
   markd:
     github: icyleaf/markd
+  kemal-flash:
+    github: neovintage/kemal-flash
 
 crystal: 0.24.2
 

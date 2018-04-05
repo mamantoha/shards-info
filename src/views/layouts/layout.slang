@@ -29,6 +29,7 @@ html lang="en"
           ul class="navbar-nav mr-auto"
           == render "src/views/partials/search_input.slang"
     .container
+      == render "src/views/partials/flash.slang"
       == content
     div.space
     footer.footer
