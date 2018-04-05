@@ -1,5 +1,5 @@
 .user__avatar
-  img src="#{user.avatar_url}"
+  img src="#{user.avatar_url}" alt="#{user.login}"
 .user__name
   - if user.name
     .name

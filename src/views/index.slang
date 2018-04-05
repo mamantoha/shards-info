@@ -1,3 +1,5 @@
+h1 style="display: none;" Trending Crystal shards
+
 ul class="nav nav-tabs" id="reposTab" role="tablist"
   li class="nav-item"
     a class="nav-link active" id="trending-tab" href="#trending" role="tab" data-toggle="tab" aria-controls="trending" aria-selected="true"

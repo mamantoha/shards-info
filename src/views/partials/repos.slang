@@ -8,7 +8,7 @@
           = Emoji.emojize(repo.description.to_s)
       .shards__shard_owner
         .shards__shard_owner_avatar
-          img src="#{repo.owner.avatar_url}"
+          img src="#{repo.owner.avatar_url}" alt="#{repo.owner.login}"
         .shards__shard_owner_name
           a href="/repos/#{repo.owner.login}" = repo.owner.login
       .shards__shard_updated
