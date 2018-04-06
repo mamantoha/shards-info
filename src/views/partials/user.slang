@@ -31,4 +31,4 @@ hr
 - if user.blog && !user.blog.empty?
   .user__blog
     i class="fas fa-rss"
-    a href="#{user.blog}" target="_blank" = user.blog
+    a href="#{link(user.blog)}" target="_blank" = user.blog

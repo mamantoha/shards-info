@@ -141,4 +141,15 @@ get "/repos/:owner/:repo" do |env|
   render "src/views/repo.slang", "src/views/layouts/layout.slang"
 end
 
+def link(url : String?) : String | Nil
+  return url unless url
+
+  uri = URI.parse(url)
+  if !uri.scheme
+    url = "//" + url
+  end
+
+  url
+end
+
 Kemal.run
