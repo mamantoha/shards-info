@@ -91,7 +91,7 @@ get "/repos/:owner/:repo" do |env|
   repo = Github::Repo.from_json(repo)
 
   shard_content = CACHE.fetch("content_#{owner}_#{repo_name}_shard.yml") do
-    response = GITHUB_CLIENT.repo_contents(owner, repo_name, "shard.yml")
+    response = GITHUB_CLIENT.repo_shard(owner, repo_name)
     response.to_json
   end
 

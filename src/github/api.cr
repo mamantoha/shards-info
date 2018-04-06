@@ -28,10 +28,14 @@ module Github
       )
     end
 
-    def make_request(url)
-      client[url].get
-    rescue Crest::RequestFailed
-      raise exception_handler
+    def make_request(url, ignore_exception = false)
+      response = client[url].get
+    rescue ex : Crest::RequestFailed
+      if ignore_exception
+        raise ex
+      else
+        raise exception_handler
+      end
     end
 
     def user(username : String)
@@ -91,10 +95,10 @@ module Github
       Github::CodeSearches.from_json(response.body)
     end
 
-    def repo_contents(owner : String, repo : String, path = "shard.yml")
-      url = "/repos/#{owner}/#{repo}/contents/#{path}"
+    def repo_shard(owner : String, repo : String)
+      url = "/repos/#{owner}/#{repo}/contents/shard.yml"
 
-      response = make_request(url)
+      response = make_request(url, true)
 
       Github::Content.from_json(response.body)
     rescue Crest::RequestFailed
