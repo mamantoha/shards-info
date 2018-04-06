@@ -19,6 +19,10 @@ end
 CACHE         = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
 GITHUB_CLIENT = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
+before_all do |env|
+  GITHUB_CLIENT.exception_handler = Kemal::Exceptions::RouteNotFound.new(env)
+end
+
 get "/" do |env|
   recently_repos = CACHE.fetch("recently_repos", expires_in: 5.minutes) do
     GITHUB_CLIENT.recently_updated.to_json

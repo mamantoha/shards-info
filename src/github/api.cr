@@ -13,9 +13,11 @@ module Github
 
   class API
     getter client, base_url
+    property exception_handler
 
     def initialize(user, key)
       @base_url = "https://api.github.com"
+      @exception_handler = Exception.new
 
       @client = Crest::Resource.new(
         base_url,
@@ -26,10 +28,16 @@ module Github
       )
     end
 
+    def make_request(url)
+      client[url].get
+    rescue Crest::RequestFailed
+      raise exception_handler
+    end
+
     def user(username : String)
       url = "/users/#{username}"
 
-      response = client[url].get
+      response = make_request(url)
 
       Github::User.from_json(response.body)
     end
@@ -49,7 +57,7 @@ module Github
     def user_repos(owner : String)
       url = "/users/#{owner}/repos?sort=updated"
 
-      response = client[url].get
+      response = make_request(url)
 
       repos = Github::UserRepos.from_json(response.body)
       repos.select { |repo| repo.language == "Crystal" && repo.fork == false }
@@ -57,14 +65,16 @@ module Github
 
     def repo_get(full_name : String)
       url = "/repos/#{full_name}"
-      response = client[url].get
+
+      response = make_request(url)
 
       Github::Repo.from_json(response.body)
     end
 
     def repo_releases(full_name : String)
       url = "/repos/#{full_name}/releases"
-      response = client[url].get
+
+      response = make_request(url)
 
       Github::Releases.from_json(response.body)
     end
@@ -75,14 +85,16 @@ module Github
       type = "Code"
 
       url = "/search/code?q=#{query}+filename:#{filename}&type=#{type}"
-      response = client[url].get
+
+      response = make_request(url)
 
       Github::CodeSearches.from_json(response.body)
     end
 
     def repo_contents(owner : String, repo : String, path = "shard.yml")
       url = "/repos/#{owner}/#{repo}/contents/#{path}"
-      response = client[url].get
+
+      response = make_request(url)
 
       Github::Content.from_json(response.body)
     rescue Crest::RequestFailed
@@ -91,7 +103,8 @@ module Github
 
     def repo_readme(owner : String, repo : String)
       url = "/repos/#{owner}/#{repo}/readme"
-      response = client[url].get
+
+      response = make_request(url)
 
       Github::Readme.from_json(response.body)
     end
@@ -103,8 +116,8 @@ module Github
       pushed = date_filter != "" ? "+pushed:>#{date_filter}" : ""
 
       url = "/search/repositories?q=#{word}language:crystal#{pushed}&per_page=#{limit}&sort=#{sort}&page=#{page}"
-      puts "#{base_url}#{url}"
-      response = client[url].get
+
+      response = make_request(url)
 
       Github::Repos.from_json(response.body)
     end
