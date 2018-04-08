@@ -98,7 +98,7 @@ get "/repos/:owner/:repo" do |env|
   shard_content = Github::Content.from_json(shard_content) rescue nil
 
   unless shard_content
-    env.flash["notice"] = "Repository <strong>#{repo.full_name}</strong> does not have a <strong>shard.yml</strong> file"
+    env.flash["notice"] = "Repository <a href='#{repo.html_url}' target='_blank'>#{repo.full_name}</a> does not have a <strong>shard.yml</strong> file"
 
     env.redirect "/"
     next
