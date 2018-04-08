@@ -30,7 +30,7 @@ module Github
 
     def make_request(url, ignore_exception = false)
       response = client[url].get
-    rescue ex : Crest::RequestFailed
+    rescue ex : Crest::NotFound
       if ignore_exception
         raise ex
       else
