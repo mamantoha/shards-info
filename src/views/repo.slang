@@ -12,19 +12,20 @@
         a class="nav-link active" id="info-tab" href="#info" role="tab" data-toggle="tab" aria-controls="info" aria-selected="true"
           i class="fas fa-info-circle"
           ' Info
-      li class="nav-item"
-        a class="nav-link" id="readme-tab" href="#readme" role="tab" data-toggle="tab" aria-controls="readme" aria-selected="false"
-          i class="fas fa-book"
-          ' Readme
+      - if readme
+        li class="nav-item"
+          a class="nav-link" id="readme-tab" href="#readme" role="tab" data-toggle="tab" aria-controls="readme" aria-selected="false"
+            i class="fas fa-book"
+            ' Readme
 
     div class="tab-content"
       div role="tabpanel" class="tab-pane fade show active" id="info" aria-labelledby="info-tab"
         == render "src/views/partials/repo_info.slang"
-     div role="tabpanel" class="tab-pane fade" id="readme" aria-labelledby="readme-tab"
-       .row
-         .col-md-12.shard__readme
-           - if readme
-            == readme_html
+      - if readme
+        div role="tabpanel" class="tab-pane fade" id="readme" aria-labelledby="readme-tab"
+          .row
+            .col-md-12.shard__readme
+              == readme_html
 
   .col-md-4.col-sm-12
     .list__heading Github statistic:
