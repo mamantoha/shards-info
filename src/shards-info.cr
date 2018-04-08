@@ -129,7 +129,7 @@ get "/repos/:owner/:repo" do |env|
   readme = CACHE.fetch("readme_#{owner}_#{repo_name}") do
     response = GITHUB_CLIENT.repo_readme(owner, repo_name)
     response.to_json
-  rescue Crest::RequestFailed
+  rescue Crest::NotFound
     ""
   end
 

@@ -108,7 +108,7 @@ module Github
     def repo_readme(owner : String, repo : String)
       url = "/repos/#{owner}/#{repo}/readme"
 
-      response = make_request(url)
+      response = make_request(url, true)
 
       Github::Readme.from_json(response.body)
     end
