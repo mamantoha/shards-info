@@ -21,6 +21,7 @@ module Github
 
       @client = Crest::Resource.new(
         base_url,
+        headers: {"Accept" => "application/vnd.github.mercy-preview+json"},
         user: user,
         password: key,
         logging: true,

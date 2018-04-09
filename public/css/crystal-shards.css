@@ -130,9 +130,13 @@ ul.not-list li {
   font-size: 14px;
 }
 
+.shards__shard_topics {
+  margin-bottom: 8px;
+}
+
 .page__heading {
   padding-top: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   margin-bottom: 30px;
   border-bottom: 1px solid #c1c4ca;
   white-space: nowrap;

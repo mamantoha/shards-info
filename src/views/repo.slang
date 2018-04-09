@@ -1,12 +1,15 @@
 .row
   .col-md-8.col-sm-12.shard__main
-    h1.page__heading
-      = repo.name
-      i.page__subheading
-        = repo.latest_release
+    .page__heading
+      h1= repo.name
+        i.page__subheading
+          = repo.latest_release
+      .shard__topics
+        - if topics = repo.topics
+          - topics.each do |topic|
+            span class="badge badge-pill badge-primary" = topic
     .shard__intro
       = Emoji.emojize(repo.description.to_s)
-
     ul class="nav nav-tabs" id="infoTab" role="tablist"
       li class="nav-item"
         a class="nav-link active" id="info-tab" href="#info" role="tab" data-toggle="tab" aria-controls="info" aria-selected="true"
