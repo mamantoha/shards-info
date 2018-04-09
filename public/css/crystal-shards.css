@@ -135,9 +135,11 @@ ul.not-list li {
   padding-bottom: 20px;
   margin-bottom: 30px;
   border-bottom: 1px solid #c1c4ca;
-  white-space: nowrap;
   text-overflow: ellipsis;
   overflow:hidden;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
 }
 
 .page__subheading {
@@ -157,6 +159,10 @@ ul.not-list li {
 
 .shard__releases {
   margin-bottom: 12px;
+}
+
+.shard__topics {
+  white-space: initial;
 }
 
 .list__items a {
@@ -183,6 +189,11 @@ ul.not-list li {
 
 .shard__release-wrap {
   font-weight: 800;
+}
+
+.shard__readme {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .shard__readme img {
