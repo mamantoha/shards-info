@@ -200,6 +200,11 @@ ul.not-list li {
   max-width: 100%;
 }
 
+.shard__readme pre code {
+  overflow: auto;
+  overflow-y: hidden;
+}
+
 .list__heading {
   font-weight: 800;
   font-size: 12px;
