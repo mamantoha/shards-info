@@ -8,6 +8,7 @@ require "crest"
 require "emoji"
 require "humanize_time"
 require "markd"
+require "autolink"
 
 require "./github"
 require "./config"

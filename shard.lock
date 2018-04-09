@@ -1,5 +1,9 @@
 version: 1.0
 shards:
+  autolink:
+    github: crystal-community/autolink.cr
+    version: 0.1.3
+
   cache:
     github: mamantoha/cache
     version: 0.0.5

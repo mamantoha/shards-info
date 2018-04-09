@@ -9,7 +9,7 @@
           - topics.each do |topic|
             a href="/repos?query=topic:#{topic}" class="badge badge-pill badge-primary" = topic
     .shard__intro
-      = Emoji.emojize(repo.description.to_s)
+      == Emoji.emojize(Autolink.auto_link(repo.description.to_s, html: {"target" => "_blank"}))
     ul class="nav nav-tabs" id="infoTab" role="tablist"
       li class="nav-item"
         a class="nav-link active" id="info-tab" href="#info" role="tab" data-toggle="tab" aria-controls="info" aria-selected="true"
