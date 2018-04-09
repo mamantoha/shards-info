@@ -4,10 +4,6 @@
       .shards__shard_info
         h3.shards__shard_name
           a href="/repos/#{repo.owner.login}/#{repo.name}" = repo.name
-        .shards__shard_topics
-          - if topics = repo.topics
-            - topics.each do |topic|
-              span class="badge badge-pill badge-primary" = topic
         p.shards__shard_desc
           = Emoji.emojize(repo.description.to_s)
       .shards__shard_owner
