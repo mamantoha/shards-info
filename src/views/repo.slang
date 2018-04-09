@@ -7,7 +7,8 @@
       .shard__topics
         - if topics = repo.topics
           - topics.each do |topic|
-            span class="badge badge-pill badge-primary" = topic
+            a href="/repos?query=topic:#{topic}"
+             span class="badge badge-pill badge-primary" = topic
     .shard__intro
       = Emoji.emojize(repo.description.to_s)
     ul class="nav nav-tabs" id="infoTab" role="tablist"
