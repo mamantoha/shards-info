@@ -30,8 +30,9 @@
             i class="fab fa-github"
             a href="/repos/#{item.repository.full_name}" = item.repository.name
       - if dependent_repos.total_count > 10
-        a class="shard__see_all_dependent_link" href="/repos/#{repo.full_name}/dependents"
-          ' Show all dependents (#{dependent_repos.total_count} total)
+        .shard__see_all_dependent_link
+          a class="shard__see_all_dependent_link" href="/repos/#{repo.full_name}/dependents"
+            ' Show all dependents
   .col-md-6
       .shard__development_dependencies
         h3.list__heading Development dependencies:
