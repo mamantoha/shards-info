@@ -3,7 +3,7 @@ div
     ' Dependent
     i.page__subheading
       ' on
-      a href="#{repo.html_url}" #{repo.full_name}
+      a href="/repos/#{repo.full_name}" #{repo.full_name}
 
 == render "src/views/dependents/paginataion.slang"
 
