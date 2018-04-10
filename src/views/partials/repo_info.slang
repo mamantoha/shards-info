@@ -1,45 +1,48 @@
 .row
-   .col-md-6
-     .shard__releases
-       h3.list__heading Releases:
-       ul.list__items.not-list
-         - repo.releases.first(5).each do |release|
-           li.shard__release-wrap
-             = release.tag_name
-             small
-               ' -
-               = release.published_at.to_s("%B %-d, %Y")
-   .col-md-6
-     .shard__dependencies
-       h3.list__heading Dependencies:
-       ul.list__items.not-list
-         - dependencies.each do |key, value|
-           li
-             i class="fab fa-github"
-             - if value["github"]?
-               a href="/repos/#{value["github"]}" = key
-             - else
-               = key
-.row
-   .col-md-6
-     .shard__dependent_shards
-       h3.list__heading = "Dependent shards(#{dependent_repos.total_count}):"
-       ul.list__items.not-list
-         - dependent_repos.items.each do |item|
-           li
-             i class="fab fa-github"
-             a href="/repos/#{item.repository.full_name}" = item.repository.name
   .col-md-6
-     .shard__development_dependencies
-       h3.list__heading Development dependencies:
-       ul.list__items.not-list
-         - development_dependencies.each do |key, value|
-           li
-             i class="fab fa-github"
-             - if value["github"]?
-               a href="/repos/#{value["github"]}" = key
-             - else
-               = key
+    .shard__releases
+      h3.list__heading Releases:
+      ul.list__items.not-list
+        - repo.releases.first(5).each do |release|
+          li.shard__release-wrap
+            = release.tag_name
+            small
+              ' -
+              = release.published_at.to_s("%B %-d, %Y")
+  .col-md-6
+    .shard__dependencies
+      h3.list__heading Dependencies:
+      ul.list__items.not-list
+        - dependencies.each do |key, value|
+          li
+            i class="fab fa-github"
+            - if value["github"]?
+              a href="/repos/#{value["github"]}" = key
+            - else
+              = key
+.row
+  .col-md-6
+    .shard__dependent_shards
+      h3.list__heading = "Dependent shards (#{dependent_repos.total_count})"
+      ul.list__items.not-list
+        - dependent_repos.items.each do |item|
+          li
+            i class="fab fa-github"
+            a href="/repos/#{item.repository.full_name}" = item.repository.name
+      - if dependent_repos.total_count > 10
+        a class="shard__see_all_dependent_link" href="/repos/#{repo.full_name}/dependents"
+          ' Show all dependents (#{dependent_repos.total_count} total)
+  .col-md-6
+      .shard__development_dependencies
+        h3.list__heading Development dependencies:
+        ul.list__items.not-list
+          - development_dependencies.each do |key, value|
+            li
+              i class="fab fa-github"
+              - if value["github"]?
+                a href="/repos/#{value["github"]}" = key
+              - else
+                = key
 .row
   .col-12
     .shard__owner

@@ -1,7 +1,9 @@
 div
-  h4.page__heading.text-right
-    = repos.total_count
-    ' shards found
+  h1.page__heading
+    ' search
+    i class="page__subheading"
+      ' for
+      em = query
 - if repos.total_count != 0
   - repos_array = repos.items
   == render "src/views/partials/pagination.slang"

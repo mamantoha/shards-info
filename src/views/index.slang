@@ -14,6 +14,6 @@ div class="tab-content"
   div role="tabpanel" class="tab-pane fade show active" id="trending" aria-labelledby="trending-tab"
     - repos_array = trending_repos.items
     == render "src/views/partials/repos.slang"
- div role="tabpanel" class="tab-pane fade" id="recently" aria-labelledby="recently-tab"
+  div role="tabpanel" class="tab-pane fade" id="recently" aria-labelledby="recently-tab"
     - repos_array = recently_repos.items
     == render "src/views/partials/repos.slang"

@@ -165,6 +165,10 @@ ul.not-list li {
   white-space: initial;
 }
 
+.list__items {
+  margin-bottom: 5px;
+}
+
 .list__items a {
   color: #141c22;
 }
@@ -194,6 +198,21 @@ ul.not-list li {
 .shard__readme {
   overflow-wrap: break-word;
   word-wrap: break-word;
+}
+
+a.shard__see_all_dependent_link {
+  color: #c1c4ca;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.shard__see_all_dependent_link:after {
+  margin-left: 3px;
+  font-family: "Times New Roman", sans-serif;
+  font-style: normal;
+  content: "→";
 }
 
 .shard__readme img {

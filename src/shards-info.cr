@@ -105,7 +105,7 @@ get "/repos/:owner/:repo" do |env|
     next
   end
 
-  dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}") do
+  dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}_1") do
     GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}").to_json
   end
 
@@ -144,6 +144,30 @@ get "/repos/:owner/:repo" do |env|
   Config.config.page_title = "#{repo.full_name}: #{repo.description}"
 
   render "src/views/repo.slang", "src/views/layouts/layout.slang"
+end
+
+get "/repos/:owner/:repo/dependents" do |env|
+  owner = env.params.url["owner"]
+  repo_name = env.params.url["repo"]
+
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+
+  repo = CACHE.fetch("repos_#{owner}_#{repo_name}") do
+    GITHUB_CLIENT.repo_get("#{owner}/#{repo_name}").to_json
+  end
+
+  repo = Github::Repo.from_json(repo)
+
+  dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}_#{page}") do
+    GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}", page).to_json
+  end
+
+  dependent_repos = Github::CodeSearches.from_json(dependent_repos)
+
+  Config.config.page_title = "#{repo.full_name}: dependent shards"
+
+  render "src/views/dependents.slang", "src/views/layouts/layout.slang"
 end
 
 def link(url : String?) : String | Nil
