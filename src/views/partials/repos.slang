@@ -12,7 +12,7 @@
         .shards__shard_owner_name
           a href="/repos/#{repo.owner.login}" = repo.owner.login
       .shards__shard_updated
-        = "Updated #{HumanizeTime.distance_of_time_in_words(repo.pushed_at, Time.now)} ago"
+        = "Updated #{HumanizeTime.distance_of_time_in_words(repo.updated_at, Time.now)} ago"
       .shards__shard_github
         ul
           li

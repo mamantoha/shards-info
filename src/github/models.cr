@@ -93,7 +93,7 @@ module Github
       deployments_url:   String,
       created_at:        Time,
       updated_at:        Time,
-      pushed_at:         Time,
+      pushed_at:         Time?,
       git_url:           String,
       ssh_url:           String,
       clone_url:         String,
