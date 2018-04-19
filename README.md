@@ -20,6 +20,10 @@ sentry
 
 ### Deploy
 
+Get started by deploying this service to heroku.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ```
 heroku buildpacks:add https://github.com/crystal-lang/heroku-buildpack-crystal.git
 ```
@@ -32,6 +36,11 @@ GITHUB_KEY
 ```
 
 Go to https://github.com/settings/tokens and generate new token (select `repo` scope).
+
+## Built With
+
+* [Crystal language](https://crystal-lang.org/)
+* [Kemal](https://github.com/kemalcr/kemal) - Web microframework for Crystal
 
 ## Contributing
 
