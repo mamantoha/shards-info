@@ -1,0 +1,26 @@
+{
+  "name": "shards-info",
+  "description": "View of all repositories on GitHub that have Crystal code in them",
+  "keywords": [
+    "crystal",
+    "crystal-shards"
+  ],
+  "website": "http://shards.info/",
+  "repository": "https://github.com/mamantoha/shards-info",
+  "success_url": "/",
+  "env": {
+    "GITHUB_USER": {
+      "description": "Github user.",
+      "value": "secret"
+    },
+    "GITHUB_KEY": {
+      "description": "Github secret key.",
+      "value": "secret"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/crystal-lang/heroku-buildpack-crystal.git"
+    }
+  ]
+}
