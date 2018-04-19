@@ -31,7 +31,7 @@ module Github
 
     def make_request(url, ignore_exception = false)
       response = client[url].get
-    rescue ex : Crest::NotFound
+    rescue ex : Crest::NotFound | Crest::UnprocessableEntity
       if ignore_exception
         raise ex
       else
