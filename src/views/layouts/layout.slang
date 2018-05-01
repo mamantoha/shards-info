@@ -18,6 +18,7 @@ html lang="en"
     link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"
     link rel="stylesheet" href="/css/crystal-shards.css"
     title #{Config.config.page_title}
+    link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"
   body
     nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
       .container

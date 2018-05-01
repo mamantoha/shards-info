@@ -3,3 +3,4 @@
 /bin/
 /.shards/
 .env
+.DS_Store
