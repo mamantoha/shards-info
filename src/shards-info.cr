@@ -22,6 +22,9 @@ GITHUB_CLIENT = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
 before_all do |env|
   GITHUB_CLIENT.exception_handler = Kemal::Exceptions::RouteNotFound.new(env)
+
+  Config.config.open_graph = OpenGraph.new
+  Config.config.open_graph.url = "http://shards.info#{env.request.path}"
 end
 
 get "/" do |env|
@@ -77,6 +80,11 @@ get "/repos/:owner" do |env|
   repos = Github::UserRepos.from_json(repos)
 
   Config.config.page_title = "#{user.login} shards"
+
+  Config.config.open_graph.title = "#{user.login} (#{user.name})"
+  Config.config.open_graph.description = "#{user.login} has #{repos.size} shards available."
+  Config.config.open_graph.image = "#{user.avatar_url}"
+  Config.config.open_graph.type = "profile"
 
   render "src/views/owner.slang", "src/views/layouts/layout.slang"
 end
@@ -142,6 +150,10 @@ get "/repos/:owner/:repo" do |env|
   end
 
   Config.config.page_title = "#{repo.full_name}: #{repo.description}"
+
+  Config.config.open_graph.title = "#{repo.full_name}"
+  Config.config.open_graph.description = "#{repo.description}"
+  Config.config.open_graph.image = "#{repo.owner.avatar_url}"
 
   render "src/views/repo.slang", "src/views/layouts/layout.slang"
 end
