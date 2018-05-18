@@ -22,7 +22,7 @@ dependencies:
     version: ~> 0.0.5
   crest:
     github: mamantoha/crest
-    version: ~> 0.9.10
+    version: ~> 0.10.1
   emoji:
     github: veelenga/emoji.cr
     branch: master
