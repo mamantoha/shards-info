@@ -27,6 +27,8 @@ module Github
         logging: true,
         logger: Logger.new
       )
+
+      @client.http_client.compress = false
     end
 
     def make_request(url, ignore_exception = false)
