@@ -10,11 +10,11 @@ shards:
 
   crest:
     github: mamantoha/crest
-    version: 0.10.1
+    version: 0.9.10
 
   emoji:
     github: veelenga/emoji.cr
-    commit: 2266bf29ab136857a5305ea6b2828a4cf94b5314
+    commit: 1588ecc2bd5b40496980c05b9ac872193c968ce7
 
   humanize_time:
     github: mamantoha/humanize_time
