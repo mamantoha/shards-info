@@ -36,13 +36,8 @@ html lang="en"
       == content
     div.space
     footer.footer
-     .container
-        div class="d-flex justify-content-between"
-          div.mr-auto
-            span class="text-muted" © 2018
-              a href="https://github.com/mamantoha" Anton Maminov
-          div.ml-auto
-            img src="/logo.svg" width="40" height="40" class="d-inline-block align-center" alt=""
+      .container
+        span class="text-muted" Crystal Shards
     script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"
     script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"
     script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"
