@@ -12,14 +12,16 @@ module Github
   end
 
   class API
-    getter client, base_url
+    getter base_url, user, key
     property exception_handler
 
-    def initialize(user, key)
+    def initialize(@user : String, @key : String)
       @base_url = "https://api.github.com"
       @exception_handler = Exception.new
+    end
 
-      @client = Crest::Resource.new(
+    def client
+      client = Crest::Resource.new(
         base_url,
         headers: {"Accept" => "application/vnd.github.mercy-preview+json"},
         user: user,
@@ -28,7 +30,9 @@ module Github
         logger: Logger.new
       )
 
-      @client.http_client.compress = false
+      client.http_client.compress = false
+
+      client
     end
 
     def make_request(url, ignore_exception = false)
