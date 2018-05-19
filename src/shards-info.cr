@@ -20,6 +20,11 @@ end
 CACHE         = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
 GITHUB_CLIENT = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
+static_headers do |response, filepath, filestat|
+  duration = 86400 # 1 day
+  response.headers.add "Cache-Control", "public, max-age=#{duration}"
+end
+
 before_all do |env|
   GITHUB_CLIENT.exception_handler = Kemal::Exceptions::RouteNotFound.new(env)
 
