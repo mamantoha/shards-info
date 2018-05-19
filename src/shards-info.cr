@@ -128,7 +128,7 @@ get "/repos/:owner/:repo" do |env|
   development_dependencies = {} of String => Hash(String, String)
 
   if shard_content && shard_content.name == "shard.yml" && shard_content.download_url
-    shard_file = CACHE.fetch("content_shard_yml") do
+    shard_file = CACHE.fetch("content_shard_yml_#{owner}_#{repo_name}") do
       Crest.get(shard_content.download_url.not_nil!).body
     end
 
@@ -153,7 +153,7 @@ get "/repos/:owner/:repo" do |env|
   readme = readme.empty? ? nil : Github::Readme.from_json(readme)
 
   if readme && readme.download_url
-    readme_file = CACHE.fetch("content_readme") do
+    readme_file = CACHE.fetch("content_readme_#{owner}_#{repo_name}") do
       Crest.get(readme.download_url.not_nil!).body
     end
 
