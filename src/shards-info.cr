@@ -157,7 +157,7 @@ get "/repos/:owner/:repo" do |env|
       Crest.get(readme.download_url.not_nil!).body
     end
 
-    readme_html = Markd.to_html(readme_file)
+    readme_html = Markd.to_html(Emoji.emojize(readme_file))
   end
 
   Config.config.page_title = "#{repo.full_name}: #{repo.description}"
