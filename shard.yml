@@ -28,7 +28,7 @@ dependencies:
     branch: master
   humanize_time:
     github: mamantoha/humanize_time
-    branch: crystal_0.25
+    version: ~> 0.2.0
   markd:
     github: icyleaf/markd
   kemal-flash:

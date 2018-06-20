@@ -18,11 +18,11 @@ shards:
 
   humanize_time:
     github: mamantoha/humanize_time
-    commit: 961342d04a83465394d0da64ee5bc84ded969cda
+    version: 0.2.0
 
   i18n:
-    github: mamantoha/i18n.cr
-    commit: 64e908cafcb642396bde5529568d1a4b409d6e8d
+    github: TechMagister/i18n.cr
+    version: 0.2.0
 
   kemal:
     github: kemalcr/kemal
