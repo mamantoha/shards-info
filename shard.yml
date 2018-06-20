@@ -11,7 +11,7 @@ targets:
 dependencies:
   kemal:
     github: kemalcr/kemal
-    version: ~> 0.22.0
+    version: ~> 0.23.0
   kemal-session:
     github: kemalcr/kemal-session
   slang:
@@ -22,13 +22,13 @@ dependencies:
     version: ~> 0.0.5
   crest:
     github: mamantoha/crest
-    version: ~> 0.10.0
+    version: ~> 0.10.2
   emoji:
     github: veelenga/emoji.cr
     branch: master
   humanize_time:
     github: mamantoha/humanize_time
-    branch: master
+    version: ~> 0.2.0
   markd:
     github: icyleaf/markd
   kemal-flash:
@@ -36,6 +36,6 @@ dependencies:
   autolink:
     github: crystal-community/autolink.cr
 
-crystal: 0.24.2
+crystal: 0.25.0
 
 license: MIT

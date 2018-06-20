@@ -135,11 +135,11 @@ get "/repos/:owner/:repo" do |env|
     shard = YAML.parse(shard_file)
 
     if shard["dependencies"]?
-      dependencies = shard["dependencies"]
+      dependencies = shard["dependencies"].as_h
     end
 
     if shard["development_dependencies"]?
-      development_dependencies = shard["development_dependencies"]
+      development_dependencies = shard["development_dependencies"].as_h
     end
   end
 

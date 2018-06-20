@@ -6,11 +6,11 @@ shards:
 
   cache:
     github: mamantoha/cache
-    version: 0.0.5
+    version: 0.0.6
 
   crest:
     github: mamantoha/crest
-    version: 0.10.1
+    version: 0.10.2
 
   emoji:
     github: veelenga/emoji.cr
@@ -18,15 +18,15 @@ shards:
 
   humanize_time:
     github: mamantoha/humanize_time
-    commit: 1e041e6d05413d62d3b2db79ed5ed6354980e548
+    version: 0.2.0
 
   i18n:
     github: TechMagister/i18n.cr
-    version: 0.1.0
+    version: 0.2.0
 
   kemal:
     github: kemalcr/kemal
-    version: 0.22.0
+    version: 0.23.0
 
   kemal-flash:
     github: neovintage/kemal-flash
@@ -34,7 +34,7 @@ shards:
 
   kemal-session:
     github: kemalcr/kemal-session
-    version: 0.9.0
+    version: 0.10.0
 
   kilt:
     github: jeromegn/kilt
@@ -50,7 +50,7 @@ shards:
 
   redis:
     github: stefanwille/crystal-redis
-    version: 1.9.0
+    version: 1.10.1
 
   slang:
     github: jeromegn/slang
