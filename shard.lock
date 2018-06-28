@@ -14,7 +14,7 @@ shards:
 
   emoji:
     github: veelenga/emoji.cr
-    commit: 2266bf29ab136857a5305ea6b2828a4cf94b5314
+    commit: fe7d16fb8ed0fe0f1824f171f240ae305894e4cf
 
   humanize_time:
     github: mamantoha/humanize_time
@@ -54,5 +54,5 @@ shards:
 
   slang:
     github: jeromegn/slang
-    commit: 4ba04a04a352a8b3b43bd723dbff80cf1050f7cd
+    commit: f33c23be9d477a07627a124d0b79d6cdb7a9132e
 
