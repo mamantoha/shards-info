@@ -22,6 +22,7 @@ html lang="en"
     link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon"
   body
     == render "src/views/partials/navbar.slang"
+    == render "src/views/partials/about.slang"
     .container
       == render "src/views/partials/flash.slang"
       == content
