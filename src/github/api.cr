@@ -93,9 +93,10 @@ module Github
     def dependent_repos(full_name : String, page = 1, limit = 10)
       query = URI.escape("github: #{full_name}")
       filename = "shard.yml"
+      path = "/"
       type = "Code"
 
-      url = "/search/code?q=#{query}+filename:#{filename}&type=#{type}&page=#{page}&per_page=#{limit}"
+      url = "/search/code?q=#{query}+filename:#{filename}+path:#{path}&type=#{type}&page=#{page}&per_page=#{limit}"
 
       response = make_request(url)
 
