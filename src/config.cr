@@ -18,6 +18,15 @@ class Config
   def self.config
     Config::INSTANCE
   end
+
+  # List of Crystal repositories w/o shard.yml
+  # which we want to show anyway.
+  def self.special_repositories
+    [
+      "veelenga/awesome-crystal",
+      "crystal-lang/crystal"
+    ]
+  end
 end
 
 struct OpenGraph
