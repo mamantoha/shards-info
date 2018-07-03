@@ -183,7 +183,7 @@ get "/repos/:owner/:repo/dependents" do |env|
   repo = Github::Repo.from_json(repo)
 
   dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}_#{page}") do
-    GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}", page).to_json
+    GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}", page: page).to_json
   end
 
   dependent_repos = Github::CodeSearches.from_json(dependent_repos)

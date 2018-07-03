@@ -54,15 +54,15 @@ module Github
     end
 
     def trending
-      search_repositories("", "stars", 1, 20, after_date: 1.week.ago)
+      search_repositories("", sort: "stars", page: 1, limit: 20, after_date: 1.week.ago)
     end
 
     def recently_updated
-      search_repositories("", "updated", 1, 20)
+      search_repositories("", sort: "updated", page: 1, limit: 20)
     end
 
     def filter(query : String, page = 1)
-      search_repositories(query, "stars", page, 10)
+      search_repositories(query, sort: "stars", page: page, limit: 10, after_date: nil)
     end
 
     def user_repos(owner : String)
@@ -98,7 +98,7 @@ module Github
       JSON.parse(response.body)
     end
 
-    def dependent_repos(full_name : String, page = 1, limit = 10)
+    def dependent_repos(full_name : String, *, page = 1, limit = 10)
       query = URI.escape("github: #{full_name}")
       filename = "shard.yml"
       path = "/"
@@ -130,13 +130,25 @@ module Github
     end
 
     # https://developer.github.com/v3/search/#search-repositories
-    private def search_repositories(word = "", sort = "stars", page = 1, limit = 100, after_date = 1.years.ago)
-      date_filter = after_date.to_s("%Y-%m-%d")
-      pushed = date_filter != "" ? "+pushed:>#{date_filter}" : ""
+    private def search_repositories(
+      word : String,
+      *,
+      sort = "stars",
+      page = 1,
+      limit = 100,
+      after_date = 1.years.ago,
+      language = "Crystal"
+    )
+      pushed = ""
 
-      word = word != "" ? "#{URI.escape(word)}" : ""
+      if after_date
+        date_filter = after_date.to_s("%Y-%m-%d")
+        pushed = date_filter.empty? ? "" : "+pushed:>#{date_filter}"
+      end
 
-      url = "/search/repositories?q=#{word}+language:crystal#{pushed}&per_page=#{limit}&sort=#{sort}&page=#{page}"
+      word = word.empty? ? "" : "#{URI.escape(word)}"
+
+      url = "/search/repositories?q=#{word}+language:#{language}#{pushed}&per_page=#{limit}&sort=#{sort}&page=#{page}"
 
       response = make_request(url)
 
