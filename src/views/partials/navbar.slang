@@ -2,7 +2,7 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
   .container
     .navbar-brand
       img src="/images/logo.svg" width="30" height="30" class="d-inline-block align-top" alt=""
-      ' Crystal Shards
+      ' Shards Info
     button.navbar-toggler aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" data-target="#navbarCollapse" data-toggle="collapse" type="button"
       span.navbar-toggler-icon
     #navbarCollapse.collapse.navbar-collapse

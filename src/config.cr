@@ -11,7 +11,7 @@ class Config
   property open_graph
 
   def initialize
-    @page_title = "Crystal Shards"
+    @page_title = "Shards Info"
     @open_graph = OpenGraph.new
   end
 
@@ -34,8 +34,8 @@ struct OpenGraph
   property site_name, title, type, description, image, url
 
   def initialize(
-    @site_name = "Crystal Shards",
-    @title = "Crystal Shards",
+    @site_name = "Shards Info",
+    @title = "Shards Info",
     @type = "object",
     @description = "View of all repositories on GitHub that have Crystal code in them.",
     @image = "http://shards.info/logo.png",

@@ -44,7 +44,7 @@ get "/" do |env|
   recently_repos = Github::Repos.from_json(recently_repos)
   trending_repos = Github::Repos.from_json(trending_repos)
 
-  Config.config.page_title = "Crystal Shards"
+  Config.config.page_title = "Shards Info"
 
   render "src/views/index.slang", "src/views/layouts/layout.slang"
 end
@@ -64,7 +64,7 @@ get "/repos" do |env|
 
     repos = Github::Repos.from_json(repos)
 
-    Config.config.page_title = "Crystal Shards: search '#{query}'"
+    Config.config.page_title = "Shards Info: search '#{query}'"
 
     render "src/views/filter.slang", "src/views/layouts/layout.slang"
   end
