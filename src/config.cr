@@ -24,7 +24,8 @@ class Config
   def self.special_repositories
     [
       "veelenga/awesome-crystal",
-      "crystal-lang/crystal"
+      "crystal-lang/crystal",
+      "ysbaddaden/prax.cr",
     ]
   end
 end
