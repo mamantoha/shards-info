@@ -37,5 +37,9 @@ dependencies:
     github: neovintage/kemal-flash
   autolink:
     github: crystal-community/autolink.cr
+  raven:
+    # github: sija/raven.cr
+    github: mamantoha/raven.cr
+    branch: kemal-integration
 
 license: MIT

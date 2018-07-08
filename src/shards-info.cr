@@ -9,6 +9,8 @@ require "emoji"
 require "humanize_time"
 require "markd"
 require "autolink"
+require "raven"
+require "raven/integrations/kemal"
 
 require "./github"
 require "./config"
@@ -16,6 +18,15 @@ require "./config"
 Kemal::Session.config do |config|
   config.secret = "my_super_secret"
 end
+
+Raven.configure do |config|
+  config.async = true
+  config.current_environment = Kemal.config.env
+  config.dsn = ENV["SENTRY_DNS"]
+  config.environments = %w(production)
+end
+
+Kemal.config.add_handler(Raven::Kemal::ExceptionHandler.new)
 
 CACHE         = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
 GITHUB_CLIENT = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
