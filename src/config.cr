@@ -26,6 +26,7 @@ class Config
       "veelenga/awesome-crystal",
       "crystal-lang/crystal",
       "ysbaddaden/prax.cr",
+      "hendisantika/List-All-Programming-Telegram-Group",
     ]
   end
 end
