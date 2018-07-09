@@ -10,7 +10,7 @@ shards:
 
   cache:
     github: mamantoha/cache
-    version: 0.0.6
+    version: 0.0.7
 
   crest:
     github: mamantoha/crest
@@ -48,13 +48,17 @@ shards:
     github: icyleaf/markd
     version: 0.1.1
 
+  memcached:
+    github: comandeo/crystal-memcached
+    version: 0.2.2
+
   radix:
     github: luislavena/radix
     version: 0.3.8
 
   raven:
-    github: mamantoha/raven.cr
-    commit: dee8f4be0b869f3ccda055e239633660e552a603
+    github: sija/raven.cr
+    commit: 74bfe8d5fda938a26634a5c328863979462023dc
 
   redis:
     github: stefanwille/crystal-redis
