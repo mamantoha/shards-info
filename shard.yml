@@ -21,7 +21,7 @@ dependencies:
     branch: master
   cache:
     github: mamantoha/cache
-    version: ~> 0.0.5
+    version: ~> 0.0.7
   crest:
     github: mamantoha/crest
     version: ~> 0.10.2
@@ -37,5 +37,8 @@ dependencies:
     github: neovintage/kemal-flash
   autolink:
     github: crystal-community/autolink.cr
+  raven:
+    github: sija/raven.cr
+    branch: develop
 
 license: MIT

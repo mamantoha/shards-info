@@ -1,12 +1,16 @@
 version: 1.0
 shards:
+  any_hash:
+    github: sija/any_hash.cr
+    version: 0.2.2
+
   autolink:
     github: crystal-community/autolink.cr
     version: 0.1.3
 
   cache:
     github: mamantoha/cache
-    version: 0.0.6
+    version: 0.0.7
 
   crest:
     github: mamantoha/crest
@@ -44,9 +48,17 @@ shards:
     github: icyleaf/markd
     version: 0.1.1
 
+  memcached:
+    github: comandeo/crystal-memcached
+    version: 0.2.2
+
   radix:
     github: luislavena/radix
     version: 0.3.8
+
+  raven:
+    github: sija/raven.cr
+    commit: 74bfe8d5fda938a26634a5c328863979462023dc
 
   redis:
     github: stefanwille/crystal-redis
