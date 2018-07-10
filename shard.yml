@@ -30,7 +30,7 @@ dependencies:
     branch: master
   humanize_time:
     github: mamantoha/humanize_time
-    version: ~> 0.2.0
+    branch: embed-translations
   markd:
     github: icyleaf/markd
   kemal-flash:

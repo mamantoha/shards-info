@@ -22,11 +22,11 @@ shards:
 
   humanize_time:
     github: mamantoha/humanize_time
-    version: 0.2.0
+    commit: fe46664abfd85fee15b742332e06f4f1306474bd
 
   i18n:
     github: TechMagister/i18n.cr
-    version: 0.2.0
+    commit: d8a8933f6a4eb7d9790c3803cb8bec06c304ea5c
 
   kemal:
     github: kemalcr/kemal
