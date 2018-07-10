@@ -71,7 +71,7 @@ module Github
       response = make_request(url)
 
       repos = Github::UserRepos.from_json(response.body)
-      repos.select { |repo| repo.languages["Crystal"]? && repo.fork == false }
+      repos.select { |repo| repo.language == "Crystal" && repo.fork == false }
     end
 
     def repo_get(full_name : String)
@@ -88,14 +88,6 @@ module Github
       response = make_request(url)
 
       Github::Releases.from_json(response.body)
-    end
-
-    def repo_languages(full_name : String)
-      url = "/repos/#{full_name}/languages"
-
-      response = make_request(url)
-
-      JSON.parse(response.body)
     end
 
     def dependent_repos(full_name : String, *, page = 1, limit = 10)
