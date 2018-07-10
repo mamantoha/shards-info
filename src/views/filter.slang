@@ -6,6 +6,6 @@ div
       em = query
 - if repos.total_count != 0
   - repos_array = repos.items
-  == render "src/views/partials/pagination.slang"
+  == paginator
   == render "src/views/partials/repos.slang"
-  == render "src/views/partials/pagination.slang"
+  == paginator

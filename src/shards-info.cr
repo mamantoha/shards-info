@@ -14,6 +14,7 @@ require "raven/integrations/kemal"
 
 require "./github"
 require "./config"
+require "./view_helpers"
 
 Kemal::Session.config do |config|
   config.secret = "my_super_secret"
@@ -76,6 +77,8 @@ get "/repos" do |env|
     repos = Github::Repos.from_json(repos)
 
     raise Kemal::Exceptions::RouteNotFound.new(env) if repos.items.empty?
+
+    paginator = ViewHelpers::GithubPaginator.new(repos, page, "/repos?query=#{query}&page=%{page}").to_s
 
     Config.config.page_title = "Shards Info: search '#{query}'"
 
@@ -200,6 +203,8 @@ get "/repos/:owner/:repo/dependents" do |env|
   end
 
   dependent_repos = Github::CodeSearches.from_json(dependent_repos)
+
+  paginator = ViewHelpers::GithubPaginator.new(dependent_repos, page, "/repos/#{repo.full_name}/dependents?page=%{page}").to_s
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if dependent_repos.items.empty?
 

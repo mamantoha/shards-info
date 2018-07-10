@@ -1,6 +1,13 @@
 require "json"
 
 module Github
+  class Iterable
+    JSON.mapping({
+      total_count:        Int32,
+      incomplete_results: Bool,
+    })
+  end
+
   class User
     JSON.mapping({
       login:               String,
@@ -36,7 +43,7 @@ module Github
     })
   end
 
-  class Repos
+  class Repos < Iterable
     JSON.mapping({
       total_count:        Int32,
       incomplete_results: Bool,
@@ -161,7 +168,7 @@ module Github
 
   alias UserRepos = Array(Repo)
 
-  class CodeSearches
+  class CodeSearches < Iterable
     JSON.mapping({
       total_count:        Int32,
       incomplete_results: Bool,
