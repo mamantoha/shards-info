@@ -142,14 +142,6 @@ module Github
       Github::Releases.from_json(releases)
     end
 
-    def languages
-      releases = CACHE.fetch("languages_#{full_name}") do
-        GITHUB_CLIENT.repo_languages(full_name).to_json
-      end
-
-      JSON.parse(releases)
-    end
-
     def latest_release
       releases.first?.try do |release|
         return release.tag_name
