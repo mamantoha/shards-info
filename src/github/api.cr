@@ -90,7 +90,7 @@ module Github
       Github::Releases.from_json(response.body)
     end
 
-    def dependent_repos(full_name : String, page = 1, limit = 10)
+    def dependent_repos(full_name : String, *, page = 1, limit = 10)
       query = URI.escape("github: #{full_name}")
       filename = "shard.yml"
       path = "/"
