@@ -27,6 +27,7 @@ class Config
       "crystal-lang/crystal",
       "ysbaddaden/prax.cr",
       "hendisantika/List-All-Programming-Telegram-Group",
+      "exercism/crystal",
     ]
   end
 end
