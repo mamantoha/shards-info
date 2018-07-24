@@ -144,7 +144,14 @@ ul.not-list li {
 
 .page__subheading {
   font-size: 60%;
-  color: #a6aab2;
+  color: #808080;
+}
+
+.result_stats {
+  font-size: 40%;
+  line-height: 43px;
+  padding-left: 16px;
+  color: #808080;
 }
 
 .shard__main {

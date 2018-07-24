@@ -76,8 +76,6 @@ get "/repos" do |env|
 
     repos = Github::Repos.from_json(repos)
 
-    raise Kemal::Exceptions::RouteNotFound.new(env) if repos.items.empty?
-
     paginator = ViewHelpers::GithubPaginator.new(repos, page, "/repos?query=#{query}&page=%{page}").to_s
 
     Config.config.page_title = "Shards Info: search '#{query}'"
