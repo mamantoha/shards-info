@@ -28,6 +28,7 @@ class Config
       "ysbaddaden/prax.cr",
       "hendisantika/List-All-Programming-Telegram-Group",
       "exercism/crystal",
+      "oprypin/crsfml",
     ]
   end
 end
