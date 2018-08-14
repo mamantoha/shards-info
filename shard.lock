@@ -61,8 +61,8 @@ shards:
     version: 0.3.8
 
   raven:
-    github: mamantoha/raven.cr
-    commit: e456fce662cdcde8bd6ec1b4271a62afdcf7c1aa
+    github: sija/raven.cr
+    commit: 9121541aa1f5a14a6ea155b2c614d2695f4c74dc
 
   redis:
     github: stefanwille/crystal-redis
