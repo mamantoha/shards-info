@@ -20,6 +20,10 @@ shards:
     github: veelenga/emoji.cr
     commit: fe7d16fb8ed0fe0f1824f171f240ae305894e4cf
 
+  exception_page:
+    github: crystal-loot/exception_page
+    version: 0.1.1
+
   humanize_time:
     github: mamantoha/humanize_time
     version: 0.3.0
@@ -30,7 +34,7 @@ shards:
 
   kemal:
     github: kemalcr/kemal
-    version: 0.23.0
+    commit: e468e2e340f23d0a0e4b0c86c2c3dc1f58c23fdc
 
   kemal-flash:
     github: neovintage/kemal-flash
@@ -57,8 +61,8 @@ shards:
     version: 0.3.8
 
   raven:
-    github: sija/raven.cr
-    commit: 74bfe8d5fda938a26634a5c328863979462023dc
+    github: mamantoha/raven.cr
+    commit: e456fce662cdcde8bd6ec1b4271a62afdcf7c1aa
 
   redis:
     github: stefanwille/crystal-redis
