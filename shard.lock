@@ -14,7 +14,7 @@ shards:
 
   crest:
     github: mamantoha/crest
-    version: 0.13.0
+    version: 0.14.0
 
   emoji:
     github: veelenga/emoji.cr
@@ -34,7 +34,7 @@ shards:
 
   kemal:
     github: kemalcr/kemal
-    commit: e468e2e340f23d0a0e4b0c86c2c3dc1f58c23fdc
+    commit: 9448360eac4273919c2bb6d2517a7234844aec2f
 
   kemal-flash:
     github: neovintage/kemal-flash

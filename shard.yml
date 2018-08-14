@@ -14,7 +14,7 @@ dependencies:
   kemal:
     github: kemalcr/kemal
     branch: master
-    version: ~> 0.23.0
+    version: ~> 0.24.0
   kemal-session:
     github: kemalcr/kemal-session
   slang:
@@ -25,7 +25,7 @@ dependencies:
     version: ~> 0.0.7
   crest:
     github: mamantoha/crest
-    version: ~> 0.13.0
+    version: ~> 0.14.0
   emoji:
     github: veelenga/emoji.cr
     branch: master
