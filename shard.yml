@@ -1,7 +1,7 @@
 name: shards-info
 version: 0.2.0
 
-crystal: 0.25.1
+crystal: 0.26.0
 
 authors:
   - Anton Maminov <anton.linux@gmail.com>
@@ -13,7 +13,7 @@ targets:
 dependencies:
   kemal:
     github: kemalcr/kemal
-    version: ~> 0.23.0
+    version: ~> 0.24.0
   kemal-session:
     github: kemalcr/kemal-session
   slang:
@@ -24,7 +24,7 @@ dependencies:
     version: ~> 0.0.7
   crest:
     github: mamantoha/crest
-    version: ~> 0.13.0
+    version: ~> 0.14.0
   emoji:
     github: veelenga/emoji.cr
     branch: master
