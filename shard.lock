@@ -10,7 +10,7 @@ shards:
 
   cache:
     github: mamantoha/cache
-    version: 0.0.7
+    version: 0.1.0
 
   crest:
     github: mamantoha/crest
@@ -62,7 +62,7 @@ shards:
 
   raven:
     github: sija/raven.cr
-    commit: 9121541aa1f5a14a6ea155b2c614d2695f4c74dc
+    commit: bc9d4febe2f588117bbb67fbbe2f544551c553ec
 
   redis:
     github: stefanwille/crystal-redis
