@@ -1,7 +1,7 @@
 version: 1.0
 shards:
   any_hash:
-    github: sija/any_hash.cr
+    github: Sija/any_hash.cr
     version: 0.2.2
 
   autolink:
@@ -61,8 +61,8 @@ shards:
     version: 0.3.8
 
   raven:
-    github: sija/raven.cr
-    commit: bc9d4febe2f588117bbb67fbbe2f544551c553ec
+    github: Sija/raven.cr
+    version: 1.0.0
 
   redis:
     github: stefanwille/crystal-redis

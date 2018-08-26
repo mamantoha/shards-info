@@ -38,7 +38,7 @@ dependencies:
   autolink:
     github: crystal-community/autolink.cr
   raven:
-    github: sija/raven.cr
-    branch: develop
+    github: Sija/raven.cr
+    version: ~> 1.0.0
 
 license: MIT
