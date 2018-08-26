@@ -22,8 +22,6 @@ end
 
 Raven.configure do |config|
   config.async = true
-  config.current_environment = ENV["KEMAL_ENV"]
-  config.dsn = ENV["SENTRY_DSN"]
   config.environments = %w(production)
 end
 
