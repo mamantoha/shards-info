@@ -7,7 +7,8 @@ View of all repositories on GitHub that have Crystal code in them.
 * [Install](https://crystal-lang.org/docs/installation/) Crystal
 * Clone this repository
 * Install dependencies `shards install`
-* Run it `crystal src/shards-info.cr`
+* Rename `.env.example` to `.env`, and set `GITHUB_KEY` and `GITHUB_KEY`
+* Run it `source .env && crystal src/shards-info.cr`
 
 ## Development
 
@@ -15,7 +16,7 @@ Install [sentry](https://github.com/samueleaton/sentry) to build/runs applicatio
 watches files, and rebuilds/restarts app on file changes.
 
 ```console
-sentry
+source .env && sentry
 ```
 
 ### Deploy
