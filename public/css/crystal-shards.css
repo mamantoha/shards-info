@@ -250,7 +250,7 @@ ul.not-list li {
   }
 }
 #back-to-top {
-  font-size: 30px;
+  font-size: 1.25rem;
   position: fixed;
   bottom: 16px;
   right: 16px;
@@ -258,18 +258,18 @@ ul.not-list li {
   width: 32px;
   height: 32px;
   text-align: center;
-  line-height: 30px;
-  background: rgba(0, 0, 0, 0.6);
-  color: rgba(255, 255, 255, 0.6);
+  background: #343a40;
+  color: white;
   cursor: pointer;
   border: 0;
-  border-radius: 2px;
+  border-radius: .25rem;
   text-decoration: none;
   transition: opacity 0.2s ease-out;
   opacity: 0;
 }
 #back-to-top::after {
   content: "\02191";
+  padding: 2px;
 }
 #back-to-top:hover {
   background: #343a40;
