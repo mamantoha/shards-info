@@ -7,7 +7,7 @@ View of all repositories on GitHub that have Crystal code in them.
 * [Install](https://crystal-lang.org/docs/installation/) Crystal
 * Clone this repository
 * Install dependencies `shards install`
-* Rename `.env.example` to `.env`, and set `GITHUB_KEY` and `GITHUB_KEY`
+* Rename `.env.example` to `.env`, and set `GITHUB_USER` and `GITHUB_KEY`
 * Run it `source .env && crystal src/shards-info.cr`
 
 ## Development
