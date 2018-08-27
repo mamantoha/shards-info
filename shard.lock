@@ -72,3 +72,7 @@ shards:
     github: jeromegn/slang
     commit: f33c23be9d477a07627a124d0b79d6cdb7a9132e
 
+  spec-kemal:
+    github: kemalcr/spec-kemal
+    commit: 93ab608228ea6619d15555d1c77a3bcff29f1dba
+

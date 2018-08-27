@@ -1,2 +1,3 @@
 require "spec"
-require "../src/crystal-shards"
+require "spec-kemal"
+require "../src/shards-info"
