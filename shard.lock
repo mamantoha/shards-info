@@ -10,7 +10,7 @@ shards:
 
   cache:
     github: mamantoha/cache
-    version: 0.1.0
+    version: 0.2.0
 
   crest:
     github: mamantoha/crest
@@ -56,6 +56,10 @@ shards:
     github: comandeo/crystal-memcached
     version: 0.2.2
 
+  pool:
+    github: ysbaddaden/pool
+    version: 0.2.3
+
   radix:
     github: luislavena/radix
     version: 0.3.8
@@ -66,7 +70,7 @@ shards:
 
   redis:
     github: stefanwille/crystal-redis
-    version: 1.10.1
+    version: 2.0.0
 
   slang:
     github: jeromegn/slang
