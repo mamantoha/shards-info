@@ -1,5 +1,7 @@
 # shards-info
 
+[![Build Status](http://img.shields.io/travis/mamantoha/shards-info.svg?style=flat)](https://travis-ci.org/mamantoha/shards-info)
+
 View of all repositories on GitHub that have Crystal code in them.
 
 ## Installation
