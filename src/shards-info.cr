@@ -23,6 +23,8 @@ end
 Raven.configure do |config|
   config.async = true
   config.environments = %w(production)
+  config.connect_timeout = 5.seconds
+  config.read_timeout = 5.seconds
 end
 
 Kemal.config.add_handler(Raven::Kemal::ExceptionHandler.new)
@@ -31,7 +33,7 @@ CACHE         = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
 GITHUB_CLIENT = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
 static_headers do |response, filepath, filestat|
-  duration = 86400 # 1 day
+  duration = 1.day.total_seconds.to_i
   response.headers.add "Cache-Control", "public, max-age=#{duration}"
 end
 
