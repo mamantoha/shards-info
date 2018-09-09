@@ -242,39 +242,31 @@ ul.not-list li {
   color: #a6aab2;
 }
 
-/* Back To Top Button */
-/* http://jsfiddle.net/gilbitron/Lt2wH/ */
 @media (min-width : 768px) {
   #back-to-top {
     display: none;
   }
 }
 #back-to-top {
-  font-size: 1.25rem;
   position: fixed;
   bottom: 16px;
   right: 16px;
   z-index: 9999;
-  width: 32px;
-  height: 32px;
-  text-align: center;
-  background: #343a40;
-  color: white;
   cursor: pointer;
-  border: 0;
-  border-radius: .25rem;
   text-decoration: none;
   transition: opacity 0.2s ease-out;
   opacity: 0;
 }
-#back-to-top::after {
-  content: "\02191";
-  padding: 2px;
+
+.back-to-top-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  content: "";
+  background: no-repeat center center;
+  background-size: 100% 100%;
 }
-#back-to-top:hover {
-  background: #343a40;
-  color: #ffffff;
-}
+
 #back-to-top.show {
   opacity: 1;
 }
