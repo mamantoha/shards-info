@@ -2,134 +2,237 @@ require "json"
 
 module Github
   class Iterable
-    JSON.mapping({
-      total_count:        Int32,
-      incomplete_results: Bool,
-    })
+    include JSON::Serializable
+
+    property total_count : Int32
+
+    property incomplete_results : Bool
   end
 
   class User
-    JSON.mapping({
-      login:               String,
-      id:                  Int32,
-      avatar_url:          String,
-      gravatar_id:         String,
-      url:                 String,
-      html_url:            String,
-      followers_url:       String,
-      following_url:       String,
-      gists_url:           String,
-      starred_url:         String,
-      subscriptions_url:   String,
-      organizations_url:   String,
-      repos_url:           String,
-      events_url:          String,
-      received_events_url: String,
-      type:                String,
-      site_admin:          Bool,
-      name:                String?,
-      company:             String?,
-      blog:                String,
-      location:            String?,
-      email:               String?,
-      hireable:            Bool?,
-      bio:                 String?,
-      public_repos:        Int32,
-      public_gists:        Int32,
-      followers:           Int32,
-      following:           Int32,
-      created_at:          Time,
-      updated_at:          Time,
-    })
+    include JSON::Serializable
+
+    property login : String
+
+    property id : Int32
+
+    property node_id : String
+
+    property avatar_url : String
+
+    property gravatar_id : String
+
+    property url : String
+
+    property html_url : String
+
+    property followers_url : String
+
+    property following_url : String
+
+    property gists_url : String
+
+    property starred_url : String
+
+    property subscriptions_url : String
+
+    property organizations_url : String
+
+    property repos_url : String
+
+    property events_url : String
+
+    property received_events_url : String
+
+    @[JSON::Field(key: "type")]
+    property welcome_type : String
+
+    property site_admin : Bool
+
+    property name : String?
+
+    property company : String?
+
+    property blog : String
+
+    property location : String?
+
+    property email : String?
+
+    property hireable : Bool?
+
+    property bio : String?
+
+    property public_repos : Int32
+
+    property public_gists : Int32
+
+    property followers : Int32
+
+    property following : Int32
+
+    property created_at : Time
+
+    property updated_at : Time
   end
 
   class Repos < Iterable
-    JSON.mapping({
-      total_count:        Int32,
-      incomplete_results: Bool,
-      items:              Array(Repo),
-    })
+    property items : Array(Repo)
   end
 
   class Repo
-    JSON.mapping({
-      id:                Int32,
-      name:              String,
-      full_name:         String,
-      owner:             Owner,
-      private:           Bool,
-      html_url:          String,
-      description:       String?,
-      fork:              Bool,
-      url:               String,
-      forks_url:         String,
-      keys_url:          String,
-      collaborators_url: String,
-      teams_url:         String,
-      hooks_url:         String,
-      issue_events_url:  String,
-      events_url:        String,
-      assignees_url:     String,
-      branches_url:      String,
-      tags_url:          String,
-      blobs_url:         String,
-      git_tags_url:      String,
-      git_refs_url:      String,
-      trees_url:         String,
-      statuses_url:      String,
-      languages_url:     String,
-      stargazers_url:    String,
-      contributors_url:  String,
-      subscribers_url:   String,
-      subscription_url:  String,
-      commits_url:       String,
-      git_commits_url:   String,
-      comments_url:      String,
-      issue_comment_url: String,
-      contents_url:      String,
-      compare_url:       String,
-      merges_url:        String,
-      archive_url:       String,
-      downloads_url:     String,
-      issues_url:        String,
-      pulls_url:         String,
-      milestones_url:    String,
-      notifications_url: String,
-      labels_url:        String,
-      releases_url:      String,
-      deployments_url:   String,
-      created_at:        Time,
-      updated_at:        Time,
-      pushed_at:         Time?,
-      git_url:           String,
-      ssh_url:           String,
-      clone_url:         String,
-      svn_url:           String,
-      homepage:          String?,
-      size:              Int32,
-      stargazers_count:  Int32,
-      watchers_count:    Int32,
-      language:          String?,
-      has_issues:        Bool,
-      has_projects:      Bool,
-      has_downloads:     Bool,
-      has_wiki:          Bool,
-      has_pages:         Bool,
-      forks_count:       Int32,
-      mirror_url:        String?,
-      archived:          Bool,
-      open_issues_count: Int32,
-      license:           License?,
-      forks:             Int32,
-      open_issues:       Int32,
-      watchers:          Int32,
-      default_branch:    String,
-      network_count:     Int32?,
-      subscribers_count: Int32?,
-      permissions:       Permissions?,
-      score:             Float64?,
-      topics:            Array(String)?,
-    })
+    include JSON::Serializable
+
+    property id : Int32
+
+    property node_id : String
+
+    property name : String
+
+    property full_name : String
+
+    @[JSON::Field(key: "private")]
+    property welcome_private : Bool
+
+    property owner : Owner
+
+    property html_url : String
+
+    property description : String?
+
+    property fork : Bool
+
+    property url : String
+
+    property forks_url : String
+
+    property keys_url : String
+
+    property collaborators_url : String
+
+    property teams_url : String
+
+    property hooks_url : String
+
+    property issue_events_url : String
+
+    property events_url : String
+
+    property assignees_url : String
+
+    property branches_url : String
+
+    property tags_url : String
+
+    property blobs_url : String
+
+    property git_tags_url : String
+
+    property git_refs_url : String
+
+    property trees_url : String
+
+    property statuses_url : String
+
+    property languages_url : String
+
+    property stargazers_url : String
+
+    property contributors_url : String
+
+    property subscribers_url : String
+
+    property subscription_url : String
+
+    property commits_url : String
+
+    property git_commits_url : String
+
+    property comments_url : String
+
+    property issue_comment_url : String
+
+    property contents_url : String
+
+    property compare_url : String
+
+    property merges_url : String
+
+    property archive_url : String
+
+    property downloads_url : String
+
+    property issues_url : String
+
+    property pulls_url : String
+
+    property milestones_url : String
+
+    property notifications_url : String
+
+    property labels_url : String
+
+    property releases_url : String
+
+    property deployments_url : String
+
+    property created_at : Time
+
+    property updated_at : Time
+
+    property pushed_at : Time?
+
+    property git_url : String
+
+    property ssh_url : String
+
+    property clone_url : String
+
+    property svn_url : String
+
+    property homepage : String?
+
+    property size : Int32
+
+    property stargazers_count : Int32
+
+    property watchers_count : Int32
+
+    property language : String?
+
+    property has_issues : Bool
+
+    property has_projects : Bool
+
+    property has_downloads : Bool
+
+    property has_wiki : Bool
+
+    property has_pages : Bool
+
+    property forks_count : Int32
+
+    property mirror_url : String?
+
+    property archived : Bool
+
+    property open_issues_count : Int32
+
+    property license : License?
+
+    property forks : Int32
+
+    property open_issues : Int32
+
+    property watchers : Int32
+
+    property default_branch : String
+
+    property subscribers_count : Int32?
+
+    property topics : Array(String)?
+
+    property score : Float64?
 
     def license_name
       @license.try do |license|
@@ -161,199 +264,373 @@ module Github
   alias UserRepos = Array(Repo)
 
   class CodeSearches < Iterable
-    JSON.mapping({
-      total_count:        Int32,
-      incomplete_results: Bool,
-      items:              Array(CodeSearchItem),
-    })
+    property items : Array(CodeSearchItem)
+  end
 
-    class CodeSearchItem
-      JSON.mapping({
-        name:       String,
-        path:       String,
-        sha:        String,
-        url:        String,
-        git_url:    String,
-        html_url:   String,
-        repository: Repository,
-        score:      Float64,
-      })
+  class CodeSearchItem
+    include JSON::Serializable
 
-      class Repository
-        JSON.mapping({
-          id:                Int32,
-          name:              String,
-          full_name:         String,
-          owner:             Owner,
-          private:           Bool,
-          html_url:          String,
-          description:       String?,
-          fork:              Bool,
-          url:               String,
-          forks_url:         String,
-          keys_url:          String,
-          collaborators_url: String,
-          teams_url:         String,
-          hooks_url:         String,
-          issue_events_url:  String,
-          events_url:        String,
-          assignees_url:     String,
-          branches_url:      String,
-          tags_url:          String,
-          blobs_url:         String,
-          git_tags_url:      String,
-          git_refs_url:      String,
-          trees_url:         String,
-          statuses_url:      String,
-          languages_url:     String,
-          stargazers_url:    String,
-          contributors_url:  String,
-          subscribers_url:   String,
-          subscription_url:  String,
-          commits_url:       String,
-          git_commits_url:   String,
-          comments_url:      String,
-          issue_comment_url: String,
-          contents_url:      String,
-          compare_url:       String,
-          merges_url:        String,
-          archive_url:       String,
-          downloads_url:     String,
-          issues_url:        String,
-          pulls_url:         String,
-          milestones_url:    String,
-          notifications_url: String,
-          labels_url:        String,
-          releases_url:      String,
-          deployments_url:   String,
-          topics:            Array(String)?,
-        })
-      end
-    end
+    property name : String
+
+    property path : String
+
+    property sha : String
+
+    property url : String
+
+    property git_url : String
+
+    property html_url : String
+
+    property repository : CodeSearchRepository
+
+    property score : Float64
+  end
+
+  class CodeSearchRepository
+    include JSON::Serializable
+
+    property id : Int32
+
+    property node_id : String
+
+    property name : String
+
+    property full_name : String
+
+    @[JSON::Field(key: "private")]
+    property repository_private : Bool
+
+    property owner : Owner
+
+    property html_url : String
+
+    property description : String?
+
+    property fork : Bool
+
+    property url : String
+
+    property forks_url : String
+
+    property keys_url : String
+
+    property collaborators_url : String
+
+    property teams_url : String
+
+    property hooks_url : String
+
+    property issue_events_url : String
+
+    property events_url : String
+
+    property assignees_url : String
+
+    property branches_url : String
+
+    property tags_url : String
+
+    property blobs_url : String
+
+    property git_tags_url : String
+
+    property git_refs_url : String
+
+    property trees_url : String
+
+    property statuses_url : String
+
+    property languages_url : String
+
+    property stargazers_url : String
+
+    property contributors_url : String
+
+    property subscribers_url : String
+
+    property subscription_url : String
+
+    property commits_url : String
+
+    property git_commits_url : String
+
+    property comments_url : String
+
+    property issue_comment_url : String
+
+    property contents_url : String
+
+    property compare_url : String
+
+    property merges_url : String
+
+    property archive_url : String
+
+    property downloads_url : String
+
+    property issues_url : String
+
+    property pulls_url : String
+
+    property milestones_url : String
+
+    property notifications_url : String
+
+    property labels_url : String
+
+    property releases_url : String
+
+    property deployments_url : String
+  end
+
+  class Organization
+    include JSON::Serializable
+
+    property login : String
+
+    property id : Int32
+
+    property node_id : String
+
+    property avatar_url : String
+
+    property gravatar_id : String
+
+    property url : String
+
+    property html_url : String
+
+    property followers_url : String
+
+    property following_url : String
+
+    property gists_url : String
+
+    property starred_url : String
+
+    property subscriptions_url : String
+
+    property organizations_url : String
+
+    property repos_url : String
+
+    property events_url : String
+
+    property received_events_url : String
+
+    @[JSON::Field(key: "type")]
+    property organization_type : String
+
+    property site_admin : Bool
+  end
+
+  class Owner
+    include JSON::Serializable
+
+    property login : String
+
+    property id : Int32
+
+    property node_id : String
+
+    property avatar_url : String
+
+    property gravatar_id : String
+
+    property url : String
+
+    property html_url : String
+
+    property followers_url : String
+
+    property following_url : String
+
+    property gists_url : String
+
+    property starred_url : String
+
+    property subscriptions_url : String
+
+    property organizations_url : String
+
+    property repos_url : String
+
+    property events_url : String
+
+    property received_events_url : String
+
+    @[JSON::Field(key: "type")]
+    property owner_type : String
+
+    property site_admin : Bool
+  end
+
+  class License
+    include JSON::Serializable
+
+    property key : String
+
+    property name : String
+
+    property spdx_id : String?
+
+    property url : String?
+
+    property node_id : String
   end
 
   alias Releases = Array(Release)
 
   class Release
-    JSON.mapping({
-      url:              String,
-      assets_url:       String,
-      upload_url:       String,
-      html_url:         String,
-      id:               Int32,
-      tag_name:         String,
-      target_commitish: String,
-      name:             String?,
-      draft:            Bool,
-      author:           Author,
-      prerelease:       Bool,
-      created_at:       Time,
-      published_at:     Time,
-      assets:           Array(JSON::Any),
-      tarball_url:      String,
-      zipball_url:      String,
-      body:             String?,
-    })
+    include JSON::Serializable
+
+    property url : String
+
+    property assets_url : String
+
+    property upload_url : String
+
+    property html_url : String
+
+    property id : Int32
+
+    property node_id : String
+
+    property tag_name : String
+
+    property target_commitish : String
+
+    property name : String
+
+    property draft : Bool
+
+    property author : Author
+
+    property prerelease : Bool
+
+    property created_at : Time
+
+    property published_at : Time
+
+    property assets : Array(JSON::Any)
+
+    property tarball_url : String
+
+    property zipball_url : String
+
+    property body : String?
   end
 
   class Author
-    JSON.mapping({
-      login:               String,
-      id:                  Int32,
-      avatar_url:          String,
-      gravatar_id:         String,
-      url:                 String,
-      html_url:            String,
-      followers_url:       String,
-      following_url:       String,
-      gists_url:           String,
-      starred_url:         String,
-      subscriptions_url:   String,
-      organizations_url:   String,
-      repos_url:           String,
-      events_url:          String,
-      received_events_url: String,
-      type:                String,
-      site_admin:          Bool,
-    })
-  end
+    include JSON::Serializable
 
-  class Owner
-    JSON.mapping({
-      login:               String,
-      id:                  Int32,
-      avatar_url:          String,
-      gravatar_id:         String,
-      url:                 String,
-      html_url:            String,
-      followers_url:       String,
-      following_url:       String,
-      gists_url:           String,
-      starred_url:         String,
-      subscriptions_url:   String,
-      organizations_url:   String,
-      repos_url:           String,
-      events_url:          String,
-      received_events_url: String,
-      type:                String,
-      site_admin:          Bool,
-    })
-  end
+    property login : String
 
-  class License
-    JSON.mapping({
-      key:     String,
-      name:    String,
-      spdx_id: String?,
-      url:     String?,
-    })
-  end
+    property id : Int32
 
-  class Permissions
-    JSON.mapping({
-      admin: Bool,
-      push:  Bool,
-      pull:  Bool,
-    })
+    property node_id : String
+
+    property avatar_url : String
+
+    property gravatar_id : String
+
+    property url : String
+
+    property html_url : String
+
+    property followers_url : String
+
+    property following_url : String
+
+    property gists_url : String
+
+    property starred_url : String
+
+    property subscriptions_url : String
+
+    property organizations_url : String
+
+    property repos_url : String
+
+    property events_url : String
+
+    property received_events_url : String
+
+    @[JSON::Field(key: "type")]
+    property author_type : String
+
+    property site_admin : Bool
   end
 
   class Content
-    JSON.mapping({
-      type:         String,
-      size:         Int32,
-      name:         String,
-      path:         String,
-      sha:          String,
-      url:          String,
-      git_url:      String,
-      html_url:     String,
-      download_url: String?,
-      links:        {key: "_links", type: Links},
-    })
+    include JSON::Serializable
+
+    property name : String
+
+    property path : String
+
+    property sha : String
+
+    property size : Int32
+
+    property url : String
+
+    property html_url : String
+
+    property git_url : String
+
+    property download_url : String
+
+    @[JSON::Field(key: "type")]
+    property welcome_type : String
+
+    property content : String
+
+    property encoding : String
+
+    @[JSON::Field(key: "_links")]
+    property links : Links
   end
 
   class Readme
-    JSON.mapping({
-      type:         String,
-      encoding:     String,
-      size:         Int32,
-      name:         String,
-      path:         String,
-      content:      String,
-      sha:          String,
-      url:          String,
-      git_url:      String,
-      html_url:     String,
-      download_url: String,
-      links:        {key: "_links", type: Links},
-    })
+    include JSON::Serializable
+
+    property name : String
+
+    property path : String
+
+    property sha : String
+
+    property size : Int32
+
+    property url : String
+
+    property html_url : String
+
+    property git_url : String
+
+    property download_url : String
+
+    @[JSON::Field(key: "type")]
+    property welcome_type : String
+
+    property content : String
+
+    property encoding : String
+
+    @[JSON::Field(key: "_links")]
+    property links : Links
   end
 
   class Links
-    JSON.mapping({
-      self: String,
-      git:  String,
-      html: String,
-    })
+    include JSON::Serializable
+
+    @[JSON::Field(key: "self")]
+    property links_self : String
+
+    property git : String
+
+    property html : String
   end
 end
