@@ -45,7 +45,7 @@ module Github
     property received_events_url : String
 
     @[JSON::Field(key: "type")]
-    property welcome_type : String
+    property user_type : String
 
     property site_admin : Bool
 
@@ -92,7 +92,7 @@ module Github
     property full_name : String
 
     @[JSON::Field(key: "private")]
-    property welcome_private : Bool
+    property repo_private : Bool
 
     property owner : Owner
 
@@ -583,7 +583,7 @@ module Github
     property download_url : String
 
     @[JSON::Field(key: "type")]
-    property welcome_type : String
+    property content_type : String
 
     property content : String
 
@@ -613,7 +613,7 @@ module Github
     property download_url : String
 
     @[JSON::Field(key: "type")]
-    property welcome_type : String
+    property readme_type : String
 
     property content : String
 
