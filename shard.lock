@@ -8,6 +8,10 @@ shards:
     github: crystal-community/autolink.cr
     version: 0.1.3
 
+  blank:
+    github: kostya/blank
+    version: 0.1.0
+
   cache:
     github: mamantoha/cache
     version: 0.2.1
@@ -48,10 +52,6 @@ shards:
     github: jeromegn/kilt
     version: 0.4.0
 
-  markd:
-    github: icyleaf/markd
-    version: 0.1.1
-
   memcached:
     github: comandeo/crystal-memcached
     version: 0.2.2
@@ -71,6 +71,10 @@ shards:
   redis:
     github: stefanwille/crystal-redis
     version: 2.1.0
+
+  simple_markdown:
+    path: ../simple_markdown
+    version: 0.1.0
 
   slang:
     github: jeromegn/slang

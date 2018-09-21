@@ -7,7 +7,8 @@ require "cache"
 require "crest"
 require "emoji"
 require "humanize_time"
-require "markd"
+# require "markd"
+require "simple_markdown"
 require "autolink"
 require "raven"
 require "raven/integrations/kemal"
@@ -173,7 +174,8 @@ get "/repos/:owner/:repo" do |env|
       Crest.get(readme.download_url.not_nil!).body
     end
 
-    readme_html = Markd.to_html(Emoji.emojize(readme_file))
+    # readme_html = Markd.to_html(Emoji.emojize(readme_file))
+    readme_html = SimpleMarkdown.new(Emoji.emojize(readme_file)).parse
   end
 
   Config.config.page_title = "#{repo.full_name}: #{repo.description}"
