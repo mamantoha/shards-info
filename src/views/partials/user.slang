@@ -5,7 +5,7 @@
     .name
       = user.name
   .login
-    a href="#{user.html_url}" target="_blank"
+    a href="#{user.html_url}"
       i class="fab fa-github"
     = user.login
   .user__info
@@ -31,4 +31,4 @@ hr
 - if user.blog && !user.blog.empty?
   .user__blog
     i class="fas fa-rss"
-    a href="#{link(user.blog)}" target="_blank" = user.blog
+    a href="#{link(user.blog)}" = user.blog
