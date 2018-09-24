@@ -1,6 +1,7 @@
 # shards-info
 
 [![Build Status](http://img.shields.io/travis/mamantoha/shards-info.svg?style=flat)](https://travis-ci.org/mamantoha/shards-info)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmamantoha%2Fshards-info.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmamantoha%2Fshards-info?ref=badge_shield)
 
 View of all repositories on GitHub that have Crystal code in them.
 
@@ -66,3 +67,7 @@ heroku labs:enable runtime-dyno-metadata
 ## Contributors
 
 * [mamantoha](https://github.com/mamantoha) Anton Maminov - creator, maintainer
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmamantoha%2Fshards-info.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmamantoha%2Fshards-info?ref=badge_large)
