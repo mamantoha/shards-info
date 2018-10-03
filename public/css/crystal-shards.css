@@ -9,6 +9,10 @@ body {
   margin-bottom: 60px;
 }
 
+h3 {
+  font-size: 20px;
+}
+
 ul.not-list {
   padding-left: 0px;
 }
@@ -24,6 +28,7 @@ ul.not-list li {
 .space {
   height: 16px;
 }
+
 
 .footer {
   position: absolute;
@@ -68,14 +73,57 @@ ul.not-list li {
   margin-bottom: 1rem;
 }
 
+.width-full {
+  width: 100%!important;
+}
+
+.text-normal {
+  font-weight: 600!important;
+}
+
+.css-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+.dont-break-out {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.avatar {
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1;
+  vertical-align: middle;
+  border-radius: 3px;
+}
+
 .user__avatar img {
   width: 230px;
   height: 230px;
+  border-radius: 6px!important;
 }
 
 .user__name .name {
   font-size: 26px;
   line-height: 30px;
+  margin-top: 16px;
 }
 
 .user__name .login {
@@ -97,9 +145,15 @@ ul.not-list li {
 }
 
 .shards__shard {
+  display: flex;
   padding-top: 24px;
   padding-bottom: 12px;
   border-bottom: 1px solid #eee;
+}
+
+.shards__shard_desc {
+  margin-bottom: 8px;
+  overflow-wrap: break-word;
 }
 
 .shards__shard_owner {
@@ -113,21 +167,22 @@ ul.not-list li {
 }
 
 .shards__shard_updated {
-  color: #a6aab2;
-  font-size: 14px;
-  font-weight: 500;
+  margin-left: 16px;
+  display: inline;
 }
 
 .shards__shard_github ul {
   padding-left: 0;
   padding-top: 5px;
   margin-bottom: 0;
+  font-size: 12px;
 }
 
 .shards__shard_github ul li {
   display: inline;
   padding-right: 5px;
   font-size: 14px;
+  color: #586069!important;
 }
 
 .page__heading {
@@ -170,6 +225,7 @@ ul.not-list li {
 
 .shard__topics {
   white-space: initial;
+  margin-bottom: 5px;
 }
 
 .list__items {
