@@ -154,11 +154,6 @@ ul.not-list li {
   display: inline;
 }
 
-.shards__shard_open_issues_count {
-  margin-left: 16px;
-  display: inline;
-}
-
 .shards__shard_github ul {
   padding-left: 0;
   padding-top: 5px;
