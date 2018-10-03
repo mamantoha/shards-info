@@ -1,12 +1,10 @@
 - repos_array.each do |repo|
   .shards__shard.d-flex
-    a.d-block.mr-2.mt-1 href="/repos/#{repo.owner.login}"
-      img.rounded-1 src="#{repo.owner.avatar_url}" alt="#{repo.owner.login}" width="32" height="32"
     .width-full
       .shards__shard_info
         h3.shards__shard_name.css-truncate
           a href="/repos/#{repo.owner.login}/#{repo.name}"
-            == "#{repo.owner.login}/<span class='text-normal'>#{repo.name}</span>"
+            = repo.name
         p.shards__shard_desc.dont-break-out
           == Emoji.emojize(Autolink.auto_link(repo.description.to_s))
       .shard__topics

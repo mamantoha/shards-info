@@ -81,6 +81,13 @@ ul.not-list li {
   font-weight: 600!important;
 }
 
+.css-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: top;
+}
+
 .dont-break-out {
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
@@ -158,12 +165,14 @@ ul.not-list li {
   padding-left: 0;
   padding-top: 5px;
   margin-bottom: 0;
+  font-size: 12px;
 }
 
 .shards__shard_github ul li {
   display: inline;
   padding-right: 5px;
   font-size: 14px;
+  color: #586069!important;
 }
 
 .page__heading {
