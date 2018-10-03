@@ -109,11 +109,13 @@ ul.not-list li {
 .user__avatar img {
   width: 230px;
   height: 230px;
+  border-radius: 6px!important;
 }
 
 .user__name .name {
   font-size: 26px;
   line-height: 30px;
+  margin-top: 16px;
 }
 
 .user__name .login {
