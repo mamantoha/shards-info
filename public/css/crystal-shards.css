@@ -106,6 +106,14 @@ ul.not-list li {
   hyphens: auto;
 }
 
+.avatar {
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1;
+  vertical-align: middle;
+  border-radius: 3px;
+}
+
 .user__avatar img {
   width: 230px;
   height: 230px;
