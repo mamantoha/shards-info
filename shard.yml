@@ -24,16 +24,13 @@ dependencies:
     branch: master
   cache:
     github: mamantoha/cache
-    version: ~> 0.2.1
   crest:
     github: mamantoha/crest
-    version: ~> 0.14.0
   emoji:
     github: veelenga/emoji.cr
     branch: master
   humanize_time:
     github: mamantoha/humanize_time
-    version: ~> 0.3.0
   markd:
     github: icyleaf/markd
   kemal-flash:
