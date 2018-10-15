@@ -139,6 +139,12 @@ get "/repos/:owner/:repo" do |env|
 
   dependent_repos = Github::CodeSearches.from_json(dependent_repos)
 
+  repo_forks = CACHE.fetch("repo_forks_#{owner}_#{repo_name}_1") do
+    GITHUB_CLIENT.repo_forks("#{owner}/#{repo_name}").to_json
+  end
+
+  repo_forks = Github::Forks.from_json(repo_forks)
+
   dependencies = {} of String => Hash(String, String)
   development_dependencies = {} of String => Hash(String, String)
 

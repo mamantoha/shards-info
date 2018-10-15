@@ -262,6 +262,7 @@ module Github
   end
 
   alias UserRepos = Array(Repo)
+  alias Forks = Array(Repo)
 
   class CodeSearches < Iterable
     property items : Array(CodeSearchItem)
