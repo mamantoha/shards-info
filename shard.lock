@@ -18,7 +18,7 @@ shards:
 
   crest:
     github: mamantoha/crest
-    version: 0.14.0
+    version: 0.15.0
 
   emoji:
     github: veelenga/emoji.cr
@@ -70,7 +70,7 @@ shards:
 
   redis:
     github: stefanwille/crystal-redis
-    version: 2.1.0
+    version: 2.1.1
 
   simple_markdown:
     path: ../simple_markdown

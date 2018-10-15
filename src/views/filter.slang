@@ -9,6 +9,5 @@ div
       ' results
 - if repos.total_count != 0
   - repos_array = repos.items
-  == paginator
   == render "src/views/partials/repos.slang"
   == paginator

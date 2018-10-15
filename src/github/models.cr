@@ -501,7 +501,7 @@ module Github
 
     property target_commitish : String
 
-    property name : String
+    property name : String?
 
     property draft : Bool
 

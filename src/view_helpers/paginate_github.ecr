@@ -1,26 +1,9 @@
 <% pages_count = ((@collection.total_count + 10 - 1) / 10).to_i %>
 
 <nav aria-label="Search result pages">
-  <ul class="pagination justify-content-center flex-wrap">
-    <li class='<%= "page-item #{@page == 1 ? "disabled" : ""}" %>'>
-      <a class="page-link" href='<%= @link % {"page" => @page - 1} %>'>
-        Previous
-      </a>
-    </li>
-
-    <%- pages_count.times do |p| -%>
-      <% p += 1 %>
-      <li class='<%= "page-item #{@page == p ? "disabled" : ""}" %>'>
-        <a class="page-link" href='<%= @link % {"page" => p} %>'>
-          <%= p %>
-        </a>
-      </li>
-    <%- end -%>
-
-    <li class='<%= "page-item #{@page == pages_count ? "disabled" : "no"}" %>'>
-      <a class="page-link" href='<%= @link % {"page" => @page + 1} %>'>
-        Next
-      </a>
-    </li>
+  <ul id="pagination" class="pagination justify-content-center flex-wrap"
+    data-current-page="<%= @page %>"
+    data-pages-count="<%= pages_count %>"
+  >
   </ul>
 </nav>

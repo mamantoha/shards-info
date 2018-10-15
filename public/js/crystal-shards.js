@@ -34,4 +34,23 @@ $(document).ready(function () {
   var moveTo = new MoveTo();
   var trigger = $("#back-to-top")
   moveTo.registerTrigger(trigger[0]);
+
+  pagesCount = $('#pagination').data("pagesCount");
+  currentPage = $('#pagination').data("currentPage");
+  var $pagination = $('#pagination');
+
+  $pagination.twbsPagination({
+    totalPages: pagesCount,
+    startPage: currentPage,
+    visiblePages: 7,
+    href: true,
+    pageVariable: "page",
+    prev: "&laquo;",
+    next: "&raquo;",
+    first: "",
+    last: "",
+    onPageClick: function (event, page) {
+    }
+  });
+
 });
