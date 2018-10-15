@@ -9,10 +9,12 @@ class Config
 
   property page_title
   property open_graph
+  property query
 
   def initialize
     @page_title = "Shards Info"
     @open_graph = OpenGraph.new
+    @query = ""
   end
 
   def self.config

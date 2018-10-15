@@ -42,6 +42,7 @@ before_all do |env|
 
   Config.config.open_graph = OpenGraph.new
   Config.config.open_graph.url = "http://shards.info#{env.request.path}"
+  Config.config.query = env.request.query_params["query"]?.to_s
 end
 
 get "/" do |env|
