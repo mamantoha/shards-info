@@ -10,11 +10,11 @@ shards:
 
   cache:
     github: mamantoha/cache
-    version: 0.2.1
+    version: 0.3.0
 
   crest:
     github: mamantoha/crest
-    version: 0.15.0
+    version: 0.16.0
 
   emoji:
     github: veelenga/emoji.cr
@@ -34,7 +34,7 @@ shards:
 
   kemal:
     github: kemalcr/kemal
-    version: 0.24.0
+    commit: 21ab64511af441cb3691fc11f15072d663fac87c
 
   kemal-flash:
     github: neovintage/kemal-flash
