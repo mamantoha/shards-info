@@ -13,7 +13,7 @@ targets:
 dependencies:
   kemal:
     github: kemalcr/kemal
-    branch: master
+    version: ~> 0.25.0
   kemal-session:
     github: kemalcr/kemal-session
   spec-kemal:
