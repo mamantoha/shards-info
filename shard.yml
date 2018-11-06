@@ -15,9 +15,6 @@ dependencies:
     github: kemalcr/kemal
   kemal-session:
     github: kemalcr/kemal-session
-  spec-kemal:
-    github: kemalcr/spec-kemal
-    branch: master
   slang:
     github: jeromegn/slang
     branch: master
@@ -40,5 +37,9 @@ dependencies:
     github: Sija/raven.cr
     version: ~> 1.0.0
     branch: develop
+
+development_dependencies:
+  spec-kemal:
+    github: kemalcr/spec-kemal
 
 license: MIT

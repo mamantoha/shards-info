@@ -78,5 +78,5 @@ shards:
 
   spec-kemal:
     github: kemalcr/spec-kemal
-    commit: 64b89c719234ceb92c0a14762dce3afc6257fffc
+    version: 0.5.0
 
