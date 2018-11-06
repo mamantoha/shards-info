@@ -39,5 +39,6 @@ dependencies:
   raven:
     github: Sija/raven.cr
     version: ~> 1.0.0
+    branch: develop
 
 license: MIT
