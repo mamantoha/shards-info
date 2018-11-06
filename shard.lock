@@ -42,7 +42,7 @@ shards:
 
   kemal-session:
     github: kemalcr/kemal-session
-    version: 0.10.0
+    version: 0.11.0
 
   kilt:
     github: jeromegn/kilt
@@ -78,5 +78,5 @@ shards:
 
   spec-kemal:
     github: kemalcr/spec-kemal
-    commit: 93ab608228ea6619d15555d1c77a3bcff29f1dba
+    commit: 64b89c719234ceb92c0a14762dce3afc6257fffc
 
