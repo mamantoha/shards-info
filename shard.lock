@@ -66,7 +66,7 @@ shards:
 
   raven:
     github: Sija/raven.cr
-    commit: 20581c68509a9b07cdf2c207f735aece203b83a5
+    version: 1.1.0
 
   redis:
     github: stefanwille/crystal-redis
