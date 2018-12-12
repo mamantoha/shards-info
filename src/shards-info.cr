@@ -129,7 +129,7 @@ get "/repos/:owner/:repo" do |env|
   unless show_repository?(shard_content, repo.full_name)
     env.flash["notice"] = "Repository <a href='#{repo.html_url}'>#{repo.full_name}</a> does not have a <strong>shard.yml</strong> file"
 
-    env.redirect "/"
+    env.redirect back(env)
     next
   end
 
@@ -212,6 +212,10 @@ get "/repos/:owner/:repo/dependents" do |env|
   Config.config.page_title = "#{repo.full_name}: dependent shards"
 
   render "src/views/dependents.slang", "src/views/layouts/layout.slang"
+end
+
+def back(env : HTTP::Server::Context) : String
+  env.request.headers.fetch("Referer", "/")
 end
 
 def link(url : String?) : String | Nil
