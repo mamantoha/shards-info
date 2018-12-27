@@ -1,4 +1,5 @@
 require "yaml"
+require "base64"
 require "kemal"
 require "kemal-session"
 require "kemal-flash"
@@ -119,11 +120,10 @@ get "/repos/:owner/:repo" do |env|
 
   repo = Github::Repo.from_json(repo)
 
-  shard_content = CACHE.fetch("content_#{owner}_#{repo_name}_shard.yml") do
-    response = GITHUB_CLIENT.repo_shard(owner, repo_name)
-    response.to_json
-  end
+  dependencies = {} of String => Hash(String, String)
+  development_dependencies = {} of String => Hash(String, String)
 
+  shard_content = get_content(owner, repo_name, "shard.yml")
   shard_content = Github::Content.from_json(shard_content) rescue nil
 
   unless show_repository?(shard_content, repo.full_name)
@@ -133,19 +133,8 @@ get "/repos/:owner/:repo" do |env|
     next
   end
 
-  dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}_1") do
-    GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}").to_json
-  end
-
-  dependent_repos = Github::CodeSearches.from_json(dependent_repos)
-
-  dependencies = {} of String => Hash(String, String)
-  development_dependencies = {} of String => Hash(String, String)
-
-  if shard_content && shard_content.name == "shard.yml" && shard_content.download_url
-    shard_file = CACHE.fetch("content_shard_yml_#{owner}_#{repo_name}") do
-      Crest.get(shard_content.download_url.not_nil!).body
-    end
+  if shard_content
+    shard_file = decode_github_content(shard_content.content)
 
     shard = YAML.parse(shard_file)
 
@@ -160,16 +149,22 @@ get "/repos/:owner/:repo" do |env|
     end
   end
 
+  dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}_1") do
+    GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}").to_json
+  end
+
+  dependent_repos = Github::CodeSearches.from_json(dependent_repos)
+
   readme = get_readme(owner, repo_name)
   readme = readme.empty? ? nil : Github::Readme.from_json(readme)
   if readme && readme.download_url
-    readme_html = get_markdown_content(readme, owner, repo_name, "readme")
+    readme_html = content_to_markdown(readme)
   end
 
-  changelog = get_changelog(owner, repo_name)
+  changelog = get_content(owner, repo_name, "CHANGELOG.md")
   changelog = changelog.empty? ? nil : Github::Content.from_json(changelog)
   if changelog && changelog.download_url
-    changelog_html = get_markdown_content(changelog, owner, repo_name, "changelog")
+    changelog_html = content_to_markdown(changelog)
   end
 
   Config.config.page_title = "#{repo.full_name}: #{repo.description}"
@@ -237,21 +232,23 @@ private def get_readme(owner : String, repo_name : String)
   end
 end
 
-private def get_changelog(owner : String, repo_name : String)
-  CACHE.fetch("changelog_#{owner}_#{repo_name}") do
-    response = GITHUB_CLIENT.repo_content(owner, repo_name, "CHANGELOG.md")
+private def get_content(owner : String, repo_name : String, filename : String)
+  CACHE.fetch("content_#{filename}_#{owner}_#{repo_name}") do
+    response = GITHUB_CLIENT.repo_content(owner, repo_name, filename)
     response.to_json
   rescue Crest::NotFound
     ""
   end
 end
 
-private def get_markdown_content(content : Github::Content, owner : String, repo_name : String, cache_key : String)
-  content_file = CACHE.fetch("content_#{cache_key}_#{owner}_#{repo_name}") do
-    Crest.get(content.download_url.not_nil!).body
-  end
+private def content_to_markdown(content : Github::Content)
+  string = decode_github_content(content.content)
 
-  Markd.to_html(Emoji.emojize(content_file))
+  Markd.to_html(Emoji.emojize(string))
+end
+
+private def decode_github_content(content : String) : String
+  Base64.decode_string(content)
 end
 
 Kemal.run
