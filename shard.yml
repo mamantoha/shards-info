@@ -13,6 +13,8 @@ targets:
 dependencies:
   kemal:
     github: kemalcr/kemal
+    branch: encapsulate-app
+    # path: ../kemal
   kemal-session:
     github: kemalcr/kemal-session
   slang:
