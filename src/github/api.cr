@@ -121,6 +121,14 @@ module Github
       Github::Readme.from_json(response.body)
     end
 
+    def repo_content(owner : String, repo : String, path : String)
+      url = "/repos/#{owner}/#{repo}/contents/#{path}"
+
+      response = make_request(url, true)
+
+      Github::Content.from_json(response.body)
+    end
+
     # https://developer.github.com/v3/search/#search-repositories
     private def search_repositories(
       word : String,

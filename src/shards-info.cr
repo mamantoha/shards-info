@@ -160,21 +160,16 @@ get "/repos/:owner/:repo" do |env|
     end
   end
 
-  readme = CACHE.fetch("readme_#{owner}_#{repo_name}") do
-    response = GITHUB_CLIENT.repo_readme(owner, repo_name)
-    response.to_json
-  rescue Crest::NotFound
-    ""
+  readme = get_readme(owner, repo_name)
+  readme = readme.empty? ? nil : Github::Readme.from_json(readme)
+  if readme && readme.download_url
+    readme_html = get_markdown_content(readme, owner, repo_name, "readme")
   end
 
-  readme = readme.empty? ? nil : Github::Readme.from_json(readme)
-
-  if readme && readme.download_url
-    readme_file = CACHE.fetch("content_readme_#{owner}_#{repo_name}") do
-      Crest.get(readme.download_url.not_nil!).body
-    end
-
-    readme_html = Markd.to_html(Emoji.emojize(readme_file))
+  changelog = get_changelog(owner, repo_name)
+  changelog = changelog.empty? ? nil : Github::Content.from_json(changelog)
+  if changelog && changelog.download_url
+    changelog_html = get_markdown_content(changelog, owner, repo_name, "changelog")
   end
 
   Config.config.page_title = "#{repo.full_name}: #{repo.description}"
@@ -231,6 +226,32 @@ end
 
 private def show_repository?(shard_content, repo_fullname)
   shard_content || Config.special_repositories.includes?(repo_fullname) ? true : false
+end
+
+private def get_readme(owner : String, repo_name : String)
+  CACHE.fetch("readme_#{owner}_#{repo_name}") do
+    response = GITHUB_CLIENT.repo_readme(owner, repo_name)
+    response.to_json
+  rescue Crest::NotFound
+    ""
+  end
+end
+
+private def get_changelog(owner : String, repo_name : String)
+  CACHE.fetch("changelog_#{owner}_#{repo_name}") do
+    response = GITHUB_CLIENT.repo_content(owner, repo_name, "CHANGELOG.md")
+    response.to_json
+  rescue Crest::NotFound
+    ""
+  end
+end
+
+private def get_markdown_content(content : Github::Content, owner : String, repo_name : String, cache_key : String)
+  content_file = CACHE.fetch("content_#{cache_key}_#{owner}_#{repo_name}") do
+    Crest.get(content.download_url.not_nil!).body
+  end
+
+  Markd.to_html(Emoji.emojize(content_file))
 end
 
 Kemal.run

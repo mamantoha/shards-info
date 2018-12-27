@@ -593,35 +593,7 @@ module Github
     property links : Links
   end
 
-  class Readme
-    include JSON::Serializable
-
-    property name : String
-
-    property path : String
-
-    property sha : String
-
-    property size : Int32
-
-    property url : String
-
-    property html_url : String
-
-    property git_url : String
-
-    property download_url : String
-
-    @[JSON::Field(key: "type")]
-    property readme_type : String
-
-    property content : String
-
-    property encoding : String
-
-    @[JSON::Field(key: "_links")]
-    property links : Links
-  end
+  alias Readme = Content
 
   class Links
     include JSON::Serializable
