@@ -103,22 +103,20 @@ module Github
       Github::CodeSearches.from_json(response.body)
     end
 
-    def repo_shard(owner : String, repo : String)
-      url = "/repos/#{owner}/#{repo}/contents/shard.yml"
-
-      response = make_request(url, true)
-
-      Github::Content.from_json(response.body)
-    rescue Crest::RequestFailed
-      nil
-    end
-
     def repo_readme(owner : String, repo : String)
       url = "/repos/#{owner}/#{repo}/readme"
 
       response = make_request(url, true)
 
       Github::Readme.from_json(response.body)
+    end
+
+    def repo_content(owner : String, repo : String, path : String)
+      url = "/repos/#{owner}/#{repo}/contents/#{path}"
+
+      response = make_request(url, true)
+
+      Github::Content.from_json(response.body)
     end
 
     # https://developer.github.com/v3/search/#search-repositories
