@@ -11,6 +11,8 @@
           li
             | Build with Crystal #{Crystal::VERSION}
           li
+            | Build date #{Config.config.build_time.to_s("%Y-%m-%d %H:%M:%S %:z")}
+          li
             | Official code repository is on
             a href="https://github.com/mamantoha/shards-info" GitHub
           li
