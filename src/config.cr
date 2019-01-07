@@ -10,17 +10,19 @@ class Config
   property page_title
   property open_graph
   property query
-  property build_time
 
   def initialize
     @page_title = "Shards Info"
     @open_graph = OpenGraph.new
     @query = ""
-    @build_time = Time.now
   end
 
   def self.config
     Config::INSTANCE
+  end
+
+  def self.date
+    {{ `date -R`.stringify.chomp }}
   end
 
   # List of Crystal repositories w/o shard.yml
