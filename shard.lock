@@ -14,11 +14,11 @@ shards:
 
   cache:
     github: mamantoha/cache
-    version: 0.2.1
+    version: 0.3.0
 
   crest:
     github: mamantoha/crest
-    version: 0.15.0
+    version: 0.18.0
 
   emoji:
     github: veelenga/emoji.cr
@@ -46,7 +46,7 @@ shards:
 
   kemal-session:
     github: kemalcr/kemal-session
-    version: 0.10.0
+    version: 0.11.0
 
   kilt:
     github: jeromegn/kilt
@@ -62,7 +62,7 @@ shards:
 
   radix:
     github: luislavena/radix
-    version: 0.3.8
+    version: 0.3.9
 
   raven:
     github: Sija/raven.cr
@@ -73,8 +73,8 @@ shards:
     version: 2.1.1
 
   simple_markdown:
-    path: ../simple_markdown
-    version: 0.1.0
+    github: mamantoha/simple_markdown
+    commit: a5be65a683151ac25928f0cb1883fdccb92bc902
 
   slang:
     github: jeromegn/slang
@@ -82,5 +82,5 @@ shards:
 
   spec-kemal:
     github: kemalcr/spec-kemal
-    commit: 93ab608228ea6619d15555d1c77a3bcff29f1dba
+    commit: 64b89c719234ceb92c0a14762dce3afc6257fffc
 

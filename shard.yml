@@ -32,9 +32,7 @@ dependencies:
   humanize_time:
     github: mamantoha/humanize_time
   simple_markdown:
-    path: ../simple_markdown
-  # markd:
-  #   github: icyleaf/markd
+    github: mamantoha/simple_markdown
   kemal-flash:
     github: neovintage/kemal-flash
   autolink:
