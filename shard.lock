@@ -74,7 +74,7 @@ shards:
 
   simple_markdown:
     github: mamantoha/simple_markdown
-    commit: 61db030072df80ff35b8fe290da4eb07ed73eac0
+    commit: 1c4cf102f01e309107b102418816cbfb6b32c0f6
 
   slang:
     github: jeromegn/slang

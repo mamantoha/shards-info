@@ -29,6 +29,7 @@ dependencies:
     github: mamantoha/humanize_time
   simple_markdown:
     github: mamantoha/simple_markdown
+    branch: master
   kemal-flash:
     github: neovintage/kemal-flash
   autolink:
