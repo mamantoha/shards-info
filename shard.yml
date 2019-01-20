@@ -27,8 +27,8 @@ dependencies:
     branch: master
   humanize_time:
     github: mamantoha/humanize_time
-  markd:
-    github: icyleaf/markd
+  simple_markdown:
+    github: mamantoha/simple_markdown
   kemal-flash:
     github: neovintage/kemal-flash
   autolink:

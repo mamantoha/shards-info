@@ -8,7 +8,7 @@ require "cache"
 require "crest"
 require "emoji"
 require "humanize_time"
-require "markd"
+require "simple_markdown"
 require "autolink"
 require "raven"
 require "raven/integrations/kemal"
@@ -244,7 +244,7 @@ end
 private def content_to_markdown(content : Github::Content)
   string = decode_github_content(content.content)
 
-  Markd.to_html(Emoji.emojize(string))
+  SimpleMarkdown.parse(Emoji.emojize(string))
 end
 
 private def decode_github_content(content : String) : String

@@ -8,13 +8,17 @@ shards:
     github: crystal-community/autolink.cr
     version: 0.1.3
 
+  blank:
+    github: kostya/blank
+    version: 0.1.0
+
   cache:
     github: mamantoha/cache
     version: 0.3.0
 
   crest:
     github: mamantoha/crest
-    version: 0.18.0
+    version: 0.18.1
 
   emoji:
     github: veelenga/emoji.cr
@@ -48,10 +52,6 @@ shards:
     github: jeromegn/kilt
     version: 0.4.0
 
-  markd:
-    github: icyleaf/markd
-    version: 0.1.1
-
   memcached:
     github: comandeo/crystal-memcached
     version: 0.2.2
@@ -71,6 +71,10 @@ shards:
   redis:
     github: stefanwille/crystal-redis
     version: 2.1.1
+
+  simple_markdown:
+    github: mamantoha/simple_markdown
+    commit: 61db030072df80ff35b8fe290da4eb07ed73eac0
 
   slang:
     github: jeromegn/slang
