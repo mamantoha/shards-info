@@ -234,6 +234,12 @@ module Github
 
     property score : Float64?
 
+    def description_with_emoji : String?
+      @description.try do |description|
+        Emoji.emojize(description)
+      end
+    end
+
     def license_name
       @license.try do |license|
         if license.name

@@ -167,10 +167,10 @@ get "/repos/:owner/:repo" do |env|
     changelog_html = content_to_markdown(changelog)
   end
 
-  Config.config.page_title = "#{repo.full_name}: #{repo.description}"
+  Config.config.page_title = "#{repo.full_name}: #{repo.description_with_emoji}"
 
   Config.config.open_graph.title = "#{repo.full_name}"
-  Config.config.open_graph.description = "#{repo.description}"
+  Config.config.open_graph.description = "#{repo.description_with_emoji}"
   Config.config.open_graph.image = "#{repo.owner.avatar_url}"
 
   render "src/views/repo.slang", "src/views/layouts/layout.slang"
