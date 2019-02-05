@@ -21,6 +21,12 @@ watches files, and rebuilds/restarts app on file changes.
 source .env && sentry
 ```
 
+## Specs
+
+```console
+source .env && export KEMAL_ENV=test && crystal spec
+```
+
 ### Deploy
 
 Get started by deploying this service to heroku.
