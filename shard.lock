@@ -14,7 +14,7 @@ shards:
 
   crest:
     github: mamantoha/crest
-    version: 0.18.0
+    version: 0.18.2
 
   emoji:
     github: veelenga/emoji.cr
@@ -22,7 +22,7 @@ shards:
 
   exception_page:
     github: crystal-loot/exception_page
-    version: 0.1.1
+    version: 0.1.2
 
   humanize_time:
     github: mamantoha/humanize_time
@@ -66,7 +66,7 @@ shards:
 
   raven:
     github: Sija/raven.cr
-    version: 1.1.0
+    version: 1.2.0
 
   redis:
     github: stefanwille/crystal-redis
