@@ -9,7 +9,14 @@
       .modal-body
         ul
           li
-            | Build with Crystal #{Crystal::VERSION}
+            | Build with:
+            ul
+              li
+                a href="https://crystal-lang.org/" Crystal
+                = Crystal::VERSION
+              li
+                a href="http://kemalcr.com/" Kemal
+                = Kemal::VERSION
           li
             | Build date #{Time.parse_rfc2822(Config.date).to_s("%Y-%m-%d %H:%M:%S %:z")}
           li
