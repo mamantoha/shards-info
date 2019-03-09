@@ -35,6 +35,8 @@ dependencies:
     github: crystal-community/autolink.cr
   raven:
     github: Sija/raven.cr
+  i18n:
+    github: TechMagister/i18n.cr
 
 development_dependencies:
   spec-kemal:

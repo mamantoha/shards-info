@@ -12,10 +12,16 @@ require "markd"
 require "autolink"
 require "raven"
 require "raven/integrations/kemal"
+require "i18n"
 
 require "./github"
 require "./config"
 require "./view_helpers"
+
+I18n.load_path += ["src/locales"]
+I18n.init
+
+I18n.default_locale = "en"
 
 Kemal::Session.config do |config|
   config.secret = "my_super_secret"
