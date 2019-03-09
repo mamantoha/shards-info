@@ -27,6 +27,7 @@ dependencies:
     branch: master
   humanize_time:
     github: mamantoha/humanize_time
+    branch: ukrainian-locale
   markd:
     github: icyleaf/markd
   kemal-flash:

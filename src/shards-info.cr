@@ -21,7 +21,7 @@ require "./view_helpers"
 I18n.load_path += ["src/locales"]
 I18n.init
 
-I18n.default_locale = "en"
+I18n.locale = "uk"
 
 Kemal::Session.config do |config|
   config.secret = "my_super_secret"
