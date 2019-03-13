@@ -53,6 +53,14 @@ module Github
       Github::User.from_json(response.body)
     end
 
+    def crystal_users(page = 1)
+      url = "/search/users?q=language:crystal&page=#{page}"
+
+      response = make_request(url)
+
+      Github::Search::Users.from_json(response.body)
+    end
+
     def trending
       search_repositories("", sort: "stars", page: 1, limit: 20, after_date: 1.week.ago)
     end
@@ -100,7 +108,7 @@ module Github
 
       response = make_request(url)
 
-      Github::CodeSearches.from_json(response.body)
+      Github::Search::Codes.from_json(response.body)
     end
 
     def repo_readme(owner : String, repo : String)

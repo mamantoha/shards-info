@@ -76,6 +76,176 @@ module Github
     property updated_at : Time
   end
 
+  module Search
+    class User
+      include JSON::Serializable
+
+      property login : String
+
+      property id : Int32
+
+      property node_id : String
+
+      property avatar_url : String
+
+      property gravatar_id : String
+
+      property url : String
+
+      property html_url : String
+
+      property followers_url : String
+
+      property following_url : String
+
+      property gists_url : String
+
+      property starred_url : String
+
+      property subscriptions_url : String
+
+      property organizations_url : String
+
+      property repos_url : String
+
+      property events_url : String
+
+      property received_events_url : String
+
+      @[JSON::Field(key: "type")]
+      property item_type : String
+
+      property site_admin : Bool
+
+      property score : Float64
+    end
+
+    class Users < Iterable
+      property items : Array(Search::User)
+    end
+
+    class Code
+      include JSON::Serializable
+
+      property name : String
+
+      property path : String
+
+      property sha : String
+
+      property url : String
+
+      property git_url : String
+
+      property html_url : String
+
+      property repository : Search::Repository
+
+      property score : Float64
+    end
+
+    class Codes < Iterable
+      property items : Array(Code)
+    end
+
+    class Search::Repository
+      include JSON::Serializable
+
+      property id : Int32
+
+      property node_id : String
+
+      property name : String
+
+      property full_name : String
+
+      @[JSON::Field(key: "private")]
+      property repository_private : Bool
+
+      property owner : Owner
+
+      property html_url : String
+
+      property description : String?
+
+      property fork : Bool
+
+      property url : String
+
+      property forks_url : String
+
+      property keys_url : String
+
+      property collaborators_url : String
+
+      property teams_url : String
+
+      property hooks_url : String
+
+      property issue_events_url : String
+
+      property events_url : String
+
+      property assignees_url : String
+
+      property branches_url : String
+
+      property tags_url : String
+
+      property blobs_url : String
+
+      property git_tags_url : String
+
+      property git_refs_url : String
+
+      property trees_url : String
+
+      property statuses_url : String
+
+      property languages_url : String
+
+      property stargazers_url : String
+
+      property contributors_url : String
+
+      property subscribers_url : String
+
+      property subscription_url : String
+
+      property commits_url : String
+
+      property git_commits_url : String
+
+      property comments_url : String
+
+      property issue_comment_url : String
+
+      property contents_url : String
+
+      property compare_url : String
+
+      property merges_url : String
+
+      property archive_url : String
+
+      property downloads_url : String
+
+      property issues_url : String
+
+      property pulls_url : String
+
+      property milestones_url : String
+
+      property notifications_url : String
+
+      property labels_url : String
+
+      property releases_url : String
+
+      property deployments_url : String
+    end
+  end
+
   class Repos < Iterable
     property items : Array(Repo)
   end
@@ -268,127 +438,6 @@ module Github
   end
 
   alias UserRepos = Array(Repo)
-
-  class CodeSearches < Iterable
-    property items : Array(CodeSearchItem)
-  end
-
-  class CodeSearchItem
-    include JSON::Serializable
-
-    property name : String
-
-    property path : String
-
-    property sha : String
-
-    property url : String
-
-    property git_url : String
-
-    property html_url : String
-
-    property repository : CodeSearchRepository
-
-    property score : Float64
-  end
-
-  class CodeSearchRepository
-    include JSON::Serializable
-
-    property id : Int32
-
-    property node_id : String
-
-    property name : String
-
-    property full_name : String
-
-    @[JSON::Field(key: "private")]
-    property repository_private : Bool
-
-    property owner : Owner
-
-    property html_url : String
-
-    property description : String?
-
-    property fork : Bool
-
-    property url : String
-
-    property forks_url : String
-
-    property keys_url : String
-
-    property collaborators_url : String
-
-    property teams_url : String
-
-    property hooks_url : String
-
-    property issue_events_url : String
-
-    property events_url : String
-
-    property assignees_url : String
-
-    property branches_url : String
-
-    property tags_url : String
-
-    property blobs_url : String
-
-    property git_tags_url : String
-
-    property git_refs_url : String
-
-    property trees_url : String
-
-    property statuses_url : String
-
-    property languages_url : String
-
-    property stargazers_url : String
-
-    property contributors_url : String
-
-    property subscribers_url : String
-
-    property subscription_url : String
-
-    property commits_url : String
-
-    property git_commits_url : String
-
-    property comments_url : String
-
-    property issue_comment_url : String
-
-    property contents_url : String
-
-    property compare_url : String
-
-    property merges_url : String
-
-    property archive_url : String
-
-    property downloads_url : String
-
-    property issues_url : String
-
-    property pulls_url : String
-
-    property milestones_url : String
-
-    property notifications_url : String
-
-    property labels_url : String
-
-    property releases_url : String
-
-    property deployments_url : String
-  end
 
   class Organization
     include JSON::Serializable

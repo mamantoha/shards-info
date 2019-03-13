@@ -63,6 +63,21 @@ get "/" do |env|
   render "src/views/index.slang", "src/views/layouts/layout.slang"
 end
 
+get "/users" do |env|
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+
+  users = CACHE.fetch("users_#{page}") do
+    GITHUB_CLIENT.crystal_users(page).to_json
+  end
+
+  users = Github::Search::Users.from_json(users)
+
+  paginator = ViewHelpers::GithubPaginator.new(users, page, "/users?page=%{page}").to_s
+
+  render "src/views/users.slang", "src/views/layouts/layout.slang"
+end
+
 get "/repos" do |env|
   if env.params.query.[]?("query").nil?
     env.redirect "/"
@@ -153,7 +168,7 @@ get "/repos/:owner/:repo" do |env|
     GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}").to_json
   end
 
-  dependent_repos = Github::CodeSearches.from_json(dependent_repos)
+  dependent_repos = Github::Search::Codes.from_json(dependent_repos)
 
   readme = get_readme(owner, repo_name)
   readme = readme.empty? ? nil : Github::Readme.from_json(readme)
@@ -193,7 +208,7 @@ get "/repos/:owner/:repo/dependents" do |env|
     GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}", page: page).to_json
   end
 
-  dependent_repos = Github::CodeSearches.from_json(dependent_repos)
+  dependent_repos = Github::Search::Codes.from_json(dependent_repos)
 
   paginator = ViewHelpers::GithubPaginator.new(dependent_repos, page, "/repos/#{repo.full_name}/dependents?page=%{page}").to_s
 
