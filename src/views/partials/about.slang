@@ -25,3 +25,7 @@
           li
             | Developed and maintained by
             a href="mailto:anton.maminov@gmail.com" Anton Maminov
+        .px-4.mt-3
+          | We hope that this site will encourage you to start your own Crystal projects!
+        .px-4.mt-3
+          | Happy Crystalling ♥

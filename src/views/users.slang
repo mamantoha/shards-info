@@ -1,6 +1,6 @@
 div
   h1.page__heading
-    ' Users
+    ' Crystal developers
     .result_stats
       = users.total_count
       ' users
