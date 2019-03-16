@@ -79,7 +79,7 @@ module Github
       response = make_request(url)
 
       repos = Github::UserRepos.from_json(response.body)
-      repos.select { |repo| repo.language == "Crystal" && repo.fork == false }
+      repos.select { |repo| repo.language == "Crystal" }
     end
 
     def repo_get(full_name : String)

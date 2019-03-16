@@ -1,16 +1,20 @@
-.shards__shard.d-flex
+.shards__shard.d-flex class="#{repo.fork ? "forked" : ""}"
   - if additional_info
     a.d-block.mr-2.mt-1 href="/repos/#{repo.owner.login}"
       img.avatar src="#{repo.owner.avatar_url}" alt="#{repo.owner.login}" width="32" height="32"
 
   .width-full
     .shards__shard_info
+      - if repo.fork == true
+        p.shards__shard_fork
+          | Forked repository
       h3.shards__shard_name.css-truncate
         a href="/repos/#{repo.owner.login}/#{repo.name}"
           - if additional_info
             == "#{repo.owner.login}/<span class='text-normal'>#{repo.name}</span>"
           - else
             == repo.name
+
       p.shards__shard_desc.dont-break-out
         == Emoji.emojize(Autolink.auto_link(repo.description.to_s))
     .shard__topics
