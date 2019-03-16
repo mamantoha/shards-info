@@ -152,7 +152,7 @@ ul.not-list li {
 }
 
 .shards__shard.forked {
-  background: whitesmoke;
+  background: #f8f9fa;
 }
 
 .shards__shard_desc {
