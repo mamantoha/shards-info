@@ -209,6 +209,12 @@ ul.not-list li {
 
 }
 
+.page__heading .fork-flag {
+  font-size: 13px;
+  color: #586069;
+  line-height: 10px;
+}
+
 .page__subheading {
   font-size: 60%;
   color: #808080;

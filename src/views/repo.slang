@@ -4,6 +4,11 @@
       h1= repo.name
         i.page__subheading
           = repo.latest_release
+      - if repo.fork == true
+        - parent_repo = repo.parent.not_nil!
+        p.fork-flag
+          | forked from
+          a href="/repos/#{parent_repo.full_name}" = parent_repo.full_name
       .shard__topics
         - if topics = repo.topics
           - topics.each do |topic|

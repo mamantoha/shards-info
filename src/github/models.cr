@@ -398,6 +398,10 @@ module Github
 
     property default_branch : String
 
+    property parent : Repo?
+
+    property source : Repo?
+
     property subscribers_count : Int32?
 
     property topics : Array(String)?
