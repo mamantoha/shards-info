@@ -442,6 +442,7 @@ module Github
   end
 
   alias UserRepos = Array(Repo)
+  alias Forks = Array(Repo)
 
   class Organization
     include JSON::Serializable

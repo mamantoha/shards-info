@@ -98,6 +98,14 @@ module Github
       Github::Releases.from_json(response.body)
     end
 
+    def repo_forks(full_name : String)
+      url = "/repos/#{full_name}/forks"
+
+       response = make_request(url)
+
+       Github::Forks.from_json(response.body)
+    end
+
     def dependent_repos(full_name : String, *, page = 1, limit = 10)
       query = URI.escape("github: #{full_name}")
       filename = "shard.yml"
