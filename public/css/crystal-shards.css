@@ -316,6 +316,22 @@ ul.not-list li {
   color: #a6aab2;
 }
 
+[data-toggle="collapse"] .fa:before {
+  content: "\f139";
+}
+
+[data-toggle="collapse"].collapsed .fa:before {
+  content: "\f13a";
+}
+
+.list__heading a {
+  color: #a6aab2;
+}
+
+.list__heading a:hover {
+  text-decoration: none;
+}
+
 @media (min-width : 768px) {
   #back-to-top {
     display: none;
