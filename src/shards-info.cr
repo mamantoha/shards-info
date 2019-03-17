@@ -1,4 +1,5 @@
 require "yaml"
+require "base64"
 require "kemal"
 require "kemal-session"
 require "kemal-flash"
@@ -62,6 +63,21 @@ get "/" do |env|
   render "src/views/index.slang", "src/views/layouts/layout.slang"
 end
 
+get "/users" do |env|
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+
+  users = CACHE.fetch("users_#{page}") do
+    GITHUB_CLIENT.crystal_users(page).to_json
+  end
+
+  users = Github::Search::Users.from_json(users)
+
+  paginator = ViewHelpers::GithubPaginator.new(users, page, "/users?page=%{page}").to_s
+
+  render "src/views/users.slang", "src/views/layouts/layout.slang"
+end
+
 get "/repos" do |env|
   if env.params.query.[]?("query").nil?
     env.redirect "/"
@@ -119,17 +135,16 @@ get "/repos/:owner/:repo" do |env|
 
   repo = Github::Repo.from_json(repo)
 
-  shard_content = CACHE.fetch("content_#{owner}_#{repo_name}_shard.yml") do
-    response = GITHUB_CLIENT.repo_shard(owner, repo_name)
-    response.to_json
-  end
+  dependencies = {} of String => Hash(String, String)
+  development_dependencies = {} of String => Hash(String, String)
 
+  shard_content = get_content(owner, repo_name, "shard.yml")
   shard_content = Github::Content.from_json(shard_content) rescue nil
 
   unless show_repository?(shard_content, repo.full_name)
     env.flash["notice"] = "Repository <a href='#{repo.html_url}'>#{repo.full_name}</a> does not have a <strong>shard.yml</strong> file"
 
-    env.redirect "/"
+    env.redirect back(env)
     next
   end
 
@@ -137,7 +152,7 @@ get "/repos/:owner/:repo" do |env|
     GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}").to_json
   end
 
-  dependent_repos = Github::CodeSearches.from_json(dependent_repos)
+  dependent_repos = Github::Search::Codes.from_json(dependent_repos)
 
   repo_forks = CACHE.fetch("repo_forks_#{owner}_#{repo_name}_1") do
     GITHUB_CLIENT.repo_forks("#{owner}/#{repo_name}").to_json
@@ -166,27 +181,28 @@ get "/repos/:owner/:repo" do |env|
     end
   end
 
-  readme = CACHE.fetch("readme_#{owner}_#{repo_name}") do
-    response = GITHUB_CLIENT.repo_readme(owner, repo_name)
-    response.to_json
-  rescue Crest::NotFound
-    ""
+  dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}_1") do
+    GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}").to_json
   end
 
+  dependent_repos = Github::Search::Codes.from_json(dependent_repos)
+
+  readme = get_readme(owner, repo_name)
   readme = readme.empty? ? nil : Github::Readme.from_json(readme)
-
   if readme && readme.download_url
-    readme_file = CACHE.fetch("content_readme_#{owner}_#{repo_name}") do
-      Crest.get(readme.download_url.not_nil!).body
-    end
-
-    readme_html = Markd.to_html(Emoji.emojize(readme_file))
+    readme_html = content_to_markdown(readme)
   end
 
-  Config.config.page_title = "#{repo.full_name}: #{repo.description}"
+  changelog = get_content(owner, repo_name, "CHANGELOG.md")
+  changelog = changelog.empty? ? nil : Github::Content.from_json(changelog)
+  if changelog && changelog.download_url
+    changelog_html = content_to_markdown(changelog)
+  end
+
+  Config.config.page_title = "#{repo.full_name}: #{repo.description_with_emoji}"
 
   Config.config.open_graph.title = "#{repo.full_name}"
-  Config.config.open_graph.description = "#{repo.description}"
+  Config.config.open_graph.description = "#{repo.description_with_emoji}"
   Config.config.open_graph.image = "#{repo.owner.avatar_url}"
 
   render "src/views/repo.slang", "src/views/layouts/layout.slang"
@@ -209,7 +225,7 @@ get "/repos/:owner/:repo/dependents" do |env|
     GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}", page: page).to_json
   end
 
-  dependent_repos = Github::CodeSearches.from_json(dependent_repos)
+  dependent_repos = Github::Search::Codes.from_json(dependent_repos)
 
   paginator = ViewHelpers::GithubPaginator.new(dependent_repos, page, "/repos/#{repo.full_name}/dependents?page=%{page}").to_s
 
@@ -218,6 +234,10 @@ get "/repos/:owner/:repo/dependents" do |env|
   Config.config.page_title = "#{repo.full_name}: dependent shards"
 
   render "src/views/dependents.slang", "src/views/layouts/layout.slang"
+end
+
+def back(env : HTTP::Server::Context) : String
+  env.request.headers.fetch("Referer", "/")
 end
 
 def link(url : String?) : String | Nil
@@ -233,6 +253,34 @@ end
 
 private def show_repository?(shard_content, repo_fullname)
   shard_content || Config.special_repositories.includes?(repo_fullname) ? true : false
+end
+
+private def get_readme(owner : String, repo_name : String)
+  CACHE.fetch("readme_#{owner}_#{repo_name}") do
+    response = GITHUB_CLIENT.repo_readme(owner, repo_name)
+    response.to_json
+  rescue Crest::NotFound
+    ""
+  end
+end
+
+private def get_content(owner : String, repo_name : String, filename : String)
+  CACHE.fetch("content_#{filename}_#{owner}_#{repo_name}") do
+    response = GITHUB_CLIENT.repo_content(owner, repo_name, filename)
+    response.to_json
+  rescue Crest::NotFound
+    ""
+  end
+end
+
+private def content_to_markdown(content : Github::Content)
+  string = decode_github_content(content.content)
+
+  Markd.to_html(Emoji.emojize(string))
+end
+
+private def decode_github_content(content : String) : String
+  Base64.decode_string(content)
 end
 
 Kemal.run

@@ -146,9 +146,13 @@ ul.not-list li {
 
 .shards__shard {
   display: flex;
-  padding-top: 24px;
-  padding-bottom: 12px;
+  padding: 12px;
+  margin-bottom: 12px;
   border-bottom: 1px solid #eee;
+}
+
+.shards__shard.forked {
+  background: #f8f9fa;
 }
 
 .shards__shard_desc {
@@ -170,6 +174,14 @@ ul.not-list li {
   margin-left: 16px;
   display: inline;
 }
+
+.shards__shard_fork {
+  font-size: 12px;
+  color: #586069;
+  margin-bottom: 8px;
+  text-align: right;
+}
+
 
 .shards__shard_github ul {
   padding-left: 0;
@@ -195,6 +207,12 @@ ul.not-list li {
   overflow-wrap: break-word;
   word-wrap: break-word;
 
+}
+
+.page__heading .fork-flag {
+  font-size: 13px;
+  color: #586069;
+  line-height: 10px;
 }
 
 .page__subheading {
@@ -296,6 +314,22 @@ ul.not-list li {
   font-size: 12px;
   text-transform: uppercase;
   color: #a6aab2;
+}
+
+[data-toggle="collapse"] .fa:before {
+  content: "\f139";
+}
+
+[data-toggle="collapse"].collapsed .fa:before {
+  content: "\f13a";
+}
+
+.list__heading a {
+  color: #a6aab2;
+}
+
+.list__heading a:hover {
+  text-decoration: none;
 }
 
 @media (min-width : 768px) {

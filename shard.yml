@@ -1,7 +1,7 @@
 name: shards-info
 version: 0.2.0
 
-crystal: 0.27.0
+crystal: 0.27.2
 
 authors:
   - Anton Maminov <anton.linux@gmail.com>
@@ -35,7 +35,6 @@ dependencies:
     github: crystal-community/autolink.cr
   raven:
     github: Sija/raven.cr
-    version: ~> 1.1
 
 development_dependencies:
   spec-kemal:

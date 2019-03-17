@@ -53,6 +53,14 @@ module Github
       Github::User.from_json(response.body)
     end
 
+    def crystal_users(page = 1)
+      url = "/search/users?q=language:crystal&page=#{page}"
+
+      response = make_request(url)
+
+      Github::Search::Users.from_json(response.body)
+    end
+
     def trending
       search_repositories("", sort: "stars", page: 1, limit: 20, after_date: 1.week.ago)
     end
@@ -71,7 +79,7 @@ module Github
       response = make_request(url)
 
       repos = Github::UserRepos.from_json(response.body)
-      repos.select { |repo| repo.language == "Crystal" && repo.fork == false }
+      repos.select { |repo| repo.language == "Crystal" }
     end
 
     def repo_get(full_name : String)
@@ -108,17 +116,7 @@ module Github
 
       response = make_request(url)
 
-      Github::CodeSearches.from_json(response.body)
-    end
-
-    def repo_shard(owner : String, repo : String)
-      url = "/repos/#{owner}/#{repo}/contents/shard.yml"
-
-      response = make_request(url, true)
-
-      Github::Content.from_json(response.body)
-    rescue Crest::RequestFailed
-      nil
+      Github::Search::Codes.from_json(response.body)
     end
 
     def repo_readme(owner : String, repo : String)
@@ -127,6 +125,14 @@ module Github
       response = make_request(url, true)
 
       Github::Readme.from_json(response.body)
+    end
+
+    def repo_content(owner : String, repo : String, path : String)
+      url = "/repos/#{owner}/#{repo}/contents/#{path}"
+
+      response = make_request(url, true)
+
+      Github::Content.from_json(response.body)
     end
 
     # https://developer.github.com/v3/search/#search-repositories

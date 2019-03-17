@@ -4,13 +4,18 @@
       h1= repo.name
         i.page__subheading
           = repo.latest_release
+      - if repo.fork == true
+        - parent_repo = repo.parent.not_nil!
+        p.fork-flag
+          | forked from
+          a href="/repos/#{parent_repo.full_name}" = parent_repo.full_name
       .shard__topics
         - if topics = repo.topics
           - topics.each do |topic|
             a href="/repos?query=topic:#{topic}" class="badge badge-secondary" = topic
     .shard__intro
       == Emoji.emojize(Autolink.auto_link(repo.description.to_s))
-    ul class="nav nav-tabs" id="infoTab" role="tablist"
+    ul class="nav nav-tabs nav-fill" id="infoTab" role="tablist"
       li class="nav-item"
         a class="nav-link active" id="info-tab" href="#info" role="tab" data-toggle="tab" aria-controls="info" aria-selected="true"
           i class="fas fa-info-circle"
@@ -20,6 +25,11 @@
           a class="nav-link" id="readme-tab" href="#readme" role="tab" data-toggle="tab" aria-controls="readme" aria-selected="false"
             i class="fas fa-book"
             ' Readme
+      - if changelog
+        li class="nav-item"
+          a class="nav-link" id="changelog-tab" href="#changelog" role="tab" data-toggle="tab" aria-controls="changelog" aria-selected="false"
+            i class="fas fa-history"
+            ' Changelog
 
     div class="tab-content"
       div role="tabpanel" class="tab-pane fade show active" id="info" aria-labelledby="info-tab"
@@ -29,6 +39,11 @@
           .row
             .col-md-12.shard__readme
               == readme_html
+      - if changelog
+        div role="tabpanel" class="tab-pane fade" id="changelog" aria-labelledby="changelog-tab"
+          .row
+            .col-md-12.shard__changelog
+              == changelog_html
 
   .col-md-4.col-sm-12
     .list__heading Github statistic:

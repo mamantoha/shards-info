@@ -21,6 +21,10 @@ class Config
     Config::INSTANCE
   end
 
+  def self.date
+    {{ `date -R`.stringify.chomp }}
+  end
+
   # List of Crystal repositories w/o shard.yml
   # which we want to show anyway.
   def self.special_repositories
@@ -43,7 +47,7 @@ struct OpenGraph
     @title = "Shards Info",
     @type = "object",
     @description = "View of all repositories on GitHub that have Crystal code in them.",
-    @image = "http://shards.info/logo.png",
+    @image = "http://shards.info/images/logo.png",
     @url = "http://shards.info"
   )
   end
