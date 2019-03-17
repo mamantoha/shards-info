@@ -6,5 +6,5 @@ div
       ' users
 - if users.total_count != 0
   - users_array = users.items
-  == render "src/views/partials/users/users.slang"
+  == render "src/views/users/users.slang"
   == paginator
