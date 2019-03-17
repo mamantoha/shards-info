@@ -281,11 +281,11 @@ ul.not-list li {
   word-wrap: break-word;
 }
 
-.shard__see_all_dependent_link {
+.shard__see_all_link {
   margin-bottom: 10px;
 }
 
-.shard__see_all_dependent_link a {
+.shard__see_all_link a {
   color: #c1c4ca;
   font-size: 14px;
   font-style: italic;
@@ -293,7 +293,7 @@ ul.not-list li {
   text-decoration: none;
 }
 
-.shard__see_all_dependent_link a:after {
+.shard__see_all_link a:after {
   margin-left: 3px;
   font-family: "Times New Roman", sans-serif;
   font-style: normal;

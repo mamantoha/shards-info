@@ -170,6 +170,12 @@ get "/repos/:owner/:repo" do |env|
 
   dependent_repos = Github::Search::Codes.from_json(dependent_repos)
 
+  repo_forks = CACHE.fetch("repo_forks_#{owner}_#{repo_name}_1") do
+    GITHUB_CLIENT.repo_forks("#{owner}/#{repo_name}").to_json
+  end
+
+  repo_forks = Github::Forks.from_json(repo_forks)
+
   readme = get_readme(owner, repo_name)
   readme = readme.empty? ? nil : Github::Readme.from_json(readme)
   if readme && readme.download_url
@@ -217,6 +223,28 @@ get "/repos/:owner/:repo/dependents" do |env|
   Config.config.page_title = "#{repo.full_name}: dependent shards"
 
   render "src/views/dependents.slang", "src/views/layouts/layout.slang"
+end
+
+get "/repos/:owner/:repo/forks" do |env|
+  owner = env.params.url["owner"]
+  repo_name = env.params.url["repo"]
+
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+
+  repo = CACHE.fetch("repos_#{owner}_#{repo_name}") do
+    GITHUB_CLIENT.repo_get("#{owner}/#{repo_name}").to_json
+  end
+
+  repo = Github::Repo.from_json(repo)
+
+  repo_forks = CACHE.fetch("repo_forks_#{owner}_#{repo_name}_1") do
+    GITHUB_CLIENT.repo_forks("#{owner}/#{repo_name}").to_json
+  end
+
+  repo_forks = Github::Forks.from_json(repo_forks)
+
+  render "src/views/forks.slang", "src/views/layouts/layout.slang"
 end
 
 def back(env : HTTP::Server::Context) : String

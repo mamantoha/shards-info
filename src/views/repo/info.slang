@@ -42,24 +42,41 @@
               i class="fab fa-github"
               a href="/repos/#{item.repository.full_name}" = item.repository.name
         - if dependent_repos.total_count > 10
-          .shard__see_all_dependent_link
-            a class="shard__see_all_dependent_link" href="/repos/#{repo.full_name}/dependents"
+          .shard__see_all_link
+            a class="shard__see_all_link" href="/repos/#{repo.full_name}/dependents"
               ' Show all dependents
   .col-md-6
-      .shard__development_dependencies
-        h3.list__heading
-          a data-toggle="collapse" href="#collapseDevelopmentDependencies" aria-expanded="true" aria-controls="collapseDevelopmentDependencies"
-            i class="fa" aria-hidden="true"
-            | Development dependencies:
-        .collapse.show#collapseDevelopmentDependencies
-          ul.list__items.not-list
-            - development_dependencies.each do |key, value|
-              li
-                i class="fab fa-github"
-                - if value["github"]?
-                  a href="/repos/#{value["github"]}" = key
-                - else
-                  = key
+    .shard__development_dependencies
+      h3.list__heading
+        a data-toggle="collapse" href="#collapseDevelopmentDependencies" aria-expanded="true" aria-controls="collapseDevelopmentDependencies"
+          i class="fa" aria-hidden="true"
+          | Development dependencies:
+      .collapse.show#collapseDevelopmentDependencies
+        ul.list__items.not-list
+          - development_dependencies.each do |key, value|
+            li
+              i class="fab fa-github"
+              - if value["github"]?
+                a href="/repos/#{value["github"]}" = key
+              - else
+                = key
+.row
+  .col-md-6
+    .shard__forks
+      h3.list__heading
+        a data-toggle="collapse" href="#collapseForks" aria-expanded="true" aria-controls="collapseForks"
+          i class="fa" aria-hidden="true"
+          | Forks (#{repo.forks_count}):
+      .collapse.show#collapseForks
+        ul.list__items.not-list
+          - repo_forks.first(10).each do |item|
+            li
+              i class="fab fa-github"
+              a href="/repos/#{item.full_name}" = item.full_name
+        - if repo.forks_count > 10
+          .shard__see_all_link
+            a class="shard__see_all_link" href="/repos/#{repo.full_name}/forks"
+              ' Show all forks
 .row
   .col-12
     .shard__owner
