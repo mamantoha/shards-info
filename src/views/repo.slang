@@ -14,7 +14,11 @@
           - topics.each do |topic|
             a href="/repos?query=topic:#{topic}" class="badge badge-secondary" = topic
     .shard__intro
-      == Emoji.emojize(Autolink.auto_link(repo.description.to_s))
+      span
+        == Emoji.emojize(Autolink.auto_link(repo.description.to_s))
+      - if repo_homepage = repo.homepage
+        span
+          a href="#{repo_homepage}" = repo_homepage
     ul class="nav nav-tabs nav-fill" id="infoTab" role="tablist"
       li class="nav-item"
         a class="nav-link active" id="info-tab" href="#info" role="tab" data-toggle="tab" aria-controls="info" aria-selected="true"
