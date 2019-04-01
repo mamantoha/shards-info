@@ -22,10 +22,16 @@
       .collapse.show#collapseDependencies
         ul.list__items.not-list
           - dependencies.each do |key, value|
+            - icon_class = case
+              - when value["github"]? then "fab fa-github"
+              - when value["gitlab"]? then "fab fa-gitlab"
+              - else "fa fa-gem"
             li
-              i class="fab fa-github"
+              i class="#{icon_class}"
               - if value["github"]?
                 a href="/repos/#{value["github"]}" = key
+              - elsif value["gitlab"]?
+                a href="https://gitlab.com/#{value["gitlab"]}" = key
               - else
                 = key
 .row
@@ -54,10 +60,16 @@
       .collapse.show#collapseDevelopmentDependencies
         ul.list__items.not-list
           - development_dependencies.each do |key, value|
+            - icon_class = case
+              - when value["github"]? then "fab fa-github"
+              - when value["gitlab"]? then "fab fa-gitlab"
+              - else "fa fa-gem"
             li
-              i class="fab fa-github"
+              i class="#{icon_class}"
               - if value["github"]?
                 a href="/repos/#{value["github"]}" = key
+              - elsif value["gitlab"]?
+                a href="https://gitlab.com/#{value["gitlab"]}" = key
               - else
                 = key
 .row
