@@ -565,7 +565,7 @@ module Github
 
     property draft : Bool
 
-    property author : Author
+    property author : Author?
 
     property prerelease : Bool
 

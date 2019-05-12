@@ -14,7 +14,7 @@ shards:
 
   crest:
     github: mamantoha/crest
-    version: 0.19.0
+    version: 0.19.1
 
   emoji:
     github: veelenga/emoji.cr
@@ -30,7 +30,7 @@ shards:
 
   i18n:
     github: TechMagister/i18n.cr
-    commit: d8a8933f6a4eb7d9790c3803cb8bec06c304ea5c
+    commit: ead11152304c2bfae7bc09a8d6016be2b277a15f
 
   kemal:
     github: kemalcr/kemal
