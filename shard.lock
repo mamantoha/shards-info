@@ -30,7 +30,7 @@ shards:
 
   i18n:
     github: TechMagister/i18n.cr
-    commit: ead11152304c2bfae7bc09a8d6016be2b277a15f
+    commit: de24f4f82604b38610f87af1278348924dcb9714
 
   kemal:
     github: kemalcr/kemal
@@ -66,7 +66,7 @@ shards:
 
   raven:
     github: Sija/raven.cr
-    version: 1.3.0
+    commit: 1afd64b136e59065a36b09b8f672a5d32cba7663
 
   redis:
     github: stefanwille/crystal-redis
