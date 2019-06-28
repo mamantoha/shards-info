@@ -35,6 +35,7 @@ Get started by deploying this service to heroku.
 
 ```console
 heroku buildpacks:add https://github.com/crystal-lang/heroku-buildpack-crystal.git
+heroku buildpacks:add --index 1 heroku-community/apt
 ```
 
 And set environment variables with `heroku config:set VAR=VAL`:
