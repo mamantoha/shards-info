@@ -8,7 +8,7 @@ require "cache"
 require "crest"
 require "emoji"
 require "humanize_time"
-require "markd"
+require "common_marker"
 require "autolink"
 require "raven"
 require "raven/integrations/kemal"
@@ -287,7 +287,11 @@ end
 private def content_to_markdown(content : Github::Content)
   string = decode_github_content(content.content)
 
-  Markd.to_html(Emoji.emojize(string))
+  options = ["unsafe"]
+  extensions = ["table", "strikethrough", "autolink"]
+
+  md = CommonMarker.new(Emoji.emojize(string), options, extensions)
+  md.to_html
 end
 
 private def decode_github_content(content : String) : String

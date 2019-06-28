@@ -27,8 +27,8 @@ dependencies:
     branch: master
   humanize_time:
     github: mamantoha/humanize_time
-  markd:
-    github: icyleaf/markd
+  common_marker:
+    github: mamantoha/crystal-cmark-gfm
   kemal-flash:
     github: neovintage/kemal-flash
   autolink:
