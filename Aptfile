@@ -1,3 +1,4 @@
+:repo:deb deb http://cz.archive.ubuntu.com/ubuntu disco main universe
 cmark-gfm
 libcmark-gfm-dev
 libcmark-gfm-extensions-dev
