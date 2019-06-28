@@ -12,9 +12,13 @@ shards:
     github: mamantoha/cache
     version: 0.3.0
 
+  common_marker:
+    github: mamantoha/crystal-cmark-gfm
+    commit: 820b078110ce8aaa2bb5042c7d8ccaeb3e284c62
+
   crest:
     github: mamantoha/crest
-    version: 0.19.1
+    version: 0.20.0
 
   emoji:
     github: veelenga/emoji.cr
@@ -47,10 +51,6 @@ shards:
   kilt:
     github: jeromegn/kilt
     version: 0.4.0
-
-  markd:
-    github: icyleaf/markd
-    version: 0.1.1
 
   memcached:
     github: comandeo/crystal-memcached
