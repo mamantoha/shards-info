@@ -29,6 +29,8 @@ $(function () {
 
 // Register Events
 $(document).ready(function () {
+  $('.shard__readme table').addClass('table table-bordered table-striped');
+
   hljs.initHighlightingOnLoad();
 
   var moveTo = new MoveTo();
