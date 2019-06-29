@@ -23,7 +23,11 @@ module Github
     def client
       client = Crest::Resource.new(
         base_url,
-        headers: {"Accept" => "application/vnd.github.mercy-preview+json"},
+        headers: {
+          "Accept" => "application/vnd.github.v3+json",
+          "Content-Type" => "application/json",
+          "User-Agent": "request"
+        },
         user: user,
         password: key,
         logging: true,
