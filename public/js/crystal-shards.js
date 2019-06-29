@@ -29,7 +29,7 @@ $(function () {
 
 // Register Events
 $(document).ready(function () {
-  $('.shard__readme table').addClass('table table-bordered table-striped');
+  $('.shard__readme table').addClass('table table-bordered table-striped table-responsive');
 
   hljs.initHighlightingOnLoad();
 
