@@ -14,7 +14,7 @@ shards:
 
   common_marker:
     github: mamantoha/crystal-cmark-gfm
-    commit: 74dcc10979bdc64be22f0398af0f4fe2436a9a90
+    commit: 36e650c789c0df450294a283722a8cc059a872d8
 
   crest:
     github: mamantoha/crest
