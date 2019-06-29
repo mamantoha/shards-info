@@ -29,6 +29,7 @@ dependencies:
     github: mamantoha/humanize_time
   common_marker:
     github: mamantoha/crystal-cmark-gfm
+    branch: master
   kemal-flash:
     github: neovintage/kemal-flash
   autolink:
