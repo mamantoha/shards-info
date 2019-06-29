@@ -288,7 +288,7 @@ private def content_to_markdown(content : Github::Content)
   string = decode_github_content(content.content)
 
   options = ["unsafe"]
-  extensions = ["table", "strikethrough", "autolink"]
+  extensions = ["table", "strikethrough", "autolink", "tagfilter", "tasklist"]
 
   md = CommonMarker.new(Emoji.emojize(string), options, extensions)
   md.to_html
