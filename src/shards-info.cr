@@ -220,7 +220,7 @@ get "/repos/:owner/:repo/dependents" do |env|
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if dependent_repos.items.empty?
 
-  Config.config.page_title = "#{repo.full_name}: dependent shards"
+  Config.config.page_title = "#{repo.full_name}: used by"
 
   render "src/views/dependents.slang", "src/views/layouts/layout.slang"
 end

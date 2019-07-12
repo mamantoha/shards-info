@@ -56,6 +56,9 @@
         i class="fas fa-star" title="Stars"
         = repo.watchers_count
       li
+        i class="fas fa-box" title="Used by"
+        = dependent_repos.total_count
+      li
         i class="fas fa-code-branch" title="Forks"
         = repo.forks_count
       li

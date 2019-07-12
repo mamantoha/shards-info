@@ -40,7 +40,7 @@
       h3.list__heading
         a data-toggle="collapse" href="#collapseDependent" aria-expanded="true" aria-controls="collapseDependent"
           i class="fa" aria-hidden="true"
-          | Dependent shards (#{dependent_repos.total_count}):
+          | Used by (#{dependent_repos.total_count}):
       .collapse.show#collapseDependent
         ul.list__items.not-list
           - dependent_repos.items.each do |item|
