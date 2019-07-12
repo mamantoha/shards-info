@@ -14,7 +14,7 @@ shards:
 
   common_marker:
     github: mamantoha/crystal-cmark-gfm
-    commit: 7927cb85fdbe0e5d7a156dc33a75fb74ca6910c1
+    commit: 8273a9d7a3138607b01f3f249f74c38d1d325051
 
   crest:
     github: mamantoha/crest
@@ -22,7 +22,7 @@ shards:
 
   emoji:
     github: veelenga/emoji.cr
-    commit: 808f66db7078200a69a1a01998b8a12cc802764b
+    commit: 22c147f37333a94249eac7ce54e7e9f1c4999838
 
   exception_page:
     github: crystal-loot/exception_page
