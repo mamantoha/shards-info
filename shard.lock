@@ -1,8 +1,8 @@
 version: 1.0
 shards:
   any_hash:
-    github: mamantoha/any_hash.cr
-    commit: ed7f661e30c62c66cbcb3e21f7d2ac972b6aba74
+    github: Sija/any_hash.cr
+    version: 0.2.2
 
   autolink:
     github: crystal-community/autolink.cr
