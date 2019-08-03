@@ -36,6 +36,7 @@ dependencies:
     github: crystal-community/autolink.cr
   any_hash:
     github: Sija/any_hash.cr
+    branch: develop
   raven:
     github: Sija/raven.cr
 
