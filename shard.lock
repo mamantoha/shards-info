@@ -2,7 +2,7 @@ version: 1.0
 shards:
   any_hash:
     github: Sija/any_hash.cr
-    commit: 61ff0a41fb59795d71ec73625712b4273cd1913a
+    version: 0.2.3
 
   autolink:
     github: crystal-community/autolink.cr
