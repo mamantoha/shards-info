@@ -38,7 +38,7 @@ shards:
 
   kemal:
     github: kemalcr/kemal
-    version: 0.25.2
+    version: 0.26.0
 
   kemal-flash:
     github: neovintage/kemal-flash

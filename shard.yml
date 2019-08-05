@@ -34,8 +34,6 @@ dependencies:
     github: neovintage/kemal-flash
   autolink:
     github: crystal-community/autolink.cr
-  any_hash:
-    github: Sija/any_hash.cr
   raven:
     github: Sija/raven.cr
 
