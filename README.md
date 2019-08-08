@@ -46,7 +46,7 @@ GITHUB_KEY
 SENTRY_DSN
 ```
 
-Go to https://github.com/settings/tokens and generate new token (select `repo` scope).
+Go to <https://github.com/settings/tokens> and generate new token (select `repo` scope).
 
 On Heroku you **must** enable [Dyno Metadata](https://devcenter.heroku.com/articles/dyno-metadata)
 for Sentry's release detection to work correctly.
@@ -64,7 +64,7 @@ heroku labs:enable runtime-dyno-metadata
 
 ## Contributing
 
-1. Fork it ( https://github.com/mamantoha/shards-info/fork )
+1. Fork it (<https://github.com/mamantoha/shards-info/fork>)
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
