@@ -10,11 +10,11 @@ shards:
 
   cache:
     github: mamantoha/cache
-    version: 0.3.0
+    version: 0.3.1
 
   common_marker:
     github: mamantoha/crystal-cmark-gfm
-    commit: 8273a9d7a3138607b01f3f249f74c38d1d325051
+    commit: 70cb006c79ac6649c82659836f88e6c9d0f6cd52
 
   crest:
     github: mamantoha/crest
