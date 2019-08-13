@@ -18,7 +18,7 @@ shards:
 
   crest:
     github: mamantoha/crest
-    version: 0.21.0
+    version: 0.21.1
 
   emoji:
     github: veelenga/emoji.cr
