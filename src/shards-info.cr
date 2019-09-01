@@ -44,7 +44,7 @@ before_all do |env|
   GITHUB_CLIENT.exception_handler = Kemal::Exceptions::RouteNotFound.new(env)
 
   Config.config.open_graph = OpenGraph.new
-  Config.config.open_graph.url = "http://shards.info#{env.request.path}"
+  Config.config.open_graph.url = "https://shards.info#{env.request.path}"
   Config.config.query = env.request.query_params["query"]?.to_s
 end
 
