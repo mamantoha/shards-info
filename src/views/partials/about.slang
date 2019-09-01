@@ -17,6 +17,9 @@
               li
                 a href="http://kemalcr.com/" Kemal
                 = Kemal::VERSION
+              li
+                | Redis
+                = REDIS.info["redis_version"]
           li
             | Build date #{Time.parse_rfc2822(Config.date).to_s("%Y-%m-%d %H:%M:%S %:z")}
           li
