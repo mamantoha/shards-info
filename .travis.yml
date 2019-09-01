@@ -4,3 +4,6 @@ dist: xenial
 script:
   - crystal spec
   - crystal tool format --check
+
+services:
+  - redis-server
