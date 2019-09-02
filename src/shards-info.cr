@@ -31,8 +31,7 @@ end
 
 Kemal.config.add_handler(Raven::Kemal::ExceptionHandler.new)
 
-REDIS         = Redis.new(url: ENV["REDIS_URL"])
-CACHE         = Cache::RedisStore(String, String).new(expires_in: 30.minute, cache: REDIS)
+CACHE         = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
 GITHUB_CLIENT = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
 static_headers do |response, filepath, filestat|
