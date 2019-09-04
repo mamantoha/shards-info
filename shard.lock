@@ -10,11 +10,11 @@ shards:
 
   cache:
     github: mamantoha/cache
-    version: 0.3.1
+    version: 0.5.0
 
   common_marker:
     github: mamantoha/crystal-cmark-gfm
-    commit: 70cb006c79ac6649c82659836f88e6c9d0f6cd52
+    commit: 3423ddacec345b77284ce751df374ba00b92562e
 
   crest:
     github: mamantoha/crest
@@ -46,7 +46,7 @@ shards:
 
   kemal-session:
     github: kemalcr/kemal-session
-    version: 0.11.1
+    version: 0.12.0
 
   kilt:
     github: jeromegn/kilt
@@ -70,7 +70,7 @@ shards:
 
   redis:
     github: stefanwille/crystal-redis
-    version: 2.1.1
+    version: 2.3.0
 
   slang:
     github: jeromegn/slang
