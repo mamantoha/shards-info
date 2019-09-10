@@ -13,7 +13,7 @@ html lang="en"
 
     meta charset="utf-8"
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    meta name="description" content="View of all repositories on GitHub that have Crystal code in them."
+    meta name="description" content="#{Config.config.page_description}"
     == render "src/views/partials/open_graph.slang"
 
     /! Improve Load time by preloading render blocking resources

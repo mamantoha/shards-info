@@ -60,6 +60,7 @@ get "/" do |env|
   trending_repos = Github::Repos.from_json(trending_repos)
 
   Config.config.page_title = "Shards Info"
+  Config.config.page_description = "View of all repositories on GitHub that have Crystal code in them"
 
   render "src/views/index.slang", "src/views/layouts/layout.slang"
 end
@@ -96,7 +97,8 @@ get "/repos" do |env|
 
     paginator = ViewHelpers::GithubPaginator.new(repos, page, "/repos?query=#{query}&page=%{page}").to_s
 
-    Config.config.page_title = "Shards Info: search '#{query}'"
+    Config.config.page_title = "Search for '#{query}'"
+    Config.config.page_description = "Search Crystal repositories for '#{query}'"
 
     render "src/views/filter.slang", "src/views/layouts/layout.slang"
   end
@@ -116,10 +118,11 @@ get "/repos/:owner" do |env|
   user = Github::User.from_json(user)
   repos = Github::UserRepos.from_json(repos)
 
-  Config.config.page_title = "#{user.login} shards"
+  Config.config.page_title = "#{user.login} Crystal repositories"
+  Config.config.page_description = "#{user.login} has #{repos.size} Crystal repositories"
 
   Config.config.open_graph.title = "#{user.login} (#{user.name})"
-  Config.config.open_graph.description = "#{user.login} has #{repos.size} shards available."
+  Config.config.open_graph.description = "#{user.login} has #{repos.size} Crystal repositories"
   Config.config.open_graph.image = "#{user.avatar_url}"
   Config.config.open_graph.type = "profile"
 
@@ -190,6 +193,7 @@ get "/repos/:owner/:repo" do |env|
   end
 
   Config.config.page_title = "#{repo.full_name}: #{repo.description_with_emoji}"
+  Config.config.page_description = "#{repo.full_name}: #{repo.description_with_emoji}"
 
   Config.config.open_graph.title = "#{repo.full_name}"
   Config.config.open_graph.description = "#{repo.description_with_emoji}"
@@ -222,6 +226,7 @@ get "/repos/:owner/:repo/dependents" do |env|
   raise Kemal::Exceptions::RouteNotFound.new(env) if dependent_repos.items.empty?
 
   Config.config.page_title = "#{repo.full_name}: used by"
+  Config.config.page_description = "#{repo.full_name} used by repositories"
 
   render "src/views/dependents.slang", "src/views/layouts/layout.slang"
 end
@@ -244,6 +249,9 @@ get "/repos/:owner/:repo/forks" do |env|
   end
 
   repo_forks = Github::Forks.from_json(repo_forks)
+
+  Config.config.page_title = "#{repo.full_name}: forks"
+  Config.config.page_description = "#{repo.full_name} forks"
 
   render "src/views/forks.slang", "src/views/layouts/layout.slang"
 end

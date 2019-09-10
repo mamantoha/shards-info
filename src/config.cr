@@ -8,11 +8,13 @@ class Config
   INSTANCE = Config.new
 
   property page_title
+  property page_description
   property open_graph
   property query
 
   def initialize
     @page_title = "Shards Info"
+    @page_description = "View of all repositories on GitHub that have Crystal code in them"
     @open_graph = OpenGraph.new
     @query = ""
   end
@@ -46,7 +48,7 @@ struct OpenGraph
     @site_name = "Shards Info",
     @title = "Shards Info",
     @type = "object",
-    @description = "View of all repositories on GitHub that have Crystal code in them.",
+    @description = "View of all repositories on GitHub that have Crystal code in them",
     @image = "https://shards.info/images/logo.png",
     @url = "https://shards.info"
   )
