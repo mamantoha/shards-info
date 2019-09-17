@@ -34,4 +34,4 @@
           = repo.open_issues_count
         li
           .shards__shard_updated
-            = "Updated #{HumanizeTime.distance_of_time_in_words(repo.updated_at, Time.now)} ago"
+            = "Updated #{HumanizeTime.distance_of_time_in_words(repo.updated_at, Time.local)} ago"

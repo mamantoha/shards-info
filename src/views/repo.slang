@@ -69,7 +69,7 @@
         = repo.open_issues_count
       li
         i class="fas fa-clock" title="Last update"
-        = "#{HumanizeTime.distance_of_time_in_words(repo.updated_at, Time.now)} ago"
+        = "#{HumanizeTime.distance_of_time_in_words(repo.updated_at, Time.local)} ago"
 
     h3.list__heading License:
     p

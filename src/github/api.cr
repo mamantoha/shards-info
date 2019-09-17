@@ -2,12 +2,16 @@ require "crest"
 
 module Github
   class Logger < Crest::Logger
-    def request(request)
-      @logger.info ">> | %s | %s" % [request.method, request.url]
+    def request(request) : String
+      message = ">> | %s | %s" % [request.method, request.url]
+      @logger.info(message)
+      message
     end
 
-    def response(response)
-      @logger.info "<< | %s | %s" % [response.status_code, response.url]
+    def response(response) : String
+      message = "<< | %s | %s" % [response.status_code, response.url]
+      @logger.info(message)
+      message
     end
   end
 
@@ -111,7 +115,7 @@ module Github
     end
 
     def dependent_repos(full_name : String, *, page = 1, limit = 10)
-      query = URI.escape("github: #{full_name}")
+      query = URI.encode("github: #{full_name}")
       filename = "shard.yml"
       path = "/"
       type = "Code"
@@ -156,7 +160,7 @@ module Github
         pushed = date_filter.empty? ? "" : "+pushed:>#{date_filter}"
       end
 
-      word = word.empty? ? "" : "#{URI.escape(word)}"
+      word = word.empty? ? "" : "#{URI.encode(word)}"
 
       url = "/search/repositories?q=#{word}+language:#{language}#{pushed}&per_page=#{limit}&sort=#{sort}&page=#{page}"
 
