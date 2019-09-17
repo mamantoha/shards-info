@@ -5,7 +5,7 @@
     "crystal",
     "crystal-shards"
   ],
-  "website": "http://shards.info/",
+  "website": "https://shards.info/",
   "repository": "https://github.com/mamantoha/shards-info",
   "success_url": "/",
   "env": {
