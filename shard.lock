@@ -22,7 +22,7 @@ shards:
 
   emoji:
     github: veelenga/emoji.cr
-    commit: 22c147f37333a94249eac7ce54e7e9f1c4999838
+    commit: 2f991f0d373badd72a9c26374fa453f3ccd1706a
 
   exception_page:
     github: crystal-loot/exception_page
@@ -34,11 +34,11 @@ shards:
 
   humanize_time:
     github: mamantoha/humanize_time
-    version: 0.3.0
+    version: 0.4.0
 
   i18n:
     github: TechMagister/i18n.cr
-    commit: ed60fa3268a8e319c7a6c9a01dab519dd47846a7
+    commit: 7e8168f2a0d567d3722a70b3a3a1028930e1c47e
 
   kemal:
     github: kemalcr/kemal
@@ -70,7 +70,7 @@ shards:
 
   raven:
     github: Sija/raven.cr
-    version: 1.5.0
+    version: 1.5.1
 
   redis:
     github: stefanwille/crystal-redis
@@ -78,7 +78,7 @@ shards:
 
   slang:
     github: jeromegn/slang
-    commit: f33c23be9d477a07627a124d0b79d6cdb7a9132e
+    commit: 87e7a418027a4d89a6e5193dd4cf44a20be559d1
 
   spec-kemal:
     github: kemalcr/spec-kemal
