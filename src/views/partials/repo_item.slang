@@ -1,7 +1,7 @@
 .shards__shard.d-flex class="#{repo.fork ? "forked" : ""}"
   - if additional_info
     a.d-block.mr-2.mt-1 href="/repos/#{repo.owner.login}"
-      img.avatar src="#{repo.owner.avatar_url}" alt="#{repo.owner.login}" width="32" height="32"
+      img.avatar src="#{repo.owner.avatar_url}" alt="#{repo.owner.login}"
 
   .width-full
     .shards__shard_info

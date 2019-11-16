@@ -131,6 +131,8 @@ ul.not-list li {
   line-height: 1;
   vertical-align: middle;
   border-radius: 3px;
+  width: 32px;
+  height: 32px;;
 }
 
 .user__avatar img {
