@@ -42,7 +42,7 @@ shards:
 
   kemal:
     github: kemalcr/kemal
-    version: 0.26.0
+    version: 0.26.1
 
   kemal-flash:
     github: neovintage/kemal-flash
@@ -70,11 +70,11 @@ shards:
 
   raven:
     github: Sija/raven.cr
-    version: 1.5.2
+    version: 1.5.4
 
   redis:
     github: stefanwille/crystal-redis
-    version: 2.3.0
+    version: 2.5.0
 
   slang:
     github: jeromegn/slang
