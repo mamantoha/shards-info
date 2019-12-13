@@ -18,7 +18,7 @@ shards:
 
   crest:
     github: mamantoha/crest
-    version: 0.22.0
+    version: 0.23.0
 
   emoji:
     github: veelenga/emoji.cr
@@ -78,7 +78,7 @@ shards:
 
   slang:
     github: jeromegn/slang
-    commit: 87e7a418027a4d89a6e5193dd4cf44a20be559d1
+    commit: 8210d3f83c6199bc59925ee964405ffe926f44f3
 
   spec-kemal:
     github: kemalcr/spec-kemal
