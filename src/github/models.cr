@@ -425,7 +425,7 @@ module Github
     end
 
     def releases
-      releases = CACHE.fetch("releases_#{full_name}") do
+      releases = CACHE.fetch("github/releases/#{owner.login}/#{name}") do
         GITHUB_CLIENT.repo_releases(full_name).to_json
       end
 

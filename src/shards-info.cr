@@ -55,11 +55,11 @@ before_all do |env|
 end
 
 get "/" do |env|
-  recently_repos = CACHE.fetch("recently_repos", expires_in: 5.minutes) do
+  recently_repos = CACHE.fetch("github/recently_repos", expires_in: 5.minutes) do
     GITHUB_CLIENT.recently_updated.to_json
   end
 
-  trending_repos = CACHE.fetch("trending_repos") do
+  trending_repos = CACHE.fetch("github/trending_repos") do
     GITHUB_CLIENT.trending.to_json
   end
 
@@ -77,7 +77,7 @@ get "/github/users" do |env|
   page = env.params.query["page"]? || ""
   page = page.to_i? || 1
 
-  users = CACHE.fetch("users_#{page}") do
+  users = CACHE.fetch("github/users/#{page}") do
     GITHUB_CLIENT.crystal_users(page).to_json
   end
 
@@ -98,7 +98,7 @@ get "/github" do |env|
     page = env.params.query["page"]? || ""
     page = page.to_i? || 1
 
-    repos = CACHE.fetch("search_#{query}_#{page}") do
+    repos = CACHE.fetch("github/search/#{query}/#{page}") do
       GITHUB_CLIENT.filter(query, page).to_json
     end
 
@@ -117,11 +117,11 @@ get "/repos/:owner" { }
 get "/github/:owner" do |env|
   owner = env.params.url["owner"]
 
-  repos = CACHE.fetch("#{owner}_repos") do
+  repos = CACHE.fetch("github/users/#{owner}/repos") do
     GITHUB_CLIENT.user_repos(owner).to_json
   end
 
-  user = CACHE.fetch(owner) do
+  user = CACHE.fetch("github/users/#{owner}") do
     GITHUB_CLIENT.user(owner).to_json
   end
 
@@ -144,7 +144,7 @@ get "/github/:owner/:repo" do |env|
   owner = env.params.url["owner"]
   repo_name = env.params.url["repo"]
 
-  repo = CACHE.fetch("repos_#{owner}_#{repo_name}") do
+  repo = CACHE.fetch("github/repos/#{owner}/#{repo_name}") do
     GITHUB_CLIENT.repo_get("#{owner}/#{repo_name}").to_json
   end
 
@@ -179,13 +179,13 @@ get "/github/:owner/:repo" do |env|
     end
   end
 
-  dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}_1") do
+  dependent_repos = CACHE.fetch("github/dependent_repos/#{owner}/#{repo_name}/1") do
     GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}").to_json
   end
 
   dependent_repos = Github::Search::Codes.from_json(dependent_repos)
 
-  repo_forks = CACHE.fetch("repo_forks_#{owner}_#{repo_name}_1") do
+  repo_forks = CACHE.fetch("github/forks/#{owner}/#{repo_name}/1") do
     GITHUB_CLIENT.repo_forks("#{owner}/#{repo_name}").to_json
   end
 
@@ -221,13 +221,13 @@ get "/github/:owner/:repo/dependents" do |env|
   page = env.params.query["page"]? || ""
   page = page.to_i? || 1
 
-  repo = CACHE.fetch("repos_#{owner}_#{repo_name}") do
+  repo = CACHE.fetch("github/repos/#{owner}/#{repo_name}") do
     GITHUB_CLIENT.repo_get("#{owner}/#{repo_name}").to_json
   end
 
   repo = Github::Repo.from_json(repo)
 
-  dependent_repos = CACHE.fetch("dependent_repos_#{owner}_#{repo_name}_#{page}") do
+  dependent_repos = CACHE.fetch("github/dependent_repos/#{owner}/#{repo_name}/#{page}") do
     GITHUB_CLIENT.dependent_repos("#{owner}/#{repo_name}", page: page).to_json
   end
 
@@ -251,13 +251,13 @@ get "/github/:owner/:repo/forks" do |env|
   page = env.params.query["page"]? || ""
   page = page.to_i? || 1
 
-  repo = CACHE.fetch("repos_#{owner}_#{repo_name}") do
+  repo = CACHE.fetch("github/repos/#{owner}/#{repo_name}") do
     GITHUB_CLIENT.repo_get("#{owner}/#{repo_name}").to_json
   end
 
   repo = Github::Repo.from_json(repo)
 
-  repo_forks = CACHE.fetch("repo_forks_#{owner}_#{repo_name}_1") do
+  repo_forks = CACHE.fetch("github/forks/#{owner}/#{repo_name}/1") do
     GITHUB_CLIENT.repo_forks("#{owner}/#{repo_name}").to_json
   end
 
@@ -289,7 +289,7 @@ private def show_repository?(shard_content, repo_fullname)
 end
 
 private def get_readme(owner : String, repo_name : String)
-  CACHE.fetch("readme_#{owner}_#{repo_name}") do
+  CACHE.fetch("github/readme/#{owner}/#{repo_name}") do
     response = GITHUB_CLIENT.repo_readme(owner, repo_name)
     response.to_json
   rescue Crest::NotFound
@@ -298,7 +298,7 @@ private def get_readme(owner : String, repo_name : String)
 end
 
 private def get_content(owner : String, repo_name : String, filename : String)
-  CACHE.fetch("content_#{filename}_#{owner}_#{repo_name}") do
+  CACHE.fetch("github/content/#{filename}/#{owner}/#{repo_name}") do
     response = GITHUB_CLIENT.repo_content(owner, repo_name, filename)
     response.to_json
   rescue Crest::NotFound

@@ -30,7 +30,7 @@ module Github
         headers: {
           "Accept"       => "application/vnd.github.mercy-preview+json",
           "Content-Type" => "application/json",
-          "User-Agent":     "request",
+          "User-Agent"   => "request",
         },
         user: user,
         password: key,
