@@ -5,5 +5,5 @@
       h5.card-title
         a href="#{user.html_url}"
           i class="fab fa-github"
-        a href="/repos/#{user.login}"
+        a href="/github/#{user.login}"
           == "#{user.login}"

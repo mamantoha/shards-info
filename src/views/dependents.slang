@@ -3,7 +3,7 @@ div
     ' dependent
     i.page__subheading
       ' on
-      a href="/repos/#{repo.full_name}" #{repo.full_name}
+      a href="/github/#{repo.full_name}" #{repo.full_name}
     .result_stats
       = dependent_repos.total_count
       ' repositories

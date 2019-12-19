@@ -7,8 +7,8 @@ describe "shards.info" do
     response.status_code.should eq(200)
   end
 
-  it "renders repository" do
-    get "/repos/mamantoha/shards-info"
+  it "renders github repository" do
+    get "/github/mamantoha/shards-info"
 
     response.status_code.should eq(200)
   end

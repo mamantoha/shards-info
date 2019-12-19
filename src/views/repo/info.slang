@@ -29,7 +29,7 @@
             li
               i class="#{icon_class}"
               - if value["github"]?
-                a href="/repos/#{value["github"]}" = key
+                a href="/github/#{value["github"]}" = key
               - elsif value["gitlab"]?
                 a href="https://gitlab.com/#{value["gitlab"]}" = key
               - else
@@ -46,10 +46,10 @@
           - dependent_repos.items.each do |item|
             li
               i class="fab fa-github"
-              a href="/repos/#{item.repository.full_name}" = item.repository.name
+              a href="/github/#{item.repository.full_name}" = item.repository.name
         - if dependent_repos.total_count > 10
           .shard__see_all_link
-            a class="shard__see_all_link" href="/repos/#{repo.full_name}/dependents"
+            a class="shard__see_all_link" href="/github/#{repo.full_name}/dependents"
               ' Show all dependents
   .col-md-6
     .shard__development_dependencies.info-block
@@ -67,7 +67,7 @@
             li
               i class="#{icon_class}"
               - if value["github"]?
-                a href="/repos/#{value["github"]}" = key
+                a href="/github/#{value["github"]}" = key
               - elsif value["gitlab"]?
                 a href="https://gitlab.com/#{value["gitlab"]}" = key
               - else
@@ -84,10 +84,10 @@
           - repo_forks.first(10).each do |item|
             li
               i class="fab fa-github"
-              a href="/repos/#{item.full_name}" = item.full_name
+              a href="/github/#{item.full_name}" = item.full_name
         - if repo.forks_count > 10
           .shard__see_all_link
-            a class="shard__see_all_link" href="/repos/#{repo.full_name}/forks"
+            a class="shard__see_all_link" href="/github/#{repo.full_name}/forks"
               ' Show all forks
 .row
   .col-12
@@ -97,4 +97,4 @@
         .shards__shard_owner_avatar
           img src="#{repo.owner.avatar_url}" alt="#{repo.owner.login}"
         .shards__shard_owner_name
-          a href="/repos/#{repo.owner.login}" = repo.owner.login
+          a href="/github/#{repo.owner.login}" = repo.owner.login

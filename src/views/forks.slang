@@ -3,7 +3,7 @@ div
     ' forks
     i.page__subheading
       ' of
-      a href="/repos/#{repo.full_name}" #{repo.full_name}
+      a href="/github/#{repo.full_name}" #{repo.full_name}
     .result_stats
       = repo.forks_count
       ' repositories

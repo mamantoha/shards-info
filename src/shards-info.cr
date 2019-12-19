@@ -40,6 +40,13 @@ static_headers do |response, filepath, filestat|
 end
 
 before_all do |env|
+  if env.request.resource.starts_with?("/repos")
+    new_resourse = env.request.resource.sub(%r{\A/(repos)}, "/github")
+    env.redirect(new_resourse)
+  end
+end
+
+before_all do |env|
   GITHUB_CLIENT.exception_handler = Kemal::Exceptions::RouteNotFound.new(env)
 
   Config.config.open_graph = OpenGraph.new
@@ -65,7 +72,8 @@ get "/" do |env|
   render "src/views/index.slang", "src/views/layouts/layout.slang"
 end
 
-get "/users" do |env|
+get "/users" { |env| env.redirect("/github/users") }
+get "/github/users" do |env|
   page = env.params.query["page"]? || ""
   page = page.to_i? || 1
 
@@ -80,7 +88,8 @@ get "/users" do |env|
   render "src/views/users.slang", "src/views/layouts/layout.slang"
 end
 
-get "/repos" do |env|
+get "/repos" { }
+get "/github" do |env|
   if env.params.query.[]?("query").nil?
     env.redirect "/"
   else
@@ -95,7 +104,7 @@ get "/repos" do |env|
 
     repos = Github::Repos.from_json(repos)
 
-    paginator = ViewHelpers::GithubPaginator.new(repos, page, "/repos?query=#{query}&page=%{page}").to_s
+    paginator = ViewHelpers::GithubPaginator.new(repos, page, "/github?query=#{query}&page=%{page}").to_s
 
     Config.config.page_title = "Search for '#{query}'"
     Config.config.page_description = "Search Crystal repositories for '#{query}'"
@@ -104,7 +113,8 @@ get "/repos" do |env|
   end
 end
 
-get "/repos/:owner" do |env|
+get "/repos/:owner" { }
+get "/github/:owner" do |env|
   owner = env.params.url["owner"]
 
   repos = CACHE.fetch("#{owner}_repos") do
@@ -129,7 +139,8 @@ get "/repos/:owner" do |env|
   render "src/views/owner.slang", "src/views/layouts/layout.slang"
 end
 
-get "/repos/:owner/:repo" do |env|
+get "/repos/:owner/:repo" { }
+get "/github/:owner/:repo" do |env|
   owner = env.params.url["owner"]
   repo_name = env.params.url["repo"]
 
@@ -202,7 +213,8 @@ get "/repos/:owner/:repo" do |env|
   render "src/views/repo.slang", "src/views/layouts/layout.slang"
 end
 
-get "/repos/:owner/:repo/dependents" do |env|
+get "/repos/:owner/:repo/dependents" { }
+get "/github/:owner/:repo/dependents" do |env|
   owner = env.params.url["owner"]
   repo_name = env.params.url["repo"]
 
@@ -221,7 +233,7 @@ get "/repos/:owner/:repo/dependents" do |env|
 
   dependent_repos = Github::Search::Codes.from_json(dependent_repos)
 
-  paginator = ViewHelpers::GithubPaginator.new(dependent_repos, page, "/repos/#{repo.full_name}/dependents?page=%{page}").to_s
+  paginator = ViewHelpers::GithubPaginator.new(dependent_repos, page, "/github/#{repo.full_name}/dependents?page=%{page}").to_s
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if dependent_repos.items.empty?
 
@@ -231,7 +243,8 @@ get "/repos/:owner/:repo/dependents" do |env|
   render "src/views/dependents.slang", "src/views/layouts/layout.slang"
 end
 
-get "/repos/:owner/:repo/forks" do |env|
+get "/repos/:owner/:repo/forks" { }
+get "/github/:owner/:repo/forks" do |env|
   owner = env.params.url["owner"]
   repo_name = env.params.url["repo"]
 
