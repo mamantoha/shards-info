@@ -1,9 +1,13 @@
 language: crystal
 dist: xenial
 
+before_script:
+  - psql -c 'create database shards_info_test;' -U postgres
+
 script:
   - crystal spec
   - crystal tool format --check
 
 services:
+  - postgresql
   - redis-server
