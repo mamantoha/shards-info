@@ -20,6 +20,10 @@ shards:
     github: mamantoha/crest
     version: 0.23.1
 
+  db:
+    github: crystal-lang/crystal-db
+    version: 0.8.0
+
   emoji:
     github: veelenga/emoji.cr
     commit: 2f991f0d373badd72a9c26374fa453f3ccd1706a
@@ -37,8 +41,20 @@ shards:
     version: 0.5.0
 
   i18n:
-    github: mamantoha/i18n.cr
-    commit: 8230f996033c8a205e86e210191c8e211ce91b74
+    github: TechMagister/i18n.cr
+    version: 0.3.1
+
+  ifrit:
+    github: imdrasil/ifrit
+    version: 0.1.2
+
+  inflector:
+    github: phoffer/inflector.cr
+    version: 0.1.8
+
+  jennifer:
+    github: imdrasil/jennifer.cr
+    version: 0.8.4
 
   kemal:
     github: kemalcr/kemal
@@ -60,6 +76,10 @@ shards:
     github: comandeo/crystal-memcached
     version: 0.2.2
 
+  pg:
+    github: will/crystal-pg
+    version: 0.20.0
+
   pool:
     github: ysbaddaden/pool
     version: 0.2.3
@@ -75,6 +95,10 @@ shards:
   redis:
     github: stefanwille/crystal-redis
     version: 2.5.0
+
+  sam:
+    github: imdrasil/sam.cr
+    version: 0.3.2
 
   slang:
     github: jeromegn/slang
