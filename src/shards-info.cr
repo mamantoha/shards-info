@@ -13,7 +13,6 @@ require "autolink"
 require "raven"
 require "raven/integrations/kemal"
 
-require "../config/config"
 require "./github"
 require "./config"
 require "./view_helpers"

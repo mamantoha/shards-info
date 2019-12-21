@@ -15,12 +15,6 @@ dependencies:
     github: kemalcr/kemal
   kemal-session:
     github: kemalcr/kemal-session
-  jennifer:
-    github: imdrasil/jennifer.cr
-  pg:
-    github: will/crystal-pg
-  sam:
-    github: imdrasil/sam.cr
   slang:
     github: jeromegn/slang
     branch: master
