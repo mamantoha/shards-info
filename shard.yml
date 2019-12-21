@@ -9,6 +9,8 @@ authors:
 targets:
   crystal-shards:
     main: src/shards-info.cr
+  sam:
+    main: sam.cr
 
 dependencies:
   kemal:
