@@ -35,7 +35,6 @@ dependencies:
     branch: master
   humanize_time:
     github: mamantoha/humanize_time
-    version: 0.4.0
   common_marker:
     github: mamantoha/crystal-cmark-gfm
     branch: master

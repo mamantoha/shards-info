@@ -48,6 +48,10 @@ shards:
     github: mamantoha/i18n_plural_rules
     version: 0.1.0
 
+  i18n_plural_rules:
+    github: mamantoha/i18n_plural_rules
+    version: 0.1.0
+
   ifrit:
     github: imdrasil/ifrit
     version: 0.1.2
