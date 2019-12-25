@@ -43,10 +43,6 @@ shards:
   i18n:
     github: TechMagister/i18n.cr
     version: 0.3.1
-  
-  i18n_plural_rules:
-    github: mamantoha/i18n_plural_rules
-    version: 0.1.0
 
   i18n_plural_rules:
     github: mamantoha/i18n_plural_rules
