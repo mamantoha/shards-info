@@ -37,6 +37,7 @@ class Config
       "hendisantika/List-All-Programming-Telegram-Group",
       "exercism/crystal",
       "oprypin/crsfml",
+      "ffwff/lilith",
     ]
   end
 end
