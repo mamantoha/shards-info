@@ -7,7 +7,7 @@ authors:
   - Anton Maminov <anton.maminov@gmail.com>
 
 targets:
-  crystal-shards:
+  shards-info:
     main: src/shards-info.cr
 
 dependencies:
