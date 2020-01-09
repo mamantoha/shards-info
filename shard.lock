@@ -18,11 +18,11 @@ shards:
 
   crest:
     github: mamantoha/crest
-    version: 0.23.1
+    version: 0.23.2
 
   emoji:
     github: veelenga/emoji.cr
-    commit: 2f991f0d373badd72a9c26374fa453f3ccd1706a
+    commit: 509e463285dff26450f3ba600e4bf67fde4e89ae
 
   exception_page:
     github: crystal-loot/exception_page
@@ -30,7 +30,7 @@ shards:
 
   http-client-digest_auth:
     github: mamantoha/http-client-digest_auth
-    version: 0.2.0
+    version: 0.3.0
 
   humanize_time:
     github: mamantoha/humanize_time
@@ -78,7 +78,7 @@ shards:
 
   redis:
     github: stefanwille/crystal-redis
-    version: 2.5.0
+    version: 2.5.3
 
   slang:
     github: jeromegn/slang
