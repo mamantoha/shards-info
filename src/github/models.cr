@@ -247,6 +247,10 @@ module Github
   end
 
   class Repos < Iterable
+    property total_count : Int32
+
+    property incomplete_results : Bool
+
     property items : Array(Repo)
   end
 
