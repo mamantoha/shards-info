@@ -84,7 +84,6 @@ module Gitlab
       Gitlab::Group.from_json(response.body)
     end
 
-
     def get_file(project_id : Int32, file_path : String)
       url = "/projects/#{project_id}/repository/files/#{file_path}"
       params = {
