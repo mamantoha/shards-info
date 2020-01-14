@@ -1,5 +1,9 @@
 version: 1.0
 shards:
+  admiral:
+    github: jwaldrip/admiral.cr
+    commit: d11fc4863154f3dbd933421bdf45d356a2550e07
+
   any_hash:
     github: Sija/any_hash.cr
     version: 0.2.3
@@ -11,6 +15,10 @@ shards:
   cache:
     github: mamantoha/cache
     version: 0.6.0
+
+  clear:
+    github: mamantoha/clear
+    commit: f0028d9e8fc9cd88973684207c955a7475bd1a0d
 
   common_marker:
     github: mamantoha/crystal-cmark-gfm
@@ -32,6 +40,10 @@ shards:
     github: crystal-loot/exception_page
     version: 0.1.2
 
+  generate:
+    github: anykeyh/generate.cr
+    commit: 27a59d663ded8ce39a361e3a88b8dd747f59ce42
+
   http-client-digest_auth:
     github: mamantoha/http-client-digest_auth
     version: 0.3.0
@@ -48,17 +60,9 @@ shards:
     github: mamantoha/i18n_plural_rules
     version: 0.1.0
 
-  ifrit:
-    github: imdrasil/ifrit
-    version: 0.1.2
-
   inflector:
     github: phoffer/inflector.cr
     version: 0.1.8
-
-  jennifer:
-    github: imdrasil/jennifer.cr
-    version: 0.8.4
 
   kemal:
     github: mamantoha/kemal
@@ -82,7 +86,7 @@ shards:
 
   pg:
     github: will/crystal-pg
-    version: 0.20.0
+    commit: cafebf8ae9477e7e50bd3e1281d66d8a519d645f
 
   pool:
     github: ysbaddaden/pool
@@ -99,10 +103,6 @@ shards:
   redis:
     github: stefanwille/crystal-redis
     version: 2.5.3
-
-  sam:
-    github: imdrasil/sam.cr
-    version: 0.3.2
 
   slang:
     github: jeromegn/slang

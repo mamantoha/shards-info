@@ -9,8 +9,8 @@ authors:
 targets:
   crystal-shards:
     main: src/shards-info.cr
-  sam:
-    main: sam.cr
+  db_cli:
+    main: src/db_cli.cr
 
 dependencies:
   kemal:
@@ -21,12 +21,13 @@ dependencies:
     # github: kemalcr/kemal-session
     github: mamantoha/kemal-session
     branch: crystal-0.32
-  jennifer:
-    github: imdrasil/jennifer.cr
+  clear:
+    # github: anykeyh/clear
+    # branch: master
+    github: mamantoha/clear
+    branch: fix/delete-and-unlink
   pg:
     github: will/crystal-pg
-  sam:
-    github: imdrasil/sam.cr
   slang:
     github: jeromegn/slang
     branch: master
