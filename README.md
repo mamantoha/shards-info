@@ -27,36 +27,6 @@ source .env && sentry
 source .env && export KEMAL_ENV=test && crystal spec
 ```
 
-### Deploy
-
-Get started by deploying this service to heroku.
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-```console
-heroku buildpacks:add https://github.com/crystal-lang/heroku-buildpack-crystal.git
-heroku buildpacks:add --index 1 heroku-community/apt
-```
-
-And set environment variables with `heroku config:set VAR=VAL`:
-
-```console
-GITHUB_USER
-GITHUB_KEY
-SENTRY_DSN
-```
-
-Go to <https://github.com/settings/tokens> and generate new token (select `repo` scope).
-
-On Heroku you **must** enable [Dyno Metadata](https://devcenter.heroku.com/articles/dyno-metadata)
-for Sentry's release detection to work correctly.
-
-Run:
-
-```console
-heroku labs:enable runtime-dyno-metadata
-```
-
 ## Built With
 
 * [Crystal language](https://crystal-lang.org/)
