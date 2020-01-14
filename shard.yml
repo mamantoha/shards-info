@@ -1,7 +1,7 @@
 name: shards-info
 version: 0.2.0
 
-crystal: 0.32.0
+crystal: 0.33.0
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
@@ -14,9 +14,13 @@ targets:
 
 dependencies:
   kemal:
-    github: kemalcr/kemal
+    # github: kemalcr/kemal
+    github: mamantoha/kemal
+    branch: crystal-0.33
   kemal-session:
-    github: kemalcr/kemal-session
+    # github: kemalcr/kemal-session
+    github: mamantoha/kemal-session
+    branch: crystal-0.32
   jennifer:
     github: imdrasil/jennifer.cr
   pg:

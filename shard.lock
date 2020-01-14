@@ -10,7 +10,7 @@ shards:
 
   cache:
     github: mamantoha/cache
-    version: 0.5.0
+    version: 0.6.0
 
   common_marker:
     github: mamantoha/crystal-cmark-gfm
@@ -61,16 +61,16 @@ shards:
     version: 0.8.4
 
   kemal:
-    github: kemalcr/kemal
-    version: 0.26.1
+    github: mamantoha/kemal
+    commit: 7e3a8ee150d88a47d862474b5d3ed3990016e9cf
 
   kemal-flash:
     github: neovintage/kemal-flash
     version: 0.1.0
 
   kemal-session:
-    github: kemalcr/kemal-session
-    version: 0.12.0
+    github: mamantoha/kemal-session
+    commit: 1596739f778b7a042c4ab4ba56cd9f56e87b2f2f
 
   kilt:
     github: jeromegn/kilt
