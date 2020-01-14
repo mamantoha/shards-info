@@ -9,16 +9,14 @@ View of all repositories on GitHub that have Crystal code in them.
 * [Install](https://crystal-lang.org/docs/installation/) Crystal
 * Clone this repository
 * Install dependencies `shards install`
-* Rename `.env.example` to `.env`, and set `GITHUB_USER` and `GITHUB_KEY`
+* Rename `.env.example` to `.env`, and set variables.
 * Run it `source .env && crystal src/shards-info.cr`
 
 ## Development
 
-Install [sentry](https://github.com/samueleaton/sentry) to build/runs application,
-watches files, and rebuilds/restarts app on file changes.
-
 ```console
-source .env && sentry
+psql -c 'CREATE DATABASE shards_info_development;' -U postgres
+crystal src/db_cli.cr -- migrate
 ```
 
 ## Specs
