@@ -35,7 +35,7 @@ module Gitlab
 
     property license_url : String?
 
-    property license : License?
+    property license : License? # only for single project
 
     property avatar_url : String?
 
@@ -179,10 +179,6 @@ module Gitlab
     property web_url : String
 
     property readme_url : String?
-
-    property license_url : String?
-
-    property license : License? # only for single project
 
     property avatar_url : String?
 
