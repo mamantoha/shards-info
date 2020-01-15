@@ -53,12 +53,14 @@ module Github
 
             repos = repos + github_repos.items
             page += 1
-          rescue
+          rescue ex
             # Only the first 1000 search results are available
             # otherwise Github returns 422 error
             #
             # TODO: in case we notice that more than 1000 results are returned for a period,
             # we would have to narrow the period even more.
+            puts "[ERROR]"
+            puts ex.message
             break
           end
         end
@@ -73,8 +75,32 @@ end
 
 github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
+print "Getting repositories from Github..."
 repos = github_client.all
+puts "OK!"
 
 repos.each do |repo|
-  # TODO
+  tags = repo.tags
+  github_user = repo.user
+
+  user = User.query.find_or_create({provider: "github", login: github_user.login}) do |u|
+    u.provider_id = github_user.id
+    u.name = github_user.name
+    u.kind = github_user.kind
+    u.avatar_url = github_user.avatar_url
+    u.synced_at = Time.utc
+  end
+
+  repository = Repository.query.find_or_create({provider: "github", provider_id: repo.id}) do |r|
+    r.user = user
+    r.name = repo.name
+    r.description = repo.description
+    r.last_activity_at = repo.updated_at
+    r.stars_count = repo.watchers_count
+    r.forks_count = repo.forks_count
+    r.open_issues_count = repo.open_issues_count
+    r.synced_at = Time.utc
+  end
+
+  repository.tags = tags
 end

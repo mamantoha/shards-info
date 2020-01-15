@@ -74,6 +74,17 @@ module Github
     property created_at : Time
 
     property updated_at : Time
+
+    def kind
+      case user_type
+      when "User"
+        "user"
+      when "Organization"
+        "group"
+      else
+        "user"
+      end
+    end
   end
 
   module Search
@@ -411,6 +422,22 @@ module Github
     property topics : Array(String)?
 
     property score : Float64?
+
+    def tags : Array(String)
+      if tags = topics
+        tags
+      else
+        [] of String
+      end
+    end
+
+    def user
+      _user = CACHE.fetch("github_user_#{owner.login}") do
+        GITHUB_CLIENT.user(owner.login).to_json
+      end
+
+      Github::User.from_json(_user)
+    end
 
     def description_with_emoji : String?
       @description.try do |description|

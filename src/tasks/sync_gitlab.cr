@@ -31,10 +31,5 @@ projects.each do |project|
     r.synced_at = Time.utc
   end
 
-  # tags.each do |name|
-  #   tag = Tag.query.find_or_create({name: name}) { }
-  #   repository.tags << tag
-  # end
-
   repository.tags = tags
 end

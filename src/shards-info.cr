@@ -4,7 +4,6 @@ require "kemal"
 require "kemal-session"
 require "kemal-flash"
 require "kilt/slang"
-require "cache"
 require "crest"
 require "emoji"
 require "humanize_time"
@@ -31,9 +30,6 @@ Raven.configure do |config|
 end
 
 Kemal.config.add_handler(Raven::Kemal::ExceptionHandler.new)
-
-CACHE         = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
-GITHUB_CLIENT = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
 static_headers do |response, filepath, filestat|
   duration = 1.day.total_seconds.to_i
