@@ -33,6 +33,10 @@ module Gitlab
 
     property readme_url : String?
 
+    property license_url : String?
+
+    property license : License?
+
     property avatar_url : String?
 
     property star_count : Int32
