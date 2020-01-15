@@ -3,6 +3,7 @@ dist: xenial
 
 before_script:
   - psql -c 'create database shards_info_test;' -U postgres
+  - crystal src/db_cli.cr -- migrate
 
 script:
   - crystal spec
