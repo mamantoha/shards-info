@@ -4,8 +4,7 @@ require "../gitlab"
 gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
 
 print "Getting projects from Giltab..."
-# projects = gitlab_client.projects
-projects = gitlab_client.test_projects
+projects = gitlab_client.projects
 
 puts "OK!"
 
