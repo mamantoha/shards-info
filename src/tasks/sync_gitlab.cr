@@ -20,16 +20,16 @@ projects.each do |project|
   end
 
   repository = Repository.create!({
-    user: user,
-    provider: "gitlab",
-    provider_id: project.id,
-    name: project.path,
-    description: project.description,
-    last_activity_at: project.last_activity_at,
-    stars_count: project.star_count,
-    forks_count: project.forks_count,
+    user:              user,
+    provider:          "gitlab",
+    provider_id:       project.id,
+    name:              project.path,
+    description:       project.description,
+    last_activity_at:  project.last_activity_at,
+    stars_count:       project.star_count,
+    forks_count:       project.forks_count,
     open_issues_count: project.open_issues_count,
-    synced_at: Time.utc,
+    synced_at:         Time.utc,
   })
 
   tags.each do |name|

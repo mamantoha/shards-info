@@ -7,14 +7,14 @@
           | Releases:
       .collapse.show#collapseReleases
         ul.list__items.not-list
-          - repo.releases.first(5).each do |release|
+          /- repo.releases.first(5).each do |release|
             li.shard__release-wrap
               = release.tag_name
               small
                 ' -
                 = release.published_at.to_s("%B %-d, %Y")
   .col-md-6
-    .shard__dependencies.info-block
+    /.shard__dependencies.info-block
       h3.list__heading
         a data-toggle="collapse" href="#collapseDependencies" aria-expanded="true" aria-controls="collapseDependencies"
           i class="fa" aria-hidden="true"
@@ -36,7 +36,7 @@
                 = key
 .row
   .col-md-6
-    .shard__dependent_shards.info-block
+    /.shard__dependent_shards.info-block
       h3.list__heading
         a data-toggle="collapse" href="#collapseDependent" aria-expanded="true" aria-controls="collapseDependent"
           i class="fa" aria-hidden="true"
@@ -52,7 +52,7 @@
             a class="shard__see_all_link" href="/repos/#{repo.full_name}/dependents"
               ' Show all dependents
   .col-md-6
-    .shard__development_dependencies.info-block
+    /.shard__development_dependencies.info-block
       h3.list__heading
         a data-toggle="collapse" href="#collapseDevelopmentDependencies" aria-expanded="true" aria-controls="collapseDevelopmentDependencies"
           i class="fa" aria-hidden="true"
@@ -78,8 +78,8 @@
       h3.list__heading
         a data-toggle="collapse" href="#collapseForks" aria-expanded="true" aria-controls="collapseForks"
           i class="fa" aria-hidden="true"
-          | Forks (#{repo.forks_count}):
-      .collapse.show#collapseForks
+          | Forks (#{repository.forks_count}):
+      /.collapse.show#collapseForks
         ul.list__items.not-list
           - repo_forks.first(10).each do |item|
             li
@@ -95,6 +95,6 @@
       h3.list__heading Owner:
       .shards__shard_owner
         .shards__shard_owner_avatar
-          img src="#{repo.owner.avatar_url}" alt="#{repo.owner.login}"
+          img src="#{repository.user.avatar}" alt="#{repository.user.login}"
         .shards__shard_owner_name
-          a href="/repos/#{repo.owner.login}" = repo.owner.login
+          a href="/#{repository.provider}/#{repository.user.login}" = repository.user.login

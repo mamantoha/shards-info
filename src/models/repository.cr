@@ -15,4 +15,16 @@ class Repository
 
   belongs_to user : User
   has_many tags : Tag, through: RepositoryTag
+
+  def tag_names
+    self.tags.map(&.name)
+  end
+
+  def provider_url
+    if provider == "gitlab"
+      "https://gitlab.com/#{user.login}/#{name}"
+    else
+      "https://github.com/#{user.login}/#{name}"
+    end
+  end
 end
