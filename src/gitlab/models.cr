@@ -19,7 +19,7 @@ module Gitlab
 
     property path_with_namespace : String
 
-    property created_at : String
+    property created_at : Time
 
     property default_branch : String?
 
@@ -43,7 +43,7 @@ module Gitlab
 
     property forks_count : Int32
 
-    property last_activity_at : String
+    property last_activity_at : Time
 
     property namespace : Namespace
 
@@ -138,7 +138,7 @@ module Gitlab
 
     property service_desk_address : String?
 
-    property marked_for_deletion_at : String?
+    property marked_for_deletion_at : Time?
 
     property forked_from_project : ForkedFromProject?
 
@@ -166,11 +166,11 @@ module Gitlab
 
     property path_with_namespace : String
 
-    property created_at : String
+    property created_at : Time
 
     property default_branch : String?
 
-    property tag_list : Array(JSON::Any?)
+    property tag_list : Array(String)
 
     property ssh_url_to_repo : String
 
@@ -186,7 +186,7 @@ module Gitlab
 
     property forks_count : Int32
 
-    property last_activity_at : String
+    property last_activity_at : Time
 
     property namespace : Namespace
   end
@@ -291,7 +291,7 @@ module Gitlab
 
     property web_url : String
 
-    property created_at : String
+    property created_at : Time
 
     property bio : String
 
@@ -377,9 +377,9 @@ module Gitlab
 
     property description_html : String
 
-    property created_at : String
+    property created_at : Time
 
-    property released_at : String
+    property released_at : Time
 
     property commit : Commit
 
@@ -420,7 +420,7 @@ module Gitlab
 
     property short_id : String
 
-    property created_at : String
+    property created_at : Time
 
     property parent_ids : Array(String)
 

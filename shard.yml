@@ -26,8 +26,6 @@ dependencies:
     # branch: master
     github: mamantoha/clear
     branch: fix/delete-and-unlink
-  pg:
-    github: will/crystal-pg
   slang:
     github: jeromegn/slang
     branch: master
