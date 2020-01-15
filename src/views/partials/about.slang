@@ -7,16 +7,21 @@
         button.close aria-label="Close" data-dismiss="modal" type="button"
           span aria-hidden="true" == "&times;"
       .modal-body
+        p
+          | View of all repositories on GitHub and Gitlab that have Crystal code in them.
         ul
           li
             | Build with:
             ul
               li
-                a href="https://crystal-lang.org/" Crystal
+                a href="https://crystal-lang.org" Crystal
                 = Crystal::VERSION
               li
-                a href="http://kemalcr.com/" Kemal
+                a href="https://kemalcr.com/" Kemal
                 = Kemal::VERSION
+              li
+                a href="https://github.com/anykeyh/clear" Clear
+                = Clear::VERSION
           li
             | Build date #{Time.parse_rfc2822(Config.date).to_s("%Y-%m-%d %H:%M:%S %:z")}
           li
