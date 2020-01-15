@@ -21,15 +21,18 @@ class InitTables
         t.column :provider_id, :integer, null: false
         t.column :name, :string, null: false, index: true
         t.column :description, :string
-        t.column :last_activity_at, :timestamp, null: false
+        t.column :last_activity_at, :timestamp, null: false, index: true
         t.column :stars_count, :integer, default: 0
         t.column :forks_count, :integer, default: 0
         t.column :open_issues_count, :integer, default: 0
         t.column :synced_at, :timestamp, null: false
+        t.column :updated_on, :timestamp, default: "NOW()"
+        t.column :tsv, "tsvector"
 
         t.references to: "users", name: "user_id", on_delete: "cascade", null: false, primary: true
 
         t.index [:provider, :provider_id], using: :btree, unique: true
+        t.index :tsv, using: :gin
       end
 
       create_table(:tags) do |t|

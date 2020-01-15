@@ -12,9 +12,34 @@ class Repository
   column forks_count : Int32
   column open_issues_count : Int32?
   column synced_at : Time
+  column updated_on : Time?
+
+  full_text_searchable "tsv", catalog: "pg_catalog.simple"
 
   belongs_to user : User
   has_many tags : Tag, through: RepositoryTag
+
+  def touch
+    self.updated_on = Time.local
+    self.save!
+    self
+  end
+
+  def tags=(names : Array(String))
+    names.map do |name|
+      tag = Tag.query.find_or_create({name: name}) { }
+      self.tags << tag
+    end
+
+    unlink_tags = tag_names - names
+    unlink_tags.each do |name|
+      if tag = Tag.query.find!({name: name})
+        self.tags.unlink(tag)
+      end
+    end
+
+    touch
+  end
 
   def tag_names
     self.tags.map(&.name)

@@ -25,6 +25,21 @@ module Gitlab
       client[url].get(params: params)
     end
 
+    def test_projects : Gitlab::Projects
+      url = "/projects"
+      params = {
+        "with_programming_language" => "Crystal",
+        "order_by"                  => "updated_at",
+        "visibility"                => "public",
+        "page"                      => 1,
+        "per_page"                  => 20,
+      }
+
+      response = make_request(url, params)
+
+      Gitlab::Projects.from_json(response.body)
+    end
+
     # Recursive get Crystal projects
     def projects(page = 1, items = [] of Gitlab::Project, per_page = 100) : Gitlab::Projects
       url = "/projects"

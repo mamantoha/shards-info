@@ -73,6 +73,21 @@ end
 #   render "src/views/users.slang", "src/views/layouts/layout.slang"
 # end
 
+get "/search" do |env|
+  if env.params.query.[]?("query").nil?
+    env.redirect "/"
+  else
+    query = env.params.query["query"].as(String)
+
+    repos = Repository.query.with_tags.with_user.search(query)
+
+    Config.config.page_title = "Search for '#{query}'"
+    Config.config.page_description = "Search Crystal repositories for '#{query}'"
+
+    render "src/views/filter.slang", "src/views/layouts/layout.slang"
+  end
+end
+
 # get "/repos" do |env|
 #   if env.params.query.[]?("query").nil?
 #     env.redirect "/"
