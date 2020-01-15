@@ -17,8 +17,8 @@ shards:
     version: 0.6.0
 
   clear:
-    path: ../clear
-    version: 0.7.2
+    github: mamantoha/clear
+    commit: f0028d9e8fc9cd88973684207c955a7475bd1a0d
 
   common_marker:
     github: mamantoha/crystal-cmark-gfm
