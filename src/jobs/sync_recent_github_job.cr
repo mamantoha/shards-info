@@ -8,9 +8,13 @@ class SyncRecentGithubJob < Mosquito::PeriodicJob
 
     repos.each do |github_repo|
       if repository = Repository.query.find({provider: "github", provider_id: github_repo.id})
+        # Update if repository has been changed
         if repository.last_activity_at != github_repo.updated_at
           Github::Helpers.sync_repository(github_repo)
         end
+      else
+        # Create new repository
+        Github::Helpers.sync_repository(github_repo)
       end
     end
   end
