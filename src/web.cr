@@ -45,7 +45,7 @@ before_all do |env|
 end
 
 get "/" do |env|
-  trending_repos = Repository.query.with_user.with_tags.where{last_activity_at > 1.week.ago}.order_by(stars_count: :desc).limit(20)
+  trending_repos = Repository.query.with_user.with_tags.where { last_activity_at > 1.week.ago }.order_by(stars_count: :desc).limit(20)
   recently_repos = Repository.query.with_user.with_tags.order_by(last_activity_at: :desc).limit(20)
 
   Config.config.page_title = "Shards Info"
