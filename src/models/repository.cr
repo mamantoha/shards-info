@@ -52,18 +52,24 @@ class Repository
   end
 
   def provider_url
-    if provider == "gitlab"
+    case provider
+    when "gitlab"
       "https://gitlab.com/#{user.login}/#{name}"
-    else
+    when "github"
       "https://github.com/#{user.login}/#{name}"
+    else
+      ""
     end
   end
 
   def provider_icon
-    if provider == "gitlab"
+    case provider
+    when "gitlab"
       "fab fa-gitlab"
-    else
+    when "github"
       "fab fa-github"
+    else
+      ""
     end
   end
 end

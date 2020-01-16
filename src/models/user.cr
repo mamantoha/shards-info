@@ -24,18 +24,24 @@ class User
   end
 
   def provider_url
-    if provider == "gitlab"
+    case provider
+    when "gitlab"
       "https://gitlab.com/#{login}"
-    else
+    when "github"
       "https://github.com/#{login}"
+    else
+      ""
     end
   end
 
   def provider_icon
-    if provider == "gitlab"
+    case provider
+    when "gitlab"
       "fab fa-gitlab"
-    else
+    when "github"
       "fab fa-github"
+    else
+      ""
     end
   end
 end
