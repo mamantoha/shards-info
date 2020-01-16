@@ -7,10 +7,10 @@ authors:
   - Anton Maminov <anton.maminov@gmail.com>
 
 targets:
-  shards-info:
-    main: src/shards-info.cr
-  db_cli:
-    main: src/db_cli.cr
+  web:
+    main: src/web.cr
+  db:
+    main: src/db.cr
   worker:
     main: src/worker.cr
 

@@ -16,7 +16,7 @@ View of all repositories on GitHub that have Crystal code in them.
 
 ```console
 psql -c 'CREATE DATABASE shards_info_development;' -U postgres
-crystal src/db_cli.cr -- migrate
+crystal src/db.cr -- migrate
 ```
 
 ## Specs
