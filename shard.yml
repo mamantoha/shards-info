@@ -51,6 +51,8 @@ dependencies:
     github: crystal-community/autolink.cr
   raven:
     github: Sija/raven.cr
+  dotenv:
+    github: gdotdesign/cr-dotenv
 
 development_dependencies:
   spec-kemal:

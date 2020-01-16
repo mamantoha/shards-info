@@ -10,7 +10,7 @@ View of all repositories on GitHub that have Crystal code in them.
 * Clone this repository
 * Install dependencies `shards install`
 * Rename `.env.example` to `.env`, and set variables.
-* Run it `source .env && crystal src/shards-info.cr`
+* Run it `crystal src/shards-info.cr`
 
 ## Development
 
@@ -22,7 +22,7 @@ crystal src/db.cr -- migrate
 ## Specs
 
 ```console
-source .env && export KEMAL_ENV=test && crystal spec
+export KEMAL_ENV=test && crystal spec
 ```
 
 ## Built With

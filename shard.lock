@@ -32,6 +32,10 @@ shards:
     github: crystal-lang/crystal-db
     version: 0.8.0
 
+  dotenv:
+    github: gdotdesign/cr-dotenv
+    version: 0.3.1
+
   emoji:
     github: veelenga/emoji.cr
     commit: 509e463285dff26450f3ba600e4bf67fde4e89ae
