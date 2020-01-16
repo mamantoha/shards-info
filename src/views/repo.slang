@@ -54,15 +54,12 @@
       li
         i class="fas fa-star" title="Stars"
         = repository.stars_count
-      /li
+      li
         i class="fas fa-box" title="Used by"
-        = dependent_repos.total_count
+        = repository.dependents.count
       li
         i class="fas fa-code-branch" title="Forks"
         = repository.forks_count
-      /li
-        i class="fas fa-eye" title="Watchers"
-        = repo.subscribers_count
       li
         i class="fas fa-exclamation-circle" title="Open issues"
         = repository.open_issues_count

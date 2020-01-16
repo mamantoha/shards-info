@@ -112,6 +112,10 @@ shards:
     github: stefanwille/crystal-redis
     version: 2.5.3
 
+  shards:
+    github: crystal-lang/shards
+    version: 0.9.0
+
   slang:
     github: jeromegn/slang
     commit: 8210d3f83c6199bc59925ee964405ffe926f44f3

@@ -7,6 +7,7 @@ class Repository
   column provider_id : Int32
   column name : String
   column description : String?
+  column shard_yml : String?
   column last_activity_at : Time
   column stars_count : Int32
   column forks_count : Int32
@@ -18,6 +19,10 @@ class Repository
 
   belongs_to user : User
   has_many tags : Tag, through: RepositoryTag
+
+  has_many relationships : Relationship, foreign_key: "master_id"
+  has_many dependencies : Repository, through: Relationship, foreign_key: "dependency_id", own_key: "master_id"
+  has_many dependents : Repository, through: Relationship, foreign_key: "master_id", own_key: "dependency_id"
 
   def touch
     self.updated_on = Time.local
@@ -51,6 +56,14 @@ class Repository
       "https://gitlab.com/#{user.login}/#{name}"
     else
       "https://github.com/#{user.login}/#{name}"
+    end
+  end
+
+  def provider_icon
+    if provider == "gitlab"
+      "fab fa-gitlab"
+    else
+      "fab fa-github"
     end
   end
 end

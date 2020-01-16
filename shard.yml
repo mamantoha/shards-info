@@ -53,6 +53,8 @@ dependencies:
     github: Sija/raven.cr
   dotenv:
     github: gdotdesign/cr-dotenv
+  shards:
+    github: crystal-lang/shards
 
 development_dependencies:
   spec-kemal:
