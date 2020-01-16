@@ -26,7 +26,8 @@ class Repository
   end
 
   def tags=(names : Array(String))
-    names.map do |name|
+    new_tags = names - tag_names
+    new_tags.each do |name|
       tag = Tag.query.find_or_create({name: name}) { }
       self.tags << tag
     end

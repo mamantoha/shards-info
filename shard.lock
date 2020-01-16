@@ -84,6 +84,10 @@ shards:
     github: comandeo/crystal-memcached
     version: 0.2.2
 
+  mosquito:
+    github: robacarp/mosquito
+    version: 0.6.0
+
   pg:
     github: will/crystal-pg
     commit: cafebf8ae9477e7e50bd3e1281d66d8a519d645f

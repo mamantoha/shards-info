@@ -11,6 +11,8 @@ targets:
     main: src/shards-info.cr
   db_cli:
     main: src/db_cli.cr
+  worker:
+    main: src/worker.cr
 
 dependencies:
   kemal:
@@ -33,6 +35,8 @@ dependencies:
     github: mamantoha/cache
   crest:
     github: mamantoha/crest
+  mosquito:
+    github: robacarp/mosquito
   emoji:
     github: veelenga/emoji.cr
     branch: master
