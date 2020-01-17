@@ -29,17 +29,17 @@ class Config
 
   # List of Crystal repositories w/o shard.yml
   # which we want to show anyway.
-  def self.special_repositories
-    [
-      "veelenga/awesome-crystal",
-      "crystal-lang/crystal",
-      "ysbaddaden/prax.cr",
-      "hendisantika/List-All-Programming-Telegram-Group",
-      "exercism/crystal",
-      "oprypin/crsfml",
-      "ffwff/lilith",
-    ]
-  end
+  # def self.special_repositories
+  #   [
+  #     "veelenga/awesome-crystal",
+  #     "crystal-lang/crystal",
+  #     "ysbaddaden/prax.cr",
+  #     "hendisantika/List-All-Programming-Telegram-Group",
+  #     "exercism/crystal",
+  #     "oprypin/crsfml",
+  #     "ffwff/lilith",
+  #   ]
+  # end
 end
 
 struct OpenGraph

@@ -291,27 +291,27 @@ def link(url : String?) : String | Nil
   url
 end
 
-private def show_repository?(shard_content, repo_fullname)
-  shard_content || Config.special_repositories.includes?(repo_fullname) ? true : false
-end
+# private def show_repository?(shard_content, repo_fullname)
+#   shard_content || Config.special_repositories.includes?(repo_fullname) ? true : false
+# end
 
-private def get_readme(owner : String, repo_name : String)
-  CACHE.fetch("readme_#{owner}_#{repo_name}") do
-    response = GITHUB_CLIENT.repo_readme(owner, repo_name)
-    response.to_json
-  rescue Crest::NotFound
-    ""
-  end
-end
+# private def get_readme(owner : String, repo_name : String)
+#   CACHE.fetch("readme_#{owner}_#{repo_name}") do
+#     response = GITHUB_CLIENT.repo_readme(owner, repo_name)
+#     response.to_json
+#   rescue Crest::NotFound
+#     ""
+#   end
+# end
 
-private def get_content(owner : String, repo_name : String, filename : String)
-  CACHE.fetch("content_#{filename}_#{owner}_#{repo_name}") do
-    response = GITHUB_CLIENT.repo_content(owner, repo_name, filename)
-    response.to_json
-  rescue Crest::NotFound
-    ""
-  end
-end
+# private def get_content(owner : String, repo_name : String, filename : String)
+#   CACHE.fetch("content_#{filename}_#{owner}_#{repo_name}") do
+#     response = GITHUB_CLIENT.repo_content(owner, repo_name, filename)
+#     response.to_json
+#   rescue Crest::NotFound
+#     ""
+#   end
+# end
 
 private def content_to_markdown(content : Github::Content)
   string = decode_github_content(content.content)
