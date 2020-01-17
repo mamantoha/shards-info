@@ -27,6 +27,17 @@ module Github
       repository.save
 
       repository.tags = tags
+
+      set_shard_yml!(repository)
+    end
+
+    def set_shard_yml!(repository : Repository)
+      response = GITHUB_CLIENT.repo_content(repository.user.login, repository.name, "shard.yml")
+      shard_file = Base64.decode_string(response.content)
+
+      repository.shard_yml = shard_file
+      repository.save
+    rescue Crest::NotFound
     end
   end
 end

@@ -13,7 +13,7 @@ class AddRelationships
         t.column :branch, :string
         t.column :version, :string
 
-        t.index ["master_id", "dependency_id"], using: :btree, unique: true
+        t.index ["master_id", "dependency_id", "development"], using: :btree, unique: true
       end
     end
 

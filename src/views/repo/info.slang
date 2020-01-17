@@ -21,7 +21,7 @@
           | Dependencies:
       .collapse.show#collapseDependencies
         ul.list__items.not-list
-          - repository.dependencies.with_user.each do |repository|
+          - repository.dependencies.with_user.where { relationships.development == false }.each do |repository|
             li
               i class="#{repository.provider_icon}"
               a href="/#{repository.provider}/#{repository.user.login}/#{repository.name}" = repository.name
@@ -43,26 +43,17 @@
             a class="shard__see_all_link" href="/#{repository.provider}/#{repository.user.login}/#{repository.name}/dependents"
               ' Show all dependents
   .col-md-6
-    /.shard__development_dependencies.info-block
+    .shard__development_dependencies.info-block
       h3.list__heading
         a data-toggle="collapse" href="#collapseDevelopmentDependencies" aria-expanded="true" aria-controls="collapseDevelopmentDependencies"
           i class="fa" aria-hidden="true"
           | Development dependencies:
       .collapse.show#collapseDevelopmentDependencies
         ul.list__items.not-list
-          - development_dependencies.each do |key, value|
-            - icon_class = case
-              - when value["github"]? then "fab fa-github"
-              - when value["gitlab"]? then "fab fa-gitlab"
-              - else "fa fa-gem"
+          - repository.dependencies.with_user.where { relationships.development == true }.each do |repository|
             li
-              i class="#{icon_class}"
-              - if value["github"]?
-                a href="/repos/#{value["github"]}" = key
-              - elsif value["gitlab"]?
-                a href="https://gitlab.com/#{value["gitlab"]}" = key
-              - else
-                = key
+              i class="#{repository.provider_icon}"
+              a href="/#{repository.provider}/#{repository.user.login}/#{repository.name}" = repository.name
 .row
   .col-md-6
     .shard__forks.info-block

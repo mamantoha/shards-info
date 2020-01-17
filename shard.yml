@@ -28,6 +28,7 @@ dependencies:
     # branch: master
     github: mamantoha/clear
     branch: fix/delete-and-unlink
+    # path: ../clear
   slang:
     github: jeromegn/slang
     branch: master
