@@ -28,6 +28,7 @@ projects.each do |project|
     r.stars_count = project.star_count
     r.forks_count = project.forks_count
     r.open_issues_count = project.open_issues_count
+    r.created_at = project.created_at
     r.synced_at = Time.utc
   end
 

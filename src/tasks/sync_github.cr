@@ -66,8 +66,6 @@ module Github
         end
       end
 
-      # repos.uniq.size # 5054 items by 2019-12-26
-
       repos.uniq
     end
   end
@@ -83,11 +81,12 @@ repos.each do |repo|
   tags = repo.tags
   github_user = repo.user
 
-  user = User.query.find_or_create({provider: "github", login: github_user.login}) do |u|
-    u.provider_id = github_user.id
+  user = User.query.find_or_create({provider: "github", provider_id: github_user.id}) do |u|
+    u.login = github_user.login
     u.name = github_user.name
     u.kind = github_user.kind
     u.avatar_url = github_user.avatar_url
+    u.created_at = github_user.created_at
     u.synced_at = Time.utc
   end
 
@@ -99,6 +98,7 @@ repos.each do |repo|
     r.stars_count = repo.watchers_count
     r.forks_count = repo.forks_count
     r.open_issues_count = repo.open_issues_count
+    r.created_at = repo.created_at
     r.synced_at = Time.utc
   end
 
