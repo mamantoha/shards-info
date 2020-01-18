@@ -3,10 +3,12 @@ class InitTables
 
   def change(direction)
     direction.up do
+      execute("CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;")
+
       create_table(:users) do |t|
         t.column :provider, :string, null: false
         t.column :provider_id, :integer, null: false
-        t.column :login, :string, null: false, index: true
+        t.column :login, :citext, null: false, index: true
         t.column :name, :string
         t.column :kind, :string, null: false
         t.column :avatar_url, :string
@@ -19,7 +21,7 @@ class InitTables
       create_table(:repositories) do |t|
         t.column :provider, :string, null: false
         t.column :provider_id, :integer, null: false
-        t.column :name, :string, null: false, index: true
+        t.column :name, :citext, null: false, index: true
         t.column :description, :string
         t.column :last_activity_at, :timestamp, null: false, index: true
         t.column :stars_count, :integer, default: 0
@@ -39,7 +41,7 @@ class InitTables
         t.column :name, :string, index: true, unique: true, null: false
       end
 
-      create_table(:repository_tags, id: false) do |t|
+      create_table(:repository_tags) do |t|
         t.references to: "tags", name: "tag_id", on_delete: "cascade", null: false, primary: true
         t.references to: "repositories", name: "repository_id", on_delete: "cascade", null: false, primary: true
 

@@ -1,6 +1,8 @@
 class Relationship
   include Clear::Model
 
+  primary_key
+
   column development : Bool?
   column branch : String?
   column version : String?
