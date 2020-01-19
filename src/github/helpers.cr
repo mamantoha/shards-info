@@ -22,9 +22,10 @@ module Github
       repository.stars_count = github_repo.watchers_count
       repository.forks_count = github_repo.forks_count
       repository.open_issues_count = github_repo.open_issues_count
+      repository.created_at = github_repo.created_at
       repository.synced_at = Time.utc
 
-      repository.save
+      repository.save!
 
       repository.tags = tags
 

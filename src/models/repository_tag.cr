@@ -3,6 +3,6 @@ class RepositoryTag
 
   primary_key
 
-  belongs_to repository : Repository, primary: true
+  belongs_to repository : Repository
   belongs_to tag : Tag
 end

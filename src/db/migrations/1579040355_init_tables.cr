@@ -12,7 +12,7 @@ class InitTables
         t.column :name, :string
         t.column :kind, :string, null: false
         t.column :avatar_url, :string
-        t.column :created_at, :timestamp, null: false
+        t.column :created_at, :timestamp
         t.column :synced_at, :timestamp, null: false
 
         t.index [:provider, :provider_id], using: :btree, unique: true
@@ -29,7 +29,7 @@ class InitTables
         t.column :forks_count, :integer, default: 0
         t.column :open_issues_count, :integer, default: 0
         t.column :synced_at, :timestamp, null: false
-        t.column :created_at, :timestamp, null: false
+        t.column :created_at, :timestamp
         t.column :updated_on, :timestamp, default: "NOW()"
         t.column :tsv, "tsvector"
 

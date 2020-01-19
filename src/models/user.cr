@@ -8,7 +8,7 @@ class User
   column login : String
   column name : String?
   column synced_at : Time
-  column created_at : Time
+  column created_at : Time?
   column kind : String
   column avatar_url : String?
 
