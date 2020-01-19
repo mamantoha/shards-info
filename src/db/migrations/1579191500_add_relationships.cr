@@ -3,8 +3,6 @@ class AddRelationships
 
   def change(direction)
     direction.up do
-      add_column "repositories", "shard_yml", "text"
-
       create_table(:relationships) do |t|
         t.references to: "repositories", name: "master_id", on_delete: "cascade", null: false, primary: true
         t.references to: "repositories", name: "dependency_id", on_delete: "cascade", null: false, primary: true
@@ -18,8 +16,6 @@ class AddRelationships
     end
 
     direction.down do
-      drop_column "repositories", "shard_yml", "text"
-
       execute("DROP TABLE relationships")
     end
   end

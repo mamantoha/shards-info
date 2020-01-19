@@ -24,6 +24,10 @@ class InitTables
         t.column :provider_id, :integer, null: false
         t.column :name, :citext, null: false, index: true
         t.column :description, :string
+        t.column :shard_yml, :string
+        t.column :readme, :string
+        t.column :changelog, :string
+        t.column :license, :string
         t.column :last_activity_at, :timestamp, null: false, index: true
         t.column :stars_count, :integer, default: 0
         t.column :forks_count, :integer, default: 0

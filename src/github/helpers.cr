@@ -71,7 +71,7 @@ module Github
         if provider_name = (spec_dependency.keys & ["github", "gitlab"]).first?
           if repository_path = spec_dependency[provider_name]
             user_name, repository_name = repository_path.split("/")
-            if dependency = Repository.query.with_user { |u| u.where(name: user_name) }.find { (provider == provider_name) & (name == repository_name) }
+            if dependency = Repository.query.with_user { |u| u.where(login: user_name) }.find({provider: provider_name, name: repository_name})
               dependencies = repository.dependencies.where { relationships.development == development }
 
               unless Relationship.query.find({master_id: repository.id, dependency_id: dependency.id, development: development})

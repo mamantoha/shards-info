@@ -9,6 +9,8 @@ class Repository
   column description : String?
   column shard_yml : String?
   column readme : String?
+  column changelog : String?
+  column license : String?
   column last_activity_at : Time
   column stars_count : Int32
   column forks_count : Int32
