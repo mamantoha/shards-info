@@ -1,6 +1,5 @@
 require "dotenv"
 require "mosquito"
-require "shards/spec"
 
 Dotenv.load
 

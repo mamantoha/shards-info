@@ -1,3 +1,4 @@
+require "shards/spec"
 require "yaml"
 require "base64"
 require "kemal"
