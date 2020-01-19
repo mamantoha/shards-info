@@ -2,7 +2,6 @@
   .col-md-8.col-sm-12.shard__main
     .page__heading
       h1
-        i class="#{repository.provider_icon}"
         = "#{repository.name}"
         /i.page__subheading
           = repo.latest_release
