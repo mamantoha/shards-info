@@ -12,8 +12,8 @@ projects.each do |project|
   owner = project.namespace
   tags = project.tag_list
 
-  user = User.query.find_or_create({provider: "gitlab", login: owner.path}) do |u|
-    u.provider_id = owner.id
+  user = User.query.find_or_create({provider: "gitlab", provider_id: owner.id}) do |u|
+    u.login = owner.path
     u.name = owner.name
     u.kind = owner.kind
     u.avatar_url = owner.avatar_url
