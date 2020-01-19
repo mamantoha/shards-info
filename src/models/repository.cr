@@ -53,6 +53,16 @@ class Repository
     self.tags.map(&.name)
   end
 
+  def description_with_emoji : String?
+    self.description.try do |_description|
+      Emoji.emojize(_description)
+    end
+  end
+
+  def full_name : String
+    "#{self.user.login}/#{self.name}"
+  end
+
   def provider_url
     case provider
     when "gitlab"

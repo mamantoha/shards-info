@@ -1,7 +1,9 @@
 .row
   .col-md-8.col-sm-12.shard__main
     .page__heading
-      h1= repository.name
+      h1
+        i class="#{repository.provider_icon}"
+        = "#{repository.name}"
         /i.page__subheading
           = repo.latest_release
       /- if repo.fork == true
@@ -15,9 +17,6 @@
     .shard__intro
       span
         == Emoji.emojize(Autolink.auto_link(repository.description.to_s))
-      /- if repo_homepage = repo.homepage
-        span
-          a href="#{repo_homepage}" = repo_homepage
     ul class="nav nav-tabs nav-fill" id="infoTab" role="tablist"
       li class="nav-item"
         a class="nav-link active" id="info-tab" href="#info" role="tab" data-toggle="tab" aria-controls="info" aria-selected="true"

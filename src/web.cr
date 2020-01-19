@@ -137,12 +137,12 @@ get "/:provider/:owner/:repo" do |env|
   repo = env.params.url["repo"]
 
   if repository = Repository.query.with_user.with_tags.find({provider: provider, name: repo})
-    # Config.config.page_title = "#{repo.full_name}: #{repo.description_with_emoji}"
-    # Config.config.page_description = "#{repo.full_name}: #{repo.description_with_emoji}"
+    Config.config.page_title = "#{repository.full_name}: #{repository.description_with_emoji}"
+    Config.config.page_description = "#{repository.full_name}: #{repository.description_with_emoji}"
 
-    # Config.config.open_graph.title = "#{repo.full_name}"
-    # Config.config.open_graph.description = "#{repo.description_with_emoji}"
-    # Config.config.open_graph.image = "#{repo.owner.avatar_url}"
+    Config.config.open_graph.title = "#{repository.full_name}"
+    Config.config.open_graph.description = "#{repository.description_with_emoji}"
+    Config.config.open_graph.image = "#{repository.user.avatar_url}"
 
     readme_html = content_to_markdown(repository.readme)
 
