@@ -1,3 +1,5 @@
+require "shards/spec"
+
 module Github
   module Helpers
     extend self
@@ -29,16 +31,26 @@ module Github
 
       repository.tags = tags
 
-      set_shard_yml!(repository)
+      set_repository_shard_yml(repository)
+      set_repository_readme(repository)
       update_dependecies(repository)
     end
 
-    def set_shard_yml!(repository : Repository)
+    def set_repository_shard_yml(repository : Repository)
       response = GITHUB_CLIENT.repo_content(repository.user.login, repository.name, "shard.yml")
       shard_file = Base64.decode_string(response.content)
 
       repository.shard_yml = shard_file
       repository.save
+    rescue Crest::NotFound
+    end
+
+    def set_repository_readme(repository : Repository)
+      response = GITHUB_CLIENT.repo_content(repository.user.login, repository.name, "README.md")
+      readme_file = Base64.decode_string(response.content)
+
+      repository.readme = readme_file
+      repository.save!
     rescue Crest::NotFound
     end
 

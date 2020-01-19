@@ -23,7 +23,7 @@
         a class="nav-link active" id="info-tab" href="#info" role="tab" data-toggle="tab" aria-controls="info" aria-selected="true"
           i class="fas fa-info-circle"
           ' Info
-      /- if readme
+      - if repository.readme
         li class="nav-item"
           a class="nav-link" id="readme-tab" href="#readme" role="tab" data-toggle="tab" aria-controls="readme" aria-selected="false"
             i class="fas fa-book"
@@ -37,7 +37,7 @@
     div class="tab-content"
       div role="tabpanel" class="tab-pane fade show active" id="info" aria-labelledby="info-tab"
         == render "src/views/repo/info.slang"
-      /- if readme
+      - if repository.readme
         div role="tabpanel" class="tab-pane fade" id="readme" aria-labelledby="readme-tab"
           .row
             .col-md-12.shard__readme
