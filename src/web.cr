@@ -76,7 +76,7 @@ get "/search" do |env|
   else
     query = env.params.query["query"].as(String)
 
-    repos = Repository.query.with_tags.with_user.search(query)
+    repos = Repository.query.with_tags.with_user.search(query).order_by(stars_count: :desc)
 
     Config.config.page_title = "Search for '#{query}'"
     Config.config.page_description = "Search Crystal repositories for '#{query}'"
