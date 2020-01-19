@@ -40,9 +40,9 @@ module Helpers
     dependencies = repository.dependencies.where { relationships.development == development }
 
     dependencies.each do |dependency|
-      repository_path = [dependency.user.login, dependency.name].join('/')
+      repository_path = [dependency.user.login, dependency.name].join('/').downcase
 
-      if spec_dependencies.none? { |dep| dep[repository.provider]? == repository_path }
+      if spec_dependencies.none? { |dep| dep.fetch(dependency.provider, "").downcase == repository_path }
         if relationship = Relationship.query.where({master_id: repository.id, dependency_id: dependency.id, development: development}).first
           relationship.delete
         end

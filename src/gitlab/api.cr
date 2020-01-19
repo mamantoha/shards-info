@@ -1,6 +1,20 @@
 require "crest"
 
 module Gitlab
+  class Logger < Crest::Logger
+    def request(request) : String
+      message = ">> | %s | %s" % [request.method, request.url]
+      @logger.info(message)
+      message
+    end
+
+    def response(response) : String
+      message = "<< | %s | %s" % [response.status_code, response.url]
+      @logger.info(message)
+      message
+    end
+  end
+
   class API
     property client
 
@@ -9,6 +23,11 @@ module Gitlab
     end
 
     def client
+      uri = URI.parse(@base_url)
+      http_client = HTTP::Client.new(uri)
+      http_client.connect_timeout = 5.seconds
+      http_client.read_timeout = 30.seconds
+
       @client ||= Crest::Resource.new(
         @base_url,
         headers: {
@@ -17,7 +36,9 @@ module Gitlab
         params: {
           "access_token" => @access_token,
         },
-        logging: false
+        http_client: http_client,
+        logging: true,
+        logger: Logger.new
       )
     end
 

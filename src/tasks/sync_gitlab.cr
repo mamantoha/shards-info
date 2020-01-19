@@ -9,6 +9,8 @@ projects = gitlab_client.projects
 puts "OK!"
 
 projects.each do |project|
+  next if project.forked_from_project
+
   owner = project.namespace
   tags = project.tag_list
 
