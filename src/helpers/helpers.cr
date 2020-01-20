@@ -18,9 +18,16 @@ module Helpers
       if provider_name = (spec_dependency.keys & ["github", "gitlab"]).first?
         if repository_path = spec_dependency[provider_name]
           user_name, repository_name = repository_path.split("/")
-          if dependency = Repository.query.with_user { |u| u.where(login: user_name) }.find({provider: provider_name, name: repository_name})
-            dependencies = repository.dependencies.where { relationships.development == development }
 
+          if dependency = Repository
+               .query
+               .join("users") { users.id == repositories.user_id }
+               .find {
+                 (users.login == user_name) &
+                   (users.provider == provider_name) &
+                   (repositories.provider == provider_name) &
+                   (repositories.name == repository_name)
+               }
             unless Relationship.query.find({master_id: repository.id, dependency_id: dependency.id, development: development})
               Relationship.create!({
                 master_id:     repository.id,
