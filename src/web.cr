@@ -136,15 +136,7 @@ get "/:provider/:owner/:repo" do |env|
   owner = env.params.url["owner"]
   repo = env.params.url["repo"]
 
-  if repository = Repository
-       .query
-       .join("users") { users.id == repositories.user_id }
-       .find {
-         (users.login == owner) &
-           (users.provider == provider) &
-           (repositories.provider == provider) &
-           (repositories.name == repo)
-       }
+  if repository = Helpers.find_repository(owner, repo, provider)
     Config.config.page_title = "#{repository.full_name}: #{repository.description_with_emoji}"
     Config.config.page_description = "#{repository.full_name}: #{repository.description_with_emoji}"
 
