@@ -45,7 +45,7 @@ module GithubHelpers
   end
 
   def set_repository_readme(repository : Repository)
-    response = GITHUB_CLIENT.repo_content(repository.user.login, repository.name, "README.md")
+    response = GITHUB_CLIENT.repo_readme(repository.user.login, repository.name)
     readme_file = Base64.decode_string(response.content)
 
     repository.readme = readme_file
