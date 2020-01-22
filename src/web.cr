@@ -120,6 +120,7 @@ get "/search" do |env|
   end
 end
 
+get "/repos/:owner" { }
 get "/:provider/:owner" do |env|
   provider = env.params.url["provider"]
   owner = env.params.url["owner"]
@@ -142,6 +143,7 @@ get "/:provider/:owner" do |env|
   end
 end
 
+get "/repos/:owner/:repo" { }
 get "/:provider/:owner/:repo" do |env|
   provider = env.params.url["provider"]
   owner = env.params.url["owner"]
