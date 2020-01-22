@@ -55,20 +55,31 @@ get "/" do |env|
   render "src/views/index.slang", "src/views/layouts/layout.slang"
 end
 
-# get "/users" do |env|
-#   page = env.params.query["page"]? || ""
-#   page = page.to_i? || 1
+get "/users" do |env|
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+  per_page = 30
+  offset = (page - 1) * per_page
 
-#   users = CACHE.fetch("users_#{page}") do
-#     GITHUB_CLIENT.crystal_users(page).to_json
-#   end
+  users_query = User
+    .query
+    .join("repositories") { var("repositories", "user_id") == var("users", "id") }
+    .select(
+      "users.*",
+      "SUM(repositories.stars_count) AS stars_count",
+      "COUNT(repositories.*) AS repositories_count",
+    )
+    .group_by("users.id")
+    .order_by(stars_count: :desc)
 
-#   users = Github::Search::Users.from_json(users)
+  total_count = users_query.count
 
-#   paginator = ViewHelpers::GithubPaginator.new(users, page, "/users?page=%{page}").to_s
+  paginator = ViewHelpers::Paginator.new(page, per_page, total_count, "/users?page=%{page}").to_s
 
-#   render "src/views/users.slang", "src/views/layouts/layout.slang"
-# end
+  users = users_query.limit(per_page).offset(offset)
+
+  render "src/views/users.slang", "src/views/layouts/layout.slang"
+end
 
 get "/search" do |env|
   if env.params.query.[]?("query").nil?

@@ -2,9 +2,11 @@ div
   h1.page__heading
     ' Crystal developers
     .result_stats
-      = users.total_count
+      = total_count
       ' users
-- if users.total_count != 0
-  - users_array = users.items
-  == render "src/views/users/users.slang"
-  == paginator
+
+.d-flex.align-content-start.justify-content-center.flex-wrap
+  - users.each(fetch_columns: true) do |user|
+    == render "src/views/users/user.slang"
+
+== paginator
