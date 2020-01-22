@@ -1,9 +1,0 @@
-<% pages_count = ((@collection.total_count + 10 - 1) / 10).to_i %>
-
-<nav aria-label="Search result pages">
-  <ul id="pagination" class="pagination justify-content-center flex-wrap"
-    data-current-page="<%= @page %>"
-    data-pages-count="<%= pages_count %>"
-  >
-  </ul>
-</nav>
