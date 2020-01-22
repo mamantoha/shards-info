@@ -69,6 +69,21 @@ module Gitlab
       end
     end
 
+    def recently_updated(per_page = 10)
+      url = "/projects"
+
+      params = {
+        "with_programming_language" => "Crystal",
+        "order_by"                  => "last_activity_at",
+        "visibility"                => "public",
+        "per_page"                  => per_page
+      }
+
+      response = make_request(url, params)
+
+      Gitlab::Projects.from_json(response.body)
+    end
+
     def project(id : Int32)
       url = "/projects/#{id}"
 
