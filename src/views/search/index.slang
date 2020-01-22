@@ -8,6 +8,5 @@ div
       = total_count
       ' results
 
-- repos_array = repos
 == render "src/views/repositories/_list.slang"
 == paginator

@@ -11,8 +11,8 @@ ul class="nav nav-tabs nav-fill justify-content-center" id="reposTab" role="tabl
       ' Recent
 div class="tab-content"
   div role="tabpanel" class="tab-pane fade show active" id="trending" aria-labelledby="trending-tab"
-    - repos_array = trending_repos
+    - repositories = trending_repositories
     == render "src/views/repositories/_list.slang"
   div role="tabpanel" class="tab-pane fade" id="recently" aria-labelledby="recently-tab"
-    - repos_array = recently_repos
+    - repositories = recently_repositories
     == render "src/views/repositories/_list.slang"

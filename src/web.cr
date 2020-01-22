@@ -46,8 +46,8 @@ before_all do |env|
 end
 
 get "/" do |env|
-  trending_repos = Repository.query.with_user.with_tags.where { last_activity_at > 1.week.ago }.order_by(stars_count: :desc).limit(20)
-  recently_repos = Repository.query.with_user.with_tags.order_by(last_activity_at: :desc).limit(20)
+  trending_repositories = Repository.query.with_user.with_tags.where { last_activity_at > 1.week.ago }.order_by(stars_count: :desc).limit(20)
+  recently_repositories = Repository.query.with_user.with_tags.order_by(last_activity_at: :desc).limit(20)
 
   Config.config.page_title = "Shards Info"
   Config.config.page_description = "View of all repositories on GitHub that have Crystal code in them"
@@ -92,18 +92,18 @@ get "/search" do |env|
 
     query = env.params.query["query"].as(String)
 
-    repos_query = Repository
+    repositories_query = Repository
       .query
       .with_tags
       .with_user
       .search(query)
       .order_by(stars_count: :desc)
 
-    total_count = repos_query.count
+    total_count = repositories_query.count
 
     paginator = ViewHelpers::Paginator.new(page, per_page, total_count, "/search?query=#{query}&page=%{page}").to_s
 
-    repos = repos_query.limit(per_page).offset(offset)
+    repositories = repositories_query.limit(per_page).offset(offset)
 
     Config.config.page_title = "Search for '#{query}'"
     Config.config.page_description = "Search Crystal repositories for '#{query}'"
@@ -117,14 +117,14 @@ get "/:provider/:owner" do |env|
   owner = env.params.url["owner"]
 
   if user = User.query.with_repositories(&.with_tags).find({provider: provider, login: owner})
-    repos = user.repositories.with_user.with_tags.order_by(stars_count: :desc)
-    repos_count = repos.count
+    repositories = user.repositories.with_user.with_tags.order_by(stars_count: :desc)
+    repositories_count = repositories.count
 
     Config.config.page_title = "#{user.login} Crystal repositories"
-    Config.config.page_description = "#{user.login} has #{repos_count} Crystal repositories"
+    Config.config.page_description = "#{user.login} has #{repositories_count} Crystal repositories"
 
     Config.config.open_graph.title = "#{user.login} (#{user.name})"
-    Config.config.open_graph.description = "#{user.login} has #{repos_count} Crystal repositories"
+    Config.config.open_graph.description = "#{user.login} has #{repositories_count} Crystal repositories"
     Config.config.open_graph.image = "#{user.avatar}"
     Config.config.open_graph.type = "profile"
 

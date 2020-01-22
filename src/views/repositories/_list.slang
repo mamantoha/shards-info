@@ -1,4 +1,4 @@
 - additional_info = true
 
-- repos_array.each do |repo|
+- repositories.each do |repo|
   == render "src/views/repositories/_repository.slang"
