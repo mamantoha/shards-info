@@ -130,7 +130,7 @@ get "/:provider/:owner" do |env|
 
     render "src/views/users/show.slang", "src/views/layouts/layout.slang"
   else
-    # 404
+    render_404
   end
 end
 
@@ -151,7 +151,7 @@ get "/:provider/:owner/:repo" do |env|
 
     render "src/views/repositories/show.slang", "src/views/layouts/layout.slang"
   else
-    # 404
+    render_404
   end
 end
 

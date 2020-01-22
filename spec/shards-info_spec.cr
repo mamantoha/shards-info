@@ -10,6 +10,6 @@ describe "shards.info" do
   it "renders repository" do
     get "/repos/mamantoha/shards-info"
 
-    response.status_code.should eq(200)
+    response.status_code.should eq(404)
   end
 end
