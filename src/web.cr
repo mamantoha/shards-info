@@ -157,38 +157,11 @@ get "/:provider/:owner/:repo" do |env|
     Config.config.open_graph.description = "#{repository.description_with_emoji}"
     Config.config.open_graph.image = "#{repository.user.avatar_url}"
 
-    readme_html = content_to_markdown(repository.readme)
+    readme_html = Helpers.to_markdown(repository.readme)
 
     render "src/views/repositories/show.slang", "src/views/layouts/layout.slang"
   else
     halt env, 404, render_404
-  end
-end
-
-# def back(env : HTTP::Server::Context) : String
-#   env.request.headers.fetch("Referer", "/")
-# end
-
-def link(url : String?) : String | Nil
-  return url unless url
-
-  uri = URI.parse(url)
-  if !uri.scheme
-    url = "//" + url
-  end
-
-  url
-end
-
-private def content_to_markdown(content : String?)
-  if string = content
-    options = ["unsafe"]
-    extensions = ["table", "strikethrough", "autolink", "tagfilter", "tasklist"]
-
-    md = CommonMarker.new(Emoji.emojize(string), options, extensions)
-    md.to_html
-  else
-    ""
   end
 end
 

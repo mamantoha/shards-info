@@ -66,4 +66,16 @@ module Helpers
   rescue
     nil
   end
+
+  def to_markdown(content : String?)
+    if string = content
+      options = ["unsafe"]
+      extensions = ["table", "strikethrough", "autolink", "tagfilter", "tasklist"]
+
+      md = CommonMarker.new(Emoji.emojize(string), options, extensions)
+      md.to_html
+    else
+      ""
+    end
+  end
 end
