@@ -165,4 +165,31 @@ get "/:provider/:owner/:repo" do |env|
   end
 end
 
+get "/repos/:owner/:repo/dependents" { }
+get "/:provider/:owner/:repo/dependents" do |env|
+  provider = env.params.url["provider"]
+  owner = env.params.url["owner"]
+  repo = env.params.url["repo"]
+
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+  per_page = 20
+  offset = (page - 1) * per_page
+
+  if repository = Helpers.find_repository(owner, repo, provider)
+    repositories_query = repository.dependents.with_tags.with_user
+
+    total_count = repositories_query.count
+    paginator = ViewHelpers::Paginator.new(page, per_page, total_count, "/#{provider}/#{owner}/#{repo}/dependents?page=%{page}").to_s
+    repositories = repositories_query.limit(per_page).offset(offset)
+
+    Config.config.page_title = "Depend on '#{repository.full_name}'"
+    Config.config.page_description = "Depend on '#{repository.full_name}'"
+
+    render "src/views/dependents/index.slang", "src/views/layouts/layout.slang"
+  else
+    halt env, 404, render_404
+  end
+end
+
 Kemal.run
