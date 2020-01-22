@@ -76,7 +76,7 @@ module Gitlab
         "with_programming_language" => "Crystal",
         "order_by"                  => "last_activity_at",
         "visibility"                => "public",
-        "per_page"                  => per_page
+        "per_page"                  => per_page,
       }
 
       response = make_request(url, params)
