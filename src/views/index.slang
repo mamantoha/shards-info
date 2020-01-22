@@ -12,7 +12,7 @@ ul class="nav nav-tabs nav-fill justify-content-center" id="reposTab" role="tabl
 div class="tab-content"
   div role="tabpanel" class="tab-pane fade show active" id="trending" aria-labelledby="trending-tab"
     - repos_array = trending_repos
-    == render "src/views/partials/repos.slang"
+    == render "src/views/repositories/_list.slang"
   div role="tabpanel" class="tab-pane fade" id="recently" aria-labelledby="recently-tab"
     - repos_array = recently_repos
-    == render "src/views/partials/repos.slang"
+    == render "src/views/repositories/_list.slang"

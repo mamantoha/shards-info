@@ -9,5 +9,5 @@ div
       ' results
 
 - repos_array = repos
-== render "src/views/partials/repos.slang"
+== render "src/views/repositories/_list.slang"
 == paginator

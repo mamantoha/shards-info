@@ -34,7 +34,7 @@
 
     div class="tab-content"
       div role="tabpanel" class="tab-pane fade show active" id="info" aria-labelledby="info-tab"
-        == render "src/views/repo/info.slang"
+        == render "src/views/repositories/_info.slang"
       - if repository.readme
         div role="tabpanel" class="tab-pane fade" id="readme" aria-labelledby="readme-tab"
           .row

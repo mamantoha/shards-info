@@ -78,7 +78,7 @@ get "/users" do |env|
 
   users = users_query.limit(per_page).offset(offset)
 
-  render "src/views/users.slang", "src/views/layouts/layout.slang"
+  render "src/views/users/index.slang", "src/views/layouts/layout.slang"
 end
 
 get "/search" do |env|
@@ -108,7 +108,7 @@ get "/search" do |env|
     Config.config.page_title = "Search for '#{query}'"
     Config.config.page_description = "Search Crystal repositories for '#{query}'"
 
-    render "src/views/filter.slang", "src/views/layouts/layout.slang"
+    render "src/views/search/index.slang", "src/views/layouts/layout.slang"
   end
 end
 
@@ -128,7 +128,7 @@ get "/:provider/:owner" do |env|
     Config.config.open_graph.image = "#{user.avatar}"
     Config.config.open_graph.type = "profile"
 
-    render "src/views/owner.slang", "src/views/layouts/layout.slang"
+    render "src/views/users/show.slang", "src/views/layouts/layout.slang"
   else
     # 404
   end
@@ -149,7 +149,7 @@ get "/:provider/:owner/:repo" do |env|
 
     readme_html = content_to_markdown(repository.readme)
 
-    render "src/views/repo.slang", "src/views/layouts/layout.slang"
+    render "src/views/repositories/show.slang", "src/views/layouts/layout.slang"
   else
     # 404
   end
