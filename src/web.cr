@@ -74,9 +74,25 @@ get "/search" do |env|
   if env.params.query.[]?("query").nil?
     env.redirect "/"
   else
+    page = env.params.query["page"]? || ""
+    page = page.to_i? || 1
+    per_page = 20
+    offset = (page - 1) * per_page
+
     query = env.params.query["query"].as(String)
 
-    repos = Repository.query.with_tags.with_user.search(query).order_by(stars_count: :desc)
+    repos_query = Repository
+      .query
+      .with_tags
+      .with_user
+      .search(query)
+      .order_by(stars_count: :desc)
+
+    total_count = repos_query.count
+
+    paginator = ViewHelpers::Paginator.new(page, per_page, total_count, "/search?query=#{query}&page=%{page}").to_s
+
+    repos = repos_query.limit(per_page).offset(offset)
 
     Config.config.page_title = "Search for '#{query}'"
     Config.config.page_description = "Search Crystal repositories for '#{query}'"
@@ -84,30 +100,6 @@ get "/search" do |env|
     render "src/views/filter.slang", "src/views/layouts/layout.slang"
   end
 end
-
-# get "/repos" do |env|
-#   if env.params.query.[]?("query").nil?
-#     env.redirect "/"
-#   else
-#     query = env.params.query["query"].as(String)
-
-#     page = env.params.query["page"]? || ""
-#     page = page.to_i? || 1
-
-#     repos = CACHE.fetch("search_#{query}_#{page}") do
-#       GITHUB_CLIENT.filter(query, page).to_json
-#     end
-
-#     repos = Github::Repos.from_json(repos)
-
-#     paginator = ViewHelpers::GithubPaginator.new(repos, page, "/repos?query=#{query}&page=%{page}").to_s
-
-#     Config.config.page_title = "Search for '#{query}'"
-#     Config.config.page_description = "Search Crystal repositories for '#{query}'"
-
-#     render "src/views/filter.slang", "src/views/layouts/layout.slang"
-#   end
-# end
 
 get "/:provider/:owner" do |env|
   provider = env.params.url["provider"]

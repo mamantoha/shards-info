@@ -5,9 +5,9 @@ div
       ' for
       em = query
     .result_stats
-      = repos.count
+      = total_count
       ' results
-- if repos.count != 0
-  - repos_array = repos
-  == render "src/views/partials/repos.slang"
-  / == paginator
+
+- repos_array = repos
+== render "src/views/partials/repos.slang"
+== paginator

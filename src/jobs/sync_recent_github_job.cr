@@ -1,7 +1,7 @@
 require "../github"
 
 class SyncRecentGithubJob < Mosquito::PeriodicJob
-  run_every 5.minutes
+  run_every 30.minutes
 
   def perform
     repos = GITHUB_CLIENT.recently_updated.items
