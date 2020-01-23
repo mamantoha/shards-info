@@ -31,14 +31,14 @@
       h3.list__heading
         a data-toggle="collapse" href="#collapseDependent" aria-expanded="true" aria-controls="collapseDependent"
           i class="fa" aria-hidden="true"
-          | Used by (#{repository.dependents.count}):
+          | Used by (#{dependents_count}):
       .collapse.show#collapseDependent
         ul.list__items.not-list
-          - repository.dependents.with_user.limit(10).each do |repository|
+          - dependents.with_user.limit(10).each do |repository|
             li
               i class="#{repository.provider_icon}"
               a href="/#{repository.provider}/#{repository.user.login}/#{repository.name}" = repository.name
-        - if repository.dependents.count > 10
+        - if dependents_count > 10
           .shard__see_all_link
             a class="shard__see_all_link" href="/#{repository.provider}/#{repository.user.login}/#{repository.name}/dependents"
               ' Show all dependents

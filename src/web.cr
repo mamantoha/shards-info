@@ -150,6 +150,14 @@ get "/:provider/:owner/:repo" do |env|
   repo = env.params.url["repo"]
 
   if repository = Helpers.find_repository(owner, repo, provider)
+    dependents =
+      repository
+        .dependents
+        .undistinct
+        .order_by({stars_count: :desc})
+
+    dependents_count = dependents.count
+
     Config.config.page_title = "#{repository.full_name}: #{repository.description_with_emoji}"
     Config.config.page_description = "#{repository.full_name}: #{repository.description_with_emoji}"
 
@@ -177,7 +185,13 @@ get "/:provider/:owner/:repo/dependents" do |env|
   offset = (page - 1) * per_page
 
   if repository = Helpers.find_repository(owner, repo, provider)
-    repositories_query = repository.dependents.with_tags.with_user
+    repositories_query =
+      repository
+        .dependents
+        .undistinct
+        .order_by({stars_count: :desc})
+        .with_tags
+        .with_user
 
     total_count = repositories_query.count
     paginator = ViewHelpers::Paginator.new(page, per_page, total_count, "/#{provider}/#{owner}/#{repo}/dependents?page=%{page}").to_s
