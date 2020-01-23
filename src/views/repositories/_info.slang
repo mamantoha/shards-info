@@ -55,23 +55,6 @@
               i class="#{repository.provider_icon}"
               a href="/#{repository.provider}/#{repository.user.login}/#{repository.name}" = repository.name
 .row
-  .col-md-6
-    .shard__forks.info-block
-      h3.list__heading
-        a data-toggle="collapse" href="#collapseForks" aria-expanded="true" aria-controls="collapseForks"
-          i class="fa" aria-hidden="true"
-          | Forks (#{repository.forks_count}):
-      /.collapse.show#collapseForks
-        ul.list__items.not-list
-          - repo_forks.first(10).each do |item|
-            li
-              i class="fab fa-github"
-              a href="/repos/#{item.full_name}" = item.full_name
-        - if repo.forks_count > 10
-          .shard__see_all_link
-            a class="shard__see_all_link" href="/repos/#{repo.full_name}/forks"
-              ' Show all forks
-.row
   .col-12
     .shard__owner
       h3.list__heading Owner:
