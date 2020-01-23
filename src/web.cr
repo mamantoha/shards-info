@@ -54,8 +54,22 @@ before_all do |env|
 end
 
 get "/" do |env|
-  trending_repositories = Repository.query.with_user.with_tags.where { last_activity_at > 1.week.ago }.order_by(stars_count: :desc).limit(20)
-  recently_repositories = Repository.query.with_user.with_tags.order_by(last_activity_at: :desc).limit(20)
+  trending_repositories =
+    Repository
+      .query
+      .with_user
+      .with_tags
+      .where { last_activity_at > 1.week.ago }
+      .order_by(stars_count: :desc)
+      .limit(20)
+
+  recently_repositories =
+    Repository
+      .query
+      .with_user
+      .with_tags
+      .order_by(last_activity_at: :desc)
+      .limit(20)
 
   Config.config.page_title = "Shards Info"
   Config.config.page_description = "View of all repositories on GitHub that have Crystal code in them"
@@ -69,16 +83,17 @@ get "/users" do |env|
   per_page = 30
   offset = (page - 1) * per_page
 
-  users_query = User
-    .query
-    .join("repositories") { var("repositories", "user_id") == var("users", "id") }
-    .select(
-      "users.*",
-      "SUM(repositories.stars_count) AS stars_count",
-      "COUNT(repositories.*) AS repositories_count",
-    )
-    .group_by("users.id")
-    .order_by(stars_count: :desc)
+  users_query =
+    User
+      .query
+      .join("repositories") { var("repositories", "user_id") == var("users", "id") }
+      .select(
+        "users.*",
+        "SUM(repositories.stars_count) AS stars_count",
+        "COUNT(repositories.*) AS repositories_count",
+      )
+      .group_by("users.id")
+      .order_by(stars_count: :desc)
 
   total_count = users_query.count
 
@@ -100,16 +115,22 @@ get "/search" do |env|
 
     query = env.params.query["query"].as(String)
 
-    repositories_query = Repository
-      .query
-      .with_tags
-      .with_user
-      .search(query)
-      .order_by(stars_count: :desc)
+    repositories_query =
+      Repository
+        .query
+        .with_tags
+        .with_user
+        .search(query)
+        .order_by(stars_count: :desc)
 
     total_count = repositories_query.count
 
-    paginator = ViewHelpers::Paginator.new(page, per_page, total_count, "/search?query=#{query}&page=%{page}").to_s
+    paginator = ViewHelpers::Paginator.new(
+      page,
+      per_page,
+      total_count,
+      "/search?query=#{query}&page=%{page}"
+    ).to_s
 
     repositories = repositories_query.limit(per_page).offset(offset)
 
@@ -158,14 +179,13 @@ get "/:provider/:owner/:repo" do |env|
 
     dependents_count = dependents.count
 
+    readme_html = Helpers.to_markdown(repository.readme)
+
     Config.config.page_title = "#{repository.full_name}: #{repository.description_with_emoji}"
     Config.config.page_description = "#{repository.full_name}: #{repository.description_with_emoji}"
-
     Config.config.open_graph.title = "#{repository.full_name}"
     Config.config.open_graph.description = "#{repository.description_with_emoji}"
     Config.config.open_graph.image = "#{repository.user.avatar_url}"
-
-    readme_html = Helpers.to_markdown(repository.readme)
 
     render "src/views/repositories/show.slang", "src/views/layouts/layout.slang"
   else
@@ -194,7 +214,14 @@ get "/:provider/:owner/:repo/dependents" do |env|
         .with_user
 
     total_count = repositories_query.count
-    paginator = ViewHelpers::Paginator.new(page, per_page, total_count, "/#{provider}/#{owner}/#{repo}/dependents?page=%{page}").to_s
+
+    paginator = ViewHelpers::Paginator.new(
+      page,
+      per_page,
+      total_count,
+      "/#{provider}/#{owner}/#{repo}/dependents?page=%{page}"
+    ).to_s
+
     repositories = repositories_query.limit(per_page).offset(offset)
 
     Config.config.page_title = "Depend on '#{repository.full_name}'"
