@@ -233,4 +233,42 @@ get "/:provider/:owner/:repo/dependents" do |env|
   end
 end
 
+get "/tags/:name" do |env|
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+  per_page = 20
+  offset = (page - 1) * per_page
+
+  name = env.params.url["name"]
+
+  if tag = Tag.query.find({name: name})
+    repositories_query = tag.repositories
+
+    total_count = repositories_query.count
+
+    paginator = ViewHelpers::Paginator.new(
+      page,
+      per_page,
+      total_count,
+      "/tags/#{name}?page=%{page}"
+    ).to_s
+
+    repositories =
+      repositories_query
+        .undistinct
+        .with_tags
+        .with_user
+        .order_by(stars_count: :desc)
+        .limit(per_page)
+        .offset(offset)
+
+    Config.config.page_title = "Repositories tagged with '#{name}'"
+    Config.config.page_description = "Crystal repositories with tag '#{name}'"
+
+    render "src/views/tags/show.slang", "src/views/layouts/layout.slang"
+  else
+    halt env, 404, render_404
+  end
+end
+
 Kemal.run
