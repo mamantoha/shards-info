@@ -1,3 +1,14 @@
+@font-face {
+  font-family: 'JetBrainsMono-Regular';
+  src: url('fonts/JetBrainsMono-Regular.woff2') format('woff2'),
+       url('fonts/JetBrainsMono-Regular.woff') format('woff'),
+       url('fonts/JetBrainsMono-Regular.ttf')  format('truetype');
+}
+
+body {
+  font-family: 'JetBrainsMono-Regular', Fallback, sans-serif;
+}
+
 html {
   position: relative;
   min-height: 100%;
