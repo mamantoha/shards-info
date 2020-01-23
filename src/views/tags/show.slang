@@ -3,7 +3,8 @@ div
     ' tagged
     i.page__subheading
       ' with
-      = tag.name
+      span class="badge badge-info"
+        = tag.name
     .result_stats
       = total_count
       ' results
