@@ -170,7 +170,7 @@ get "/:provider/:owner/:repo" do |env|
   owner = env.params.url["owner"]
   repo = env.params.url["repo"]
 
-  if repository = Helpers.find_repository(owner, repo, provider)
+  if repository = Repository.find_repository(owner, repo, provider)
     dependents =
       repository
         .dependents
@@ -204,7 +204,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
   per_page = 20
   offset = (page - 1) * per_page
 
-  if repository = Helpers.find_repository(owner, repo, provider)
+  if repository = Repository.find_repository(owner, repo, provider)
     repositories_query =
       repository
         .dependents

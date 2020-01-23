@@ -28,6 +28,18 @@ class Repository
   has_many dependencies : Repository, through: Relationship, foreign_key: "dependency_id", own_key: "master_id"
   has_many dependents : Repository, through: Relationship, foreign_key: "master_id", own_key: "dependency_id"
 
+  def self.find_repository(user_login : String, repository_name : String, provider : String) : Repository?
+    Repository
+      .query
+      .join("users") { users.id == repositories.user_id }
+      .find {
+        (users.login == user_login) &
+          (users.provider == provider) &
+          (repositories.provider == provider) &
+          (repositories.name == repository_name)
+      }
+  end
+
   def touch
     self.updated_on = Time.local
     self.save!

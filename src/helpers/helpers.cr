@@ -1,18 +1,6 @@
 module Helpers
   extend self
 
-  def find_repository(user_login : String, repository_name : String, provider : String) : Repository?
-    Repository
-      .query
-      .join("users") { users.id == repositories.user_id }
-      .find {
-        (users.login == user_login) &
-          (users.provider == provider) &
-          (repositories.provider == provider) &
-          (repositories.name == repository_name)
-      }
-  end
-
   def update_dependecies(repository : Repository)
     if shard_yml = repository.shard_yml
       if spec = spec_from_yaml(shard_yml)
@@ -31,7 +19,7 @@ module Helpers
         if repository_path = spec_dependency[provider_name]
           user_name, repository_name = repository_path.split("/")
 
-          if dependency = Helpers.find_repository(user_name, repository_name, provider_name)
+          if dependency = Repository.find_repository(user_name, repository_name, provider_name)
             unless Relationship.query.find({master_id: repository.id, dependency_id: dependency.id, development: development})
               Relationship.create!({
                 master_id:     repository.id,
