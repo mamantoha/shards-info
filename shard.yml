@@ -56,6 +56,7 @@ dependencies:
     github: Sija/raven.cr
   dotenv:
     github: gdotdesign/cr-dotenv
+    branch: master
   shards:
     github: crystal-lang/shards
 
