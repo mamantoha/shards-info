@@ -3,6 +3,10 @@ class RepositoryDelegator < Delegator(Repository)
     "#{user.login}/#{name}"
   end
 
+  def latest_release : String
+    releases.published.order_by(published_at: :desc).first.try(&.tag_name) || ""
+  end
+
   def description_with_emoji : String?
     description.try do |_description|
       Emoji.emojize(_description)

@@ -3,8 +3,8 @@
     .page__heading
       h1
         = "#{repository.name}"
-        /i.page__subheading
-          = repo.latest_release
+        i.page__subheading
+          = repository.decorate.latest_release
       .shard__topics
         - repository.tag_names.each do |name|
           a href="/tags/#{name}" class="badge badge-secondary" = name

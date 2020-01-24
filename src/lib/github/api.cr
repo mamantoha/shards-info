@@ -98,12 +98,24 @@ module Github
       Github::Repo.from_json(response.body)
     end
 
-    def repo_releases(full_name : String)
+    def repo_releases(full_name : String) : Array(Github::Release)
       url = "/repos/#{full_name}/releases"
 
       response = make_request(url)
 
       Github::Releases.from_json(response.body)
+    end
+
+    def repo_releases(user_name : String, repository : String)
+      repo_releases("#{user_name}/#{repository}")
+    end
+
+    def repo_release_by_tag(owner : String, repo : String, tag : String)
+      url = "/repos/#{owner}/#{repo}/releases/tags/#{tag}"
+
+      response = make_request(url)
+
+      Github::Release.from_json(response.body)
     end
 
     def repo_forks(full_name : String)

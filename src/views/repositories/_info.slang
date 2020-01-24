@@ -1,18 +1,18 @@
 .row
   .col-md-6
-    /.shard__releases.info-block
+    .shard__releases.info-block
       h3.list__heading
         a data-toggle="collapse" href="#collapseReleases" aria-expanded="true" aria-controls="collapseReleases"
           i class="fa" aria-hidden="true"
-          | Releases:
+          | Latest Releases:
       .collapse.show#collapseReleases
         ul.list__items.not-list
-          - repo.releases.first(5).each do |release|
+          - repository.releases.limit(5).each do |release|
             li.shard__release-wrap
               = release.tag_name
               small
                 ' -
-                = release.published_at.to_s("%B %-d, %Y")
+                = release.published_at.try(&.to_s("%B %-d, %Y"))
   .col-md-6
     .shard__dependencies.info-block
       h3.list__heading
