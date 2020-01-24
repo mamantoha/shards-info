@@ -1,4 +1,4 @@
-require "../gitlab"
+require "../lib/gitlab"
 
 class SyncRecentGitlabJob < Mosquito::PeriodicJob
   run_every 30.minutes

@@ -1,5 +1,5 @@
 require "../../config/config"
-require "../github"
+require "../lib/github"
 
 module Github
   class API

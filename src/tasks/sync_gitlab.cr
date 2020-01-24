@@ -1,5 +1,5 @@
 require "../../config/config"
-require "../gitlab"
+require "../lib/gitlab"
 
 gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
 

@@ -1,4 +1,4 @@
-require "../github"
+require "../lib/github"
 
 class SyncRecentGithubJob < Mosquito::PeriodicJob
   run_every 30.minutes
