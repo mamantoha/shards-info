@@ -7,7 +7,7 @@
           | Latest Releases:
       .collapse.show#collapseReleases
         ul.list__items.not-list
-          - repository.releases.limit(5).each do |release|
+          - repository.releases.order_by(published_at: :desc).limit(5).each do |release|
             li.shard__release-wrap
               = release.tag_name
               small

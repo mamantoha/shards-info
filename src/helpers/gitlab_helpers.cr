@@ -59,4 +59,30 @@ module GitlabHelpers
     repository.save
   rescue Crest::NotFound
   end
+
+  def create_releases(repository : Repository, gitlab_releases : Array(Gitlab::Release))
+    gitlab_releases.each do |gitlab_release|
+      unless repository.releases.find({tag_name: gitlab_release.tag_name})
+        Release.create!({
+          repository_id: repository.id,
+          provider:      "gitlab",
+          tag_name:      gitlab_release.tag_name,
+          name:          gitlab_release.name,
+          body:          gitlab_release.description,
+          created_at:    gitlab_release.created_at,
+          published_at:  gitlab_release.released_at,
+        })
+      end
+    end
+  end
+
+  def remove_outdated_releases(repository : Repository, gitlab_releases : Array(Gitlab::Release))
+    releases = repository.releases
+
+    releases.each do |release|
+      if gitlab_releases.none? { |gitlab_release| gitlab_release.tag_name == release.tag_name }
+        release.delete
+      end
+    end
+  end
 end
