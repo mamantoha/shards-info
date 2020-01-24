@@ -4,7 +4,7 @@
     .card-body
       h5.card-title
         a href="/#{user.provider}/#{user.login}"
-          i class="fab #{user.provider_icon}"
+          i class="fab #{user.decorate.provider_icon}"
           == "#{user.login}"
     ul class="list-group list-group-flush"
       li class="list-group-item"

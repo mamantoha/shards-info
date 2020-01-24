@@ -5,11 +5,6 @@
         = "#{repository.name}"
         /i.page__subheading
           = repo.latest_release
-      /- if repo.fork == true
-        - parent_repo = repo.parent.not_nil!
-        p.fork-flag
-          | forked from
-          a href="/repos/#{parent_repo.full_name}" = parent_repo.full_name
       .shard__topics
         - repository.tag_names.each do |name|
           a href="/tags/#{name}" class="badge badge-secondary" = name
@@ -71,4 +66,4 @@
     h3.list__heading Links:
     ul.shard__links.not-list
       li
-        a href="#{repository.provider_url}" Homepage
+        a href="#{repository.decorate.provider_url}" Homepage

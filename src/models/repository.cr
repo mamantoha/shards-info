@@ -40,6 +40,10 @@ class Repository
       }
   end
 
+  def decorate
+    @delegator ||= RepositoryDelegator.delegate(self)
+  end
+
   def touch
     self.updated_on = Time.local
     self.save!
@@ -65,37 +69,5 @@ class Repository
 
   def tag_names
     self.tags.map(&.name)
-  end
-
-  def description_with_emoji : String?
-    self.description.try do |_description|
-      Emoji.emojize(_description)
-    end
-  end
-
-  def full_name : String
-    "#{self.user.login}/#{self.name}"
-  end
-
-  def provider_url
-    case provider
-    when "gitlab"
-      "https://gitlab.com/#{user.login}/#{name}"
-    when "github"
-      "https://github.com/#{user.login}/#{name}"
-    else
-      ""
-    end
-  end
-
-  def provider_icon
-    case provider
-    when "gitlab"
-      "fab fa-gitlab"
-    when "github"
-      "fab fa-github"
-    else
-      ""
-    end
   end
 end

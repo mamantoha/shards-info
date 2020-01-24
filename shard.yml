@@ -29,6 +29,8 @@ dependencies:
     github: mamantoha/clear
     branch: fix/delete-and-unlink
     # path: ../clear
+  delegator:
+    github: Schniz/delegator.cr
   slang:
     github: jeromegn/slang
     branch: master

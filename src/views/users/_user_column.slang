@@ -1,12 +1,12 @@
 .user__avatar
-  img src="#{user.avatar}" alt="#{user.login}"
+  img src="#{user.decorate.avatar}" alt="#{user.login}"
 .user__name
   - if user.name
     .name
       = user.name
   .login
-    a href="#{user.provider_url}"
-      i class="#{user.provider_icon}"
+    a href="#{user.decorate.provider_url}"
+      i class="#{user.decorate.provider_icon}"
     = user.login
 hr
   - if created_at = user.created_at

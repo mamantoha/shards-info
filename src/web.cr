@@ -17,6 +17,7 @@ require "../config/config"
 require "./github"
 require "./config"
 require "./view_helpers"
+require "./delegators"
 
 Kemal::Session.config do |config|
   config.secret = "my_super_secret"
@@ -155,7 +156,7 @@ get "/:provider/:owner" do |env|
 
     Config.config.open_graph.title = "#{user.login} (#{user.name})"
     Config.config.open_graph.description = "#{user.login} has #{repositories_count} Crystal repositories"
-    Config.config.open_graph.image = "#{user.avatar}"
+    Config.config.open_graph.image = "#{user.decorate.avatar}"
     Config.config.open_graph.type = "profile"
 
     render "src/views/users/show.slang", "src/views/layouts/layout.slang"
@@ -181,10 +182,10 @@ get "/:provider/:owner/:repo" do |env|
 
     readme_html = Helpers.to_markdown(repository.readme)
 
-    Config.config.page_title = "#{repository.full_name}: #{repository.description_with_emoji}"
-    Config.config.page_description = "#{repository.full_name}: #{repository.description_with_emoji}"
-    Config.config.open_graph.title = "#{repository.full_name}"
-    Config.config.open_graph.description = "#{repository.description_with_emoji}"
+    Config.config.page_title = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
+    Config.config.page_description = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
+    Config.config.open_graph.title = "#{repository.decorate.full_name}"
+    Config.config.open_graph.description = "#{repository.decorate.description_with_emoji}"
     Config.config.open_graph.image = "#{repository.user.avatar_url}"
 
     render "src/views/repositories/show.slang", "src/views/layouts/layout.slang"
@@ -224,8 +225,8 @@ get "/:provider/:owner/:repo/dependents" do |env|
 
     repositories = repositories_query.limit(per_page).offset(offset)
 
-    Config.config.page_title = "Depend on '#{repository.full_name}'"
-    Config.config.page_description = "Depend on '#{repository.full_name}'"
+    Config.config.page_title = "Depend on '#{repository.decorate.full_name}'"
+    Config.config.page_description = "Depend on '#{repository.decorate.full_name}'"
 
     render "src/views/dependents/index.slang", "src/views/layouts/layout.slang"
   else

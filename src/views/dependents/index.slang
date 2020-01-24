@@ -3,7 +3,7 @@ div
     ' dependent
     i.page__subheading
       ' on
-      a href="/#{repository.provider}/#{repository.full_name}" #{repository.full_name}
+      a href="/#{repository.provider}/#{repository.decorate.full_name}" #{repository.decorate.full_name}
     .result_stats
       = total_count
       ' results

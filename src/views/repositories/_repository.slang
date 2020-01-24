@@ -2,7 +2,7 @@
 .shards__shard.d-flex
   - if additional_info
     a.d-block.mr-2.mt-1 href="/#{repo.provider}/#{repo.user.login}"
-      img.avatar src="#{repo.user.avatar}" alt="#{repo.user.login}"
+      img.avatar src="#{repo.user.decorate.avatar}" alt="#{repo.user.login}"
 
   .width-full
     .shards__shard_info

@@ -32,6 +32,10 @@ shards:
     github: crystal-lang/crystal-db
     version: 0.8.0
 
+  delegator:
+    github: Schniz/delegator.cr
+    version: 0.1.0
+
   dotenv:
     github: gdotdesign/cr-dotenv
     version: 0.3.1

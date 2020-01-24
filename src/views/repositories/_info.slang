@@ -23,7 +23,7 @@
         ul.list__items.not-list
           - repository.dependencies.with_user.where { relationships.development == false }.each do |repository|
             li
-              i class="#{repository.provider_icon}"
+              i class="#{repository.decorate.provider_icon}"
               a href="/#{repository.provider}/#{repository.user.login}/#{repository.name}" = repository.name
 .row
   .col-md-6
@@ -36,7 +36,7 @@
         ul.list__items.not-list
           - dependents.with_user.limit(10).each do |repository|
             li
-              i class="#{repository.provider_icon}"
+              i class="#{repository.decorate.provider_icon}"
               a href="/#{repository.provider}/#{repository.user.login}/#{repository.name}" = repository.name
         - if dependents_count > 10
           .shard__see_all_link
@@ -52,7 +52,7 @@
         ul.list__items.not-list
           - repository.dependencies.with_user.where { relationships.development == true }.each do |repository|
             li
-              i class="#{repository.provider_icon}"
+              i class="#{repository.decorate.provider_icon}"
               a href="/#{repository.provider}/#{repository.user.login}/#{repository.name}" = repository.name
 .row
   .col-12
@@ -60,6 +60,6 @@
       h3.list__heading Owner:
       .shards__shard_owner
         .shards__shard_owner_avatar
-          img src="#{repository.user.avatar}" alt="#{repository.user.login}"
+          img src="#{repository.user.decorate.avatar}" alt="#{repository.user.login}"
         .shards__shard_owner_name
           a href="/#{repository.provider}/#{repository.user.login}" = repository.user.login
