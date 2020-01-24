@@ -1,7 +1,7 @@
 require "dotenv"
 require "mosquito"
 
-Dotenv.load
+Dotenv.load?
 
 require "./initializers/**"
 require "../src/models/*"
