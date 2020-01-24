@@ -1,39 +1,34 @@
-/.shards__shard.d-flex class="#{repo.fork ? "forked" : ""}"
 .shards__shard.d-flex
   - if additional_info
-    a.d-block.mr-2.mt-1 href="/#{repo.provider}/#{repo.user.login}"
-      img.avatar src="#{repo.user.decorate.avatar}" alt="#{repo.user.login}"
-
+    a.d-block.mr-2.mt-1 href="/#{repository.provider}/#{repository.user.login}"
+      img.avatar src="#{repository.user.decorate.avatar}" alt="#{repository.user.login}"
   .width-full
     .shards__shard_info
-      /- if repo.fork == true
-        p.shards__shard_fork
-          | Forked repository
       h3.shards__shard_name.css-truncate
-        a href="/#{repo.provider}/#{repo.user.login}/#{repo.name}"
+        a href="/#{repository.provider}/#{repository.user.login}/#{repository.name}"
           - if additional_info
-            == "#{repo.user.login}/<span class='text-normal'>#{repo.name}</span>"
+            == "#{repository.user.login}/<span class='text-normal'>#{repository.name}</span>"
           - else
-            == repo.name
+            == repository.name
 
       p.shards__shard_desc.dont-break-out
-        == Emoji.emojize(Autolink.auto_link(repo.description.to_s))
+        == Emoji.emojize(Autolink.auto_link(repository.description.to_s))
     .shard__topics
-      / TODO: for some reason repo.tags breaks html template
-      / - repo.tags.each do |tag|
-      - repo.tag_names.each do |tag|
+      / TODO: for some reason repository.tags breaks html template
+      / - repository.tags.each do |tag|
+      - repository.tag_names.each do |tag|
         a href="/tags/#{tag}" class="badge badge-secondary" = tag
     .shards__shard_github
       ul
         li
           i class="fas fa-star" title="Stars"
-          = repo.stars_count
+          = repository.stars_count
         li
           i class="fas fa-code-branch" title="Forks"
-          = repo.forks_count
+          = repository.forks_count
         li
           i class="fas fa-exclamation-circle" title="Open issues"
-          = repo.open_issues_count
+          = repository.open_issues_count
         li
           .shards__shard_updated
-            = "Updated #{HumanizeTime.distance_of_time_in_words(repo.last_activity_at, Time.local)} ago"
+            = "Updated #{HumanizeTime.distance_of_time_in_words(repository.last_activity_at, Time.local)} ago"
