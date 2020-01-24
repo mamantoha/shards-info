@@ -32,6 +32,7 @@ module GithubHelpers
 
     set_repository_shard_yml(repository)
     set_repository_readme(repository)
+    sync_releases(repository)
     Helpers.update_dependecies(repository)
   end
 
@@ -51,6 +52,15 @@ module GithubHelpers
     repository.readme = readme_file
     repository.save!
   rescue Crest::NotFound
+  end
+
+  def sync_releases(repository : Repository)
+    github_releases = GITHUB_CLIENT.repo_releases(repository.user.login, repository.name)
+
+    create_releases(repository, github_releases)
+    remove_outdated_releases(repository, github_releases)
+  rescue ex
+    puts "SYNC RELEASES ERROR: #{ex.message}"
   end
 
   def create_releases(repository : Repository, github_releases : Array(Github::Release))
