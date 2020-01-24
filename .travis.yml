@@ -1,6 +1,9 @@
 language: crystal
 dist: xenial
 
+env:
+  - DATABASE_URL=postgres://postgres@localhost/shards_info_test
+
 before_script:
   - psql -c 'create database shards_info_test;' -U postgres
   - crystal src/db.cr -- migrate
