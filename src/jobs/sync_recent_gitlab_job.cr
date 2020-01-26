@@ -8,7 +8,9 @@ class SyncRecentGitlabJob < Mosquito::PeriodicJob
 
     projects = gitlab_client.recently_updated
 
-    projects.each do |gitlab_project|
+    projects.each do |_gitlab_project|
+      gitlab_project = gitlab_client.project(_gitlab_project.id)
+
       if repository = Repository.query.find({provider: "gitlab", provider_id: gitlab_project.id})
         # Update if repository has been changed
         if repository.last_activity_at != gitlab_project.last_activity_at
