@@ -37,30 +37,45 @@ module GithubHelpers
   end
 
   def set_repository_shard_yml(repository : Repository)
-    response = GITHUB_CLIENT.repo_content(repository.user.login, repository.name, "shard.yml")
+    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+
+    response = github_client.repo_content(repository.user.login, repository.name, "shard.yml")
     shard_file = Base64.decode_string(response.content)
 
     repository.shard_yml = shard_file
     repository.save
+    true
   rescue Crest::NotFound
+    true
+  rescue
+    false
   end
 
   def set_repository_readme(repository : Repository)
-    response = GITHUB_CLIENT.repo_readme(repository.user.login, repository.name)
+    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+
+    response = github_client.repo_readme(repository.user.login, repository.name)
     readme_file = Base64.decode_string(response.content)
 
     repository.readme = readme_file
     repository.save!
+    true
   rescue Crest::NotFound
+    true
+  rescue
+    false
   end
 
   def sync_releases(repository : Repository)
-    github_releases = GITHUB_CLIENT.repo_releases(repository.user.login, repository.name)
+    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+
+    github_releases = github_client.repo_releases(repository.user.login, repository.name)
 
     create_releases(repository, github_releases)
     remove_outdated_releases(repository, github_releases)
-  rescue ex
-    puts "SYNC RELEASES ERROR: #{ex.message}"
+    true
+  rescue
+    false
   end
 
   def create_releases(repository : Repository, github_releases : Array(Github::Release))

@@ -28,6 +28,15 @@ class Repository
   has_many dependencies : Repository, through: Relationship, foreign_key: "dependency_id", own_key: "master_id"
   has_many dependents : Repository, through: Relationship, foreign_key: "master_id", own_key: "dependency_id"
 
+  scope(:without_releases) {
+    where(<<-SQL
+      NOT (
+        EXISTS (SELECT "releases".* FROM "releases" WHERE (releases.repository_id = repositories.id))
+      )
+      SQL
+    )
+  }
+
   def self.find_repository(user_login : String, repository_name : String, provider : String) : Repository?
     Repository
       .query

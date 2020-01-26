@@ -47,7 +47,11 @@ module GitlabHelpers
 
     repository.shard_yml = content
     repository.save
+    true
   rescue Crest::NotFound
+    true
+  rescue
+    false
   end
 
   def set_repository_readme(repository : Repository)
@@ -58,7 +62,11 @@ module GitlabHelpers
 
     repository.readme = content
     repository.save
+    true
   rescue Crest::NotFound
+    true
+  rescue
+    false
   end
 
   def sync_releases(repository : Repository)
@@ -67,8 +75,11 @@ module GitlabHelpers
 
     create_releases(repository, gitlab_releases)
     remove_outdated_releases(repository, gitlab_releases)
-  rescue ex
-    puts "SYNC RELEASES ERROR: #{ex.message}"
+    true
+  rescue Crest::NotFound
+    true
+  rescue
+    false
   end
 
   def create_releases(repository : Repository, gitlab_releases : Array(Gitlab::Release))
