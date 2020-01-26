@@ -43,14 +43,8 @@ module Github
       client
     end
 
-    def make_request(url, ignore_exception = false)
+    def make_request(url)
       response = client[url].get
-    rescue ex : Crest::NotFound | Crest::UnprocessableEntity
-      if ignore_exception
-        raise ex
-      else
-        raise exception_handler
-      end
     end
 
     def user(username : String)
@@ -146,7 +140,7 @@ module Github
     def repo_readme(owner : String, repo : String)
       url = "/repos/#{owner}/#{repo}/readme"
 
-      response = make_request(url, true)
+      response = make_request(url)
 
       Github::Readme.from_json(response.body)
     end
@@ -154,7 +148,7 @@ module Github
     def repo_content(owner : String, repo : String, path : String)
       url = "/repos/#{owner}/#{repo}/contents/#{path}"
 
-      response = make_request(url, true)
+      response = make_request(url)
 
       Github::Content.from_json(response.body)
     end
