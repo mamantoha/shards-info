@@ -94,7 +94,7 @@ repos.each do |repo|
     r.user = user
     r.name = repo.name
     r.description = repo.description
-    r.last_activity_at = repo.updated_at
+    r.last_activity_at = repo.last_activity_at
     r.stars_count = repo.watchers_count
     r.forks_count = repo.forks_count
     r.open_issues_count = repo.open_issues_count

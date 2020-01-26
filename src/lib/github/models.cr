@@ -423,6 +423,10 @@ module Github
 
     property score : Float64?
 
+    def last_activity_at : Time
+      pushed_at || created_at
+    end
+
     def tags : Array(String)
       if tags = topics
         tags
