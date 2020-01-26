@@ -64,8 +64,8 @@
         = repository.created_at.try(&.to_s("%B %-d, %Y"))
 
     h3.list__heading License:
-    /p
-      = repo.license_name
+    p
+      = repository.license
     h3.list__heading Links:
     ul.shard__links.not-list
       li

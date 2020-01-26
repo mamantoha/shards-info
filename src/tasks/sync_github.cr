@@ -99,6 +99,7 @@ repos.each do |repo|
     r.forks_count = repo.forks_count
     r.open_issues_count = repo.open_issues_count
     r.created_at = repo.created_at
+    r.license = repo.license.try(&.name)
     r.synced_at = Time.utc
   end
 
