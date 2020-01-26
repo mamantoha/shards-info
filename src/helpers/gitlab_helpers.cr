@@ -3,33 +3,20 @@ require "shards/spec"
 module GitlabHelpers
   extend self
 
-  def sync_project(project : Gitlab::Project)
-    return if project.forked_from_project
+  def sync_project(gilab_project : Gitlab::Project)
+    return if gilab_project.forked_from_project
 
-    owner = project.namespace
-    tags = project.tag_list
+    owner = gilab_project.namespace
+    tags = gilab_project.tag_list
 
-    user = User.query.find_or_create({provider: "gitlab", provider_id: owner.id}) do |u|
-      u.login = owner.path
-      u.name = owner.name
-      u.kind = owner.kind
-      u.avatar_url = owner.avatar_url
-      u.synced_at = Time.utc
-    end
+    user = User.query.find_or_create({provider: "gitlab", provider_id: owner.id}) { }
+    update_user(user, owner)
+    user.save
 
-    repository = Repository.query.find_or_build({provider: "gitlab", provider_id: project.id}) { }
-
+    repository = Repository.query.find_or_build({provider: "gitlab", provider_id: gilab_project.id}) { }
     repository.user = user
-    repository.name = project.path
-    repository.description = project.description
-    repository.last_activity_at = project.last_activity_at
-    repository.stars_count = project.star_count
-    repository.forks_count = project.forks_count
-    repository.open_issues_count = project.open_issues_count
-    repository.created_at = project.created_at
-    repository.synced_at = Time.utc
-
-    repository.save!
+    update_repository(repository, gilab_project)
+    repository.save
 
     repository.tags = tags
 
@@ -37,6 +24,29 @@ module GitlabHelpers
     set_repository_readme(repository)
     sync_releases(repository)
     Helpers.update_dependecies(repository)
+  end
+
+  def update_user(user : User, owner : Gitlab::Namespace)
+    user.update({
+      login:      owner.path,
+      name:       owner.name,
+      kind:       owner.kind,
+      avatar_url: owner.avatar_url,
+      synced_at:  Time.utc,
+    })
+  end
+
+  def update_repository(repository : Repository, gitlab_project : Gitlab::Project)
+    repository.update({
+      name:              gitlab_project.path,
+      description:       gitlab_project.description,
+      last_activity_at:  gitlab_project.last_activity_at,
+      stars_count:       gitlab_project.star_count,
+      forks_count:       gitlab_project.forks_count,
+      open_issues_count: gitlab_project.open_issues_count,
+      created_at:        gitlab_project.created_at,
+      synced_at:         Time.utc,
+    })
   end
 
   def set_repository_shard_yml(repository : Repository)
