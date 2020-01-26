@@ -3,31 +3,18 @@ require "shards/spec"
 module GithubHelpers
   extend self
 
-  def sync_repository(github_repo : Github::Repo)
-    tags = github_repo.tags
-    github_user = github_repo.user
+  def sync_repository(github_repository : Github::Repo)
+    tags = github_repository.tags
+    github_user = github_repository.user
 
-    user = ::User.query.find_or_create({provider: "github", login: github_user.login}) do |u|
-      u.provider_id = github_user.id
-      u.name = github_user.name
-      u.kind = github_user.kind
-      u.avatar_url = github_user.avatar_url
-      u.synced_at = Time.utc
-    end
+    user = User.query.find_or_build({provider: "github", provider_id: github_user.id}) { }
+    update_user(user, github_user)
+    user.save!
 
-    repository = Repository.query.find_or_build({provider: "github", provider_id: github_repo.id}) { }
+    repository = Repository.query.find_or_build({provider: "github", provider_id: github_repository.id}) { }
     repository.user = user
-    repository.name = github_repo.name
-    repository.description = github_repo.description
-    repository.last_activity_at = github_repo.updated_at
-    repository.stars_count = github_repo.watchers_count
-    repository.forks_count = github_repo.forks_count
-    repository.open_issues_count = github_repo.open_issues_count
-    repository.created_at = github_repo.created_at
-    repository.license = github_repo.license.try(&.name)
-    repository.synced_at = Time.utc
-
-    repository.save!
+    update_repository(repository, github_repository)
+    repository.save
 
     repository.tags = tags
 
@@ -35,6 +22,30 @@ module GithubHelpers
     set_repository_readme(repository)
     sync_releases(repository)
     Helpers.update_dependecies(repository)
+  end
+
+  def update_user(user : User, github_user : Github::User)
+    user.update({
+      login:      github_user.login,
+      name:       github_user.name,
+      kind:       github_user.kind,
+      avatar_url: github_user.avatar_url,
+      synced_at:  Time.utc,
+    })
+  end
+
+  def update_repository(repository : Repository, github_repository : Github::Repo)
+    repository.update({
+      name:              github_repository.name,
+      description:       github_repository.description,
+      last_activity_at:  github_repository.updated_at,
+      stars_count:       github_repository.watchers_count,
+      forks_count:       github_repository.forks_count,
+      open_issues_count: github_repository.open_issues_count,
+      created_at:        github_repository.created_at,
+      license:           github_repository.license.try(&.name),
+      synced_at:         Time.utc,
+    })
   end
 
   def set_repository_shard_yml(repository : Repository)
