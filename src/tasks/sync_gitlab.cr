@@ -9,7 +9,7 @@ projects = gitlab_client.projects
 puts "OK!"
 
 projects.each do |project|
-  next if project.forked_from_project
+  next if project.forked_from_project || project.mirror
 
   owner = project.namespace
   tags = project.tag_list

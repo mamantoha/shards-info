@@ -4,7 +4,7 @@ module GitlabHelpers
   extend self
 
   def sync_project(gilab_project : Gitlab::Project)
-    return if gilab_project.forked_from_project
+    return if gilab_project.forked_from_project || gilab_project.mirror
 
     owner = gilab_project.namespace
     tags = gilab_project.tag_list
