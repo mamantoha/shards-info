@@ -105,7 +105,7 @@ get "/users" do |env|
 end
 
 get "/search" do |env|
-  if env.params.query.[]?("query").nil?
+  if env.params.query.[]?("query").nil? || env.params.query.[]?("query").try(&.empty?)
     env.redirect "/"
   else
     page = env.params.query["page"]? || ""
