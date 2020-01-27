@@ -6,16 +6,8 @@ class SyncRecentGitlabJob < Mosquito::PeriodicJob
   def perform
     projects = gitlab_client.recently_updated
 
-    projects.each do |_gitlab_project|
-      if repository = Repository.query.find({provider: "gitlab", provider_id: _gitlab_project.id})
-        # Update if repository has been changed
-        if repository.last_activity_at != _gitlab_project.last_activity_at
-          sync_project(_gitlab_project)
-        end
-      else
-        # Create new repository
-        sync_project(_gitlab_project)
-      end
+    projects.each do |gitlab_project|
+      sync_project(gitlab_project)
     end
   end
 

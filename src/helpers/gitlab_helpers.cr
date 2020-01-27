@@ -9,13 +9,21 @@ module GitlabHelpers
     owner = gilab_project.namespace
     tags = gilab_project.tag_list
 
-    user = User.query.find_or_create({provider: "gitlab", provider_id: owner.id}) { }
-    update_user(user, owner)
-    user.save
+    user = User.query.find_or_build({provider: "gitlab", provider_id: owner.id}) { }
+    assign_user_attributes(user, owner)
+
+    if user.changed?
+      user.synced_at = Time.utc
+      user.save
+    end
 
     repository = Repository.query.find_or_build({provider: "gitlab", provider_id: gilab_project.id}) { }
     repository.user = user
-    update_repository(repository, gilab_project)
+    assign_repository_attributes(repository, gilab_project)
+
+    return unless repository.changed?
+
+    repository.synced_at = Time.utc
     repository.save
 
     repository.tags = tags
@@ -26,18 +34,17 @@ module GitlabHelpers
     Helpers.update_dependecies(repository)
   end
 
-  def update_user(user : User, owner : Gitlab::Namespace)
-    user.update({
+  def assign_user_attributes(user : User, owner : Gitlab::Namespace)
+    user.set({
       login:      owner.path,
       name:       owner.name,
       kind:       owner.kind,
       avatar_url: owner.avatar_url,
-      synced_at:  Time.utc,
     })
   end
 
-  def update_repository(repository : Repository, gitlab_project : Gitlab::Project)
-    repository.update({
+  def assign_repository_attributes(repository : Repository, gitlab_project : Gitlab::Project)
+    repository.set({
       name:              gitlab_project.path,
       description:       gitlab_project.description,
       last_activity_at:  gitlab_project.last_activity_at,
@@ -46,7 +53,6 @@ module GitlabHelpers
       open_issues_count: gitlab_project.open_issues_count,
       license:           gitlab_project.license.try(&.name),
       created_at:        gitlab_project.created_at,
-      synced_at:         Time.utc,
     })
   end
 
