@@ -8,12 +8,20 @@ module GithubHelpers
     github_user = github_repository.user
 
     user = User.query.find_or_build({provider: "github", provider_id: github_user.id}) { }
-    update_user(user, github_user)
-    user.save!
+    assign_user_attributes(user, github_user)
+
+    if user.changed?
+      user.synced_at = Time.utc
+      user.save
+    end
 
     repository = Repository.query.find_or_build({provider: "github", provider_id: github_repository.id}) { }
     repository.user = user
-    update_repository(repository, github_repository)
+    assign_repository_attributes(repository, github_repository)
+
+    return unless repository.changed?
+
+    repository.synced_at = Time.utc
     repository.save
 
     repository.tags = tags
@@ -24,18 +32,17 @@ module GithubHelpers
     Helpers.update_dependecies(repository)
   end
 
-  def update_user(user : User, github_user : Github::User)
-    user.update({
+  def assign_user_attributes(user : User, github_user : Github::User)
+    user.set({
       login:      github_user.login,
       name:       github_user.name,
       kind:       github_user.kind,
       avatar_url: github_user.avatar_url,
-      synced_at:  Time.utc,
     })
   end
 
-  def update_repository(repository : Repository, github_repository : Github::Repo)
-    repository.update({
+  def assign_repository_attributes(repository : Repository, github_repository : Github::Repo)
+    repository.set({
       name:              github_repository.name,
       description:       github_repository.description,
       last_activity_at:  github_repository.last_activity_at,
@@ -44,7 +51,6 @@ module GithubHelpers
       open_issues_count: github_repository.open_issues_count,
       created_at:        github_repository.created_at,
       license:           github_repository.license.try(&.name),
-      synced_at:         Time.utc,
     })
   end
 

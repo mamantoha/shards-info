@@ -73,7 +73,7 @@ class Repository
       end
     end
 
-    touch
+    touch unless (new_tags + unlink_tags).empty?
   end
 
   def tag_names
