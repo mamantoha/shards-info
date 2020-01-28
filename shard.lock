@@ -10,7 +10,7 @@ shards:
 
   cache:
     github: mamantoha/cache
-    version: 0.5.0
+    version: 0.6.0
 
   common_marker:
     github: mamantoha/crystal-cmark-gfm
