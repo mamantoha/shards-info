@@ -1,6 +1,6 @@
-# shards-info
+# shards.info
 
-[![Build Status](https://travis-ci.org/mamantoha/shards-info.svg?branch=master)](https://travis-ci.org/mamantoha/shards-info)
+[![Build Status](https://travis-ci.org/mamantoha/shards-info.svg?branch=v1)](https://travis-ci.org/mamantoha/shards-info)
 
 View of all repositories on GitHub that have Crystal code in them.
 
