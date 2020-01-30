@@ -38,7 +38,7 @@ shards:
 
   dotenv:
     github: gdotdesign/cr-dotenv
-    commit: 668f5631bc487af5a588972729091b1fd04918b1
+    commit: a1f9f1afa51e1e6fce37734bc40754e04621d8db
 
   emoji:
     github: veelenga/emoji.cr
