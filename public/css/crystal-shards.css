@@ -131,8 +131,28 @@ ul.not-list li {
   line-height: 1;
   vertical-align: middle;
   border-radius: 3px;
-  width: 32px;
-  height: 32px;
+  box-shadow: 0 0 0 1px #1d2127, 0 0 0 2px #e9e9ea;
+  width: 64px;
+  height: 64px;
+}
+
+.avatar_block {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar_block .badge {
+  position: absolute;
+  top: 52px;
+  right: 45px;
+}
+
+.avatar_block .badge .fa-stack {
+  font-size: 0.8em;
+  color: black;
+}
+.avatar_block .badge i {
+  vertical-align: middle;
 }
 
 .user__avatar img {
