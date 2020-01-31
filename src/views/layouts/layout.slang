@@ -22,7 +22,7 @@ html lang="en"
 
     link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"
     link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"
-    link rel="stylesheet" href="/css/crystal-shards.css?v=1.4"
+    link rel="stylesheet" href="/css/crystal-shards.css?v=1.5"
 
     title #{Config.config.page_title}
     link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon"
