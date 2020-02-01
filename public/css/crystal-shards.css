@@ -29,7 +29,6 @@ ul.not-list li {
   height: 16px;
 }
 
-
 .footer {
   position: absolute;
   bottom: 0;
@@ -418,6 +417,18 @@ ul.not-list li {
 .users .user img.avatar {
   width: 64px;
   height: 64px;
+}
+
+.nav-tabs .nav-link {
+  color: #586069;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-top: 3px solid transparent;
+  border-radius: 3px 3px 0 0;
+}
+
+.nav-tabs .nav-link.active {
+  border-color: #e36209 #e1e4e8 transparent;
 }
 
 .subnav .nav-link {
