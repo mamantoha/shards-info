@@ -1,17 +1,19 @@
+div
+  .page__heading
+    .container
+      h1
+        = "#{repository.name}"
+        i.page__subheading
+          = repository.decorate.latest_release
+      .shard__topics
+        - repository.tag_names.each do |name|
+          a href="/tags/#{name}" class="badge badge-secondary text-monospace" = name
+      .shard__intro.text-muted
+        span
+          == Emoji.emojize(Autolink.auto_link(repository.description.to_s))
 .container
   .row
     .col-md-8.col-sm-12.shard__main
-      .shard__heading
-        h1
-          = "#{repository.name}"
-          i.page__subheading
-            = repository.decorate.latest_release
-        .shard__topics
-          - repository.tag_names.each do |name|
-            a href="/tags/#{name}" class="badge badge-secondary text-monospace" = name
-      .shard__intro
-        span
-          == Emoji.emojize(Autolink.auto_link(repository.description.to_s))
       ul class="nav nav-tabs nav-fill" id="infoTab" role="tablist"
         li class="nav-item"
           a class="nav-link active" id="info-tab" href="#info" role="tab" data-toggle="tab" aria-controls="info" aria-selected="true"
@@ -43,6 +45,15 @@
                 == changelog_html
 
     .col-md-4.col-sm-12
+      .list__heading Owner:
+      ul.shard__links.not-list
+        li
+          .shards__shard_owner
+            .shards__shard_owner_avatar
+              img src="#{repository.user.decorate.avatar}" alt="#{repository.user.login}"
+            .shards__shard_owner_name
+              a href="/#{repository.provider}/#{repository.user.login}"
+                = repository.user.login
       .list__heading= "#{repository.provider} statistic:"
       ul.shard__statistic.not-list
         li

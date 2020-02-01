@@ -54,12 +54,3 @@
             li
               i class="#{repository.decorate.provider_icon}"
               a href="/#{repository.provider}/#{repository.user.login}/#{repository.name}" = repository.name
-.row
-  .col-12
-    .shard__owner
-      h3.list__heading Owner:
-      .shards__shard_owner
-        .shards__shard_owner_avatar
-          img src="#{repository.user.decorate.avatar}" alt="#{repository.user.login}"
-        .shards__shard_owner_name
-          a href="/#{repository.provider}/#{repository.user.login}" = repository.user.login

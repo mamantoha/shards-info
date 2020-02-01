@@ -202,7 +202,6 @@ ul.not-list li {
 
 .shards__shard_owner {
   display: inline-flex;
-  padding-bottom: 1rem;
 }
 
 .shards__shard_owner_avatar img {
@@ -266,31 +265,17 @@ ul.not-list li {
   border-right: 1px solid #c1c4ca;
 }
 
-.shard__heading {
-  padding-top: 30px;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
-  border-bottom: 1px solid #c1c4ca;
-  text-overflow: ellipsis;
-  overflow:hidden;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-}
-
-
 .shard__intro {
-  margin-bottom: 32px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid #c1c4ca;
-}
-
-.info-block {
-  margin-bottom: 12px;
+  padding-bottom: 2px;
 }
 
 .shard__topics {
   white-space: initial;
   margin-bottom: 5px;
+}
+
+.info-block {
+  margin-bottom: 12px;
 }
 
 .list__items {
@@ -361,7 +346,6 @@ ul.not-list li {
   font-size: 12px;
   text-transform: uppercase;
   color: #a6aab2;
-  margin-top: 15px;
 }
 
 [data-toggle="collapse"] .fa:before {
