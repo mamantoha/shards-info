@@ -1,4 +1,8 @@
 class UserDelegator < Delegator(User)
+  def full_name : String
+    name || login
+  end
+
   def avatar
     return "/images/avatar.png" unless avatar_url
 

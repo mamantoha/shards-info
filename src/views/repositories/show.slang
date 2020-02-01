@@ -58,7 +58,7 @@
         = repository.open_issues_count
       li
         i class="fas fa-clock" title="Last update"
-        = "#{HumanizeTime.distance_of_time_in_words(repository.last_activity_at, Time.local)} ago"
+        = repository.decorate.last_activity_ago
       li
         i class="fas fa-hourglass-start" title="Created"
         = repository.created_at.try(&.to_s("%B %-d, %Y"))

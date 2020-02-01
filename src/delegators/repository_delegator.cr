@@ -7,6 +7,10 @@ class RepositoryDelegator < Delegator(Repository)
     releases.published.order_by(published_at: :desc).first.try(&.tag_name) || ""
   end
 
+  def last_activity_ago
+    "#{HumanizeTime.distance_of_time_in_words(last_activity_at, Time.local)} ago"
+  end
+
   def description_with_emoji : String?
     description.try do |_description|
       Emoji.emojize(_description)

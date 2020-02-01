@@ -101,6 +101,9 @@ get "/users" do |env|
 
   users = users_query.limit(per_page).offset(offset)
 
+  Config.config.page_title = "Crystal developers"
+  Config.config.page_description = "Crystal developers"
+
   render "src/views/users/index.slang", "src/views/layouts/layout.slang"
 end
 

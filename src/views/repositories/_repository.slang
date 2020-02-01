@@ -35,5 +35,5 @@
           i class="fas fa-exclamation-circle" title="Open issues"
           = repository.open_issues_count
         li
-          .shards__shard_updated
-            = "Updated #{HumanizeTime.distance_of_time_in_words(repository.last_activity_at, Time.local)} ago"
+          i class="fas fa-clock" title="Last activity"
+          = repository.decorate.last_activity_ago
