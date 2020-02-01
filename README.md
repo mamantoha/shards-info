@@ -1,4 +1,4 @@
-# shards-info
+![shards.info](https://github.com/mamantoha/site-assets/raw/develop/public/images/logo-horizontal.png)
 
 [![Build Status](https://travis-ci.org/mamantoha/shards-info.svg?branch=master)](https://travis-ci.org/mamantoha/shards-info)
 
