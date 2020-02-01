@@ -237,12 +237,11 @@ ul.not-list li {
   padding-top: 30px;
   padding-bottom: 20px;
   margin-bottom: 30px;
-  border-bottom: 1px solid #c1c4ca;
   text-overflow: ellipsis;
   overflow:hidden;
   overflow-wrap: break-word;
   word-wrap: break-word;
-
+  background-color: #fafbfc!important;
 }
 
 .page__heading .fork-flag {
@@ -266,6 +265,18 @@ ul.not-list li {
 .shard__main {
   border-right: 1px solid #c1c4ca;
 }
+
+.shard__heading {
+  padding-top: 30px;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #c1c4ca;
+  text-overflow: ellipsis;
+  overflow:hidden;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
 
 .shard__intro {
   margin-bottom: 32px;
@@ -397,18 +408,13 @@ ul.not-list li {
   opacity: 1;
 }
 
-.users {
-  border: 1px solid #d1d5da;
-  border-radius: 3px;
-}
-
-.user {
+.users .user {
   padding: 16px;
-  border-top: 1px solid #e1e4e8;
+  border-bottom: 1px solid #e1e4e8;
 
 }
 
-.user img.avatar {
+.users .user img.avatar {
   width: 64px;
   height: 64px;
 }

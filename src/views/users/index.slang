@@ -1,12 +1,13 @@
 div
   h1.page__heading
-    ' Crystal developers
-    .result_stats
-      = total_count
-      ' users
+    .container
+      ' Crystal community
+      .result_stats
+        = total_count
+        ' developers
+.container
+  .users
+    - users.each(fetch_columns: true) do |user|
+      == render "src/views/users/_user_card.slang"
 
-.users
-  - users.each(fetch_columns: true) do |user|
-    == render "src/views/users/_user_card.slang"
-
-== paginator
+  == paginator

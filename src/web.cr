@@ -71,8 +71,8 @@ get "/" do |env|
       .order_by(last_activity_at: :desc)
       .limit(20)
 
-  Config.config.page_title = "Shards Info"
-  Config.config.page_description = "View of all repositories on GitHub that have Crystal code in them"
+  Config.config.page_title = "Trending repositories"
+  Config.config.page_description = "See what the Crystal community is most excited about today"
 
   render "src/views/index.slang", "src/views/layouts/layout.slang"
 end
