@@ -17,7 +17,7 @@
           ' Popular repository
         div
           i class="#{repository.decorate.provider_icon}"
-          a href="/#{user.provider}/#{repository.name}"
+          a href="/#{user.provider}/#{user.login}/#{repository.name}"
             = repository.name
         .text-muted.mb-2
           = repository.description

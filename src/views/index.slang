@@ -3,7 +3,7 @@ div
     .container.text-center
       .h1
         ' Trending
-      .h6.text-mutted.font-weight-light
+      .h6.font-weight-light
         ' See what the Crystal community is most excited about today
 
 .container
