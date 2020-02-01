@@ -31,6 +31,8 @@ export KEMAL_ENV=test && crystal spec
 * [Crystal language](https://crystal-lang.org/)
 * [Kemal](https://github.com/kemalcr/kemal) - Web microframework for Crystal
 
+Logo [icon](https://game-icons.net/1x1/lorc/floating-crystal.html) taken from [Game Icons pack](https://game-icons.net/) under CC BY 3.0 license.
+
 ## Contributing
 
 1. Fork it (<https://github.com/mamantoha/shards-info/fork>)
