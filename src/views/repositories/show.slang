@@ -8,7 +8,7 @@
             = repository.decorate.latest_release
         .shard__topics
           - repository.tag_names.each do |name|
-            a href="/tags/#{name}" class="badge badge-secondary" = name
+            a href="/tags/#{name}" class="badge badge-secondary text-monospace" = name
       .shard__intro
         span
           == Emoji.emojize(Autolink.auto_link(repository.description.to_s))

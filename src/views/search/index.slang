@@ -2,7 +2,7 @@ div
   h1.page__heading
     .container
       ' search
-      i.page__subheading
+      span.page__subheading
         ' for
         span class="badge badge-info"
           = query

@@ -1,9 +1,9 @@
 div
   h1.page__heading
     .container.text-center
-      h1
+      .h1
         ' Trending
-      i.page__subheading
+      .h6.text-mutted.font-weight-light
         ' See what the Crystal community is most excited about today
 
 .container

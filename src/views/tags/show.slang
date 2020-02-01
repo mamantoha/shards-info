@@ -2,7 +2,7 @@ div
   h1.page__heading
     .container
       ' tagged
-      i.page__subheading
+      span.page__subheading
         ' with
         span class="badge badge-info"
           = tag.name

@@ -22,7 +22,7 @@
       / TODO: for some reason repository.tags breaks html template
       / - repository.tags.each do |tag|
       - repository.tag_names.each do |tag|
-        a href="/tags/#{tag}" class="badge badge-secondary" = tag
+        a href="/tags/#{tag}" class="badge badge-secondary text-monospace" = tag
     .shards__shard_github
       ul
         li
