@@ -58,6 +58,10 @@ ul.not-list li {
   background-color: #24292E!important;
 }
 
+.navbar-brand img {
+  filter: invert(100%);
+}
+
 .has-search .form-control {
   padding-left: 2.375rem;
 }
