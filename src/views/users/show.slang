@@ -1,4 +1,4 @@
-.container
+.container.user_container
   .row
     .col-md-3
       == render "src/views/users/_user_column.slang"

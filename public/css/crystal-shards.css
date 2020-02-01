@@ -393,6 +393,10 @@ ul.not-list li {
   opacity: 1;
 }
 
+.user_container {
+  padding-top: 20px;
+}
+
 .users .user {
   padding: 16px;
   border-bottom: 1px solid #e1e4e8;
