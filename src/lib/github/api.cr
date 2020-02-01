@@ -36,7 +36,7 @@ module Github
         user: user,
         password: key,
         logging: @logging,
-        logger: Github::Logger.new
+        logger: Github.logger
       )
 
       client.http_client.compress = false

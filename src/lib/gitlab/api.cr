@@ -39,7 +39,7 @@ module Gitlab
         },
         http_client: http_client,
         logging: @logging,
-        logger: Gitlab::Logger.new
+        logger: Gitlab.logger
       )
     end
 
