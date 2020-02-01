@@ -1,5 +1,4 @@
 require "dotenv"
-require "mosquito"
 
 Dotenv.load?
 
