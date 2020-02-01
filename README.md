@@ -1,6 +1,7 @@
-![shards.info](https://github.com/mamantoha/shards-info/blob/develop/public/images/logo-horizontal.png)
+<img src="https://raw.githubusercontent.com/mamantoha/shards-info/develop/public/images/logo-horizontal.png" alt="shards.info" width="360" />
 
-[![Build Status](https://travis-ci.org/mamantoha/shards-info.svg?branch=master)](https://travis-ci.org/mamantoha/shards-info)
+[![Built with Crystal](https://img.shields.io/badge/built%20with-crystal-000000.svg?style=for-the-badge&logo=appveyor)](https://crystal-lang.org/)
+![Travis (.org) branch](https://img.shields.io/travis/mamantoha/shards-info/develop?style=for-the-badge)
 
 View of all repositories on GitHub that have Crystal code in them.
 
