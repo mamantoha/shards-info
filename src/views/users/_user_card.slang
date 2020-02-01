@@ -8,7 +8,7 @@
       .text-muted
         i class="fab #{user.decorate.provider_icon}"
         = "#{user.login}"
-      .small
+      .small.mb-4
         | #{user.attributes["repositories_count"]} repositories
     .col-md-10
       - if repository = user.repositories.order_by({stars_count: :desc}).first
