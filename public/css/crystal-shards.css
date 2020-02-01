@@ -279,9 +279,12 @@ ul.not-list li {
   padding-right: 0;
 }
 
+.shard__main .tab-content {
+  padding-right: 15px;
+}
+
 .shard__statistic {
   border-left: 1px solid #e1e4e8;
-  padding-right: 5px;
 }
 
 .shard__intro {
