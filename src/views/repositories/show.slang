@@ -1,6 +1,6 @@
 div
   .page__heading
-    .container
+    .container.shard__header
       h1
         = "#{repository.name}"
         i.page__subheading
@@ -44,7 +44,7 @@ div
               .col-md-12.shard__changelog
                 == changelog_html
 
-    .col-md-4.col-sm-12
+    .col-md-4.col-sm-12.shard__statistic
       .list__heading Owner:
       ul.shard__links.not-list
         li
@@ -55,7 +55,7 @@ div
               a href="/#{repository.provider}/#{repository.user.login}"
                 = repository.user.login
       .list__heading= "#{repository.provider} statistic:"
-      ul.shard__statistic.not-list
+      ul.repository__statistic.not-list
         li
           i class="fas fa-star" title="Stars"
           = repository.stars_count

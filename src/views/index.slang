@@ -1,13 +1,13 @@
 == render "src/views/partials/subnav.slang"
 div
   h1.page__heading
-    .container.text-center
+    .container.text-center.home_heaeding__container
       .h1
         ' Repositories
       .h6.font-weight-light
         ' See what the Crystal community is most excited about today
 
-.container
+.container.home_repositories__container
   h1 style="display: none;" Trending Crystal repositories
 
   ul class="nav nav-tabs nav-fill justify-content-center" id="reposTab" role="tablist"

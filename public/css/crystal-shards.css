@@ -135,6 +135,15 @@ ul.not-list li {
   height: 64px;
 }
 
+.home_heaeding__container {
+  padding-bottom: 40px;
+}
+
+.home_repositories__container {
+  position: relative;
+  top: -74px
+}
+
 .avatar_block {
   position: relative;
   display: inline-block;
@@ -261,12 +270,22 @@ ul.not-list li {
   color: #808080;
 }
 
+.shard__header {
+  padding-bottom: 40px;
+}
+
 .shard__main {
-  border-right: 1px solid #c1c4ca;
+  top: -74px;
+  padding-right: 0;
+}
+
+.shard__statistic {
+  border-left: 1px solid #e1e4e8;
+  padding-right: 5px;
 }
 
 .shard__intro {
-  padding-bottom: 2px;
+  padding: 0;
 }
 
 .shard__topics {
@@ -292,7 +311,7 @@ ul.not-list li {
   clear: both;
 }
 
-.shard__statistic {
+.repository__statistic {
   padding-left: 0px;
 }
 
@@ -411,12 +430,16 @@ ul.not-list li {
   color: #586069;
   white-space: nowrap;
   border: 1px solid transparent;
-  border-top: 3px solid transparent;
   border-radius: 3px 3px 0 0;
 }
 
 .nav-tabs .nav-link.active {
+  border-top: 3px solid;
   border-color: #e36209 #e1e4e8 transparent;
+}
+
+.nav-tabs .nav-link:hover {
+  border-bottom: transparent;
 }
 
 .subnav .nav-link {
