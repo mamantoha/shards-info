@@ -73,6 +73,7 @@ get "/" do |env|
 
   Config.config.page_title = "Trending repositories"
   Config.config.page_description = "See what the Crystal community is most excited about today"
+  Config.config.current_page = "home"
 
   render "src/views/index.slang", "src/views/layouts/layout.slang"
 end
@@ -103,6 +104,7 @@ get "/users" do |env|
 
   Config.config.page_title = "Crystal developers"
   Config.config.page_description = "Crystal developers"
+  Config.config.current_page = "users"
 
   render "src/views/users/index.slang", "src/views/layouts/layout.slang"
 end

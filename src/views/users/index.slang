@@ -1,3 +1,4 @@
+== render "src/views/partials/subnav.slang"
 div
   h1.page__heading
     .container
