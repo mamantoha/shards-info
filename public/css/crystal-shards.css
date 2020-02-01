@@ -131,7 +131,8 @@ ul.not-list li {
   line-height: 1;
   vertical-align: middle;
   border-radius: 3px;
-  box-shadow: 0 0 0 1px #1d2127, 0 0 0 2px #e9e9ea;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
   width: 64px;
   height: 64px;
 }
