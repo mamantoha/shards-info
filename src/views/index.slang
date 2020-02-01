@@ -3,12 +3,12 @@ div
   h1.page__heading
     .container.text-center
       .h1
-        ' Trending
+        ' Repositories
       .h6.font-weight-light
         ' See what the Crystal community is most excited about today
 
 .container
-  h1 style="display: none;" Trending Crystal shards
+  h1 style="display: none;" Trending Crystal repositories
 
   ul class="nav nav-tabs nav-fill justify-content-center" id="reposTab" role="tablist"
     li class="nav-item"
