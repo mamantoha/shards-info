@@ -18,8 +18,9 @@ module Github
   class API
     getter base_url, user, key
     property exception_handler
+    property logging
 
-    def initialize(@user : String, @key : String)
+    def initialize(@user : String, @key : String, @logging = true)
       @base_url = "https://api.github.com"
       @exception_handler = Exception.new
     end
@@ -34,8 +35,8 @@ module Github
         },
         user: user,
         password: key,
-        logging: true,
-        logger: Logger.new
+        logging: @logging,
+        logger: Github::Logger.new
       )
 
       client.http_client.compress = false

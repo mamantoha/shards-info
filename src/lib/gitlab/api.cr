@@ -17,8 +17,9 @@ module Gitlab
 
   class API
     property client
+    property logging
 
-    def initialize(@access_token : String)
+    def initialize(@access_token : String, @logging = true)
       @base_url = "https://gitlab.com/api/v4"
     end
 
@@ -37,8 +38,8 @@ module Gitlab
           "access_token" => @access_token,
         },
         http_client: http_client,
-        logging: true,
-        logger: Logger.new
+        logging: @logging,
+        logger: Gitlab::Logger.new
       )
     end
 
