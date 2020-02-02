@@ -109,6 +109,46 @@ get "/users" do |env|
   render "src/views/users/index.slang", "src/views/layouts/layout.slang"
 end
 
+get "/tags" do |env|
+  skipped_tags = [
+    "crystal", "crystal-language", "crystallang", "crystal-lang", "crystal-shard", "crystal-shards",
+    "shard", "shards",
+  ]
+
+  tags_json = CACHE.fetch("tags_json") do
+    tags =
+      Tag
+        .query
+        .where { ~(name.in? skipped_tags) }
+        .join("repository_tags") { repository_tags.tag_id == var("tags", "id") }
+        .group_by("tags.id")
+        .order_by(tagging_count: :desc)
+        .limit(200)
+        .select(
+          "tags.*",
+          "COUNT(repository_tags.*) AS tagging_count"
+        )
+
+    tags_array = [] of Hash(String, String)
+
+    tags.each(fetch_columns: true) do |tag|
+      tags_array << {
+        "text"   => tag.name.to_s,
+        "weight" => tag.attributes["tagging_count"].to_s,
+        "link"   => "/tags/#{tag.name}",
+      }
+    end
+
+    tags_array.to_json
+  end
+
+  Config.config.page_title = "Tags on shard.info"
+  Config.config.page_description = "Browse popular tags on shards.info"
+  Config.config.current_page = "tags"
+
+  render "src/views/tags/index.slang", "src/views/layouts/layout.slang"
+end
+
 get "/search" do |env|
   if env.params.query.[]?("query").nil? || env.params.query.[]?("query").try(&.empty?)
     env.redirect "/"
