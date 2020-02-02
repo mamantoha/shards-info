@@ -71,7 +71,7 @@ get "/" do |env|
       .order_by(last_activity_at: :desc)
       .limit(20)
 
-  Config.config.page_title = "Trending repositories"
+  Config.config.page_title = "shards.info"
   Config.config.page_description = "See what the Crystal community is most excited about today"
   Config.config.current_page = "home"
 

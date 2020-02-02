@@ -8,7 +8,7 @@
           span aria-hidden="true" == "&times;"
       .modal-body
         p
-          | View of all repositories on GitHub and Gitlab that have Crystal code in them.
+          | View of all repositories on Github and Gitlab that have Crystal code in them.
         ul
           li
             | Build with:
@@ -26,7 +26,7 @@
             | Build date #{Time.parse_rfc2822(Config.date).to_s("%Y-%m-%d %H:%M:%S %:z")}
           li
             | Official code repository is on
-            a href="https://github.com/mamantoha/shards-info" GitHub
+            a href="https://github.com/mamantoha/shards-info" Github
           li
             | Developed and maintained by
             a href="mailto:anton.maminov@gmail.com" Anton Maminov
