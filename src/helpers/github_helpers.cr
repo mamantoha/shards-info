@@ -3,7 +3,21 @@ require "shards/spec"
 module GithubHelpers
   extend self
 
-  def sync_repository(github_repository : Github::Repo)
+  def resync_repository(repository : Repository)
+    return unless repository.provider == "github"
+
+    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+
+    github_repository = github_client.get_repo(repository.user.login, repository.name)
+
+    assign_repository_attributes(repository, github_repository)
+    repository.synced_at = Time.utc
+    repository.save
+  rescue Crest::NotFound
+    repository.delete
+  end
+
+  def sync_github_repository(github_repository : Github::Repo)
     tags = github_repository.tags
     github_user = github_repository.user
 
