@@ -49,5 +49,5 @@ html lang="en"
     script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
     script src="https://cdnjs.cloudflare.com/ajax/libs/moveTo/1.7.3/moveTo.min.js"
 
-    script src="/js/crystal-shards.js?v=1.0"
+    script src="/js/crystal-shards.js?v=1.1"
     script src="/js/jquery.twbsPagination.js"
