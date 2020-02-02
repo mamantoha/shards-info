@@ -142,7 +142,7 @@ get "/tags" do |env|
     tags_array.to_json
   end
 
-  Config.config.page_title = "Tags on shard.info"
+  Config.config.page_title = "Tags on shards.info"
   Config.config.page_description = "Browse popular tags on shards.info"
   Config.config.current_page = "tags"
 
