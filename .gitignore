@@ -2,6 +2,7 @@
 /lib/
 /bin/
 /log/
+/src/tasks/
 /.shards/
 .env
 .DS_Store
