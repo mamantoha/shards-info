@@ -107,6 +107,7 @@ ul.not-list li {
   text-overflow: ellipsis;
   white-space: nowrap;
   vertical-align: top;
+  width: 70vw;
 }
 
 .dont-break-out {
