@@ -53,6 +53,10 @@ before_all do |env|
   Config.config.query = env.request.query_params["query"]?.to_s
 end
 
+error 404 do
+  render "src/views/404.slang"
+end
+
 get "/" do |env|
   trending_repositories =
     Repository
@@ -205,7 +209,7 @@ get "/:provider/:owner" do |env|
 
     render "src/views/users/show.slang", "src/views/layouts/layout.slang"
   else
-    halt env, 404, render_404
+    raise Kemal::Exceptions::RouteNotFound.new(env)
   end
 end
 
@@ -234,7 +238,7 @@ get "/:provider/:owner/:repo" do |env|
 
     render "src/views/repositories/show.slang", "src/views/layouts/layout.slang"
   else
-    halt env, 404, render_404
+    raise Kemal::Exceptions::RouteNotFound.new(env)
   end
 end
 
@@ -274,7 +278,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
 
     render "src/views/dependents/index.slang", "src/views/layouts/layout.slang"
   else
-    halt env, 404, render_404
+    raise Kemal::Exceptions::RouteNotFound.new(env)
   end
 end
 
@@ -312,7 +316,7 @@ get "/tags/:name" do |env|
 
     render "src/views/tags/show.slang", "src/views/layouts/layout.slang"
   else
-    halt env, 404, render_404
+    raise Kemal::Exceptions::RouteNotFound.new(env)
   end
 end
 
