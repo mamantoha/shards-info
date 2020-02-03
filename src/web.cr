@@ -2,8 +2,6 @@ require "shards/spec"
 require "yaml"
 require "base64"
 require "kemal"
-require "kemal-session"
-require "kemal-flash"
 require "kilt/slang"
 require "crest"
 require "emoji"
@@ -17,10 +15,6 @@ require "../config/config"
 require "./config"
 require "./view_helpers"
 require "./delegators"
-
-Kemal::Session.config do |config|
-  config.secret = "my_super_secret"
-end
 
 Raven.configure do |config|
   config.async = true

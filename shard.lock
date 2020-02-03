@@ -38,7 +38,7 @@ shards:
 
   dotenv:
     github: gdotdesign/cr-dotenv
-    commit: 67296000c2ca95684c3de00a04afc357f53f98f9
+    commit: 31a7209e04fef73bc87e8a57ca95b58848f6715b
 
   emoji:
     github: veelenga/emoji.cr
@@ -75,14 +75,6 @@ shards:
   kemal:
     github: mamantoha/kemal
     commit: 7e3a8ee150d88a47d862474b5d3ed3990016e9cf
-
-  kemal-flash:
-    github: neovintage/kemal-flash
-    version: 0.1.0
-
-  kemal-session:
-    github: mamantoha/kemal-session
-    commit: 1596739f778b7a042c4ab4ba56cd9f56e87b2f2f
 
   kilt:
     github: jeromegn/kilt

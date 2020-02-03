@@ -30,7 +30,6 @@ html lang="en"
     == render "src/views/partials/navbar.slang"
     == render "src/views/partials/about.slang"
     == render "src/views/partials/back_to_top.slang"
-    == render "src/views/partials/flash.slang"
     == content
     div.space
     footer.footer

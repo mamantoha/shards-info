@@ -19,10 +19,6 @@ dependencies:
     # github: kemalcr/kemal
     github: mamantoha/kemal
     branch: crystal-0.33
-  kemal-session:
-    # github: kemalcr/kemal-session
-    github: mamantoha/kemal-session
-    branch: crystal-0.32
   clear:
     # github: anykeyh/clear
     # branch: master
@@ -48,8 +44,6 @@ dependencies:
   common_marker:
     github: mamantoha/crystal-cmark-gfm
     branch: master
-  kemal-flash:
-    github: neovintage/kemal-flash
   autolink:
     github: crystal-community/autolink.cr
   raven:
