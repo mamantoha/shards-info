@@ -138,7 +138,7 @@ module Gitlab
 
     property service_desk_address : String?
 
-    property marked_for_deletion_at : Time?
+    property marked_for_deletion_at : String?
 
     property forked_from_project : ForkedFromProject?
 
@@ -211,6 +211,30 @@ module Gitlab
     property web_url : String
   end
 
+  class Owner
+    include JSON::Serializable
+
+    property id : Int32
+
+    property name : String
+
+    property username : String
+
+    property state : String
+
+    property avatar_url : String
+
+    property web_url : String
+
+    def path
+      username
+    end
+
+    def kind
+      "user"
+    end
+  end
+
   class License
     include JSON::Serializable
 
@@ -242,22 +266,6 @@ module Gitlab
     property events : String
 
     property members : String
-  end
-
-  class Owner
-    include JSON::Serializable
-
-    property id : Int32
-
-    property name : String
-
-    property username : String
-
-    property state : String
-
-    property avatar_url : String
-
-    property web_url : String
   end
 
   class Permissions

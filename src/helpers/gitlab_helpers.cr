@@ -6,7 +6,7 @@ module GitlabHelpers
   def sync_project(gilab_project : Gitlab::Project)
     return if gilab_project.forked_from_project || gilab_project.mirror
 
-    owner = gilab_project.namespace
+    owner = gilab_project.owner || gilab_project.namespace
     tags = gilab_project.tag_list
 
     user = User.query.find_or_build({provider: "gitlab", provider_id: owner.id}) { }
@@ -35,7 +35,7 @@ module GitlabHelpers
     Helpers.update_dependecies(repository)
   end
 
-  def assign_user_attributes(user : User, owner : Gitlab::Namespace)
+  def assign_user_attributes(user : User, owner : Gitlab::Namespace | Gitlab::Owner)
     user.set({
       login:      owner.path,
       name:       owner.name,

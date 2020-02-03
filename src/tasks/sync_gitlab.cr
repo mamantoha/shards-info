@@ -11,7 +11,7 @@ puts "OK!"
 projects.each do |project|
   next if project.forked_from_project || project.mirror
 
-  owner = project.namespace
+  owner = project.owner || project.namespace
   tags = project.tag_list
 
   user = User.query.find_or_create({provider: "gitlab", provider_id: owner.id}) do |u|
