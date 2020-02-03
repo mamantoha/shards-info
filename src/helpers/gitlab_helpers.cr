@@ -19,7 +19,7 @@ module GitlabHelpers
 
     repository = Repository.query.find_or_build({provider: "gitlab", provider_id: gilab_project.id}) { }
     repository.user = user
-    assign_repository_attributes(repository, gilab_project)
+    assign_project_attributes(repository, gilab_project)
 
     return unless repository.changed?
 
@@ -28,9 +28,10 @@ module GitlabHelpers
 
     repository.tags = tags
 
-    set_repository_shard_yml(repository)
-    set_repository_readme(repository)
-    sync_releases(repository)
+    sync_project_shard_yml(repository)
+    sync_project_readme(repository)
+    sync_project_releases(repository)
+
     Helpers.update_dependecies(repository)
   end
 
@@ -43,7 +44,7 @@ module GitlabHelpers
     })
   end
 
-  def assign_repository_attributes(repository : Repository, gitlab_project : Gitlab::Project)
+  def assign_project_attributes(repository : Repository, gitlab_project : Gitlab::Project)
     repository.set({
       name:              gitlab_project.path,
       description:       gitlab_project.description,
@@ -56,7 +57,7 @@ module GitlabHelpers
     })
   end
 
-  def set_repository_shard_yml(repository : Repository)
+  def sync_project_shard_yml(repository : Repository)
     gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
 
     response = gitlab_client.get_file(repository.provider_id, "shard.yml")
@@ -71,7 +72,7 @@ module GitlabHelpers
     false
   end
 
-  def set_repository_readme(repository : Repository)
+  def sync_project_readme(repository : Repository)
     gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
 
     response = gitlab_client.get_file(repository.provider_id, "README.md")
@@ -86,7 +87,7 @@ module GitlabHelpers
     false
   end
 
-  def sync_releases(repository : Repository)
+  def sync_project_releases(repository : Repository)
     gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
     gitlab_releases = gitlab_client.project_releases(repository.provider_id)
 

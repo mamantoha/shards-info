@@ -56,9 +56,10 @@ module GithubHelpers
 
     repository.tags = tags
 
-    set_repository_shard_yml(repository)
-    set_repository_readme(repository)
-    sync_releases(repository)
+    sync_repository_shard_yml(repository)
+    sync_repository_readme(repository)
+    sync_repository_releases(repository)
+
     Helpers.update_dependecies(repository)
   end
 
@@ -84,7 +85,7 @@ module GithubHelpers
     })
   end
 
-  def set_repository_shard_yml(repository : Repository)
+  def sync_repository_shard_yml(repository : Repository)
     github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
     response = github_client.repo_content(repository.user.login, repository.name, "shard.yml")
@@ -99,7 +100,7 @@ module GithubHelpers
     false
   end
 
-  def set_repository_readme(repository : Repository)
+  def sync_repository_readme(repository : Repository)
     github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
     response = github_client.repo_readme(repository.user.login, repository.name)
@@ -114,7 +115,7 @@ module GithubHelpers
     false
   end
 
-  def sync_releases(repository : Repository)
+  def sync_repository_releases(repository : Repository)
     github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
     github_releases = github_client.repo_releases(repository.user.login, repository.name)
