@@ -17,8 +17,8 @@ shards:
     version: 0.6.0
 
   clear:
-    github: mamantoha/clear
-    commit: ca25d926b3d5c0777c3639ca1477863ef4e4b3a8
+    github: anykeyh/clear
+    commit: 6fca1e595dffb3243c6476fd8b5ac82e5ab3bdf9
 
   common_marker:
     github: mamantoha/crystal-cmark-gfm
