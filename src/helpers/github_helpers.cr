@@ -6,8 +6,6 @@ module GithubHelpers
   def resync_repository(repository : Repository)
     return unless repository.provider == "github"
 
-    user = repository.user
-
     github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
     github_repository = github_client.get_repo(repository.user.login, repository.name)
@@ -15,6 +13,7 @@ module GithubHelpers
     tags = github_repository.tags
     github_user = github_repository.user
 
+    user = User.query.find_or_build({provider: "github", provider_id: github_user.id}) { }
     assign_user_attributes(user, github_user)
 
     if user.changed?
@@ -22,6 +21,7 @@ module GithubHelpers
       user.save
     end
 
+    repository.user = user
     assign_repository_attributes(repository, github_repository)
     repository.synced_at = Time.utc
     repository.save
