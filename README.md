@@ -26,13 +26,12 @@ crystal src/db.cr -- migrate
 export KEMAL_ENV=test && crystal spec
 ```
 
-## Built With
+## Special thanks
 
 * [Crystal language](https://crystal-lang.org/)
 * [Clear](https://github.com/anykeyh/clear) - Advanced ORM between PostgreSQL and Crystal
 * [Kemal](https://github.com/kemalcr/kemal) - Web microframework for Crystal
-
-Logo [icon](https://game-icons.net/1x1/lorc/floating-crystal.html) taken from [Game Icons pack](https://game-icons.net/) under CC BY 3.0 license.
+* Logo [icon](https://game-icons.net/1x1/lorc/floating-crystal.html) taken from [Game Icons pack](https://game-icons.net/) under CC BY 3.0 license.
 
 ## Contributing
 
