@@ -18,7 +18,7 @@ shards:
 
   clear:
     github: mamantoha/clear
-    commit: f0028d9e8fc9cd88973684207c955a7475bd1a0d
+    commit: ca25d926b3d5c0777c3639ca1477863ef4e4b3a8
 
   common_marker:
     github: mamantoha/crystal-cmark-gfm
@@ -38,11 +38,11 @@ shards:
 
   dotenv:
     github: gdotdesign/cr-dotenv
-    commit: a1f9f1afa51e1e6fce37734bc40754e04621d8db
+    commit: 67296000c2ca95684c3de00a04afc357f53f98f9
 
   emoji:
     github: veelenga/emoji.cr
-    commit: 509e463285dff26450f3ba600e4bf67fde4e89ae
+    commit: 324a5c8233c1f26ea704e340be4223b58c51406f
 
   exception_page:
     github: crystal-loot/exception_page
