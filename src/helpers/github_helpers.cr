@@ -6,13 +6,29 @@ module GithubHelpers
   def resync_repository(repository : Repository)
     return unless repository.provider == "github"
 
+    user = repository.user
+
     github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
     github_repository = github_client.get_repo(repository.user.login, repository.name)
 
+    tags = github_repository.tags
+    github_user = github_repository.user
+
+    assign_user_attributes(user, github_user)
+
+    if user.changed?
+      user.synced_at = Time.utc
+      user.save
+    end
+
     assign_repository_attributes(repository, github_repository)
     repository.synced_at = Time.utc
     repository.save
+
+    repository.tags = tags
+
+    Helpers.update_dependecies(repository)
   rescue Crest::NotFound
     repository.delete
   end
