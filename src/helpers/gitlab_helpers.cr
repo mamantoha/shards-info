@@ -10,8 +10,8 @@ module GitlabHelpers
 
     gitlab_project = gitlab_client.project(repository.provider_id)
 
-    owner = gilab_project.owner || gilab_project.namespace
-    tags = gilab_project.tag_list
+    owner = gitlab_project.owner || gitlab_project.namespace
+    tags = gitlab_project.tag_list
 
     user = User.query.find_or_build({provider: "gitlab", provider_id: owner.id}) { }
     assign_project_owner_attributes(user, owner)
@@ -22,7 +22,7 @@ module GitlabHelpers
     end
 
     repository.user = user
-    assign_project_attributes(repository, gilab_project)
+    assign_project_attributes(repository, gitlab_project)
     repository.synced_at = Time.utc
     repository.save
 
@@ -42,11 +42,11 @@ module GitlabHelpers
     end
   end
 
-  def sync_project(gilab_project : Gitlab::Project)
-    return if gilab_project.forked_from_project || gilab_project.mirror
+  def sync_project(gitlab_project : Gitlab::Project)
+    return if gitlab_project.forked_from_project || gitlab_project.mirror
 
-    owner = gilab_project.owner || gilab_project.namespace
-    tags = gilab_project.tag_list
+    owner = gitlab_project.owner || gitlab_project.namespace
+    tags = gitlab_project.tag_list
 
     user = User.query.find_or_build({provider: "gitlab", provider_id: owner.id}) { }
     assign_project_owner_attributes(user, owner)
@@ -56,9 +56,9 @@ module GitlabHelpers
       user.save
     end
 
-    repository = Repository.query.find_or_build({provider: "gitlab", provider_id: gilab_project.id}) { }
+    repository = Repository.query.find_or_build({provider: "gitlab", provider_id: gitlab_project.id}) { }
     repository.user = user
-    assign_project_attributes(repository, gilab_project)
+    assign_project_attributes(repository, gitlab_project)
 
     return unless repository.changed?
 
