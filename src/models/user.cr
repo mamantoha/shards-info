@@ -11,6 +11,11 @@ class User
   column created_at : Time?
   column kind : String
   column avatar_url : String?
+  column bio : String?
+  column location : String?
+  column company : String?
+  column email : String?
+  column website : String?
 
   has_many repositories : Repository
 

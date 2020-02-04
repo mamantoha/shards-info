@@ -2,7 +2,8 @@
   .d-block.mr-2.mt-1
     img.avatar src="#{user.avatar_url}" alt="#{user.login}"
   .row.width-full
-    .col-md-2
+    .col-md-3
+      i class="#{user.decorate.kind_icon}"
       a href="/#{user.provider}/#{user.login}"
         = "#{user.decorate.full_name}"
       .text-muted
@@ -10,7 +11,7 @@
         = "#{user.login}"
       .small.mb-4
         | #{user.attributes["repositories_count"]} repositories
-    .col-md-10
+    .col-md-9
       - if repository = user.repositories.order_by({stars_count: :desc}).first
         .small.text-muted.text-uppercase.mb-2
           i.text-warning.fas.fa-fire

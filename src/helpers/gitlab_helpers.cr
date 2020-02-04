@@ -10,7 +10,7 @@ module GitlabHelpers
     tags = gilab_project.tag_list
 
     user = User.query.find_or_build({provider: "gitlab", provider_id: owner.id}) { }
-    assign_user_attributes(user, owner)
+    assign_project_owner_attributes(user, owner)
 
     if user.changed?
       user.synced_at = Time.utc
@@ -35,7 +35,68 @@ module GitlabHelpers
     Helpers.update_dependecies(repository)
   end
 
-  def assign_user_attributes(user : User, owner : Gitlab::Namespace | Gitlab::Owner)
+  def sync_user(user : User)
+    case user.kind
+    when "user"
+      sync_user_with_kind_user(user)
+    when "group"
+      sync_user_with_kind_group(user)
+    end
+  end
+
+  def sync_user_with_kind_user(user : User)
+    return unless user.provider == "gitlab" && user.kind == "user"
+
+    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
+
+    gitlab_user = gitlab_client.user(user.provider_id)
+
+    assign_user_attributes(user, gitlab_user)
+    user.synced_at = Time.utc
+    user.save
+  rescue Crest::NotFound
+    user.delete
+  end
+
+  def sync_user_with_kind_group(user : User)
+    return unless user.provider == "gitlab" && user.kind == "group"
+
+    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
+
+    gitlab_group = gitlab_client.group(user.provider_id)
+
+    assign_group_attributes(user, gitlab_group)
+    user.synced_at = Time.utc
+    user.save
+  rescue Crest::NotFound
+    user.delete
+  end
+
+  def assign_user_attributes(user : User, gitlab_user : Gitlab::User)
+    user.set({
+      login:      gitlab_user.username,
+      name:       gitlab_user.name,
+      avatar_url: gitlab_user.avatar_url,
+      created_at: gitlab_user.created_at,
+      bio:        gitlab_user.bio,
+      location:   gitlab_user.location,
+      company:    gitlab_user.organization,
+      email:      gitlab_user.public_email,
+      website:    gitlab_user.website_url,
+    })
+  end
+
+  def assign_group_attributes(user : User, gitlab_group : Gitlab::Group)
+    user.set({
+      login:      gitlab_group.path,
+      name:       gitlab_group.name,
+      avatar_url: gitlab_group.avatar_url,
+      bio:        gitlab_group.description,
+      website:    gitlab_group.web_url,
+    })
+  end
+
+  def assign_project_owner_attributes(user : User, owner : Gitlab::Namespace | Gitlab::Owner)
     user.set({
       login:      owner.path,
       name:       owner.name,

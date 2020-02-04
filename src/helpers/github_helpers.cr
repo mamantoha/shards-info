@@ -14,7 +14,7 @@ module GithubHelpers
     github_user = github_repository.user
 
     user = User.query.find_or_build({provider: "github", provider_id: github_user.id}) { }
-    assign_user_attributes(user, github_user)
+    assign_repository_user_attributes(user, github_user)
 
     if user.changed?
       user.synced_at = Time.utc
@@ -38,7 +38,7 @@ module GithubHelpers
     github_user = github_repository.user
 
     user = User.query.find_or_build({provider: "github", provider_id: github_user.id}) { }
-    assign_user_attributes(user, github_user)
+    assign_repository_user_attributes(user, github_user)
 
     if user.changed?
       user.synced_at = Time.utc
@@ -63,7 +63,35 @@ module GithubHelpers
     Helpers.update_dependecies(repository)
   end
 
+  def sync_user(user : User)
+    return unless user.provider == "github"
+
+    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+
+    github_user = github_client.user(user.login)
+
+    assign_user_attributes(user, github_user)
+    user.synced_at = Time.utc
+    user.save
+  rescue Crest::NotFound
+    user.delete
+  end
+
   def assign_user_attributes(user : User, github_user : Github::User)
+    user.set({
+      login:      github_user.login,
+      name:       github_user.name,
+      kind:       github_user.kind,
+      avatar_url: github_user.avatar_url,
+      bio:        github_user.bio,
+      location:   github_user.location,
+      company:    github_user.company,
+      email:      github_user.email,
+      website:    github_user.blog,
+    })
+  end
+
+  def assign_repository_user_attributes(user : User, github_user : Github::User)
     user.set({
       login:      github_user.login,
       name:       github_user.name,

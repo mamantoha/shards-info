@@ -128,6 +128,17 @@ ul.not-list li {
   hyphens: auto;
 }
 
+.middle-dot-divider::after {
+  content: '\00B7';
+  padding: 0 6px;
+  font-weight: 600;
+}
+
+.middle-dot-divider:last-child::after {
+  content: '';
+  padding: 0;
+}
+
 .avatar_block .avatar {
   display: inline-block;
   overflow: hidden;
@@ -169,22 +180,17 @@ ul.not-list li {
 }
 
 .user__avatar img {
-  width: 230px;
-  height: 230px;
-  border-radius: 6px!important;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
 }
 
-.user__name .name {
-  font-size: 26px;
-  line-height: 30px;
-  margin-top: 16px;
+.user__full_name {
+  font-size: 23px;
 }
 
-.user__name .login {
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 24px;
-  color: #666;
+.user__login a {
+  color: #2e2e2e;
 }
 
 .user__info {

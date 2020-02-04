@@ -5,10 +5,10 @@ div
       ' Crystal community
       .result_stats
         = total_count
-        ' developers
+        ' users and groups
 .container
   .users
     - users.each(fetch_columns: true) do |user|
-      == render "src/views/users/_user_card.slang"
+      == render "src/views/users/_user_item.slang"
 
   == paginator

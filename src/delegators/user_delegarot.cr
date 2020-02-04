@@ -34,4 +34,15 @@ class UserDelegator < Delegator(User)
       ""
     end
   end
+
+  def kind_icon
+    case kind
+    when "user"
+      "fas fa-user"
+    when "group"
+      "fas fa-user-friends"
+    else
+      ""
+    end
+  end
 end
