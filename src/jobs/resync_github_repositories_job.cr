@@ -15,6 +15,8 @@ class ResyncGithubRepositoriesJob < Mosquito::PeriodicJob
 
     repositories.each do |repository|
       GithubHelpers.resync_repository(repository)
+    rescue
+      next
     end
   end
 end

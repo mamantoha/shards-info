@@ -1,19 +1,19 @@
 require "../lib/gitlab"
 
-class ResyncGitlabUsersJob < Mosquito::PeriodicJob
-  run_every 12.hours
+class ResyncGitlabRepositoriesJob < Mosquito::PeriodicJob
+  run_every 1.hour
 
   def perform
     return unless ENV["KEMAL_ENV"] == "production"
 
-    users = User
+    repositories = Repository
       .query
       .where({provider: "gitlab"})
       .order_by(synced_at: :asc)
       .limit(10)
 
-    users.each do |user|
-      GitlabHelpers.resync_user(user)
+    repositories.each do |repository|
+      GitlabHelpers.resync_repository(repository)
     rescue
       next
     end

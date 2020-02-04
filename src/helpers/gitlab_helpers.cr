@@ -3,6 +3,45 @@ require "shards/spec"
 module GitlabHelpers
   extend self
 
+  def resync_repository(repository : Repository)
+    return unless repository.provider == "gitlab"
+
+    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
+
+    gitlab_project = gitlab_client.project(repository.provider_id)
+
+    owner = gilab_project.owner || gilab_project.namespace
+    tags = gilab_project.tag_list
+
+    user = User.query.find_or_build({provider: "gitlab", provider_id: owner.id}) { }
+    assign_project_owner_attributes(user, owner)
+
+    if user.changed?
+      user.synced_at = Time.utc
+      user.save
+    end
+
+    repository.user = user
+    assign_project_attributes(repository, gilab_project)
+    repository.synced_at = Time.utc
+    repository.save
+
+    repository.tags = tags
+
+    Helpers.update_dependecies(repository)
+  rescue Crest::NotFound
+    repository.delete
+  end
+
+  def resync_user(user : User)
+    case user.kind
+    when "user"
+      sync_user_with_kind_user(user)
+    when "group"
+      sync_user_with_kind_group(user)
+    end
+  end
+
   def sync_project(gilab_project : Gitlab::Project)
     return if gilab_project.forked_from_project || gilab_project.mirror
 
@@ -33,15 +72,6 @@ module GitlabHelpers
     sync_project_releases(repository)
 
     Helpers.update_dependecies(repository)
-  end
-
-  def sync_user(user : User)
-    case user.kind
-    when "user"
-      sync_user_with_kind_user(user)
-    when "group"
-      sync_user_with_kind_group(user)
-    end
   end
 
   def sync_user_with_kind_user(user : User)

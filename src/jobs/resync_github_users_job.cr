@@ -13,11 +13,9 @@ class ResyncGithubUsersJob < Mosquito::PeriodicJob
       .limit(100)
 
     users.each do |user|
-      begin
-        GithubHelpers.sync_user(user)
-      rescue
-        next
-      end
+      GithubHelpers.resync_user(user)
+    rescue
+      next
     end
   end
 end

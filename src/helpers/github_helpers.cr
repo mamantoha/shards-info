@@ -33,6 +33,20 @@ module GithubHelpers
     repository.delete
   end
 
+  def resync_user(user : User)
+    return unless user.provider == "github"
+
+    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+
+    github_user = github_client.user(user.login)
+
+    assign_user_attributes(user, github_user)
+    user.synced_at = Time.utc
+    user.save
+  rescue Crest::NotFound
+    user.delete
+  end
+
   def sync_github_repository(github_repository : Github::Repo)
     tags = github_repository.tags
     github_user = github_repository.user
@@ -61,20 +75,6 @@ module GithubHelpers
     sync_repository_releases(repository)
 
     Helpers.update_dependecies(repository)
-  end
-
-  def sync_user(user : User)
-    return unless user.provider == "github"
-
-    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
-
-    github_user = github_client.user(user.login)
-
-    assign_user_attributes(user, github_user)
-    user.synced_at = Time.utc
-    user.save
-  rescue Crest::NotFound
-    user.delete
   end
 
   def assign_user_attributes(user : User, github_user : Github::User)
