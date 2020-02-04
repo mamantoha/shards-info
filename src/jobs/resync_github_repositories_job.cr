@@ -11,7 +11,7 @@ class ResyncGithubRepositoriesJob < Mosquito::PeriodicJob
         .query
         .where({provider: "github"})
         .order_by(synced_at: :asc)
-        .limit(100)
+        .limit(50)
 
     repositories.each do |repository|
       GithubHelpers.resync_repository(repository)
