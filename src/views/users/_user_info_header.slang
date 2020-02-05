@@ -16,15 +16,15 @@
     .user__repositories_count
       = "#{user.repositories.count} repositories"
     .user__description
-      - if location = user.location
+      - if (location = user.location) && (!user.location.to_s.empty?)
         span.middle-dot-divider
           i class="fas fa-map-marker-alt"
           = location
-      - if company = user.company
+      - if (company = user.company) && (!user.company.to_s.empty?)
         span.middle-dot-divider
           i class="fas fa-building"
           = company
-    - if bio = user.bio
+    - if (bio = user.bio) && (!user.bio.to_s.empty?)
       .user__bio.text_muted
         = bio
     - if (email = user.email) && (!user.email.to_s.empty?)
