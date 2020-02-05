@@ -6,8 +6,8 @@ div
         i.page__subheading
           = repository.decorate.latest_release
       .shard__topics
-        - repository.tag_names.each do |name|
-          a href="/tags/#{name}" class="badge badge-secondary text-monospace" = name
+        - repository.tag_names.each do |tag_name|
+          a href="/tags/#{tag_name}" class="badge badge-secondary text-monospace" = tag_name
       .shard__intro.text-muted
         span
           == Emoji.emojize(Autolink.auto_link(repository.description.to_s))
@@ -52,7 +52,7 @@ div
             .shards__shard_owner_avatar
               img src="#{repository.user.decorate.avatar}" alt="#{repository.user.login}"
             .shards__shard_owner_name
-              a href="/#{repository.provider}/#{repository.user.login}"
+              a href="/#{repository.provider}/#{repository.user.login}/"
                 = repository.user.login
       .list__heading= "#{repository.provider} statistic:"
       ul.repository__statistic.not-list

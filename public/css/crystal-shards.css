@@ -9,6 +9,11 @@ body {
   margin-bottom: 60px;
 }
 
+.turbolinks-progress-bar {
+  height: 2px;
+  background-color: #1074e7;
+}
+
 h3 {
   font-size: 20px;
 }

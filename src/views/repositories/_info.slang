@@ -24,7 +24,7 @@
           - repository.dependencies.with_user.where { relationships.development == false }.each do |repository|
             li
               i class="#{repository.decorate.provider_icon}"
-              a href="/#{repository.provider}/#{repository.user.login}/#{repository.name}" = repository.name
+              a href="/#{repository.provider}/#{repository.decorate.full_name}/" = repository.name
 .row
   .col-md-6
     .shard__dependent_shards.info-block
@@ -37,10 +37,10 @@
           - dependents.with_user.limit(10).each do |repository|
             li
               i class="#{repository.decorate.provider_icon}"
-              a href="/#{repository.provider}/#{repository.user.login}/#{repository.name}" = repository.name
+              a href="/#{repository.provider}/#{repository.decorate.full_name}/" = repository.name
         - if dependents_count > 10
           .shard__see_all_link
-            a class="shard__see_all_link" href="/#{repository.provider}/#{repository.user.login}/#{repository.name}/dependents"
+            a class="shard__see_all_link" href="/#{repository.provider}/#{repository.decorate.full_name}/dependents"
               ' Show all dependents
   .col-md-6
     .shard__development_dependencies.info-block
@@ -53,4 +53,4 @@
           - repository.dependencies.with_user.where { relationships.development == true }.each do |repository|
             li
               i class="#{repository.decorate.provider_icon}"
-              a href="/#{repository.provider}/#{repository.user.login}/#{repository.name}" = repository.name
+              a href="/#{repository.provider}/#{repository.decorate.full_name}/" = repository.name

@@ -4,7 +4,7 @@
   .row.width-full
     .col-md-3
       i class="#{user.decorate.kind_icon}"
-      a href="/#{user.provider}/#{user.login}"
+      a href="/#{user.provider}/#{user.login}/"
         = "#{user.decorate.full_name}"
       .text-muted
         i class="fab #{user.decorate.provider_icon}"
@@ -18,7 +18,7 @@
           ' Popular repository
         div
           i class="#{repository.decorate.provider_icon}"
-          a href="/#{user.provider}/#{user.login}/#{repository.name}"
+          a href="/#{user.provider}/#{user.login}/#{repository.name}/"
             = repository.name
         .text-muted.mb-2
           = repository.description
