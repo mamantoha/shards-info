@@ -1,9 +1,11 @@
 <% pages_count = ((@total_count + @per_page - 1) / @per_page).to_i %>
 
-<nav aria-label="Search result pages">
-  <ul id="pagination" class="pagination justify-content-center flex-wrap"
-    data-current-page="<%= @current_page %>"
-    data-pages-count="<%= pages_count %>"
-  >
-  </ul>
-</nav>
+<% if pages_count > 1 %>
+  <nav aria-label="Search result pages">
+    <ul id="pagination" class="pagination justify-content-center flex-wrap"
+      data-current-page="<%= @current_page %>"
+      data-pages-count="<%= pages_count %>"
+    >
+    </ul>
+  </nav>
+<% end %>
