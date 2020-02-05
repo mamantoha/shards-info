@@ -23,7 +23,7 @@ html lang="en"
     link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
     link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" integrity="sha256-iAmWN8uaUdN6Y9FCf8srQdrx3eVVwouJ5QtEiyuTQ6A=" crossorigin="anonymous"
     link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jqcloud2@2.0.3/dist/jqcloud.min.css" integrity="sha256-UjwN98m8Dcz5FTMPDMCkUoRCMmtV8U0uTsX7fMiBlYU=" crossorigin="anonymous"
-    link rel="stylesheet" href="/css/crystal-shards.css?v=1.7"
+    link rel="stylesheet" href="/css/crystal-shards.css?v=1.8"
 
     script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"
     script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"
@@ -34,7 +34,7 @@ html lang="en"
     script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/yaml.min.js" integrity="sha256-z6ne2FeT9mH7gdPHHc68W8MwdnePuf9rR2cln3lt2hQ=" crossorigin="anonymous"
     script src="https://cdnjs.cloudflare.com/ajax/libs/moveTo/1.7.3/moveTo.min.js"
     script src="/js/jquery.twbsPagination.js?v=1.0"
-    script src="/js/crystal-shards.js?v=1.2"
+    script src="/js/crystal-shards.js?v=1.3"
 
     script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" integrity="sha256-iM4Yzi/zLj/IshPWMC1IluRxTtRjMqjPGd97TZ9yYpU=" crossorigin="anonymous"
 
