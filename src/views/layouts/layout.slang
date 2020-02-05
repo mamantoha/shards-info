@@ -33,7 +33,7 @@ html lang="en"
     script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/yaml.min.js" integrity="sha256-z6ne2FeT9mH7gdPHHc68W8MwdnePuf9rR2cln3lt2hQ=" crossorigin="anonymous"
     script src="https://cdnjs.cloudflare.com/ajax/libs/moveTo/1.7.3/moveTo.min.js"
     script src="/js/jquery.twbsPagination.js?v=1.0"
-    script src="/js/crystal-shards.js?v=1.4"
+    script src="/js/crystal-shards.js?v=1.5"
 
     script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" integrity="sha256-iM4Yzi/zLj/IshPWMC1IluRxTtRjMqjPGd97TZ9yYpU=" crossorigin="anonymous"
 
