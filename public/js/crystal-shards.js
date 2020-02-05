@@ -11,6 +11,9 @@ document.addEventListener("turbolinks:load", function() {
     Turbolinks.visit("/search?query=" + query);
   });
 
+  hljs.initHighlighting.called = false;
+  hljs.initHighlighting();
+
   $(function () {
     var hash = window.location.hash;
     hash && $('ul.nav a[href="' + hash + '"]').tab('show');
@@ -42,8 +45,6 @@ document.addEventListener("turbolinks:load", function() {
   });
 
   $('.shard__readme table').addClass('table table-bordered table-striped table-responsive');
-
-  hljs.initHighlightingOnLoad();
 
   var moveTo = new MoveTo();
   var trigger = $("#back-to-top")
