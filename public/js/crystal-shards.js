@@ -1,4 +1,9 @@
 document.addEventListener("turbolinks:load", function() {
+  if (typeof ga === "function") {
+    ga("set", "location", event.data.url);
+    ga("send", "pageview");
+  };
+
   $('form#search').on('submit', function(e) {
     e.preventDefault();
     query = $(e.target).find("input[name='query']").val();
