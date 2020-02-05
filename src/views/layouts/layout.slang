@@ -4,12 +4,6 @@ html lang="en"
     - if ENV["GOOGLE_ANALYTICS_ID"]?
       /! Global site tag (gtag.js) - Google Analytics
       script async="" src="https://www.googletagmanager.com/gtag/js?id=#{ENV["GOOGLE_ANALYTICS_ID"]}"
-      javascript:
-        | window.dataLayer = window.dataLayer || [];
-        | function gtag(){dataLayer.push(arguments);}
-        | gtag('js', new Date());
-
-        | gtag('config', '#{ENV["GOOGLE_ANALYTICS_ID"]}');
 
     meta charset="utf-8"
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -49,3 +43,10 @@ html lang="en"
     footer.footer
       .container.text-center
         span class="text-muted" Happy Crystalling ♥
+    - if ENV["GOOGLE_ANALYTICS_ID"]?
+      javascript:
+        | window.dataLayer = window.dataLayer || [];
+        | function gtag(){dataLayer.push(arguments);}
+        | gtag('js', new Date());
+
+        | gtag('config', '#{ENV["GOOGLE_ANALYTICS_ID"]}');
