@@ -45,7 +45,7 @@ div
                 == changelog_html
 
     .col-md-4.col-sm-12.shard__statistic
-      .list__heading Owner:
+      .list__heading Owner
       ul.shard__links.not-list
         li
           .shards__shard_owner
@@ -54,7 +54,7 @@ div
             .shards__shard_owner_name
               a href="/#{repository.provider}/#{repository.user.login}/"
                 = repository.user.login
-      .list__heading= "#{repository.provider} statistic:"
+      .list__heading= "#{repository.provider} statistic"
       ul.repository__statistic.not-list
         li
           i class="fas fa-star" title="Stars"
@@ -75,10 +75,13 @@ div
           i class="fas fa-hourglass-start" title="Created"
           = repository.created_at.try(&.to_s("%B %-d, %Y"))
 
-      h3.list__heading License:
+      h3.list__heading License
       p
         = repository.license
-      h3.list__heading Links:
+      h3.list__heading Links
       ul.shard__links.not-list
         li
           a href="#{repository.decorate.provider_url}" Homepage
+      h3.list__heading Synced at
+      p.small
+        = Time::Format::HTTP_DATE.format(repository.synced_at)

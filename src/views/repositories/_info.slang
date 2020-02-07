@@ -4,7 +4,7 @@
       h3.list__heading
         a data-toggle="collapse" href="#collapseReleases" aria-expanded="true" aria-controls="collapseReleases"
           i class="fa" aria-hidden="true"
-          | Latest Releases:
+          | Latest Releases
       .collapse.show#collapseReleases
         ul.list__items.not-list
           - repository.releases.order_by(published_at: :desc).limit(5).each do |release|
@@ -18,7 +18,7 @@
       h3.list__heading
         a data-toggle="collapse" href="#collapseDependencies" aria-expanded="true" aria-controls="collapseDependencies"
           i class="fa" aria-hidden="true"
-          | Dependencies:
+          | Dependencies
       .collapse.show#collapseDependencies
         ul.list__items.not-list
           - repository.dependencies.with_user.where { relationships.development == false }.each do |repository|
@@ -31,7 +31,7 @@
       h3.list__heading
         a data-toggle="collapse" href="#collapseDependent" aria-expanded="true" aria-controls="collapseDependent"
           i class="fa" aria-hidden="true"
-          | Used by (#{dependents_count}):
+          | Used by (#{dependents_count})
       .collapse.show#collapseDependent
         ul.list__items.not-list
           - dependents.with_user.limit(10).each do |repository|
@@ -47,7 +47,7 @@
       h3.list__heading
         a data-toggle="collapse" href="#collapseDevelopmentDependencies" aria-expanded="true" aria-controls="collapseDevelopmentDependencies"
           i class="fa" aria-hidden="true"
-          | Development dependencies:
+          | Development dependencies
       .collapse.show#collapseDevelopmentDependencies
         ul.list__items.not-list
           - repository.dependencies.with_user.where { relationships.development == true }.each do |repository|
