@@ -1,5 +1,5 @@
 name: shards-info
-version: 0.2.0
+version: 2.0.0
 
 crystal: 0.33.0
 
@@ -17,6 +17,7 @@ targets:
 dependencies:
   kemal:
     # github: kemalcr/kemal
+    # branch: master
     github: mamantoha/kemal
     branch: crystal-0.33
   clear:
