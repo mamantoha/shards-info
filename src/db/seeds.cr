@@ -1,0 +1,2 @@
+Clear.seed do
+end

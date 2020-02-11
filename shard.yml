@@ -1,20 +1,30 @@
 name: shards-info
-version: 0.2.0
+version: 2.0.0
 
-crystal: 0.32.0
+crystal: 0.33.0
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
 
 targets:
-  shards-info:
-    main: src/shards-info.cr
+  web:
+    main: src/web.cr
+  db:
+    main: src/db.cr
+  worker:
+    main: src/worker.cr
 
 dependencies:
   kemal:
-    github: kemalcr/kemal
-  kemal-session:
-    github: kemalcr/kemal-session
+    # github: kemalcr/kemal
+    # branch: master
+    github: mamantoha/kemal
+    branch: crystal-0.33
+  clear:
+    github: anykeyh/clear
+    branch: master
+  delegator:
+    github: Schniz/delegator.cr
   slang:
     github: jeromegn/slang
     branch: master
@@ -22,6 +32,8 @@ dependencies:
     github: mamantoha/cache
   crest:
     github: mamantoha/crest
+  mosquito:
+    github: robacarp/mosquito
   emoji:
     github: veelenga/emoji.cr
     branch: master
@@ -30,12 +42,15 @@ dependencies:
   common_marker:
     github: mamantoha/crystal-cmark-gfm
     branch: master
-  kemal-flash:
-    github: neovintage/kemal-flash
   autolink:
     github: crystal-community/autolink.cr
   raven:
     github: Sija/raven.cr
+  dotenv:
+    github: gdotdesign/cr-dotenv
+    branch: master
+  shards:
+    github: crystal-lang/shards
 
 development_dependencies:
   spec-kemal:

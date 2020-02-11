@@ -1,37 +1,50 @@
-$(function () {
-  var hash = window.location.hash;
-  hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+document.addEventListener("turbolinks:load", function() {
+  if (typeof ga === "function") {
+    ga("set", "location", event.data.url);
+    ga("send", "pageview");
+  };
 
-  $('.nav-tabs a').click(function (e) {
-    $(this).tab('show');
-    var scrollmem = $('body').scrollTop();
-    window.location.hash = this.hash;
-    $('html,body').scrollTop(scrollmem);
+  $('form#search').on('submit', function(e) {
+    e.preventDefault();
+    query = $(e.target).find("input[name='query']").val();
+    query = query.replace(/\s/g, '+');
+    Turbolinks.visit("/search?query=" + query);
   });
 
-  // Back To Top Button
-  if ($('#back-to-top').length) {
-    var scrollTrigger = 100, // px
-      backToTop = function () {
-        var scrollTop = $(window).scrollTop();
-        if (scrollTop > scrollTrigger) {
-          $('#back-to-top').addClass('show');
-        } else {
-          $('#back-to-top').removeClass('show');
-        }
-      };
-    backToTop();
-    $(window).on('scroll', function () {
-      backToTop();
+  hljs.initHighlighting.called = false;
+  hljs.initHighlighting();
+
+  $(function () {
+    var hash = window.location.hash;
+    hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+    $('.nav-tabs a').click(function (e) {
+      $(this).tab('show');
+      var scrollmem = $('body').scrollTop();
+      window.location.replace(this.hash);
+      history.replaceState({ turbolinks: {} }, '');
+      $('html,body').scrollTop(scrollmem);
     });
-  }
-});
 
-// Register Events
-$(document).ready(function () {
+    // Back To Top Button
+    if ($('#back-to-top').length) {
+      var scrollTrigger = 100, // px
+        backToTop = function () {
+          var scrollTop = $(window).scrollTop();
+          if (scrollTop > scrollTrigger) {
+            $('#back-to-top').addClass('show');
+          } else {
+            $('#back-to-top').removeClass('show');
+          }
+        };
+      backToTop();
+      $(window).on('scroll', function () {
+        backToTop();
+      });
+    }
+  });
+
   $('.shard__readme table').addClass('table table-bordered table-striped table-responsive');
-
-  hljs.initHighlightingOnLoad();
 
   var moveTo = new MoveTo();
   var trigger = $("#back-to-top")
@@ -54,5 +67,8 @@ $(document).ready(function () {
     onPageClick: function (event, page) {
     }
   });
+})
 
+$(document).ready(function () {
+  Turbolinks.setProgressBarDelay(200);
 });

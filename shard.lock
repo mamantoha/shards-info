@@ -1,5 +1,9 @@
 version: 1.0
 shards:
+  admiral:
+    github: jwaldrip/admiral.cr
+    commit: d11fc4863154f3dbd933421bdf45d356a2550e07
+
   any_hash:
     github: Sija/any_hash.cr
     version: 0.2.3
@@ -10,7 +14,11 @@ shards:
 
   cache:
     github: mamantoha/cache
-    version: 0.5.0
+    version: 0.6.0
+
+  clear:
+    github: anykeyh/clear
+    commit: 6fca1e595dffb3243c6476fd8b5ac82e5ab3bdf9
 
   common_marker:
     github: mamantoha/crystal-cmark-gfm
@@ -20,13 +28,29 @@ shards:
     github: mamantoha/crest
     version: 0.23.2
 
+  db:
+    github: crystal-lang/crystal-db
+    version: 0.8.0
+
+  delegator:
+    github: Schniz/delegator.cr
+    version: 0.1.0
+
+  dotenv:
+    github: gdotdesign/cr-dotenv
+    commit: 31a7209e04fef73bc87e8a57ca95b58848f6715b
+
   emoji:
     github: veelenga/emoji.cr
-    commit: 509e463285dff26450f3ba600e4bf67fde4e89ae
+    commit: 324a5c8233c1f26ea704e340be4223b58c51406f
 
   exception_page:
     github: crystal-loot/exception_page
     version: 0.1.2
+
+  generate:
+    github: anykeyh/generate.cr
+    commit: 27a59d663ded8ce39a361e3a88b8dd747f59ce42
 
   http-client-digest_auth:
     github: mamantoha/http-client-digest_auth
@@ -44,17 +68,13 @@ shards:
     github: mamantoha/i18n_plural_rules
     version: 0.1.0
 
+  inflector:
+    github: phoffer/inflector.cr
+    version: 0.1.8
+
   kemal:
-    github: kemalcr/kemal
-    version: 0.26.1
-
-  kemal-flash:
-    github: neovintage/kemal-flash
-    version: 0.1.0
-
-  kemal-session:
-    github: kemalcr/kemal-session
-    version: 0.12.0
+    github: mamantoha/kemal
+    commit: 7e3a8ee150d88a47d862474b5d3ed3990016e9cf
 
   kilt:
     github: jeromegn/kilt
@@ -63,6 +83,14 @@ shards:
   memcached:
     github: comandeo/crystal-memcached
     version: 0.2.2
+
+  mosquito:
+    github: robacarp/mosquito
+    version: 0.6.0
+
+  pg:
+    github: will/crystal-pg
+    commit: cafec2c963ee3f16799fb52e0bf15b4622d6a7c7
 
   pool:
     github: ysbaddaden/pool
@@ -79,6 +107,10 @@ shards:
   redis:
     github: stefanwille/crystal-redis
     version: 2.5.3
+
+  shards:
+    github: crystal-lang/shards
+    version: 0.9.0
 
   slang:
     github: jeromegn/slang

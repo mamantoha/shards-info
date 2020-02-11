@@ -1,66 +1,38 @@
-# shards-info
+<img src="https://raw.githubusercontent.com/mamantoha/shards-info/develop/public/images/logo-horizontal.png" alt="shards.info" width="360" />
 
-[![Build Status](https://travis-ci.org/mamantoha/shards-info.svg?branch=master)](https://travis-ci.org/mamantoha/shards-info)
+[![Built with Crystal](https://img.shields.io/badge/built%20with-crystal-000000.svg?style=for-the-badge&logo=appveyor)](https://crystal-lang.org/)
+![Travis (.org) branch](https://img.shields.io/travis/mamantoha/shards-info/develop?style=for-the-badge)
 
-View of all repositories on GitHub that have Crystal code in them.
+View of all repositories on Github and Gitlab that have Crystal code in them.
 
 ## Installation
 
 * [Install](https://crystal-lang.org/docs/installation/) Crystal
 * Clone this repository
 * Install dependencies `shards install`
-* Rename `.env.example` to `.env`, and set `GITHUB_USER` and `GITHUB_KEY`
-* Run it `source .env && crystal src/shards-info.cr`
+* Rename `.env.example` to `.env`, and set variables.
+* Run it `crystal src/shards-info.cr`
 
 ## Development
 
-Install [sentry](https://github.com/samueleaton/sentry) to build/runs application,
-watches files, and rebuilds/restarts app on file changes.
-
 ```console
-source .env && sentry
+psql -c 'CREATE DATABASE shards_info_development;' -U postgres
+crystal src/db.cr -- migrate
 ```
 
 ## Specs
 
 ```console
-source .env && export KEMAL_ENV=test && crystal spec
+export KEMAL_ENV=test && crystal spec
 ```
 
-### Deploy
-
-Get started by deploying this service to heroku.
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-```console
-heroku buildpacks:add https://github.com/crystal-lang/heroku-buildpack-crystal.git
-heroku buildpacks:add --index 1 heroku-community/apt
-```
-
-And set environment variables with `heroku config:set VAR=VAL`:
-
-```console
-GITHUB_USER
-GITHUB_KEY
-SENTRY_DSN
-```
-
-Go to <https://github.com/settings/tokens> and generate new token (select `repo` scope).
-
-On Heroku you **must** enable [Dyno Metadata](https://devcenter.heroku.com/articles/dyno-metadata)
-for Sentry's release detection to work correctly.
-
-Run:
-
-```console
-heroku labs:enable runtime-dyno-metadata
-```
-
-## Built With
+## Special thanks
 
 * [Crystal language](https://crystal-lang.org/)
+* [Clear](https://github.com/anykeyh/clear) - Advanced ORM between PostgreSQL and Crystal
 * [Kemal](https://github.com/kemalcr/kemal) - Web microframework for Crystal
+* [raven.cr](https://github.com/Sija/raven.cr) - Crystal client for [Sentry](https://sentry.io)
+* Logo [icon](https://game-icons.net/1x1/lorc/floating-crystal.html) taken from [Game Icons pack](https://game-icons.net/) under CC BY 3.0 license.
 
 ## Contributing
 

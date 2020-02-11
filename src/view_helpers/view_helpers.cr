@@ -1,7 +1,7 @@
 require "ecr"
 
 module ViewHelpers
-  record GithubPaginator, collection : Github::Iterable, page : Int32, link : String do
-    ECR.def_to_s "#{__DIR__}/paginate_github.ecr"
+  record Paginator, current_page : Int32, per_page : Int32, total_count : Int64, link : String do
+    ECR.def_to_s "#{__DIR__}/paginate.ecr"
   end
 end

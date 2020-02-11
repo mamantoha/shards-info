@@ -4,9 +4,14 @@ html {
 }
 
 body {
-  padding-top: 4.5rem;
+  padding-top: 3.5rem;
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+}
+
+.turbolinks-progress-bar {
+  height: 2px;
+  background-color: #1074e7;
 }
 
 h3 {
@@ -28,7 +33,6 @@ ul.not-list li {
 .space {
   height: 16px;
 }
-
 
 .footer {
   position: absolute;
@@ -56,8 +60,11 @@ ul.not-list li {
 }
 
 .navbar {
-  margin-bottom: 1rem;
-  background-color: #15202b!important;
+  background-color: #24292E!important;
+}
+
+.navbar-brand img {
+  filter: invert(100%);
 }
 
 .has-search .form-control {
@@ -67,17 +74,17 @@ ul.not-list li {
 .has-search .form-control {
   border-radius: 2rem;
   border: 0;
-  background-color: #253341;
-  color: #8899a6;
+  background-color: #404448;
+  color: #87898c;
 }
 
 .has-search ::placeholder {
-  color: #8899a6!important;
+  color: #87898c!important;
 }
 
 .form-group.has-search {
   margin-bottom: 0;
-  background-color: #15202b;
+  background-color: #24292E;
 }
 
 .has-search .form-control-feedback {
@@ -89,7 +96,7 @@ ul.not-list li {
   line-height: 2.375rem;
   text-align: center;
   pointer-events: none;
-  color: #8899a6;
+  color: #87898c;
 }
 
 .width-full {
@@ -105,6 +112,7 @@ ul.not-list li {
   text-overflow: ellipsis;
   white-space: nowrap;
   vertical-align: top;
+  width: 70vw;
 }
 
 .dont-break-out {
@@ -125,33 +133,69 @@ ul.not-list li {
   hyphens: auto;
 }
 
-.avatar {
+.middle-dot-divider::after {
+  content: '\00B7';
+  padding: 0 6px;
+  font-weight: 600;
+}
+
+.middle-dot-divider:last-child::after {
+  content: '';
+  padding: 0;
+}
+
+.avatar_block .avatar {
   display: inline-block;
   overflow: hidden;
   line-height: 1;
   vertical-align: middle;
   border-radius: 3px;
-  width: 32px;
-  height: 32px;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  width: 64px;
+  height: 64px;
+}
+
+.home_heaeding__container {
+  padding-bottom: 40px;
+}
+
+.home_repositories__container {
+  position: relative;
+  top: -74px
+}
+
+.avatar_block {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar_block .badge {
+  position: absolute;
+  top: 52px;
+  right: 45px;
+}
+
+.avatar_block .badge .fa-stack {
+  font-size: 0.8em;
+  color: black;
+}
+.avatar_block .badge i {
+  vertical-align: middle;
 }
 
 .user__avatar img {
-  width: 230px;
-  height: 230px;
-  border-radius: 6px!important;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
 }
 
-.user__name .name {
-  font-size: 26px;
-  line-height: 30px;
-  margin-top: 16px;
+.user__full_name {
+  font-size: 23px;
 }
 
-.user__name .login {
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 24px;
-  color: #666;
+.user__login a {
+  color: #2e2e2e;
 }
 
 .user__info {
@@ -183,17 +227,11 @@ ul.not-list li {
 
 .shards__shard_owner {
   display: inline-flex;
-  padding-bottom: 1rem;
 }
 
 .shards__shard_owner_avatar img {
   width: 20px;
   margin-right: 5px;
-}
-
-.shards__shard_updated {
-  margin-left: 16px;
-  display: inline;
 }
 
 .shards__shard_fork {
@@ -202,7 +240,6 @@ ul.not-list li {
   margin-bottom: 8px;
   text-align: right;
 }
-
 
 .shards__shard_github ul {
   padding-left: 0;
@@ -219,15 +256,16 @@ ul.not-list li {
 }
 
 .page__heading {
-  padding-top: 30px;
-  padding-bottom: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   margin-bottom: 30px;
-  border-bottom: 1px solid #c1c4ca;
   text-overflow: ellipsis;
   overflow:hidden;
   overflow-wrap: break-word;
   word-wrap: break-word;
-
+  background-color: #fafbfc!important;
+  border-bottom: 1px solid #e1e4e8!important;
+  border-top: 1px solid #e1e4e8!important;
 }
 
 .page__heading .fork-flag {
@@ -248,23 +286,34 @@ ul.not-list li {
   color: #808080;
 }
 
+.shard__header {
+  padding-bottom: 40px;
+}
+
 .shard__main {
-  border-right: 1px solid #c1c4ca;
+  top: -74px;
+  padding-right: 0;
+}
+
+.shard__main .tab-content {
+  padding-right: 15px;
+}
+
+.shard__statistic {
+  border-left: 1px solid #e1e4e8;
 }
 
 .shard__intro {
-  margin-bottom: 32px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid #c1c4ca;
-}
-
-.info-block {
-  margin-bottom: 12px;
+  padding: 0;
 }
 
 .shard__topics {
   white-space: initial;
   margin-bottom: 5px;
+}
+
+.info-block {
+  margin-bottom: 12px;
 }
 
 .list__items {
@@ -281,7 +330,7 @@ ul.not-list li {
   clear: both;
 }
 
-.shard__statistic {
+.repository__statistic {
   padding-left: 0px;
 }
 
@@ -380,4 +429,60 @@ ul.not-list li {
 
 #back-to-top.show {
   opacity: 1;
+}
+
+.user_container {
+  padding-top: 20px;
+}
+
+.users .user {
+  padding: 16px;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.users .user img.avatar {
+  width: 64px;
+  height: 64px;
+}
+
+.nav-tabs .nav-link {
+  color: #586069;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: 3px 3px 0 0;
+}
+
+.nav-tabs .nav-link.active {
+  border-top: 3px solid;
+  border-color: #e36209 #e1e4e8 transparent;
+}
+
+.nav-tabs .nav-link:hover {
+  border-bottom-color: white;
+}
+
+.subnav .nav-link {
+  color: #6a737d;
+  cursor: pointer;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom-color .4s;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.subnav .nav-link.active {
+  font-weight: 500;
+  color: #1b1f23!important;
+  border-bottom-color: #1074e7!important;
+}
+
+.subnav .nav-link:hover {
+  color: #1b1f23!important;
+  border-bottom-color: #E1E4E8;
+}
+
+#tags-cloud {
+  width: 100%;
+  height: 50vh;
 }

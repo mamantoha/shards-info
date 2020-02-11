@@ -11,12 +11,14 @@ class Config
   property page_description
   property open_graph
   property query
+  property current_page
 
   def initialize
-    @page_title = "Shards Info"
-    @page_description = "View of all repositories on GitHub that have Crystal code in them"
+    @page_title = "shards.info"
+    @page_description = "View of all repositories on Github and Gitlab that have Crystal code in them"
     @open_graph = OpenGraph.new
     @query = ""
+    @current_page = "home"
   end
 
   def self.config
@@ -26,30 +28,16 @@ class Config
   def self.date
     {{ `date -R`.stringify.chomp }}
   end
-
-  # List of Crystal repositories w/o shard.yml
-  # which we want to show anyway.
-  def self.special_repositories
-    [
-      "veelenga/awesome-crystal",
-      "crystal-lang/crystal",
-      "ysbaddaden/prax.cr",
-      "hendisantika/List-All-Programming-Telegram-Group",
-      "exercism/crystal",
-      "oprypin/crsfml",
-      "ffwff/lilith",
-    ]
-  end
 end
 
 struct OpenGraph
   property site_name, title, type, description, image, url
 
   def initialize(
-    @site_name = "Shards Info",
-    @title = "Shards Info",
+    @site_name = "shards.info",
+    @title = "shards.info",
     @type = "object",
-    @description = "View of all repositories on GitHub that have Crystal code in them",
+    @description = "View of all repositories on Github and Gitlab that have Crystal code in them",
     @image = "https://shards.info/images/logo.png",
     @url = "https://shards.info"
   )
