@@ -50,7 +50,7 @@ div
         li
           .shards__shard_owner
             .shards__shard_owner_avatar
-              img src="#{repository.user.decorate.avatar}" alt="#{repository.user.login}"
+              img src="#{repository.user.decorate.avatar(20)}" alt="#{repository.user.login}" loading="lazy"
             .shards__shard_owner_name
               a href="/#{repository.provider}/#{repository.user.login}/"
                 = repository.user.login

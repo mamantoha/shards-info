@@ -3,14 +3,27 @@ class UserDelegator < Delegator(User)
     name || login
   end
 
-  def avatar
+  def avatar(size : Int32? = nil)
     return "/images/avatar.png" unless avatar_url
 
     if provider == "gitlab" && avatar_url.not_nil!.starts_with?('/')
       "https://gitlab.com#{avatar_url}"
     else
-      avatar_url
+      if size
+        avatar_url_with_size(avatar_url.to_s, size)
+      else
+        avatar_url
+      end
     end
+  end
+
+  def avatar_url_with_size(avatar_url : String, size : Int32 = 64) : String
+    uri = URI.parse(avatar_url)
+    params = uri.query_params
+    params["s"] = size.to_s
+    uri.query = params.to_s
+
+    uri.to_s
   end
 
   def provider_url

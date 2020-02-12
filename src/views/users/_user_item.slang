@@ -1,6 +1,6 @@
 .d-flex.user
   .d-block.mr-2.mt-1
-    img.avatar src="#{user.avatar_url}" alt="#{user.login}"
+    img.avatar src="#{user.decorate.avatar(64)}" alt="#{user.login}"
   .row.width-full
     .col-md-3
       i class="#{user.decorate.kind_icon}"

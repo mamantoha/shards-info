@@ -2,7 +2,7 @@
   - if additional_info
     a.d-block.mr-2.mt-1 href="/#{repository.provider}/#{repository.user.login}/"
       .avatar_block
-        img.avatar src="#{repository.user.decorate.avatar}" alt="#{repository.user.login}"
+        img.avatar src="#{repository.user.decorate.avatar(64)}" alt="#{repository.user.login}"
         span.badge
           span class="fa-stack"
             i class="fas fa-circle fa-stack-2x"

@@ -1,7 +1,7 @@
 .page__heading.user_heading
   .container.text-center
     .user__avatar
-      img src="#{user.decorate.avatar}" alt="#{user.login}"
+      img src="#{user.decorate.avatar(90)}" alt="#{user.login}"
     .user__full_name
       i class="#{user.decorate.kind_icon}"
       = "#{user.decorate.full_name}"
