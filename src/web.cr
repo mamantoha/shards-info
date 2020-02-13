@@ -35,7 +35,7 @@ before_all do |env|
   # Redirect from old `/repos` URLs to `/github`
   if env.request.resource.starts_with?("/repos")
     new_resourse = env.request.resource.sub(%r{\A/(repos)}, "/github")
-    env.redirect(new_resourse)
+    env.redirect(new_resourse, 301)
   end
 end
 
