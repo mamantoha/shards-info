@@ -10,7 +10,7 @@ describe "shards.info" do
   it "redirects from old urls" do
     get "/repos/mamantoha/shards-info"
 
-    response.status_code.should eq(302)
+    response.status_code.should eq(301)
   end
 
   it "renders repository" do
