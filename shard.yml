@@ -39,8 +39,8 @@ dependencies:
     branch: master
   humanize_time:
     github: mamantoha/humanize_time
-  common_marker:
-    github: mamantoha/crystal-cmark-gfm
+  cmark:
+    github: amauryt/cr-cmark-gfm
     branch: master
   autolink:
     github: crystal-community/autolink.cr

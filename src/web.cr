@@ -6,7 +6,6 @@ require "kilt/slang"
 require "crest"
 require "emoji"
 require "humanize_time"
-require "common_marker"
 require "autolink"
 require "raven"
 require "raven/integrations/kemal"
@@ -15,6 +14,8 @@ require "../config/config"
 require "./config"
 require "./view_helpers"
 require "./delegators"
+
+require "./lib/cmark/readme_renderer"
 
 Raven.configure do |config|
   config.async = true
@@ -220,7 +221,12 @@ get "/:provider/:owner/:repo" do |env|
 
     dependents_count = dependents.count
 
-    readme_html = Helpers.to_markdown(repository.readme)
+    readme_html =
+      if repository_readme = repository.readme
+        Helpers.to_markdown(repository_readme, repository.decorate.provider_url)
+      else
+        ""
+      end
 
     Config.config.page_title = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
     Config.config.page_description = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"

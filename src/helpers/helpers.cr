@@ -55,15 +55,13 @@ module Helpers
     nil
   end
 
-  def to_markdown(content : String?)
-    if string = content
-      options = ["unsafe"]
-      extensions = ["table", "strikethrough", "autolink", "tagfilter", "tasklist"]
+  def to_markdown(content : String, repository_url) : String
+    options = Cmark::Option.flags(Unsafe, Nobreaks, ValidateUTF8)
+    extensions = Cmark::Extension.flags(Table, Strikethrough, Autolink, Tagfilter, Tasklist)
 
-      md = CommonMarker.new(Emoji.emojize(string), options, extensions)
-      md.to_html
-    else
-      ""
-    end
+    node = Cmark.parse_gfm(content, options)
+    renderer = ReadmeRenderer.new(options, extensions, repository_url)
+
+    renderer.render(node)
   end
 end
