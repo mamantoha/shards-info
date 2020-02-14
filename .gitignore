@@ -8,3 +8,5 @@
 .DS_Store
 shards-info
 shards-info.dwarf
+node_modules
+.cache
