@@ -44,8 +44,6 @@ document.addEventListener("turbolinks:load", function() {
     }
   });
 
-  $('.shard__readme table').addClass('table table-bordered table-striped table-responsive');
-
   var moveTo = new MoveTo();
   var trigger = $("#back-to-top")
   moveTo.registerTrigger(trigger[0]);
