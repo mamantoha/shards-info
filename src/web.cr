@@ -252,13 +252,13 @@ get "/:provider/:owner/:repo/dependents" do |env|
   offset = (page - 1) * per_page
 
   if repository = Repository.find_repository(owner, repo, provider)
+    # TODO: Exception:  (Clear::SQL::RecordNotFoundError)
+    # when calling with `.with_user` and limit/offset
     repositories_query =
       repository
         .dependents
         .undistinct
         .order_by({stars_count: :desc})
-        .with_tags
-        .with_user
 
     total_count = repositories_query.count
 
