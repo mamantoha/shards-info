@@ -1,3 +1,6 @@
+require "dotenv"
+Dotenv.load?
+
 require "shards/spec"
 require "yaml"
 require "base64"

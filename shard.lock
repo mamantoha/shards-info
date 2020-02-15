@@ -20,9 +20,9 @@ shards:
     github: anykeyh/clear
     commit: 6fca1e595dffb3243c6476fd8b5ac82e5ab3bdf9
 
-  common_marker:
-    github: mamantoha/crystal-cmark-gfm
-    commit: 3423ddacec345b77284ce751df374ba00b92562e
+  cmark:
+    github: amauryt/cr-cmark-gfm
+    commit: 638ef0e34c0cd6a96a28559704af7c9081743e87
 
   crest:
     github: mamantoha/crest
@@ -102,7 +102,7 @@ shards:
 
   raven:
     github: Sija/raven.cr
-    version: 1.5.5
+    version: 1.6.0
 
   redis:
     github: stefanwille/crystal-redis
