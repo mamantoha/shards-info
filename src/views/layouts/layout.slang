@@ -17,8 +17,8 @@ html lang="en"
 
     == render "src/views/partials/open_graph.slang"
 
-    link rel="stylesheet" href="/application.css"
-    script src="/application.js"
+    link rel="stylesheet" href="/application.css?v=2.0"
+    script src="/application.js?v=2.0"
 
     title #{Config.config.page_title}
     link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon"

@@ -5,6 +5,7 @@ html {
 
 body {
   padding-top: 3.5rem;
+
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
@@ -20,10 +21,10 @@ h3 {
 
 ul.not-list {
   padding-left: 0px;
-}
 
-ul.not-list li {
-  list-style-type: none;
+  li {
+    list-style-type: none;
+  }
 }
 
 .nav-tabs {
@@ -38,9 +39,12 @@ ul.not-list li {
   position: absolute;
   bottom: 0;
   width: 100%;
+
   /* Set the fixed height of the footer here */
   height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 60px;
+
+  /* Vertically center the text there */
   background-color: #f5f5f5;
 }
 
@@ -60,26 +64,25 @@ ul.not-list li {
 }
 
 .navbar {
-  background-color: #24292E!important;
+  background-color: #24292E !important;
 }
 
 .navbar-brand img {
   filter: invert(100%);
 }
 
-.has-search .form-control {
-  padding-left: 2.375rem;
-}
+.has-search {
+  .form-control {
+    padding-left: 2.375rem;
+    border-radius: 2rem;
+    border: 0;
+    background-color: #404448;
+    color: #87898c;
+  }
 
-.has-search .form-control {
-  border-radius: 2rem;
-  border: 0;
-  background-color: #404448;
-  color: #87898c;
-}
-
-.has-search ::placeholder {
-  color: #87898c!important;
+  ::placeholder {
+    color: #87898c !important;
+  }
 }
 
 .form-group.has-search {
@@ -100,11 +103,11 @@ ul.not-list li {
 }
 
 .width-full {
-  width: 100%!important;
+  width: 100% !important;
 }
 
 .text-normal {
-  font-weight: 600!important;
+  font-weight: 600 !important;
 }
 
 .css-truncate {
@@ -119,10 +122,11 @@ ul.not-list li {
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
   word-wrap: break-word;
-
   -ms-word-break: break-all;
+
   /* This is the dangerous one in WebKit, as it breaks things wherever */
   word-break: break-all;
+
   /* Instead use this non-standard one: */
   word-break: break-word;
 
@@ -133,15 +137,17 @@ ul.not-list li {
   hyphens: auto;
 }
 
-.middle-dot-divider::after {
-  content: '\00B7';
-  padding: 0 6px;
-  font-weight: 600;
-}
+.middle-dot-divider {
+  &::after {
+    content: '\00B7';
+    padding: 0 6px;
+    font-weight: 600;
+  }
 
-.middle-dot-divider:last-child::after {
-  content: '';
-  padding: 0;
+  &:last-child::after {
+    content: '';
+    padding: 0;
+  }
 }
 
 .avatar_block .avatar {
@@ -162,26 +168,27 @@ ul.not-list li {
 
 .home_repositories__container {
   position: relative;
-  top: -74px
+  top: -74px;
 }
 
 .avatar_block {
   position: relative;
   display: inline-block;
-}
 
-.avatar_block .badge {
-  position: absolute;
-  top: 52px;
-  right: 45px;
-}
+  .badge {
+    position: absolute;
+    top: 52px;
+    right: 45px;
 
-.avatar_block .badge .fa-stack {
-  font-size: 0.8em;
-  color: black;
-}
-.avatar_block .badge i {
-  vertical-align: middle;
+    .fa-stack {
+      font-size: 0.8em;
+      color: black;
+    }
+
+    i {
+      vertical-align: middle;
+    }
+  }
 }
 
 .user__avatar img {
@@ -214,10 +221,10 @@ ul.not-list li {
   padding: 12px;
   margin-bottom: 12px;
   border-bottom: 1px solid #eee;
-}
 
-.shards__shard.forked {
-  background: #f8f9fa;
+  &.forked {
+    background: #f8f9fa;
+  }
 }
 
 .shards__shard_desc {
@@ -246,13 +253,13 @@ ul.not-list li {
   padding-top: 5px;
   margin-bottom: 0;
   font-size: 12px;
-}
 
-.shards__shard_github ul li {
-  display: inline;
-  padding-right: 5px;
-  font-size: 14px;
-  color: #586069!important;
+  li {
+    display: inline;
+    padding-right: 5px;
+    font-size: 14px;
+    color: #586069 !important;
+  }
 }
 
 .page__heading {
@@ -260,18 +267,18 @@ ul.not-list li {
   padding-bottom: 40px;
   margin-bottom: 30px;
   text-overflow: ellipsis;
-  overflow:hidden;
+  overflow: hidden;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  background-color: #fafbfc!important;
-  border-bottom: 1px solid #e1e4e8!important;
-  border-top: 1px solid #e1e4e8!important;
-}
+  background-color: #fafbfc !important;
+  border-bottom: 1px solid #e1e4e8 !important;
+  border-top: 1px solid #e1e4e8 !important;
 
-.page__heading .fork-flag {
-  font-size: 13px;
-  color: #586069;
-  line-height: 10px;
+  .fork-flag {
+    font-size: 13px;
+    color: #586069;
+    line-height: 10px;
+  }
 }
 
 .page__subheading {
@@ -293,10 +300,10 @@ ul.not-list li {
 .shard__main {
   top: -74px;
   padding-right: 0;
-}
 
-.shard__main .tab-content {
-  padding-right: 15px;
+  .tab-content {
+    padding-right: 15px;
+  }
 }
 
 .shard__statistic {
@@ -318,10 +325,10 @@ ul.not-list li {
 
 .list__items {
   margin-bottom: 5px;
-}
 
-.list__items a {
-  color: #141c22;
+  a {
+    color: #141c22;
+  }
 }
 
 .shard__owner {
@@ -336,10 +343,10 @@ ul.not-list li {
 
 .shard__links {
   padding-left: 0px;
-}
 
-.shard__links a {
-  color: #141c22;
+  a {
+    color: #141c22;
+  }
 }
 
 .shard__release-wrap {
@@ -353,30 +360,32 @@ ul.not-list li {
 
 .shard__see_all_link {
   margin-bottom: 10px;
+
+  a {
+    color: #c1c4ca;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 500;
+    text-decoration: none;
+
+    &:after {
+      margin-left: 3px;
+      font-family: "Times New Roman", sans-serif;
+      font-style: normal;
+      content: "→";
+    }
+  }
 }
 
-.shard__see_all_link a {
-  color: #c1c4ca;
-  font-size: 14px;
-  font-style: italic;
-  font-weight: 500;
-  text-decoration: none;
-}
+.shard__readme {
+  img {
+    max-width: 100%;
+  }
 
-.shard__see_all_link a:after {
-  margin-left: 3px;
-  font-family: "Times New Roman", sans-serif;
-  font-style: normal;
-  content: "→";
-}
-
-.shard__readme img {
-  max-width: 100%;
-}
-
-.shard__readme pre code {
-  overflow: auto;
-  overflow-y: hidden;
+  pre code {
+    overflow: auto;
+    overflow-y: hidden;
+  }
 }
 
 .list__heading {
@@ -386,27 +395,30 @@ ul.not-list li {
   color: #a6aab2;
 }
 
-[data-toggle="collapse"] .fa:before {
-  content: "\f139";
-}
+[data-toggle="collapse"] {
+  .fa:before {
+    content: "\f139";
+  }
 
-[data-toggle="collapse"].collapsed .fa:before {
-  content: "\f13a";
+  &.collapsed .fa:before {
+    content: "\f13a";
+  }
 }
 
 .list__heading a {
   color: #a6aab2;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
-.list__heading a:hover {
-  text-decoration: none;
-}
-
-@media (min-width : 768px) {
+@media (min-width: 768px) {
   #back-to-top {
     display: none;
   }
 }
+
 #back-to-top {
   position: fixed;
   bottom: 16px;
@@ -438,11 +450,11 @@ ul.not-list li {
 .users .user {
   padding: 16px;
   border-bottom: 1px solid #e1e4e8;
-}
 
-.users .user img.avatar {
-  width: 64px;
-  height: 64px;
+  img.avatar {
+    width: 64px;
+    height: 64px;
+  }
 }
 
 .nav-tabs .nav-link {
@@ -450,15 +462,15 @@ ul.not-list li {
   white-space: nowrap;
   border: 1px solid transparent;
   border-radius: 3px 3px 0 0;
-}
 
-.nav-tabs .nav-link.active {
-  border-top: 3px solid;
-  border-color: #e36209 #e1e4e8 transparent;
-}
+  &.active {
+    border-top: 3px solid;
+    border-color: #e36209 #e1e4e8 transparent;
+  }
 
-.nav-tabs .nav-link:hover {
-  border-bottom-color: white;
+  &:hover {
+    border-bottom-color: white;
+  }
 }
 
 .subnav .nav-link {
@@ -469,17 +481,17 @@ ul.not-list li {
   transition: border-bottom-color .4s;
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
 
-.subnav .nav-link.active {
-  font-weight: 500;
-  color: #1b1f23!important;
-  border-bottom-color: #1074e7!important;
-}
+  &.active {
+    font-weight: 500;
+    color: #1b1f23 !important;
+    border-bottom-color: #1074e7 !important;
+  }
 
-.subnav .nav-link:hover {
-  color: #1b1f23!important;
-  border-bottom-color: #E1E4E8;
+  &:hover {
+    color: #1b1f23 !important;
+    border-bottom-color: #E1E4E8;
+  }
 }
 
 #tags-cloud {
