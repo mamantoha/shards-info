@@ -7,6 +7,8 @@ html lang="en"
 
     title Page not found
 
+    link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"
+
     link type="text/css" rel="stylesheet" href="/css/404.css"
   body
     #notfound

@@ -15,13 +15,14 @@ html lang="en"
     meta name="description" content="#{Config.config.page_description}"
     meta name="turbolinks-cache-control" content="no-preview"
 
+    link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"
+
     == render "src/views/partials/open_graph.slang"
 
     link rel="stylesheet" href="/application.css?v=2.0"
     script src="/application.js?v=2.0"
 
     title #{Config.config.page_title}
-    link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon"
   body
     == render "src/views/partials/navbar.slang"
     == render "src/views/partials/about.slang"
