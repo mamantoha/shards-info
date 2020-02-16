@@ -1,6 +1,7 @@
 import 'bootstrap/js/dist/util'
 import 'bootstrap/js/dist/modal'
 import 'bootstrap/js/dist/tab'
+import 'bootstrap/js/dist/collapse'
 
 import hljs from 'highlight.js/lib/highlight'
 import _crystal from 'highlight.js/lib/languages/crystal'
