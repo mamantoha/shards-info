@@ -20,6 +20,19 @@ psql -c 'CREATE DATABASE shards_info_development;' -U postgres
 crystal src/db.cr -- migrate
 ```
 
+### Frontend
+
+Install depencencies:
+
+```console
+npm install
+```
+
+After modifications:
+
+1. Run `npm run build`
+2. Change version of `application.js` and `application.css` in `src/views/layouts/index.slang`
+
 ## Specs
 
 ```console
