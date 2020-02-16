@@ -18,7 +18,7 @@ html lang="en"
         h2 Oops, The Page you are looking for can't be found!
         form.notfound-search action="/search" method="GET" autocomplete="off"
           input name="query" type="text" placeholder="Search shards..." onClick="this.select();"
-          button type="button" Search
+          button type="submit" Search
         a href="/"
           span.arrow
           | Back to Homepage
