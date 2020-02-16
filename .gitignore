@@ -2,6 +2,7 @@
 /lib/
 /bin/
 /log/
+/public/
 /src/tasks/
 /.shards/
 .env
