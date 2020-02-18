@@ -46,7 +46,8 @@ module GitlabHelpers
 
     user = User.query.find_or_build({provider: "gitlab", provider_id: owner.id}) { }
     assign_project_owner_attributes(user, owner)
-    user.save
+    user.synced_at = Time.utc if user.changed?
+    user.save!
 
     repository = Repository.query.find_or_build({provider: "gitlab", provider_id: gitlab_project.id}) { }
     repository.user = user
@@ -55,7 +56,7 @@ module GitlabHelpers
     return unless repository.changed?
 
     repository.synced_at = Time.utc
-    repository.save
+    repository.save!
 
     repository.tags = tags
 
