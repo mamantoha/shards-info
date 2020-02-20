@@ -12,11 +12,17 @@ body {
 
 .turbolinks-progress-bar {
   height: 2px;
-  background-color: #1074e7;
+  background-color: #2E2EFF;
 }
 
 h3 {
   font-size: 20px;
+}
+
+a {
+  color: #2E2EFF;
+  text-decoration: none;
+  background-color: transparent;
 }
 
 ul.not-list {
@@ -46,6 +52,7 @@ ul.not-list {
 
   /* Vertically center the text there */
   background-color: #f5f5f5;
+  color: #4F545A;
 }
 
 .pagination {
@@ -77,11 +84,11 @@ ul.not-list {
     border-radius: 2rem;
     border: 0;
     background-color: #404448;
-    color: #87898c;
+    color: #DADADC;
   }
 
   ::placeholder {
-    color: #87898c !important;
+    color: #DADADC !important;
   }
 }
 
@@ -99,7 +106,7 @@ ul.not-list {
   line-height: 2.375rem;
   text-align: center;
   pointer-events: none;
-  color: #87898c;
+  color: #DADADC;
 }
 
 .width-full {
@@ -227,6 +234,10 @@ ul.not-list {
   }
 }
 
+.shards__shard_name {
+  font-size: 20px;
+}
+
 .shards__shard_desc {
   margin-bottom: 8px;
   overflow-wrap: break-word;
@@ -283,14 +294,14 @@ ul.not-list {
 
 .page__subheading {
   font-size: 60%;
-  color: #808080;
+  color: #545454;
 }
 
 .result_stats {
   font-size: 40%;
   line-height: 43px;
   padding-left: 16px;
-  color: #808080;
+  color: #545454;
 }
 
 .shard__header {
@@ -324,7 +335,11 @@ ul.not-list {
 }
 
 .list__items {
-  margin-bottom: 5px;
+  margin-bottom: 18px;
+
+  li.link {
+    margin-top: 10px;
+  }
 
   a {
     color: #141c22;
@@ -362,7 +377,7 @@ ul.not-list {
   margin-bottom: 10px;
 
   a {
-    color: #c1c4ca;
+    color: #555868;
     font-size: 14px;
     font-style: italic;
     font-weight: 500;
@@ -390,9 +405,10 @@ ul.not-list {
 
 .list__heading {
   font-weight: 800;
-  font-size: 12px;
+  font-size: 13px;
   text-transform: uppercase;
-  color: #a6aab2;
+  color: #535860;
+  margin-bottom: 10px;
 }
 
 [data-toggle="collapse"] {
@@ -406,7 +422,7 @@ ul.not-list {
 }
 
 .list__heading a {
-  color: #a6aab2;
+  color: #535860;
 
   &:hover {
     text-decoration: none;
@@ -485,7 +501,7 @@ ul.not-list {
   &.active {
     font-weight: 500;
     color: #1b1f23 !important;
-    border-bottom-color: #1074e7 !important;
+    border-bottom-color: #2E2EFF !important;
   }
 
   &:hover {
@@ -497,4 +513,35 @@ ul.not-list {
 #tags-cloud {
   width: 100%;
   height: 50vh;
+}
+
+.badge-info {
+  color: #fff;
+  background-color: #0C5F6E;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: .5rem .75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #2E2EFF;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #2E2EFF;
+  border-color: #2E2EFF;
+}
+
+.page-item.disabled .page-link {
+  color: #505053;
+  pointer-events: none;
+  cursor: auto;
+  background-color: #fff;
+  border-color: #dee2e6;
 }

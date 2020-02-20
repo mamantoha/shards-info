@@ -9,7 +9,7 @@
             i class="fab fa-#{repository.provider} fa-stack-1x fa-inverse"
   .width-full
     .shards__shard_info
-      h3.shards__shard_name.css-truncate
+      h2.shards__shard_name.css-truncate
         a href="/#{repository.provider}/#{repository.decorate.full_name}/"
           - if additional_info
             == "#{repository.user.login}/<span class='text-normal'>#{repository.name}</span>"

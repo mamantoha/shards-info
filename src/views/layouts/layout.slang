@@ -19,7 +19,7 @@ html lang="en"
 
     == render "src/views/partials/open_graph.slang"
 
-    link rel="stylesheet" href="/dist/application.css?v=2.0" async="async" defer="defer"
+    link rel="stylesheet" href="/dist/application.css?v=2.1" async="async" defer="defer"
     script src="/dist/application.js?v=2.1" media="all"
 
     title #{Config.config.page_title}
@@ -27,8 +27,9 @@ html lang="en"
     == render "src/views/partials/navbar.slang"
     == render "src/views/partials/about.slang"
     == render "src/views/partials/back_to_top.slang"
-    == content
+    div role="main"
+      == content
     div.space
     footer.footer
       .container.text-center
-        span class="text-muted" Happy Crystalling ♥
+        span Happy Crystalling ♥

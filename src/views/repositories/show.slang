@@ -14,21 +14,15 @@ div
 .container
   .row
     .col-md-8.col-sm-12.shard__main
-      ul class="nav nav-tabs nav-fill" id="infoTab" role="tablist"
-        li class="nav-item"
-          a class="nav-link active" id="info-tab" href="#info" role="tab" data-toggle="tab" aria-controls="info" aria-selected="true"
+      nav id="infoTab" aria-label="Information"
+        div class="nav nav-tabs nav-fill justify-content-center" id="nav-tabs" role="tablist"
+          a class="nav-item nav-link active" id="info-tab" href="#info" role="tab" data-toggle="tab" aria-controls="info" aria-selected="true"
             i class="fas fa-info-circle"
             ' Info
-        - if repository.readme
-          li class="nav-item"
-            a class="nav-link" id="readme-tab" href="#readme" role="tab" data-toggle="tab" aria-controls="readme" aria-selected="false"
+          - if repository.readme
+            a class="nav-item nav-link" id="readme-tab" href="#readme" role="tab" data-toggle="tab" aria-controls="readme" aria-selected="false"
               i class="fas fa-book"
               ' Readme
-        /- if changelog
-          li class="nav-item"
-            a class="nav-link" id="changelog-tab" href="#changelog" role="tab" data-toggle="tab" aria-controls="changelog" aria-selected="false"
-              i class="fas fa-history"
-              ' Changelog
 
       div class="tab-content"
         div role="tabpanel" class="tab-pane fade show active" id="info" aria-labelledby="info-tab"
@@ -38,11 +32,6 @@ div
             .row
               .col-md-12.shard__readme
                 == readme_html
-        /- if changelog
-          div role="tabpanel" class="tab-pane fade" id="changelog" aria-labelledby="changelog-tab"
-            .row
-              .col-md-12.shard__changelog
-                == changelog_html
 
     .col-md-4.col-sm-12.shard__statistic
       .list__heading Owner
@@ -50,7 +39,7 @@ div
         li
           .shards__shard_owner
             .shards__shard_owner_avatar
-              img src="#{repository.user.decorate.avatar(20)}" alt="#{repository.user.login}" loading="lazy"
+              img src="#{repository.user.decorate.avatar(20)}" alt="#{repository.user.login} avatar" loading="lazy"
             .shards__shard_owner_name
               a href="/#{repository.provider}/#{repository.user.login}/"
                 = repository.user.login
@@ -75,13 +64,13 @@ div
           i class="fas fa-hourglass-start" title="Created"
           = repository.created_at.try(&.to_s("%B %-d, %Y"))
 
-      h3.list__heading License
+      .list__heading License
       p
         = repository.license
-      h3.list__heading Links
+      .list__heading Links
       ul.shard__links.not-list
         li
           a href="#{repository.decorate.provider_url}" Homepage
-      h3.list__heading Synced at
+      .list__heading Synced at
       p.small
         = Time::Format::HTTP_DATE.format(repository.synced_at)
