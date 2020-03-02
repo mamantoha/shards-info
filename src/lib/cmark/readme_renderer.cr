@@ -11,7 +11,7 @@ class ReadmeRenderer < Cmark::HTMLRenderer
       title = node.title
       out %(<a href=")
       if @options.unsafe? || !(UNSAFE_URL_REGEX === url)
-        out URI.encode(raw_url(url)) unless url.nil?
+        out raw_url(url) unless url.nil?
       end
       unless title.try &.empty?
         out %(" title=")
@@ -28,7 +28,7 @@ class ReadmeRenderer < Cmark::HTMLRenderer
       url = node.url
       out %(<img src=")
       if @options.unsafe? || !(UNSAFE_URL_REGEX === url)
-        out URI.encode(raw_url(url))
+        out raw_url(url)
       end
       out %(" alt=")
     else
