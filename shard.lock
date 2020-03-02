@@ -18,7 +18,7 @@ shards:
 
   clear:
     github: anykeyh/clear
-    commit: 3efce5eebfb75ac04c218e9dab547b6ffa022563
+    commit: 4cff99857afe26582bafa73d0ac0729b615b52a4
 
   cmark:
     github: amauryt/cr-cmark-gfm
@@ -46,7 +46,7 @@ shards:
 
   exception_page:
     github: crystal-loot/exception_page
-    version: 0.1.2
+    version: 0.1.4
 
   generate:
     github: anykeyh/generate.cr
