@@ -18,5 +18,5 @@ class SitemapJob
   end
 end
 
-job = SitemapJob.new
-job.perform
+# job = SitemapJob.new
+# job.perform
