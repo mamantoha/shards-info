@@ -18,7 +18,7 @@ shards:
 
   clear:
     github: anykeyh/clear
-    commit: 4cff99857afe26582bafa73d0ac0729b615b52a4
+    commit: 8d5518cb3af00deb5d92e9dba68751771ee449eb
 
   cmark:
     github: amauryt/cr-cmark-gfm
@@ -26,7 +26,7 @@ shards:
 
   crest:
     github: mamantoha/crest
-    version: 0.23.2
+    version: 0.24.0
 
   db:
     github: crystal-lang/crystal-db
