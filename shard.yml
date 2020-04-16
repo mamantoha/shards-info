@@ -16,10 +16,8 @@ targets:
 
 dependencies:
   kemal:
-    # github: kemalcr/kemal
-    # branch: master
-    github: mamantoha/kemal
-    branch: crystal-0.33
+    github: kemalcr/kemal
+    branch: master
   clear:
     github: anykeyh/clear
     branch: master
@@ -30,6 +28,7 @@ dependencies:
     branch: master
   cache:
     github: mamantoha/cache
+    version: ~> 0.7.0
   crest:
     github: mamantoha/crest
   mosquito:
@@ -51,6 +50,7 @@ dependencies:
     branch: master
   shards:
     github: crystal-lang/shards
+    version: ~> 0.10.0
 
 development_dependencies:
   spec-kemal:
