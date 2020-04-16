@@ -2,13 +2,13 @@ require "crest"
 
 module Gitlab
   class Logger < Crest::Logger
-    def request(request) : String
+    def request(request) : Nil
       message = ">> | %s | %s" % [request.method, request.url]
       @logger.info(message)
       message
     end
 
-    def response(response) : String
+    def response(response) : Nil
       message = "<< | %s | %s" % [response.status_code, response.url]
       @logger.info(message)
       message
