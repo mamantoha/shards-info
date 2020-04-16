@@ -90,7 +90,7 @@ shards:
 
   mosquito:
     github: robacarp/mosquito
-    version: 0.0.4
+    commit: bce04b7501bb6ec14d4f1c9bda540e20c1765e80
 
   pg:
     github: will/crystal-pg
