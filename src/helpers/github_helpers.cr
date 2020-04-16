@@ -1,3 +1,4 @@
+require "shards/resolvers/resolver"
 require "shards/spec"
 
 module GithubHelpers
