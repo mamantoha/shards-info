@@ -18,7 +18,7 @@ shards:
 
   clear:
     github: anykeyh/clear
-    commit: f9aa2369a665f413ea27a8000e8884c778f28d36
+    version: 0.8
 
   cmark:
     github: amauryt/cr-cmark-gfm
@@ -66,7 +66,7 @@ shards:
 
   i18n_plural_rules:
     github: mamantoha/i18n_plural_rules
-    version: 0.1.0
+    version: 0.1.1
 
   inflector:
     github: phoffer/inflector.cr
@@ -90,7 +90,7 @@ shards:
 
   mosquito:
     github: robacarp/mosquito
-    commit: bce04b7501bb6ec14d4f1c9bda540e20c1765e80
+    commit: 0cbc8f0e03f8c3706ebcac7be4b91da32c3dd414
 
   pg:
     github: will/crystal-pg
