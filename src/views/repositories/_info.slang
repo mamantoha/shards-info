@@ -34,7 +34,7 @@
           | Used by (#{dependents_count})
       .collapse.show#collapseDependent
         ul.list__items.not-list
-          - dependents.with_user.limit(10).each do |repository|
+          - dependents.limit(10).each do |repository|
             li.link
               i class="#{repository.decorate.provider_icon}"
               a href="/#{repository.provider}/#{repository.decorate.full_name}/" = repository.name

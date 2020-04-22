@@ -2,7 +2,7 @@ version: 1.0
 shards:
   admiral:
     github: jwaldrip/admiral.cr
-    commit: d11fc4863154f3dbd933421bdf45d356a2550e07
+    commit: 09a81513a47535c4b59cbf0ab98cadcbf6ab70fb
 
   any_hash:
     github: Sija/any_hash.cr
@@ -14,11 +14,11 @@ shards:
 
   cache:
     github: mamantoha/cache
-    version: 0.6.0
+    version: 0.7.0
 
   clear:
     github: anykeyh/clear
-    commit: 8d5518cb3af00deb5d92e9dba68751771ee449eb
+    commit: f9aa2369a665f413ea27a8000e8884c778f28d36
 
   cmark:
     github: amauryt/cr-cmark-gfm
@@ -26,11 +26,11 @@ shards:
 
   crest:
     github: mamantoha/crest
-    version: 0.24.0
+    version: 0.25.0
 
   db:
     github: crystal-lang/crystal-db
-    version: 0.8.0
+    version: 0.9.0
 
   delegator:
     github: Schniz/delegator.cr
@@ -38,7 +38,7 @@ shards:
 
   dotenv:
     github: gdotdesign/cr-dotenv
-    commit: 31a7209e04fef73bc87e8a57ca95b58848f6715b
+    commit: c2253998797b46c8754f892fc2138fe35654bec4
 
   emoji:
     github: veelenga/emoji.cr
@@ -73,8 +73,8 @@ shards:
     version: 0.1.8
 
   kemal:
-    github: mamantoha/kemal
-    commit: 7e3a8ee150d88a47d862474b5d3ed3990016e9cf
+    github: kemalcr/kemal
+    commit: c3c43145b8951b511790287ef3cd872f75c55c89
 
   kilt:
     github: jeromegn/kilt
@@ -84,13 +84,17 @@ shards:
     github: comandeo/crystal-memcached
     version: 0.2.2
 
+  molinillo:
+    github: crystal-lang/crystal-molinillo
+    version: 0.1.0
+
   mosquito:
     github: robacarp/mosquito
-    version: 0.6.0
+    commit: bce04b7501bb6ec14d4f1c9bda540e20c1765e80
 
   pg:
     github: will/crystal-pg
-    commit: cafec2c963ee3f16799fb52e0bf15b4622d6a7c7
+    commit: cafee448dc09ef487bd3941febce8796830f1bd7
 
   pool:
     github: ysbaddaden/pool
@@ -106,11 +110,11 @@ shards:
 
   redis:
     github: stefanwille/crystal-redis
-    version: 2.5.3
+    version: 2.6.0
 
   shards:
     github: crystal-lang/shards
-    version: 0.9.0
+    version: 0.10.0
 
   slang:
     github: jeromegn/slang

@@ -1,3 +1,4 @@
+require "shards/resolvers/resolver"
 require "shards/spec"
 
 module GithubHelpers
@@ -8,7 +9,7 @@ module GithubHelpers
 
     github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
-    github_repository = github_client.get_repo(repository.user.login, repository.name)
+    github_repository = github_client.get_repo(repository.provider_id)
 
     tags = github_repository.tags
     github_user = github_repository.user
