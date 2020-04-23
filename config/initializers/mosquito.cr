@@ -8,4 +8,4 @@ log_file =
     STDOUT
   end
 
-Mosquito::Base.logger = Logger.new(log_file)
+Log.builder.bind "mosquito.*", :info, Log::IOBackend.new(log_file)

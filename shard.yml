@@ -20,7 +20,7 @@ dependencies:
     branch: master
   clear:
     github: anykeyh/clear
-    version: '= 0.8'
+    branch: master
   delegator:
     github: Schniz/delegator.cr
   slang:

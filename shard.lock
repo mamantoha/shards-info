@@ -18,7 +18,7 @@ shards:
 
   clear:
     github: anykeyh/clear
-    version: 0.8
+    commit: f9aa2369a665f413ea27a8000e8884c778f28d36
 
   cmark:
     github: amauryt/cr-cmark-gfm
@@ -90,7 +90,7 @@ shards:
 
   mosquito:
     github: robacarp/mosquito
-    commit: 0cbc8f0e03f8c3706ebcac7be4b91da32c3dd414
+    commit: bd4d646312fecebabaf34099b99384ff0d473213
 
   pg:
     github: will/crystal-pg
