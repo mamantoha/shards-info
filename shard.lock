@@ -73,8 +73,8 @@ shards:
     version: 0.1.8
 
   kemal:
-    github: kemalcr/kemal
-    commit: 70684a2cf07aa36fd92f2cfb26843f52fff5a10f
+    github: mamantoha/kemal
+    commit: f5c1bc750b858b8c38f2509ead2050598d3e0d06
 
   kilt:
     github: jeromegn/kilt
