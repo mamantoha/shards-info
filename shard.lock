@@ -74,7 +74,7 @@ shards:
 
   kemal:
     github: mamantoha/kemal
-    commit: f5c1bc750b858b8c38f2509ead2050598d3e0d06
+    commit: 21cd778e380890c626733a3a10999c67e160d1b6
 
   kilt:
     github: jeromegn/kilt
@@ -93,8 +93,8 @@ shards:
     commit: 8a0f98788d07945f9f1ae3e08add364ce2a5af07
 
   pg:
-    github: will/crystal-pg
-    commit: cafee448dc09ef487bd3941febce8796830f1bd7
+    github: mamantoha/crystal-pg
+    commit: 0a25cffdf67f04af4085364348eb68e80423af4d
 
   pool:
     github: ysbaddaden/pool

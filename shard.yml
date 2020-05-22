@@ -18,6 +18,11 @@ dependencies:
   kemal:
     github: mamantoha/kemal
     branch: develop
+  pg:
+    # TODO https://github.com/will/crystal-pg/pull/205
+    # github: will/crystal-pg
+    github: mamantoha/crystal-pg
+    branch: crystal/0.35.0
   clear:
     github: anykeyh/clear
     branch: master
