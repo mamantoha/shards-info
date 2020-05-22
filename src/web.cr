@@ -222,7 +222,7 @@ get "/:provider/:owner/:repo" do |env|
       repository
         .dependents
         .undistinct
-        .order_by({stars_count: :desc})
+        .order_by({created_at: :desc})
 
     dependents_count = dependents.count
 
@@ -263,7 +263,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
       repository
         .dependents
         .undistinct
-        .order_by({stars_count: :desc})
+        .order_by({created_at: :desc})
 
     total_count = repositories_query.count
 
