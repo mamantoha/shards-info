@@ -74,7 +74,7 @@ shards:
 
   kemal:
     github: mamantoha/kemal
-    commit: 21cd778e380890c626733a3a10999c67e160d1b6
+    commit: bad31ab889a603b1d578fa2dbdf7ae01db5189ff
 
   kilt:
     github: jeromegn/kilt
