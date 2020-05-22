@@ -22,7 +22,7 @@ shards:
 
   cmark:
     github: amauryt/cr-cmark-gfm
-    commit: 638ef0e34c0cd6a96a28559704af7c9081743e87
+    commit: 8cfdcdbea800319e1a588ca2a1b77258d0a40bb6
 
   crest:
     github: mamantoha/crest
@@ -74,7 +74,7 @@ shards:
 
   kemal:
     github: kemalcr/kemal
-    commit: c3c43145b8951b511790287ef3cd872f75c55c89
+    commit: 70684a2cf07aa36fd92f2cfb26843f52fff5a10f
 
   kilt:
     github: jeromegn/kilt
@@ -90,7 +90,7 @@ shards:
 
   mosquito:
     github: robacarp/mosquito
-    commit: 1c8bb385cd3ba5ccede5f3c1d04cda6c80bbafc8
+    commit: 8a0f98788d07945f9f1ae3e08add364ce2a5af07
 
   pg:
     github: will/crystal-pg
@@ -118,7 +118,7 @@ shards:
 
   slang:
     github: jeromegn/slang
-    commit: 8210d3f83c6199bc59925ee964405ffe926f44f3
+    commit: 8206914a74832e3ae71490ec4fa60c50e967c9ee
 
   spec-kemal:
     github: kemalcr/spec-kemal
