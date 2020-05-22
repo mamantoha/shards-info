@@ -10,12 +10,7 @@ require "shards/spec"
 
 require "yaml"
 require "base64"
-
-require "flate"
-require "gzip"
-require "zlib"
 require "kemal"
-
 require "kilt/slang"
 require "crest"
 require "emoji"
