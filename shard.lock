@@ -22,7 +22,7 @@ shards:
 
   cmark:
     github: amauryt/cr-cmark-gfm
-    commit: 8cfdcdbea800319e1a588ca2a1b77258d0a40bb6
+    commit: f605a7d0a28ad5ffd2f204b0f1e3e8c9bad857e3
 
   crest:
     github: mamantoha/crest

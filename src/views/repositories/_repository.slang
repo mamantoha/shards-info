@@ -17,7 +17,7 @@
             == repository.name
 
       p.shards__shard_desc.dont-break-out
-        == Emoji.emojize(Autolink.auto_link(repository.description.to_s))
+        = Emoji.emojize(Autolink.auto_link(repository.description.to_s))
     .shard__topics
       / TODO: for some reason repository.tags breaks html template
       / - repository.tags.each do |tag|
