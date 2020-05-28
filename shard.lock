@@ -93,8 +93,8 @@ shards:
     commit: 8a0f98788d07945f9f1ae3e08add364ce2a5af07
 
   pg:
-    github: mamantoha/crystal-pg
-    commit: 0a25cffdf67f04af4085364348eb68e80423af4d
+    github: bcardiff/crystal-pg
+    commit: afdc8e5db132762e6e54f739fd386ad746a63706
 
   pool:
     github: ysbaddaden/pool
