@@ -13,7 +13,9 @@ class RepositoryDelegator < Delegator(Repository)
 
   def description_with_emoji : String?
     description.try do |_description|
-      Emoji.emojize(_description)
+      Emoji.emojize(
+        HTML.escape(_description)
+      )
     end
   end
 

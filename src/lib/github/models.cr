@@ -444,12 +444,6 @@ module Github
       Github::User.from_json(_user)
     end
 
-    def description_with_emoji : String?
-      @description.try do |description|
-        Emoji.emojize(description)
-      end
-    end
-
     def license_name
       @license.try do |license|
         if license.name
