@@ -10,7 +10,7 @@ div
           a href="/tags/#{tag_name}" class="badge badge-secondary text-monospace" = tag_name
       .shard__intro.text-muted
         span
-          = Emoji.emojize(Autolink.auto_link(repository.description.to_s))
+          == repository.decorate.description_html.to_s
 .container
   .row
     .col-md-8.col-sm-12.shard__main
