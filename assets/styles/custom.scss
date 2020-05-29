@@ -401,9 +401,21 @@ ul.not-list {
     max-width: 100%;
   }
 
-  pre code {
+  pre {
+    padding: 16px;
     overflow: auto;
-    overflow-y: hidden;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+  }
+
+  .blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: .25em solid #dfe2e5;
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 1rem;
   }
 }
 

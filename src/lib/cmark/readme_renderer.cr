@@ -5,6 +5,17 @@ class ReadmeRenderer < Cmark::HTMLRenderer
     super(@options, @extensions)
   end
 
+  def block_quote(node, entering)
+    if entering
+      out "<blockquote class='blockquote'"
+      sourcepos node
+      out ">\n"
+    else
+      cr
+      out "</blockquote>\n"
+    end
+  end
+
   def link(node, entering)
     if entering
       url = node.url
