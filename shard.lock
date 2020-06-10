@@ -1,126 +1,126 @@
-version: 1.0
+version: 2.0
 shards:
   admiral:
-    github: jwaldrip/admiral.cr
-    commit: c3c3467953654554b72c24e7b853d6fbb23f10c0
+    git: https://github.com/jwaldrip/admiral.cr.git
+    version: 1.11.2+git.commit.c3c3467953654554b72c24e7b853d6fbb23f10c0
 
   any_hash:
-    github: Sija/any_hash.cr
+    git: https://github.com/sija/any_hash.cr.git
     version: 0.2.3
 
   autolink:
-    github: crystal-community/autolink.cr
+    git: https://github.com/crystal-community/autolink.cr.git
     version: 0.1.3
 
   cache:
-    github: mamantoha/cache
+    git: https://github.com/mamantoha/cache.git
     version: 0.7.0
 
   clear:
-    github: anykeyh/clear
-    commit: f9aa2369a665f413ea27a8000e8884c778f28d36
+    git: https://github.com/anykeyh/clear.git
+    version: 0.8+git.commit.f9aa2369a665f413ea27a8000e8884c778f28d36
 
   cmark:
-    github: amauryt/cr-cmark-gfm
-    commit: f605a7d0a28ad5ffd2f204b0f1e3e8c9bad857e3
+    git: https://github.com/amauryt/cr-cmark-gfm.git
+    version: 0.1.0+git.commit.f605a7d0a28ad5ffd2f204b0f1e3e8c9bad857e3
 
   crest:
-    github: mamantoha/crest
-    version: 0.25.0
+    git: https://github.com/mamantoha/crest.git
+    version: 0.25.1
 
   db:
-    github: crystal-lang/crystal-db
+    git: https://github.com/crystal-lang/crystal-db.git
     version: 0.9.0
 
   delegator:
-    github: Schniz/delegator.cr
+    git: https://github.com/Schniz/delegator.cr.git
     version: 0.1.0
 
   dotenv:
-    github: gdotdesign/cr-dotenv
-    commit: c2253998797b46c8754f892fc2138fe35654bec4
+    git: https://github.com/gdotdesign/cr-dotenv.git
+    version: 0.7.0+git.commit.c2253998797b46c8754f892fc2138fe35654bec4
 
   emoji:
-    github: veelenga/emoji.cr
-    commit: 4642bd8ef64839b4639ba0be521e8c85113cb8d5
+    git: https://github.com/veelenga/emoji.cr.git
+    version: 0.4.0+git.commit.4642bd8ef64839b4639ba0be521e8c85113cb8d5
 
   exception_page:
-    github: crystal-loot/exception_page
+    git: https://github.com/crystal-loot/exception_page.git
     version: 0.1.4
 
   generate:
-    github: anykeyh/generate.cr
-    commit: 27a59d663ded8ce39a361e3a88b8dd747f59ce42
+    git: https://github.com/anykeyh/generate.cr.git
+    version: 0.1.0+git.commit.27a59d663ded8ce39a361e3a88b8dd747f59ce42
 
   http-client-digest_auth:
-    github: mamantoha/http-client-digest_auth
-    version: 0.3.0
+    git: https://github.com/mamantoha/http-client-digest_auth.git
+    version: 0.4.0
 
   humanize_time:
-    github: mamantoha/humanize_time
+    git: https://github.com/mamantoha/humanize_time.git
     version: 0.6.0
 
   i18n:
-    github: TechMagister/i18n.cr
+    git: https://github.com/TechMagister/i18n.cr.git
     version: 0.3.1
 
   i18n_plural_rules:
-    github: mamantoha/i18n_plural_rules
+    git: https://github.com/mamantoha/i18n_plural_rules.git
     version: 0.1.1
 
   inflector:
-    github: phoffer/inflector.cr
+    git: https://github.com/phoffer/inflector.cr.git
     version: 0.1.8
 
   kemal:
-    github: mamantoha/kemal
-    commit: 0ec67f014ed04bc5568e7c24a1a6dd33620468b1
+    git: https://github.com/mamantoha/kemal.git
+    version: 0.26.1+git.commit.0ec67f014ed04bc5568e7c24a1a6dd33620468b1
 
   kilt:
-    github: jeromegn/kilt
+    git: https://github.com/jeromegn/kilt.git
     version: 0.4.0
 
   memcached:
-    github: comandeo/crystal-memcached
+    git: https://github.com/comandeo/crystal-memcached.git
     version: 0.2.2
 
   molinillo:
-    github: crystal-lang/crystal-molinillo
+    git: https://github.com/crystal-lang/crystal-molinillo.git
     version: 0.1.0
 
   mosquito:
-    github: robacarp/mosquito
-    commit: 8a0f98788d07945f9f1ae3e08add364ce2a5af07
+    git: https://github.com/robacarp/mosquito.git
+    version: 0.8.0+git.commit.b38a224fd9c16a11e5f0d7923b8ce950317a2292
 
   pg:
-    github: bcardiff/crystal-pg
-    commit: afdc8e5db132762e6e54f739fd386ad746a63706
+    git: https://github.com/will/crystal-pg.git
+    version: 0.21.1+git.commit.cafe111fc28e366c219144d5f656c3718d7357dd
 
   pool:
-    github: ysbaddaden/pool
+    git: https://github.com/ysbaddaden/pool.git
     version: 0.2.3
 
   radix:
-    github: luislavena/radix
+    git: https://github.com/luislavena/radix.git
     version: 0.3.9
 
   raven:
-    github: Sija/raven.cr
+    git: https://github.com/Sija/raven.cr.git
     version: 1.6.0
 
   redis:
-    github: stefanwille/crystal-redis
+    git: https://github.com/stefanwille/crystal-redis.git
     version: 2.6.0
 
   shards:
-    github: crystal-lang/shards
+    git: https://github.com/crystal-lang/shards.git
     version: 0.10.0
 
   slang:
-    github: jeromegn/slang
-    commit: 8206914a74832e3ae71490ec4fa60c50e967c9ee
+    git: https://github.com/jeromegn/slang.git
+    version: 1.7.1+git.commit.8206914a74832e3ae71490ec4fa60c50e967c9ee
 
   spec-kemal:
-    github: kemalcr/spec-kemal
+    git: https://github.com/kemalcr/spec-kemal.git
     version: 0.5.0
 
