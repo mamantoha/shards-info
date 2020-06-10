@@ -16,8 +16,8 @@ targets:
 
 dependencies:
   kemal:
-    github: mamantoha/kemal
-    branch: develop
+    github: kemalcr/kemal
+    branch: master
   clear:
     github: anykeyh/clear
     branch: master
