@@ -7,7 +7,7 @@ crystal:
 
 before_script:
   - psql -c 'create database shards_info_test;' -U postgres
-  - crystal src/db.cr -- migrate
+  - crystal src/db.cr migrate
 
 script:
   - crystal spec
