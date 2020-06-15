@@ -5,15 +5,13 @@ require "../../src/db/migrations/**"
 
 Clear::SQL.init(ENV["DATABASE_URL"], connection_pool_size: 5)
 
-Log.setup(:debug)
+log_file =
+  case ENV["KEMAL_ENV"]
+  when "production"
+    File.new("#{__DIR__}/../../log/clear.log", "a+")
+  else
+    STDOUT
+  end
 
-# log_file =
-#   case ENV["KEMAL_ENV"]
-#   when "production"
-#     File.new("#{__DIR__}/../../log/clear.log", "a+")
-#   else
-#     STDOUT
-#   end
-#
-# Clear.logger = Logger.new(log_file)
-# Clear.logger.level = Logger::DEBUG
+Clear.logger = Logger.new(log_file)
+Clear.logger.level = Logger::DEBUG

@@ -20,7 +20,7 @@ dependencies:
     branch: develop
   clear:
     github: anykeyh/clear
-    branch: master
+    commit: f9aa2369a665f413ea27a8000e8884c778f28d36
   delegator:
     github: Schniz/delegator.cr
   slang:
