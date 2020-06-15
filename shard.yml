@@ -28,7 +28,6 @@ dependencies:
     branch: master
   cache:
     github: mamantoha/cache
-    version: ~> 0.7.0
   crest:
     github: mamantoha/crest
   mosquito:

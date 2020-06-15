@@ -14,7 +14,7 @@ shards:
 
   cache:
     git: https://github.com/mamantoha/cache.git
-    version: 0.7.0
+    version: 0.8.0
 
   clear:
     git: https://github.com/anykeyh/clear.git
@@ -82,7 +82,7 @@ shards:
 
   memcached:
     git: https://github.com/comandeo/crystal-memcached.git
-    version: 0.2.2
+    version: 0.2.2+git.commit.ee02a364a0274df0cde3d1bb3ef958e2e7c07c18
 
   molinillo:
     git: https://github.com/crystal-lang/crystal-molinillo.git
