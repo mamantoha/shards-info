@@ -18,7 +18,7 @@ shards:
 
   clear:
     git: https://github.com/anykeyh/clear.git
-    version: 0.8+git.commit.f9aa2369a665f413ea27a8000e8884c778f28d36
+    version: 0.8+git.commit.c946b6c77f88f1727547fd22997a61ef8da1a542
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -73,8 +73,8 @@ shards:
     version: 0.1.8
 
   kemal:
-    git: https://github.com/kemalcr/kemal.git
-    version: 0.26.1+git.commit.a8c0f09b858162bd13c96663febef5527b322a32
+    git: https://github.com/mamantoha/kemal.git
+    version: 0.26.1+git.commit.feb3ed2489e8edc05a9166582d5fe30a32bde565
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
