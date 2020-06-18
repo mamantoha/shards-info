@@ -80,6 +80,10 @@ shards:
     git: https://github.com/jeromegn/kilt.git
     version: 0.4.0
 
+  logger:
+    git: https://github.com/84codes/logger.cr.git
+    version: 1.0.0
+
   memcached:
     git: https://github.com/comandeo/crystal-memcached.git
     version: 0.2.2+git.commit.ee02a364a0274df0cde3d1bb3ef958e2e7c07c18
