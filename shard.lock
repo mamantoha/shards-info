@@ -26,7 +26,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 0.25.1
+    version: 0.26.0
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -55,6 +55,10 @@ shards:
   http-client-digest_auth:
     git: https://github.com/mamantoha/http-client-digest_auth.git
     version: 0.4.0
+
+  http_proxy:
+    git: https://github.com/mamantoha/http_proxy.git
+    version: 0.7.0
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
