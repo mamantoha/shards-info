@@ -13,6 +13,10 @@ script:
   - crystal spec
   - crystal tool format --check
 
+jobs:
+  allow_failures:
+  - crystal: nightly
+
 services:
   - postgresql
   - redis-server
