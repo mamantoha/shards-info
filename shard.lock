@@ -85,8 +85,8 @@ shards:
     version: 0.4.0
 
   logger:
-    git: https://github.com/84codes/logger.cr.git
-    version: 1.0.0
+    git: https://github.com/crystal-lang/logger.cr.git
+    version: 0.1.0
 
   memcached:
     git: https://github.com/comandeo/crystal-memcached.git
@@ -114,7 +114,7 @@ shards:
 
   raven:
     git: https://github.com/Sija/raven.cr.git
-    version: 1.6.0
+    version: 1.7.1
 
   redis:
     git: https://github.com/stefanwille/crystal-redis.git
