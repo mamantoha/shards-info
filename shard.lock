@@ -14,7 +14,7 @@ shards:
 
   cache:
     git: https://github.com/mamantoha/cache.git
-    version: 0.8.0
+    version: 0.9.0
 
   clear:
     git: https://github.com/anykeyh/clear.git
