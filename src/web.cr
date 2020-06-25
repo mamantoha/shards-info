@@ -13,9 +13,9 @@ require "shards/spec"
 require "yaml"
 require "base64"
 
-require "flate"
-require "gzip"
-require "zlib"
+require "compress/deflate"
+require "compress/gzip"
+require "compress/zlib"
 require "kemal"
 
 require "kilt/slang"
