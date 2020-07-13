@@ -21,7 +21,7 @@
           a href="/#{user.provider}/#{user.login}/#{repository.name}/"
             = repository.name
         .text-muted.mb-2
-          = repository.description
+          = repository.decorate.description_html
         .small
           ul.list-inline.not-list
             li.list-inline-item
