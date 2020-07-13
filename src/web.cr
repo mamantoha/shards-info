@@ -103,7 +103,11 @@ get "/users" do |env|
       .join("repositories") { var("repositories", "user_id") == var("users", "id") }
       .select(
         "users.*",
-        "SUM(repositories.stars_count) AS stars_count",
+        "SUM(repositories.stars_count * CASE
+          WHEN repositories.last_activity_at > '#{1.year.ago}' THEN 1
+          ELSE 0.25
+        END
+        ) AS stars_count",
         "COUNT(repositories.*) AS repositories_count",
       )
       .group_by("users.id")
