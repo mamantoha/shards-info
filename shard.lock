@@ -22,7 +22,7 @@ shards:
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
-    version: 0.1.0+git.commit.f605a7d0a28ad5ffd2f204b0f1e3e8c9bad857e3
+    version: 0.1.0+git.commit.b5d73efd841c8d77283786b7a37ea4369ceb3d2c
 
   crest:
     git: https://github.com/mamantoha/crest.git
@@ -126,7 +126,7 @@ shards:
 
   slang:
     git: https://github.com/jeromegn/slang.git
-    version: 1.7.1+git.commit.8206914a74832e3ae71490ec4fa60c50e967c9ee
+    version: 1.7.1+git.commit.22bfe847286647f98af008b284c5c0438d67677a
 
   spec-kemal:
     git: https://github.com/kemalcr/spec-kemal.git
