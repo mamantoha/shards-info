@@ -5,7 +5,7 @@ shards:
     version: 1.11.2+git.commit.c3c3467953654554b72c24e7b853d6fbb23f10c0
 
   any_hash:
-    git: https://github.com/sija/any_hash.cr.git
+    git: https://github.com/Sija/any_hash.cr.git
     version: 0.2.3
 
   autolink:
