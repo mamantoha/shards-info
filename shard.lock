@@ -17,12 +17,12 @@ shards:
     version: 0.9.0
 
   clear:
-    git: https://github.com/anykeyh/clear.git
-    version: 0.8+git.commit.f9aa2369a665f413ea27a8000e8884c778f28d36
+    git: https://github.com/mamantoha/clear.git
+    version: 0.8+git.commit.6d188fc02a378fbb9ca1cf50dbaf29f4bdcf36fb
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
-    version: 0.1.0+git.commit.b5d73efd841c8d77283786b7a37ea4369ceb3d2c
+    version: 0.1.0+git.commit.92c4a6f4a3a5ce2029d0a2216a828d59d2b22dd6
 
   crest:
     git: https://github.com/mamantoha/crest.git
@@ -30,7 +30,7 @@ shards:
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
-    version: 0.9.0
+    version: 0.10.0
 
   delegator:
     git: https://github.com/Schniz/delegator.cr.git
@@ -62,15 +62,11 @@ shards:
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
-    version: 0.6.0
+    version: 0.7.0
 
   i18n:
     git: https://github.com/TechMagister/i18n.cr.git
-    version: 0.3.1
-
-  i18n_plural_rules:
-    git: https://github.com/mamantoha/i18n_plural_rules.git
-    version: 0.1.1
+    version: 0.3.1+git.commit.635e05dd5e9fb8bc99c46c12497689221644d9e4
 
   inflector:
     git: https://github.com/phoffer/inflector.cr.git
@@ -78,15 +74,11 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 0.26.1+git.commit.dfe7dca08f4c9a9456d6132af5f6b59fcd6865e4
+    version: 0.26.1+git.commit.a819d4792bbc63d993d6dd2b15f9af5efb0c2d8c
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
     version: 0.4.0
-
-  logger:
-    git: https://github.com/crystal-lang/logger.cr.git
-    version: 0.1.0
 
   memcached:
     git: https://github.com/comandeo/crystal-memcached.git
@@ -102,7 +94,7 @@ shards:
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.21.1+git.commit.cafe111fc28e366c219144d5f656c3718d7357dd
+    version: 0.21.1+git.commit.cafe894810d111dc6593f294cb22cdf64560b3ac
 
   pool:
     git: https://github.com/ysbaddaden/pool.git
