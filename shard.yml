@@ -45,6 +45,7 @@ dependencies:
     github: crystal-community/autolink.cr
   raven:
     github: Sija/raven.cr
+    version: 1.7.2
   dotenv:
     github: gdotdesign/cr-dotenv
     branch: master
