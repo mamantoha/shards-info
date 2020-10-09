@@ -13,5 +13,4 @@ log_file =
     STDOUT
   end
 
-Clear.logger = Logger.new(log_file)
-Clear.logger.level = Logger::DEBUG
+Log.builder.bind "clear.*", :debug, Log::IOBackend.new(log_file)

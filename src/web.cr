@@ -5,8 +5,6 @@
 require "dotenv"
 Dotenv.load?
 
-require "logger"
-
 require "shards/resolvers/resolver"
 require "shards/spec"
 
