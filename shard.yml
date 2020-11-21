@@ -20,7 +20,7 @@ dependencies:
     branch: master
   clear:
     # github: anykeyh/clear
-    # commit: f9aa2369a665f413ea27a8000e8884c778f28d36
+    # branch: master
     github: mamantoha/clear
     branch: develop
   delegator:

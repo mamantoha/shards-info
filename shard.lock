@@ -18,7 +18,7 @@ shards:
 
   clear:
     git: https://github.com/mamantoha/clear.git
-    version: 0.8+git.commit.6d188fc02a378fbb9ca1cf50dbaf29f4bdcf36fb
+    version: 0.8+git.commit.e757063e38140b7a74dda942c5b0e5371d7810a4
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -38,7 +38,7 @@ shards:
 
   dotenv:
     git: https://github.com/gdotdesign/cr-dotenv.git
-    version: 0.7.0+git.commit.c2253998797b46c8754f892fc2138fe35654bec4
+    version: 0.7.0+git.commit.3c5f9c9b8da2280c68921a3470b91b4bac1afa98
 
   emoji:
     git: https://github.com/veelenga/emoji.cr.git
@@ -51,6 +51,10 @@ shards:
   generate:
     git: https://github.com/anykeyh/generate.cr.git
     version: 0.1.0+git.commit.27a59d663ded8ce39a361e3a88b8dd747f59ce42
+
+  habitat:
+    git: https://github.com/luckyframework/habitat.git
+    version: 0.4.4
 
   http-client-digest_auth:
     git: https://github.com/mamantoha/http-client-digest_auth.git
@@ -90,7 +94,7 @@ shards:
 
   mosquito:
     git: https://github.com/robacarp/mosquito.git
-    version: 0.8.0+git.commit.b38a224fd9c16a11e5f0d7923b8ce950317a2292
+    version: 0.9.0+git.commit.35068a627cbcc7bb969042c87f9e0b0de5cf1158
 
   pg:
     git: https://github.com/will/crystal-pg.git
