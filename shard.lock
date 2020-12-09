@@ -14,7 +14,7 @@ shards:
 
   cache:
     git: https://github.com/mamantoha/cache.git
-    version: 0.9.0
+    version: 0.10.0
 
   clear:
     git: https://github.com/mamantoha/clear.git
@@ -62,7 +62,7 @@ shards:
 
   http_proxy:
     git: https://github.com/mamantoha/http_proxy.git
-    version: 0.7.1
+    version: 0.7.2
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
@@ -94,7 +94,7 @@ shards:
 
   mosquito:
     git: https://github.com/robacarp/mosquito.git
-    version: 0.9.0+git.commit.35068a627cbcc7bb969042c87f9e0b0de5cf1158
+    version: 0.9.0+git.commit.fb1ce08c1366d0b0bc8d5b07dcd255059477af42
 
   pg:
     git: https://github.com/will/crystal-pg.git
