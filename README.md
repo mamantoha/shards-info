@@ -44,6 +44,7 @@ export KEMAL_ENV=test && crystal spec
 * [Crystal language](https://crystal-lang.org/)
 * [Clear](https://github.com/anykeyh/clear) - Advanced ORM between PostgreSQL and Crystal
 * [Kemal](https://github.com/kemalcr/kemal) - Web microframework for Crystal
+* [Mosquito](https://github.com/robacarp/mosquito) - A generic background task runner for Crystal applications
 * [raven.cr](https://github.com/Sija/raven.cr) - Crystal client for [Sentry](https://sentry.io)
 * Logo [icon](https://game-icons.net/1x1/lorc/floating-crystal.html) taken from [Game Icons pack](https://game-icons.net/) under CC BY 3.0 license.
 
