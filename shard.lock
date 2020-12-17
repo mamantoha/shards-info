@@ -94,7 +94,7 @@ shards:
 
   mosquito:
     git: https://github.com/robacarp/mosquito.git
-    version: 0.9.0+git.commit.fb1ce08c1366d0b0bc8d5b07dcd255059477af42
+    version: 0.9.0+git.commit.920660fb953cf9e46d1d3680287b8b8452ae601c
 
   pg:
     git: https://github.com/will/crystal-pg.git
@@ -110,7 +110,7 @@ shards:
 
   raven:
     git: https://github.com/Sija/raven.cr.git
-    version: 1.7.2
+    version: 1.8.1
 
   redis:
     git: https://github.com/stefanwille/crystal-redis.git
