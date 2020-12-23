@@ -22,17 +22,19 @@ module.exports = {
     rules: [
       {
         test: require.resolve('jquery'),
-        use: [{
-          loader: 'expose-loader',
-          options: 'jQuery'
-        },{
-          loader: 'expose-loader',
-          options: '$'
-        }]
+        use: [
+          {
+            loader: 'expose-loader',
+            options: 'jQuery'
+          },
+          {
+            loader: 'expose-loader',
+            options: '$'
+          }
+        ]
       },
       {
         test: /\.(sa|sc|c)ss$/i,
-        exclude: /node_modules/,
         use: [
         {
           loader: MiniCssExtractPlugin.loader,
@@ -50,11 +52,16 @@ module.exports = {
             options: {
               limit: 8192
             }
-          }]
+          }
+        ]
       },
       {
         test: /\.(ttf|eot)$/,
-        use: [{loader: 'file-loader'}]
+        use: [
+          {
+            loader: 'file-loader'
+          }
+        ]
       },
     ]
   },
