@@ -42,6 +42,8 @@ document.addEventListener("turbolinks:load", function() {
         backToTop();
       });
     }
+
+    Turbolinks.setProgressBarDelay(200)
   });
 
   var moveTo = new MoveTo();
@@ -66,7 +68,3 @@ document.addEventListener("turbolinks:load", function() {
     }
   });
 })
-
-$(document).ready(function () {
-  Turbolinks.setProgressBarDelay(200);
-});
