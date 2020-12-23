@@ -32,11 +32,25 @@ module.exports = {
       },
       {
         test: /\.(sa|sc|c)ss$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader','sass-loader']
+        exclude: /node_modules/,
+        use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options:
+          {
+            publicPath: '/dist/'
+          }
+        }, 'css-loader', 'sass-loader']
       },
       {
         test: /\.(woff2?|svg)$/,
-        use: [{loader: 'url-loader?limit=10000'}]
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }]
       },
       {
         test: /\.(ttf|eot)$/,
