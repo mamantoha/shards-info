@@ -46,22 +46,11 @@ module.exports = {
       },
       {
         test: /\.(woff2?|svg)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192
-            }
-          }
-        ]
+        type: 'asset/inline',
       },
       {
         test: /\.(ttf|eot)$/,
-        use: [
-          {
-            loader: 'file-loader'
-          }
-        ]
+        type: 'asset/resource',
       },
     ]
   },
