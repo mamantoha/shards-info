@@ -4,7 +4,7 @@ import 'bootstrap/js/dist/tab'
 import 'bootstrap/js/dist/collapse'
 import Turbolinks from "turbolinks"
 
-import hljs from 'highlight.js/lib/highlight'
+import hljs from 'highlight.js/lib/core'
 import _crystal from 'highlight.js/lib/languages/crystal'
 import _yaml from 'highlight.js/lib/languages/yaml'
 hljs.registerLanguage('crystal', _crystal)
