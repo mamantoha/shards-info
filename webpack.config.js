@@ -1,6 +1,5 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -13,7 +12,6 @@ module.exports = {
     path: path.resolve(__dirname, 'public/dist'),
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'application.css',
     }),
@@ -21,26 +19,26 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('jquery'),
-        use: [{
-          loader: 'expose-loader',
-          options: 'jQuery'
-        },{
-          loader: 'expose-loader',
-          options: '$'
-        }]
+        test: require.resolve("jquery"),
+        loader: "expose-loader",
+        options: {
+          exposes: ["$", "jQuery"],
+        },
       },
       {
         test: /\.(sa|sc|c)ss$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader','sass-loader']
+        use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options:
+          {
+            publicPath: '/dist/'
+          }
+        }, 'css-loader', 'sass-loader']
       },
       {
-        test: /\.(woff2?|svg)$/,
-        use: [{loader: 'url-loader?limit=10000'}]
-      },
-      {
-        test: /\.(ttf|eot)$/,
-        use: [{loader: 'file-loader'}]
+        test: /\.(woff2?|svg|ttf|eot)$/,
+        type: 'asset/resource',
       },
     ]
   },
