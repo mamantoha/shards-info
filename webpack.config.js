@@ -1,6 +1,5 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -13,7 +12,6 @@ module.exports = {
     path: path.resolve(__dirname, 'public/dist'),
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'application.css',
     }),
@@ -39,11 +37,7 @@ module.exports = {
         }, 'css-loader', 'sass-loader']
       },
       {
-        test: /\.(woff2?|svg)$/,
-        type: 'asset/inline',
-      },
-      {
-        test: /\.(ttf|eot)$/,
+        test: /\.(woff2?|svg|ttf|eot)$/,
         type: 'asset/resource',
       },
     ]
