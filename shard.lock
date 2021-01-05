@@ -13,8 +13,8 @@ shards:
     version: 0.1.3
 
   cache:
-    git: https://github.com/mamantoha/cache.git
-    version: 0.10.0
+    git: https://github.com/crystal-cache/cache.git
+    version: 0.12.0
 
   clear:
     git: https://github.com/mamantoha/clear.git
@@ -26,7 +26,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 0.26.1
+    version: 0.26.2
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -42,7 +42,7 @@ shards:
 
   emoji:
     git: https://github.com/veelenga/emoji.cr.git
-    version: 0.4.0+git.commit.4642bd8ef64839b4639ba0be521e8c85113cb8d5
+    version: 0.4.0+git.commit.2b56d97dc049887a842af0877e57ba27d6e08bc7
 
   exception_page:
     git: https://github.com/crystal-loot/exception_page.git
@@ -84,10 +84,6 @@ shards:
     git: https://github.com/jeromegn/kilt.git
     version: 0.4.0
 
-  memcached:
-    git: https://github.com/comandeo/crystal-memcached.git
-    version: 0.2.2+git.commit.ee02a364a0274df0cde3d1bb3ef958e2e7c07c18
-
   molinillo:
     git: https://github.com/crystal-lang/crystal-molinillo.git
     version: 0.1.0
@@ -98,7 +94,7 @@ shards:
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.22.1+git.commit.cafeaf6127d8d50cfc345ae987f63e8d39fd9041
+    version: 0.22.1+git.commit.cafe0fd89eeb68cd579f539da44b89afcd51a21f
 
   pool:
     git: https://github.com/ysbaddaden/pool.git
