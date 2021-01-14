@@ -16,6 +16,9 @@ import 'jqcloud2/src/jqcloud'
 import moveto from 'moveto/src/moveTo'
 window.MoveTo = moveto
 
+import { changeTheme } from 'themes-switch'
+changeTheme('theme-dark', 'dist/css/theme-dark.css')
+
 import './js/jquery.twbsPagination.js'
 import './js/application.js'
 

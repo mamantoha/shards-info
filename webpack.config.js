@@ -1,4 +1,6 @@
 const path = require('path');
+
+const ThemesGeneratorPlugin = require('themes-switch/ThemesGeneratorPlugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -8,13 +10,22 @@ module.exports = {
     './assets/main.scss'
   ],
   output: {
-    filename: 'application.js',
+    filename: '[name].js',
+    chunkFilename: '[name].js',
     path: path.resolve(__dirname, 'public/dist'),
+    publicPath: ''
   },
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'application.css',
     }),
+    new ThemesGeneratorPlugin({
+      srcDir: 'assets',
+      themesDir: 'assets/styles/themes',
+      outputDir: 'css',
+      defaultStyleName: 'default.scss',
+      useStaticThemeName: true
+    })
   ],
   module: {
     rules: [

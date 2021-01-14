@@ -1,3 +1,10 @@
+@import './themes/default.scss';
+
+body {
+  background-color: $color-main;
+  color: $color-text;
+}
+
 html {
   position: relative;
   min-height: 100%;
