@@ -15,6 +15,9 @@
             == "#{repository.user.login}/<span class='text-normal'>#{repository.name}</span>"
           - else
             == repository.name
+        - if repository.archived
+          span.archived-badge.badge.bg-warning.text-light
+            | Archived
 
       p.shards__shard_desc.dont-break-out
         == repository.decorate.description_html.to_s

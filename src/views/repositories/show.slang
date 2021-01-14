@@ -1,6 +1,9 @@
 div
   .page__heading
     .container.shard__header
+      - if repository.archived
+        .archived-repository.alert.alert-warning.text-center
+          | This repository has been archived by the owner. It is now read-only.
       h1
         = "#{repository.name}"
         i.page__subheading
