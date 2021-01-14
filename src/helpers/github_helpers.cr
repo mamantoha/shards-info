@@ -102,6 +102,7 @@ module GithubHelpers
       stars_count:       github_repository.watchers_count,
       forks_count:       github_repository.forks_count,
       open_issues_count: github_repository.open_issues_count,
+      archived:          github_repository.archived,
       created_at:        github_repository.created_at,
       license:           github_repository.license.try(&.name),
     })
