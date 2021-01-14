@@ -30,8 +30,29 @@ psql -c 'DROP DATABASE shards_info_development;' -U postgres
 psql -c 'CREATE DATABASE shards_info_development;' -U postgres
 ```
 
+### Build project
+
 ```console
 shards build
+```
+
+Build assests if needed:
+
+```console
+npm run build
+````
+
+Migrate database if needed:
+
+```console
+./bin/db migrate
+```
+
+Restart application:
+
+```console
+sudo systemctl restart shards.info_worker.service
+sudo systemctl restart shards.info_web.service
 ```
 
 ### nginx
