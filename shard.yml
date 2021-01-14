@@ -30,7 +30,6 @@ dependencies:
     branch: master
   cache:
     github: crystal-cache/cache
-    version: ~> 0.12.0
   crest:
     github: mamantoha/crest
   mosquito:
@@ -48,7 +47,7 @@ dependencies:
     github: crystal-community/autolink.cr
   raven:
     github: Sija/raven.cr
-    version: ~> 1.8.0
+    version: ~> 1.9.0
   dotenv:
     github: gdotdesign/cr-dotenv
     branch: master
