@@ -62,7 +62,7 @@ module GitlabHelpers
     repository.tags = tags
 
     sync_project_shard_yml(repository)
-    sync_project_readme(repository)
+    sync_project_readme(repository, readme_file(gitlab_project))
     sync_project_releases(repository)
 
     Helpers.update_dependecies(repository)
@@ -157,10 +157,10 @@ module GitlabHelpers
     false
   end
 
-  def sync_project_readme(repository : Repository)
+  def sync_project_readme(repository : Repository, readme_url = "README.md")
     gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
 
-    response = gitlab_client.get_file(repository.provider_id, "README.md")
+    response = gitlab_client.get_file(repository.provider_id, readme_url)
     content = Base64.decode_string(response.content)
 
     repository.readme = content
@@ -170,6 +170,18 @@ module GitlabHelpers
     true
   rescue
     false
+  end
+
+  def readme_file(gitlab_project : Gitlab::Project)
+    if readme_url = gitlab_project.readme_url
+      if m = readme_url.match(/#{gitlab_project.web_url}\/-\/blob\/#{gitlab_project.default_branch}\/(.*)/)
+        m[1]
+      else
+        "README.md"
+      end
+    else
+      "README.md"
+    end
   end
 
   def sync_project_releases(repository : Repository)
