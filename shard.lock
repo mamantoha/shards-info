@@ -18,11 +18,11 @@ shards:
 
   cache:
     git: https://github.com/crystal-cache/cache.git
-    version: 0.12.0
+    version: 0.12.1
 
   clear:
     git: https://github.com/mamantoha/clear.git
-    version: 0.8+git.commit.e757063e38140b7a74dda942c5b0e5371d7810a4
+    version: 0.8+git.commit.78c69e54324b5d13aa90beda5436436928d80b39
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -30,7 +30,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 0.26.3
+    version: 0.26.4
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -62,19 +62,19 @@ shards:
 
   http-client-digest_auth:
     git: https://github.com/mamantoha/http-client-digest_auth.git
-    version: 0.4.0
+    version: 0.5.0
 
   http_proxy:
     git: https://github.com/mamantoha/http_proxy.git
-    version: 0.7.2
+    version: 0.7.3
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
-    version: 0.8.1
+    version: 0.8.2
 
   i18n:
     git: https://github.com/crystal-i18n/i18n.git
-    version: 0.1.3
+    version: 0.1.4
 
   inflector:
     git: https://github.com/phoffer/inflector.cr.git
@@ -110,7 +110,7 @@ shards:
 
   raven:
     git: https://github.com/Sija/raven.cr.git
-    version: 1.9.0
+    version: 1.9.0+git.commit.f10889123ffa1eb3d2c8ff41b2fa98973d85b171
 
   redis:
     git: https://github.com/stefanwille/crystal-redis.git
@@ -127,3 +127,4 @@ shards:
   spec-kemal:
     git: https://github.com/kemalcr/spec-kemal.git
     version: 0.5.0
+

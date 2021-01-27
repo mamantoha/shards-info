@@ -1,7 +1,7 @@
 name: shards-info
 version: 2.3.0
 
-crystal: 0.35.1
+crystal: 0.36.0
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
@@ -47,7 +47,8 @@ dependencies:
     github: crystal-community/autolink.cr
   raven:
     github: Sija/raven.cr
-    version: ~> 1.9.0
+    branch: develop
+    # version: ~> 1.9.1
   dotenv:
     github: gdotdesign/cr-dotenv
     branch: master
