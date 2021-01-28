@@ -5,8 +5,7 @@
 require "dotenv"
 Dotenv.load?
 
-require "shards/resolvers/resolver"
-require "shards/spec"
+require "shards_spec"
 
 require "yaml"
 require "base64"

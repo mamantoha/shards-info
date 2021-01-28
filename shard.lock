@@ -88,10 +88,6 @@ shards:
     git: https://github.com/jeromegn/kilt.git
     version: 0.4.0
 
-  molinillo:
-    git: https://github.com/crystal-lang/crystal-molinillo.git
-    version: 0.1.0
-
   mosquito:
     git: https://github.com/robacarp/mosquito.git
     version: 0.9.0+git.commit.920660fb953cf9e46d1d3680287b8b8452ae601c
@@ -110,15 +106,15 @@ shards:
 
   raven:
     git: https://github.com/Sija/raven.cr.git
-    version: 1.9.0+git.commit.f10889123ffa1eb3d2c8ff41b2fa98973d85b171
+    version: 1.9.1
 
   redis:
     git: https://github.com/stefanwille/crystal-redis.git
     version: 2.6.0
 
-  shards:
-    git: https://github.com/crystal-lang/shards.git
-    version: 0.10.0
+  shards_spec:
+    git: https://github.com/mamantoha/shards_spec.git
+    version: 0.1.0
 
   slang:
     git: https://github.com/jeromegn/slang.git
