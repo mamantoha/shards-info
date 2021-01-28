@@ -13,7 +13,7 @@ module Helpers
     end
   end
 
-  def create_relationships(repository : Repository, spec_dependencies : Array(Shards::Dependency), development : Bool)
+  def create_relationships(repository : Repository, spec_dependencies : Array(ShardsSpec::Dependency), development : Bool)
     spec_dependencies.each do |spec_dependency|
       if provider_name = (spec_dependency.keys & ["github", "gitlab"]).first?
         if repository_path = spec_dependency[provider_name]
@@ -35,7 +35,7 @@ module Helpers
     end
   end
 
-  def remove_outdated_relationships(repository : Repository, spec_dependencies : Array(Shards::Dependency), development : Bool)
+  def remove_outdated_relationships(repository : Repository, spec_dependencies : Array(ShardsSpec::Dependency), development : Bool)
     dependencies = repository.dependencies.where { relationships.development == development }
 
     dependencies.each do |dependency|
@@ -50,7 +50,7 @@ module Helpers
   end
 
   def spec_from_yaml(s)
-    Shards::Spec.from_yaml(s)
+    ShardsSpec::Spec.from_yaml(s)
   rescue
     nil
   end

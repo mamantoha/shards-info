@@ -1,5 +1,4 @@
-require "shards/resolvers/resolver"
-require "shards/spec"
+require "shards_spec"
 
 module GitlabHelpers
   extend self
