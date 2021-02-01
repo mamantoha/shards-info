@@ -24,27 +24,31 @@ module Gitlab
     end
 
     def client
-      uri = URI.parse(@base_url)
-      http_client = HTTP::Client.new(uri)
-      http_client.connect_timeout = 5.seconds
-      http_client.read_timeout = 30.seconds
+      @client ||= begin
+        uri = URI.parse(@base_url)
+        http_client = HTTP::Client.new(uri)
+        http_client.connect_timeout = 5.seconds
+        http_client.read_timeout = 30.seconds
 
-      @client ||= Crest::Resource.new(
-        @base_url,
-        headers: {
-          "Content-Type" => "application/json",
-        },
-        params: {
-          "access_token" => @access_token,
-        },
-        http_client: http_client,
-        logging: @logging,
-        logger: Gitlab.logger
-      )
+        Crest::Resource.new(
+          @base_url,
+          headers: {
+            "Content-Type" => "application/json",
+          },
+          params: {
+            "access_token" => @access_token,
+          },
+          http_client: http_client,
+          logging: @logging,
+          logger: Gitlab.logger
+        )
+      end
     end
 
     def make_request(url : String, params = {} of String => String)
       client[url].get(params: params)
+    ensure
+      client.http_client.close
     end
 
     # Recursive get Crystal projects
