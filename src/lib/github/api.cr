@@ -24,26 +24,34 @@ module Github
     end
 
     def client
-      client = Crest::Resource.new(
-        base_url,
-        headers: {
-          "Accept"       => "application/vnd.github.mercy-preview+json",
-          "Content-Type" => "application/json",
-          "User-Agent":     "request",
-        },
-        user: user,
-        password: key,
-        logging: @logging,
-        logger: Github.logger
-      )
+      @client ||= begin
+        uri = URI.parse(@base_url)
 
-      client.http_client.compress = false
+        http_client = HTTP::Client.new(uri)
+        http_client.connect_timeout = 5.seconds
+        http_client.read_timeout = 30.seconds
+        http_client.compress = false
 
-      client
+        Crest::Resource.new(
+          base_url,
+          headers: {
+            "Accept"       => "application/vnd.github.mercy-preview+json",
+            "Content-Type" => "application/json",
+            "User-Agent":     "request",
+          },
+          user: user,
+          password: key,
+          logging: @logging,
+          logger: Github.logger,
+          http_client: http_client
+        )
+      end
     end
 
     def make_request(url)
       response = client[url].get
+    ensure
+      client.http_client.close
     end
 
     def user(username : String)
