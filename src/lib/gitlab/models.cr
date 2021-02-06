@@ -246,7 +246,7 @@ module Gitlab
 
     property html_url : String
 
-    property source_url : String
+    property source_url : String?
   end
 
   class Links
