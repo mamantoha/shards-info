@@ -1,6 +1,7 @@
 require "mosquito"
 
 Mosquito.configure do |settings|
+  settings.idle_wait = 10.seconds
   settings.redis_url = ENV["REDIS_URL"]
 end
 
