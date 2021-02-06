@@ -90,11 +90,11 @@ shards:
 
   mosquito:
     git: https://github.com/robacarp/mosquito.git
-    version: 0.9.0+git.commit.920660fb953cf9e46d1d3680287b8b8452ae601c
+    version: 0.9.0+git.commit.5f28c5ee997ac40e0177743161db09ec8bd2e477
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.23.0+git.commit.cafec1e131427b65b47e82a8f9b3cb3f602c2cb2
+    version: 0.23.1+git.commit.cafe039cfd6340a271e81603943bb1975f5a91f5
 
   pool:
     git: https://github.com/ysbaddaden/pool.git
