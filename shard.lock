@@ -30,7 +30,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 0.26.6
+    version: 0.26.7
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -58,7 +58,7 @@ shards:
 
   habitat:
     git: https://github.com/luckyframework/habitat.git
-    version: 0.4.4
+    version: 0.4.5
 
   http-client-digest_auth:
     git: https://github.com/mamantoha/http-client-digest_auth.git
