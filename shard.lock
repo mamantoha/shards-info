@@ -2,7 +2,7 @@ version: 2.0
 shards:
   admiral:
     git: https://github.com/jwaldrip/admiral.cr.git
-    version: 1.11.2+git.commit.c3c3467953654554b72c24e7b853d6fbb23f10c0
+    version: 1.11.2+git.commit.91df71243271debfeb46fe751b4b9d8892ab6f2d
 
   any_hash:
     git: https://github.com/Sija/any_hash.cr.git
@@ -118,7 +118,7 @@ shards:
 
   slang:
     git: https://github.com/jeromegn/slang.git
-    version: 1.7.1+git.commit.22bfe847286647f98af008b284c5c0438d67677a
+    version: 1.7.2+git.commit.c2d90a98ed55aea56b1361ba38a6e67cd1ff8f16
 
   spec-kemal:
     git: https://github.com/kemalcr/spec-kemal.git
