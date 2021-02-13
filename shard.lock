@@ -82,7 +82,7 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 0.27.0+git.commit.bf9f627ac789d2ebe573629904f02beb9e4089d5
+    version: 0.27.0+git.commit.f71a83e2c43b963fd2fa2e6fb73b8abf447c17bf
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
@@ -102,7 +102,7 @@ shards:
 
   radix:
     git: https://github.com/luislavena/radix.git
-    version: 0.3.9
+    version: 0.4.0
 
   raven:
     git: https://github.com/Sija/raven.cr.git
