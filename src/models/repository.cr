@@ -16,7 +16,7 @@ class Repository
   column forks_count : Int32
   column open_issues_count : Int32?
   column archived : Bool
-  column ignore : Bool
+  column ignore : Bool = false
   column synced_at : Time
   column created_at : Time?
   column updated_on : Time?
@@ -38,6 +38,8 @@ class Repository
       SQL
     )
   }
+
+  scope(:published) { where({ignore: false}) }
 
   def self.find_repository(user_login : String, repository_name : String, provider : String) : Repository?
     Repository

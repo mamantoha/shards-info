@@ -53,6 +53,7 @@ module GithubHelpers
     user.save!
 
     repository = Repository.query.find_or_build({provider: "github", provider_id: github_repository.id}) { }
+    repository.ignore = false unless repository.persisted?
     repository.user = user
     assign_repository_attributes(repository, github_repository)
 

@@ -69,8 +69,8 @@ get "/" do |env|
       .query
       .with_user
       .with_tags
+      .published
       .where { last_activity_at > 1.week.ago }
-      .where { ignore == false }
       .order_by(stars_count: :desc)
       .limit(20)
 
@@ -79,7 +79,7 @@ get "/" do |env|
       .query
       .with_user
       .with_tags
-      .where { ignore == false }
+      .published
       .order_by(last_activity_at: :desc)
       .limit(20)
 

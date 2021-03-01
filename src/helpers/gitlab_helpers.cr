@@ -50,6 +50,7 @@ module GitlabHelpers
     user.save!
 
     repository = Repository.query.find_or_build({provider: "gitlab", provider_id: gitlab_project.id}) { }
+    repository.ignore = false unless repository.persisted?
     repository.user = user
     assign_project_attributes(repository, gitlab_project)
 
