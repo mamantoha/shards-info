@@ -16,6 +16,7 @@ class Repository
   column forks_count : Int32
   column open_issues_count : Int32?
   column archived : Bool
+  column ignore : Bool
   column synced_at : Time
   column created_at : Time?
   column updated_on : Time?

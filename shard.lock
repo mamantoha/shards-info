@@ -22,7 +22,7 @@ shards:
 
   clear:
     git: https://github.com/mamantoha/clear.git
-    version: 0.8+git.commit.78c69e54324b5d13aa90beda5436436928d80b39
+    version: 0.8.1+git.commit.69c094f9a298ef559f4cf465e82f51f2b3851852
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -90,7 +90,7 @@ shards:
 
   mosquito:
     git: https://github.com/robacarp/mosquito.git
-    version: 0.9.0+git.commit.5f28c5ee997ac40e0177743161db09ec8bd2e477
+    version: 0.10.0+git.commit.df3e0ad67d5724f52960b6f40b7335e7f2a257ca
 
   pg:
     git: https://github.com/will/crystal-pg.git

@@ -70,6 +70,7 @@ get "/" do |env|
       .with_user
       .with_tags
       .where { last_activity_at > 1.week.ago }
+      .where { ignore == false }
       .order_by(stars_count: :desc)
       .limit(20)
 
@@ -78,6 +79,7 @@ get "/" do |env|
       .query
       .with_user
       .with_tags
+      .where { ignore == false }
       .order_by(last_activity_at: :desc)
       .limit(20)
 
@@ -98,6 +100,7 @@ get "/users" do |env|
     User
       .query
       .join("repositories") { var("repositories", "user_id") == var("users", "id") }
+      .where { repositories.ignore == false }
       .select(
         "users.*",
         "SUM(repositories.stars_count * CASE
