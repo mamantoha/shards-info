@@ -182,6 +182,7 @@ get "/search" do |env|
         .query
         .with_tags
         .with_user
+        .published
         .search(query)
         .order_by(stars_count: :desc)
 
