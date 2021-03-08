@@ -70,7 +70,7 @@ shards:
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
-    version: 0.8.2
+    version: 0.9.0
 
   i18n:
     git: https://github.com/crystal-i18n/i18n.git
@@ -82,7 +82,7 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 0.27.0+git.commit.f71a83e2c43b963fd2fa2e6fb73b8abf447c17bf
+    version: 0.27.0+git.commit.8d0875f64c4e2d227cdf71b4edb5ef4079154325
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
@@ -118,7 +118,7 @@ shards:
 
   slang:
     git: https://github.com/jeromegn/slang.git
-    version: 1.7.2+git.commit.c2d90a98ed55aea56b1361ba38a6e67cd1ff8f16
+    version: 1.7.2+git.commit.9b41cef0ddf2cd5ba34094742e954570f170c284
 
   spec-kemal:
     git: https://github.com/kemalcr/spec-kemal.git

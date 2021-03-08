@@ -29,14 +29,14 @@
     "node-sass": "^5.0.0",
     "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
-    "webpack": "^5.24.2",
+    "webpack": "^5.24.4",
     "webpack-cli": "^4.5.0"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
     "highlight.js": "^10.6.0",
     "jqcloud2": "^2.0.3",
-    "jquery": "^3.5.1",
+    "jquery": "^3.6.0",
     "moveto": "^1.8.2",
     "popper.js": "^1.16.1",
     "turbolinks": "^5.2.0"
