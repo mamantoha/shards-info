@@ -46,14 +46,6 @@ static_headers do |response, filepath, filestat|
 end
 
 before_all do |env|
-  # Redirect from old `/repos` URLs to `/github`
-  if env.request.resource.starts_with?("/repos")
-    new_resourse = env.request.resource.sub(%r{\A/(repos)}, "/github")
-    env.redirect(new_resourse, 301)
-  end
-end
-
-before_all do |env|
   Config.config.open_graph = OpenGraph.new
   Config.config.open_graph.url = "https://shards.info#{env.request.path}"
   Config.config.query = env.request.query_params["query"]?.to_s
@@ -204,7 +196,6 @@ get "/search" do |env|
   end
 end
 
-get "/repos/:owner" { }
 get "/:provider/:owner" do |env|
   provider = env.params.url["provider"]
   owner = env.params.url["owner"]
@@ -227,7 +218,6 @@ get "/:provider/:owner" do |env|
   end
 end
 
-get "/repos/:owner/:repo" { }
 get "/:provider/:owner/:repo" do |env|
   provider = env.params.url["provider"]
   owner = env.params.url["owner"]
@@ -261,7 +251,6 @@ get "/:provider/:owner/:repo" do |env|
   end
 end
 
-get "/repos/:owner/:repo/dependents" { }
 get "/:provider/:owner/:repo/dependents" do |env|
   provider = env.params.url["provider"]
   owner = env.params.url["owner"]
