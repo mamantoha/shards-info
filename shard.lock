@@ -6,7 +6,7 @@ shards:
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
-    version: 0.2.4
+    version: 0.2.5
 
   autolink:
     git: https://github.com/crystal-community/autolink.cr.git
@@ -82,7 +82,7 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 0.27.0+git.commit.8d0875f64c4e2d227cdf71b4edb5ef4079154325
+    version: 0.27.0+git.commit.2d46beea5debefbb836a7e148a8e24452608471b
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
