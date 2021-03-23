@@ -38,6 +38,10 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+
     steps:
       - name: Install dependencies
         run: apt-get install build-essential
@@ -58,9 +62,9 @@ jobs:
       - name: Run tests
         run: crystal spec
         env:
-          DATABASE_URL: postgres://postgres:postgres@postgres/shards_info_test
+          DATABASE_URL: postgres://postgres:postgres@localhost/shards_info_test
           KEMAL_ENV: test
-          POSTGRES_HOST: postgres
+          POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
