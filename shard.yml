@@ -17,7 +17,6 @@ targets:
 dependencies:
   kemal:
     github: kemalcr/kemal
-    branch: master
   clear:
     # github: anykeyh/clear
     # branch: master

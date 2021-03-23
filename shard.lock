@@ -2,7 +2,7 @@ version: 2.0
 shards:
   admiral:
     git: https://github.com/jwaldrip/admiral.cr.git
-    version: 1.11.2+git.commit.91df71243271debfeb46fe751b4b9d8892ab6f2d
+    version: 1.11.4+git.commit.50a01f29ffe2b921fe4d2a4dbbc135bf551a4742
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -34,7 +34,7 @@ shards:
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
-    version: 0.10.0
+    version: 0.10.1
 
   delegator:
     git: https://github.com/schniz/delegator.cr.git
@@ -46,7 +46,7 @@ shards:
 
   emoji:
     git: https://github.com/veelenga/emoji.cr.git
-    version: 0.4.0+git.commit.2b56d97dc049887a842af0877e57ba27d6e08bc7
+    version: 0.4.0+git.commit.46a1f902f0ea81cd61bc99cdf8d12217df17ad5f
 
   exception_page:
     git: https://github.com/crystal-loot/exception_page.git
@@ -82,7 +82,7 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 0.27.0+git.commit.2d46beea5debefbb836a7e148a8e24452608471b
+    version: 1.0.0
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
