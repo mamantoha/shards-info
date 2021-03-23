@@ -30,7 +30,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 0.26.8
+    version: 0.27.0
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
