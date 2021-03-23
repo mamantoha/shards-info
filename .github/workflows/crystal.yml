@@ -59,13 +59,18 @@ jobs:
       - name: Install shard dependencies
         run: shards install --ignore-crystal-version
 
-      - name: Run tests
-        run: crystal spec
+      - name: Prepare database
+        run: crystal ./spec/initdb.cr
         env:
-          DATABASE_URL: postgres://postgres:postgres@localhost/shards_info_test
-          KEMAL_ENV: test
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
+
+
+      - name: Run tests
+        run: crystal spec
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost/shards_info_test
+          KEMAL_ENV: test

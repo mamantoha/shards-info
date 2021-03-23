@@ -1,0 +1,35 @@
+require "clear"
+require "../config/config"
+
+def initdb
+  pg.exec("DROP DATABASE IF EXISTS shards_info_test;")
+  pg.exec("CREATE DATABASE shards_info_test;")
+
+  Clear::SQL.init("postgres://#{postgres_user}:#{postgres_password}@#{postgres_host}/shards_info_test", connection_pool_size: 5)
+
+  Clear::Migration::Manager.instance.apply_all
+end
+
+def postgres_user
+  ENV["POSTGRES_USER"]? || "postgres"
+end
+
+def postgres_password
+  ENV["POSTGRES_PASSWORD"]? || ""
+end
+
+def postgres_host
+  ENV["POSTGRES_HOST"]? || "localhost"
+end
+
+def postgres_db
+  ENV["POSTGRES_DB"]? || "postgres"
+end
+
+def pg
+  DB.open("postgres://#{postgres_user}:#{postgres_password}@#{postgres_host}/#{postgres_db}")
+end
+
+Log.setup(:debug)
+
+initdb
