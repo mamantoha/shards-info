@@ -56,7 +56,7 @@ jobs:
       - name: Run tests
         run: crystal spec
         env:
-          DATABASE_URL: postgres://postgres:postgres@localhost/shards_info_test
+          DATABASE_URL: postgres://postgres:postgres@postgres/shards_info_test
           KEMAL_ENV: test
           POSTGRES_HOST: postgres
           POSTGRES_PORT: 5432
