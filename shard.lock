@@ -22,7 +22,7 @@ shards:
 
   clear:
     git: https://github.com/mamantoha/clear.git
-    version: 0.8.1+git.commit.69c094f9a298ef559f4cf465e82f51f2b3851852
+    version: 0.8.2+git.commit.253984bc498f8a047a86c4708173d6c2f48c8e28
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
