@@ -9,8 +9,9 @@ on:
 jobs:
   check_format:
     runs-on: ubuntu-latest
-    container: crystallang/crystal
     steps:
+      - name: Install Crystal
+        uses: oprypin/install-crystal@v1
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Check format
@@ -19,8 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        crystal: ["crystallang/crystal", "crystallang/crystal:nightly"]
-    container: ${{ matrix.crystal }}
+        crystal: [latest, nightly]
     # Service containers to run with `container-job`
     services:
       # Label used to access the service container
@@ -40,12 +40,17 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get install build-essential
 
+      - name: Install Crystal
+        uses: oprypin/install-crystal@v1
+        with:
+          crystal: ${{ matrix.crystal }}
+
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
         uses: actions/checkout@v2
 
       # Performs a clean installation of all dependencies in the `shard.yml` file
-      - name: Install dependencies
+      - name: Install shard dependencies
         run: shards install --ignore-crystal-version
 
       - name: Run tests
