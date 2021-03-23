@@ -63,7 +63,7 @@ jobs:
         run: crystal ./spec/initdb.cr
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost/shards_info_test
-          POSTGRES_HOST: postgres
+          POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
