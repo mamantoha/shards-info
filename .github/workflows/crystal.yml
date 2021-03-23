@@ -39,7 +39,7 @@ jobs:
           --health-retries 5
     steps:
       - name: Install dependencies
-        run: sudo apt-get install build-essential
+        run: apt-get install build-essential
 
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
