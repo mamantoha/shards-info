@@ -2,12 +2,12 @@ require "spec"
 require "spec-kemal"
 require "../src/web"
 
-def init_db
+def initdb
   pg.exec("DROP DATABASE IF EXISTS shards_info_test;")
   pg.exec("CREATE DATABASE shards_info_test;")
-end
 
-def migrate_db
+  Clear::SQL.init("postgres://#{postgres_user}:#{postgres_password}@#{postgres_host}/shards_info_test", connection_pool_size: 5)
+
   Clear::Migration::Manager.instance.apply_all
 end
 
@@ -31,5 +31,4 @@ def pg
   DB.open("postgres://#{postgres_user}:#{postgres_password}@#{postgres_host}/#{postgres_db}")
 end
 
-init_db
-migrate_db
+initdb
