@@ -41,6 +41,17 @@ jobs:
         ports:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
+      redis:
+        # Docker Hub image
+        image: redis
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
 
     steps:
       - name: Install dependencies
@@ -73,4 +84,5 @@ jobs:
         run: crystal spec
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost/shards_info_test
+          REDIS_URL: redis://localhost:6379
           KEMAL_ENV: test
