@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/mamantoha/shards-info/master/public/images/logo-horizontal_dark.png" alt="shards.info" width="360" />
 
-[![Built with Crystal](https://img.shields.io/badge/built%20with-crystal-000000.svg?style=for-the-badge&logo=appveyor)](https://crystal-lang.org/)
-![Travis (.org) branch](https://img.shields.io/travis/mamantoha/shards-info/master?style=for-the-badge)
+[![Built with Crystal](https://img.shields.io/badge/built%20with-Crystal-000000.svg?logo=appveyor)](https://crystal-lang.org/)
+[![Crystal CI](https://github.com/mamantoha/shards-info/actions/workflows/crystal.yml/badge.svg)](https://github.com/mamantoha/shards-info/actions/workflows/crystal.yml)
 
 View of all repositories on Github and Gitlab that have Crystal code in them.
 
