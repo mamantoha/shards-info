@@ -42,7 +42,7 @@ shards:
 
   dotenv:
     git: https://github.com/gdotdesign/cr-dotenv.git
-    version: 0.7.0+git.commit.3c5f9c9b8da2280c68921a3470b91b4bac1afa98
+    version: 1.0.0+git.commit.cb70a7111043fa37e09dce3e4b6db17fd5c6ce54
 
   emoji:
     git: https://github.com/veelenga/emoji.cr.git
@@ -50,15 +50,15 @@ shards:
 
   exception_page:
     git: https://github.com/crystal-loot/exception_page.git
-    version: 0.1.4
+    version: 0.1.5
 
   generate:
     git: https://github.com/anykeyh/generate.cr.git
-    version: 0.1.0+git.commit.27a59d663ded8ce39a361e3a88b8dd747f59ce42
+    version: 0.1.0+git.commit.f5dafc934a70e0ee2f246dddf3df44686f844da2
 
   habitat:
     git: https://github.com/luckyframework/habitat.git
-    version: 0.4.6
+    version: 0.4.7
 
   http-client-digest_auth:
     git: https://github.com/mamantoha/http-client-digest_auth.git
@@ -86,19 +86,19 @@ shards:
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
-    version: 0.4.0
+    version: 0.4.1
 
   mosquito:
     git: https://github.com/robacarp/mosquito.git
-    version: 0.10.0+git.commit.df3e0ad67d5724f52960b6f40b7335e7f2a257ca
+    version: 0.10.0+git.commit.30c9cae1558e084735eed1b202679cbbbd5aa26b
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.23.1+git.commit.cafe039cfd6340a271e81603943bb1975f5a91f5
+    version: 0.23.2+git.commit.cafe1e2a48764464299b44ab26449eb503be5934
 
   pool:
     git: https://github.com/ysbaddaden/pool.git
-    version: 0.2.3
+    version: 0.2.4
 
   radix:
     git: https://github.com/luislavena/radix.git
@@ -114,7 +114,7 @@ shards:
 
   shards_spec:
     git: https://github.com/mamantoha/shards_spec.git
-    version: 0.2.2
+    version: 0.2.3
 
   slang:
     git: https://github.com/jeromegn/slang.git
