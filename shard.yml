@@ -32,8 +32,7 @@ dependencies:
   crest:
     github: mamantoha/crest
   mosquito:
-    github: robacarp/mosquito
-    branch: master
+    github: mosquito-cr/mosquito
   emoji:
     github: veelenga/emoji.cr
     branch: master
