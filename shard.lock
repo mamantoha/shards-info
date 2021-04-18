@@ -26,7 +26,7 @@ shards:
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
-    version: 0.1.0+git.commit.3d941a0cbae64acbc0d9085e0182e89af7221bf5
+    version: 0.1.0+git.commit.4dd681983e6fe10c5e44ef7f38ed94e8a7a9b147
 
   crest:
     git: https://github.com/mamantoha/crest.git
