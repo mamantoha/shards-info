@@ -2,7 +2,7 @@
   .col-md-6
     .shard__releases.info-block
       .list__heading
-        a data-toggle="collapse" href="#collapseReleases" aria-expanded="true" aria-controls="collapseReleases"
+        a data-bs-toggle="collapse" href="#collapseReleases" aria-expanded="true" aria-controls="collapseReleases"
           i class="fa" aria-hidden="true"
           | Latest Releases
       .collapse.show#collapseReleases
@@ -16,7 +16,7 @@
   .col-md-6
     .shard__dependencies.info-block
       .list__heading
-        a data-toggle="collapse" href="#collapseDependencies" aria-expanded="true" aria-controls="collapseDependencies"
+        a data-bs-toggle="collapse" href="#collapseDependencies" aria-expanded="true" aria-controls="collapseDependencies"
           i class="fa" aria-hidden="true"
           | Dependencies
       .collapse.show#collapseDependencies
@@ -29,7 +29,7 @@
   .col-md-6
     .shard__dependent_shards.info-block
       .list__heading
-        a data-toggle="collapse" href="#collapseDependent" aria-expanded="true" aria-controls="collapseDependent"
+        a data-bs-toggle="collapse" href="#collapseDependent" aria-expanded="true" aria-controls="collapseDependent"
           i class="fa" aria-hidden="true"
           | Used by (#{dependents_count})
       .collapse.show#collapseDependent
@@ -45,7 +45,7 @@
   .col-md-6
     .shard__development_dependencies.info-block
       .list__heading
-        a data-toggle="collapse" href="#collapseDevelopmentDependencies" aria-expanded="true" aria-controls="collapseDevelopmentDependencies"
+        a data-bs-toggle="collapse" href="#collapseDevelopmentDependencies" aria-expanded="true" aria-controls="collapseDevelopmentDependencies"
           i class="fa" aria-hidden="true"
           | Development dependencies
       .collapse.show#collapseDevelopmentDependencies

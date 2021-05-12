@@ -3,11 +3,12 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
     a.navbar-brand href="/"
       img src="/images/logo.svg" width="30" height="30" class="d-inline-block align-top" alt=""
       ' shards.info
-    button.navbar-toggler aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" data-target="#navbarCollapse" data-toggle="collapse" type="button"
+    button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"
       span.navbar-toggler-icon
-    #navbarCollapse.collapse.navbar-collapse
-      ul.navbar-nav.mr-auto
-        li.nav-item
-          a.nav-link href="#aboutModal" data-toggle="modal" data-target="#aboutModal"
-            | About
+    .collapse.navbar-collapse#navbarNavDropdown
+      .navbar-nav.me-auto.mb-2.mb-lg-0
+        ul.navbar-nav.me-auto
+          li.nav-item
+            a.nav-link href="#" data-bs-toggle="modal" data-bs-target="#aboutModal"
+              | About
       == render "src/views/partials/search_input.slang"

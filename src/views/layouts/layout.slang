@@ -20,7 +20,7 @@ html lang="en"
     == render "src/views/partials/open_graph.slang"
 
     link rel="stylesheet" href="/dist/application.css?v=2.8" async="async" defer="defer"
-    script src="/dist/application.js?v=2.7" media="all"
+    script src="/dist/application.js?v=2.7" media="all" async="async"
 
     title #{Config.config.page_title}
   body

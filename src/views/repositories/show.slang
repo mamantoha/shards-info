@@ -10,7 +10,7 @@ div
           = repository.decorate.latest_release
       .shard__topics
         - repository.tag_names.each do |tag_name|
-          a href="/tags/#{tag_name}" class="badge badge-secondary text-monospace" = tag_name
+          a href="/tags/#{tag_name}" class="badge bg-secondary text-monospace" = tag_name
       .shard__intro.text-muted
         span
           == repository.decorate.description_html.to_s
@@ -19,11 +19,11 @@ div
     .col-md-8.col-sm-12.shard__main
       nav id="infoTab" aria-label="Information"
         div class="nav nav-tabs nav-fill justify-content-center" id="nav-tabs" role="tablist"
-          a class="nav-item nav-link active" id="info-tab" href="#info" role="tab" data-toggle="tab" aria-controls="info" aria-selected="true"
+          a class="nav-item nav-link active" id="info-tab" href="#info" role="tab" data-bs-toggle="tab" aria-controls="info" aria-selected="true"
             i class="fas fa-info-circle"
             ' Info
           - if repository.readme
-            a class="nav-item nav-link" id="readme-tab" href="#readme" role="tab" data-toggle="tab" aria-controls="readme" aria-selected="false"
+            a class="nav-item nav-link" id="readme-tab" href="#readme" role="tab" data-bs-toggle="tab" aria-controls="readme" aria-selected="false"
               i class="fas fa-book"
               ' Readme
 
