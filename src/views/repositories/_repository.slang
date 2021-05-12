@@ -1,6 +1,6 @@
 .shards__shard.d-flex
   - if additional_info
-    a.d-block.mr-2.mt-1 href="/#{repository.provider}/#{repository.user.login}/"
+    a.d-block.me-2.mt-1 href="/#{repository.provider}/#{repository.user.login}/"
       .avatar_block
         img.avatar src="#{repository.user.decorate.avatar(64)}" alt="#{repository.user.login}"
         span.badge
@@ -25,7 +25,7 @@
       / TODO: for some reason repository.tags breaks html template
       / - repository.tags.each do |tag|
       - repository.tag_names.each do |tag_name|
-        a href="/tags/#{tag_name}" class="badge badge-secondary text-monospace" = tag_name
+        a href="/tags/#{tag_name}" class="badge bg-secondary text-monospace" = tag_name
     .shards__shard_github
       ul
         li

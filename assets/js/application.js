@@ -12,7 +12,7 @@ document.addEventListener("turbolinks:load", function() {
   });
 
   hljs.initHighlighting.called = false;
-  hljs.initHighlighting();
+  hljs.highlightAll();
 
   $(function () {
     var hash = window.location.hash;

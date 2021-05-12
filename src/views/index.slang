@@ -12,10 +12,10 @@ div
 
   nav id="reposTab" aria-label="Repositories"
     div class="nav nav-tabs nav-fill justify-content-center" id="nav-tabs" role="tablist"
-      a class="nav-item nav-link active" id="trending-tab" href="#trending" role="tab" data-toggle="tab" aria-controls="trending" aria-selected="true"
+      a class="nav-item nav-link active" id="trending-tab" href="#trending" role="tab" data-bs-toggle="tab" aria-controls="trending" aria-selected="true"
         i class="fas fa-fire"
         ' Trending
-      a class="nav-item nav-link" id="recently-tab" href="#recently" role="tab" data-toggle="tab" aria-controls="recently" aria-selected="false"
+      a class="nav-item nav-link" id="recently-tab" href="#recently" role="tab" data-bs-toggle="tab" aria-controls="recently" aria-selected="false"
         i class="fas fa-clock"
         ' Recent
 

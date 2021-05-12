@@ -4,8 +4,7 @@
     .modal-content
       .modal-header
         h5#aboutModalLabel.modal-title About
-        button.close aria-label="Close" data-dismiss="modal" type="button"
-          span aria-hidden="true" == "&times;"
+        button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
       .modal-body
         p
           | View of all repositories on Github and Gitlab that have Crystal code in them.

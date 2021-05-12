@@ -25,6 +25,13 @@ a {
   background-color: transparent;
 }
 
+a.badge {
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+}
+
 ul.not-list {
   padding-left: 0px;
 
@@ -175,7 +182,7 @@ ul.not-list {
 
 .home_repositories__container {
   position: relative;
-  top: -74px;
+  margin-top: -74px;
 }
 
 .avatar_block {
@@ -318,7 +325,7 @@ ul.not-list {
 }
 
 .shard__main {
-  top: -74px;
+  margin-top: -74px;
   padding-right: 0;
 
   .tab-content {
@@ -433,7 +440,7 @@ ul.not-list {
   margin-bottom: 10px;
 }
 
-[data-toggle="collapse"] {
+[data-bs-toggle="collapse"] {
   .fa:before {
     content: "\f139";
   }

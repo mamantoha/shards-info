@@ -1,5 +1,5 @@
 .d-flex.user
-  .d-block.mr-2.mt-1
+  .d-block.me-2.mt-1
     img.avatar src="#{user.decorate.avatar(64)}" alt="#{user.login}"
   .row.width-full
     .col-md-3

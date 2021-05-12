@@ -1,4 +1,6 @@
-import 'bootstrap/js/dist/util'
+import $ from 'jquery'
+import jQuery from 'jquery'
+
 import 'bootstrap/js/dist/modal'
 import 'bootstrap/js/dist/tab'
 import 'bootstrap/js/dist/collapse'
