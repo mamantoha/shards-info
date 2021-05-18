@@ -118,7 +118,7 @@ shards:
 
   slang:
     git: https://github.com/jeromegn/slang.git
-    version: 1.7.2+git.commit.9b41cef0ddf2cd5ba34094742e954570f170c284
+    version: 1.7.2+git.commit.a34ba066d2b762fcee1d87eb6e1e49ec0f385128
 
   spec-kemal:
     git: https://github.com/kemalcr/spec-kemal.git
