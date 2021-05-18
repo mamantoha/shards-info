@@ -4,11 +4,12 @@ import jQuery from "jquery";
 import "bootstrap/js/dist/modal";
 import "bootstrap/js/dist/tab";
 import "bootstrap/js/dist/collapse";
-import Turbolinks from "turbolinks";
 
+import Turbolinks from "turbolinks";
 import hljs from "highlight.js/lib/core";
 import _crystal from "highlight.js/lib/languages/crystal";
 import _yaml from "highlight.js/lib/languages/yaml";
+
 hljs.registerLanguage("crystal", _crystal);
 hljs.registerLanguage("yaml", _yaml);
 window.hljs = hljs;

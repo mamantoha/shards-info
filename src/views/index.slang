@@ -10,19 +10,22 @@ div
 .container.home_repositories__container
   h1 style="display: none;" Trending Crystal repositories
 
-  nav id="reposTab" aria-label="Repositories"
-    div class="nav nav-tabs nav-fill justify-content-center" id="nav-tabs" role="tablist"
-      a class="nav-item nav-link active" id="trending-tab" href="#trending" role="tab" data-bs-toggle="tab" aria-controls="trending" aria-selected="true"
-        i class="fas fa-fire"
+  / Nav tab
+  ul.nav.nav-tabs.nav-fill.justify-content-center#reposTab role="tablist" aria-label="Repositories"
+    li.nav-item role="presentation"
+      a.nav-link.active#trending-tab data-bs-toggle="tab" data-bs-target="#trending" href="#trending" type="button" role="tab" aria-controls="trending" aria-selected="true"
+        i.fas.fa-fire
         ' Trending
-      a class="nav-item nav-link" id="recently-tab" href="#recently" role="tab" data-bs-toggle="tab" aria-controls="recently" aria-selected="false"
-        i class="fas fa-clock"
+    li.nav-item role="presentation"
+      a.nav-link#recently-tab data-bs-toggle="tab" data-bs-target="#recently" href="#recently" type="button" role="tab" aria-controls="recently" aria-selected="false"
+        i.fas.fa-clock
         ' Recent
 
-  div class="tab-content"
-    div role="tabpanel" class="tab-pane fade show active" id="trending" aria-labelledby="trending-tab"
+  / Tab panes
+  .tab-content
+    .tab-pane.fade.show.active#trending role="tabpanel" aria-labelledby="trending-tab"
       - repositories = trending_repositories
       == render "src/views/repositories/_list.slang"
-    div role="tabpanel" class="tab-pane fade" id="recently" aria-labelledby="recently-tab"
+    .tab-pane.fade#recently role="tabpanel" aria-labelledby="recently-tab"
       - repositories = recently_repositories
       == render "src/views/repositories/_list.slang"
