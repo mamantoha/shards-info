@@ -86,3 +86,4 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost/shards_info_test
           REDIS_URL: redis://localhost:6379
           KEMAL_ENV: test
+          KEMAL_SESSION_SECRET: some_secret
