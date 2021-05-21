@@ -84,6 +84,10 @@ shards:
     git: https://github.com/kemalcr/kemal.git
     version: 1.0.0
 
+  kemal-session:
+    git: https://github.com/kemalcr/kemal-session.git
+    version: 1.0.0
+
   kilt:
     git: https://github.com/jeromegn/kilt.git
     version: 0.4.1
@@ -91,6 +95,10 @@ shards:
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
     version: 0.11.0
+
+  multi_auth:
+    git: https://github.com/msa7/multi_auth.git
+    version: 1.1.1
 
   pg:
     git: https://github.com/will/crystal-pg.git

@@ -13,7 +13,6 @@ require "base64"
 require "compress/deflate"
 require "compress/gzip"
 require "compress/zlib"
-require "kemal"
 
 require "kilt/slang"
 require "crest"
@@ -50,6 +49,36 @@ before_all do |env|
   Config.config.open_graph.url = "https://shards.info#{env.request.path}"
   Config.config.query = env.request.query_params["query"]?.to_s
 end
+
+def self.multi_auth(env)
+  provider = env.params.url["provider"]
+  redirect_uri = "#{Kemal.config.scheme}://#{env.request.headers["Host"]?}/auth/#{provider}/callback"
+  MultiAuth.make(provider, redirect_uri)
+end
+
+def self.current_user(env)
+  env.session.int?("user_id")
+end
+
+get "/auth/:provider" do |env|
+  env.redirect(multi_auth(env).authorize_uri)
+end
+
+get "/auth/:provider/callback" do |env|
+  user = multi_auth(env).user(env.params.query)
+  env.session.int("user_id", user.uid.to_i)
+
+  p user
+
+  env.redirect "/"
+end
+
+get "/logout" do |env|
+  env.session.destroy
+
+  env.redirect "/"
+end
+
 
 error 404 do
   render "src/views/404.slang"

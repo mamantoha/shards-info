@@ -4,6 +4,7 @@ import jQuery from "jquery";
 import "bootstrap/js/dist/modal";
 import "bootstrap/js/dist/tab";
 import "bootstrap/js/dist/collapse";
+import "bootstrap/js/dist/dropdown";
 
 import Turbolinks from "turbolinks";
 import hljs from "highlight.js/lib/core";
