@@ -79,7 +79,6 @@ get "/logout" do |env|
   env.redirect "/"
 end
 
-
 error 404 do
   render "src/views/404.slang"
 end
