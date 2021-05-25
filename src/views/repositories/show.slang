@@ -18,7 +18,7 @@ div
           .shard__intro.text-muted
             span
               == repository.decorate.description_html.to_s
-        - if current_user = current_user(env)
+        - if (current_user = current_user(env)) && current_user.admin?
           .col.text-end
             .dropdown#repositoryActions
               button.btn.btn-danger.dropdown-toggle type="button" id="dropdownRepositiryActionsMenuButton" data-bs-toggle="dropdown" aria-expanded="false"

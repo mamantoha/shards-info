@@ -47,10 +47,11 @@ static_headers do |response, filepath, filestat|
   response.headers.add "Cache-Control", "public, max-age=#{duration}"
 end
 
-# before_all "/admin/*" do |env|
-#   # TODO: check admin role
-#   halt env, status_code: 403, response: "Forbidden"
-# end
+before_all "/admin/*" do |env|
+  next if (current_user = current_user(env)) && current_user.admin?
+
+  halt env, status_code: 403, response: "Forbidden"
+end
 
 before_all do |env|
   Config.config.open_graph = OpenGraph.new
@@ -64,8 +65,10 @@ def self.multi_auth(env)
   MultiAuth.make(provider, redirect_uri)
 end
 
-def self.current_user(env)
-  env.session.int?("user_id")
+def self.current_user(env) : Admin?
+  if id = env.session.bigint?("user_id")
+    Admin.find(id)
+  end
 end
 
 get "/auth/:provider" do |env|
@@ -77,9 +80,29 @@ end
 
 get "/auth/:provider/callback" do |env|
   user = multi_auth(env).user(env.params.query)
-  env.session.int("user_id", user.uid.to_i)
 
-  p user
+  admin = Admin.query.find({provider: user.provider, uid: user.uid}) || Admin.new({role: 0})
+
+  admin.set({
+    provider:   user.provider,
+    uid:        user.uid,
+    raw_json:   user.raw_json,
+    name:       user.name,
+    email:      user.email,
+    nickname:   user.nickname,
+    first_name: user.first_name,
+    last_name:  user.last_name,
+    location:   user.location,
+    image:      user.image,
+    phone:      user.phone,
+  })
+
+  if admin.save
+    env.session.bigint("user_id", admin.id)
+  else
+    p admin.errors
+  end
+
   origin = env.session.string?("origin") || "/"
 
   env.redirect(origin)

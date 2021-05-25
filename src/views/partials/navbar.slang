@@ -19,16 +19,15 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
             input.form-control.me-2 aria-label="Search" name="query" type="search" placeholder="Search shards..." onClick="this.select();" value="#{Config.config.query}"
 
       ul.navbar-nav.me
-        - if current_user(env)
+        - if current_user = current_user(env)
           li.nav-item.dropdown
             a.nav-link.dropdown-toggle#navbarDropdown href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-              img.rounded-circle src="https://avatars.githubusercontent.com/u/61285?v=4" alt="mamantoha" width="20" height="20"
+              img.rounded-circle src="#{current_user.image}" alt="#{current_user.nickname}" width="20" height="20"
             ul.dropdown-menu.dropdown-menu-dark aria-labelledby="navbarDropdown"
               li
                 .ms-2.p-2.fw-lighter.lh-1
                   | Signed in as
-                  strong
-                    | mamantoha
+                  strong= current_user.nickname
               li
                 hr.dropdown-divider
               li
