@@ -84,6 +84,10 @@ shards:
     git: https://github.com/kemalcr/kemal.git
     version: 1.0.0
 
+  kemal-flash:
+    git: https://github.com/mamantoha/kemal-flash.git
+    version: 0.1.0+git.commit.07e5a841368e2fa6e701c47b65d3ccc673da5f98
+
   kemal-session:
     git: https://github.com/kemalcr/kemal-session.git
     version: 1.0.0
@@ -126,7 +130,7 @@ shards:
 
   slang:
     git: https://github.com/jeromegn/slang.git
-    version: 1.7.2+git.commit.a34ba066d2b762fcee1d87eb6e1e49ec0f385128
+    version: 1.7.3+git.commit.901df64c9a1c1df91d3acd00762509c9b6d3cfd8
 
   spec-kemal:
     git: https://github.com/kemalcr/spec-kemal.git

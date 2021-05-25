@@ -29,6 +29,9 @@ require "./delegators"
 
 require "./lib/cmark/readme_renderer"
 
+require "./helpers/github_helpers"
+require "./helpers/gitlab_helpers"
+
 Raven.configure do |config|
   config.async = true
   config.environments = %w(production)
@@ -43,6 +46,11 @@ static_headers do |response, filepath, filestat|
   duration = 1.day.total_seconds.to_i
   response.headers.add "Cache-Control", "public, max-age=#{duration}"
 end
+
+# before_all "/admin/*" do |env|
+#   # TODO: check admin role
+#   halt env, status_code: 403, response: "Forbidden"
+# end
 
 before_all do |env|
   Config.config.open_graph = OpenGraph.new
@@ -61,6 +69,9 @@ def self.current_user(env)
 end
 
 get "/auth/:provider" do |env|
+  origin = env.request.headers["Referer"]? || "/"
+  env.session.string("origin", origin)
+
   env.redirect(multi_auth(env).authorize_uri)
 end
 
@@ -69,8 +80,9 @@ get "/auth/:provider/callback" do |env|
   env.session.int("user_id", user.uid.to_i)
 
   p user
+  origin = env.session.string?("origin") || "/"
 
-  env.redirect "/"
+  env.redirect(origin)
 end
 
 get "/logout" do |env|
@@ -353,6 +365,83 @@ get "/tags/:name" do |env|
     render "src/views/tags/show.slang", "src/views/layouts/layout.slang"
   else
     raise Kemal::Exceptions::RouteNotFound.new(env)
+  end
+end
+
+post "/admin/repositories/:id/sync" do |env|
+  id = env.params.url["id"]
+
+  if repository = Repository.find(id)
+    case repository.provider
+    when "github"
+      GithubHelpers.resync_repository(repository)
+    when "gitlab"
+      GitlabHelpers.resync_repository(repository)
+    end
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "Repository was successfully synced."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
+      },
+    }.to_json
+  end
+end
+
+post "/admin/repositories/:id/show" do |env|
+  id = env.params.url["id"]
+
+  if repository = Repository.find(id)
+    repository.update(ignore: false)
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "Repository was successfully shown."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
+      },
+    }.to_json
+  end
+end
+
+post "/admin/repositories/:id/hide" do |env|
+  id = env.params.url["id"]
+
+  if repository = Repository.find(id)
+    repository.update(ignore: true)
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "Repository was successfully hidden."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
+      },
+    }.to_json
+  end
+end
+
+delete "/admin/repositories/:id" do |env|
+  id = env.params.url["id"]
+
+  if repository = Repository.find(id)
+    repository.delete
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "Repository was successfully destroyed."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/",
+      },
+    }.to_json
   end
 end
 

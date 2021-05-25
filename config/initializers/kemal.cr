@@ -1,5 +1,6 @@
 require "kemal"
 require "kemal-session"
+require "kemal-flash"
 
 log_file =
   case ENV["KEMAL_ENV"]
