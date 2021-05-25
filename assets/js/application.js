@@ -11,6 +11,63 @@ document.addEventListener("turbolinks:load", function () {
     Turbolinks.visit("/search?query=" + query);
   });
 
+  $("#syncRepository").on("click", function (e) {
+    e.preventDefault();
+    url = e.currentTarget.dataset["href"];
+
+    $.ajax({
+      url: url,
+      method: "POST",
+      data: {},
+      success: function (resp) {
+        window.location.href = resp.data.redirect_url;
+      },
+    });
+  });
+
+  $("#showRepository").on("click", function (e) {
+    e.preventDefault();
+    url = e.currentTarget.dataset["href"];
+
+    $.ajax({
+      url: url,
+      method: "POST",
+      data: {},
+      success: function (resp) {
+        console.log('show');
+        window.location.href = resp.data.redirect_url;
+      },
+    });
+  });
+
+  $("#hideRepository").on("click", function (e) {
+    e.preventDefault();
+    url = e.currentTarget.dataset["href"];
+
+    $.ajax({
+      url: url,
+      method: "POST",
+      data: {},
+      success: function (resp) {
+        window.location.href = resp.data.redirect_url;
+      },
+    });
+  });
+
+  $("#destroyRepository").on("click", function (e) {
+    e.preventDefault();
+    url = e.currentTarget.dataset["href"];
+
+    $.ajax({
+      url: url,
+      method: "DELETE",
+      data: {},
+      success: function (resp) {
+        window.location.href = resp.data.redirect_url;
+      },
+    });
+  });
+
   hljs.initHighlighting.called = false;
   hljs.highlightAll();
 
