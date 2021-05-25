@@ -29,8 +29,17 @@ require "./delegators"
 
 require "./lib/cmark/readme_renderer"
 
-require "./helpers/github_helpers"
-require "./helpers/gitlab_helpers"
+def self.multi_auth(env)
+  provider = env.params.url["provider"]
+  redirect_uri = "#{Kemal.config.scheme}://#{env.request.headers["Host"]?}/auth/#{provider}/callback"
+  MultiAuth.make(provider, redirect_uri)
+end
+
+def self.current_user(env) : Admin?
+  if id = env.session.bigint?("user_id")
+    Admin.find(id)
+  end
+end
 
 Raven.configure do |config|
   config.async = true
@@ -57,18 +66,6 @@ before_all do |env|
   Config.config.open_graph = OpenGraph.new
   Config.config.open_graph.url = "https://shards.info#{env.request.path}"
   Config.config.query = env.request.query_params["query"]?.to_s
-end
-
-def self.multi_auth(env)
-  provider = env.params.url["provider"]
-  redirect_uri = "#{Kemal.config.scheme}://#{env.request.headers["Host"]?}/auth/#{provider}/callback"
-  MultiAuth.make(provider, redirect_uri)
-end
-
-def self.current_user(env) : Admin?
-  if id = env.session.bigint?("user_id")
-    Admin.find(id)
-  end
 end
 
 get "/auth/:provider" do |env|
@@ -219,6 +216,36 @@ get "/tags" do |env|
   Config.config.current_page = "tags"
 
   render "src/views/tags/index.slang", "src/views/layouts/layout.slang"
+end
+
+get "/admin/hidden_repositories" do |env|
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+  per_page = 20
+  offset = (page - 1) * per_page
+
+  repositories_query =
+    Repository
+      .query
+      .with_tags
+      .with_user
+      .where { repositories.ignore == true }
+      .order_by(stars_count: :desc)
+
+  total_count = repositories_query.count
+
+  paginator = ViewHelpers::Paginator.new(
+    page,
+    per_page,
+    total_count,
+    "/admin/hidden_repositories&page=%{page}"
+  ).to_s
+
+  repositories = repositories_query.limit(per_page).offset(offset)
+
+  Config.config.page_title = "Admin: Hidden Repositories"
+
+  render "src/views/admin/hidden_repositories.slang", "src/views/layouts/layout.slang"
 end
 
 get "/search" do |env|

@@ -30,6 +30,10 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
                   strong= current_user.nickname
               li
                 hr.dropdown-divider
+              - if current_user.admin?
+                li
+                  a.dropdown-item href="/admin/hidden_repositories"
+                    | Hidden Repositories
               li
                 a.dropdown-item href="/logout" data-turbolinks="false"
                   | Sing out
