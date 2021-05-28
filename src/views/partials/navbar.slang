@@ -32,8 +32,8 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
                 hr.dropdown-divider
               - if current_user.admin?
                 li
-                  a.dropdown-item href="/admin/hidden_repositories"
-                    | Hidden Repositories
+                  a.dropdown-item href="/admin"
+                    | Admin
               li
                 a.dropdown-item href="/logout" data-turbolinks="false"
                   | Sing out

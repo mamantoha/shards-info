@@ -218,36 +218,6 @@ get "/tags" do |env|
   render "src/views/tags/index.slang", "src/views/layouts/layout.slang"
 end
 
-get "/admin/hidden_repositories" do |env|
-  page = env.params.query["page"]? || ""
-  page = page.to_i? || 1
-  per_page = 20
-  offset = (page - 1) * per_page
-
-  repositories_query =
-    Repository
-      .query
-      .with_tags
-      .with_user
-      .where { repositories.ignore == true }
-      .order_by(stars_count: :desc)
-
-  total_count = repositories_query.count
-
-  paginator = ViewHelpers::Paginator.new(
-    page,
-    per_page,
-    total_count,
-    "/admin/hidden_repositories&page=%{page}"
-  ).to_s
-
-  repositories = repositories_query.limit(per_page).offset(offset)
-
-  Config.config.page_title = "Admin: Hidden Repositories"
-
-  render "src/views/admin/hidden_repositories.slang", "src/views/layouts/layout.slang"
-end
-
 get "/search" do |env|
   if env.params.query.[]?("query").nil? || env.params.query.[]?("query").try(&.empty?)
     env.redirect "/"
@@ -416,6 +386,40 @@ get "/tags/:name" do |env|
   else
     raise Kemal::Exceptions::RouteNotFound.new(env)
   end
+end
+
+get "/admin" do |env|
+  render "src/views/admin/index.slang", "src/views/layouts/layout.slang"
+end
+
+get "/admin/hidden_repositories" do |env|
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+  per_page = 20
+  offset = (page - 1) * per_page
+
+  repositories_query =
+    Repository
+      .query
+      .with_tags
+      .with_user
+      .where { repositories.ignore == true }
+      .order_by(stars_count: :desc)
+
+  total_count = repositories_query.count
+
+  paginator = ViewHelpers::Paginator.new(
+    page,
+    per_page,
+    total_count,
+    "/admin/hidden_repositories&page=%{page}"
+  ).to_s
+
+  repositories = repositories_query.limit(per_page).offset(offset)
+
+  Config.config.page_title = "Admin: Hidden Repositories"
+
+  render "src/views/admin/hidden_repositories/index.slang", "src/views/layouts/layout.slang"
 end
 
 post "/admin/repositories/:id/sync" do |env|
