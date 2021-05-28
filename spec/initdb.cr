@@ -1,5 +1,6 @@
 require "clear"
 require "../src/db/migrations/**"
+require "../src/models/**"
 
 def initdb
   pg.exec("DROP DATABASE IF EXISTS shards_info_test;")
@@ -8,6 +9,31 @@ def initdb
   Clear::SQL.init(database_url, connection_pool_size: 5)
 
   Clear::Migration::Manager.instance.apply_all
+
+  create_user_with_repository
+end
+
+def create_user_with_repository
+  User.create({
+    provider:    "github",
+    provider_id: "1",
+    login:       "crystal-lang",
+    kind:        "user",
+    synced_at:   Time.local,
+  })
+
+  Repository.create({
+    user_id:          user.id,
+    provider:         "github",
+    provider_id:      "1",
+    name:             "crystal",
+    stars_count:      1,
+    forks_count:      1,
+    archived:         false,
+    ignore:           false,
+    last_activity_at: Time.local,
+    synced_at:        Time.local,
+  })
 end
 
 def database_url
