@@ -14,7 +14,7 @@ def initdb
 end
 
 def create_user_with_repository
-  User.create({
+  user = User.create({
     provider:    "github",
     provider_id: "1",
     login:       "crystal-lang",
