@@ -24,6 +24,10 @@ module GitlabHelpers
 
     repository.tags = tags
 
+    sync_project_shard_yml(repository)
+    sync_project_readme(repository, readme_file(gitlab_project))
+    sync_project_releases(repository)
+
     Helpers.update_dependecies(repository)
   rescue Crest::NotFound
     repository.delete

@@ -24,6 +24,10 @@ module GithubHelpers
 
     repository.tags = tags
 
+    sync_repository_shard_yml(repository)
+    sync_repository_readme(repository)
+    sync_repository_releases(repository)
+
     Helpers.update_dependecies(repository)
   rescue Crest::NotFound
     repository.delete

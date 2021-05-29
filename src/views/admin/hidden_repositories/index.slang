@@ -6,7 +6,7 @@
             a href="/admin" Admin
           li.breadcrumb-item.active aria-current="page" Hidden repositories
 
-    table.table.table-striped.table-hover
+    table.table.table-striped
       thead
         tr
           th
