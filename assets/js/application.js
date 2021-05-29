@@ -34,7 +34,6 @@ document.addEventListener("turbolinks:load", function () {
       method: "POST",
       data: {},
       success: function (resp) {
-        console.log('show');
         window.location.href = resp.data.redirect_url;
       },
     });

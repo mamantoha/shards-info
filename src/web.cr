@@ -96,8 +96,6 @@ get "/auth/:provider/callback" do |env|
 
   if admin.save
     env.session.bigint("user_id", admin.id)
-  else
-    p admin.errors
   end
 
   origin = env.session.string?("origin") || "/"
