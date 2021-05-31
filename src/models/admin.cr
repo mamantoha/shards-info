@@ -28,4 +28,8 @@ class Admin
       role == {{value.id}}
     end
   {% end %}
+
+  def decorate
+    @delegator ||= AdminDelegator.delegate(self)
+  end
 end

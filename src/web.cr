@@ -387,7 +387,33 @@ get "/tags/:name" do |env|
 end
 
 get "/admin" do |env|
+  Config.config.page_title = "Admin:"
+
   render "src/views/admin/index.slang", "src/views/layouts/layout.slang"
+end
+
+get "/admin/admins" do |env|
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+  per_page = 20
+  offset = (page - 1) * per_page
+
+  admin_query = Admin.query
+
+  total_count = admin_query.count
+
+  paginator = ViewHelpers::Paginator.new(
+    page,
+    per_page,
+    total_count,
+    "/admin/admins&page=%{page}"
+  ).to_s
+
+  admins = admin_query.limit(per_page).offset(offset)
+
+  Config.config.page_title = "Admin: Site Admins"
+
+  render "src/views/admin/admins/index.slang", "src/views/layouts/layout.slang"
 end
 
 get "/admin/hidden_repositories" do |env|
