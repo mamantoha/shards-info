@@ -1,7 +1,3 @@
-{% if compare_versions(Crystal::VERSION, "0.35.0-0") >= 0 %}
-  alias CallStack = Exception::CallStack
-{% end %}
-
 require "dotenv"
 Dotenv.load?
 
