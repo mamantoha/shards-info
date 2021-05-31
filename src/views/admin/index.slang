@@ -6,6 +6,8 @@
 
   ul
     li
+      a href="/admin/repositories/new" Add new repository
+    li
       a href="/admin/admins" Site admins
     li
       a href="/admin/hidden_repositories" Hidden repositories

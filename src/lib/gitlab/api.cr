@@ -101,6 +101,21 @@ module Gitlab
       Gitlab::Project.from_json(response.body)
     end
 
+    def project(user : String, project : String)
+      # make sure that the `NAMESPACE/PROJECT_PATH` is URL-encoded
+      # For example, `/` is represented by `%2F`
+      path = URI.encode_www_form("#{user}/#{project}")
+      url = "/projects/#{path}"
+
+      params = {
+        "license" => "true",
+      }
+
+      response = make_request(url, params)
+
+      Gitlab::Project.from_json(response.body)
+    end
+
     def project_releases(project_id : Int32)
       url = "/projects/#{project_id}/releases"
 

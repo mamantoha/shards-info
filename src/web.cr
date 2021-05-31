@@ -412,6 +412,26 @@ get "/admin/admins" do |env|
   render "src/views/admin/admins/index.slang", "src/views/layouts/layout.slang"
 end
 
+get "/admin/repositories/new" do |env|
+  Config.config.page_title = "Admin: Add new repository"
+
+  render "src/views/admin/repositories/new.slang", "src/views/layouts/layout.slang"
+end
+
+post "/admin/repositories" do |env|
+  url = env.params.body["repository[url]"].as(String)
+
+  if repository = Helpers.sync_repository_by_url(url)
+    env.flash["notice"] = "Repository was successfully added."
+
+    env.redirect(repository.decorate.relative_path)
+  else
+    env.flash["notice"] = "Something went wrong."
+
+    env.redirect("/admin/repositories/new")
+  end
+end
+
 get "/admin/hidden_repositories" do |env|
   page = env.params.query["page"]? || ""
   page = page.to_i? || 1

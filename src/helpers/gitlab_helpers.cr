@@ -42,7 +42,7 @@ module GitlabHelpers
     end
   end
 
-  def sync_project(gitlab_project : Gitlab::Project)
+  def sync_project(gitlab_project : Gitlab::Project) : Repository?
     return if gitlab_project.forked_from_project || gitlab_project.mirror
 
     owner = gitlab_project.owner || gitlab_project.namespace
@@ -58,7 +58,7 @@ module GitlabHelpers
     repository.user = user
     assign_project_attributes(repository, gitlab_project)
 
-    return unless repository.changed?
+    return repository unless repository.changed?
 
     repository.synced_at = Time.utc
     repository.save!
@@ -70,6 +70,8 @@ module GitlabHelpers
     sync_project_releases(repository)
 
     Helpers.update_dependecies(repository)
+
+    repository
   end
 
   def sync_user_with_kind_user(user : User)
