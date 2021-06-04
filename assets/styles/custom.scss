@@ -67,7 +67,6 @@ ul.not-list {
   color: var(--footer-color);
 }
 
-
 .pagination {
   margin-top: 16px;
 
@@ -100,6 +99,12 @@ ul.not-list {
 
 .search-wrap {
   width: 38%;
+}
+
+.alert-success {
+  color: var(--alert-success-color);
+  background-color: var(--alert-success-bg-color);
+  border-color: var(--alert-success-border-color);
 }
 
 @media (max-width: 576px) {
