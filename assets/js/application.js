@@ -1,4 +1,32 @@
 document.addEventListener("turbolinks:load", function () {
+  if (!("theme" in localStorage)) {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      document.documentElement.classList.add("dark");
+      document.getElementById("switchTheme").checked = true;
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.getElementById("switchTheme").checked = false;
+    }
+  } else {
+    if (localStorage.theme === "dark") {
+      document.documentElement.classList.add("dark");
+      document.getElementById("switchTheme").checked = true;
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.getElementById("switchTheme").checked = false;
+    }
+  }
+
+  $("#switchTheme").on("change", function (e) {
+    if (e.currentTarget.checked) {
+      document.documentElement.classList.add("dark");
+      localStorage.theme = "dark";
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.theme = "light";
+    }
+  });
+
   if (typeof ga === "function") {
     ga("set", "location", event.data.url);
     ga("send", "pageview");

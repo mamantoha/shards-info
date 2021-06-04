@@ -11,6 +11,9 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
           li.nav-item
             a.nav-link href="#" data-bs-toggle="modal" data-bs-target="#aboutModal"
               | About
+          li.nav-item
+            div.form-check.form-switch.m-2
+              input.form-check-input#switchTheme type="checkbox"
 
       .search-wrap
         div.form-group.has-search

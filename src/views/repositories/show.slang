@@ -23,7 +23,7 @@ div
             .dropdown#repositoryActions
               button.btn.btn-danger.dropdown-toggle type="button" id="dropdownRepositiryActionsMenuButton" data-bs-toggle="dropdown" aria-expanded="false"
                 | Actions
-              ul.dropdown-menu aria-labelledby="dropdownRepositoryActionsMenuButton"
+              ul.dropdown-menu.dropdown-menu-dark aria-labelledby="dropdownRepositoryActionsMenuButton"
                 li
                   a.dropdown-item#syncRepository href="#" data-href="/admin/repositories/#{repository.id}/sync"
                     i.fas.fa-sync
@@ -55,7 +55,7 @@ div
               i class="fas fa-book"
               ' Readme
 
-      div class="tab-content"
+      div class="tab-content mt-4"
         div role="tabpanel" class="tab-pane fade show active" id="info" aria-labelledby="info-tab"
           == render "src/views/repositories/_info.slang"
         - if repository.readme
