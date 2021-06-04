@@ -441,6 +441,24 @@ ul.not-list {
   }
 }
 
+.users__user {
+  a {
+    color: var(--link-color);
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.users__popular_repository {
+  a {
+    color: var(--link-color);
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 .shard__release-wrap {
   font-weight: 800;
 }

@@ -3,7 +3,7 @@
     .avatar_block
       img.avatar src="#{user.decorate.avatar(64)}" alt="#{user.login}"
   .row.width-full
-    .col-md-3
+    .col-md-3.users__user
       i class="#{user.decorate.kind_icon}"
       a href="/#{user.provider}/#{user.login}/"
         = "#{user.decorate.full_name}"
@@ -17,7 +17,7 @@
         .small.text-muted.text-uppercase.mb-2
           i.text-warning.fas.fa-fire
           ' Popular repository
-        div
+        div.users__popular_repository
           i class="#{repository.decorate.provider_icon}"
           a href="/#{user.provider}/#{user.login}/#{repository.name}/"
             = repository.name
