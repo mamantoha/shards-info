@@ -35,8 +35,16 @@ After modifications:
 
 ## Specs
 
+Prepare a database:
+
 ```console
-export KEMAL_ENV=test && crystal spec
+crystal spec/initdb.cr
+```
+
+Run specs:
+
+```console
+crystal spec
 ```
 
 ## Special thanks

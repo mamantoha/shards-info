@@ -24,6 +24,10 @@ module GithubHelpers
 
     repository.tags = tags
 
+    sync_repository_shard_yml(repository)
+    sync_repository_readme(repository)
+    sync_repository_releases(repository)
+
     Helpers.update_dependecies(repository)
   rescue Crest::NotFound
     repository.delete
@@ -43,7 +47,7 @@ module GithubHelpers
     user.delete
   end
 
-  def sync_github_repository(github_repository : Github::Repo)
+  def sync_github_repository(github_repository : Github::Repo) : Repository?
     tags = github_repository.tags
     github_user = github_repository.user
 
@@ -57,7 +61,7 @@ module GithubHelpers
     repository.user = user
     assign_repository_attributes(repository, github_repository)
 
-    return unless repository.changed?
+    return repository unless repository.changed?
 
     repository.synced_at = Time.utc
     repository.save!
@@ -69,6 +73,8 @@ module GithubHelpers
     sync_repository_releases(repository)
 
     Helpers.update_dependecies(repository)
+
+    repository
   end
 
   def assign_user_attributes(user : User, github_user : Github::User)

@@ -1,7 +1,3 @@
-{% if compare_versions(Crystal::VERSION, "0.35.0-0") >= 0 %}
-  alias CallStack = Exception::CallStack
-{% end %}
-
 require "dotenv"
 Dotenv.load?
 
@@ -13,7 +9,6 @@ require "base64"
 require "compress/deflate"
 require "compress/gzip"
 require "compress/zlib"
-require "kemal"
 
 require "kilt/slang"
 require "crest"
@@ -30,6 +25,18 @@ require "./delegators"
 
 require "./lib/cmark/readme_renderer"
 
+def self.multi_auth(env)
+  provider = env.params.url["provider"]
+  redirect_uri = "#{Kemal.config.scheme}://#{env.request.headers["Host"]?}/auth/#{provider}/callback"
+  MultiAuth.make(provider, redirect_uri)
+end
+
+def self.current_user(env) : Admin?
+  if id = env.session.bigint?("user_id")
+    Admin.find(id)
+  end
+end
+
 Raven.configure do |config|
   config.async = true
   config.environments = %w(production)
@@ -45,10 +52,57 @@ static_headers do |response, filepath, filestat|
   response.headers.add "Cache-Control", "public, max-age=#{duration}"
 end
 
+before_all "/admin/*" do |env|
+  next if (current_user = current_user(env)) && current_user.admin?
+
+  halt env, status_code: 403, response: "Forbidden"
+end
+
 before_all do |env|
   Config.config.open_graph = OpenGraph.new
   Config.config.open_graph.url = "https://shards.info#{env.request.path}"
   Config.config.query = env.request.query_params["query"]?.to_s
+end
+
+get "/auth/:provider" do |env|
+  origin = env.request.headers["Referer"]? || "/"
+  env.session.string("origin", origin)
+
+  env.redirect(multi_auth(env).authorize_uri)
+end
+
+get "/auth/:provider/callback" do |env|
+  user = multi_auth(env).user(env.params.query)
+
+  admin = Admin.query.find({provider: user.provider, uid: user.uid}) || Admin.new({role: 0})
+
+  admin.set({
+    provider:   user.provider,
+    uid:        user.uid,
+    raw_json:   user.raw_json,
+    name:       user.name,
+    email:      user.email,
+    nickname:   user.nickname,
+    first_name: user.first_name,
+    last_name:  user.last_name,
+    location:   user.location,
+    image:      user.image,
+    phone:      user.phone,
+  })
+
+  if admin.save
+    env.session.bigint("user_id", admin.id)
+  end
+
+  origin = env.session.string?("origin") || "/"
+
+  env.redirect(origin)
+end
+
+get "/logout" do |env|
+  env.session.destroy
+
+  env.redirect "/"
 end
 
 error 404 do
@@ -325,6 +379,163 @@ get "/tags/:name" do |env|
     render "src/views/tags/show.slang", "src/views/layouts/layout.slang"
   else
     raise Kemal::Exceptions::RouteNotFound.new(env)
+  end
+end
+
+get "/admin" do |env|
+  Config.config.page_title = "Admin:"
+
+  render "src/views/admin/index.slang", "src/views/layouts/layout.slang"
+end
+
+get "/admin/admins" do |env|
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+  per_page = 20
+  offset = (page - 1) * per_page
+
+  admin_query = Admin.query
+
+  total_count = admin_query.count
+
+  paginator = ViewHelpers::Paginator.new(
+    page,
+    per_page,
+    total_count,
+    "/admin/admins&page=%{page}"
+  ).to_s
+
+  admins = admin_query.limit(per_page).offset(offset)
+
+  Config.config.page_title = "Admin: Site Admins"
+
+  render "src/views/admin/admins/index.slang", "src/views/layouts/layout.slang"
+end
+
+get "/admin/repositories/new" do |env|
+  Config.config.page_title = "Admin: Add new repository"
+
+  render "src/views/admin/repositories/new.slang", "src/views/layouts/layout.slang"
+end
+
+post "/admin/repositories" do |env|
+  url = env.params.body["repository[url]"].as(String)
+
+  if repository = Helpers.sync_repository_by_url(url)
+    env.flash["notice"] = "Repository was successfully added."
+
+    env.redirect(repository.decorate.relative_path)
+  else
+    env.flash["notice"] = "Something went wrong."
+
+    env.redirect("/admin/repositories/new")
+  end
+end
+
+get "/admin/hidden_repositories" do |env|
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+  per_page = 20
+  offset = (page - 1) * per_page
+
+  repositories_query =
+    Repository
+      .query
+      .with_tags
+      .with_user
+      .where { repositories.ignore == true }
+      .order_by(stars_count: :desc)
+
+  total_count = repositories_query.count
+
+  paginator = ViewHelpers::Paginator.new(
+    page,
+    per_page,
+    total_count,
+    "/admin/hidden_repositories&page=%{page}"
+  ).to_s
+
+  repositories = repositories_query.limit(per_page).offset(offset)
+
+  Config.config.page_title = "Admin: Hidden Repositories"
+
+  render "src/views/admin/hidden_repositories/index.slang", "src/views/layouts/layout.slang"
+end
+
+post "/admin/repositories/:id/sync" do |env|
+  id = env.params.url["id"]
+
+  if repository = Repository.find(id)
+    case repository.provider
+    when "github"
+      GithubHelpers.resync_repository(repository)
+    when "gitlab"
+      GitlabHelpers.resync_repository(repository)
+    end
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "Repository was successfully synced."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
+      },
+    }.to_json
+  end
+end
+
+post "/admin/repositories/:id/show" do |env|
+  id = env.params.url["id"]
+
+  if repository = Repository.find(id)
+    repository.update(ignore: false)
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "Repository was successfully shown."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
+      },
+    }.to_json
+  end
+end
+
+post "/admin/repositories/:id/hide" do |env|
+  id = env.params.url["id"]
+
+  if repository = Repository.find(id)
+    repository.update(ignore: true)
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "Repository was successfully hidden."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
+      },
+    }.to_json
+  end
+end
+
+delete "/admin/repositories/:id" do |env|
+  id = env.params.url["id"]
+
+  if repository = Repository.find(id)
+    repository.delete
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "Repository was successfully destroyed."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/",
+      },
+    }.to_json
   end
 end
 

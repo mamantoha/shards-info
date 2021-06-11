@@ -1,6 +1,30 @@
 module Helpers
   extend self
 
+  def sync_repository_by_url(url : String) : Repository?
+    uri = URI.parse(url)
+
+    if match = uri.path.match(/^\/([\w|-]*)\/([\w|-]*)/)
+      user_name = match[1]
+      repository_name = match[2]
+
+      case uri.host
+      when "github.com"
+        github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+
+        if github_repository = github_client.get_repo(user_name, repository_name)
+          GithubHelpers.sync_github_repository(github_repository)
+        end
+      when "gitlab.com"
+        gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
+
+        if gitlab_project = gitlab_client.project(user_name, repository_name)
+          GitlabHelpers.sync_project(gitlab_project)
+        end
+      end
+    end
+  end
+
   def update_dependecies(repository : Repository)
     if shard_yml = repository.shard_yml
       if spec = spec_from_yaml(shard_yml)

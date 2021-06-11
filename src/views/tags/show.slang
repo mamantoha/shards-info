@@ -11,4 +11,4 @@ div
         ' results
 .container
   == render "src/views/repositories/_list.slang"
-  == paginator
+== paginator

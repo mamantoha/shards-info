@@ -1,5 +1,5 @@
 name: shards-info
-version: 2.4.0
+version: 3.0.0
 
 crystal: 1.0.0
 
@@ -17,6 +17,13 @@ targets:
 dependencies:
   kemal:
     github: kemalcr/kemal
+  kemal-session:
+    github: kemalcr/kemal-session
+  kemal-flash:
+    github: mamantoha/kemal-flash
+    branch: develop
+  multi_auth:
+    github: msa7/multi_auth
   clear:
     # github: anykeyh/clear
     # branch: master

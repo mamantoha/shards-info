@@ -10,5 +10,4 @@ div
   .users
     - users.each(fetch_columns: true) do |user|
       == render "src/views/users/_user_item.slang"
-
-  == paginator
+== paginator
