@@ -498,7 +498,7 @@ ul.not-list {
     overflow: auto;
     font-size: 85%;
     line-height: 1.45;
-    background-color: var(--main-bg-color);
+    background-color: var(--code-bg-color);
   }
 
   .blockquote {
@@ -513,10 +513,6 @@ ul.not-list {
   pre code {
     color: var(--code-color);
     background: var(--code-bg-color);
-  }
-
-  .hljs-keyword {
-    color: var(--code-color);
   }
 }
 
