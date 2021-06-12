@@ -52,7 +52,8 @@ class ReadmeRenderer < Cmark::HTMLRenderer
   def table(node, entering)
     if entering
       cr
-      out "<table class='table table-bordered table-striped table-responsive'"
+      out "<div class='table-responsive'>"
+      out "<table class='table table-bordered table-striped'"
       sourcepos node
       out ">"
       @table_needs_closing_table_body = false
@@ -66,6 +67,7 @@ class ReadmeRenderer < Cmark::HTMLRenderer
       @table_needs_closing_table_body = false
       cr
       out "</table>"
+      out "</div>"
       cr
     end
   end
