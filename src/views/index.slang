@@ -22,7 +22,7 @@ div
         ' Recent
 
   / Tab panes
-  .tab-content
+  .tab-content.mt-4
     .tab-pane.fade.show.active#trending role="tabpanel" aria-labelledby="trending-tab"
       - repositories = trending_repositories
       == render "src/views/repositories/_list.slang"

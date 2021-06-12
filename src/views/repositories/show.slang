@@ -45,21 +45,21 @@ div
 .container
   .row
     .col-md-8.col-sm-12.shard__main
-      nav id="infoTab" aria-label="Information"
-        div class="nav nav-tabs nav-fill justify-content-center" id="nav-tabs" role="tablist"
-          a class="nav-item nav-link active" id="info-tab" href="#info" role="tab" data-bs-toggle="tab" aria-controls="info" aria-selected="true"
-            i class="fas fa-info-circle"
+      nav.infoTab aria-label="Information"
+        .nav.nav-tabs.nav-fill.justify-content-center#nav-tabs role="tablist"
+          a.nav-item.nav-link.active#info-tab href="#info" role="tab" data-bs-toggle="tab" aria-controls="info" aria-selected="true"
+            i.fas.fa-info-circle
             ' Info
           - if repository.readme
-            a class="nav-item nav-link" id="readme-tab" href="#readme" role="tab" data-bs-toggle="tab" aria-controls="readme" aria-selected="false"
-              i class="fas fa-book"
+            a.nav-item.nav-link#readme-tab href="#readme" role="tab" data-bs-toggle="tab" aria-controls="readme" aria-selected="false"
+              i.fas.fa-book
               ' Readme
 
-      div class="tab-content mt-4"
-        div role="tabpanel" class="tab-pane fade show active" id="info" aria-labelledby="info-tab"
+      .tab-content.mt-4
+        .tab-pane.fade.show.active#info role="tabpanel" aria-labelledby="info-tab"
           == render "src/views/repositories/_info.slang"
         - if repository.readme
-          div role="tabpanel" class="tab-pane fade" id="readme" aria-labelledby="readme-tab"
+          .tab-pane.fade#readme role="tabpanel" aria-labelledby="readme-tab"
             .row
               .col-md-12.shard__readme
                 == readme_html
