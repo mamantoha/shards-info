@@ -1,6 +1,7 @@
 User-agent: *
 
-Disallow:
+Disallow: /auth/github
+Disallow: /admin/
 
 # What's up?
 #
