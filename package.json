@@ -30,7 +30,8 @@
     "sass-loader": "^12.1.0",
     "style-loader": "^2.0.0",
     "webpack": "^5.38.1",
-    "webpack-cli": "^4.7.2"
+    "webpack-cli": "^4.7.2",
+    "trim-newlines": ">=4.0.2"
   },
   "dependencies": {
     "bootstrap": "^5.0.1",
