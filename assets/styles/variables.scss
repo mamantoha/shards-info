@@ -18,6 +18,7 @@ html {
   --alert-success-color: #0f5132;
   --alert-success-bg-color: #d1e7dd;
   --alert-success-border-color: #badbcc;
+  --badge-bg-color: #6c757d;
 
   .table {
     --bs-table-bg: rgba(0, 0, 0, 0);
@@ -48,6 +49,7 @@ html.dark {
   --alert-success-color: #fff;
   --alert-success-bg-color: #58a6ff;
   --alert-success-border-color: #07693c;
+  --badge-bg-color: #424b5f;
 
   .btn-close {
     filter: invert(1) grayscale(100%) brightness(200%);
