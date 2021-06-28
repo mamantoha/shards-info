@@ -1,4 +1,5 @@
 require "cmark"
+require "../../ext/cmark"
 
 class ReadmeRenderer < Cmark::HTMLRenderer
   def initialize(@options = Option::None, @extensions = Extension::None, @base_url : String? = nil)
