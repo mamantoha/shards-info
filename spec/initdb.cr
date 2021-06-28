@@ -6,7 +6,7 @@ def initdb
   pg.exec("DROP DATABASE IF EXISTS shards_info_test;")
   pg.exec("CREATE DATABASE shards_info_test;")
 
-  Clear::SQL.init(database_url, connection_pool_size: 5)
+  Clear::SQL.init(database_url)
 
   Clear::Migration::Manager.instance.apply_all
 
