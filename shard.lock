@@ -22,11 +22,11 @@ shards:
 
   clear:
     git: https://github.com/mamantoha/clear.git
-    version: 0.8.3+git.commit.4d163a2405c2b3d2626d546f4ef981ba0720f1c1
+    version: 0.8.3+git.commit.835a0e06e59df4f609a45a6970c25785b8691820
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
-    version: 0.1.0+git.commit.4dd681983e6fe10c5e44ef7f38ed94e8a7a9b147
+    version: 0.1.0+git.commit.40a0004e03aa77b0d4dc48230b24477c56cd61f3
 
   crest:
     git: https://github.com/mamantoha/crest.git
