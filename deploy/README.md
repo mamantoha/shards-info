@@ -33,7 +33,7 @@ psql -c 'CREATE DATABASE shards_info_development;' -U postgres
 ### Build project
 
 ```console
-shards build
+shards build --ignore-crystal-version
 ```
 
 Build assests if needed:
@@ -125,6 +125,7 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=always
 RestartSec=1
+WatchdogSec=8640
 User=sammy
 WorkingDirectory=/home/sammy/projects/shards-info
 ExecStart=/home/sammy/projects/shards-info/bin/web &>/dev/null &
@@ -162,6 +163,10 @@ StandardError=null
 
 [Install]
 WantedBy=multi-user.target
+```
+
+```console
+sudo systemctl daemon-reload
 ```
 
 ```console
