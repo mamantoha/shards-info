@@ -1,5 +1,13 @@
 require "cmark"
 
+require "noir"
+require "noir/lexers/crystal"
+require "noir/lexers/css"
+require "noir/lexers/html"
+require "noir/lexers/javascript"
+require "noir/lexers/json"
+require "noir/lexers/yaml"
+
 class ReadmeRenderer < Cmark::HTMLRenderer
   def initialize(@options = Option::None, @extensions = Extension::None, @base_url : String? = nil)
     super(@options, @extensions)
@@ -92,6 +100,46 @@ class ReadmeRenderer < Cmark::HTMLRenderer
     else
       out change_html(node.literal)
     end
+  end
+
+  def code_block(node)
+    cr
+    out %(<pre class="code")
+    sourcepos node
+    fence_info = node.fence_info
+
+    if fence_info.bytesize.zero?
+      out "><code>"
+      out escape_html(node.literal)
+    else
+      tags = fence_info.split(' ', remove_empty: true)
+      language_name = tags[0]
+
+      if @options.github_pre_lang?
+        out %( lang="#{escape_html(tags.shift)})
+        tags.each { |tag| out %(" data-meta="#{escape_html(tag)}) } if @options.full_info_string?
+        out %("><code class="highlight">)
+      else
+        out %(><code class="highlight language-#{escape_html(tags.shift)})
+        tags.each { |tag| out %(" data-meta="#{escape_html(tag)}) } if @options.full_info_string?
+        out %(">)
+      end
+
+      formatter_out : IO = IO::Memory.new
+
+      if lexer = Noir.find_lexer(language_name)
+        Noir.highlight(
+          node.literal,
+          lexer: lexer,
+          formatter: Noir::Formatters::HTML.new(formatter_out)
+        )
+        out formatter_out.to_s
+      else
+        out escape_html(node.literal)
+      end
+    end
+
+    out "</code></pre>\n"
   end
 
   private def change_html(html : String) : String

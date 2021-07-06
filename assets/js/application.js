@@ -95,9 +95,6 @@ document.addEventListener("turbolinks:load", function () {
     });
   });
 
-  hljs.initHighlighting.called = false;
-  hljs.highlightAll();
-
   $(function () {
     var hash = window.location.hash;
     hash && $('.nav a[href="' + hash + '"]').tab("show");

@@ -26,7 +26,7 @@ shards:
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
-    version: 0.1.0+git.commit.40a0004e03aa77b0d4dc48230b24477c56cd61f3
+    version: 0.1.0+git.commit.78142e87edb9747bdd904f70732786074a0a82b2
 
   crest:
     git: https://github.com/mamantoha/crest.git
@@ -103,6 +103,10 @@ shards:
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
     version: 1.1.1
+
+  noir:
+    git: https://github.com/makenowjust/noir.git
+    version: 0.1.0+git.commit.2508cdec22f4ec61e87a19d9ec563b99c0faa1f0
 
   pg:
     git: https://github.com/will/crystal-pg.git

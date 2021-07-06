@@ -35,7 +35,6 @@
   },
   "dependencies": {
     "bootstrap": "^5.0.2",
-    "highlight.js": "^11.0.1",
     "jqcloud2": "^2.0.3",
     "jquery": "^3.6.0",
     "moveto": "^1.8.2",
