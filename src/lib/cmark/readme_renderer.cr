@@ -135,7 +135,6 @@ class ReadmeRenderer < Cmark::HTMLRenderer
         )
         out formatter_out.to_s
       else
-        Log.info { "Lexer for '#{language_name}' not found." }
         out escape_html(node.literal)
       end
     end
