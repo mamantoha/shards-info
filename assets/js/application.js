@@ -124,6 +124,8 @@ document.addEventListener("turbolinks:load", function () {
       });
     }
 
+    $(".shard__readme li:has(input)").addClass("checklist-item");
+
     Turbolinks.setProgressBarDelay(200);
   });
 
