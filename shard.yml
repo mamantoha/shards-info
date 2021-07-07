@@ -44,6 +44,8 @@ dependencies:
   emoji:
     github: veelenga/emoji.cr
     branch: master
+  i18n:
+    github: crystal-i18n/i18n
   humanize_time:
     github: mamantoha/humanize_time
   cmark:
