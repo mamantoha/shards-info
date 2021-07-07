@@ -518,6 +518,13 @@ ul.not-list {
     list-style: none;
     margin-left: -1rem;
   }
+
+  code {
+    font-size: 0.875em;
+    color: var(--code-color);
+    word-wrap: break-word;
+    background-color: var(--code-bg-color);
+  }
 }
 
 .list__heading {
