@@ -503,6 +503,22 @@ ul.not-list {
     font-size: 85%;
     line-height: 1.45;
     background-color: var(--code-bg-color);
+    border-radius: 6px;
+
+    code {
+      padding: 0;
+      background-color: var(--code-bg-color);
+    }
+  }
+
+  code {
+    font-size: 85%;
+    color: var(--code-color);
+    word-wrap: break-word;
+    background-color: var(--code-inline-bg-color);
+    border-radius: 6px;
+    margin: 0;
+    padding: 0.2em 0.4em;
   }
 
   .blockquote {
@@ -517,13 +533,6 @@ ul.not-list {
   li.checklist-item {
     list-style: none;
     margin-left: -1rem;
-  }
-
-  code {
-    font-size: 0.875em;
-    color: var(--code-color);
-    word-wrap: break-word;
-    background-color: var(--code-bg-color);
   }
 }
 

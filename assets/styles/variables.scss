@@ -13,7 +13,8 @@ html {
   --pg-color: #1f6feb;
   --pg-active-color: #ffffff;
   --code-color: #333;
-  --code-bg-color: #f8f8f8;
+  --code-bg-color: #f7f8fa;
+  --code-inline-bg-color: #f3f4f4;
   --avatar-bg-color: #fff;
   --alert-success-color: #0f5132;
   --alert-success-bg-color: #d1e7dd;
@@ -46,6 +47,7 @@ html.dark {
   --border-color: #3d3d3d;
   --code-color: #f8f8f8;
   --code-bg-color: #0e1117;
+  --code-inline-bg-color: #30333a;
   --alert-success-color: #fff;
   --alert-success-bg-color: #58a6ff;
   --alert-success-border-color: #07693c;
