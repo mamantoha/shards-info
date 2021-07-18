@@ -2,7 +2,7 @@ version: 2.0
 shards:
   admiral:
     git: https://github.com/jwaldrip/admiral.cr.git
-    version: 1.11.4+git.commit.50a01f29ffe2b921fe4d2a4dbbc135bf551a4742
+    version: 1.12.1+git.commit.211937b64b753b86ccbe86a72122be30e294e31a
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -22,7 +22,7 @@ shards:
 
   clear:
     git: https://github.com/mamantoha/clear.git
-    version: 0.8.3+git.commit.835a0e06e59df4f609a45a6970c25785b8691820
+    version: 0.8.3+git.commit.6423916777644b82594302332a160311aec660c3
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -46,7 +46,7 @@ shards:
 
   emoji:
     git: https://github.com/veelenga/emoji.cr.git
-    version: 0.4.0+git.commit.46a1f902f0ea81cd61bc99cdf8d12217df17ad5f
+    version: 0.4.0+git.commit.0277a2d159b1b0e2f4f98b2dad332e725ed0fb8c
 
   exception_page:
     git: https://github.com/crystal-loot/exception_page.git
@@ -110,7 +110,7 @@ shards:
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.23.2+git.commit.cafe1e2a48764464299b44ab26449eb503be5934
+    version: 0.23.2+git.commit.69e8605eeef3879e217a6210f495a26aecd94259
 
   pool:
     git: https://github.com/ysbaddaden/pool.git
