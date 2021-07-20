@@ -23,13 +23,13 @@
   "homepage": "https://github.com/mamantoha/shards-info#readme",
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
-    "css-loader": "^5.2.6",
+    "css-loader": "^6.2.0",
     "expose-loader": "^3.0.0",
     "mini-css-extract-plugin": "^2.1.0",
     "node-sass": "^6.0.1",
     "sass-loader": "^12.1.0",
-    "style-loader": "^3.0.0",
-    "webpack": "^5.43.0",
+    "style-loader": "^3.2.1",
+    "webpack": "^5.45.1",
     "webpack-cli": "^4.7.2",
     "trim-newlines": ">=4.0.2"
   },
