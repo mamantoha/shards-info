@@ -4,7 +4,7 @@ module Helpers
   def sync_repository_by_url(url : String) : Repository?
     uri = URI.parse(url)
 
-    if match = uri.path.match(/^\/([\w|-]*)\/([\w|-]*)/)
+    if match = uri.path.match(/^\/([\w|-]*)\/([\w|-|\.]*)/)
       user_name = match[1]
       repository_name = match[2]
 
