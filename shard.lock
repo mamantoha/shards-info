@@ -30,7 +30,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 0.27.0
+    version: 0.27.1
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -110,7 +110,7 @@ shards:
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.23.2+git.commit.69e8605eeef3879e217a6210f495a26aecd94259
+    version: 0.24.0+git.commit.cafe572e12966f7449477891fa65558954dbca5c
 
   pool:
     git: https://github.com/ysbaddaden/pool.git
