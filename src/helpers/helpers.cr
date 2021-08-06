@@ -86,6 +86,6 @@ module Helpers
     node = Cmark.parse_gfm(content, options)
     renderer = ReadmeRenderer.new(options, extensions, repository_url)
 
-    renderer.render(node)
+    Emoji.emojize(renderer.render(node))
   end
 end
