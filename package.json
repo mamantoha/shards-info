@@ -22,10 +22,10 @@
   },
   "homepage": "https://github.com/mamantoha/shards-info#readme",
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "css-loader": "^6.2.0",
     "expose-loader": "^3.0.0",
-    "mini-css-extract-plugin": "^2.1.0",
+    "mini-css-extract-plugin": "^2.2.0",
     "node-sass": "^6.0.1",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
@@ -34,7 +34,7 @@
     "trim-newlines": ">=4.0.2"
   },
   "dependencies": {
-    "bootstrap": "^5.0.2",
+    "bootstrap": "^5.1.0",
     "jqcloud2": "^2.0.3",
     "jquery": "^3.6.0",
     "moveto": "^1.8.2",
