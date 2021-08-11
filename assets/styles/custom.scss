@@ -533,6 +533,10 @@ ul.not-list {
   li.checklist-item {
     list-style: none;
     margin-left: -1rem;
+
+    p {
+      display: inline;
+    }
   }
 }
 

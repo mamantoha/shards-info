@@ -19,7 +19,7 @@ html lang="en"
 
     == render "src/views/partials/open_graph.slang"
 
-    link rel="stylesheet" href="/dist/application.css?v=4.7" async="async" defer="defer"
+    link rel="stylesheet" href="/dist/application.css?v=4.8" async="async" defer="defer"
     script src="/dist/application.js?v=4.3" media="all"
 
     title #{Config.config.page_title}
