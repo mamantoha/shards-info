@@ -11,11 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install Crystal
-        uses: oprypin/install-crystal@v1
-
+        uses: crystal-lang/install-crystal@v1
       - name: Check out repository code
         uses: actions/checkout@v2
-
       - name: Check format
         run: crystal tool format --check
   test:
@@ -58,18 +56,15 @@ jobs:
         run: sudo apt-get install build-essential
 
       - name: Install Crystal
-        uses: oprypin/install-crystal@v1
+        uses: crystal-lang/install-crystal@v1
         with:
           crystal: ${{ matrix.crystal }}
-
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
         uses: actions/checkout@v2
-
       # Performs a clean installation of all dependencies in the `shard.yml` file
       - name: Install shard dependencies
         run: shards install --ignore-crystal-version
-
       - name: Prepare database
         run: crystal ./spec/initdb.cr
         env:
@@ -79,7 +74,6 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
-
       - name: Run tests
         run: crystal spec
         env:
