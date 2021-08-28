@@ -20,6 +20,10 @@ shards:
     git: https://github.com/crystal-cache/cache.git
     version: 0.12.1
 
+  cadmium_transliterator:
+    git: https://github.com/cadmiumcr/transliterator.git
+    version: 0.1.0+git.commit.46c4c14594057dbcfaf27e7e7c8c164d3f0ce3f1
+
   clear:
     git: https://github.com/mamantoha/clear.git
     version: 0.8.5+git.commit.81dde1faa17df2b53544635c698ee9c0dbf1a5fa

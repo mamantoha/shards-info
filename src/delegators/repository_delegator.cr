@@ -3,8 +3,12 @@ class RepositoryDelegator < Delegator(Repository)
     "#{user.login}/#{name}"
   end
 
-  def relative_path : String
+  def show_path : String
     "/#{provider}/#{user.login}/#{name}"
+  end
+
+  def readme_path : String
+    "/#{provider}/#{user.login}/#{name}/readme"
   end
 
   def latest_release : String
