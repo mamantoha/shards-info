@@ -500,6 +500,8 @@ ul.not-list {
     a.anchor {
       margin-left: -20px;
       padding-right: 4px;
+      padding-top: 65px;
+      margin-top: -65px;
 
       svg {
         fill: var(--font-color);

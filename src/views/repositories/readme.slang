@@ -15,7 +15,7 @@
       .tab-content.mt-4
         .tab-pane.show.active#readme role="tabpanel" aria-labelledby="readme-tab"
           .row
-            .col-md-12.shard__readme
+            .col-md-12.ps-4.shard__readme
               == readme_html
 
     == render "src/views/repositories/_statistics.slang"
