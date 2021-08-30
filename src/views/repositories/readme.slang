@@ -8,10 +8,9 @@
           a.nav-item.nav-link#info-tab href="#{repository.decorate.show_path}" role="tab" aria-controls="info" aria-selected="false"
             i.fas.fa-info-circle
             ' Info
-          - if repository.readme
-            .nav-item.nav-link.active#readme-tab role="tab" aria-controls="readme" aria-selected="true"
-              i.fas.fa-book
-              ' Readme
+          .nav-item.nav-link.active#readme-tab role="tab" aria-controls="readme" aria-selected="true"
+            i.fas.fa-book
+            ' Readme
 
       .tab-content.mt-4
         .tab-pane.show.active#readme role="tabpanel" aria-labelledby="readme-tab"
