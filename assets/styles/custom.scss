@@ -507,6 +507,9 @@ ul.not-list {
         fill: var(--font-color);
         vertical-align: middle;
         visibility: hidden;
+        @include media-breakpoint-down(md) {
+          visibility: visible;
+        }
       }
     }
   }
