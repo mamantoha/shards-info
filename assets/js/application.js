@@ -107,6 +107,12 @@ document.addEventListener("turbolinks:load", function () {
       $("html,body").scrollTop(scrollmem);
     });
 
+    $(".shard__readme a.anchor").on("click", function (e) {
+      e.preventDefault();
+      window.location.replace(this.hash);
+      history.replaceState({ turbolinks: {} }, "");
+    });
+
     // Back To Top Button
     if ($("#back-to-top").length) {
       var scrollTrigger = 100, // px
