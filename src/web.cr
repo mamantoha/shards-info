@@ -278,20 +278,8 @@ get "/:provider/:owner/:repo" do |env|
   repo = env.params.url["repo"]
 
   if repository = Repository.find_repository(owner, repo, provider)
-    dependents =
-      repository
-        .dependents
-        .undistinct
-        .order_by({created_at: :desc})
-
+    dependents = repository.dependents.undistinct.order_by({created_at: :desc})
     dependents_count = dependents.count
-
-    readme_html =
-      if repository_readme = repository.readme
-        Helpers.to_markdown(repository_readme, repository.decorate.provider_url)
-      else
-        ""
-      end
 
     Config.config.page_title = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
     Config.config.page_description = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
@@ -300,6 +288,31 @@ get "/:provider/:owner/:repo" do |env|
     Config.config.open_graph.image = "#{repository.user.avatar_url}"
 
     render "src/views/repositories/show.slang", "src/views/layouts/layout.slang"
+  else
+    raise Kemal::Exceptions::RouteNotFound.new(env)
+  end
+end
+
+get "/:provider/:owner/:repo/readme" do |env|
+  provider = env.params.url["provider"]
+  owner = env.params.url["owner"]
+  repo = env.params.url["repo"]
+
+  if repository = Repository.find_repository(owner, repo, provider)
+    readme_html =
+      if repository_readme = repository.readme
+        Helpers.to_markdown(repository_readme, repository.decorate.provider_url)
+      else
+        raise Kemal::Exceptions::RouteNotFound.new(env)
+      end
+
+    Config.config.page_title = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
+    Config.config.page_description = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
+    Config.config.open_graph.title = "#{repository.decorate.full_name}"
+    Config.config.open_graph.description = "#{repository.decorate.description_with_emoji}"
+    Config.config.open_graph.image = "#{repository.user.avatar_url}"
+
+    render "src/views/repositories/readme.slang", "src/views/layouts/layout.slang"
   else
     raise Kemal::Exceptions::RouteNotFound.new(env)
   end
@@ -424,7 +437,7 @@ post "/admin/repositories" do |env|
   if repository = Helpers.sync_repository_by_url(url)
     env.flash["notice"] = "Repository was successfully added."
 
-    env.redirect(repository.decorate.relative_path)
+    env.redirect(repository.decorate.show_path)
   else
     env.flash["notice"] = "Something went wrong."
 

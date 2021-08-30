@@ -64,6 +64,8 @@ dependencies:
     branch: master
   shards_spec:
     github: mamantoha/shards_spec
+  cadmium_transliterator:
+    github: cadmiumcr/transliterator
 
 development_dependencies:
   spec-kemal:

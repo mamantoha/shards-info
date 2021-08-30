@@ -99,7 +99,7 @@ document.addEventListener("turbolinks:load", function () {
     var hash = window.location.hash;
     hash && $('.nav a[href="' + hash + '"]').tab("show");
 
-    $(".nav-tabs a").on("click", function (e) {
+    $(".home_repositories__container .nav-tabs a").on("click", function (e) {
       $(this).tab("show");
       var scrollmem = $("body").scrollTop();
       window.location.replace(this.hash);

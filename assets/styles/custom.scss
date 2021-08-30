@@ -492,6 +492,43 @@ ul.not-list {
 }
 
 .shard__readme {
+  :is(h1, h2, h3, h4, h5, h6) {
+    font-weight: 600;
+    margin-bottom: 16px;
+    margin-top: 24px;
+
+    a.anchor {
+      margin-left: -20px;
+      padding-right: 4px;
+
+      svg {
+        fill: var(--font-color);
+        vertical-align: middle;
+        visibility: hidden;
+      }
+    }
+  }
+
+  :is(h1, h2, h3, h4, h5, h6):hover {
+    a.anchor {
+      svg {
+        visibility: visible;
+      }
+    }
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  h3 {
+    font-size: 1.25em;
+  }
+
+  h4 {
+    font-size: 1em;
+  }
+
   img {
     max-width: 100%;
     height: auto;
