@@ -55,6 +55,7 @@ crystal spec
 * [Mosquito](https://github.com/robacarp/mosquito) - A generic background task runner for Crystal applications
 * [raven.cr](https://github.com/Sija/raven.cr) - Crystal client for [Sentry](https://sentry.io)
 * [cr-cmark-gfm](https://github.com/amauryt/cr-cmark-gfm) - Crystal C bindings for [cmark-gfm](https://github.com/github/cmark-gfm)
+* [noir](https://github.com/MakeNowJust/noir) - Syntax Highlight Library for Crystal
 * Logo [icon](https://game-icons.net/1x1/lorc/floating-crystal.html) taken from [Game Icons pack](https://game-icons.net/) under CC BY 3.0 license.
 
 ## Contributing
