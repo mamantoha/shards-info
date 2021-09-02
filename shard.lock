@@ -54,7 +54,7 @@ shards:
 
   exception_page:
     git: https://github.com/crystal-loot/exception_page.git
-    version: 0.1.5
+    version: 0.2.0
 
   generate:
     git: https://github.com/anykeyh/generate.cr.git
@@ -86,7 +86,7 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 1.0.0
+    version: 1.1.0
 
   kemal-flash:
     git: https://github.com/mamantoha/kemal-flash.git
@@ -98,7 +98,7 @@ shards:
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
-    version: 0.4.1
+    version: 0.6.1
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git

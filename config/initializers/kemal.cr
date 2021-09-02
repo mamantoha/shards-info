@@ -1,7 +1,6 @@
 require "kemal"
 require "kemal-session"
 require "kemal-flash"
-require "../../src/ext/kemal"
 
 log_file =
   case ENV["KEMAL_ENV"]
