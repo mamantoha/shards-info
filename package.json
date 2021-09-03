@@ -25,11 +25,11 @@
     "@fortawesome/fontawesome-free": "^5.15.4",
     "css-loader": "^6.2.0",
     "expose-loader": "^3.0.0",
-    "mini-css-extract-plugin": "^2.2.0",
+    "mini-css-extract-plugin": "^2.2.2",
     "node-sass": "^6.0.1",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
-    "webpack": "^5.51.1",
+    "webpack": "^5.51.2",
     "webpack-cli": "^4.8.0",
     "trim-newlines": ">=4.0.2"
   },
