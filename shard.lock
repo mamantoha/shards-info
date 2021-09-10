@@ -86,11 +86,11 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 1.1.0
+    version: 1.1.0+git.commit.5e2efec0503622267b57d03fe7d5151000d3bf47
 
   kemal-flash:
     git: https://github.com/mamantoha/kemal-flash.git
-    version: 0.1.0+git.commit.07e5a841368e2fa6e701c47b65d3ccc673da5f98
+    version: 0.1.0+git.commit.3c9ade6372cdc3b2dfb64d3448fb9098632c1094
 
   kemal-session:
     git: https://github.com/kemalcr/kemal-session.git
