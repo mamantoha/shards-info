@@ -42,6 +42,7 @@ dependencies:
     github: crystal-cache/cache
   crest:
     github: mamantoha/crest
+    branch: master
   mosquito:
     github: mosquito-cr/mosquito
   emoji:
