@@ -19,7 +19,7 @@
                 a href="https://kemalcr.com/" Kemal
                 = Kemal::VERSION
               li
-                a href="https://github.com/anykeyh/clear" Clear
+                a href="https://github.com/mamantoha/clear" Clear
                 = Clear::VERSION
           li
             | Build date #{Time.parse_rfc2822(Config.date).to_s("%Y-%m-%d %H:%M:%S %:z")}
