@@ -104,6 +104,16 @@ class ReadmeRenderer < Cmark::HTMLRenderer
     end
   end
 
+  def tasklist_item_inner(node, entering)
+    if entering
+      if node.tasklist_item_checked?
+        out %(<input type="checkbox" class="form-check-input" checked="" disabled="" /> )
+      else
+        out %(<input type="checkbox" class="form-check-input" disabled="" /> )
+      end
+    end
+  end
+
   def html_block(node)
     cr
     if !@options.unsafe?
