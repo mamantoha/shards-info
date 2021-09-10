@@ -34,7 +34,7 @@
     "trim-newlines": ">=4.0.2"
   },
   "dependencies": {
-    "bootstrap": "^5.1.0",
+    "bootstrap": "^5.1.1",
     "jqcloud2": "^2.0.3",
     "jquery": "^3.6.0",
     "moveto": "^1.8.2",
