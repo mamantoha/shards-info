@@ -4,7 +4,7 @@ class AdminDelegator < Delegator(Admin)
   end
 
   def provider_url
-    "https://gitlab.com/#{nickname}"
+    "https://github.com/#{nickname}"
   end
 
   def provider_icon
