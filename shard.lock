@@ -30,7 +30,7 @@ shards:
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
-    version: 0.1.0+git.commit.78142e87edb9747bdd904f70732786074a0a82b2
+    version: 0.1.0+git.commit.09fe300cd040be2d2a72f0f7e0489663ea92440b
 
   crest:
     git: https://github.com/mamantoha/crest.git
@@ -74,11 +74,11 @@ shards:
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
-    version: 0.10.1
+    version: 0.10.1+git.commit.4de5846962803f6f842226b139d15797ec944403
 
   i18n:
     git: https://github.com/crystal-i18n/i18n.git
-    version: 0.2.0
+    version: 0.2.0+git.commit.c3da49b50495df3f27caa55beada8f151ae1be48
 
   inflector:
     git: https://github.com/phoffer/inflector.cr.git
