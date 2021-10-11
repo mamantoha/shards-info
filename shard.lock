@@ -30,11 +30,11 @@ shards:
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
-    version: 0.1.0+git.commit.09fe300cd040be2d2a72f0f7e0489663ea92440b
+    version: 0.1.0+git.commit.b4bd46e7ba9a37c16790136fa521be1ece615193
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 0.27.1+git.commit.c62ca6d6672999b1e33f7928a184967b3cf81e98
+    version: 0.27.1+git.commit.d5148589c57469ec981ea2fa396056fb050d52a7
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -114,7 +114,7 @@ shards:
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.24.0+git.commit.cafe572e12966f7449477891fa65558954dbca5c
+    version: 0.24.0+git.commit.cafec7f347bd07d44ceffe0c05df117071c8824e
 
   pool:
     git: https://github.com/ysbaddaden/pool.git
