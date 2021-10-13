@@ -27,10 +27,10 @@
     "expose-loader": "^3.0.0",
     "mini-css-extract-plugin": "^2.4.2",
     "node-sass": "^6.0.1",
-    "sass-loader": "^12.1.0",
+    "sass-loader": "^12.2.0",
     "style-loader": "^3.3.0",
     "trim-newlines": ">=4.0.2",
-    "webpack": "^5.58.1",
+    "webpack": "^5.58.2",
     "webpack-cli": "^4.9.0"
   },
   "dependencies": {
