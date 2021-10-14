@@ -185,7 +185,7 @@ module Github
         pushed = date_filter.empty? ? "" : "+pushed:>#{date_filter}"
       end
 
-      word = word.empty? ? "" : "#{URI.encode(word)}"
+      word = word.empty? ? "" : "#{URI.encode_path(word)}"
 
       url = "/search/repositories?q=#{word}+language:#{language}#{pushed}&per_page=#{limit}&sort=#{sort}&page=#{page}"
 
