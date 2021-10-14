@@ -2,7 +2,7 @@ version: 2.0
 shards:
   admiral:
     git: https://github.com/jwaldrip/admiral.cr.git
-    version: 1.12.1+git.commit.211937b64b753b86ccbe86a72122be30e294e31a
+    version: 1.12.1
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -26,7 +26,7 @@ shards:
 
   clear:
     git: https://github.com/mamantoha/clear.git
-    version: 0.8.6+git.commit.dbdf5f19aa7daaba24dae945514cf34ae07a1dde
+    version: 0.8.7+git.commit.3e10fd02b2d1e7e8b56f5a9bb24888fd54d94596
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -114,7 +114,7 @@ shards:
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.24.0+git.commit.cafec7f347bd07d44ceffe0c05df117071c8824e
+    version: 0.24.0
 
   pool:
     git: https://github.com/ysbaddaden/pool.git
