@@ -300,8 +300,8 @@ get "/:provider/:owner/:repo/readme" do |env|
 
   if repository = Repository.find_repository(owner, repo, provider)
     readme_html =
-      if repository_readme = repository.readme
-        Helpers.to_markdown(repository_readme, repository.decorate.provider_url)
+      if repository.readme
+        Helpers.to_markdown(repository)
       else
         raise Kemal::Exceptions::RouteNotFound.new(env)
       end

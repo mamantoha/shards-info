@@ -79,12 +79,14 @@ module Helpers
     nil
   end
 
-  def to_markdown(content : String, repository_url) : String
+  def to_markdown(repository : Repository) : String
+    content = repository.readme.not_nil!
+
     options = Cmark::Option.flags(Unsafe, Nobreaks, ValidateUTF8)
     extensions = Cmark::Extension.flags(Table, Strikethrough, Autolink, Tagfilter, Tasklist)
 
     node = Cmark.parse_gfm(content, options)
-    renderer = ReadmeRenderer.new(options, extensions, repository_url)
+    renderer = ReadmeRenderer.new(options, extensions, repository)
 
     Emoji.emojize(renderer.render(node))
   end
