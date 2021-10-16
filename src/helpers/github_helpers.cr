@@ -104,6 +104,7 @@ module GithubHelpers
     repository.set({
       name:              github_repository.name,
       description:       github_repository.description,
+      default_branch:    github_repository.default_branch,
       last_activity_at:  github_repository.last_activity_at,
       stars_count:       github_repository.watchers_count,
       forks_count:       github_repository.forks_count,

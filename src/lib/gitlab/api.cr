@@ -141,9 +141,11 @@ module Gitlab
     end
 
     def get_file(project_id : Int32, file_path : String)
+      project = project(project_id)
+
       url = "/projects/#{project_id}/repository/files/#{file_path}"
       params = {
-        "ref" => "master",
+        "ref" => project.default_branch,
       }
 
       response = make_request(url, params)
