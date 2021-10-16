@@ -7,6 +7,7 @@ class Repository
   column provider_id : Int32
   column name : String
   column description : String?
+  column default_branch : String
   column shard_yml : String?
   column readme : String?
   column changelog : String?

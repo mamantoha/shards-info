@@ -11,7 +11,7 @@ require "noir/lexers/json"
 require "noir/lexers/yaml"
 
 class ReadmeRenderer < Cmark::HTMLRenderer
-  def initialize(@options = Option::None, @extensions = Extension::None, @base_url : String? = nil)
+  def initialize(@options = Option::None, @extensions = Extension::None, *, @repository : Repository)
     super(@options, @extensions)
   end
 
@@ -185,9 +185,9 @@ class ReadmeRenderer < Cmark::HTMLRenderer
   private def raw_url(url : String) : String
     uri = URI.parse(url)
 
-    if base_url = @base_url
+    @repository.try do |repository|
       if uri.relative?
-        url = File.join(base_url, "raw/master", uri.path)
+        url = File.join(repository.decorate.provider_url, "raw/#{repository.default_branch}", uri.path)
       end
     end
 
