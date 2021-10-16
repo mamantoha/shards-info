@@ -86,7 +86,7 @@ module Helpers
     extensions = Cmark::Extension.flags(Table, Strikethrough, Autolink, Tagfilter, Tasklist)
 
     node = Cmark.parse_gfm(content, options)
-    renderer = ReadmeRenderer.new(options, extensions, repository)
+    renderer = ReadmeRenderer.new(options, extensions, repository: repository)
 
     Emoji.emojize(renderer.render(node))
   end

@@ -11,7 +11,7 @@ require "noir/lexers/json"
 require "noir/lexers/yaml"
 
 class ReadmeRenderer < Cmark::HTMLRenderer
-  def initialize(@options = Option::None, @extensions = Extension::None, @repository : Repository? = nil)
+  def initialize(@options = Option::None, @extensions = Extension::None, *, @repository : Repository)
     super(@options, @extensions)
   end
 
