@@ -44,7 +44,7 @@ crystal spec/initdb.cr
 Run specs:
 
 ```console
-crystal spec
+KEMAL_ENV=test crystal spec
 ```
 
 ## Special thanks
