@@ -30,7 +30,7 @@ shards:
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
-    version: 0.1.0+git.commit.b4bd46e7ba9a37c16790136fa521be1ece615193
+    version: 0.1.0+git.commit.7fbe7718ae6fa1ccd09b83dd203de9da8cc39b70
 
   crest:
     git: https://github.com/mamantoha/crest.git
@@ -86,11 +86,11 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 1.1.0+git.commit.5e2efec0503622267b57d03fe7d5151000d3bf47
+    version: 1.1.0
 
   kemal-flash:
     git: https://github.com/mamantoha/kemal-flash.git
-    version: 0.1.0+git.commit.3c9ade6372cdc3b2dfb64d3448fb9098632c1094
+    version: 0.2.0
 
   kemal-session:
     git: https://github.com/kemalcr/kemal-session.git
