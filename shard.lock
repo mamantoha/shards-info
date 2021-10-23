@@ -18,7 +18,7 @@ shards:
 
   cache:
     git: https://github.com/crystal-cache/cache.git
-    version: 0.12.1
+    version: 0.13.0
 
   cadmium_transliterator:
     git: https://github.com/cadmiumcr/transliterator.git
@@ -95,6 +95,10 @@ shards:
   kemal-session:
     git: https://github.com/kemalcr/kemal-session.git
     version: 1.0.0
+
+  kemal-session-redis:
+    git: https://github.com/mamantoha/kemal-session-redis.git
+    version: 0.6.1+git.commit.ff370b94485c28d7211f33e37e10ba8c1c894c2b
 
   kilt:
     git: https://github.com/jeromegn/kilt.git

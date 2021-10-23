@@ -19,6 +19,9 @@ dependencies:
     github: kemalcr/kemal
   kemal-session:
     github: kemalcr/kemal-session
+  kemal-session-redis:
+    github: mamantoha/kemal-session-redis
+    branch: develop
   kemal-flash:
     github: mamantoha/kemal-flash
   kilt:
