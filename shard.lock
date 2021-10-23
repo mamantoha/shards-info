@@ -98,7 +98,7 @@ shards:
 
   kemal-session-redis:
     git: https://github.com/mamantoha/kemal-session-redis.git
-    version: 0.6.1+git.commit.ff370b94485c28d7211f33e37e10ba8c1c894c2b
+    version: 0.6.1+git.commit.07fb6bfa4e52d8955b15910a38d6af8a33610d78
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
