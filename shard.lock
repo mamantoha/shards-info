@@ -26,7 +26,7 @@ shards:
 
   clear:
     git: https://github.com/mamantoha/clear.git
-    version: 0.8.7+git.commit.3e10fd02b2d1e7e8b56f5a9bb24888fd54d94596
+    version: 0.8.7+git.commit.b7198ed68a72067133f3147424c478633ac22200
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -50,7 +50,7 @@ shards:
 
   emoji:
     git: https://github.com/veelenga/emoji.cr.git
-    version: 0.4.0+git.commit.0277a2d159b1b0e2f4f98b2dad332e725ed0fb8c
+    version: 0.4.0+git.commit.94c9047f6e8adc8db07494644be0cc104336de3c
 
   exception_page:
     git: https://github.com/crystal-loot/exception_page.git
@@ -74,11 +74,11 @@ shards:
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
-    version: 0.10.1+git.commit.4de5846962803f6f842226b139d15797ec944403
+    version: 0.10.2
 
   i18n:
     git: https://github.com/crystal-i18n/i18n.git
-    version: 0.2.0+git.commit.c3da49b50495df3f27caa55beada8f151ae1be48
+    version: 0.2.1
 
   inflector:
     git: https://github.com/phoffer/inflector.cr.git

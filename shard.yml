@@ -50,10 +50,8 @@ dependencies:
     branch: master
   i18n:
     github: crystal-i18n/i18n
-    branch: main
   humanize_time:
     github: mamantoha/humanize_time
-    branch: master
   cmark:
     github: amauryt/cr-cmark-gfm
     branch: master
