@@ -26,22 +26,22 @@
     .user__repositories_count
       = "#{user.repositories.count} repositories"
     .user__description
-      - if (location = user.location) && (!user.location.to_s.empty?)
+      - if (location = user.location) && (!user.location.to_s.blank?)
         span.middle-dot-divider
           i class="fas fa-map-marker-alt"
           = location
-      - if (company = user.company) && (!user.company.to_s.empty?)
+      - if (company = user.company) && (!user.company.to_s.blank?)
         span.middle-dot-divider
           i class="fas fa-building"
           = company
-    - if (bio = user.bio) && (!user.bio.to_s.empty?)
+    - if (bio = user.bio) && (!user.bio.to_s.blank?)
       .user__bio.text_muted
         = bio
-    - if (email = user.email) && (!user.email.to_s.empty?)
+    - if (email = user.email) && (!user.email.to_s.blank?)
       .user__email
         i class="fas fa-envelope"
         a href="mailto:#{email}" = email
-    - if (website = user.website) && (!user.website.to_s.empty?)
+    - if (website = user.website) && (!user.website.to_s.blank?)
       .user__website
         i class="fas fa-link"
         a href="#{website}" = website
