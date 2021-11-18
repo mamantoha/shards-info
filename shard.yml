@@ -20,10 +20,10 @@ dependencies:
   kemal-session:
     github: kemalcr/kemal-session
   kemal-session-redis:
-    github: mamantoha/kemal-session-redis
+    github: crystal-garage/kemal-session-redis
     branch: develop
   kemal-flash:
-    github: mamantoha/kemal-flash
+    github: crystal-garage/kemal-flash
   kilt:
     github: jeromegn/kilt
   multi_auth:
@@ -32,7 +32,7 @@ dependencies:
     # path: ../clear
     # github: anykeyh/clear
     # branch: master
-    github: mamantoha/clear
+    github: crystal-garage/clear
     branch: develop
   delegator:
     github: Schniz/delegator.cr

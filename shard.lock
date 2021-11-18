@@ -25,8 +25,8 @@ shards:
     version: 0.1.0+git.commit.46c4c14594057dbcfaf27e7e7c8c164d3f0ce3f1
 
   clear:
-    git: https://github.com/mamantoha/clear.git
-    version: 0.8.7+git.commit.b7198ed68a72067133f3147424c478633ac22200
+    git: https://github.com/crystal-garage/clear.git
+    version: 0.8.7+git.commit.206de070324b61444aa0237a9d7d50f10dbf43ab
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -89,7 +89,7 @@ shards:
     version: 1.1.0
 
   kemal-flash:
-    git: https://github.com/mamantoha/kemal-flash.git
+    git: https://github.com/crystal-garage/kemal-flash.git
     version: 0.2.0
 
   kemal-session:
@@ -97,8 +97,8 @@ shards:
     version: 1.0.0
 
   kemal-session-redis:
-    git: https://github.com/mamantoha/kemal-session-redis.git
-    version: 0.6.1+git.commit.07fb6bfa4e52d8955b15910a38d6af8a33610d78
+    git: https://github.com/crystal-garage/kemal-session-redis.git
+    version: 0.6.1+git.commit.3b656caa6709f40cbe5c9707842ff1bae28ea348
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
