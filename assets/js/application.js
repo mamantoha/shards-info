@@ -39,6 +39,20 @@ document.addEventListener("turbolinks:load", function () {
     Turbolinks.visit("/search?query=" + query);
   });
 
+  $("#syncUser").on("click", function (e) {
+    e.preventDefault();
+    url = e.currentTarget.dataset["href"];
+
+    $.ajax({
+      url: url,
+      method: "POST",
+      data: {},
+      success: function (resp) {
+        window.location.href = resp.data.redirect_url;
+      },
+    });
+  });
+
   $("#syncRepository").on("click", function (e) {
     e.preventDefault();
     url = e.currentTarget.dataset["href"];

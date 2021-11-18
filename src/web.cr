@@ -475,6 +475,29 @@ get "/admin/hidden_repositories" do |env|
   render "src/views/admin/hidden_repositories/index.slang", "src/views/layouts/layout.slang"
 end
 
+post "/admin/users/:id/sync" do |env|
+  id = env.params.url["id"]
+
+  if user = User.find(id)
+    case user.provider
+    when "github"
+      GithubHelpers.resync_user(user)
+    when "gitlab"
+      GitlabHelpers.resync_user(user)
+    end
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "User was successfully synced."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/#{user.provider}/#{user.login}",
+      },
+    }.to_json
+  end
+end
+
 post "/admin/repositories/:id/sync" do |env|
   id = env.params.url["id"]
 

@@ -1,5 +1,15 @@
 .page__heading.user_heading
   .container.text-center
+    - if (current_user = current_user(env)) && current_user.admin?
+      .text-end
+        .dropdown#userActions
+          button.btn.btn-danger.dropdown-toggle type="button" id="dropdownUserActionsMenuButton" data-bs-toggle="dropdown" aria-expanded="false"
+            | Actions
+          ul.dropdown-menu.dropdown-menu-dark aria-labelledby="dropdownUserActionsMenuButton"
+            li
+              a.dropdown-item#syncUser href="#" data-href="/admin/users/#{user.id}/sync"
+                i.fas.fa-sync
+                | Sync
     .user__avatar
       img src="#{user.decorate.avatar(90)}" alt="#{user.login}"
     .user__full_name
