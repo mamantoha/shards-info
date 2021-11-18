@@ -20,28 +20,28 @@
         a href="#{user.decorate.provider_url}"
           i class="#{user.decorate.provider_icon}"
           = user.login
-      - if created_at = user.created_at
+      - if (created_at = user.created_at)
         span.middle-dot-divider
           | Member since #{created_at.to_s("%b %Y")}
     .user__repositories_count
       = "#{user.repositories.count} repositories"
     .user__description
-      - if (location = user.location) && !user.location.to_s.blank?
+      - if (location = user.location) && !location.blank?
         span.middle-dot-divider
           i class="fas fa-map-marker-alt"
           = location
-      - if (company = user.company) && !user.company.to_s.blank?
+      - if (company = user.company) && !company.blank?
         span.middle-dot-divider
           i class="fas fa-building"
           = company
-    - if (bio = user.bio) && !user.bio.to_s.blank?
+    - if (bio = user.bio) && !bio.blank?
       .user__bio.text_muted
         = bio
-    - if (email = user.email) && !user.email.to_s.blank?
+    - if (email = user.email) && !email.blank?
       .user__email
         i class="fas fa-envelope"
         a href="mailto:#{email}" = email
-    - if (website = user.website) && !user.website.to_s.blank?
+    - if (website = user.website) && !website.blank?
       .user__website
         i class="fas fa-link"
         a href="#{website}" = website

@@ -428,11 +428,7 @@ module Github
     end
 
     def tags : Array(String)
-      if tags = topics
-        tags
-      else
-        [] of String
-      end
+      topics || [] of String
     end
 
     def user
