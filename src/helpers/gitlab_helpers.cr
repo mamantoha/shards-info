@@ -181,8 +181,8 @@ module GitlabHelpers
   end
 
   def readme_file(gitlab_project : Gitlab::Project)
-    if readme_url = gitlab_project.readme_url
-      if m = readme_url.match(/#{gitlab_project.web_url}\/-\/blob\/#{gitlab_project.default_branch}\/(.*)/)
+    if (readme_url = gitlab_project.readme_url)
+      if (m = readme_url.match(/#{gitlab_project.web_url}\/-\/blob\/#{gitlab_project.default_branch}\/(.*)/))
         m[1]
       else
         "README.md"

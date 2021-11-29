@@ -21,7 +21,7 @@ div
         - if (current_user = current_user(env)) && current_user.admin?
           .col.text-end
             .dropdown#repositoryActions
-              button.btn.btn-danger.dropdown-toggle type="button" id="dropdownRepositiryActionsMenuButton" data-bs-toggle="dropdown" aria-expanded="false"
+              button.btn.btn-danger.dropdown-toggle type="button" id="dropdownRepositoryActionsMenuButton" data-bs-toggle="dropdown" aria-expanded="false"
                 | Actions
               ul.dropdown-menu.dropdown-menu-dark aria-labelledby="dropdownRepositoryActionsMenuButton"
                 li

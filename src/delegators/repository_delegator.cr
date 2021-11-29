@@ -37,16 +37,6 @@ class RepositoryDelegator < Delegator(Repository)
     end
   end
 
-  def description_html : String?
-    description.try do |_description|
-      Emoji.emojize(
-        Autolink.auto_link(
-          HTML.escape(_description)
-        )
-      )
-    end
-  end
-
   def provider_url
     case provider
     when "gitlab"

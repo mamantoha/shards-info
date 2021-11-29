@@ -22,7 +22,7 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
             input.form-control.me-2 aria-label="Search" name="query" type="search" placeholder="Search shards..." onClick="this.select();" value="#{Config.config.query}"
 
       ul.navbar-nav.me
-        - if current_user = current_user(env)
+        - if (current_user = current_user(env))
           li.nav-item.dropdown
             a.nav-link.dropdown-toggle#navbarDropdown href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               img.rounded-circle src="#{current_user.image}" alt="#{current_user.nickname}" width="20" height="20"

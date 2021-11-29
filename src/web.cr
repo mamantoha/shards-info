@@ -32,7 +32,7 @@ def self.multi_auth(env)
 end
 
 def self.current_user(env) : Admin?
-  if id = env.session.bigint?("user_id")
+  if (id = env.session.bigint?("user_id"))
     Admin.find(id)
   end
 end
@@ -254,7 +254,7 @@ get "/:provider/:owner" do |env|
   provider = env.params.url["provider"]
   owner = env.params.url["owner"]
 
-  if user = User.query.with_repositories(&.with_tags).find({provider: provider, login: owner})
+  if (user = User.query.with_repositories(&.with_tags).find({provider: provider, login: owner}))
     repositories = user.repositories.with_user.with_tags.order_by(stars_count: :desc)
     repositories_count = repositories.count
 
@@ -277,7 +277,7 @@ get "/:provider/:owner/:repo" do |env|
   owner = env.params.url["owner"]
   repo = env.params.url["repo"]
 
-  if repository = Repository.find_repository(owner, repo, provider)
+  if (repository = Repository.find_repository(owner, repo, provider))
     dependents = repository.dependents.undistinct.order_by({created_at: :desc})
     dependents_count = dependents.count
 
@@ -298,7 +298,7 @@ get "/:provider/:owner/:repo/readme" do |env|
   owner = env.params.url["owner"]
   repo = env.params.url["repo"]
 
-  if repository = Repository.find_repository(owner, repo, provider)
+  if (repository = Repository.find_repository(owner, repo, provider))
     readme_html =
       if repository.readme
         Helpers.to_markdown(repository)
@@ -328,7 +328,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
   per_page = 20
   offset = (page - 1) * per_page
 
-  if repository = Repository.find_repository(owner, repo, provider)
+  if (repository = Repository.find_repository(owner, repo, provider))
     # TODO: Exception:  (Clear::SQL::RecordNotFoundError)
     # when calling with `.with_user` and limit/offset
     repositories_query =
@@ -365,7 +365,7 @@ get "/tags/:name" do |env|
 
   name = env.params.url["name"]
 
-  if tag = Tag.query.find({name: name})
+  if (tag = Tag.query.find({name: name}))
     repositories_query = tag.repositories
 
     total_count = repositories_query.count
@@ -434,7 +434,7 @@ end
 post "/admin/repositories" do |env|
   url = env.params.body["repository[url]"].as(String)
 
-  if repository = Helpers.sync_repository_by_url(url)
+  if (repository = Helpers.sync_repository_by_url(url))
     env.flash["notice"] = "Repository was successfully added."
 
     env.redirect(repository.decorate.show_path)
@@ -475,10 +475,33 @@ get "/admin/hidden_repositories" do |env|
   render "src/views/admin/hidden_repositories/index.slang", "src/views/layouts/layout.slang"
 end
 
+post "/admin/users/:id/sync" do |env|
+  id = env.params.url["id"]
+
+  if (user = User.find(id))
+    case user.provider
+    when "github"
+      GithubHelpers.resync_user(user)
+    when "gitlab"
+      GitlabHelpers.resync_user(user)
+    end
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "User was successfully synced."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/#{user.provider}/#{user.login}",
+      },
+    }.to_json
+  end
+end
+
 post "/admin/repositories/:id/sync" do |env|
   id = env.params.url["id"]
 
-  if repository = Repository.find(id)
+  if (repository = Repository.find(id))
     case repository.provider
     when "github"
       GithubHelpers.resync_repository(repository)
@@ -501,7 +524,7 @@ end
 post "/admin/repositories/:id/show" do |env|
   id = env.params.url["id"]
 
-  if repository = Repository.find(id)
+  if (repository = Repository.find(id))
     repository.update(ignore: false)
 
     env.response.content_type = "application/json"
@@ -519,7 +542,7 @@ end
 post "/admin/repositories/:id/hide" do |env|
   id = env.params.url["id"]
 
-  if repository = Repository.find(id)
+  if (repository = Repository.find(id))
     repository.update(ignore: true)
 
     env.response.content_type = "application/json"
@@ -537,7 +560,7 @@ end
 delete "/admin/repositories/:id" do |env|
   id = env.params.url["id"]
 
-  if repository = Repository.find(id)
+  if (repository = Repository.find(id))
     repository.delete
 
     env.response.content_type = "application/json"

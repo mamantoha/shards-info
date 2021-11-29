@@ -13,7 +13,7 @@
       .small.mb-4
         | #{user.attributes["repositories_count"]} repositories
     .col-md-9
-      - if repository = user.repositories.order_by({stars_count: :desc}).first
+      - if (repository = user.repositories.order_by({stars_count: :desc}).first)
         .small.text-muted.text-uppercase.mb-2
           i.text-warning.fas.fa-fire
           ' Popular repository
