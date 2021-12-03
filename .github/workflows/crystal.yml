@@ -64,7 +64,7 @@ jobs:
         uses: actions/checkout@v2
       # Performs a clean installation of all dependencies in the `shard.yml` file
       - name: Install shard dependencies
-        run: shards install --ignore-crystal-version
+        run: shards install
       - name: Prepare database
         run: crystal ./spec/initdb.cr
         env:

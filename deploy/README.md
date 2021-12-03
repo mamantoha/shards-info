@@ -33,7 +33,7 @@ psql -c 'CREATE DATABASE shards_info_development;' -U postgres
 ### Build project
 
 ```console
-shards build --ignore-crystal-version
+shards build
 ```
 
 Build assests if needed:
