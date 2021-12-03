@@ -1,3 +1,18 @@
+Dump DB on production:
+
+```
+pg_dump "postgres://postgres@localhost/shards_info_production" -Fc > shards_info_production.sql
+```
+
+Respore DB on localhost
+
+```
+psql -c 'DROP DATABASE IF EXISTS shards_info_development;' -U postgres
+psql -c 'CREATE DATABASE shards_info_development;' -U postgres
+
+pg_restore -d shards_info_development shards_info_prudction.sql
+```
+
 Generate new migration:
 
 ```
