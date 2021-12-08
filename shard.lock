@@ -29,8 +29,8 @@ shards:
     version: 0.8.7+git.commit.206de070324b61444aa0237a9d7d50f10dbf43ab
 
   cmark:
-    git: https://github.com/amauryt/cr-cmark-gfm.git
-    version: 0.1.0+git.commit.7fbe7718ae6fa1ccd09b83dd203de9da8cc39b70
+    git: https://github.com/mamantoha/cr-cmark-gfm.git
+    version: 0.1.0+git.commit.a348a188dd14df29013c062bd5410477c16bf8a5
 
   crest:
     git: https://github.com/mamantoha/crest.git
@@ -54,7 +54,7 @@ shards:
 
   exception_page:
     git: https://github.com/crystal-loot/exception_page.git
-    version: 0.2.0
+    version: 0.2.1
 
   generate:
     git: https://github.com/anykeyh/generate.cr.git
@@ -98,7 +98,7 @@ shards:
 
   kemal-session-redis:
     git: https://github.com/crystal-garage/kemal-session-redis.git
-    version: 0.6.1+git.commit.3b656caa6709f40cbe5c9707842ff1bae28ea348
+    version: 0.6.1+git.commit.d2dec0517717de48758264356689e155c8973943
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
