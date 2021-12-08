@@ -53,10 +53,8 @@ dependencies:
   humanize_time:
     github: mamantoha/humanize_time
   cmark:
-    github: mamantoha/cr-cmark-gfm
-    # github: amauryt/cr-cmark-gfm
-    # branch: master
-    branch: fix-build-arch-linux
+    github: amauryt/cr-cmark-gfm
+    branch: master
   noir:
     github: MakeNowJust/noir
     branch: main
