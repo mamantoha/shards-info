@@ -21,7 +21,7 @@ module Gitlab
 
     property created_at : Time
 
-    property default_branch : String
+    property default_branch : String?
 
     property tag_list : Array(String)
 

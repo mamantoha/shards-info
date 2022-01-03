@@ -139,7 +139,7 @@ module GitlabHelpers
     repository.set({
       name:              gitlab_project.path,
       description:       gitlab_project.description,
-      default_branch:    gitlab_project.default_branch,
+      default_branch:    gitlab_project.default_branch || "master",
       last_activity_at:  gitlab_project.last_activity_at,
       stars_count:       gitlab_project.star_count,
       forks_count:       gitlab_project.forks_count,
