@@ -53,6 +53,20 @@ document.addEventListener("turbolinks:load", function () {
     });
   });
 
+  $("#destroyUser").on("click", function (e) {
+    e.preventDefault();
+    url = e.currentTarget.dataset["href"];
+
+    $.ajax({
+      url: url,
+      method: "DELETE",
+      data: {},
+      success: function (resp) {
+        window.location.href = resp.data.redirect_url;
+      },
+    });
+  });
+
   $("#syncRepository").on("click", function (e) {
     e.preventDefault();
     url = e.currentTarget.dataset["href"];
