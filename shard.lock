@@ -74,7 +74,7 @@ shards:
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
-    version: 0.10.2
+    version: 0.10.3
 
   i18n:
     git: https://github.com/crystal-i18n/i18n.git
