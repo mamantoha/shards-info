@@ -498,6 +498,24 @@ post "/admin/users/:id/sync" do |env|
   end
 end
 
+delete "/admin/users/:id" do |env|
+  id = env.params.url["id"]
+
+  if (user = User.find(id))
+    user.delete
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "User was successfully destroyed."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/",
+      },
+    }.to_json
+  end
+end
+
 post "/admin/repositories/:id/sync" do |env|
   id = env.params.url["id"]
 

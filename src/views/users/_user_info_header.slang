@@ -10,6 +10,10 @@
               a.dropdown-item#syncUser href="#" data-href="/admin/users/#{user.id}/sync"
                 i.fas.fa-sync
                 | Sync
+            li
+              a.dropdown-item#destroyUser href="#" data-href="/admin/users/#{user.id}"
+                i.fas.fa-trash-alt
+                | Destroy
     .user__avatar
       img src="#{user.decorate.avatar(90)}" alt="#{user.login}"
     .user__full_name
