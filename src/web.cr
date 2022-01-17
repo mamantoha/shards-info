@@ -223,6 +223,9 @@ get "/search" do |env|
 
     query = env.params.query["query"].as(String)
 
+    # remove dissallowed tsquery characters
+    query = query.gsub(/['?\\:‘’]/, "")
+
     repositories_query =
       Repository
         .query
