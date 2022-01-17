@@ -21,6 +21,9 @@
               li
                 a href="https://github.com/mamantoha/clear" Clear
                 = Clear::VERSION
+              li
+                a href="https://github.com/mosquito-cr/mosquito" Mosquito
+                = Mosquito::VERSION
           li
             | Build date #{Time.parse_rfc2822(Config.date).to_s("%Y-%m-%d %H:%M:%S %:z")}
           li
