@@ -5,7 +5,7 @@ div
       ' Crystal community
       .result_stats
         = total_count
-        ' users and groups
+        ' users and organizations
 .container
   .users
     - users.each(fetch_columns: true) do |user|
