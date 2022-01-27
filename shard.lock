@@ -26,7 +26,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.8+git.commit.a624b0a4fe3290955921caf4c788e7605cfcb0aa
+    version: 0.8.8+git.commit.93fca310cf7515bfad0b5327d3f2bc7a8f1514ca
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -38,7 +38,7 @@ shards:
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
-    version: 0.10.1
+    version: 0.11.0
 
   delegator:
     git: https://github.com/schniz/delegator.cr.git
@@ -82,7 +82,7 @@ shards:
 
   inflector:
     git: https://github.com/phoffer/inflector.cr.git
-    version: 0.1.8
+    version: 1.0.0
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
@@ -106,7 +106,7 @@ shards:
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
-    version: 0.11.1
+    version: 0.11.2
 
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
@@ -118,7 +118,7 @@ shards:
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.24.0
+    version: 0.26.0
 
   pool:
     git: https://github.com/ysbaddaden/pool.git
