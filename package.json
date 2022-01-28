@@ -25,13 +25,13 @@
     "@fortawesome/fontawesome-free": "^5.15.4",
     "css-loader": "^6.5.1",
     "expose-loader": "^3.1.0",
-    "mini-css-extract-plugin": "^2.5.2",
+    "mini-css-extract-plugin": "^2.5.3",
     "node-sass": "^7.0.1",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",
     "trim-newlines": ">=4.0.2",
     "webpack": "^5.67.0",
-    "webpack-cli": "^4.9.1"
+    "webpack-cli": "^4.9.2"
   },
   "dependencies": {
     "bootstrap": "^5.1.3",
