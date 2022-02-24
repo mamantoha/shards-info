@@ -128,7 +128,7 @@ module Gitlab
 
     property approvals_before_merge : Int32?
 
-    property mirror : Bool
+    property mirror : Bool?
 
     property external_authorization_classification_label : String
 
