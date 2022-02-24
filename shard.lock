@@ -86,7 +86,7 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 1.1.1
+    version: 1.1.2
 
   kemal-flash:
     git: https://github.com/crystal-garage/kemal-flash.git
