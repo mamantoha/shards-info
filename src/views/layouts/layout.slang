@@ -28,6 +28,8 @@ html lang="en"
     == render "src/views/partials/about.slang"
     == render "src/views/partials/back_to_top.slang"
     div role="main"
+      div.alert.alert-danger.text-center role="alert"
+        | 🇺🇦 Русский военный корабль, иди на хуй!
       == render "src/views/partials/flash.slang"
       == content
     div.space
