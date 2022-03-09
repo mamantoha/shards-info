@@ -120,8 +120,27 @@ ul.not-list {
   background-color: var(--navbar-bg-color) !important;
 }
 
-.navbar-brand img {
-  filter: invert(100%);
+// .navbar-brand img {
+//   filter: invert(100%);
+// }
+
+#standWithUkraine {
+  margin: 2rem;
+
+  .blue-band {
+    background-color: #0057b7;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    color: white;
+  }
+
+  .yellow-band {
+    background-color: #ffd700;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+
+  p.hashtag {
+    color: black;
+  }
 }
 
 .has-search {

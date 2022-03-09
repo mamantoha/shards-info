@@ -1,7 +1,7 @@
 nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
   .container
     a.navbar-brand href="/"
-      img.d-inline-block.align-top src="/images/logo.svg" width="30" height="30" alt=""
+      img.d-inline-block.align-top src="/images/logo_ua.svg" width="30" height="30" alt=""
       ' shards.info
     button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"
       span.navbar-toggler-icon
