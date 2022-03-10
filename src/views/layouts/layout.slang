@@ -28,7 +28,7 @@ html lang="en"
     == render "src/views/partials/about.slang"
     == render "src/views/partials/back_to_top.slang"
     div role="main"
-      #standWithUkraine
+      #standWithUkraine.d-none.d-lg-block
         .blue-band
           p.mb-0
             | This software was created by a developer from Ukraine.
