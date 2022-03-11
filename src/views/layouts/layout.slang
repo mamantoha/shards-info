@@ -33,7 +33,7 @@ html lang="en"
           p.mb-0
             | This software was created by a developer from Ukraine.
           p.mb-0
-            | Russia has invaded Ukraine and already killed thousands of civilians, including more than 40 children.
+            | Russia has invaded Ukraine and already killed thousands of civilians, including more than 70 children.
           p
             | The death toll is still counting. It is a war and we need your help. Let's stand together against the Russian regime.
         .yellow-band
