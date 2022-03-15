@@ -125,7 +125,7 @@ ul.not-list {
 // }
 
 #standWithUkraine {
-  margin: 2rem;
+  margin: 1rem 0 1rem;
 
   .blue-band {
     background-color: #0057b7;
@@ -140,6 +140,11 @@ ul.not-list {
 
   p.hashtag {
     color: black;
+  }
+
+  // X-Small devices (portrait phones, less than 576px)
+  @media (max-width: 575.98px) {
+    font-size: xx-small;
   }
 }
 
