@@ -2,7 +2,7 @@
   .d-none.d-lg-block
     .blue-band
       p.mb-0
-        | This software was created by a developer from Ukraine.
+        | This project was created by a developer from Ukraine.
       p.mb-0
         | Russia has invaded Ukraine and already
         strong
