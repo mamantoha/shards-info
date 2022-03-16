@@ -11,7 +11,7 @@
         | The death toll is still counting. It is a war and we need your help. Let's stand together against the Russian regime.
     .yellow-band
       span
-        a.btn.btn-outline-primary href="https://vshymanskyy.github.io/StandWithUkraine/" Support Ukraine
+        a.btn.btn-outline-primary href="https://github.com/vshymanskyy/StandWithUkraine"" Support Ukraine
       p.text-end.hashtag
         | #StandWithUkraine
   .d-lg-none
