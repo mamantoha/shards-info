@@ -6,7 +6,7 @@
       p.mb-0
         | Russia has invaded Ukraine and already
         strong
-          | killed thousands of civilians, including more than 85 children.
+          | killed thousands of civilians, including more than 105 children.
       p
         | The death toll is still counting. It is a war and we need your help. Let's stand together against the Russian regime.
     .yellow-band
@@ -26,6 +26,6 @@
         | The death toll is still counting. It is a war and we need your help.
     .yellow-band
       span
-        a.btn.btn-sm.btn-outline-primary href="https://vshymanskyy.github.io/StandWithUkraine/" Support Ukraine
+        a.btn.btn-sm.btn-outline-primary href="https://github.com/vshymanskyy/StandWithUkraine" Support Ukraine
       p.text-end.hashtag
         | #StandWithUkraine
