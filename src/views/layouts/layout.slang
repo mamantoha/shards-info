@@ -19,8 +19,8 @@ html lang="en"
 
     == render "src/views/partials/open_graph.slang"
 
-    link rel="stylesheet" href="/dist/application.css?v=4.14" async="async" defer="defer"
-    script src="/dist/application.js?v=4.7" media="all"
+    link rel="stylesheet" href="/dist/application.css?v=#{assets_version}" async="async" defer="defer"
+    script src="/dist/application.js?v=#{assets_version}" media="all"
 
     title #{Config.config.page_title}
   body
