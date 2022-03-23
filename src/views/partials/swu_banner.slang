@@ -6,7 +6,7 @@
       p.mb-0
         | Russia has invaded Ukraine and already
         strong
-          | killed thousands of civilians, including more than 105 children.
+          | killed over 3000 civilians, including more than 117 children.
       p
         | The death toll is still counting. It is a war and we need your help. Let's stand together against the Russian regime.
     .yellow-band
