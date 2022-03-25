@@ -6,9 +6,9 @@
       p.mb-0
         | Russia has invaded Ukraine and already
         strong
-          | killed over 3000 civilians, including more than 117 children.
+          | killed over 4000 civilians, including more than 135 children.
       p
-        | The death toll is still counting. It is a war and we need your help. Let's stand together against the Russian regime.
+        | The death toll countinues climbing. It is a war and we need your help. Let's stand together against the Russian regime.
     .yellow-band
       span
         a.btn.btn-outline-primary href="https://github.com/vshymanskyy/StandWithUkraine" Support Ukraine
@@ -21,9 +21,9 @@
       p.mb-0
         | Russia has invaded Ukraine and already
         strong
-          | killed thousands of civilians.
+          | killed over 4000 civilians.
       p
-        | The death toll is still counting. It is a war and we need your help.
+        | The death toll countinues climbing. It is a war and we need your help.
     .yellow-band
       span
         a.btn.btn-sm.btn-outline-primary href="https://github.com/vshymanskyy/StandWithUkraine" Support Ukraine
