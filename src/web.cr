@@ -486,7 +486,6 @@ get "/admin/hidden_repositories" do |env|
   repositories_query =
     Repository
       .query
-      .with_tags
       .with_user
       .where { repositories.ignore == true }
       .order_by(stars_count: :desc)
