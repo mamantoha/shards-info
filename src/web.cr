@@ -150,6 +150,7 @@ get "/users" do |env|
     User
       .query
       .join("repositories") { var("repositories", "user_id") == var("users", "id") }
+      .where { users.ignore == false }
       .where { repositories.ignore == false }
       .select(
         "users.*",
