@@ -453,6 +453,30 @@ post "/admin/repositories" do |env|
   end
 end
 
+get "/admin/hidden_users" do |env|
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+  per_page = 20
+  offset = (page - 1) * per_page
+
+  users_query = User.query.where { ignore == true }
+
+  total_count = users_query.count
+
+  paginator = ViewHelpers::Paginator.new(
+    page,
+    per_page,
+    total_count,
+    "/admin/hidden_users&page=%{page}"
+  ).to_s
+
+  users = users_query.limit(per_page).offset(offset)
+
+  Config.config.page_title = "Admin: Hidden Users"
+
+  render "src/views/admin/hidden_users/index.slang", "src/views/layouts/layout.slang"
+end
+
 get "/admin/hidden_repositories" do |env|
   page = env.params.query["page"]? || ""
   page = page.to_i? || 1
