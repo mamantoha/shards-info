@@ -113,19 +113,23 @@ get "/" do |env|
   trending_repositories =
     Repository
       .query
+      .join("users") { users.id == repositories.user_id }
       .with_user
       .with_tags
-      .published
-      .where { last_activity_at > 1.week.ago }
+      .where { users.ignore == false }
+      .where { repositories.ignore == false }
+      .where { repositories.last_activity_at > 1.week.ago }
       .order_by(stars_count: :desc)
       .limit(20)
 
   recently_repositories =
     Repository
       .query
+      .join("users") { users.id == repositories.user_id }
       .with_user
       .with_tags
-      .published
+      .where { users.ignore == false }
+      .where { repositories.ignore == false }
       .order_by(last_activity_at: :desc)
       .limit(20)
 
