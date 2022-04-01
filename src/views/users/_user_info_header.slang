@@ -11,6 +11,15 @@
                 i.fas.fa-sync
                 | Sync
             li
+              - if user.ignore
+                a.dropdown-item#showUser href="#" data-href="/admin/users/#{user.id}/show"
+                  i.fas.fa-eye
+                  | Show
+              - else
+                a.dropdown-item#hideUser href="#" data-href="/admin/users/#{user.id}/hide"
+                  i.fas.fa-eye-slash
+                  | Hide
+            li
               a.dropdown-item#destroyUser href="#" data-href="/admin/users/#{user.id}"
                 i.fas.fa-trash-alt
                 | Destroy

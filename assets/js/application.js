@@ -67,6 +67,34 @@ document.addEventListener("turbolinks:load", function () {
     });
   });
 
+  $("#showUser").on("click", function (e) {
+    e.preventDefault();
+    url = e.currentTarget.dataset["href"];
+
+    $.ajax({
+      url: url,
+      method: "POST",
+      data: {},
+      success: function (resp) {
+        window.location.href = resp.data.redirect_url;
+      },
+    });
+  });
+
+  $("#hideUser").on("click", function (e) {
+    e.preventDefault();
+    url = e.currentTarget.dataset["href"];
+
+    $.ajax({
+      url: url,
+      method: "POST",
+      data: {},
+      success: function (resp) {
+        window.location.href = resp.data.redirect_url;
+      },
+    });
+  });
+
   $("#syncRepository").on("click", function (e) {
     e.preventDefault();
     url = e.currentTarget.dataset["href"];

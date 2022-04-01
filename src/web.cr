@@ -519,6 +519,42 @@ delete "/admin/users/:id" do |env|
   end
 end
 
+post "/admin/users/:id/show" do |env|
+  id = env.params.url["id"]
+
+  if (user = User.find(id))
+    user.update(ignore: false)
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "User was successfully shown."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/#{user.provider}/#{user.login}",
+      },
+    }.to_json
+  end
+end
+
+post "/admin/users/:id/hide" do |env|
+  id = env.params.url["id"]
+
+  if (user = User.find(id))
+    user.update(ignore: true)
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "User was successfully hidden."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/#{user.provider}/#{user.login}",
+      },
+    }.to_json
+  end
+end
+
 post "/admin/repositories/:id/sync" do |env|
   id = env.params.url["id"]
 
