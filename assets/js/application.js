@@ -39,111 +39,14 @@ document.addEventListener("turbolinks:load", function () {
     Turbolinks.visit("/search?query=" + query);
   });
 
-  $("#syncUser").on("click", function (e) {
+  $(".js-action").on("click", function (e) {
     e.preventDefault();
     url = e.currentTarget.dataset["href"];
+    method = e.currentTarget.dataset["method"];
 
     $.ajax({
       url: url,
-      method: "POST",
-      data: {},
-      success: function (resp) {
-        window.location.href = resp.data.redirect_url;
-      },
-    });
-  });
-
-  $("#destroyUser").on("click", function (e) {
-    e.preventDefault();
-    url = e.currentTarget.dataset["href"];
-
-    $.ajax({
-      url: url,
-      method: "DELETE",
-      data: {},
-      success: function (resp) {
-        window.location.href = resp.data.redirect_url;
-      },
-    });
-  });
-
-  $("#showUser").on("click", function (e) {
-    e.preventDefault();
-    url = e.currentTarget.dataset["href"];
-
-    $.ajax({
-      url: url,
-      method: "POST",
-      data: {},
-      success: function (resp) {
-        window.location.href = resp.data.redirect_url;
-      },
-    });
-  });
-
-  $("#hideUser").on("click", function (e) {
-    e.preventDefault();
-    url = e.currentTarget.dataset["href"];
-
-    $.ajax({
-      url: url,
-      method: "POST",
-      data: {},
-      success: function (resp) {
-        window.location.href = resp.data.redirect_url;
-      },
-    });
-  });
-
-  $("#syncRepository").on("click", function (e) {
-    e.preventDefault();
-    url = e.currentTarget.dataset["href"];
-
-    $.ajax({
-      url: url,
-      method: "POST",
-      data: {},
-      success: function (resp) {
-        window.location.href = resp.data.redirect_url;
-      },
-    });
-  });
-
-  $("#showRepository").on("click", function (e) {
-    e.preventDefault();
-    url = e.currentTarget.dataset["href"];
-
-    $.ajax({
-      url: url,
-      method: "POST",
-      data: {},
-      success: function (resp) {
-        window.location.href = resp.data.redirect_url;
-      },
-    });
-  });
-
-  $("#hideRepository").on("click", function (e) {
-    e.preventDefault();
-    url = e.currentTarget.dataset["href"];
-
-    $.ajax({
-      url: url,
-      method: "POST",
-      data: {},
-      success: function (resp) {
-        window.location.href = resp.data.redirect_url;
-      },
-    });
-  });
-
-  $("#destroyRepository").on("click", function (e) {
-    e.preventDefault();
-    url = e.currentTarget.dataset["href"];
-
-    $.ajax({
-      url: url,
-      method: "DELETE",
+      method: method,
       data: {},
       success: function (resp) {
         window.location.href = resp.data.redirect_url;
