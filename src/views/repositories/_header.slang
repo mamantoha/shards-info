@@ -25,19 +25,19 @@ div
                 | Actions
               ul.dropdown-menu.dropdown-menu-dark aria-labelledby="dropdownRepositoryActionsMenuButton"
                 li
-                  a.dropdown-item#syncRepository href="#" data-href="/admin/repositories/#{repository.id}/sync"
+                  a.dropdown-item.js-action href="#" data-href="/admin/repositories/#{repository.id}/sync" data-method="POST"
                     i.fas.fa-sync
                     | Sync
                 li
                   - if repository.ignore
-                    a.dropdown-item#showRepository href="#" data-href="/admin/repositories/#{repository.id}/show"
+                    a.dropdown-item.js-action href="#" data-href="/admin/repositories/#{repository.id}/show" data-method="POST"
                       i.fas.fa-eye
                       | Show
                   - else
-                    a.dropdown-item#hideRepository href="#" data-href="/admin/repositories/#{repository.id}/hide"
+                    a.dropdown-item.js-action href="#" data-href="/admin/repositories/#{repository.id}/hide" data-method="POST"
                       i.fas.fa-eye-slash
                       | Hide
                 li
-                  a.dropdown-item#destroyRepository href="#" data-href="/admin/repositories/#{repository.id}"
+                  a.dropdown-item.js-action href="#" data-href="/admin/repositories/#{repository.id}" data-method="DELETE"
                     i.fas.fa-trash-alt
                     | Destroy

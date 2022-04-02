@@ -113,19 +113,23 @@ get "/" do |env|
   trending_repositories =
     Repository
       .query
+      .join("users") { users.id == repositories.user_id }
       .with_user
       .with_tags
-      .published
-      .where { last_activity_at > 1.week.ago }
+      .where { users.ignore == false }
+      .where { repositories.ignore == false }
+      .where { repositories.last_activity_at > 1.week.ago }
       .order_by(stars_count: :desc)
       .limit(20)
 
   recently_repositories =
     Repository
       .query
+      .join("users") { users.id == repositories.user_id }
       .with_user
       .with_tags
-      .published
+      .where { users.ignore == false }
+      .where { repositories.ignore == false }
       .order_by(last_activity_at: :desc)
       .limit(20)
 
@@ -146,6 +150,7 @@ get "/users" do |env|
     User
       .query
       .join("repositories") { var("repositories", "user_id") == var("users", "id") }
+      .where { users.ignore == false }
       .where { repositories.ignore == false }
       .select(
         "users.*",
@@ -448,6 +453,30 @@ post "/admin/repositories" do |env|
   end
 end
 
+get "/admin/hidden_users" do |env|
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+  per_page = 20
+  offset = (page - 1) * per_page
+
+  users_query = User.query.where { ignore == true }
+
+  total_count = users_query.count
+
+  paginator = ViewHelpers::Paginator.new(
+    page,
+    per_page,
+    total_count,
+    "/admin/hidden_users&page=%{page}"
+  ).to_s
+
+  users = users_query.limit(per_page).offset(offset)
+
+  Config.config.page_title = "Admin: Hidden Users"
+
+  render "src/views/admin/hidden_users/index.slang", "src/views/layouts/layout.slang"
+end
+
 get "/admin/hidden_repositories" do |env|
   page = env.params.query["page"]? || ""
   page = page.to_i? || 1
@@ -457,7 +486,6 @@ get "/admin/hidden_repositories" do |env|
   repositories_query =
     Repository
       .query
-      .with_tags
       .with_user
       .where { repositories.ignore == true }
       .order_by(stars_count: :desc)
@@ -514,6 +542,42 @@ delete "/admin/users/:id" do |env|
       "status" => "success",
       "data"   => {
         "redirect_url" => "/",
+      },
+    }.to_json
+  end
+end
+
+post "/admin/users/:id/show" do |env|
+  id = env.params.url["id"]
+
+  if (user = User.find(id))
+    user.update(ignore: false)
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "User was successfully shown."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/#{user.provider}/#{user.login}",
+      },
+    }.to_json
+  end
+end
+
+post "/admin/users/:id/hide" do |env|
+  id = env.params.url["id"]
+
+  if (user = User.find(id))
+    user.update(ignore: true)
+
+    env.response.content_type = "application/json"
+    env.flash["notice"] = "User was successfully hidden."
+
+    {
+      "status" => "success",
+      "data"   => {
+        "redirect_url" => "/#{user.provider}/#{user.login}",
       },
     }.to_json
   end

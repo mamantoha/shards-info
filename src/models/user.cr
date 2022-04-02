@@ -16,8 +16,11 @@ class User
   column company : String?
   column email : String?
   column website : String?
+  column ignore : Bool = false
 
   has_many repositories : Repository
+
+  scope(:published) { where({ignore: false}) }
 
   def decorate
     @delegator ||= UserDelegator.delegate(self)

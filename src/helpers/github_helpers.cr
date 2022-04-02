@@ -54,6 +54,7 @@ module GithubHelpers
     user = User.query.find_or_build({provider: "github", provider_id: github_user.id}) { }
     assign_repository_user_attributes(user, github_user)
     user.synced_at = Time.utc if user.changed?
+    user.ignore = false unless user.persisted?
     user.save!
 
     repository = Repository.query.find_or_build({provider: "github", provider_id: github_repository.id}) { }

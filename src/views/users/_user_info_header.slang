@@ -7,11 +7,20 @@
             | Actions
           ul.dropdown-menu.dropdown-menu-dark aria-labelledby="dropdownUserActionsMenuButton"
             li
-              a.dropdown-item#syncUser href="#" data-href="/admin/users/#{user.id}/sync"
+              a.dropdown-item.js-action href="#" data-href="/admin/users/#{user.id}/sync" data-method="POST"
                 i.fas.fa-sync
                 | Sync
             li
-              a.dropdown-item#destroyUser href="#" data-href="/admin/users/#{user.id}"
+              - if user.ignore
+                a.dropdown-item.js-action href="#" data-href="/admin/users/#{user.id}/show" data-method="POST"
+                  i.fas.fa-eye
+                  | Show
+              - else
+                a.dropdown-item.js-action href="#" data-href="/admin/users/#{user.id}/hide" data-method="POST"
+                  i.fas.fa-eye-slash
+                  | Hide
+            li
+              a.dropdown-item.js-action href="#" data-href="/admin/users/#{user.id}" data-method="DELETE"
                 i.fas.fa-trash-alt
                 | Destroy
     .user__avatar

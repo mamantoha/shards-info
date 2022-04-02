@@ -19,6 +19,7 @@ def create_user_with_repository
     provider_id: "1",
     login:       "crystal-lang",
     kind:        "user",
+    ignore:      false,
     synced_at:   Time.local,
   })
 
