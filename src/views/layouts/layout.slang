@@ -36,4 +36,4 @@ html lang="en"
     div.space
     footer.footer
       .container.text-center
-        span Happy Crystalling ♥
+        span Happy Crystalling ❤️
