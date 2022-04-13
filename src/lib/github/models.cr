@@ -171,7 +171,7 @@ module Github
       property full_name : String
 
       @[JSON::Field(key: "private")]
-      property repository_private : Bool
+      property is_private : Bool
 
       property owner : Owner
 
@@ -277,7 +277,7 @@ module Github
     property full_name : String
 
     @[JSON::Field(key: "private")]
-    property repo_private : Bool
+    property is_private : Bool
 
     property owner : Owner
 
@@ -400,6 +400,10 @@ module Github
     property mirror_url : String?
 
     property archived : Bool
+
+    property disabled : Bool
+
+    property visibility : String
 
     property open_issues_count : Int32
 
