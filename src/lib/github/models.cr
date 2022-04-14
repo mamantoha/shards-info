@@ -171,7 +171,7 @@ module Github
       property full_name : String
 
       @[JSON::Field(key: "private")]
-      property is_private : Bool
+      property? private : Bool
 
       property owner : Owner
 
@@ -277,7 +277,7 @@ module Github
     property full_name : String
 
     @[JSON::Field(key: "private")]
-    property is_private : Bool
+    property? private : Bool
 
     property owner : Owner
 

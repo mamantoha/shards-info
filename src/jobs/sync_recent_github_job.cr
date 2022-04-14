@@ -8,7 +8,7 @@ class SyncRecentGithubJob < Mosquito::PeriodicJob
     github_repositories = github_client.recently_updated.items
 
     github_repositories.each do |github_repository|
-      next if github_repository.is_private
+      next if github_repository.private?
 
       GithubHelpers.sync_github_repository(github_repository)
     end
