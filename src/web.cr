@@ -166,7 +166,12 @@ get "/users" do |env|
 
   total_count = users_query.count
 
-  paginator = ViewHelpers::Paginator.new(page, per_page, total_count, "/users?page=%{page}").to_s
+  paginator = ViewHelpers::Paginator.new(
+    page,
+    per_page,
+    total_count,
+    "/users?page=%{page}"
+  ).to_s
 
   users = users_query.limit(per_page).offset(offset)
 
@@ -415,7 +420,7 @@ get "/admin/admins" do |env|
   per_page = 20
   offset = (page - 1) * per_page
 
-  admin_query = Admin.query
+  admin_query = Admin.query.order_by(created_at: :desc)
 
   total_count = admin_query.count
 
@@ -459,7 +464,16 @@ get "/admin/hidden_users" do |env|
   per_page = 20
   offset = (page - 1) * per_page
 
-  users_query = User.query.where { ignore == true }
+  users_query =
+    User
+      .query
+      .join("repositories") { var("repositories", "user_id") == var("users", "id") }
+      .where { users.ignore == true }
+      .select(
+        "users.*",
+        "COUNT(repositories.*) AS repositories_count",
+      )
+      .group_by("users.id")
 
   total_count = users_query.count
 
