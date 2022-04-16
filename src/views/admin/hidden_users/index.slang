@@ -11,11 +11,16 @@
         tr
           th
           th User
+          th
       tbody
-        - users.each do |user|
+        - users.each(fetch_columns: true) do |user|
           tr
             td
               i class="#{user.decorate.provider_icon}"
             td
-              a href="/#{user.provider}/#{user.login}/" = user.login
+              a href="/#{user.provider}/#{user.login}/"
+                = user.login
+              | (#{user.name})
+            td
+              | #{user.attributes["repositories_count"]} repositories
   == paginator
