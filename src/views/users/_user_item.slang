@@ -6,10 +6,10 @@
     .col-md-3.users__user
       i class="#{user.decorate.kind_icon}"
       a href="/#{user.provider}/#{user.login}/"
-        = "#{user.decorate.full_name}"
+        = user.decorate.full_name
       .text-muted
         i class="fab #{user.decorate.provider_icon}"
-        = "#{user.login}"
+        = user.login
       .small.mb-4
         | #{user.attributes["repositories_count"]} repositories
     .col-md-9

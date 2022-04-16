@@ -9,7 +9,7 @@ div
       .row
         .col
           h1
-            = "#{repository.name}"
+            = repository.name
             i.page__subheading
               = repository.decorate.latest_release
           .shard__topics
