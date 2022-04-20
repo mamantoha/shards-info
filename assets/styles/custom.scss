@@ -233,7 +233,10 @@ ul.not-list {
 
   padding: 1px;
   border: 1px solid var(--border-color);
-  // border-radius: 3px;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 0%;
 
   .badge {
     position: absolute;
@@ -257,7 +260,10 @@ ul.not-list {
     vertical-align: middle;
     width: 64px;
     height: 64px;
-    border-radius: 15%;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 0%;
     background-color: var(--avatar-bg-color);
   }
 }
