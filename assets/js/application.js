@@ -1,29 +1,27 @@
 $(function() {
   if (!("theme" in localStorage)) {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      localStorage.theme = "dark";
       document.documentElement.classList.add("dark");
-      document.getElementById("switchTheme").checked = true;
     } else {
+      localStorage.theme = "light";
       document.documentElement.classList.remove("dark");
-      document.getElementById("switchTheme").checked = false;
     }
+  }
+
+  if (localStorage.theme === "dark") {
+    document.getElementById("switchTheme").checked = true;
   } else {
-    if (localStorage.theme === "dark") {
-      document.documentElement.classList.add("dark");
-      document.getElementById("switchTheme").checked = true;
-    } else {
-      document.documentElement.classList.remove("dark");
-      document.getElementById("switchTheme").checked = false;
-    }
+    document.getElementById("switchTheme").checked = false;
   }
 
   $("#switchTheme").on("change", function (e) {
     if (e.currentTarget.checked) {
-      document.documentElement.classList.add("dark");
       localStorage.theme = "dark";
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove("dark");
       localStorage.theme = "light";
+      document.documentElement.classList.remove("dark");
     }
   });
 

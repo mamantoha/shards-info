@@ -16,6 +16,9 @@ html lang="en"
 
     title #{Config.config.page_title}
   body
+    javascript:
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.classList.add(theme);
     == render "src/views/partials/navbar.slang"
     == render "src/views/partials/about.slang"
     == render "src/views/partials/back_to_top.slang"
