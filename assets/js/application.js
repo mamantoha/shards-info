@@ -25,14 +25,12 @@ $(function () {
     }
   });
 
+  // navigate to a tab when the history changes
   window.addEventListener("popstate", function (e) {
     var hash = window.location.hash;
     var activeTab = $('.nav a[href="' + hash + '"]');
 
-    console.log(hash);
-
     if (activeTab.length) {
-      $(document.querySelector("#trending-tab")).tab("show");
       activeTab.tab("show");
     } else {
       $(".nav-tabs a:first").tab("show");
@@ -65,6 +63,7 @@ $(function () {
     var hash = window.location.hash;
     hash && $('.nav a[href="' + hash + '"]').tab("show");
 
+    // add a hash to the URL when the user clicks on a tab
     $(".home_repositories__container .nav-tabs a").on("click", function (e) {
       history.pushState(null, null, $(this).attr("href"));
       var scrollmem = $("body").scrollTop();
