@@ -1,42 +1,47 @@
-document.addEventListener("turbolinks:load", function () {
+$(function () {
   if (!("theme" in localStorage)) {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      localStorage.theme = "dark";
       document.documentElement.classList.add("dark");
-      document.getElementById("switchTheme").checked = true;
     } else {
+      localStorage.theme = "light";
       document.documentElement.classList.remove("dark");
-      document.getElementById("switchTheme").checked = false;
     }
+  }
+
+  if (localStorage.theme === "dark") {
+    document.getElementById("switchTheme").checked = true;
   } else {
-    if (localStorage.theme === "dark") {
-      document.documentElement.classList.add("dark");
-      document.getElementById("switchTheme").checked = true;
-    } else {
-      document.documentElement.classList.remove("dark");
-      document.getElementById("switchTheme").checked = false;
-    }
+    document.getElementById("switchTheme").checked = false;
   }
 
   $("#switchTheme").on("change", function (e) {
     if (e.currentTarget.checked) {
-      document.documentElement.classList.add("dark");
       localStorage.theme = "dark";
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove("dark");
       localStorage.theme = "light";
+      document.documentElement.classList.remove("dark");
     }
   });
 
-  if (typeof ga === "function") {
-    ga("set", "location", event.data.url);
-    ga("send", "pageview");
-  }
+  // navigate to a tab when the history changes
+  window.addEventListener("popstate", function (e) {
+    var hash = window.location.hash;
+    var activeTab = $('.nav a[href="' + hash + '"]');
+
+    if (activeTab.length) {
+      activeTab.tab("show");
+    } else {
+      $(".nav-tabs a:first").tab("show");
+    }
+  });
 
   $("form#search").on("submit", function (e) {
     e.preventDefault();
     query = $(e.target).find("input[name='query']").val();
     query = query.replace(/\s/g, "+");
-    Turbolinks.visit("/search?query=" + query);
+    window.location.href = "/search?query=" + query;
   });
 
   $(".js-action").on("click", function (e) {
@@ -58,18 +63,16 @@ document.addEventListener("turbolinks:load", function () {
     var hash = window.location.hash;
     hash && $('.nav a[href="' + hash + '"]').tab("show");
 
+    // add a hash to the URL when the user clicks on a tab
     $(".home_repositories__container .nav-tabs a").on("click", function (e) {
-      $(this).tab("show");
+      history.pushState(null, null, $(this).attr("href"));
       var scrollmem = $("body").scrollTop();
-      window.location.replace(this.hash);
-      history.replaceState({ turbolinks: {} }, "");
       $("html,body").scrollTop(scrollmem);
     });
 
     $(".shard__readme a.anchor").on("click", function (e) {
       e.preventDefault();
       window.location.replace(this.hash);
-      history.replaceState({ turbolinks: {} }, "");
     });
 
     // Back To Top Button
@@ -90,8 +93,6 @@ document.addEventListener("turbolinks:load", function () {
     }
 
     $(".shard__readme li:has(input)").addClass("checklist-item");
-
-    Turbolinks.setProgressBarDelay(200);
   });
 
   var moveTo = new MoveTo();

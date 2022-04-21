@@ -38,9 +38,9 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
                   a.dropdown-item href="/admin"
                     | Admin
               li
-                a.dropdown-item href="/logout" data-turbolinks="false"
+                a.dropdown-item href="/logout"
                   | Sing out
         - else
           li.nav-item
-            a.nav-link href="/auth/github" data-turbolinks="false"
+            a.nav-link href="/auth/github"
               i.fas.fa-sign-in-alt

@@ -6,7 +6,6 @@ html lang="en"
     meta charset="utf-8"
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
     meta name="description" content="#{Config.config.page_description}"
-    meta name="turbolinks-cache-control" content="no-preview"
 
     link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"
 
@@ -17,6 +16,9 @@ html lang="en"
 
     title #{Config.config.page_title}
   body
+    javascript:
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.classList.add(theme);
     == render "src/views/partials/navbar.slang"
     == render "src/views/partials/about.slang"
     == render "src/views/partials/back_to_top.slang"
