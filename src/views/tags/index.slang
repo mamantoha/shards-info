@@ -11,7 +11,7 @@ div#tags data-tags="#{tags_json}"
 #tags-cloud
 
 javascript:
-  document.addEventListener("turbolinks:load", function(event) {
+  $(function() {
     tags = $("#tags").data("tags");
     $('#tags-cloud').jQCloud(tags, {
       autoResize: true,
