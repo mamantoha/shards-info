@@ -25,11 +25,6 @@ $(function () {
     }
   });
 
-  if (typeof ga === "function") {
-    ga("set", "location", event.data.url);
-    ga("send", "pageview");
-  }
-
   window.addEventListener("popstate", function (e) {
     var hash = window.location.hash;
     var activeTab = $('.nav a[href="' + hash + '"]');
