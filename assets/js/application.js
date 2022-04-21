@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
   if (!("theme" in localStorage)) {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       localStorage.theme = "dark";
@@ -30,6 +30,20 @@ $(function() {
     ga("send", "pageview");
   }
 
+  window.addEventListener("popstate", function (e) {
+    var hash = window.location.hash;
+    var activeTab = $('.nav a[href="' + hash + '"]');
+
+    console.log(hash);
+
+    if (activeTab.length) {
+      $(document.querySelector("#trending-tab")).tab("show");
+      activeTab.tab("show");
+    } else {
+      $(".nav-tabs a:first").tab("show");
+    }
+  });
+
   $("form#search").on("submit", function (e) {
     e.preventDefault();
     query = $(e.target).find("input[name='query']").val();
@@ -57,9 +71,8 @@ $(function() {
     hash && $('.nav a[href="' + hash + '"]').tab("show");
 
     $(".home_repositories__container .nav-tabs a").on("click", function (e) {
-      $(this).tab("show");
+      history.pushState(null, null, $(this).attr("href"));
       var scrollmem = $("body").scrollTop();
-      window.location.replace(this.hash);
       $("html,body").scrollTop(scrollmem);
     });
 
