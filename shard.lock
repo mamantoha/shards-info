@@ -130,7 +130,7 @@ shards:
 
   raven:
     git: https://github.com/sija/raven.cr.git
-    version: 1.9.1
+    version: 1.9.2
 
   redis:
     git: https://github.com/stefanwille/crystal-redis.git
