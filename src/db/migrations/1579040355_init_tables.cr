@@ -1,8 +1,8 @@
 class InitTables
   include Clear::Migration
 
-  def change(direction)
-    direction.up do
+  def change(dir)
+    dir.up do
       execute("CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;")
 
       create_table(:users) do |t|
@@ -55,7 +55,7 @@ class InitTables
       end
     end
 
-    direction.down do
+    dir.down do
       execute("DROP TABLE users")
       execute("DROP TABLE repositories")
       execute("DROP TABLE tags")

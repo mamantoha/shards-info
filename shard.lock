@@ -26,7 +26,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.9+git.commit.0defba1a667637c8713ba54a0dc5737876bf85e5
+    version: 0.8.10+git.commit.e3b958b06d20ee2f57d1d03a00a33eff7df0cf6c
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -74,7 +74,7 @@ shards:
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
-    version: 0.10.3
+    version: 0.11.0
 
   i18n:
     git: https://github.com/crystal-i18n/i18n.git

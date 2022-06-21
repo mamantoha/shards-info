@@ -1,12 +1,12 @@
 class AddIgnoreToUsers
   include Clear::Migration
 
-  def change(direction)
-    direction.up do
+  def change(dir)
+    dir.up do
       add_column "users", "ignore", :bool, nullable: false, default: "false"
     end
 
-    direction.down do
+    dir.down do
       add_column "users", "ignore", :bool
     end
   end

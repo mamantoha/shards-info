@@ -1,8 +1,8 @@
 class CreateAdmins
   include Clear::Migration
 
-  def change(direction)
-    direction.up do
+  def change(dir)
+    dir.up do
       create_table(:admins) do |t|
         t.column :provider, :string, null: false
         t.column :uid, :string, null: false
@@ -22,7 +22,7 @@ class CreateAdmins
       end
     end
 
-    direction.down do
+    dir.down do
       create_table(:admins) { }
     end
   end

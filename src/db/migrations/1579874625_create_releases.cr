@@ -1,8 +1,8 @@
 class CreateReleases
   include Clear::Migration
 
-  def change(direction)
-    direction.up do
+  def change(dir)
+    dir.up do
       create_table(:releases) do |t|
         t.column :tag_name, :string, null: false
         t.column :provider, :string, null: false
@@ -18,7 +18,7 @@ class CreateReleases
       end
     end
 
-    direction.down do
+    dir.down do
       create_table(:releases) { }
     end
   end

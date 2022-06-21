@@ -1,8 +1,8 @@
 class AddRelationships
   include Clear::Migration
 
-  def change(direction)
-    direction.up do
+  def change(dir)
+    dir.up do
       create_table(:relationships) do |t|
         t.references to: "repositories", name: "master_id", on_delete: "cascade", null: false, primary: true
         t.references to: "repositories", name: "dependency_id", on_delete: "cascade", null: false, primary: true
@@ -15,7 +15,7 @@ class AddRelationships
       end
     end
 
-    direction.down do
+    dir.down do
       execute("DROP TABLE relationships")
     end
   end

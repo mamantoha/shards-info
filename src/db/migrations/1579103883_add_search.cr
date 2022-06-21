@@ -1,8 +1,8 @@
 class AddSearch
   include Clear::Migration
 
-  def change(direction)
-    direction.up do
+  def change(dir)
+    dir.up do
       # Creates function triggers
       #
       execute <<-SQL
@@ -50,7 +50,7 @@ class AddSearch
       SQL
     end
 
-    direction.down do
+    dir.down do
       execute("DROP FUNCTION tsv_trigger_insert_posts()")
       execute("DROP FUNCTION tsv_trigger_update_posts()")
       execute("DROP TRIGGER tsv_update_posts}")
