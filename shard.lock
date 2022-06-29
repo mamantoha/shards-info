@@ -1,3 +1,4 @@
+# NOTICE: This lockfile contains some overrides from shard.override.yml
 version: 2.0
 shards:
   admiral:
@@ -84,9 +85,9 @@ shards:
     git: https://github.com/phoffer/inflector.cr.git
     version: 1.0.0
 
-  kemal:
+  kemal: # Overridden
     git: https://github.com/kemalcr/kemal.git
-    version: 1.1.2
+    version: 1.1.2+git.commit.268e501a633afbdc62fcfa8820d632cafa5cbed0
 
   kemal-flash:
     git: https://github.com/crystal-garage/kemal-flash.git
