@@ -61,10 +61,6 @@ shards:
     git: https://github.com/anykeyh/generate.cr.git
     version: 0.1.0+git.commit.f5dafc934a70e0ee2f246dddf3df44686f844da2
 
-  habitat:
-    git: https://github.com/luckyframework/habitat.git
-    version: 0.4.7
-
   http-client-digest_auth:
     git: https://github.com/mamantoha/http-client-digest_auth.git
     version: 0.6.0
@@ -107,7 +103,7 @@ shards:
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
-    version: 0.11.2
+    version: 1.0.0.rc1+git.commit.0fbf8bd3fff40ee0a19ea040321f90160c9c8c6c
 
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
