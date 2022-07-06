@@ -19,6 +19,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         crystal: [latest, nightly]
     # Service containers to run with `container-job`
