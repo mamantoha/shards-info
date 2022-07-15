@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-prettier",
+    "stylelint-config-standard-scss"
+  ],
+  "plugins": [
+  ],
+  "rules": {
+    "selector-class-pattern": null,
+    "selector-id-pattern": null
+  }
+}
