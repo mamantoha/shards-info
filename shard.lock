@@ -50,7 +50,7 @@ shards:
 
   emoji:
     git: https://github.com/veelenga/emoji.cr.git
-    version: 0.4.0+git.commit.94c9047f6e8adc8db07494644be0cc104336de3c
+    version: 0.5.0+git.commit.78b46a18a5672de185690568f6d36d753bd6bacf
 
   exception_page:
     git: https://github.com/crystal-loot/exception_page.git
@@ -102,7 +102,7 @@ shards:
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
-    version: 1.0.0.rc1+git.commit.f23d2a32f7f25b811ec179497b0da9e657772753
+    version: 1.0.0.rc1+git.commit.dd14c2892bf144d79f9a3a2cf5cbed4ca78956ef
 
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
