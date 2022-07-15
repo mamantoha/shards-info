@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-prettier",
+    "stylelint-config-standard-scss"
+  ],
+  "plugins": [
+  ],
+  "rules": {
+    "selector-class-pattern": null
+  },
+  "ignoreFiles": [
+    "**/*.js",
+    "assets/vendor/*"
+  ]
+}

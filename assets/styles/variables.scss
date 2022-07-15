@@ -2,7 +2,7 @@ html {
   --main-bg-color: #fff;
   --navbar-bg-color: #24292e;
   --font-color: #212529;
-  --link-color: #000000;
+  --link-color: #000;
   --regular-link-color: #2e2eff;
   --page-heading-bg-color: #fafbfc;
   --nav-link-color: #6a737d;
@@ -11,7 +11,7 @@ html {
   --footer-bg-color: #f5f5f5;
   --border-color: #eee;
   --pg-color: #1f6feb;
-  --pg-active-color: #ffffff;
+  --pg-active-color: #fff;
   --code-color: #333;
   --code-bg-color: #f7f8fa;
   --code-inline-bg-color: #f3f4f4;
@@ -22,14 +22,14 @@ html {
   --badge-bg-color: #6c757d;
 
   .table {
-    --bs-table-bg: rgba(0, 0, 0, 0);
-    --bs-table-accent-bg: rgba(0, 0, 0, 0);
+    --bs-table-bg: rgb(0 0 0 / 0%);
+    --bs-table-accent-bg: rgb(0 0 0 / 0%);
     --bs-table-striped-color: #212529;
-    --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+    --bs-table-striped-bg: rgb(0 0 0 / 5%);
     --bs-table-active-color: #212529;
-    --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+    --bs-table-active-bg: rgb(0 0 0 / 10%);
     --bs-table-hover-color: #212529;
-    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+    --bs-table-hover-bg: rgb(0 0 0 / 7.5%);
   }
 }
 
@@ -38,7 +38,7 @@ html.dark {
   --page-heading-bg-color: #0e1117;
   --navbar-bg-color: #181b22;
   --font-color: #acb2b8;
-  --link-color: #ffffff;
+  --link-color: #fff;
   --regular-link-color: #1f6feb;
   --nav-link-color: white;
   --nav-active-link-color: white;
@@ -65,6 +65,7 @@ html.dark {
     --bs-table-active-color: #fff;
     --bs-table-hover-bg: #323539;
     --bs-table-hover-color: #fff;
+
     color: #fff;
     border-color: #373b3e;
   }

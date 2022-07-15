@@ -1,4 +1,4 @@
-name: ESLint
+name: Stylelint
 
 on:
   push:
@@ -11,5 +11,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install modules
       run: npm install
-    - name: Run ESLint
-      run: npm run eslint
+    - name: Run Stylelint
+      run: npm run stylelint
