@@ -9,5 +9,8 @@
   "rules": {
     "selector-class-pattern": null
   },
-  "ignorePatterns": ["assets/vendor/*"]
+  "ignoreFiles": [
+    "**/*.js",
+    "assets/vendor/*"
+  ]
 }
