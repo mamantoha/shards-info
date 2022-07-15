@@ -2,6 +2,8 @@
 
 [![Built with Crystal](https://img.shields.io/badge/built%20with-Crystal-000000.svg?logo=appveyor)](https://crystal-lang.org/)
 [![Crystal CI](https://github.com/mamantoha/shards-info/actions/workflows/crystal.yml/badge.svg)](https://github.com/mamantoha/shards-info/actions/workflows/crystal.yml)
+[![ESLint](https://github.com/mamantoha/shards-info/actions/workflows/eslint.yml/badge.svg)](https://github.com/mamantoha/shards-info/actions/workflows/eslint.yml)
+[![Stylelint](https://github.com/mamantoha/shards-info/actions/workflows/stylelint.yml/badge.svg)](https://github.com/mamantoha/shards-info/actions/workflows/stylelint.yml)
 
 View of all repositories on Github and Gitlab that have Crystal code in them.
 
@@ -9,11 +11,11 @@ View of all repositories on Github and Gitlab that have Crystal code in them.
 
 ## Installation
 
-* [Install](https://crystal-lang.org/docs/installation/) Crystal
-* Clone this repository
-* Install dependencies `shards install`
-* Rename `.env.example` to `.env`, and set variables.
-* Run it `crystal src/shards-info.cr`
+- [Install](https://crystal-lang.org/docs/installation/) Crystal
+- Clone this repository
+- Install dependencies `shards install`
+- Rename `.env.example` to `.env`, and set variables.
+- Run it `crystal src/shards-info.cr`
 
 ## Development
 
@@ -51,14 +53,14 @@ KEMAL_ENV=test crystal spec
 
 ## Special thanks
 
-* [Crystal language](https://crystal-lang.org/)
-* [Clear](https://github.com/anykeyh/clear) - Advanced ORM between PostgreSQL and Crystal
-* [Kemal](https://github.com/kemalcr/kemal) - Web microframework for Crystal
-* [Mosquito](https://github.com/robacarp/mosquito) - A generic background task runner for Crystal applications
-* [raven.cr](https://github.com/Sija/raven.cr) - Crystal client for [Sentry](https://sentry.io)
-* [cr-cmark-gfm](https://github.com/amauryt/cr-cmark-gfm) - Crystal C bindings for [cmark-gfm](https://github.com/github/cmark-gfm)
-* [noir](https://github.com/MakeNowJust/noir) - Syntax Highlight Library for Crystal
-* Logo [icon](https://game-icons.net/1x1/lorc/floating-crystal.html) taken from [Game Icons pack](https://game-icons.net/) under CC BY 3.0 license.
+- [Crystal language](https://crystal-lang.org/)
+- [Clear](https://github.com/anykeyh/clear) - Advanced ORM between PostgreSQL and Crystal
+- [Kemal](https://github.com/kemalcr/kemal) - Web microframework for Crystal
+- [Mosquito](https://github.com/robacarp/mosquito) - A generic background task runner for Crystal applications
+- [raven.cr](https://github.com/Sija/raven.cr) - Crystal client for [Sentry](https://sentry.io)
+- [cr-cmark-gfm](https://github.com/amauryt/cr-cmark-gfm) - Crystal C bindings for [cmark-gfm](https://github.com/github/cmark-gfm)
+- [noir](https://github.com/MakeNowJust/noir) - Syntax Highlight Library for Crystal
+- Logo [icon](https://game-icons.net/1x1/lorc/floating-crystal.html) taken from [Game Icons pack](https://game-icons.net/) under CC BY 3.0 license.
 
 ## Contributing
 
@@ -70,4 +72,4 @@ KEMAL_ENV=test crystal spec
 
 ## Contributors
 
-* [mamantoha](https://github.com/mamantoha) Anton Maminov - creator, maintainer
+- [mamantoha](https://github.com/mamantoha) Anton Maminov - creator, maintainer
