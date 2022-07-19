@@ -291,7 +291,24 @@ get "/:provider/:owner/:repo" do |env|
   repo = env.params.url["repo"]
 
   if (repository = Repository.find_repository(owner, repo, provider))
-    dependents = repository.dependents.undistinct.order_by({created_at: :desc})
+    dependencies =
+      repository
+        .dependencies
+        .undistinct
+        .with_user
+        .where { relationships.development == false }
+        .order_by({stars_count: :desc})
+
+    development_dependencies =
+      repository
+        .dependencies
+        .undistinct
+        .with_user
+        .where { relationships.development == true }
+        .order_by({stars_count: :desc})
+
+    dependents = repository.dependents.undistinct.order_by({stars_count: :desc})
+
     dependents_count = dependents.count
 
     Config.config.page_title = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
@@ -348,7 +365,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
       repository
         .dependents
         .undistinct
-        .order_by({created_at: :desc})
+        .order_by({stars_count: :desc})
 
     total_count = repositories_query.count
 

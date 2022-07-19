@@ -114,4 +114,10 @@ $(function () {
     last: '',
     onPageClick: function (event, page) {}
   })
+
+  // initialize all tooltips on a page
+  const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new window.bootstrap.Tooltip(tooltipTriggerEl)
+  })
 })
