@@ -291,6 +291,22 @@ get "/:provider/:owner/:repo" do |env|
   repo = env.params.url["repo"]
 
   if (repository = Repository.find_repository(owner, repo, provider))
+    dependencies =
+      repository
+        .dependencies
+        .undistinct
+        .with_user
+        .where { relationships.development == false }
+        .order_by({stars_count: :desc})
+
+    development_dependencies =
+      repository
+        .dependencies
+        .undistinct
+        .with_user
+        .where { relationships.development == true }
+        .order_by({stars_count: :desc})
+
     dependents = repository.dependents.undistinct.order_by({stars_count: :desc})
 
     dependents_count = dependents.count
