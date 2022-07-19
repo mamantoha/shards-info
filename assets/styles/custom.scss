@@ -34,14 +34,6 @@ a.badge {
   }
 }
 
-ul.not-list {
-  padding-left: 0;
-
-  li {
-    list-style-type: none;
-  }
-}
-
 .space {
   height: 16px;
 }
@@ -214,40 +206,6 @@ ul.not-list {
   }
 }
 
-.avatar_block {
-  position: relative;
-  display: inline-block;
-  padding: 1px;
-  border: 1px solid var(--border-color);
-  border-radius: 50% 50% 50% 0%;
-
-  .badge {
-    position: absolute;
-    top: 52px;
-    right: 45px;
-
-    .fa-stack {
-      font-size: 0.8em;
-      color: black;
-    }
-
-    i {
-      vertical-align: middle;
-    }
-  }
-
-  img.avatar {
-    display: inline-block;
-    overflow: hidden;
-    line-height: 1;
-    vertical-align: middle;
-    width: 64px;
-    height: 64px;
-    border-radius: 50% 50% 50% 0%;
-    background-color: var(--avatar-bg-color);
-  }
-}
-
 .home_heaeding__container {
   padding-bottom: 40px;
 }
@@ -323,6 +281,58 @@ ul.not-list {
   color: #586069;
   margin-bottom: 8px;
   text-align: right;
+}
+
+.repository__statistic {
+  padding-left: 0;
+
+  li {
+    i {
+      min-width: 22px;
+    }
+  }
+}
+
+.avatar_block {
+  position: relative;
+  display: inline-block;
+  padding: 1px;
+  border: 1px solid var(--border-color);
+  border-radius: 50% 50% 50% 0%;
+
+  .badge {
+    position: absolute;
+    top: 52px;
+    right: 45px;
+
+    .fa-stack {
+      font-size: 0.8em;
+      color: black;
+    }
+
+    i {
+      vertical-align: middle;
+    }
+  }
+
+  img.avatar {
+    display: inline-block;
+    overflow: hidden;
+    line-height: 1;
+    vertical-align: middle;
+    width: 64px;
+    height: 64px;
+    border-radius: 50% 50% 50% 0%;
+    background-color: var(--avatar-bg-color);
+  }
+}
+
+ul.not-list {
+  padding-left: 0;
+
+  li {
+    list-style-type: none;
+  }
 }
 
 .shards__shard_github ul {
@@ -405,15 +415,6 @@ ul.not-list {
   padding-top: 30px;
   border-top: 1px solid #c1c4ca;
   clear: both;
-}
-
-.repository__statistic {
-  padding-left: 0;
-  li {
-    i {
-      min-width: 22px;
-    }
-  }
 }
 
 .shard__release-wrap {
@@ -729,5 +730,4 @@ ul.not-list {
   .tooltip-inner {
     text-align: left;
   }
-
 }
