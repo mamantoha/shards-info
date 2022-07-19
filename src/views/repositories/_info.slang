@@ -24,7 +24,8 @@
           - repository.dependencies.with_user.where { relationships.development == false }.each do |repository|
             li.link
               i class="#{repository.decorate.provider_icon}"
-              a href="/#{repository.provider}/#{repository.decorate.full_name}/" = repository.name
+              a href="/#{repository.provider}/#{repository.decorate.full_name}/" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" title="#{render("src/views/repositories/_tooltip.slang")}"
+                = repository.name
 .row
   .col-md-6
     .shard__dependent_shards.info-block
