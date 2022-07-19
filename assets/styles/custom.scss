@@ -409,6 +409,11 @@ ul.not-list {
 
 .repository__statistic {
   padding-left: 0;
+  li {
+    i {
+      min-width: 22px;
+    }
+  }
 }
 
 .shard__release-wrap {
@@ -718,4 +723,11 @@ ul.not-list {
 .badge-info {
   color: #fff;
   background-color: #0c5f6e;
+}
+
+.tooltip {
+  .tooltip-inner {
+    text-align: left;
+  }
+
 }
