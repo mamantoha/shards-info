@@ -120,4 +120,10 @@ $(function () {
   tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new window.bootstrap.Tooltip(tooltipTriggerEl)
   })
+
+  // initialize all popovers on a page
+  const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+  popoverTriggerList.map(function (popoverTriggerEl) {
+    return new window.bootstrap.Popover(popoverTriggerEl)
+  })
 })

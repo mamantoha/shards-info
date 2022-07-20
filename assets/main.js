@@ -7,6 +7,7 @@ import 'bootstrap/js/dist/dropdown'
 import 'bootstrap/js/dist/alert'
 import 'bootstrap/js/dist/scrollspy'
 import 'bootstrap/js/dist/tooltip'
+import 'bootstrap/js/dist/popover'
 
 import 'jqcloud2/src/jqcloud'
 
