@@ -106,6 +106,13 @@ a.badge {
   background-color: var(--navbar-bg-color) !important;
 }
 
+.repository-popover {
+  --bs-popover-bg: var(--main-bg-color);
+  --bs-popover-border-color: var(--border-color);
+  --bs-popover-arrow-border: var(--border-color);
+  --bs-popover-body-color: var(--font-color);
+}
+
 #stand-with-ukraine {
   margin: 1rem 0;
 
