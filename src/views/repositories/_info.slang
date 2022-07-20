@@ -24,7 +24,7 @@
           - dependencies.each do |repository|
             li.link
               i class="#{repository.decorate.provider_icon}"
-              a href="/#{repository.provider}/#{repository.decorate.full_name}/" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" title="#{render("src/views/repositories/_tooltip.slang")}"
+              a href="/#{repository.provider}/#{repository.decorate.full_name}/" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" data-bs-html="true" data-bs-content="#{render("src/views/repositories/_tooltip.slang")}"
                 = repository.name
 .row
   .col-md-6
@@ -38,7 +38,7 @@
           - dependents.limit(10).each do |repository|
             li.link
               i class="#{repository.decorate.provider_icon}"
-              a href="/#{repository.provider}/#{repository.decorate.full_name}/" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" title="#{render("src/views/repositories/_tooltip.slang")}"
+              a href="/#{repository.provider}/#{repository.decorate.full_name}/" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" data-bs-html="true" data-bs-content="#{render("src/views/repositories/_tooltip.slang")}"
                 = repository.name
         - if dependents_count > 10
           .shard__see_all_link
@@ -55,5 +55,5 @@
           - development_dependencies.each do |repository|
             li.link
               i class="#{repository.decorate.provider_icon}"
-              a href="/#{repository.provider}/#{repository.decorate.full_name}/" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" title="#{render("src/views/repositories/_tooltip.slang")}"
+              a href="/#{repository.provider}/#{repository.decorate.full_name}/" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" data-bs-html="true" data-bs-content="#{render("src/views/repositories/_tooltip.slang")}"
                 = repository.name
