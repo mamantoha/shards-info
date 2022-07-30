@@ -14,3 +14,12 @@ end
 macro render(filename)
   Kilt.render({{filename}})
 end
+
+# Workaround for https://github.com/kemalcr/kemal/issues/643
+module Kemal
+  class StaticFileHandler < HTTP::StaticFileHandler
+    private def modification_time(file_path)
+      File.info(file_path).modification_time
+    end
+  end
+end
