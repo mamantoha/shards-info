@@ -1,0 +1,4 @@
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+    branch: master
