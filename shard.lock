@@ -55,7 +55,7 @@ shards:
 
   exception_page:
     git: https://github.com/crystal-loot/exception_page.git
-    version: 0.2.2
+    version: 0.3.0
 
   generate:
     git: https://github.com/anykeyh/generate.cr.git
@@ -83,7 +83,7 @@ shards:
 
   kemal: # Overridden
     git: https://github.com/kemalcr/kemal.git
-    version: 1.2.0+git.commit.f5d767fe7e02baed9e828ab750ef6809ba94652d
+    version: 1.2.0+git.commit.93521b712031d8a01004fdf21ddfc75784f83c91
 
   kemal-flash:
     git: https://github.com/crystal-garage/kemal-flash.git
