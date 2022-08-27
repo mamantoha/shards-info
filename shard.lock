@@ -135,7 +135,7 @@ shards:
 
   shards_spec:
     git: https://github.com/mamantoha/shards_spec.git
-    version: 0.2.3
+    version: 0.2.4
 
   slang:
     git: https://github.com/jeromegn/slang.git
