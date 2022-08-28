@@ -28,19 +28,19 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.1.2",
     "css-loader": "^6.7.1",
-    "eslint": "^8.22.0",
+    "eslint": "^8.23.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.2.4",
-    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-n": "^15.2.5",
+    "eslint-plugin-promise": "^6.0.1",
     "expose-loader": "^4.0.0",
     "mini-css-extract-plugin": "^2.6.1",
     "node-sass": "^7.0.1",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
-    "stylelint": "^14.10.0",
+    "stylelint": "^14.11.0",
     "stylelint-config-prettier": "^9.0.3",
-    "stylelint-config-standard": "^27.0.0",
+    "stylelint-config-standard": "^28.0.0",
     "stylelint-config-standard-scss": "^5.0.0",
     "trim-newlines": ">=4.0.2",
     "webpack": "^5.74.0",
@@ -49,7 +49,7 @@
   "dependencies": {
     "bootstrap": "^5.2.0",
     "jqcloud2": "^2.0.3",
-    "jquery": "^3.6.0",
+    "jquery": "^3.6.1",
     "moveto": "^1.8.2",
     "popper.js": "^1.16.1"
   }
