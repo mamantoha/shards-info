@@ -10,9 +10,11 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
         ul.navbar-nav.me-auto
           li.nav-item
             a.nav-link href="/repositories"
-              | Browse All Shards
+              i.fas.fa-compass
+              | Browse
           li.nav-item
             a.nav-link href="#" data-bs-toggle="modal" data-bs-target="#aboutModal"
+              i.fas.fa-circle-info
               | About
           li.nav-item
             div.form-check.form-switch.m-2

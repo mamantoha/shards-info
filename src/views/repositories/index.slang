@@ -4,7 +4,7 @@ div
       .row
         .col
           h1.container
-            ' All Shards
+            | All Shards
             .result_stats
               | Displaying
               strong= "#{offset + 1}-#{page * per_page}"
