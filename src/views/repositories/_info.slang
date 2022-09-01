@@ -57,3 +57,11 @@
               i class="#{repository.decorate.provider_icon}"
               a href="/#{repository.provider}/#{repository.decorate.full_name}/" data-bs-toggle="popover" data-bs-custom-class="repository-popover" data-bs-trigger="hover" data-bs-placement="right" data-bs-html="true" data-bs-content="#{render("src/views/repositories/_tooltip.slang")}"
                 = repository.name
+- if repository.postinstall_script
+  hr
+  .shard__postinstall_script
+    .list__heading
+      | Postinstall script
+    .code
+      code
+        = repository.postinstall_script

@@ -15,6 +15,7 @@ require "crest"
 require "emoji"
 require "humanize_time"
 require "autolink"
+require "shards_spec"
 require "raven"
 require "raven/integrations/kemal"
 
