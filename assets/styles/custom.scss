@@ -542,6 +542,17 @@ ul.not-list {
   }
 }
 
+.shard__postinstall_script {
+  .code {
+    background-color: var(--code-bg-color);
+    padding: 0.4em 0.6em;
+
+    code {
+      background-color: var(--code-bg-color);
+    }
+  }
+}
+
 .list__heading {
   font-weight: 800;
   font-size: 13px;

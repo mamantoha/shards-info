@@ -9,7 +9,12 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
       .navbar-nav.me-auto.mb-2.mb-lg-0
         ul.navbar-nav.me-auto
           li.nav-item
+            a.nav-link href="/repositories"
+              i.fas.fa-compass
+              | Browse
+          li.nav-item
             a.nav-link href="#" data-bs-toggle="modal" data-bs-target="#aboutModal"
+              i.fas.fa-circle-info
               | About
           li.nav-item
             div.form-check.form-switch.m-2
@@ -29,16 +34,18 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
             ul.dropdown-menu.dropdown-menu-dark aria-labelledby="navbarDropdown"
               li
                 .ms-2.p-2.fw-lighter.lh-1
-                  | Signed in as
+                  i.fas.fa-user
                   strong= current_user.nickname
               li
                 hr.dropdown-divider
               - if current_user.admin?
                 li
                   a.dropdown-item href="/admin"
+                    i.fas.fa-toolbox
                     | Admin
               li
                 a.dropdown-item href="/logout"
+                  i.fas.fa-right-from-bracket
                   | Sing out
         - else
           li.nav-item

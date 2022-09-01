@@ -40,6 +40,13 @@ class Repository
     )
   }
 
+  def postinstall_script : String?
+    if (_shard_yml = shard_yml)
+      spec = ShardsSpec::Spec.from_yaml(_shard_yml)
+      spec.scripts["postinstall"]?
+    end
+  end
+
   scope(:published) { where({ignore: false}) }
 
   def self.find_repository(user_login : String, repository_name : String, provider : String) : Repository?

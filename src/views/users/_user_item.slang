@@ -35,5 +35,5 @@
               i class="fas fa-exclamation-circle" title="Open issues"
               = repository.open_issues_count
             li.list-inline-item
-              i class="fas fa-clock" title="Last activity"
+              i class="fas fa-rotate" title="Last activity"
               = repository.decorate.last_activity_ago

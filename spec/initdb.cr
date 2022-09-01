@@ -29,6 +29,7 @@ def create_user_with_repository
     provider_id:      "1",
     name:             "crystal",
     default_branch:   "master",
+    shard_yml:        "name: shards\nversion: 0.1.0\ndescription: short description",
     stars_count:      1,
     forks_count:      1,
     archived:         false,

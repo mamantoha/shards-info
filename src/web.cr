@@ -15,6 +15,7 @@ require "crest"
 require "emoji"
 require "humanize_time"
 require "autolink"
+require "shards_spec"
 require "raven"
 require "raven/integrations/kemal"
 
@@ -138,6 +139,67 @@ get "/" do |env|
   Config.config.current_page = "home"
 
   render "src/views/index.slang", "src/views/layouts/layout.slang"
+end
+
+get "/repositories" do |env|
+  sort_options = {
+    "alphabetical"   => "Alphabetical",
+    "stars"          => "Stars",
+    "recent-updates" => "Recent Updates",
+    "new"            => "Newly Added",
+  }
+
+  sort_param = env.params.query["sort"]?
+
+  sort =
+    if sort_param.in?(sort_options.keys)
+      sort_param
+    else
+      "alphabetical"
+    end
+
+  order_by =
+    case sort
+    when "alphabetical"
+      {name: :asc}
+    when "stars"
+      {stars_count: :desc}
+    when "recent-updates"
+      {last_activity_at: :desc}
+    when "new"
+      {created_at: :desc}
+    else
+      {name: :asc}
+    end
+
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+  per_page = 20
+  offset = (page - 1) * per_page
+
+  repositories_query =
+    Repository
+      .query
+      .with_tags
+      .with_user
+      .published
+      .order_by(order_by)
+
+  total_count = repositories_query.count
+
+  paginator = ViewHelpers::Paginator.new(
+    page,
+    per_page,
+    total_count,
+    "/repositories?page=%{page}"
+  ).to_s
+
+  repositories = repositories_query.limit(per_page).offset(offset)
+
+  Config.config.page_title = "All Shards"
+  Config.config.page_description = "All Shards"
+
+  render "src/views/repositories/index.slang", "src/views/layouts/layout.slang"
 end
 
 get "/users" do |env|
