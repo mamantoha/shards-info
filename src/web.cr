@@ -143,8 +143,8 @@ end
 
 get "/repositories" do |env|
   sort_options = {
-    "alphabetical"   => "Alphabetical",
     "stars"          => "Stars",
+    "alphabetical"   => "Alphabetical",
     "dependents"     => "Dependents",
     "recent-updates" => "Recent Updates",
     "new"            => "Newly Added",
@@ -156,7 +156,7 @@ get "/repositories" do |env|
     if sort_param.in?(sort_options.keys)
       sort_param
     else
-      "alphabetical"
+      "stars"
     end
 
   repositories_query = Repository.query.with_tags.with_user.published
