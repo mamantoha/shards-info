@@ -43,7 +43,7 @@ class Repository
   def postinstall_script : String?
     if (_shard_yml = shard_yml)
       spec = ShardsSpec::Spec.from_yaml(_shard_yml)
-      spec.scripts["postinstall"]
+      spec.scripts["postinstall"]?
     end
   end
 
