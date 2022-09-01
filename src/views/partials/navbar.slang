@@ -9,6 +9,9 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
       .navbar-nav.me-auto.mb-2.mb-lg-0
         ul.navbar-nav.me-auto
           li.nav-item
+            a.nav-link href="/repositories"
+              | Browse All Shards
+          li.nav-item
             a.nav-link href="#" data-bs-toggle="modal" data-bs-target="#aboutModal"
               | About
           li.nav-item
