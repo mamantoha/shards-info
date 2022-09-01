@@ -23,7 +23,7 @@
       i.fas.fa-exclamation-circle title="Open issues"
       = repository.open_issues_count
     li
-      i.fas.fa-clock title="Last update"
+      i.fas.fa-rotate title="Last activity"
       = repository.decorate.last_activity_ago
     li
       i.fas.fa-hourglass-start title="Created"
