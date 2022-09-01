@@ -145,6 +145,7 @@ get "/repositories" do |env|
   sort_options = {
     "alphabetical"   => "Alphabetical",
     "stars"          => "Stars",
+    "dependents"     => "Dependents",
     "recent-updates" => "Recent Updates",
     "new"            => "Newly Added",
   }
@@ -158,34 +159,38 @@ get "/repositories" do |env|
       "alphabetical"
     end
 
-  order_by =
-    case sort
-    when "alphabetical"
-      {name: :asc}
-    when "stars"
-      {stars_count: :desc}
-    when "recent-updates"
-      {last_activity_at: :desc}
-    when "new"
-      {created_at: :desc}
+  repositories_query = Repository.query.with_tags.with_user.published
+
+  repositories_query =
+    if sort == "dependents"
+      repositories_query
+        .left_join("relationships") { var("relationships", "dependency_id") == var("repositories", "id") }
+        .group_by("repositories.id")
+        .order_by("COUNT(relationships.dependency_id)", "DESC")
     else
-      {name: :asc}
+      order_by =
+        case sort
+        when "alphabetical"
+          {name: :asc}
+        when "stars"
+          {stars_count: :desc}
+        when "recent-updates"
+          {last_activity_at: :desc}
+        when "new"
+          {created_at: :desc}
+        else
+          {name: :asc}
+        end
+
+      repositories_query.order_by(order_by)
     end
+
+  total_count = repositories_query.count
 
   page = env.params.query["page"]? || ""
   page = page.to_i? || 1
   per_page = 20
   offset = (page - 1) * per_page
-
-  repositories_query =
-    Repository
-      .query
-      .with_tags
-      .with_user
-      .published
-      .order_by(order_by)
-
-  total_count = repositories_query.count
 
   paginator = ViewHelpers::Paginator.new(
     page,
