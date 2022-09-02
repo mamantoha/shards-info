@@ -6,6 +6,7 @@ class User
   column provider : String
   column provider_id : Int32
   column login : String
+  column path : String?
   column name : String?
   column synced_at : Time
   column created_at : Time?

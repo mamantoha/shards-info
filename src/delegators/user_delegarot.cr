@@ -1,4 +1,8 @@
 class UserDelegator < Delegator(User)
+  def provider_path : String
+    path || login
+  end
+
   def full_name : String
     name || login
   end
@@ -29,9 +33,9 @@ class UserDelegator < Delegator(User)
   def provider_url
     case provider
     when "gitlab"
-      "https://gitlab.com/#{login}"
+      "https://gitlab.com/#{provider_path}"
     when "github"
-      "https://github.com/#{login}"
+      "https://github.com/#{provider_path}"
     else
       ""
     end
