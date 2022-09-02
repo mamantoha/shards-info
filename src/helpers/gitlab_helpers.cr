@@ -106,22 +106,25 @@ module GitlabHelpers
   def assign_user_attributes(user : User, gitlab_user : Gitlab::User)
     user.set({
       login:      gitlab_user.username,
+      path:       gitlab_user.username,
       name:       gitlab_user.name,
       avatar_url: gitlab_user.avatar_url,
       created_at: gitlab_user.created_at,
       bio:        gitlab_user.bio,
+      website:    gitlab_user.website_url,
       location:   gitlab_user.location,
       company:    gitlab_user.organization,
       email:      gitlab_user.public_email,
-      website:    gitlab_user.website_url,
     })
   end
 
   def assign_group_attributes(user : User, gitlab_group : Gitlab::Group)
     user.set({
       login:      gitlab_group.path,
+      path:       gitlab_group.full_path,
       name:       gitlab_group.name,
       avatar_url: gitlab_group.avatar_url,
+      created_at: gitlab_group.created_at,
       bio:        gitlab_group.description,
       website:    gitlab_group.web_url,
     })
@@ -130,9 +133,10 @@ module GitlabHelpers
   def assign_project_owner_attributes(user : User, owner : Gitlab::Namespace | Gitlab::Owner)
     user.set({
       login:      owner.path,
+      path:       owner.full_path,
       name:       owner.name,
-      kind:       owner.kind,
       avatar_url: owner.avatar_url,
+      kind:       owner.kind,
     })
   end
 

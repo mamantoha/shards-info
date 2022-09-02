@@ -230,6 +230,10 @@ module Gitlab
       username
     end
 
+    def full_path
+      username
+    end
+
     def kind
       "user"
     end
@@ -356,6 +360,8 @@ module Gitlab
     property full_name : String
 
     property full_path : String
+
+    property created_at : Time
 
     property parent_id : Int32?
 
