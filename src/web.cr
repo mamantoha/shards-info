@@ -476,7 +476,13 @@ get "/:provider/:owner/:repo/dependents" do |env|
     repositories_query =
       repository
         .dependents
+        .with_tags
         .undistinct
+        .select(
+          "repositories.*",
+          "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
+        )
+        .group_by("repositories.id")
         .order_by({stars_count: :desc})
 
     total_count = repositories_query.count
