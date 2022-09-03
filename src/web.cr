@@ -115,11 +115,17 @@ get "/" do |env|
     Repository
       .query
       .join("users") { users.id == repositories.user_id }
+      .left_join("relationships") { var("relationships", "dependency_id") == var("repositories", "id") }
       .with_user
       .with_tags
       .where { users.ignore == false }
       .where { repositories.ignore == false }
       .where { repositories.last_activity_at > 1.week.ago }
+      .select(
+        "repositories.*",
+        "COUNT(relationships.dependency_id) AS dependents_count"
+      )
+      .group_by("repositories.id")
       .order_by(stars_count: :desc)
       .limit(20)
 
@@ -127,10 +133,16 @@ get "/" do |env|
     Repository
       .query
       .join("users") { users.id == repositories.user_id }
+      .left_join("relationships") { var("relationships", "dependency_id") == var("repositories", "id") }
       .with_user
       .with_tags
       .where { users.ignore == false }
       .where { repositories.ignore == false }
+      .select(
+        "repositories.*",
+        "COUNT(relationships.dependency_id) AS dependents_count"
+      )
+      .group_by("repositories.id")
       .order_by(last_activity_at: :desc)
       .limit(20)
 
@@ -152,38 +164,37 @@ get "/repositories" do |env|
 
   sort_param = env.params.query["sort"]?
 
-  sort =
-    if sort_param.in?(sort_options.keys)
-      sort_param
-    else
-      "stars"
-    end
+  sort = sort_param.in?(sort_options.keys) ? sort_param : "stars"
 
-  repositories_query = Repository.query.with_tags.with_user.published
+  expression, direction =
+    case sort
+    when "alphabetical"
+      {"name", "ASC"}
+    when "stars"
+      {"stars_count", "DESC"}
+    when "dependents"
+      {"COUNT(relationships.dependency_id)", "DESC"}
+    when "recent-updates"
+      {"last_activity_at", "DESC"}
+    when "new"
+      {"created_at", "DESC"}
+    else
+      {"stars_count", "DESC"}
+    end
 
   repositories_query =
-    if sort == "dependents"
-      repositories_query
-        .left_join("relationships") { var("relationships", "dependency_id") == var("repositories", "id") }
-        .group_by("repositories.id")
-        .order_by("COUNT(relationships.dependency_id)", "DESC")
-    else
-      order_by =
-        case sort
-        when "alphabetical"
-          {name: :asc}
-        when "stars"
-          {stars_count: :desc}
-        when "recent-updates"
-          {last_activity_at: :desc}
-        when "new"
-          {created_at: :desc}
-        else
-          {name: :asc}
-        end
-
-      repositories_query.order_by(order_by)
-    end
+    Repository
+      .query
+      .with_tags
+      .with_user
+      .published
+      .left_join("relationships") { var("relationships", "dependency_id") == var("repositories", "id") }
+      .select(
+        "repositories.*",
+        "COUNT(relationships.dependency_id) AS dependents_count"
+      )
+      .group_by("repositories.id")
+      .order_by(expression, direction)
 
   total_count = repositories_query.count
 
@@ -309,6 +320,12 @@ get "/search" do |env|
         .with_tags
         .with_user
         .published
+        .left_join("relationships") { var("relationships", "dependency_id") == var("repositories", "id") }
+        .select(
+          "repositories.*",
+          "COUNT(relationships.dependency_id) AS dependents_count"
+        )
+        .group_by("repositories.id")
         .search(query)
         .order_by(stars_count: :desc)
 
@@ -335,7 +352,19 @@ get "/:provider/:owner" do |env|
   owner = env.params.url["owner"]
 
   if (user = User.query.with_repositories(&.with_tags).find({provider: provider, login: owner}))
-    repositories = user.repositories.with_user.with_tags.order_by(stars_count: :desc)
+    repositories =
+      user
+        .repositories
+        .with_user
+        .with_tags
+        .left_join("relationships") { var("relationships", "dependency_id") == var("repositories", "id") }
+        .select(
+          "repositories.*",
+          "COUNT(relationships.dependency_id) AS dependents_count"
+        )
+        .group_by("repositories.id")
+        .order_by(stars_count: :desc)
+
     repositories_count = repositories.count
 
     Config.config.page_title = "#{user.login} Crystal repositories"

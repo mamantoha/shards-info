@@ -13,7 +13,7 @@
           th Repository
           th User
       tbody
-        - repositories.each do |repository|
+        - repositories.each(fetch_columns: true) do |repository|
           tr
             td
               i class="#{repository.decorate.provider_icon}"
