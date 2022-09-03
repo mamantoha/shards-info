@@ -18,7 +18,7 @@ ul.repository__statistic.not-list
     = repository.stars_count
   li
     i.fas.fa-box title="Used by"
-    = repository.dependents.count
+    = repository.attributes["dependents_count"]
   li
     i.fas.fa-code-branch title="Forks"
     = repository.forks_count

@@ -390,20 +390,36 @@ get "/:provider/:owner/:repo" do |env|
     dependencies =
       repository
         .dependencies
-        .undistinct
         .with_user
         .where { relationships.development == false }
-        .order_by({stars_count: :desc})
+        .select(
+          "repositories.*",
+          "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
+        )
+        .group_by("repositories.id")
 
     development_dependencies =
       repository
         .dependencies
-        .undistinct
         .with_user
         .where { relationships.development == true }
-        .order_by({stars_count: :desc})
+        .select(
+          "repositories.*",
+          "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
+        )
+        .group_by("repositories.id")
 
-    dependents = repository.dependents.undistinct.order_by({stars_count: :desc})
+    dependents =
+      repository
+        .dependents
+        .with_user
+        .undistinct
+        .select(
+          "repositories.*",
+          "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
+        )
+        .group_by("repositories.id")
+        .order_by({stars_count: :desc})
 
     dependents_count = dependents.count
 
