@@ -45,6 +45,8 @@ class Repository
       spec = ShardsSpec::Spec.from_yaml(_shard_yml)
       spec.scripts["postinstall"]?
     end
+  rescue
+    nil
   end
 
   scope(:published) { where({ignore: false}) }
