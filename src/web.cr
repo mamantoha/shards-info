@@ -413,13 +413,11 @@ get "/:provider/:owner/:repo" do |env|
       repository
         .dependents
         .with_user
-        .undistinct
         .select(
           "repositories.*",
           "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
         )
         .group_by("repositories.id")
-        .order_by({stars_count: :desc})
 
     dependents_count = dependents.count
 
@@ -471,19 +469,16 @@ get "/:provider/:owner/:repo/dependents" do |env|
   offset = (page - 1) * per_page
 
   if (repository = Repository.find_repository(owner, repo, provider))
-    # TODO: Exception:  (Clear::SQL::RecordNotFoundError)
-    # when calling with `.with_user` and limit/offset
     repositories_query =
       repository
         .dependents
         .with_tags
-        .undistinct
+        .with_user
         .select(
           "repositories.*",
           "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
         )
         .group_by("repositories.id")
-        .order_by({stars_count: :desc})
 
     total_count = repositories_query.count
 
