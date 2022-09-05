@@ -122,6 +122,7 @@ get "/" do |env|
       .where { repositories.ignore == false }
       .where { repositories.last_activity_at > 1.week.ago }
       .order_by(stars_count: :desc)
+      .order_by("repositories.id", "ASC")
       .limit(20)
 
   recently_repositories =
@@ -177,9 +178,10 @@ get "/repositories" do |env|
       .query
       .with_tags
       .with_user
-      .published
       .with_dependents_count
+      .published
       .order_by(expression, direction)
+      .order_by("repositories.id", "ASC")
 
   total_count = repositories_query.count
 
@@ -304,10 +306,11 @@ get "/search" do |env|
         .query
         .with_tags
         .with_user
-        .published
         .with_dependents_count
+        .published
         .search(query)
         .order_by(stars_count: :desc)
+        .order_by("repositories.id", "ASC")
 
     total_count = repositories_query.count
 
