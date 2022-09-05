@@ -115,17 +115,12 @@ get "/" do |env|
     Repository
       .query
       .join("users") { users.id == repositories.user_id }
-      .left_join("relationships") { var("relationships", "dependency_id") == var("repositories", "id") }
+      .with_dependents_count
       .with_user
       .with_tags
       .where { users.ignore == false }
       .where { repositories.ignore == false }
       .where { repositories.last_activity_at > 1.week.ago }
-      .select(
-        "repositories.*",
-        "COUNT(relationships.dependency_id) AS dependents_count"
-      )
-      .group_by("repositories.id")
       .order_by(stars_count: :desc)
       .limit(20)
 
@@ -133,16 +128,11 @@ get "/" do |env|
     Repository
       .query
       .join("users") { users.id == repositories.user_id }
-      .left_join("relationships") { var("relationships", "dependency_id") == var("repositories", "id") }
+      .with_dependents_count
       .with_user
       .with_tags
       .where { users.ignore == false }
       .where { repositories.ignore == false }
-      .select(
-        "repositories.*",
-        "COUNT(relationships.dependency_id) AS dependents_count"
-      )
-      .group_by("repositories.id")
       .order_by(last_activity_at: :desc)
       .limit(20)
 
@@ -188,12 +178,7 @@ get "/repositories" do |env|
       .with_tags
       .with_user
       .published
-      .left_join("relationships") { var("relationships", "dependency_id") == var("repositories", "id") }
-      .select(
-        "repositories.*",
-        "COUNT(relationships.dependency_id) AS dependents_count"
-      )
-      .group_by("repositories.id")
+      .with_dependents_count
       .order_by(expression, direction)
 
   total_count = repositories_query.count
@@ -320,12 +305,7 @@ get "/search" do |env|
         .with_tags
         .with_user
         .published
-        .left_join("relationships") { var("relationships", "dependency_id") == var("repositories", "id") }
-        .select(
-          "repositories.*",
-          "COUNT(relationships.dependency_id) AS dependents_count"
-        )
-        .group_by("repositories.id")
+        .with_dependents_count
         .search(query)
         .order_by(stars_count: :desc)
 
@@ -357,12 +337,7 @@ get "/:provider/:owner" do |env|
         .repositories
         .with_user
         .with_tags
-        .left_join("relationships") { var("relationships", "dependency_id") == var("repositories", "id") }
-        .select(
-          "repositories.*",
-          "COUNT(relationships.dependency_id) AS dependents_count"
-        )
-        .group_by("repositories.id")
+        .with_dependents_count
         .order_by(stars_count: :desc)
 
     repositories_count = repositories.count

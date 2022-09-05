@@ -40,6 +40,23 @@ class Repository
     )
   }
 
+  # ```
+  # repositories = Repository.query.with_dependent_count
+  #
+  # repositories.each(fetch_columns: true) do |repository|
+  #   repository.name
+  #   repository.attributes["dependents_count"]
+  # end
+  # ```
+  scope(:with_dependents_count) {
+    left_join("relationships") { var("relationships", "dependency_id") == var("repositories", "id") }
+      .select(
+        "repositories.*",
+        "COUNT(relationships.dependency_id) AS dependents_count"
+      )
+      .group_by("repositories.id")
+  }
+
   def postinstall_script : String?
     if (_shard_yml = shard_yml)
       spec = ShardsSpec::Spec.from_yaml(_shard_yml)
