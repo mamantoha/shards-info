@@ -7,7 +7,7 @@ div
             | All Shards
             .result_stats
               | Displaying
-              strong= "#{offset + 1}-#{page * per_page}"
+              strong= "#{offset + 1}-#{[page * per_page, total_count].min}"
               | of
               strong= "#{total_count}"
               | total results
