@@ -387,12 +387,15 @@ get "/:provider/:owner/:repo" do |env|
     dependents =
       repository
         .dependents
+        .undistinct
         .with_user
         .select(
           "repositories.*",
           "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
         )
         .group_by("repositories.id")
+        .order_by("repositories.stars_count", "DESC")
+        .order_by("repositories.id", "ASC")
 
     dependents_count = dependents.count
 
@@ -447,6 +450,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
     repositories_query =
       repository
         .dependents
+        .undistinct
         .with_tags
         .with_user
         .select(
@@ -454,6 +458,8 @@ get "/:provider/:owner/:repo/dependents" do |env|
           "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
         )
         .group_by("repositories.id")
+        .order_by("repositories.stars_count", "DESC")
+        .order_by("repositories.id", "ASC")
 
     total_count = repositories_query.count
 
@@ -476,15 +482,27 @@ get "/:provider/:owner/:repo/dependents" do |env|
 end
 
 get "/tags/:name" do |env|
+  name = env.params.url["name"]
+
   page = env.params.query["page"]? || ""
   page = page.to_i? || 1
   per_page = 20
   offset = (page - 1) * per_page
 
-  name = env.params.url["name"]
-
   if (tag = Tag.query.find({name: name}))
-    repositories_query = tag.repositories
+    repositories_query =
+      tag
+        .repositories
+        .undistinct
+        .with_tags
+        .with_user
+        .select(
+          "repositories.*",
+          "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
+        )
+        .group_by("repositories.id")
+        .order_by("repositories.stars_count", "DESC")
+        .order_by("repositories.id", "ASC")
 
     total_count = repositories_query.count
 
@@ -495,14 +513,7 @@ get "/tags/:name" do |env|
       "/tags/#{name}?page=%{page}"
     ).to_s
 
-    repositories =
-      repositories_query
-        .undistinct
-        .with_tags
-        .with_user
-        .order_by(stars_count: :desc)
-        .limit(per_page)
-        .offset(offset)
+    repositories = repositories_query.limit(per_page).offset(offset)
 
     Config.config.page_title = "Repositories tagged with '#{name}'"
     Config.config.page_description = "Crystal repositories with tag '#{name}'"
