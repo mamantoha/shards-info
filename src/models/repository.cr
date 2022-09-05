@@ -31,6 +31,8 @@ class Repository
   has_many dependencies : Repository, through: Relationship, foreign_key: "dependency_id", own_key: "master_id"
   has_many dependents : Repository, through: Relationship, foreign_key: "master_id", own_key: "dependency_id"
 
+  scope(:published) { where({ignore: false}) }
+
   scope(:without_releases) {
     where(<<-SQL
       NOT (
@@ -57,17 +59,6 @@ class Repository
       .group_by("repositories.id")
   }
 
-  def postinstall_script : String?
-    if (_shard_yml = shard_yml)
-      spec = ShardsSpec::Spec.from_yaml(_shard_yml)
-      spec.scripts["postinstall"]?
-    end
-  rescue
-    nil
-  end
-
-  scope(:published) { where({ignore: false}) }
-
   def self.find_repository(user_login : String, repository_name : String, provider : String) : Repository?
     Repository
       .query
@@ -88,6 +79,15 @@ class Repository
     self.updated_on = Time.local
     self.save!
     self
+  end
+
+  def postinstall_script : String?
+    if (_shard_yml = shard_yml)
+      spec = ShardsSpec::Spec.from_yaml(_shard_yml)
+      spec.scripts["postinstall"]?
+    end
+  rescue
+    nil
   end
 
   def tags=(names : Array(String))
