@@ -103,7 +103,7 @@ shards:
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
-    version: 1.0.0.rc1+git.commit.3a6fe1f405cfe944d20314d7e3f03e1e1104637c
+    version: 1.0.0.rc1+git.commit.09b86a30d1ebcc9845811e9550225902d9bf58f5
 
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
