@@ -145,6 +145,13 @@ get "/" do |env|
 end
 
 get "/repositories" do |env|
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+  per_page = 20
+  offset = (page - 1) * per_page
+
+  raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+
   sort_options = {
     "stars"          => "Stars",
     "alphabetical"   => "Alphabetical",
@@ -185,11 +192,6 @@ get "/repositories" do |env|
 
   total_count = repositories_query.count
 
-  page = env.params.query["page"]? || ""
-  page = page.to_i? || 1
-  per_page = 20
-  offset = (page - 1) * per_page
-
   paginator = ViewHelpers::Paginator.new(
     page,
     per_page,
@@ -210,6 +212,8 @@ get "/users" do |env|
   page = page.to_i? || 1
   per_page = 30
   offset = (page - 1) * per_page
+
+  raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
   users_query =
     User
@@ -295,6 +299,8 @@ get "/search" do |env|
     page = page.to_i? || 1
     per_page = 20
     offset = (page - 1) * per_page
+
+    raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
     query = env.params.query["query"].as(String)
 
@@ -449,6 +455,8 @@ get "/:provider/:owner/:repo/dependents" do |env|
   per_page = 20
   offset = (page - 1) * per_page
 
+  raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+
   if (repository = Repository.find_repository(owner, repo, provider))
     repositories_query =
       repository
@@ -491,6 +499,8 @@ get "/tags/:name" do |env|
   page = page.to_i? || 1
   per_page = 20
   offset = (page - 1) * per_page
+
+  raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
   if (tag = Tag.query.find({name: name}))
     repositories_query =
@@ -539,6 +549,8 @@ get "/admin/admins" do |env|
   per_page = 20
   offset = (page - 1) * per_page
 
+  raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+
   admin_query = Admin.query.order_by(created_at: :desc)
 
   total_count = admin_query.count
@@ -583,6 +595,8 @@ get "/admin/hidden_users" do |env|
   per_page = 20
   offset = (page - 1) * per_page
 
+  raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+
   users_query =
     User
       .query
@@ -615,6 +629,8 @@ get "/admin/hidden_repositories" do |env|
   page = page.to_i? || 1
   per_page = 20
   offset = (page - 1) * per_page
+
+  raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
   repositories_query =
     Repository
