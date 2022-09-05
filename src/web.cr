@@ -192,6 +192,8 @@ get "/repositories" do |env|
 
   total_count = repositories_query.count
 
+  raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+
   paginator = ViewHelpers::Paginator.new(
     page,
     per_page,
@@ -234,6 +236,8 @@ get "/users" do |env|
       .order_by(stars_count: :desc)
 
   total_count = users_query.count
+
+  raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
 
   paginator = ViewHelpers::Paginator.new(
     page,
@@ -319,6 +323,8 @@ get "/search" do |env|
         .order_by("repositories.id", "ASC")
 
     total_count = repositories_query.count
+
+    raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
 
     paginator = ViewHelpers::Paginator.new(
       page,
@@ -474,6 +480,8 @@ get "/:provider/:owner/:repo/dependents" do |env|
 
     total_count = repositories_query.count
 
+    raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+
     paginator = ViewHelpers::Paginator.new(
       page,
       per_page,
@@ -519,6 +527,8 @@ get "/tags/:name" do |env|
 
     total_count = repositories_query.count
 
+    raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+
     paginator = ViewHelpers::Paginator.new(
       page,
       per_page,
@@ -554,6 +564,8 @@ get "/admin/admins" do |env|
   admin_query = Admin.query.order_by(created_at: :desc)
 
   total_count = admin_query.count
+
+  raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
 
   paginator = ViewHelpers::Paginator.new(
     page,
@@ -610,6 +622,8 @@ get "/admin/hidden_users" do |env|
 
   total_count = users_query.count
 
+  raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+
   paginator = ViewHelpers::Paginator.new(
     page,
     per_page,
@@ -640,6 +654,8 @@ get "/admin/hidden_repositories" do |env|
       .order_by(stars_count: :desc)
 
   total_count = repositories_query.count
+
+  raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
 
   paginator = ViewHelpers::Paginator.new(
     page,
