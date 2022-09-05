@@ -39,7 +39,7 @@
           = repository.open_issues_count
         li
           i.fas.fa-box title="Used by"
-          = repository.dependents.count
+          = repository.attributes["dependents_count"]
         li
           i class="fas fa-rotate" title="Last activity"
           = repository.decorate.last_activity_ago

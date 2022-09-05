@@ -21,7 +21,7 @@
           | Dependencies
       .collapse.show#collapseDependencies
         ul.list__items.not-list
-          - dependencies.each do |repository|
+          - dependencies.each(fetch_columns: true) do |repository|
             li.link
               i class="#{repository.decorate.provider_icon}"
               a href="/#{repository.provider}/#{repository.decorate.full_name}/" data-bs-toggle="popover" data-bs-custom-class="repository-popover" data-bs-trigger="hover" data-bs-placement="right" data-bs-html="true" data-bs-content="#{render("src/views/repositories/_tooltip.slang")}"
@@ -35,7 +35,7 @@
           | Used by (#{dependents_count})
       .collapse.show#collapseDependent
         ul.list__items.not-list
-          - dependents.limit(10).each do |repository|
+          - dependents.limit(10).each(fetch_columns: true) do |repository|
             li.link
               i class="#{repository.decorate.provider_icon}"
               a href="/#{repository.provider}/#{repository.decorate.full_name}/" data-bs-toggle="popover" data-bs-custom-class="repository-popover" data-bs-trigger="hover" data-bs-placement="right" data-bs-html="true" data-bs-content="#{render("src/views/repositories/_tooltip.slang")}"
@@ -52,7 +52,7 @@
           | Development dependencies
       .collapse.show#collapseDevelopmentDependencies
         ul.list__items.not-list
-          - development_dependencies.each do |repository|
+          - development_dependencies.each(fetch_columns: true) do |repository|
             li.link
               i class="#{repository.decorate.provider_icon}"
               a href="/#{repository.provider}/#{repository.decorate.full_name}/" data-bs-toggle="popover" data-bs-custom-class="repository-popover" data-bs-trigger="hover" data-bs-placement="right" data-bs-html="true" data-bs-content="#{render("src/views/repositories/_tooltip.slang")}"
