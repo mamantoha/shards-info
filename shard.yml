@@ -20,8 +20,8 @@ dependencies:
   kemal-session:
     github: kemalcr/kemal-session
   kemal-session-redis:
-    github: crystal-garage/kemal-session-redis
-    branch: develop
+    github: neovintage/kemal-session-redis
+    branch: master
   kemal-flash:
     github: crystal-garage/kemal-flash
   kilt:

@@ -94,8 +94,8 @@ shards:
     version: 1.0.0
 
   kemal-session-redis:
-    git: https://github.com/crystal-garage/kemal-session-redis.git
-    version: 0.6.1+git.commit.d2dec0517717de48758264356689e155c8973943
+    git: https://github.com/neovintage/kemal-session-redis.git
+    version: 1.0.0+git.commit.12ccd397672d867271b8f0541344603a351827b1
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
@@ -119,7 +119,7 @@ shards:
 
   pool:
     git: https://github.com/ysbaddaden/pool.git
-    version: 0.2.4
+    version: 0.2.3
 
   radix:
     git: https://github.com/luislavena/radix.git
