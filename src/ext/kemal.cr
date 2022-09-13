@@ -14,3 +14,13 @@ end
 macro render(filename)
   Kilt.render({{filename}})
 end
+
+module Kemal
+  # :nodoc:
+  class FilterHandler
+    # FIXME: https://github.com/kemalcr/kemal/pull/564
+    private def radix_path(verb : String?, path : String, type : Symbol)
+      "/#{type}/#{verb.upcase}/#{path}"
+    end
+  end
+end
