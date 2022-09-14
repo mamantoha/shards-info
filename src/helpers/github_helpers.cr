@@ -15,12 +15,14 @@ module GithubHelpers
 
     user = User.query.find_or_build({provider: "github", provider_id: github_user.id}) { }
     assign_repository_user_attributes(user, github_user)
-    user.save
+    user.synced_at = Time.utc
+    user.ignore = false unless user.persisted?
+    user.save!
 
     repository.user = user
     assign_repository_attributes(repository, github_repository)
     repository.synced_at = Time.utc
-    repository.save
+    repository.save!
 
     repository.tags = tags
 
