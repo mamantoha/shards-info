@@ -15,12 +15,14 @@ module GitlabHelpers
 
     user = User.query.find_or_build({provider: "gitlab", provider_id: owner.id}) { }
     assign_project_owner_attributes(user, owner)
-    user.save
+    user.synced_at = Time.utc
+    user.ignore = false unless user.persisted?
+    user.save!
 
     repository.user = user
     assign_project_attributes(repository, gitlab_project)
     repository.synced_at = Time.utc
-    repository.save
+    repository.save!
 
     repository.tags = tags
 
