@@ -83,7 +83,7 @@ shards:
 
   kemal: # Overridden
     git: https://github.com/kemalcr/kemal.git
-    version: 1.2.0+git.commit.93521b712031d8a01004fdf21ddfc75784f83c91
+    version: 1.2.0+git.commit.c8f857dff35a07eacfc3f4d924d2bc056ca31aa7
 
   kemal-flash:
     git: https://github.com/crystal-garage/kemal-flash.git
