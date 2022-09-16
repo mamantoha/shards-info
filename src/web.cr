@@ -36,6 +36,8 @@ def self.current_user(env) : Admin?
   if (id = env.session.bigint?("user_id"))
     Admin.find(id)
   end
+rescue
+  nil
 end
 
 Raven.configure do |config|
