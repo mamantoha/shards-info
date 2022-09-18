@@ -54,7 +54,7 @@
       .user__email
         i class="fas fa-envelope"
         a href="mailto:#{email}" = email
-    - if (website = user.website) && !website.blank?
+    - if (website = user.decorate.website_url) && !website.blank?
       .user__website
         i class="fas fa-link"
         a href="#{website}" = website

@@ -41,6 +41,12 @@ class UserDelegator < Delegator(User)
     end
   end
 
+  def website_url : String?
+    website.try do |_website|
+      _website.starts_with?(/http(s)?:/i) ? _website : "https://" + _website
+    end
+  end
+
   def provider_icon
     case provider
     when "gitlab"
