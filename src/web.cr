@@ -516,9 +516,12 @@ get "/tags/:name" do |env|
     repositories_query =
       tag
         .repositories
+        .join("users") { users.id == repositories.user_id }
         .undistinct
         .with_tags
         .with_user
+        .where { users.ignore == false }
+        .where { repositories.ignore == false }
         .select(
           "repositories.*",
           "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
