@@ -43,6 +43,8 @@ class UserDelegator < Delegator(User)
 
   def website_url : String?
     website.try do |_website|
+      return nil if _website.empty?
+
       _website.starts_with?(/http(s)?:/i) ? _website : "https://" + _website
     end
   end
