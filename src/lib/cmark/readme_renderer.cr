@@ -51,7 +51,7 @@ class ReadmeRenderer < Cmark::HTMLRenderer
   end
 
   def link(node, entering)
-    is_video = VIDEO_EXTENSIONS.any? { |ext| node.url.ends_with?(ext) }
+    is_video = node.url.ends_with?(Regex.union(VIDEO_EXTENSIONS))
 
     if is_video
       render_video_link(node, entering)
