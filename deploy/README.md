@@ -80,7 +80,7 @@ server {
 
   # https://github.com/twitter/secure_headers
   #
-  add_header Content-Security-Policy "default-src 'self'; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'; script-src 'unsafe-inline' https:; style-src 'self' https: 'unsafe-inline'";
+  add_header Content-Security-Policy "default-src 'self'; media-src 'self' https: data:; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'; script-src 'unsafe-inline' https:; style-src 'self' https: 'unsafe-inline'";
   add_header Strict-Transport-Security "max-age=631138519";
   add_header X-Content-Type-Options "nosniff";
   add_header X-Download-Options "noopen";
