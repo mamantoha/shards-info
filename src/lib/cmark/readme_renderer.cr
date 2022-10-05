@@ -11,6 +11,8 @@ require "noir/lexers/json"
 require "noir/lexers/yaml"
 
 class ReadmeRenderer < Cmark::HTMLRenderer
+  VIDEO_EXTENSIONS = [".webm", ".mp4", ".mov"]
+
   def initialize(@options = Option::None, @extensions = Extension::None, *, @repository : Repository)
     super(@options, @extensions)
   end
@@ -49,6 +51,16 @@ class ReadmeRenderer < Cmark::HTMLRenderer
   end
 
   def link(node, entering)
+    is_video = VIDEO_EXTENSIONS.any? { |ext| node.url.ends_with?(ext) }
+
+    if is_video
+      render_video_link(node, entering)
+    else
+      render_link(node, entering)
+    end
+  end
+
+  private def render_link(node, entering)
     if entering
       url = node.url
       title = node.title
@@ -63,6 +75,24 @@ class ReadmeRenderer < Cmark::HTMLRenderer
       out %(">)
     else
       out "</a>"
+    end
+  end
+
+  private def render_video_link(node, entering)
+    if entering
+      url = node.url
+      title = node.title
+      out %(<video controls="controls" muted="muted" src=")
+      if @options.unsafe? || !(UNSAFE_URL_REGEX === url)
+        out raw_url(url)
+      end
+      unless title.try &.empty?
+        out %(" title=")
+        out escape_html(title)
+      end
+      out %(">)
+    else
+      out "</video>"
     end
   end
 
