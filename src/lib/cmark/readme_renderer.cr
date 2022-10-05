@@ -96,7 +96,6 @@ class ReadmeRenderer < Cmark::HTMLRenderer
     end
   end
 
-
   def image(node, entering)
     if entering
       url = node.url
