@@ -1,3 +1,14 @@
+@font-face {
+  font-family: JetBrainsMono-Regular;
+  src: url("./JetBrainsMono-Regular.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+:root {
+  --bs-font-monospace: JetBrainsMono-Regular, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
 html {
   --main-bg-color: #fff;
   --navbar-bg-color: #24292e;
