@@ -7,10 +7,13 @@
   "plugins": [
   ],
   "rules": {
-    "selector-class-pattern": null
+    "selector-class-pattern": null,
+    "max-line-length": null,
+    "value-keyword-case": null
   },
   "ignoreFiles": [
     "**/*.js",
+    "**/*.woff2",
     "assets/vendor/*"
   ]
 }

@@ -1,5 +1,5 @@
-const path = require('path');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   mode: 'production',
@@ -9,37 +9,37 @@ module.exports = {
   ],
   output: {
     filename: 'application.js',
-    path: path.resolve(__dirname, 'public/dist'),
+    path: path.resolve(__dirname, 'public/dist')
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'application.css',
-    }),
+      filename: 'application.css'
+    })
   ],
   module: {
     rules: [
       {
-        test: require.resolve("jquery"),
-        loader: "expose-loader",
+        test: require.resolve('jquery'),
+        loader: 'expose-loader',
         options: {
-          exposes: ["$", "jQuery"],
-        },
+          exposes: ['$', 'jQuery']
+        }
       },
       {
         test: /\.(sa|sc|c)ss$/i,
         use: [
-        {
-          loader: MiniCssExtractPlugin.loader,
-          options:
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options:
           {
             publicPath: '/dist/'
           }
-        }, 'css-loader', 'sass-loader']
+          }, 'css-loader', 'sass-loader']
       },
       {
         test: /\.(woff2?|svg|ttf|eot)$/,
-        type: 'asset/resource',
-      },
+        type: 'asset/resource'
+      }
     ]
-  },
-};
+  }
+}
