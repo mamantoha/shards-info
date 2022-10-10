@@ -1,4 +1,3 @@
-# NOTICE: This lockfile contains some overrides from shard.override.yml
 version: 2.0
 shards:
   admiral:
@@ -27,7 +26,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.10+git.commit.c675d6a11212339df8eaf6e5b309044bae22ef44
+    version: 0.8.11+git.commit.c6701df397cd444b0a8e008b37dabd70f2da787f
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -81,9 +80,9 @@ shards:
     git: https://github.com/phoffer/inflector.cr.git
     version: 1.0.0
 
-  kemal: # Overridden
+  kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 1.2.0+git.commit.c8f857dff35a07eacfc3f4d924d2bc056ca31aa7
+    version: 1.3.0
 
   kemal-flash:
     git: https://github.com/crystal-garage/kemal-flash.git
