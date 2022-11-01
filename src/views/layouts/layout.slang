@@ -14,7 +14,7 @@ html lang="en"
     link rel="stylesheet" href="/dist/application.css?v=#{assets_version}" async="async" defer="defer"
     script src="/dist/application.js?v=#{assets_version}" media="all"
 
-    link rel="image_src" href="/images/logo.png">
+    link rel="image_src" href="/images/logo.png"
 
     title #{Config.config.page_title}
   body
