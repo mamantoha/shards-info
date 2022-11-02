@@ -12,6 +12,10 @@ module ErrorHandler
   end
 end
 
+class PeriodicJobWithErrorHandler < Mosquito::PeriodicJob
+  include ErrorHandler
+end
+
 Mosquito.configure do |settings|
   settings.idle_wait = 10.seconds
   settings.redis_url = ENV["REDIS_URL"]
