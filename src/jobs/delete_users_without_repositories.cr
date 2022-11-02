@@ -1,6 +1,8 @@
 require "../lib/github"
 
 class DeleteUsersWithoutRepositories < Mosquito::PeriodicJob
+  include ErrorHandler
+
   run_every 1.day
 
   def perform

@@ -1,6 +1,8 @@
 require "../lib/github"
 
 class SyncRecentGithubJob < Mosquito::PeriodicJob
+  include ErrorHandler
+
   run_every 10.minutes
 
   def perform
