@@ -1,6 +1,6 @@
 require "../lib/gitlab"
 
-class ResyncGitlabRepositoriesJob < Mosquito::PeriodicJob
+class ResyncGitlabRepositoriesJob < PeriodicJobWithErrorHandler
   run_every 1.hour
 
   def perform

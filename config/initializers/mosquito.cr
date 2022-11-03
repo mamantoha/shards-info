@@ -1,4 +1,20 @@
 require "mosquito"
+require "raven"
+
+module ErrorHandler
+  macro included
+    after do
+      return unless failed?
+
+      # Capture the exception in Sentry with Raven - https://github.com/sija/raven.cr
+      exception.try { |e| Raven.capture(e) }
+    end
+  end
+end
+
+class PeriodicJobWithErrorHandler < Mosquito::PeriodicJob
+  include ErrorHandler
+end
 
 Mosquito.configure do |settings|
   settings.idle_wait = 10.seconds
