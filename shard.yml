@@ -39,7 +39,7 @@ dependencies:
     # github: anykeyh/clear
     # branch: master
     github: crystal-garage/clear
-    branch: develop
+    branch: refactor
   delegator:
     github: Schniz/delegator.cr
   slang:

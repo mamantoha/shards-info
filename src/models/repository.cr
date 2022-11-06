@@ -93,7 +93,7 @@ class Repository
   def tags=(names : Array(String))
     new_tags = names - tag_names
     new_tags.each do |name|
-      tag = Tag.query.find_or_create({name: name}) { }
+      tag = Tag.query.find_or_create(name: name)
       self.tags << tag
     end
 

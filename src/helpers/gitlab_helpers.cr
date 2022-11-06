@@ -13,7 +13,7 @@ module GitlabHelpers
     owner = gitlab_project.owner || gitlab_project.namespace
     tags = gitlab_project.tag_list
 
-    user = User.query.find_or_build({provider: "gitlab", provider_id: owner.id}) { }
+    user = User.query.find_or_build(provider: "gitlab", provider_id: owner.id)
     assign_project_owner_attributes(user, owner)
     user.synced_at = Time.utc
     user.ignore = false unless user.persisted?
@@ -50,13 +50,13 @@ module GitlabHelpers
     owner = gitlab_project.owner || gitlab_project.namespace
     tags = gitlab_project.tag_list
 
-    user = User.query.find_or_build({provider: "gitlab", provider_id: owner.id}) { }
+    user = User.query.find_or_build(provider: "gitlab", provider_id: owner.id)
     assign_project_owner_attributes(user, owner)
     user.synced_at = Time.utc if user.changed?
     user.ignore = false unless user.persisted?
     user.save!
 
-    repository = Repository.query.find_or_build({provider: "gitlab", provider_id: gitlab_project.id}) { }
+    repository = Repository.query.find_or_build(provider: "gitlab", provider_id: gitlab_project.id)
     repository.ignore = false unless repository.persisted?
     repository.user = user
     assign_project_attributes(repository, gitlab_project)
