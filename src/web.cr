@@ -404,7 +404,7 @@ get "/:provider/:owner/:repo" do |env|
     dependents =
       repository
         .dependents
-        .undistinct
+        .clear_distinct
         .with_user
         .select(
           "repositories.*",
@@ -469,7 +469,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
     repositories_query =
       repository
         .dependents
-        .undistinct
+        .clear_distinct
         .with_tags
         .with_user
         .select(
@@ -517,7 +517,7 @@ get "/tags/:name" do |env|
       tag
         .repositories
         .join("users") { users.id == repositories.user_id }
-        .undistinct
+        .clear_distinct
         .with_tags
         .with_user
         .where { users.ignore == false }
