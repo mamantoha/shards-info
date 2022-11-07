@@ -92,9 +92,9 @@ shards:
     git: https://github.com/kemalcr/kemal-session.git
     version: 1.0.0
 
-  kemal-session-redis:
-    git: https://github.com/crystal-garage/kemal-session-redis.git
-    version: 1.0.1+git.commit.1537a6835461be6b88989adb249e4a558bcd0b09
+  kemal-session-redis-engine:
+    git: https://github.com/crystal-garage/kemal-session-redis-engine.git
+    version: 1.0.1+git.commit.a89d6cee371bfa4ec0b6f786478ec39dc926bf78
 
   kilt:
     git: https://github.com/jeromegn/kilt.git

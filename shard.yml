@@ -25,10 +25,8 @@ dependencies:
     branch: master
   kemal-session:
     github: kemalcr/kemal-session
-  kemal-session-redis:
-    # github: neovintage/kemal-session-redis
-    # branch: master
-    github: crystal-garage/kemal-session-redis
+  kemal-session-redis-engine:
+    github: crystal-garage/kemal-session-redis-engine
     branch: main
   kemal-flash:
     github: crystal-garage/kemal-flash

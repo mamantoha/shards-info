@@ -1,6 +1,6 @@
 require "kemal"
 require "kemal-session"
-require "kemal-session-redis"
+require "kemal-session-redis-engine"
 require "kemal-flash"
 require "../../src/ext/kemal"
 
