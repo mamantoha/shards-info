@@ -17,6 +17,6 @@ Kemal.config.logger = Kemal::LogHandler.new(log_file)
 Kemal::Session.config do |config|
   config.cookie_name = "session_id"
   config.secret = ENV["KEMAL_SESSION_SECRET"]
-  config.engine = Kemal::Session::RedisEngine.new(host: "localhost", port: 6379)
+  config.engine = Kemal::Session::RedisEngine.new(ENV["SESSION_REDIS_URL"])
   config.timeout = 30.day
 end

@@ -26,7 +26,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.11+git.commit.c6701df397cd444b0a8e008b37dabd70f2da787f
+    version: 0.8.11+git.commit.75f3bc20d46fee2ba96f71ea9e425d7c63df992b
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -93,8 +93,8 @@ shards:
     version: 1.0.0
 
   kemal-session-redis:
-    git: https://github.com/mamantoha/kemal-session-redis.git
-    version: 1.0.1+git.commit.6c58defbad247920187643cd3e77eac16e5cfbb0
+    git: https://github.com/crystal-garage/kemal-session-redis.git
+    version: 1.0.1+git.commit.1537a6835461be6b88989adb249e4a558bcd0b09
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
@@ -102,7 +102,7 @@ shards:
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
-    version: 1.0.0.rc1+git.commit.33a446eec7963c8b3b3cd0f92a48fea77b7f789d
+    version: 1.0.0.rc3+git.commit.d0245eba8514e238c253267b0bdf7663c6b01590
 
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
@@ -116,10 +116,6 @@ shards:
     git: https://github.com/will/crystal-pg.git
     version: 0.26.0
 
-  pool:
-    git: https://github.com/ysbaddaden/pool.git
-    version: 0.2.4
-
   radix:
     git: https://github.com/luislavena/radix.git
     version: 0.4.1
@@ -129,8 +125,8 @@ shards:
     version: 1.9.2
 
   redis:
-    git: https://github.com/stefanwille/crystal-redis.git
-    version: 2.8.3
+    git: https://github.com/jgaskins/redis.git
+    version: 0.6.1
 
   shards_spec:
     git: https://github.com/mamantoha/shards_spec.git

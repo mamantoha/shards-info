@@ -18,13 +18,18 @@ dependencies:
   kemal:
     github: kemalcr/kemal
     version: ">= 1.3.0"
+  redis:
+    github: jgaskins/redis
+  mosquito:
+    github: mosquito-cr/mosquito
+    branch: master
   kemal-session:
     github: kemalcr/kemal-session
   kemal-session-redis:
     # github: neovintage/kemal-session-redis
     # branch: master
-    github: mamantoha/kemal-session-redis
-    branch: develop
+    github: crystal-garage/kemal-session-redis
+    branch: main
   kemal-flash:
     github: crystal-garage/kemal-flash
   kilt:
@@ -46,9 +51,6 @@ dependencies:
     github: crystal-cache/cache
   crest:
     github: mamantoha/crest
-  mosquito:
-    github: mosquito-cr/mosquito
-    branch: master
   emoji:
     github: veelenga/emoji.cr
     branch: master
