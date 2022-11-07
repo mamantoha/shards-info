@@ -124,7 +124,7 @@ get "/" do |env|
       .where { repositories.ignore == false }
       .where { repositories.last_activity_at > 1.week.ago }
       .order_by(stars_count: :desc)
-      .order_by("repositories.id", "ASC")
+      .order_by("repositories.id", :asc)
       .limit(20)
 
   recently_repositories =
@@ -169,17 +169,17 @@ get "/repositories" do |env|
   expression, direction =
     case sort
     when "alphabetical"
-      {"name", "ASC"}
+      {"name", :asc}
     when "stars"
-      {"stars_count", "DESC"}
+      {"stars_count", :desc}
     when "dependents"
-      {"COUNT(relationships.dependency_id)", "DESC"}
+      {"COUNT(relationships.dependency_id)", :desc}
     when "recent-updates"
-      {"last_activity_at", "DESC"}
+      {"last_activity_at", :desc}
     when "new"
-      {"created_at", "DESC"}
+      {"created_at", :desc}
     else
-      {"stars_count", "DESC"}
+      {"stars_count", :desc}
     end
 
   repositories_query =
@@ -190,7 +190,7 @@ get "/repositories" do |env|
       .with_dependents_count
       .published
       .order_by(expression, direction)
-      .order_by("repositories.id", "ASC")
+      .order_by("repositories.id", :asc)
 
   total_count = repositories_query.count
 
@@ -322,7 +322,7 @@ get "/search" do |env|
         .published
         .search(query)
         .order_by(stars_count: :desc)
-        .order_by("repositories.id", "ASC")
+        .order_by("repositories.id", :asc)
 
     total_count = repositories_query.count
 
@@ -411,8 +411,8 @@ get "/:provider/:owner/:repo" do |env|
           "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
         )
         .group_by("repositories.id")
-        .order_by("repositories.stars_count", "DESC")
-        .order_by("repositories.id", "ASC")
+        .order_by("repositories.stars_count", :desc)
+        .order_by("repositories.id", :asc)
 
     dependents_count = dependents.count
 
@@ -477,8 +477,8 @@ get "/:provider/:owner/:repo/dependents" do |env|
           "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
         )
         .group_by("repositories.id")
-        .order_by("repositories.stars_count", "DESC")
-        .order_by("repositories.id", "ASC")
+        .order_by("repositories.stars_count", :desc)
+        .order_by("repositories.id", :asc)
 
     total_count = repositories_query.count
 
@@ -527,8 +527,8 @@ get "/tags/:name" do |env|
           "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
         )
         .group_by("repositories.id")
-        .order_by("repositories.stars_count", "DESC")
-        .order_by("repositories.id", "ASC")
+        .order_by("repositories.stars_count", :desc)
+        .order_by("repositories.id", :asc)
 
     total_count = repositories_query.count
 
