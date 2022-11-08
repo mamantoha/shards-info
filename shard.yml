@@ -36,7 +36,7 @@ dependencies:
     github: msa7/multi_auth
   clear:
     github: crystal-garage/clear
-    branch: new
+    branch: develop
   delegator:
     github: Schniz/delegator.cr
   slang:
