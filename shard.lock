@@ -26,7 +26,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.11+git.commit.c6e7381a3b982f51b00f02384732853c21de3003
+    version: 0.8.11+git.commit.d63bfce21bacebbc3ab3f84edaeb6390b6481d3e
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -87,6 +87,10 @@ shards:
   kemal-flash:
     git: https://github.com/crystal-garage/kemal-flash.git
     version: 0.2.0
+
+  kemal-kilt:
+    git: https://github.com/crystal-garage/kemal-kilt.git
+    version: 0.1.0
 
   kemal-session:
     git: https://github.com/kemalcr/kemal-session.git
