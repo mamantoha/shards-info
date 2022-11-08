@@ -26,7 +26,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.11+git.commit.75f3bc20d46fee2ba96f71ea9e425d7c63df992b
+    version: 0.8.11+git.commit.c6e7381a3b982f51b00f02384732853c21de3003
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -94,7 +94,7 @@ shards:
 
   kemal-session-redis-engine:
     git: https://github.com/crystal-garage/kemal-session-redis-engine.git
-    version: 1.0.1+git.commit.a89d6cee371bfa4ec0b6f786478ec39dc926bf78
+    version: 1.1.0+git.commit.b1ff50c814ae31cf9123c306882274cbf66e1b71
 
   kilt:
     git: https://github.com/jeromegn/kilt.git

@@ -13,7 +13,7 @@ module GithubHelpers
     tags = github_repository.tags
     github_user = github_repository.user
 
-    user = User.query.find_or_build({provider: "github", provider_id: github_user.id}) { }
+    user = User.query.find_or_build(provider: "github", provider_id: github_user.id)
     assign_repository_user_attributes(user, github_user)
     user.synced_at = Time.utc
     user.ignore = false unless user.persisted?
@@ -53,13 +53,13 @@ module GithubHelpers
     tags = github_repository.tags
     github_user = github_repository.user
 
-    user = User.query.find_or_build({provider: "github", provider_id: github_user.id}) { }
+    user = User.query.find_or_build(provider: "github", provider_id: github_user.id)
     assign_repository_user_attributes(user, github_user)
     user.synced_at = Time.utc if user.changed?
     user.ignore = false unless user.persisted?
     user.save!
 
-    repository = Repository.query.find_or_build({provider: "github", provider_id: github_repository.id}) { }
+    repository = Repository.query.find_or_build(provider: "github", provider_id: github_repository.id)
     repository.ignore = false unless repository.persisted?
     repository.user = user
     assign_repository_attributes(repository, github_repository)
