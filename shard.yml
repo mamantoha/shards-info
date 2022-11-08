@@ -35,11 +35,8 @@ dependencies:
   multi_auth:
     github: msa7/multi_auth
   clear:
-    # path: ../clear
-    # github: anykeyh/clear
-    # branch: master
     github: crystal-garage/clear
-    branch: refactor
+    branch: develop
   delegator:
     github: Schniz/delegator.cr
   slang:
