@@ -32,6 +32,11 @@ dependencies:
     github: crystal-garage/kemal-flash
   kilt:
     github: jeromegn/kilt
+  slang:
+    github: jeromegn/slang
+    branch: master
+  kemal-kilt:
+    github: crystal-garage/kemal-kilt
   multi_auth:
     github: msa7/multi_auth
   clear:
@@ -39,9 +44,6 @@ dependencies:
     branch: develop
   delegator:
     github: Schniz/delegator.cr
-  slang:
-    github: jeromegn/slang
-    branch: master
   cache:
     github: crystal-cache/cache
   crest:
