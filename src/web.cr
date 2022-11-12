@@ -16,7 +16,6 @@ require "emoji"
 require "humanize_time"
 require "autolink"
 require "shards_spec"
-require "raven"
 require "raven/integrations/kemal"
 
 require "../config/config"
@@ -38,14 +37,6 @@ def self.current_user(env) : Admin?
   end
 rescue
   nil
-end
-
-Raven.configure do |config|
-  config.async = true
-  config.environments = %w(production)
-  config.current_environment = ENV.fetch("KEMAL_ENV", "development")
-  config.connect_timeout = 5.seconds
-  config.read_timeout = 5.seconds
 end
 
 Kemal.config.add_handler(Raven::Kemal::ExceptionHandler.new)

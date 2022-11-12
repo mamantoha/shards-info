@@ -16,11 +16,11 @@ pg_restore -d shards_info_development shards_info_production.sql
 ## Generate new migration
 
 ```
-crystal src/db.cr generate migration add_field_to_table
+crystal src/cli.cr generate migration add_field_to_table
 ```
 
 ## Migrate database
 
 ```
-crystal src/db.cr migrate
+crystal src/cli.cr migrate
 ```

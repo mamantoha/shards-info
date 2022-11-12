@@ -1,5 +1,4 @@
 require "mosquito"
-require "raven"
 
 module ErrorHandler
   macro included

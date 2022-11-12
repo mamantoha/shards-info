@@ -9,8 +9,8 @@ authors:
 targets:
   web:
     main: src/web.cr
-  db:
-    main: src/db.cr
+  cli:
+    main: src/cli.cr
   worker:
     main: src/worker.cr
 
