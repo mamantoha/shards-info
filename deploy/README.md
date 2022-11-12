@@ -45,7 +45,7 @@ npm run build
 Migrate database if needed:
 
 ```console
-./bin/db migrate
+./bin/cli migrate
 ```
 
 Restart application:
