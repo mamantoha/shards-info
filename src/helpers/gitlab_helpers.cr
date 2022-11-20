@@ -29,6 +29,7 @@ module GitlabHelpers
     sync_project_shard_yml(repository)
     sync_project_readme(repository, readme_file(gitlab_project))
     sync_project_releases(repository)
+    sync_project_languages(repository)
 
     Helpers.update_dependecies(repository)
   rescue Crest::NotFound
