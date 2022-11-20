@@ -131,6 +131,21 @@ module Github
       Github::Release.from_json(response.body)
     end
 
+    # Lists languages for the specified repository.
+    # The value shown for each language is the number of bytes of code written in that language.
+    def repo_languages(full_name : String) : Hash(String, Int32)
+      url = "/repos/#{full_name}/languages"
+
+      response = make_request(url)
+
+      Hash(String, Int32).from_json(response.body)
+    end
+
+    # :ditto:
+    def repo_languages(user_name : String, repository : String)
+      repo_languages("#{user_name}/#{repository}")
+    end
+
     def repo_forks(full_name : String)
       url = "/repos/#{full_name}/forks"
 

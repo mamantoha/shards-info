@@ -124,6 +124,14 @@ module Gitlab
       Gitlab::Releases.from_json(response.body)
     end
 
+    def project_languages(project_id : Int32) : Hash(String, Float64)
+      url = "/projects/#{project_id}/languages"
+
+      response = make_request(url)
+
+      Hash(String, Float64).from_json(response.body)
+    end
+
     def user(id : Int32)
       url = "/users/#{id}"
 

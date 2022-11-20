@@ -29,6 +29,7 @@ module GithubHelpers
     sync_repository_shard_yml(repository)
     sync_repository_readme(repository)
     sync_repository_releases(repository)
+    sync_repository_languages(repository)
 
     Helpers.update_dependecies(repository)
   rescue Crest::NotFound
@@ -185,5 +186,39 @@ module GithubHelpers
         release.delete
       end
     end
+  end
+
+  def sync_repository_languages(repository : Repository)
+    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+
+    languages = github_client.repo_languages(repository.user.login, repository.name)
+
+    unlink_languages = repository.language_names - languages.keys
+
+    total_bytes = languages.values.sum
+
+    languages.each do |language_name, number_of_bytes|
+      score = to_percents(number_of_bytes, total_bytes)
+
+      language = Language.query.find_or_create(name: language_name)
+
+      repository_language =
+        RepositoryLanguage
+          .query
+          .find_or_build(repository_id: repository.id, language_id: language.id)
+
+      repository_language.score = score
+      repository_language.save!
+    end
+
+    unlink_languages.each do |language_name|
+      if (language = Language.query.find({name: language_name}))
+        repository.languages.unlink(language)
+      end
+    end
+  end
+
+  private def to_percents(x : Int32, total : Int32) : Float64
+    ((x / total) * 100).round(2)
   end
 end

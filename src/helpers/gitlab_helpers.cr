@@ -29,6 +29,7 @@ module GitlabHelpers
     sync_project_shard_yml(repository)
     sync_project_readme(repository, readme_file(gitlab_project))
     sync_project_releases(repository)
+    sync_project_languages(repository)
 
     Helpers.update_dependecies(repository)
   rescue Crest::NotFound
@@ -234,6 +235,32 @@ module GitlabHelpers
     releases.each do |release|
       if gitlab_releases.none? { |gitlab_release| gitlab_release.tag_name == release.tag_name }
         release.delete
+      end
+    end
+  end
+
+  def sync_project_languages(repository : Repository)
+    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
+
+    languages = gitlab_client.project_languages(repository.provider_id)
+
+    unlink_languages = repository.language_names - languages.keys
+
+    languages.each do |language_name, score|
+      language = Language.query.find_or_create(name: language_name)
+
+      repository_language =
+        RepositoryLanguage
+          .query
+          .find_or_build(repository_id: repository.id, language_id: language.id)
+
+      repository_language.score = score
+      repository_language.save!
+    end
+
+    unlink_languages.each do |language_name|
+      if (language = Language.query.find({name: language_name}))
+        repository.languages.unlink(language)
       end
     end
   end
