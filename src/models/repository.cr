@@ -111,4 +111,8 @@ class Repository
   def tag_names
     self.tags.map(&.name)
   end
+
+  def language_names
+    self.languages.map(&.name)
+  end
 end
