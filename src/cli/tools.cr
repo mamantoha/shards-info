@@ -1,5 +1,3 @@
-require "../lib/linguist/language"
-
 class Clear::CLI::Tools < Admiral::Command
   include Clear::CLI::Command
 
@@ -11,12 +9,7 @@ class Clear::CLI::Tools < Admiral::Command
     define_help description: "Update languages color"
 
     def run_impl
-      Language.query.each do |language|
-        if (linguist_language = Linguist::Language.find_by_name(language.name))
-          language.color = linguist_language.color
-          language.save!
-        end
-      end
+      Helpers.update_languages_color
     end
   end
 
