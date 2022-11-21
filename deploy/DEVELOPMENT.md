@@ -24,3 +24,9 @@ crystal src/cli.cr generate migration add_field_to_table
 ```
 crystal src/cli.cr migrate
 ```
+
+## Update languages color
+
+```
+crystal ./src/cli.cr tools update_languages_color
+```
