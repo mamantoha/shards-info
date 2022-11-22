@@ -1,7 +1,7 @@
 ## Dump DB on production
 
 ```
-pg_dump "postgres://postgres@localhost/shards_info_production" -Fc > shards_info_production.sql
+pg_dump "postgres://postgres@localhost/shards_info_production" -Fc > ~/shards_info_production.sql
 ```
 
 ## Respore DB on localhost
