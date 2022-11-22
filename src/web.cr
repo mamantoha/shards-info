@@ -303,6 +303,7 @@ get "/search" do |env|
 
     # remove dissallowed tsquery characters
     query = query.gsub(/['?\\:‘’]/, "")
+    query = URI.decode(query)
 
     repositories_query =
       Repository
@@ -545,6 +546,8 @@ end
 
 get "/languages/:name" do |env|
   name = env.params.url["name"]
+
+  name = URI.decode(name)
 
   page = env.params.query["page"]? || ""
   page = page.to_i? || 1

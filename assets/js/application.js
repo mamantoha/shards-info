@@ -40,7 +40,7 @@ $(function () {
   $('form#search').on('submit', function (e) {
     e.preventDefault()
     const query = $(e.target).find("input[name='query']").val().replace(/\s/g, '+')
-    window.location.href = '/search?query=' + query
+    window.location.href = '/search?query=' + encodeURIComponent(query)
   })
 
   $('.js-action').on('click', function (e) {
