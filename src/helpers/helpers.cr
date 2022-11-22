@@ -1,3 +1,5 @@
+require "../lib/linguist/language"
+
 module Helpers
   extend self
 
@@ -89,5 +91,14 @@ module Helpers
     renderer = ReadmeRenderer.new(options, extensions, repository: repository)
 
     Emoji.emojize(renderer.render(node))
+  end
+
+  def update_languages_color
+    Language.query.each do |language|
+      if (linguist_language = Linguist::Language.find_by_name(language.name))
+        language.color = linguist_language.color
+        language.save!
+      end
+    end
   end
 end
