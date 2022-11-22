@@ -1,4 +1,7 @@
 .col-md-4.col-sm-12.shard__statistic
+  .list__heading Repository
+  p.fw-bold
+    = repository.name
   .list__heading Owner
   ul.shard__links.not-list
     li
