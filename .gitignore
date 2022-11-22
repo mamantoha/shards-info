@@ -12,3 +12,4 @@ shards-info.dwarf
 node_modules
 .cache
 /samples/
+./shards_info_production.sql
