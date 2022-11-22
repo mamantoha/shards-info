@@ -75,6 +75,7 @@ module GithubHelpers
     sync_repository_shard_yml(repository)
     sync_repository_readme(repository)
     sync_repository_releases(repository)
+    sync_repository_languages(repository)
 
     Helpers.update_dependecies(repository)
 
