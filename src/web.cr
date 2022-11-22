@@ -546,8 +546,11 @@ end
 
 get "/languages/:name" do |env|
   name = env.params.url["name"]
-
   name = URI.decode(name)
+
+  if (language = Linguist::Language.find_by_name(name))
+    name = language.name
+  end
 
   page = env.params.query["page"]? || ""
   page = page.to_i? || 1
