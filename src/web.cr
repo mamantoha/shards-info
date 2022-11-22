@@ -543,6 +543,56 @@ get "/tags/:name" do |env|
   end
 end
 
+get "/languages/:name" do |env|
+  name = env.params.url["name"]
+
+  page = env.params.query["page"]? || ""
+  page = page.to_i? || 1
+  per_page = 20
+  offset = (page - 1) * per_page
+
+  raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+
+  if (language = Language.query.find({name: name}))
+    repositories_query =
+      language
+        .repositories
+        .join("users") { users.id == repositories.user_id }
+        .clear_distinct
+        .with_tags
+        .with_user
+        .where { users.ignore == false }
+        .where { repositories.ignore == false }
+        .select(
+          "repositories.*",
+          "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
+        )
+        .group_by("repositories.id")
+        .order_by("repositories.stars_count", :desc)
+        .order_by("repositories.id", :asc)
+
+    total_count = repositories_query.count
+
+    raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+
+    paginator = ViewHelpers::Paginator.new(
+      page,
+      per_page,
+      total_count,
+      "/languages/#{name}?page=%{page}"
+    ).to_s
+
+    repositories = repositories_query.limit(per_page).offset(offset)
+
+    Config.config.page_title = "Repositories with language #{name}"
+    Config.config.page_description = "Crystal repositories with language #{name}"
+
+    render "src/views/languages/show.slang", "src/views/layouts/layout.slang"
+  else
+    raise Kemal::Exceptions::RouteNotFound.new(env)
+  end
+end
+
 get "/admin" do |env|
   Config.config.page_title = "Admin:"
 
