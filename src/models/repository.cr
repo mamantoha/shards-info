@@ -26,6 +26,7 @@ class Repository
 
   belongs_to user : User
   has_many tags : Tag, through: RepositoryTag
+  has_many repository_languages : RepositoryLanguage
   has_many languages : Language, through: RepositoryLanguage
   has_many releases : Release
   has_many relationships : Relationship, foreign_key: "master_id"

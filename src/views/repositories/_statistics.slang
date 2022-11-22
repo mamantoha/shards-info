@@ -39,3 +39,6 @@
   .list__heading Synced at
   p.small
     = Time::Format::HTTP_DATE.format(repository.synced_at)
+  - if repository.languages.any?
+    .list__heading Languages
+    == render "src/views/repositories/_languages.slang"

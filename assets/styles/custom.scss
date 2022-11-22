@@ -38,6 +38,14 @@ a.badge {
   height: 16px;
 }
 
+.list-style-none {
+  list-style: none !important;
+}
+
+.d-inline {
+  display: inline !important;
+}
+
 .footer {
   border-top: 1px solid var(--border-color);
   position: absolute;
@@ -601,6 +609,16 @@ ul.not-list {
 
   a {
     color: var(--link-color);
+  }
+}
+
+.repository__languages {
+  a {
+    color: var(--link-color);
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 }
 
