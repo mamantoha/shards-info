@@ -164,7 +164,7 @@ get "/repositories" do |env|
     when "stars"
       {"stars_count", :desc}
     when "dependents"
-      {"COUNT(relationships.dependency_id)", :desc}
+      {"(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id)", :desc}
     when "recent-updates"
       {"last_activity_at", :desc}
     when "new"
@@ -376,33 +376,21 @@ get "/:provider/:owner/:repo" do |env|
         .dependencies
         .with_user
         .where { relationships.development == false }
-        .select(
-          "repositories.*",
-          "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
-        )
-        .group_by("repositories.id")
+        .with_dependents_count
 
     development_dependencies =
       repository
         .dependencies
         .with_user
         .where { relationships.development == true }
-        .select(
-          "repositories.*",
-          "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
-        )
-        .group_by("repositories.id")
+        .with_dependents_count
 
     dependents =
       repository
         .dependents
         .clear_distinct
         .with_user
-        .select(
-          "repositories.*",
-          "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
-        )
-        .group_by("repositories.id")
+        .with_dependents_count
         .order_by("repositories.stars_count", :desc)
         .order_by("repositories.id", :asc)
 
@@ -464,11 +452,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
         .clear_distinct
         .with_tags
         .with_user
-        .select(
-          "repositories.*",
-          "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
-        )
-        .group_by("repositories.id")
+        .with_dependents_count
         .order_by("repositories.stars_count", :desc)
         .order_by("repositories.id", :asc)
 
@@ -514,11 +498,7 @@ get "/tags/:name" do |env|
         .with_user
         .where { users.ignore == false }
         .where { repositories.ignore == false }
-        .select(
-          "repositories.*",
-          "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
-        )
-        .group_by("repositories.id")
+        .with_dependents_count
         .order_by("repositories.stars_count", :desc)
         .order_by("repositories.id", :asc)
 
@@ -569,11 +549,7 @@ get "/languages/:name" do |env|
         .with_user
         .where { users.ignore == false }
         .where { repositories.ignore == false }
-        .select(
-          "repositories.*",
-          "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
-        )
-        .group_by("repositories.id")
+        .with_dependents_count
         .order_by("repositories.stars_count", :desc)
         .order_by("repositories.id", :asc)
 

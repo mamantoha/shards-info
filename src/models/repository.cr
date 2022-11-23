@@ -45,7 +45,7 @@ class Repository
   }
 
   # ```
-  # repositories = Repository.query.with_dependent_count
+  # repositories = Repository.query.with_dependents_count
   #
   # repositories.each(fetch_columns: true) do |repository|
   #   repository.name
@@ -53,10 +53,10 @@ class Repository
   # end
   # ```
   scope(:with_dependents_count) {
-    left_join("relationships") { var("relationships", "dependency_id") == var("repositories", "id") }
+    self
       .select(
         "repositories.*",
-        "COUNT(relationships.dependency_id) AS dependents_count"
+        "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count"
       )
       .group_by("repositories.id")
   }
