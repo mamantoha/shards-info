@@ -132,6 +132,10 @@ shards:
     git: https://github.com/jgaskins/redis.git
     version: 0.6.1
 
+  retriable:
+    git: https://github.com/sija/retriable.cr.git
+    version: 0.2.4
+
   shards_spec:
     git: https://github.com/mamantoha/shards_spec.git
     version: 0.2.4

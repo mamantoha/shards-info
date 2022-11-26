@@ -1,4 +1,5 @@
 require "crest"
+require "retriable"
 
 module Gitlab
   class Logger < Crest::Logger
@@ -46,7 +47,9 @@ module Gitlab
     end
 
     def make_request(url : String, params = {} of String => String)
-      client[url].get(params: params)
+      Retriable.retry(on: {Crest::InternalServerError}) do
+        client[url].get(params: params)
+      end
     ensure
       client.http_client.close
     end

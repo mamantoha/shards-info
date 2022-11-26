@@ -42,6 +42,8 @@ dependencies:
   clear:
     github: crystal-garage/clear
     branch: develop
+  retriable:
+    github: Sija/retriable.cr
   delegator:
     github: Schniz/delegator.cr
   cache:
