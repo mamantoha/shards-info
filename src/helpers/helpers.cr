@@ -55,6 +55,21 @@ module Helpers
                 version:       spec_dependency.version,
               })
             end
+          else
+            case provider_name
+            when "github"
+              github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+
+              if (github_repository = github_client.get_repo(user_name, repository_name))
+                GithubHelpers.sync_github_repository(github_repository)
+              end
+            when "gitlab"
+              gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
+
+              if (gitlab_project = gitlab_client.project(user_name, repository_name))
+                GitlabHelpers.sync_project(gitlab_project)
+              end
+            end
           end
         end
       end
