@@ -18,6 +18,7 @@ class Repository
   column open_issues_count : Int32?
   column archived : Bool
   column ignore : Bool = false
+  column fork : Bool = false
   column synced_at : Time
   column created_at : Time?
   column updated_on : Time?
