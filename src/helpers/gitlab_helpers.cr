@@ -152,6 +152,7 @@ module GitlabHelpers
       last_activity_at:  gitlab_project.last_activity_at,
       stars_count:       gitlab_project.star_count,
       forks_count:       gitlab_project.forks_count,
+      fork:              gitlab_project.forked_from_project ? true : false,
       open_issues_count: gitlab_project.open_issues_count,
       archived:          gitlab_project.archived,
       license:           gitlab_project.license.try(&.name),
