@@ -26,13 +26,21 @@ class Repository
   full_text_searchable "tsv", catalog: "pg_catalog.simple"
 
   belongs_to user : User
+
   has_many tags : Tag, through: RepositoryTag
+
   has_many repository_languages : RepositoryLanguage
   has_many languages : Language, through: RepositoryLanguage
+
   has_many releases : Release
+
   has_many relationships : Relationship, foreign_key: "master_id"
   has_many dependencies : Repository, through: Relationship, foreign_key: "dependency_id", own_key: "master_id"
   has_many dependents : Repository, through: Relationship, foreign_key: "master_id", own_key: "dependency_id"
+
+  has_many repository_forks : RepositoryFork, foreign_key: "parent_id"
+  has_one repository_parent : RepositoryFork, foreign_key: "fork_id"
+  has_many forks : Repository, through: RepositoryFork, own_key: "parent_id", foreign_key: "fork_id"
 
   scope(:published) { where({ignore: false}) }
 
