@@ -223,8 +223,8 @@ module GithubHelpers
   end
 
   def sync_repository_fork(repository : Repository, github_repository : Github::Repo)
-    if parent_github_repository = github_repository.parent
-      if parent_repository = Repository.query.find({provider: "github", provider_id: parent_github_repository.id})
+    if (parent_github_repository = github_repository.parent)
+      if (parent_repository = Repository.query.find({provider: "github", provider_id: parent_github_repository.id}))
         repository_fork = RepositoryFork.query.find_or_create(parent_id: parent_repository.id, fork_id: repository.id)
       end
     end

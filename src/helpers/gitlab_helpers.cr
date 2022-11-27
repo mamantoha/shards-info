@@ -30,6 +30,7 @@ module GitlabHelpers
     sync_project_readme(repository, readme_file(gitlab_project))
     sync_project_releases(repository)
     sync_project_languages(repository)
+    sync_project_fork(repository, gitlab_project)
 
     Helpers.update_dependecies(repository)
   rescue Crest::NotFound
@@ -73,6 +74,7 @@ module GitlabHelpers
     sync_project_readme(repository, readme_file(gitlab_project))
     sync_project_releases(repository)
     sync_project_languages(repository)
+    sync_project_fork(repository, gitlab_project)
 
     Helpers.update_dependecies(repository)
 
@@ -263,6 +265,14 @@ module GitlabHelpers
     unlink_languages.each do |language_name|
       if (language = Language.query.find({name: language_name}))
         repository.languages.unlink(language)
+      end
+    end
+  end
+
+  def sync_project_fork(repository : Repository, gitlab_project : Gitlab::Project)
+    if (parent_gitlab_project = gitlab_project.forked_from_project)
+      if (parent_repository = Repository.query.find({provider: "gitlab", provider_id: parent_gitlab_project.id}))
+        repository_fork = RepositoryFork.query.find_or_create(parent_id: parent_repository.id, fork_id: repository.id)
       end
     end
   end
