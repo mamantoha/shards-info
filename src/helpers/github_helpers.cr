@@ -51,7 +51,7 @@ module GithubHelpers
     user.delete
   end
 
-  def sync_github_repository(github_repository : Github::Repo) : Repository?
+  def sync_repository(github_repository : Github::Repo) : Repository?
     tags = github_repository.tags
     github_user = github_repository.user
 
