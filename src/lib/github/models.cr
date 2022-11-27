@@ -254,6 +254,10 @@ module Github
       property releases_url : String
 
       property deployments_url : String
+
+      def fork? : Bool
+        fork
+      end
     end
   end
 
@@ -429,6 +433,10 @@ module Github
 
     def last_activity_at : Time
       pushed_at || created_at
+    end
+
+    def fork? : Bool
+      fork
     end
 
     def tags : Array(String)

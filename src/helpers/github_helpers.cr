@@ -113,7 +113,7 @@ module GithubHelpers
       last_activity_at:  github_repository.last_activity_at,
       stars_count:       github_repository.watchers_count,
       forks_count:       github_repository.forks_count,
-      fork:              github_repository.fork,
+      fork:              github_repository.fork?,
       open_issues_count: github_repository.open_issues_count,
       archived:          github_repository.archived,
       created_at:        github_repository.created_at,
