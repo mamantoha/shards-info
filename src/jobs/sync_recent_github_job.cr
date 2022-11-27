@@ -10,7 +10,7 @@ class SyncRecentGithubJob < PeriodicJobWithErrorHandler
     github_repositories.each do |github_repository|
       next if github_repository.private?
 
-      GithubHelpers.sync_github_repository(github_repository)
+      GithubHelpers.sync_repository(github_repository)
     end
   end
 end

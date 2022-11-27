@@ -8,11 +8,17 @@ div
               | This repository has been archived by the owner. It is now read-only.
       .row
         .col
-          h1
+          h1.mb-0
             = repository.name
             i.page__subheading
               = repository.decorate.latest_release
-          .shard__topics
+          span.small
+            - if repository.fork
+              | forked from
+              - if (repository_parent = repository.repository_parent)
+                a href="#{repository_parent.parent.decorate.show_path}"
+                  = repository_parent.parent.decorate.full_name
+          .shard__topics.mt-2
             - repository.tag_names.each do |tag_name|
               a.badge.bg-secondary.text-monospace href="/tags/#{tag_name}" = tag_name
           .shard__intro.text-muted

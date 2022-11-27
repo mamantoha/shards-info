@@ -30,6 +30,7 @@ module GithubHelpers
     sync_repository_readme(repository)
     sync_repository_releases(repository)
     sync_repository_languages(repository)
+    sync_repository_fork(repository, github_repository)
 
     Helpers.update_dependecies(repository)
   rescue Crest::NotFound
@@ -50,7 +51,7 @@ module GithubHelpers
     user.delete
   end
 
-  def sync_github_repository(github_repository : Github::Repo) : Repository?
+  def sync_repository(github_repository : Github::Repo) : Repository?
     tags = github_repository.tags
     github_user = github_repository.user
 
@@ -76,6 +77,7 @@ module GithubHelpers
     sync_repository_readme(repository)
     sync_repository_releases(repository)
     sync_repository_languages(repository)
+    sync_repository_fork(repository, github_repository)
 
     Helpers.update_dependecies(repository)
 
@@ -216,6 +218,14 @@ module GithubHelpers
     unlink_languages.each do |language_name|
       if (language = Language.query.find({name: language_name}))
         repository.languages.unlink(language)
+      end
+    end
+  end
+
+  def sync_repository_fork(repository : Repository, github_repository : Github::Repo)
+    if (parent_github_repository = github_repository.parent)
+      if (parent_repository = Repository.query.find({provider: "github", provider_id: parent_github_repository.id}))
+        repository_fork = RepositoryFork.query.find_or_create(parent_id: parent_repository.id, fork_id: repository.id)
       end
     end
   end

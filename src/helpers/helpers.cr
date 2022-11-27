@@ -15,7 +15,7 @@ module Helpers
         github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
         if (github_repository = github_client.get_repo(user_name, repository_name))
-          GithubHelpers.sync_github_repository(github_repository)
+          GithubHelpers.sync_repository(github_repository)
         end
       when "gitlab.com"
         gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
@@ -39,22 +39,48 @@ module Helpers
     end
   end
 
-  def create_relationships(repository : Repository, spec_dependencies : Array(ShardsSpec::Dependency), development : Bool)
+  def create_relationships(master_repository : Repository, spec_dependencies : Array(ShardsSpec::Dependency), development : Bool)
     spec_dependencies.each do |spec_dependency|
+      branch = spec_dependency.refs
+      version = spec_dependency.version
+
       if (provider_name = (spec_dependency.keys & ["github", "gitlab"]).first?)
         if (repository_path = spec_dependency[provider_name])
           user_name, repository_name = repository_path.split("/")
 
-          if (dependency = Repository.find_repository(user_name, repository_name, provider_name))
-            unless Relationship.query.find({master_id: repository.id, dependency_id: dependency.id, development: development})
-              Relationship.create!({
-                master_id:     repository.id,
-                dependency_id: dependency.id,
-                development:   development,
-                branch:        spec_dependency.refs,
-                version:       spec_dependency.version,
-              })
+          dependency_repository = Repository.find_repository(user_name, repository_name, provider_name)
+
+          unless dependency_repository
+            case provider_name
+            when "github"
+              github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+
+              if (github_repository = github_client.get_repo(user_name, repository_name))
+                dependency_repository = GithubHelpers.sync_repository(github_repository)
+              end
+            when "gitlab"
+              gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
+
+              if (gitlab_project = gitlab_client.project(user_name, repository_name))
+                dependency_repository = GitlabHelpers.sync_project(gitlab_project)
+              end
             end
+          end
+
+          return unless dependency_repository
+
+          unless Relationship.query.find({
+                   master_id:     master_repository.id,
+                   dependency_id: dependency_repository.id,
+                   development:   development,
+                 })
+            Relationship.create!({
+              master_id:     master_repository.id,
+              dependency_id: dependency_repository.id,
+              development:   development,
+              branch:        branch,
+              version:       version,
+            })
           end
         end
       end

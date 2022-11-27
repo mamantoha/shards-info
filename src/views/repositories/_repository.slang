@@ -9,6 +9,12 @@
             i class="fab fa-#{repository.provider} fa-stack-1x fa-inverse"
   .width-full
     .shards__shard_info
+      .small.text-secondary
+        - if repository.fork
+          | forked from
+          - if (repository_parent = repository.repository_parent)
+            a href="#{repository_parent.parent.decorate.show_path}"
+              = repository_parent.parent.decorate.full_name
       h2.shards__shard_name.css-truncate
         a href="/#{repository.provider}/#{repository.decorate.full_name}/"
           - if additional_info
