@@ -34,6 +34,7 @@ def create_user_with_repository
     forks_count:      1,
     archived:         false,
     ignore:           false,
+    fork:             false,
     last_activity_at: Time.local,
     synced_at:        Time.local,
   })

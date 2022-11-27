@@ -149,6 +149,10 @@ module Gitlab
     property only_mirror_protected_branches : Bool?
 
     property mirror_overwrites_diverged_branches : Bool?
+
+    def fork? : Bool
+      forked_from_project ? true : false
+    end
   end
 
   class ForkedFromProject
