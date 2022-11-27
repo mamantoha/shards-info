@@ -26,6 +26,12 @@ module GithubHelpers
 
     repository.tags = tags
 
+    if parent_github_repository = github_repository.parent
+      if parent_repository = Repository.query.find({provider: "github", provider_id: parent_github_repository.id})
+        repository_fork = RepositoryFork.query.find_or_create(parent_id: parent_repository.id, fork_id: repository.id)
+      end
+    end
+
     sync_repository_shard_yml(repository)
     sync_repository_readme(repository)
     sync_repository_releases(repository)
