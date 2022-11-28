@@ -5,12 +5,12 @@ class SyncRecentGithubJob < PeriodicJobWithErrorHandler
 
   def perform
     github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
-    github_repositories = github_client.recently_updated.items
+    github_repos = github_client.recently_updated.items
 
-    github_repositories.each do |github_repository|
-      next if github_repository.private?
+    github_repos.each do |github_repo|
+      next if github_repo.private?
 
-      GithubHelpers.sync_repository(github_repository)
+      GithubHelpers.sync_github_repo(github_repo)
     end
   end
 end

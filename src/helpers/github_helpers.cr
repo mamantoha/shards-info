@@ -8,10 +8,10 @@ module GithubHelpers
 
     github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
-    github_repository = github_client.get_repo(repository.provider_id)
+    github_repo = github_client.get_repo(repository.provider_id)
 
-    tags = github_repository.tags
-    github_user = github_repository.user
+    tags = github_repo.tags
+    github_user = github_repo.user
 
     user = User.query.find_or_build(provider: "github", provider_id: github_user.id)
     assign_repository_user_attributes(user, github_user)
@@ -20,7 +20,7 @@ module GithubHelpers
     user.save!
 
     repository.user = user
-    assign_repository_attributes(repository, github_repository)
+    assign_repository_attributes(repository, github_repo)
     repository.synced_at = Time.utc
     repository.save!
 
@@ -30,7 +30,7 @@ module GithubHelpers
     sync_repository_readme(repository)
     sync_repository_releases(repository)
     sync_repository_languages(repository)
-    sync_repository_fork(repository, github_repository)
+    sync_repository_fork(repository, github_repo)
 
     Helpers.update_dependecies(repository)
   rescue Crest::NotFound
@@ -51,9 +51,9 @@ module GithubHelpers
     user.delete
   end
 
-  def sync_repository(github_repository : Github::Repo) : Repository?
-    tags = github_repository.tags
-    github_user = github_repository.user
+  def sync_github_repo(github_repo : Github::Repo) : Repository?
+    tags = github_repo.tags
+    github_user = github_repo.user
 
     user = User.query.find_or_build(provider: "github", provider_id: github_user.id)
     assign_repository_user_attributes(user, github_user)
@@ -61,10 +61,10 @@ module GithubHelpers
     user.ignore = false unless user.persisted?
     user.save!
 
-    repository = Repository.query.find_or_build(provider: "github", provider_id: github_repository.id)
+    repository = Repository.query.find_or_build(provider: "github", provider_id: github_repo.id)
     repository.ignore = false unless repository.persisted?
     repository.user = user
-    assign_repository_attributes(repository, github_repository)
+    assign_repository_attributes(repository, github_repo)
 
     return repository unless repository.changed?
 
@@ -77,7 +77,7 @@ module GithubHelpers
     sync_repository_readme(repository)
     sync_repository_releases(repository)
     sync_repository_languages(repository)
-    sync_repository_fork(repository, github_repository)
+    sync_repository_fork(repository, github_repo)
 
     Helpers.update_dependecies(repository)
 
@@ -107,19 +107,19 @@ module GithubHelpers
     })
   end
 
-  def assign_repository_attributes(repository : Repository, github_repository : Github::Repo)
+  def assign_repository_attributes(repository : Repository, github_repo : Github::Repo)
     repository.set({
-      name:              github_repository.name,
-      description:       github_repository.description,
-      default_branch:    github_repository.default_branch,
-      last_activity_at:  github_repository.last_activity_at,
-      stars_count:       github_repository.watchers_count,
-      forks_count:       github_repository.forks_count,
-      fork:              github_repository.fork?,
-      open_issues_count: github_repository.open_issues_count,
-      archived:          github_repository.archived,
-      created_at:        github_repository.created_at,
-      license:           github_repository.license.try(&.name),
+      name:              github_repo.name,
+      description:       github_repo.description,
+      default_branch:    github_repo.default_branch,
+      last_activity_at:  github_repo.last_activity_at,
+      stars_count:       github_repo.watchers_count,
+      forks_count:       github_repo.forks_count,
+      fork:              github_repo.fork?,
+      open_issues_count: github_repo.open_issues_count,
+      archived:          github_repo.archived,
+      created_at:        github_repo.created_at,
+      license:           github_repo.license.try(&.name),
     })
   end
 
@@ -222,9 +222,9 @@ module GithubHelpers
     end
   end
 
-  def sync_repository_fork(repository : Repository, github_repository : Github::Repo)
-    if (parent_github_repository = github_repository.parent)
-      if (parent_repository = Repository.query.find({provider: "github", provider_id: parent_github_repository.id}))
+  def sync_repository_fork(repository : Repository, github_repo : Github::Repo)
+    if (parent_github_repo = github_repo.parent)
+      if (parent_repository = Repository.query.find({provider: "github", provider_id: parent_github_repo.id}))
         repository_fork = RepositoryFork.query.find_or_create(parent_id: parent_repository.id, fork_id: repository.id)
       end
     end
