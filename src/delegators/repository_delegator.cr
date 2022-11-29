@@ -62,8 +62,4 @@ class RepositoryDelegator < Delegator(Repository)
       ""
     end
   end
-
-  def fork_icon
-    fork ? "fas fa-code-fork" : "fas fa-code"
-  end
 end
