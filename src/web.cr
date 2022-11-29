@@ -394,6 +394,8 @@ get "/:provider/:owner/:repo" do |env|
         .order_by("repositories.stars_count", :desc)
         .order_by("repositories.id", :asc)
 
+    forks = repository.forks.with_user
+
     dependents_count = dependents.count
 
     Config.config.page_title = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
@@ -524,6 +526,39 @@ get "/tags/:name" do |env|
   end
 end
 
+get "/languages" do |env|
+  languages_json = CACHE.fetch("languages_json") do
+    languages =
+      Language
+        .query
+        .join("repository_languages") { var("repository_languages", "language_id") == var("languages", "id") }
+        .select(
+          "languages.*",
+          "COUNT(repository_languages.*) AS languages_count"
+        )
+        .order_by(languages_count: :desc)
+        .group_by("languages.id")
+
+    languages_array = [] of Hash(String, String)
+
+    languages.each(fetch_columns: true) do |language|
+      languages_array << {
+        "text"   => language.name.to_s,
+        "weight" => language.attributes["languages_count"].to_s,
+        "link"   => "/languages/#{language.name}",
+      }
+    end
+
+    languages_array.to_json
+  end
+
+  Config.config.page_title = "Languages on shards.info"
+  Config.config.page_description = "Browse languages on shards.info"
+  Config.config.current_page = "languages"
+
+  render "src/views/languages/index.slang", "src/views/layouts/layout.slang"
+end
+
 get "/languages/:name" do |env|
   name = env.params.url["name"]
   name = URI.decode(name)
@@ -547,8 +582,6 @@ get "/languages/:name" do |env|
         .clear_distinct
         .with_tags
         .with_user
-        .where { users.ignore == false }
-        .where { repositories.ignore == false }
         .with_dependents_count
         .order_by("repositories.stars_count", :desc)
         .order_by("repositories.id", :asc)

@@ -72,7 +72,7 @@
             | Forks
         .collapse.show#collapseForks
           ul.list__items.not-list
-            - repository.forks.each(fetch_columns: true) do |repository|
+            - forks.each(fetch_columns: true) do |repository|
               li.link
                 i class="#{repository.decorate.provider_icon}"
                 a href="#{repository.decorate.show_path}"

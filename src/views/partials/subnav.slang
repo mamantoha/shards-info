@@ -1,9 +1,11 @@
 .subnav
   .container
-    ul class="nav"
-      li class="nav-item"
+    ul.nav
+      li.nav-item
         a class="nav-link #{"active" if Config.config.current_page == "home"}" href="/" Repositories
-      li class="nav-item"
+      li.nav-item
         a class="nav-link #{"active" if Config.config.current_page == "users"}" href="/users" Community
-      li class="nav-item"
+      li.nav-item
         a class="nav-link #{"active" if Config.config.current_page == "tags"}" href="/tags" Tags
+      li.nav-item.d-none.d-lg-block
+        a class="nav-link #{"active" if Config.config.current_page == "languages"}" href="/languages" Languages
