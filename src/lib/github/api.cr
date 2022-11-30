@@ -91,7 +91,7 @@ module Github
       repos.select { |repo| repo.language == "Crystal" }
     end
 
-    def get_repo(id : Int32)
+    def repo(id : Int32)
       url = "/repositories/#{id}"
 
       response = make_request(url)
@@ -99,7 +99,7 @@ module Github
       Github::Repo.from_json(response.body)
     end
 
-    def get_repo(full_name : String)
+    def repo(full_name : String)
       url = "/repos/#{full_name}"
 
       response = make_request(url)
@@ -107,8 +107,8 @@ module Github
       Github::Repo.from_json(response.body)
     end
 
-    def get_repo(owner : String, name : String)
-      get_repo("#{owner}/#{name}")
+    def repo(owner : String, name : String)
+      repo("#{owner}/#{name}")
     end
 
     def repo_releases(full_name : String) : Array(Github::Release)

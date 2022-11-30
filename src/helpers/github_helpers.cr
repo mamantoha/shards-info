@@ -8,7 +8,7 @@ module GithubHelpers
 
     github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
-    github_repo = github_client.get_repo(repository.provider_id)
+    github_repo = github_client.repo(repository.provider_id)
 
     tags = github_repo.tags
     github_user = github_repo.user

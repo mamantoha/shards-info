@@ -14,7 +14,7 @@ module Helpers
       when "github.com"
         github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
-        if (github_repo = github_client.get_repo(user_name, repository_name))
+        if (github_repo = github_client.repo(user_name, repository_name))
           GithubHelpers.sync_github_repo(github_repo)
         end
       when "gitlab.com"
@@ -55,7 +55,7 @@ module Helpers
             when "github"
               github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
-              if (github_repo = github_client.get_repo(user_name, repository_name))
+              if (github_repo = github_client.repo(user_name, repository_name))
                 dependency_repository = GithubHelpers.sync_github_repo(github_repo)
               end
             when "gitlab"
