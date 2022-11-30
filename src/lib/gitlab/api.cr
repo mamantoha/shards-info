@@ -104,10 +104,10 @@ module Gitlab
       Gitlab::Project.from_json(response.body)
     end
 
-    def project(user : String, project : String)
+    def project(full_name : String)
       # make sure that the `NAMESPACE/PROJECT_PATH` is URL-encoded
       # For example, `/` is represented by `%2F`
-      path = URI.encode_www_form("#{user}/#{project}")
+      path = URI.encode_www_form(full_name)
       url = "/projects/#{path}"
 
       params = {
@@ -117,6 +117,10 @@ module Gitlab
       response = make_request(url, params)
 
       Gitlab::Project.from_json(response.body)
+    end
+
+    def project(user : String, project : String)
+      project("#{user}/#{project}")
     end
 
     def project_releases(project_id : Int32)
