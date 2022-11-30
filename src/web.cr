@@ -546,6 +546,7 @@ get "/languages" do |env|
         "text"   => language.name.to_s,
         "weight" => language.attributes["languages_count"].to_s,
         "link"   => "/languages/#{language.name}",
+        "color"  => language.color.to_s,
       }
     end
 
