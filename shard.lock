@@ -26,7 +26,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.15+git.commit.fa7af9183343d90239eb0c6a3ab7a6f70a4a3de1
+    version: 0.8.15+git.commit.e746274d80e54899fbf935a1e2e8ae095cc4eab6
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
