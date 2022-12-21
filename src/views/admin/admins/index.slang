@@ -26,7 +26,7 @@
             td
               = admin.decorate.role_name
             td
-              = admin.created_at
+              = admin.created_at.by_example("January 2, 2006 @ 15:04")
             td
-              = admin.updated_at
+              = admin.updated_at.by_example("January 2, 2006 @ 15:04")
   == paginator
