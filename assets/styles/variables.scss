@@ -15,12 +15,12 @@ html {
   --font-color: #212529;
   --link-color: #000;
   --regular-link-color: #2e2eff;
-  --page-heading-bg-color: #fafbfc;
+  --page-heading-bg-color: #f6f8fa;
   --nav-link-color: #6a737d;
   --nav-active-link-color: #1b1f23;
   --footer-color: #4f545a;
-  --footer-bg-color: #f5f5f5;
-  --border-color: #eee;
+  --footer-bg-color: #f6f8fa;
+  --border-color: #d0d7de;
   --pg-color: #1f6feb;
   --pg-active-color: #fff;
   --code-color: #333;
@@ -31,6 +31,7 @@ html {
   --alert-success-bg-color: #d1e7dd;
   --alert-success-border-color: #badbcc;
   --badge-bg-color: #6c757d;
+  --pg-color: #212529;
 
   .table {
     --bs-table-bg: rgb(0 0 0 / 0%);
@@ -63,6 +64,7 @@ html.dark {
   --alert-success-bg-color: #58a6ff;
   --alert-success-border-color: #07693c;
   --badge-bg-color: #424b5f;
+  --pg-color: #acb2b8;
 
   .btn-close {
     filter: invert(1) grayscale(100%) brightness(200%);
