@@ -26,7 +26,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.15+git.commit.e746274d80e54899fbf935a1e2e8ae095cc4eab6
+    version: 0.8.15+git.commit.de5486dadfbb0abe69374e03eff43f0718a0f1d1
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -142,7 +142,7 @@ shards:
 
   slang:
     git: https://github.com/jeromegn/slang.git
-    version: 1.7.3+git.commit.901df64c9a1c1df91d3acd00762509c9b6d3cfd8
+    version: 1.7.3+git.commit.f038a6c9725065ffd9b035f9c402390a2150d519
 
   spec-kemal:
     git: https://github.com/kemalcr/spec-kemal.git
