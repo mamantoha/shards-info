@@ -723,7 +723,7 @@ ul.not-list {
     &.active {
       font-weight: 500;
       color: var(--nav-active-link-color) !important;
-      border-bottom-color: #2e2eff !important;
+      border-bottom-color: var(--color-primer-border-active) !important;
     }
   }
 }
@@ -741,7 +741,11 @@ ul.not-list {
       background-color: var(--main-bg-color);
       color: var(--nav-link-color);
       border-top: 3px solid;
-      border-color: #e36209 var(--border-color) transparent;
+      border-color: var(--color-primer-border-active) var(--border-color) transparent;
+
+      &:hover {
+        border-color: var(--color-primer-border-active) var(--border-color) transparent;
+      }
     }
   }
 }
