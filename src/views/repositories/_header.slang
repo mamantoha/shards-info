@@ -21,7 +21,7 @@ div
           .shard__topics.mt-2
             - repository.tag_names.each do |tag_name|
               a.badge.bg-secondary.text-monospace href="/tags/#{tag_name}" = tag_name
-          .shard__intro.text-muted
+          .shard__intro
             span
               == repository.decorate.description_html.to_s
         - if (current_user = current_user(env)) && current_user.admin?
