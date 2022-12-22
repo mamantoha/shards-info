@@ -5,7 +5,7 @@
         .dropdown#userActions
           button.btn.btn-danger.dropdown-toggle type="button" id="dropdownUserActionsMenuButton" data-bs-toggle="dropdown" aria-expanded="false"
             | Actions
-          ul.dropdown-menu.dropdown-menu-dark aria-labelledby="dropdownUserActionsMenuButton"
+          ul.dropdown-menu aria-labelledby="dropdownUserActionsMenuButton"
             li
               a.dropdown-item.js-action href="#" data-href="/admin/users/#{user.id}/sync" data-method="POST"
                 i.fas.fa-sync

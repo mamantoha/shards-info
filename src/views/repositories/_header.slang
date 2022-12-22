@@ -29,7 +29,7 @@ div
             .dropdown#repositoryActions
               button.btn.btn-danger.dropdown-toggle type="button" id="dropdownRepositoryActionsMenuButton" data-bs-toggle="dropdown" aria-expanded="false"
                 | Actions
-              ul.dropdown-menu.dropdown-menu-dark aria-labelledby="dropdownRepositoryActionsMenuButton"
+              ul.dropdown-menu aria-labelledby="dropdownRepositoryActionsMenuButton"
                 li
                   a.dropdown-item.js-action href="#" data-href="/admin/repositories/#{repository.id}/sync" data-method="POST"
                     i.fas.fa-sync
