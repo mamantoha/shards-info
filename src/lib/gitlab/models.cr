@@ -160,7 +160,7 @@ module Gitlab
 
     property id : Int32
 
-    property description : String
+    property description : String?
 
     property name : String
 
