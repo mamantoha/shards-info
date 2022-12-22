@@ -32,6 +32,9 @@ html {
   --badge-bg-color: #6c757d;
   --pg-color: #212529;
   --color-primer-border-active: #ec775c;
+  --scrollbar-track-color: #fafafa;
+  --scrollbar-handle-color: #c1c1c1;
+  --scrollbar-handle-hover-color: #7d7d7d;
 
   .table {
     --bs-table-bg: rgb(0 0 0 / 0%);
@@ -65,6 +68,9 @@ html.dark {
   --alert-success-border-color: #07693c;
   --badge-bg-color: #424b5f;
   --pg-color: #acb2b8;
+  --scrollbar-track-color: #2b2b2b;
+  --scrollbar-handle-color: #6b6b6b;
+  --scrollbar-handle-hover-color: #939393;
 
   .btn-close {
     filter: invert(1) grayscale(100%) brightness(200%);

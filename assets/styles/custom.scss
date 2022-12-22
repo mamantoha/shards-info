@@ -1,3 +1,22 @@
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-handle-color);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbar-track-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-handle-hover-color);
+}
+
 html {
   position: relative;
   min-height: 100%;
