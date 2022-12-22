@@ -57,6 +57,8 @@ dependencies:
     github: crystal-i18n/i18n
   humanize_time:
     github: mamantoha/humanize_time
+  time_by_example:
+    github: mamantoha/time_by_example
   cmark:
     github: amauryt/cr-cmark-gfm
     branch: master

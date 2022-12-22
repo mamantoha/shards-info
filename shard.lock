@@ -148,3 +148,7 @@ shards:
     git: https://github.com/kemalcr/spec-kemal.git
     version: 1.0.0
 
+  time_by_example:
+    git: https://github.com/mamantoha/time_by_example.git
+    version: 0.1.0
+

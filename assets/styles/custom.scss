@@ -110,7 +110,6 @@ a.badge {
 
 .navbar {
   border-bottom: 1px solid var(--border-color) !important;
-  box-shadow: 1px 5px 5px var(--page-heading-bg-color);
   background-color: var(--navbar-bg-color) !important;
 }
 
@@ -122,8 +121,6 @@ a.badge {
 }
 
 #stand-with-ukraine {
-  margin: 1rem 0;
-
   .blue-band {
     background-color: #0057b8;
     padding: 0.5rem 1rem;
@@ -382,14 +379,12 @@ ul.not-list {
 
 .page__subheading {
   font-size: 60%;
-  color: #545454;
 }
 
 .result_stats {
   font-size: 40%;
   line-height: 43px;
   padding-left: 16px;
-  color: #545454;
 }
 
 .shard__header {
@@ -459,6 +454,12 @@ ul.not-list {
   overflow-wrap: break-word;
   word-wrap: break-word;
 
+  table {
+    thead {
+      text-align: center;
+    }
+  }
+
   :is(h1, h2, h3, h4, h5, h6) {
     font-weight: 600;
     margin-bottom: 16px;
@@ -518,7 +519,7 @@ ul.not-list {
     background-color: var(--code-inline-bg-color);
     border-radius: 6px;
     margin: 0;
-    padding: 0.2em 0.4em;
+    padding: 0.1em 0.2em;
   }
 
   pre {
@@ -722,7 +723,7 @@ ul.not-list {
     &.active {
       font-weight: 500;
       color: var(--nav-active-link-color) !important;
-      border-bottom-color: #2e2eff !important;
+      border-bottom-color: var(--color-primer-border-active) !important;
     }
   }
 }
@@ -740,7 +741,11 @@ ul.not-list {
       background-color: var(--main-bg-color);
       color: var(--nav-link-color);
       border-top: 3px solid;
-      border-color: #e36209 var(--border-color) transparent;
+      border-color: var(--color-primer-border-active) var(--border-color) transparent;
+
+      &:hover {
+        border-color: var(--color-primer-border-active) var(--border-color) transparent;
+      }
     }
   }
 }
@@ -767,7 +772,7 @@ ul.not-list {
 
 .badge-info {
   color: #fff;
-  background-color: #0c5f6e;
+  background-color: var(--badge-bg-color);
 }
 
 .tooltip {

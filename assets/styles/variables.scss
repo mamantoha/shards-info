@@ -11,26 +11,27 @@
 
 html {
   --main-bg-color: #fff;
-  --navbar-bg-color: #24292e;
+  --navbar-bg-color: #2d333b;
   --font-color: #212529;
   --link-color: #000;
   --regular-link-color: #2e2eff;
-  --page-heading-bg-color: #fafbfc;
+  --page-heading-bg-color: #f6f8fa;
   --nav-link-color: #6a737d;
   --nav-active-link-color: #1b1f23;
   --footer-color: #4f545a;
-  --footer-bg-color: #f5f5f5;
-  --border-color: #eee;
-  --pg-color: #1f6feb;
+  --footer-bg-color: #f6f8fa;
+  --border-color: #d0d7de;
   --pg-active-color: #fff;
   --code-color: #333;
   --code-bg-color: #f7f8fa;
-  --code-inline-bg-color: #f3f4f4;
+  --code-inline-bg-color: #afb8c133;
   --avatar-bg-color: #fff;
   --alert-success-color: #0f5132;
   --alert-success-bg-color: #d1e7dd;
   --alert-success-border-color: #badbcc;
   --badge-bg-color: #6c757d;
+  --pg-color: #212529;
+  --color-primer-border-active: #ec775c;
 
   .table {
     --bs-table-bg: rgb(0 0 0 / 0%);
@@ -45,32 +46,33 @@ html {
 }
 
 html.dark {
-  --main-bg-color: #181b22;
-  --page-heading-bg-color: #0e1117;
-  --navbar-bg-color: #181b22;
+  --main-bg-color: #22272e;
+  --page-heading-bg-color: #2d333b;
+  --navbar-bg-color: #2d333b;
   --font-color: #acb2b8;
   --link-color: #fff;
   --regular-link-color: #1f6feb;
   --nav-link-color: white;
   --nav-active-link-color: white;
   --footer-color: #f5f5f5;
-  --footer-bg-color: #181b22;
+  --footer-bg-color: #2d333b;
   --border-color: #3d3d3d;
   --code-color: #f8f8f8;
-  --code-bg-color: #0e1117;
-  --code-inline-bg-color: #30333a;
+  --code-bg-color: #2d333b;
+  --code-inline-bg-color: #636e7b66;
   --alert-success-color: #fff;
   --alert-success-bg-color: #58a6ff;
   --alert-success-border-color: #07693c;
   --badge-bg-color: #424b5f;
+  --pg-color: #acb2b8;
 
   .btn-close {
     filter: invert(1) grayscale(100%) brightness(200%);
   }
 
   .table {
-    --bs-table-bg: #212529;
-    --bs-table-striped-bg: #2c3034;
+    --bs-table-bg: #2d333b;
+    --bs-table-striped-bg: #22272e;
     --bs-table-striped-color: #fff;
     --bs-table-active-bg: #373b3e;
     --bs-table-active-color: #fff;

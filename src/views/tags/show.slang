@@ -7,8 +7,11 @@ div
         span class="badge badge-info"
           = tag.name
       .result_stats
-        = total_count
-        ' results
+        | Displaying
+        strong= "#{offset + 1}-#{[page * per_page, total_count].min}"
+        | of
+        strong= "#{total_count}"
+        | total results
 .container
   == render "src/views/repositories/_list.slang"
 == paginator
