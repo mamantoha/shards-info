@@ -150,6 +150,7 @@ get "/repositories" do |env|
     "stars"          => "Stars",
     "alphabetical"   => "Alphabetical",
     "dependents"     => "Dependents",
+    "dependencies"   => "Dependencies",
     "recent-updates" => "Recent Updates",
     "new"            => "Newly Added",
   }
@@ -166,6 +167,8 @@ get "/repositories" do |env|
       {"stars_count", :desc}
     when "dependents"
       {"(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id)", :desc}
+    when "dependencies"
+      {"(select COUNT(*) from relationships r WHERE r.master_id=repositories.id)", :desc}
     when "recent-updates"
       {"last_activity_at", :desc}
     when "new"
