@@ -18,11 +18,3 @@ Lint/UnusedArgument:
   - src/web.cr
   Enabled: true
   Severity: Warning
-
-Lint/NotNil:
-  Description: Identifies usage of `not_nil!` calls
-  Excluded:
-  - src/helpers/helpers.cr
-  - src/delegators/user_delegarot.cr
-  Enabled: true
-  Severity: Warning

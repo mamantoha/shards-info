@@ -10,7 +10,7 @@ class UserDelegator < Delegator(User)
   def avatar(size : Int32? = nil)
     return "/images/avatar.png" unless avatar_url
 
-    if provider == "gitlab" && avatar_url.not_nil!.starts_with?('/')
+    if provider == "gitlab" && avatar_url.to_s.starts_with?('/')
       "https://gitlab.com#{avatar_url}"
     else
       if size
