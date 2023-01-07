@@ -191,7 +191,7 @@ class ReadmeRenderer < Cmark::HTMLRenderer
 
       formatter_out : IO = IO::Memory.new
 
-      if (lexer = Noir.find_lexer(language_name))
+      if lexer = Noir.find_lexer(language_name)
         Noir.highlight(
           node.literal,
           lexer: lexer,

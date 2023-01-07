@@ -193,8 +193,8 @@ module GitlabHelpers
   end
 
   def readme_file(gitlab_project : Gitlab::Project)
-    if (readme_url = gitlab_project.readme_url)
-      if (m = readme_url.match(/#{gitlab_project.web_url}\/-\/blob\/#{gitlab_project.default_branch}\/(.*)/))
+    if readme_url = gitlab_project.readme_url
+      if m = readme_url.match(/#{gitlab_project.web_url}\/-\/blob\/#{gitlab_project.default_branch}\/(.*)/)
         m[1]
       else
         "README.md"
@@ -263,16 +263,16 @@ module GitlabHelpers
     end
 
     unlink_languages.each do |language_name|
-      if (language = Language.query.find({name: language_name}))
+      if language = Language.query.find({name: language_name})
         repository.languages.unlink(language)
       end
     end
   end
 
   def sync_project_fork(repository : Repository, gitlab_project : Gitlab::Project)
-    if (parent_gitlab_project = gitlab_project.forked_from_project)
-      if (parent_repository = Repository.query.find({provider: "gitlab", provider_id: parent_gitlab_project.id}))
-        repository_fork = RepositoryFork.query.find_or_create(parent_id: parent_repository.id, fork_id: repository.id)
+    if parent_gitlab_project = gitlab_project.forked_from_project
+      if parent_repository = Repository.query.find({provider: "gitlab", provider_id: parent_gitlab_project.id})
+        RepositoryFork.query.find_or_create(parent_id: parent_repository.id, fork_id: repository.id)
       end
     end
   end

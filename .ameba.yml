@@ -1,0 +1,19 @@
+Excluded:
+  - samples/*
+
+Lint/UselessAssign:
+  Description: Disallows useless variable assignments
+  Excluded:
+    - src/web.cr
+  Enabled: true
+  Severity: Warning
+
+Lint/UnusedArgument:
+  Description: Disallows unused arguments
+  IgnoreDefs: true
+  IgnoreBlocks: false
+  IgnoreProcs: false
+  Excluded:
+    - src/web.cr
+  Enabled: true
+  Severity: Warning

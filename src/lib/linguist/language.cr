@@ -43,7 +43,7 @@ module Linguist
 
     # A List of languages with assigned colors.
     def self.colors : Array(Language)
-      all.select(&.color).sort_by { |lang| lang.name.downcase }
+      all.select(&.color).sort_by!(&.name.downcase)
     end
   end
 

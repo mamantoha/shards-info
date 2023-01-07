@@ -16,7 +16,6 @@ require "emoji"
 require "humanize_time"
 require "time_by_example"
 require "autolink"
-require "shards_spec"
 require "raven/integrations/kemal"
 
 require "../config/config"
@@ -33,7 +32,7 @@ def self.multi_auth(env)
 end
 
 def self.current_user(env) : Admin?
-  if (id = env.session.bigint?("user_id"))
+  if id = env.session.bigint?("user_id")
     Admin.find(id)
   end
 rescue
@@ -42,7 +41,7 @@ end
 
 Kemal.config.add_handler(Raven::Kemal::ExceptionHandler.new)
 
-static_headers do |response, filepath, filestat|
+static_headers do |response, _filepath, _filestat|
   duration = 1.day.total_seconds.to_i
   response.headers.add "Cache-Control", "public, max-age=#{duration}"
 end
@@ -344,7 +343,7 @@ get "/:provider/:owner" do |env|
   provider = env.params.url["provider"]
   owner = env.params.url["owner"]
 
-  if (user = User.query.with_repositories(&.with_tags).find({provider: provider, login: owner}))
+  if user = User.query.with_repositories(&.with_tags).find({provider: provider, login: owner})
     repositories =
       user
         .repositories
@@ -374,7 +373,7 @@ get "/:provider/:owner/:repo" do |env|
   owner = env.params.url["owner"]
   repo = env.params.url["repo"]
 
-  if (repository = Repository.find_repository(owner, repo, provider))
+  if repository = Repository.find_repository(owner, repo, provider)
     dependencies =
       repository
         .dependencies
@@ -419,10 +418,10 @@ get "/:provider/:owner/:repo/readme" do |env|
   owner = env.params.url["owner"]
   repo = env.params.url["repo"]
 
-  if (repository = Repository.find_repository(owner, repo, provider))
+  if repository = Repository.find_repository(owner, repo, provider)
     readme_html =
-      if repository.readme
-        Helpers.to_markdown(repository)
+      if readme_content = repository.readme
+        Helpers.to_markdown(repository, readme_content)
       else
         raise Kemal::Exceptions::RouteNotFound.new(env)
       end
@@ -451,7 +450,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
-  if (repository = Repository.find_repository(owner, repo, provider))
+  if repository = Repository.find_repository(owner, repo, provider)
     repositories_query =
       repository
         .dependents
@@ -494,7 +493,7 @@ get "/tags/:name" do |env|
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
-  if (tag = Tag.query.find({name: name}))
+  if tag = Tag.query.find({name: name})
     repositories_query =
       tag
         .repositories
@@ -568,7 +567,7 @@ get "/languages/:name" do |env|
   name = env.params.url["name"]
   name = URI.decode(name)
 
-  if (language = Linguist::Language.find_by_name(name))
+  if language = Linguist::Language.find_by_name(name)
     name = language.name
   end
 
@@ -579,7 +578,7 @@ get "/languages/:name" do |env|
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
-  if (language = Language.query.find({name: name}))
+  if language = Language.query.find({name: name})
     repositories_query =
       language
         .repositories
@@ -656,7 +655,7 @@ end
 post "/admin/repositories" do |env|
   url = env.params.body["repository[url]"].as(String)
 
-  if (repository = Helpers.sync_repository_by_url(url))
+  if repository = Helpers.sync_repository_by_url(url)
     env.flash["notice"] = "Repository was successfully added."
 
     env.redirect(repository.decorate.show_path)
@@ -740,7 +739,7 @@ end
 post "/admin/users/:id/sync" do |env|
   id = env.params.url["id"]
 
-  if (user = User.find(id))
+  if user = User.find(id)
     case user.provider
     when "github"
       GithubHelpers.resync_user(user)
@@ -763,7 +762,7 @@ end
 delete "/admin/users/:id" do |env|
   id = env.params.url["id"]
 
-  if (user = User.find(id))
+  if user = User.find(id)
     user.delete
 
     env.response.content_type = "application/json"
@@ -781,7 +780,7 @@ end
 post "/admin/users/:id/show" do |env|
   id = env.params.url["id"]
 
-  if (user = User.find(id))
+  if user = User.find(id)
     user.update(ignore: false)
 
     env.response.content_type = "application/json"
@@ -799,7 +798,7 @@ end
 post "/admin/users/:id/hide" do |env|
   id = env.params.url["id"]
 
-  if (user = User.find(id))
+  if user = User.find(id)
     user.update(ignore: true)
 
     env.response.content_type = "application/json"
@@ -817,7 +816,7 @@ end
 post "/admin/repositories/:id/sync" do |env|
   id = env.params.url["id"]
 
-  if (repository = Repository.find(id))
+  if repository = Repository.find(id)
     case repository.provider
     when "github"
       GithubHelpers.resync_repository(repository)
@@ -840,7 +839,7 @@ end
 post "/admin/repositories/:id/show" do |env|
   id = env.params.url["id"]
 
-  if (repository = Repository.find(id))
+  if repository = Repository.find(id)
     repository.update(ignore: false)
 
     env.response.content_type = "application/json"
@@ -858,7 +857,7 @@ end
 post "/admin/repositories/:id/hide" do |env|
   id = env.params.url["id"]
 
-  if (repository = Repository.find(id))
+  if repository = Repository.find(id)
     repository.update(ignore: true)
 
     env.response.content_type = "application/json"
@@ -876,7 +875,7 @@ end
 delete "/admin/repositories/:id" do |env|
   id = env.params.url["id"]
 
-  if (repository = Repository.find(id))
+  if repository = Repository.find(id)
     repository.delete
 
     env.response.content_type = "application/json"
