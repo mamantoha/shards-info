@@ -16,7 +16,6 @@ require "emoji"
 require "humanize_time"
 require "time_by_example"
 require "autolink"
-require "shards_spec"
 require "raven/integrations/kemal"
 
 require "../config/config"

@@ -272,7 +272,7 @@ module GitlabHelpers
   def sync_project_fork(repository : Repository, gitlab_project : Gitlab::Project)
     if parent_gitlab_project = gitlab_project.forked_from_project
       if parent_repository = Repository.query.find({provider: "gitlab", provider_id: parent_gitlab_project.id})
-        repository_fork = RepositoryFork.query.find_or_create(parent_id: parent_repository.id, fork_id: repository.id)
+        RepositoryFork.query.find_or_create(parent_id: parent_repository.id, fork_id: repository.id)
       end
     end
   end

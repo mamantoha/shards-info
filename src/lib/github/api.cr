@@ -49,7 +49,7 @@ module Github
     end
 
     def make_request(url)
-      response = client[url].get
+      client[url].get
     ensure
       client.http_client.close
     end
