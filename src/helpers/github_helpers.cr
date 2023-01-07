@@ -216,15 +216,15 @@ module GithubHelpers
     end
 
     unlink_languages.each do |language_name|
-      if (language = Language.query.find({name: language_name}))
+      if language = Language.query.find({name: language_name})
         repository.languages.unlink(language)
       end
     end
   end
 
   def sync_repository_fork(repository : Repository, github_repo : Github::Repo)
-    if (parent_github_repo = github_repo.parent)
-      if (parent_repository = Repository.query.find({provider: "github", provider_id: parent_github_repo.id}))
+    if parent_github_repo = github_repo.parent
+      if parent_repository = Repository.query.find({provider: "github", provider_id: parent_github_repo.id})
         repository_fork = RepositoryFork.query.find_or_create(parent_id: parent_repository.id, fork_id: repository.id)
       end
     end

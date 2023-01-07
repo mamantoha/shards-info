@@ -93,7 +93,7 @@ class Repository
   end
 
   def postinstall_script : String?
-    if (_shard_yml = shard_yml)
+    if _shard_yml = shard_yml
       spec = ShardsSpec::Spec.from_yaml(_shard_yml)
       spec.scripts["postinstall"]?
     end
@@ -110,7 +110,7 @@ class Repository
 
     unlink_tags = tag_names - names
     unlink_tags.each do |name|
-      if (tag = Tag.query.find!({name: name}))
+      if tag = Tag.query.find!({name: name})
         self.tags.unlink(tag)
       end
     end
