@@ -33,7 +33,7 @@ psql -c 'CREATE DATABASE shards_info_development;' -U postgres
 ### Build project
 
 ```console
-shards build
+shards build --production
 ```
 
 Build assests if needed:
