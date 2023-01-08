@@ -208,7 +208,7 @@ end
 get "/users" do |env|
   page = env.params.query["page"]? || ""
   page = page.to_i? || 1
-  per_page = 30
+  per_page = 20
   offset = (page - 1) * per_page
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
