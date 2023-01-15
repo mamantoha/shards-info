@@ -252,7 +252,7 @@ module Gitlab
 
     property nickname : String?
 
-    property html_url : String
+    property html_url : String?
 
     property source_url : String?
   end
