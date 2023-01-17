@@ -55,7 +55,7 @@ end
 before_all do |env|
   Config.config.open_graph = OpenGraph.new
   Config.config.open_graph.url = "https://shards.info#{env.request.path}"
-  Config.config.query = env.request.query_params["query"]?.to_s
+  Config.config.query = URI.decode_www_form(env.request.query_params["query"]?.to_s)
 end
 
 get "/auth/:provider" do |env|
@@ -303,6 +303,7 @@ get "/search" do |env|
     raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
     query = env.params.query["query"].as(String)
+    query = URI.decode_www_form(env.params.query["query"].as(String))
 
     # remove dissallowed tsquery characters
     query = query.gsub(/['?\\:‘’]/, "")
