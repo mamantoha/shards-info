@@ -1,7 +1,7 @@
 name: shards-info
 version: 6.2.0
 
-crystal: 1.7.1
+crystal: 1.7.2
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
