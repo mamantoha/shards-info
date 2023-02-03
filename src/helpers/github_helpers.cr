@@ -117,7 +117,7 @@ module GithubHelpers
       forks_count:       github_repo.forks_count,
       fork:              github_repo.fork?,
       open_issues_count: github_repo.open_issues_count,
-      archived:          github_repo.archived,
+      archived:          github_repo.archived?,
       created_at:        github_repo.created_at,
       license:           github_repo.license.try(&.name),
     })

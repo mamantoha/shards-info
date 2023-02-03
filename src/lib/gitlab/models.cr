@@ -50,27 +50,27 @@ module Gitlab
     @[JSON::Field(key: "_links")]
     property links : Links
 
-    property empty_repo : Bool
+    property? empty_repo : Bool
 
-    property archived : Bool
+    property? archived : Bool
 
     property visibility : String
 
     property owner : Owner?
 
-    property resolve_outdated_diff_discussions : Bool?
+    property? resolve_outdated_diff_discussions : Bool?
 
-    property container_registry_enabled : Bool?
+    property? container_registry_enabled : Bool?
 
-    property issues_enabled : Bool
+    property? issues_enabled : Bool
 
-    property merge_requests_enabled : Bool
+    property? merge_requests_enabled : Bool
 
-    property wiki_enabled : Bool
+    property? wiki_enabled : Bool
 
-    property jobs_enabled : Bool
+    property? jobs_enabled : Bool
 
-    property snippets_enabled : Bool
+    property? snippets_enabled : Bool
 
     property issues_access_level : String
 
@@ -84,9 +84,9 @@ module Gitlab
 
     property snippets_access_level : String
 
-    property shared_runners_enabled : Bool
+    property? shared_runners_enabled : Bool
 
-    property lfs_enabled : Bool
+    property? lfs_enabled : Bool
 
     property creator_id : Int32
 
@@ -96,7 +96,7 @@ module Gitlab
 
     property ci_default_git_depth : Int32?
 
-    property public_jobs : Bool
+    property? public_jobs : Bool
 
     property build_timeout : Int32
 
@@ -108,19 +108,19 @@ module Gitlab
 
     property shared_with_groups : Array(JSON::Any?)
 
-    property only_allow_merge_if_pipeline_succeeds : Bool
+    property? only_allow_merge_if_pipeline_succeeds : Bool
 
-    property request_access_enabled : Bool
+    property? request_access_enabled : Bool
 
-    property only_allow_merge_if_all_discussions_are_resolved : Bool?
+    property? only_allow_merge_if_all_discussions_are_resolved : Bool?
 
-    property remove_source_branch_after_merge : Bool?
+    property? remove_source_branch_after_merge : Bool?
 
-    property printing_merge_request_link_enabled : Bool
+    property? printing_merge_request_link_enabled : Bool
 
     property merge_method : String
 
-    property auto_devops_enabled : Bool
+    property? auto_devops_enabled : Bool
 
     property auto_devops_deploy_strategy : String
 
@@ -128,13 +128,13 @@ module Gitlab
 
     property approvals_before_merge : Int32?
 
-    property mirror : Bool?
+    property? mirror : Bool?
 
     property external_authorization_classification_label : String
 
-    property packages_enabled : Bool?
+    property? packages_enabled : Bool?
 
-    property service_desk_enabled : Bool?
+    property? service_desk_enabled : Bool?
 
     property service_desk_address : String?
 
@@ -144,11 +144,11 @@ module Gitlab
 
     property mirror_user_id : Int32?
 
-    property mirror_trigger_builds : Bool?
+    property? mirror_trigger_builds : Bool?
 
-    property only_mirror_protected_branches : Bool?
+    property? only_mirror_protected_branches : Bool?
 
-    property mirror_overwrites_diverged_branches : Bool?
+    property? mirror_overwrites_diverged_branches : Bool?
 
     def fork? : Bool
       forked_from_project ? true : false
@@ -341,25 +341,25 @@ module Gitlab
 
     property visibility : String
 
-    property share_with_group_lock : Bool
+    property? share_with_group_lock : Bool
 
-    property require_two_factor_authentication : Bool
+    property? require_two_factor_authentication : Bool
 
     property two_factor_grace_period : Int32
 
     property project_creation_level : String
 
-    property auto_devops_enabled : Bool?
+    property? auto_devops_enabled : Bool?
 
     property subgroup_creation_level : String
 
-    property emails_disabled : Bool
+    property? emails_disabled : Bool
 
-    property lfs_enabled : Bool
+    property? lfs_enabled : Bool
 
     property avatar_url : String?
 
-    property request_access_enabled : Bool
+    property? request_access_enabled : Bool
 
     property full_name : String
 
@@ -401,7 +401,7 @@ module Gitlab
 
     property commit : Commit
 
-    property upcoming_release : Bool
+    property? upcoming_release : Bool
 
     property commit_path : String
 

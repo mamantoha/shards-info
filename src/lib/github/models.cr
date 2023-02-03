@@ -6,7 +6,7 @@ module Github
 
     property total_count : Int32
 
-    property incomplete_results : Bool
+    property? incomplete_results : Bool
   end
 
   class User
@@ -47,7 +47,7 @@ module Github
     @[JSON::Field(key: "type")]
     property user_type : String
 
-    property site_admin : Bool
+    property? site_admin : Bool
 
     property name : String?
 
@@ -59,7 +59,7 @@ module Github
 
     property email : String?
 
-    property hireable : Bool?
+    property? hireable : Bool?
 
     property bio : String?
 
@@ -126,7 +126,7 @@ module Github
       @[JSON::Field(key: "type")]
       property item_type : String
 
-      property site_admin : Bool
+      property? site_admin : Bool
 
       property score : Float64
     end
@@ -179,7 +179,7 @@ module Github
 
       property description : String?
 
-      property fork : Bool
+      property? fork : Bool
 
       property url : String
 
@@ -264,7 +264,7 @@ module Github
   class Repos < Iterable
     property total_count : Int32
 
-    property incomplete_results : Bool
+    property? incomplete_results : Bool
 
     property items : Array(Repo)
   end
@@ -289,7 +289,7 @@ module Github
 
     property description : String?
 
-    property fork : Bool
+    property? fork : Bool
 
     property url : String
 
@@ -389,23 +389,23 @@ module Github
 
     property language : String?
 
-    property has_issues : Bool
+    property? has_issues : Bool
 
-    property has_projects : Bool
+    property? has_projects : Bool
 
-    property has_downloads : Bool
+    property? has_downloads : Bool
 
-    property has_wiki : Bool
+    property? has_wiki : Bool
 
-    property has_pages : Bool
+    property? has_pages : Bool
 
     property forks_count : Int32
 
     property mirror_url : String?
 
-    property archived : Bool
+    property? archived : Bool
 
-    property disabled : Bool
+    property? disabled : Bool
 
     property visibility : String
 
@@ -433,10 +433,6 @@ module Github
 
     def last_activity_at : Time
       pushed_at || created_at
-    end
-
-    def fork? : Bool
-      fork
     end
 
     def tags : Array(String)
@@ -521,7 +517,7 @@ module Github
     @[JSON::Field(key: "type")]
     property organization_type : String
 
-    property site_admin : Bool
+    property? site_admin : Bool
   end
 
   class Owner
@@ -562,7 +558,7 @@ module Github
     @[JSON::Field(key: "type")]
     property owner_type : String
 
-    property site_admin : Bool
+    property? site_admin : Bool
   end
 
   class License
@@ -602,11 +598,11 @@ module Github
 
     property name : String?
 
-    property draft : Bool
+    property? draft : Bool
 
     property author : Author?
 
-    property prerelease : Bool
+    property? prerelease : Bool
 
     property created_at : Time
 
@@ -659,7 +655,7 @@ module Github
     @[JSON::Field(key: "type")]
     property author_type : String
 
-    property site_admin : Bool
+    property? site_admin : Bool
   end
 
   class Content
