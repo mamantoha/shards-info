@@ -25,7 +25,6 @@ html lang="en"
     == render "src/views/partials/about.slang"
     == render "src/views/partials/back_to_top.slang"
     div role="main"
-      == render "src/views/partials/swu_banner.ecr"
       == render "src/views/partials/flash.slang"
       == content
     div.space

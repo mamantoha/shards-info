@@ -1,3 +1,5 @@
+== render "src/views/partials/swu_banner.ecr"
+
 .subnav
   .container
     ul.nav
