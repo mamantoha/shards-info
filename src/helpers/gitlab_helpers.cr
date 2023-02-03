@@ -47,7 +47,7 @@ module GitlabHelpers
   end
 
   def sync_project(gitlab_project : Gitlab::Project) : Repository?
-    return if gitlab_project.forked_from_project || gitlab_project.mirror
+    return if gitlab_project.forked_from_project || gitlab_project.mirror?
 
     owner = gitlab_project.owner || gitlab_project.namespace
     tags = gitlab_project.tag_list
@@ -156,7 +156,7 @@ module GitlabHelpers
       forks_count:       gitlab_project.forks_count,
       fork:              gitlab_project.fork?,
       open_issues_count: gitlab_project.open_issues_count,
-      archived:          gitlab_project.archived,
+      archived:          gitlab_project.archived?,
       license:           gitlab_project.license.try(&.name),
       created_at:        gitlab_project.created_at,
     })
