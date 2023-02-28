@@ -47,7 +47,7 @@ module Gitlab
     end
 
     def make_request(url : String, params = {} of String => String)
-      Retriable.retry(on: {Crest::InternalServerError, Crest::ServiceUnavailable}) do
+      Retriable.retry(on: {Crest::InternalServerError, Crest::ServiceUnavailable, Crest::BadGateway}) do
         client[url].get(params: params)
       end
     ensure
