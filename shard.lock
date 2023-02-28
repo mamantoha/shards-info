@@ -130,7 +130,7 @@ shards:
 
   raven:
     git: https://github.com/sija/raven.cr.git
-    version: 1.9.2
+    version: 1.9.3
 
   redis:
     git: https://github.com/jgaskins/redis.git
