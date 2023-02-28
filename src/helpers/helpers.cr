@@ -55,19 +55,27 @@ module Helpers
             when "github"
               github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
-              if github_repo = github_client.repo(user_name, repository_name)
-                dependency_repository = GithubHelpers.sync_github_repo(github_repo)
+              begin
+                if github_repo = github_client.repo(user_name, repository_name)
+                  dependency_repository = GithubHelpers.sync_github_repo(github_repo)
+                end
+              rescue Crest::NotFound
+                next
               end
             when "gitlab"
               gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
 
-              if gitlab_project = gitlab_client.project(user_name, repository_name)
-                dependency_repository = GitlabHelpers.sync_project(gitlab_project)
+              begin
+                if gitlab_project = gitlab_client.project(user_name, repository_name)
+                  dependency_repository = GitlabHelpers.sync_project(gitlab_project)
+                end
+              rescue Crest::NotFound
+                next
               end
             end
           end
 
-          return unless dependency_repository
+          next unless dependency_repository
 
           unless Relationship.query.find({
                    master_id:     master_repository.id,
