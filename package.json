@@ -28,27 +28,27 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.3.0",
     "css-loader": "^6.7.3",
-    "eslint": "^8.35.0",
+    "eslint": "^8.36.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
-    "expose-loader": "^4.0.0",
-    "mini-css-extract-plugin": "^2.7.2",
+    "expose-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^2.7.3",
     "node-sass": "^8.0.0",
     "sass-loader": "^13.2.0",
-    "style-loader": "^3.3.1",
+    "style-loader": "^3.3.2",
     "stylelint": "^15.2.0",
     "stylelint-config-standard": "^30.0.1",
     "stylelint-config-standard-scss": "^7.0.1",
     "trim-newlines": ">=4.0.2",
-    "webpack": "^5.75.0",
+    "webpack": "^5.76.1",
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
     "jqcloud2": "^2.0.3",
-    "jquery": "^3.6.3",
+    "jquery": "^3.6.4",
     "moveto": "^1.8.2",
     "popper.js": "^1.16.1"
   }
