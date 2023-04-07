@@ -1,7 +1,12 @@
 class RepositoryCountChart {
   constructor (options) {
-    this.options = options
     this.element = document.querySelector(options.element)
+
+    if (!this.element) {
+      return
+    }
+
+    this.options = options
     this.label = options.label
     this.chart = null
     this.data = null
