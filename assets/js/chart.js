@@ -4,6 +4,7 @@ class RepositoryCountChart {
     this.element = document.querySelector(options.element)
     this.label = options.label
     this.chart = null
+    this.data = null
 
     // set startDateInput value to current month minus 2 years
     const startDate = new Date()
@@ -19,17 +20,17 @@ class RepositoryCountChart {
     this.endDateInput.value = new Date().toISOString().slice(0, 7)
     this.element.appendChild(this.endDateInput)
 
-    this.fetchDataAndCreateChart()
-    this.updateChart()
-
     this.startDateInput.addEventListener('change', this.updateChart.bind(this))
     this.endDateInput.addEventListener('change', this.updateChart.bind(this))
+
+    this.fetchDataAndCreateChart()
   }
 
   fetchDataAndCreateChart () {
     fetch(this.options.apiUrl)
       .then(response => response.json())
       .then(data => {
+        this.data = data
         const chartData = this.processData(data)
         // create chart
         const canvas = document.createElement('canvas')
@@ -54,6 +55,8 @@ class RepositoryCountChart {
           data: chartData,
           options: chartOptions
         })
+
+        this.updateChart()
       })
       .catch(error => {
         console.error('Error fetching data:', error)
@@ -64,21 +67,14 @@ class RepositoryCountChart {
     const startDate = new Date(this.startDateInput.value)
     const endDate = new Date(this.endDateInput.value)
 
-    fetch(this.options.apiUrl)
-      .then(response => response.json())
-      .then(data => {
-        const filteredData = this.filterDataByDateRange(data, startDate, endDate)
-        const chartData = this.processData(filteredData)
-        this.chart.data = chartData
+    const filteredData = this.filterDataByDateRange(this.data, startDate, endDate)
+    const chartData = this.processData(filteredData)
+    this.chart.data = chartData
 
-        // update chart subtitle
-        this.chart.options.plugins.subtitle.text = `${this.startDateInput.value} - ${this.endDateInput.value}`
+    // update chart subtitle
+    this.chart.options.plugins.subtitle.text = `${this.startDateInput.value} - ${this.endDateInput.value}`
 
-        this.chart.update()
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error)
-      })
+    this.chart.update()
   }
 
   processData (data) {
