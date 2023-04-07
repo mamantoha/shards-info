@@ -31,7 +31,7 @@ class RepositoryCountChart {
       .then(response => response.json())
       .then(data => {
         const chartData = this.processData(data)
-        // create chart with title
+        // create chart
         const canvas = document.createElement('canvas')
         this.element.appendChild(canvas)
         const chartOptions = Object.assign({}, this.options.chartOptions, {
@@ -41,7 +41,11 @@ class RepositoryCountChart {
             },
             title: {
               display: true,
-              text: `${this.label}: ${this.startDateInput.value} - ${this.endDateInput.value}`
+              text: `${this.label}`
+            },
+            subtitle: {
+              display: true,
+              text: `${this.startDateInput.value} - ${this.endDateInput.value}`
             }
           }
         })
@@ -83,8 +87,8 @@ class RepositoryCountChart {
         const chartData = this.processData(filteredData)
         this.chart.data = chartData
 
-        // update chart title
-        this.chart.options.plugins.title.text = `${this.label}: ${this.startDateInput.value} - ${this.endDateInput.value}`
+        // update chart subtitle
+        this.chart.options.plugins.subtitle.text = `${this.startDateInput.value} - ${this.endDateInput.value}`
 
         this.chart.update()
       })
@@ -113,11 +117,6 @@ document.addEventListener('DOMContentLoaded', function () {
     label: 'New repositories',
     chartOptions: {
       scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
       }
     }
   })
