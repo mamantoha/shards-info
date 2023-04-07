@@ -891,8 +891,8 @@ delete "/admin/repositories/:id" do |env|
   end
 end
 
-get "/chart" do |env|
-  render "src/views/chart.slang", "src/views/layouts/layout.slang"
+get "/stats" do |env|
+  render "src/views/stats.slang", "src/views/layouts/layout.slang"
 end
 
 get "/stats/created_at" do |env|

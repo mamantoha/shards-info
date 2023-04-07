@@ -1,10 +1,10 @@
 div
   h1.page__heading
-    .container.text-center
+    .container
       .h1
-        ' Title
+        ' Stats
       .h6.font-weight-light
-        ' Description
+        ' Crystal shards ecosystem statistics
 
 .container
   .row
