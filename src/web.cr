@@ -891,4 +891,29 @@ delete "/admin/repositories/:id" do |env|
   end
 end
 
+get "/chart" do |env|
+  render "src/views/chart.slang", "src/views/layouts/layout.slang"
+end
+
+get "/stats/created_at" do |env|
+  repositiries =
+    Repository
+      .query
+      .select(
+        "to_char(created_at, 'YYYY-MM') as month",
+        "count(*) as count"
+      )
+      .group_by("month")
+      .order_by("month", :desc)
+
+  hsh = {} of String => Int64
+
+  repositiries.each(fetch_columns: true) do |repository|
+    hsh[repository["month"].as(String)] = repository["count"].as(Int64)
+  end
+
+  hsh.to_json
+end
+
+
 Kemal.run
