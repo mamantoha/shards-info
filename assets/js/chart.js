@@ -60,22 +60,6 @@ class RepositoryCountChart {
       })
   }
 
-  processData (data) {
-    const labels = Object.keys(data)
-    const values = Object.values(data)
-    const chartData = {
-      labels,
-      datasets: [{
-        label: this.label,
-        data: values,
-        backgroundColor: 'rgba(54, 162, 235, 0.5)',
-        borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 1
-      }]
-    }
-    return chartData
-  }
-
   updateChart () {
     const startDate = new Date(this.startDateInput.value)
     const endDate = new Date(this.endDateInput.value)
@@ -95,6 +79,22 @@ class RepositoryCountChart {
       .catch(error => {
         console.error('Error fetching data:', error)
       })
+  }
+
+  processData (data) {
+    const labels = Object.keys(data)
+    const values = Object.values(data)
+    const chartData = {
+      labels,
+      datasets: [{
+        label: this.label,
+        data: values,
+        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      }]
+    }
+    return chartData
   }
 
   filterDataByDateRange (data, startDate, endDate) {
