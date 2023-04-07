@@ -904,7 +904,7 @@ get "/stats/created_at" do |env|
         "count(*) as count"
       )
       .group_by("month")
-      .order_by("month", :desc)
+      .order_by("month", :asc)
 
   hsh = {} of String => Int64
 

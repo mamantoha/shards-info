@@ -4,10 +4,10 @@ class RepositoryCountChart {
     this.element = document.querySelector(options.element)
     this.chart = null
     this.startDateInput = document.createElement('input')
-    this.startDateInput.type = 'date'
+    this.startDateInput.type = 'month'
     this.element.appendChild(this.startDateInput)
     this.endDateInput = document.createElement('input')
-    this.endDateInput.type = 'date'
+    this.endDateInput.type = 'month'
     this.element.appendChild(this.endDateInput)
     this.startDateInput.addEventListener('change', this.updateChart.bind(this))
     this.endDateInput.addEventListener('change', this.updateChart.bind(this))
