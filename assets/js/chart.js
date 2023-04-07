@@ -3,15 +3,26 @@ class RepositoryCountChart {
     this.options = options
     this.element = document.querySelector(options.element)
     this.chart = null
+
+    // set startDateInput value to current month minus 2 years
+    const startDate = new Date()
+    startDate.setFullYear(startDate.getFullYear() - 2)
+    startDate.setDate(1)
     this.startDateInput = document.createElement('input')
     this.startDateInput.type = 'month'
+    this.startDateInput.value = startDate.toISOString().slice(0, 7)
     this.element.appendChild(this.startDateInput)
+
     this.endDateInput = document.createElement('input')
     this.endDateInput.type = 'month'
+    this.endDateInput.value = new Date().toISOString().slice(0, 7)
     this.element.appendChild(this.endDateInput)
+
+    this.fetchDataAndCreateChart()
+    this.updateChart()
+
     this.startDateInput.addEventListener('change', this.updateChart.bind(this))
     this.endDateInput.addEventListener('change', this.updateChart.bind(this))
-    this.fetchDataAndCreateChart()
   }
 
   fetchDataAndCreateChart () {
