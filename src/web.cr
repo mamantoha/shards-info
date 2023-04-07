@@ -915,5 +915,4 @@ get "/stats/created_at" do |env|
   hsh.to_json
 end
 
-
 Kemal.run
