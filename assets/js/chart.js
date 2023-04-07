@@ -2,6 +2,7 @@ class RepositoryCountChart {
   constructor (options) {
     this.options = options
     this.element = document.querySelector(options.element)
+    this.label = options.label
     this.chart = null
 
     // set startDateInput value to current month minus 2 years
@@ -30,12 +31,24 @@ class RepositoryCountChart {
       .then(response => response.json())
       .then(data => {
         const chartData = this.processData(data)
+        // create chart with title
         const canvas = document.createElement('canvas')
         this.element.appendChild(canvas)
+        const chartOptions = Object.assign({}, this.options.chartOptions, {
+          plugins: {
+            legend: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: `${this.label}: ${this.startDateInput.value} - ${this.endDateInput.value}`
+            }
+          }
+        })
         this.chart = new Chart(canvas, {
           type: 'bar',
           data: chartData,
-          options: this.options.chartOptions
+          options: chartOptions
         })
       })
       .catch(error => {
@@ -49,7 +62,7 @@ class RepositoryCountChart {
     const chartData = {
       labels,
       datasets: [{
-        label: 'Repository Count',
+        label: this.label,
         data: values,
         backgroundColor: 'rgba(54, 162, 235, 0.5)',
         borderColor: 'rgba(54, 162, 235, 1)',
@@ -69,6 +82,10 @@ class RepositoryCountChart {
         const filteredData = this.filterDataByDateRange(data, startDate, endDate)
         const chartData = this.processData(filteredData)
         this.chart.data = chartData
+
+        // update chart title
+        this.chart.options.plugins.title.text = `${this.label}: ${this.startDateInput.value} - ${this.endDateInput.value}`
+
         this.chart.update()
       })
       .catch(error => {
@@ -93,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const chart = new RepositoryCountChart({
     apiUrl: '/stats/created_at',
     element: '#chart-container',
+    label: 'New repositories',
     chartOptions: {
       scales: {
         yAxes: [{
