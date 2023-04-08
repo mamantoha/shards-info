@@ -936,23 +936,25 @@ get "/stats/last_activity_at" do |env|
 end
 
 get "/stats/repositories_growth" do |env|
-  repositiries =
-    Repository
-      .query
-      .select(
-        "year_month",
-        "(SELECT COUNT(*) FROM repositories WHERE to_char(created_at, 'YYYY-MM') <= year_month) AS cumulative_count"
-      )
-      .from("(SELECT DISTINCT to_char(created_at, 'YYYY-MM') AS year_month FROM repositories) AS year_month_groups")
-      .group_by("year_month")
+  CACHE.fetch("stats_repositories_growth") do
+    repositiries =
+      Repository
+        .query
+        .select(
+          "year_month",
+          "(SELECT COUNT(*) FROM repositories WHERE to_char(created_at, 'YYYY-MM') <= year_month) AS cumulative_count"
+        )
+        .from("(SELECT DISTINCT to_char(created_at, 'YYYY-MM') AS year_month FROM repositories) AS year_month_groups")
+        .group_by("year_month")
 
-  hsh = {} of String => Int64
+    hsh = {} of String => Int64
 
-  repositiries.each(fetch_columns: true) do |repository|
-    hsh[repository["year_month"].as(String)] = repository["cumulative_count"].as(Int64)
+    repositiries.each(fetch_columns: true) do |repository|
+      hsh[repository["year_month"].as(String)] = repository["cumulative_count"].as(Int64)
+    end
+
+    hsh.to_json
   end
-
-  hsh.to_json
 end
 
 Kemal.run
