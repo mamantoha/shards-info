@@ -11,14 +11,16 @@ class RepositoryCountChart {
     this.chart = null
     this.data = null
 
+    console.log(options.startDateYearsAgo)
+    const startDateYearsAgo = options.startDateYearsAgo || 2
+
     // create div for inputs
     this.inputContainer = document.createElement('div')
     this.inputContainer.style.textAlign = 'right'
     this.element.appendChild(this.inputContainer)
 
-    // set startDateInput value to current month minus 2 years
     const startDate = new Date()
-    startDate.setFullYear(startDate.getFullYear() - 2)
+    startDate.setFullYear(startDate.getFullYear() - startDateYearsAgo)
     startDate.setDate(1)
     this.startDateInput = document.createElement('input')
     this.startDateInput.type = 'month'
@@ -117,10 +119,21 @@ class RepositoryCountChart {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  const chart = new RepositoryCountChart({
+  const chartCreatedAt = new RepositoryCountChart({
     apiUrl: '/stats/created_at',
-    element: '#chart-container',
+    element: '#chartCreatedAt',
     label: 'New repositories',
+    chartOptions: {
+      scales: {
+      }
+    }
+  })
+
+  const chartLastActivityAt = new RepositoryCountChart({
+    apiUrl: '/stats/last_activity_at',
+    element: '#chartLastActivityAt',
+    label: 'Last activity repositories',
+    startDateYearsAgo: 5,
     chartOptions: {
       scales: {
       }

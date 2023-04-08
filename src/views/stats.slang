@@ -4,13 +4,14 @@ div
       .h1
         ' Stats
       .h6.font-weight-light
-        ' Crystal shards ecosystem statistics
+        ' Crystal shards and repositories ecosystem statistics
 
 .container
   .row
     .col-md-6
-      #chart-container
+      #chartCreatedAt
     .col-md-6
+      #chartLastActivityAt
   .row
     .col-md-6
     .col-md-6

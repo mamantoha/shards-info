@@ -915,4 +915,24 @@ get "/stats/created_at" do |env|
   hsh.to_json
 end
 
+get "/stats/last_activity_at" do |env|
+  repositiries =
+    Repository
+      .query
+      .select(
+        "to_char(last_activity_at, 'YYYY-MM') as month",
+        "count(*) as count"
+      )
+      .group_by("month")
+      .order_by("month", :asc)
+
+  hsh = {} of String => Int64
+
+  repositiries.each(fetch_columns: true) do |repository|
+    hsh[repository["month"].as(String)] = repository["count"].as(Int64)
+  end
+
+  hsh.to_json
+end
+
 Kemal.run
