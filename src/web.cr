@@ -942,15 +942,15 @@ get "/stats/repositories_growth" do |env|
         .query
         .select(
           "year_month",
-          "(SELECT COUNT(*) FROM repositories WHERE to_char(created_at, 'YYYY-MM') <= year_month) AS cumulative_count"
+          "(SELECT COUNT(*) FROM repositories WHERE date_trunc('month', created_at)::date <= year_month) AS cumulative_count"
         )
-        .from("(SELECT DISTINCT to_char(created_at, 'YYYY-MM') AS year_month FROM repositories) AS year_month_groups")
+        .from("(SELECT DISTINCT date_trunc('month', created_at)::date AS year_month FROM repositories) AS year_month_groups")
         .group_by("year_month")
 
     hsh = {} of String => Int64
 
     repositiries.each(fetch_columns: true) do |repository|
-      hsh[repository["year_month"].as(String)] = repository["cumulative_count"].as(Int64)
+      hsh[repository["year_month"].as(Time).to_s("%Y-%m")] = repository["cumulative_count"].as(Int64)
     end
 
     hsh.to_json
