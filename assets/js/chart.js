@@ -1,4 +1,4 @@
-class RepositoryCountChart {
+class RepositoryCountBarChart {
   constructor (options) {
     this.element = document.querySelector(options.element)
 
@@ -11,7 +11,6 @@ class RepositoryCountChart {
     this.chart = null
     this.data = null
 
-    console.log(options.startDateYearsAgo)
     const startDateYearsAgo = options.startDateYearsAgo || 2
 
     // create div for inputs
@@ -118,8 +117,75 @@ class RepositoryCountChart {
   }
 }
 
+class RepositoryCountLineChart {
+  constructor (options) {
+    this.element = document.querySelector(options.element)
+
+    if (!this.element) {
+      return
+    }
+
+    this.options = options
+    this.label = options.label
+    this.chart = null
+    this.data = null
+
+    this.fetchDataAndCreateChart()
+  }
+
+  fetchDataAndCreateChart () {
+    fetch(this.options.apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        this.data = data
+        const chartData = this.processData(data)
+
+        // create chart
+        const canvas = document.createElement('canvas')
+        canvas.height = '300'
+        this.element.appendChild(canvas)
+
+        const chartOptions = Object.assign({}, this.options.chartOptions, {
+          plugins: {
+            legend: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: `${this.label}`
+            }
+          }
+        })
+        this.chart = new Chart(canvas, {
+          type: 'line',
+          data: chartData,
+          options: chartOptions
+        })
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error)
+      })
+  }
+
+  processData (data) {
+    const labels = Object.keys(data)
+    const values = Object.values(data)
+    const chartData = {
+      labels,
+      datasets: [{
+        label: this.label,
+        data: values,
+        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      }]
+    }
+    return chartData
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-  const chartCreatedAt = new RepositoryCountChart({
+  const chartCreatedAt = new RepositoryCountBarChart({
     apiUrl: '/stats/created_at',
     element: '#chartCreatedAt',
     label: 'New repositories',
@@ -129,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })
 
-  const chartLastActivityAt = new RepositoryCountChart({
+  const chartLastActivityAt = new RepositoryCountBarChart({
     apiUrl: '/stats/last_activity_at',
     element: '#chartLastActivityAt',
     label: 'Last activity repositories',
@@ -137,6 +203,26 @@ document.addEventListener('DOMContentLoaded', function () {
     chartOptions: {
       scales: {
       }
+    }
+  })
+
+  const chartRepositoriesCount = new RepositoryCountLineChart({
+    apiUrl: '/stats/repositories_growth',
+    element: '#chartRepositoriesGrowth',
+    label: 'Growth of repositories',
+    startDateYearsAgo: 5,
+    chartOptions: {
+      scales: {
+        x: {
+          display: true
+        },
+        y: {
+          display: true
+        }
+      },
+      fill: true,
+      maintainAspectRatio: false,
+      responsive: true
     }
   })
 })

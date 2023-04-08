@@ -900,16 +900,16 @@ get "/stats/created_at" do |env|
     Repository
       .query
       .select(
-        "to_char(created_at, 'YYYY-MM') as month",
+        "to_char(created_at, 'YYYY-MM') as year_month",
         "count(*) as count"
       )
-      .group_by("month")
-      .order_by("month", :asc)
+      .group_by("year_month")
+      .order_by("year_month", :asc)
 
   hsh = {} of String => Int64
 
   repositiries.each(fetch_columns: true) do |repository|
-    hsh[repository["month"].as(String)] = repository["count"].as(Int64)
+    hsh[repository["year_month"].as(String)] = repository["count"].as(Int64)
   end
 
   hsh.to_json
@@ -920,16 +920,36 @@ get "/stats/last_activity_at" do |env|
     Repository
       .query
       .select(
-        "to_char(last_activity_at, 'YYYY-MM') as month",
+        "to_char(last_activity_at, 'YYYY-MM') as year_month",
         "count(*) as count"
       )
-      .group_by("month")
-      .order_by("month", :asc)
+      .group_by("year_month")
+      .order_by("year_month", :asc)
 
   hsh = {} of String => Int64
 
   repositiries.each(fetch_columns: true) do |repository|
-    hsh[repository["month"].as(String)] = repository["count"].as(Int64)
+    hsh[repository["year_month"].as(String)] = repository["count"].as(Int64)
+  end
+
+  hsh.to_json
+end
+
+get "/stats/repositories_growth" do |env|
+  repositiries =
+    Repository
+      .query
+      .select(
+        "year_month",
+        "(SELECT COUNT(*) FROM repositories WHERE to_char(created_at, 'YYYY-MM') <= year_month) AS cumulative_count"
+      )
+      .from("(SELECT DISTINCT to_char(created_at, 'YYYY-MM') AS year_month FROM repositories) AS year_month_groups")
+      .group_by("year_month")
+
+  hsh = {} of String => Int64
+
+  repositiries.each(fetch_columns: true) do |repository|
+    hsh[repository["year_month"].as(String)] = repository["cumulative_count"].as(Int64)
   end
 
   hsh.to_json

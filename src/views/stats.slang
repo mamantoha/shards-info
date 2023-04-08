@@ -8,6 +8,9 @@ div
 
 .container
   .row
+    .col-md-12
+      #chartRepositoriesGrowth
+  .row
     .col-md-6
       #chartCreatedAt
     .col-md-6
