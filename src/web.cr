@@ -900,7 +900,7 @@ get "/stats/created_at" do |env|
     Repository
       .query
       .select(
-        "to_char(created_at, 'YYYY-MM') as year_month",
+        "date_trunc('month', created_at)::date as year_month",
         "count(*) as count"
       )
       .group_by("year_month")
@@ -909,7 +909,7 @@ get "/stats/created_at" do |env|
   hsh = {} of String => Int64
 
   repositiries.each(fetch_columns: true) do |repository|
-    hsh[repository["year_month"].as(String)] = repository["count"].as(Int64)
+    hsh[repository["year_month"].as(Time).to_s("%Y-%m")] = repository["count"].as(Int64)
   end
 
   hsh.to_json
@@ -920,7 +920,7 @@ get "/stats/last_activity_at" do |env|
     Repository
       .query
       .select(
-        "to_char(last_activity_at, 'YYYY-MM') as year_month",
+        "date_trunc('month', created_at)::date as year_month",
         "count(*) as count"
       )
       .group_by("year_month")
@@ -929,7 +929,7 @@ get "/stats/last_activity_at" do |env|
   hsh = {} of String => Int64
 
   repositiries.each(fetch_columns: true) do |repository|
-    hsh[repository["year_month"].as(String)] = repository["count"].as(Int64)
+    hsh[repository["year_month"].as(Time).to_s("%Y-%m")] = repository["count"].as(Int64)
   end
 
   hsh.to_json
