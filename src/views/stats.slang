@@ -8,6 +8,32 @@ div
 
 .container
   .row
+    .col-md-3
+      .card
+        .card-header
+          ' Repositories
+        .card-body
+          h2.cart-title.text-end
+            = repositories_count
+          p.card-text
+            i.fas.fa-arrow-up
+            = "#{repositories_count_in_last_month} from last month"
+          a.btn.btn-primary href="/repositories"
+            ' Browse repositories
+    .col-md-3
+      .card
+        .card-header
+          ' Users
+        .card-body
+          h2.cart-title.text-end
+            = users_count
+          p.card-text
+            i.fas.fa-arrow-up
+            = "#{users_count_in_last_month} from last month"
+          a.btn.btn-primary href="/users"
+            ' Browse users
+
+  .row
     .col-md-12
       #chartRepositoriesGrowth
   .row

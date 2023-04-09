@@ -892,6 +892,12 @@ delete "/admin/repositories/:id" do |env|
 end
 
 get "/stats" do |env|
+  repositories_count = Repository.query.count
+  repositories_count_in_last_month = Repository.query.where("created_at >= NOW() - INTERVAL '28 days'").count
+
+  users_count = User.query.count
+  users_count_in_last_month = User.query.where("created_at >= NOW() - INTERVAL '28 days'").count
+
   render "src/views/stats.slang", "src/views/layouts/layout.slang"
 end
 

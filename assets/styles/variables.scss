@@ -89,6 +89,10 @@ html.dark {
     border-color: #373b3e;
   }
 
+  .card {
+    --bs-card-bg: var(--page-heading-bg-color);
+  }
+
   .dropdown-menu {
     --bs-dropdown-color: #acbac7;
     --bs-dropdown-bg: #2d333b;
