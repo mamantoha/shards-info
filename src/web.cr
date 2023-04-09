@@ -936,22 +936,34 @@ get "/stats/last_activity_at" do |env|
 end
 
 get "/stats/repositories_growth" do |env|
+  # Calculates the cumulative count of repositories created before and on each year-month date,
+  # including months with no repositories
   CACHE.fetch("stats_repositories_growth") do
-    repositiries =
-      Repository
-        .query
-        .select(
-          "year_month",
-          "(SELECT COUNT(*) FROM repositories WHERE date_trunc('month', created_at)::date <= year_month) AS cumulative_count"
-        )
-        .from("(SELECT DISTINCT date_trunc('month', created_at)::date AS year_month FROM repositories) AS year_month_groups")
-        .group_by("year_month")
-
     hsh = {} of String => Int64
 
-    repositiries.each(fetch_columns: true) do |repository|
-      hsh[repository["year_month"].as(Time).to_s("%Y-%m")] = repository["cumulative_count"].as(Int64)
-    end
+    # https://github.com/crystal-lang/crystal was created on November 27, 2012
+    date_start = "2012-11-01"
+
+    month_series = Clear::SQL.select(<<-SQL
+      generate_series(
+        '#{date_start}'::date,
+        (SELECT date_trunc('month', MAX(created_at)) FROM repositories),
+        '1 month'::interval
+      )::date AS year_month
+      SQL
+    )
+
+    Clear::SQL
+      .select({
+        cumulative_count: "(SELECT COUNT(*) FROM repositories WHERE date_trunc('month', created_at)::date <= ms.year_month)",
+        year_month:       "ms.year_month",
+      })
+      .with_cte({month_series: month_series})
+      .from("month_series ms")
+      .order_by("ms.year_month")
+      .fetch do |hash|
+        hsh[hash["year_month"].as(Time).to_s("%Y-%m")] = hash["cumulative_count"].as(Int64)
+      end
 
     hsh.to_json
   end
