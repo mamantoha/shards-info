@@ -42,5 +42,8 @@ div
     .col-md-6
       #chartLastActivityAt
   .row
-    .col-md-6
-    .col-md-6
+    .col-md-12
+      #chartDirectDependencies
+  .row
+    .col-md-12
+      #chartReverseDependencies

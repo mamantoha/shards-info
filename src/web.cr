@@ -978,4 +978,75 @@ get "/stats/repositories_growth" do |env|
   end
 end
 
+# Number of direct dependencies
+get "/stats/direct_dependencies" do |env|
+  hsh = {} of Int64 => Int64
+
+  Clear::SQL
+    .select(
+      "dependency_count",
+      "COUNT(*) AS repository_count"
+    )
+    .from(<<-SQL
+      (
+        SELECT
+          r.id,
+          COUNT(rel.id) AS dependency_count
+        FROM
+          repositories r
+        LEFT JOIN
+          relationships rel ON r.id = rel.master_id
+        GROUP BY
+          r.id
+      ) AS repo_dependency_count
+      SQL
+    )
+    .group_by("dependency_count")
+    .order_by("dependency_count", :asc)
+    .fetch do |hash|
+      hsh[hash["dependency_count"].as(Int64)] = hash["repository_count"].as(Int64)
+    end
+
+  hsh.to_json
+end
+
+# Number of transitive reverse dependencies
+get "/stats/reverse_dependencies" do |env|
+  hsh = {} of String => Int64
+
+  Clear::SQL
+    .select(
+      "
+      CASE
+        WHEN dependency_count BETWEEN 1 AND 29 THEN dependency_count::text
+        WHEN dependency_count BETWEEN 30 AND 100 THEN CONCAT((dependency_count / 10) * 10, '-', (dependency_count / 10) * 10 + 9)
+        ELSE CONCAT((dependency_count / 100) * 100, '-', (dependency_count / 100) * 100 + 99)
+      END AS dependency_range
+      ",
+      "COUNT(*) AS repository_count"
+    )
+    .from(<<-SQL
+    (
+      SELECT
+        r.id,
+        COUNT(rel.id) AS dependency_count
+      FROM
+        repositories r
+      LEFT JOIN
+        relationships rel ON r.id = rel.dependency_id
+      GROUP BY
+        r.id
+    ) AS repo_dependency_count
+    SQL
+    )
+    .group_by("dependency_range")
+    .order_by("MIN(dependency_count)")
+    .where("dependency_count > 0")
+    .fetch do |hash|
+      hsh[hash["dependency_range"].as(String)] = hash["repository_count"].as(Int64)
+    end
+
+  hsh.to_json
+end
+
 Kemal.run
