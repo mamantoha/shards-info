@@ -926,7 +926,7 @@ get "/stats/last_activity_at" do |env|
     Repository
       .query
       .select(
-        "date_trunc('month', created_at)::date as year_month",
+        "date_trunc('month', last_activity_at)::date as year_month",
         "count(*) as count"
       )
       .group_by("year_month")
@@ -944,7 +944,7 @@ end
 get "/stats/repositories_growth" do |env|
   # Calculates the cumulative count of repositories created before and on each year-month date,
   # including months with no repositories
-  CACHE.fetch("stats_repositories_growth") do
+  CACHE.fetch("stats_repositories_growth", expires_in: 2.hours) do
     hsh = {} of String => Int64
 
     # https://github.com/crystal-lang/crystal was created on November 27, 2012
