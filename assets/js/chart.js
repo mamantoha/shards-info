@@ -300,7 +300,18 @@ document.addEventListener('DOMContentLoaded', function () {
           display: true
         },
         y: {
-          display: true
+          display: true,
+          type: 'logarithmic',
+          ticks: {
+            callback: function (value, index, ticks) {
+              if (value === 10000) return '10k+'
+              if (value === 1000) return '1k+'
+              if (value === 100) return '100+'
+              if (value === 10) return '10+'
+              if (value === 1) return '1+'
+              return null
+            }
+          }
         }
       },
       fill: true,
@@ -319,7 +330,18 @@ document.addEventListener('DOMContentLoaded', function () {
           display: true
         },
         y: {
-          display: true
+          display: true,
+          type: 'logarithmic',
+          ticks: {
+            callback: function (value, index, ticks) {
+              if (value === 10000) return '10k+'
+              if (value === 1000) return '1k+'
+              if (value === 100) return '100+'
+              if (value === 10) return '10+'
+              if (value === 1) return '1+'
+              return null
+            }
+          }
         }
       },
       fill: true,
