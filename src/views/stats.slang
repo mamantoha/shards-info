@@ -20,23 +20,14 @@ div
             = "#{repositories_count_in_last_month} from last month"
           a.btn.btn-primary href="/repositories"
             ' Browse repositories
-    .col-md-3
-      .card
-        .card-header
-          ' Users
-        .card-body
-          h2.cart-title.text-end
-            = users_count
-          p.card-text
-            i.fas.fa-arrow-up
-            = "#{users_count_in_last_month} from last month"
-          a.btn.btn-primary href="/users"
-            ' Browse users
-
   .row.mb-4
     .col-md-12
       h3
         ' Growth of the shards.info registry
+      p
+        = "There are #{users_count} users or teams that have a shards on shards.info."
+      p
+        = "shards.info has indexed #{repositories_count} repositories."
       #chartRepositoriesGrowth
   .row.mb-4
     .col-md-6
@@ -62,4 +53,4 @@ div
       h3
         ' Number of shards per user
       p
-        ' How many shards a single account (user or team) owns
+        ' How many shards a single account (user or team) owns.
