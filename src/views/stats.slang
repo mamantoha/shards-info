@@ -7,7 +7,7 @@ div
         ' Crystal shards and repositories ecosystem statistics
 
 .container
-  .row
+  .row.mb-4
     .col-md-3
       .card
         .card-header
@@ -33,17 +33,33 @@ div
           a.btn.btn-primary href="/users"
             ' Browse users
 
-  .row
+  .row.mb-4
     .col-md-12
+      h3
+        ' Growth of the shards.info registry
       #chartRepositoriesGrowth
-  .row
+  .row.mb-4
     .col-md-6
       #chartCreatedAt
     .col-md-6
       #chartLastActivityAt
-  .row
+  .row.mb-4
     .col-md-12
+      h3
+        ' Number of direct dependencies
+      p
+        ' Number of libraries explicitly used by each shard. Includes dev dependencies.
       #chartDirectDependencies
-  .row
+  .row.mb-4
     .col-md-12
+      h3
+        ' Number of transitive reverse dependencies (popularity)
+      p
+        ' How often each library shard is used as a dependency in other shards. Includes dev dependencies.
       #chartReverseDependencies
+  .row.mb-4
+    .col-md-12
+      h3
+        ' Number of shards per user
+      p
+        ' How many shards a single account (user or team) owns

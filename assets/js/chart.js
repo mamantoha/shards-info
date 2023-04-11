@@ -29,7 +29,7 @@ class CountBarChart {
               display: false
             },
             title: {
-              display: true,
+              display: false,
               text: `${this.label}`
             }
           }
@@ -215,7 +215,7 @@ class RepositoryCountLineChart {
               display: false
             },
             title: {
-              display: true,
+              display: false,
               text: `${this.label}`
             }
           }
