@@ -349,4 +349,27 @@ document.addEventListener('DOMContentLoaded', function () {
       responsive: true
     }
   })
+
+  const chartUserRepositoriesCount = new CountBarChart({
+    apiUrl: '/stats/user_repositories_count',
+    element: '#chartUserRepositoriesCount',
+    label: 'Accounts',
+    chartOptions: {
+      scales: {
+        x: {
+          display: true
+        },
+        y: {
+          display: true,
+          type: 'linear'
+        }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index'
+      },
+      maintainAspectRatio: false,
+      responsive: true
+    }
+  })
 })

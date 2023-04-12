@@ -54,3 +54,4 @@ div
         ' Number of shards per user
       p
         ' How many shards a single account (user or team) owns.
+      #chartUserRepositoriesCount

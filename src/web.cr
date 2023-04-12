@@ -1048,4 +1048,33 @@ get "/stats/reverse_dependencies" do |env|
   hsh.to_json
 end
 
+get "/stats/user_repositories_count" do |env|
+  hsh = {} of Int64 => Int64
+
+  Clear::SQL
+    .select(
+      "repo_count",
+      "COUNT(*) AS user_count"
+    )
+    .from(<<-SQL
+      (
+        SELECT
+          user_id,
+          COUNT(*) AS repo_count
+        FROM
+          repositories
+        GROUP BY
+          user_id
+      ) AS user_repos
+      SQL
+    )
+    .group_by("repo_count")
+    .order_by("repo_count")
+    .fetch do |hash|
+      hsh[hash["repo_count"].as(Int64)] = hash["user_count"].as(Int64)
+    end
+
+  hsh.to_json
+end
+
 Kemal.run
