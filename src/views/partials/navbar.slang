@@ -12,6 +12,10 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
             a.nav-link href="/repositories"
               i.fas.fa-compass
               | Browse
+           li.nav-item
+            a.nav-link href="/stats"
+              i.fas.fa-chart-simple
+              | Stats
           li.nav-item
             a.nav-link href="#" data-bs-toggle="modal" data-bs-target="#aboutModal"
               i.fas.fa-circle-info

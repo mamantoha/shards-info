@@ -891,4 +891,190 @@ delete "/admin/repositories/:id" do |env|
   end
 end
 
+get "/stats" do |env|
+  repositories_count = Repository.query.count
+  repositories_count_in_last_month = Repository.query.where("created_at >= NOW() - INTERVAL '28 days'").count
+
+  users_count = User.query.count
+
+  Config.config.page_title = "State of the Crystal shards ecosystem // shards.info"
+  Config.config.page_description = "Crystal shards and repositories ecosystem statistics"
+
+  render "src/views/stats.slang", "src/views/layouts/layout.slang"
+end
+
+get "/stats/created_at" do |env|
+  repositiries =
+    Repository
+      .query
+      .select(
+        "date_trunc('month', created_at)::date as year_month",
+        "count(*) as count"
+      )
+      .group_by("year_month")
+      .order_by("year_month", :asc)
+
+  hsh = {} of String => Int64
+
+  repositiries.each(fetch_columns: true) do |repository|
+    hsh[repository["year_month"].as(Time).to_s("%Y-%m")] = repository["count"].as(Int64)
+  end
+
+  hsh.to_json
+end
+
+get "/stats/last_activity_at" do |env|
+  repositiries =
+    Repository
+      .query
+      .select(
+        "date_trunc('month', last_activity_at)::date as year_month",
+        "count(*) as count"
+      )
+      .group_by("year_month")
+      .order_by("year_month", :asc)
+
+  hsh = {} of String => Int64
+
+  repositiries.each(fetch_columns: true) do |repository|
+    hsh[repository["year_month"].as(Time).to_s("%Y-%m")] = repository["count"].as(Int64)
+  end
+
+  hsh.to_json
+end
+
+get "/stats/repositories_growth" do |env|
+  # Calculates the cumulative count of repositories created before and on each year-month date,
+  # including months with no repositories
+  CACHE.fetch("stats_repositories_growth", expires_in: 2.hours) do
+    hsh = {} of String => Int64
+
+    # https://github.com/crystal-lang/crystal was created on November 27, 2012
+    date_start = "2012-11-01"
+
+    month_series = Clear::SQL.select(<<-SQL
+      generate_series(
+        '#{date_start}'::date,
+        (SELECT date_trunc('month', MAX(created_at)) FROM repositories),
+        '1 month'::interval
+      )::date AS year_month
+      SQL
+    )
+
+    Clear::SQL
+      .select({
+        cumulative_count: "(SELECT COUNT(*) FROM repositories WHERE date_trunc('month', created_at)::date <= ms.year_month)",
+        year_month:       "ms.year_month",
+      })
+      .with_cte({month_series: month_series})
+      .from("month_series ms")
+      .order_by("ms.year_month")
+      .fetch do |hash|
+        hsh[hash["year_month"].as(Time).to_s("%Y-%m")] = hash["cumulative_count"].as(Int64)
+      end
+
+    hsh.to_json
+  end
+end
+
+# Number of direct dependencies
+get "/stats/direct_dependencies" do |env|
+  hsh = {} of Int64 => Int64
+
+  Clear::SQL
+    .select(
+      "dependency_count",
+      "COUNT(*) AS repository_count"
+    )
+    .from(<<-SQL
+      (
+        SELECT
+          r.id,
+          COUNT(rel.id) AS dependency_count
+        FROM
+          repositories r
+        LEFT JOIN
+          relationships rel ON r.id = rel.master_id
+        GROUP BY
+          r.id
+      ) AS repo_dependency_count
+      SQL
+    )
+    .group_by("dependency_count")
+    .order_by("dependency_count", :asc)
+    .fetch do |hash|
+      hsh[hash["dependency_count"].as(Int64)] = hash["repository_count"].as(Int64)
+    end
+
+  hsh.to_json
+end
+
+# Number of transitive reverse dependencies
+get "/stats/reverse_dependencies" do |env|
+  hsh = {} of String => Int64
+
+  Clear::SQL
+    .select(
+      "
+      CASE
+        WHEN dependency_count BETWEEN 1 AND 29 THEN dependency_count::text
+        WHEN dependency_count BETWEEN 30 AND 100 THEN CONCAT((dependency_count / 10) * 10, '-', (dependency_count / 10) * 10 + 9)
+        ELSE CONCAT((dependency_count / 100) * 100, '-', (dependency_count / 100) * 100 + 99)
+      END AS dependency_range
+      ",
+      "COUNT(*) AS repository_count"
+    )
+    .from(<<-SQL
+    (
+      SELECT
+        r.id,
+        COUNT(rel.id) AS dependency_count
+      FROM
+        repositories r
+      LEFT JOIN
+        relationships rel ON r.id = rel.dependency_id
+      GROUP BY
+        r.id
+    ) AS repo_dependency_count
+    SQL
+    )
+    .group_by("dependency_range")
+    .order_by("MIN(dependency_count)")
+    .where("dependency_count > 0")
+    .fetch do |hash|
+      hsh[hash["dependency_range"].as(String)] = hash["repository_count"].as(Int64)
+    end
+
+  hsh.to_json
+end
+
+get "/stats/user_repositories_count" do |env|
+  hsh = {} of Int64 => Int64
+
+  Clear::SQL
+    .select(
+      "repo_count",
+      "COUNT(*) AS user_count"
+    )
+    .from(<<-SQL
+      (
+        SELECT
+          user_id,
+          COUNT(*) AS repo_count
+        FROM
+          repositories
+        GROUP BY
+          user_id
+      ) AS user_repos
+      SQL
+    )
+    .group_by("repo_count")
+    .order_by("repo_count")
+    .fetch do |hash|
+      hsh[hash["repo_count"].as(Int64)] = hash["user_count"].as(Int64)
+    end
+
+  hsh.to_json
+end
+
 Kemal.run

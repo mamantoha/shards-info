@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
+    "chart.js": "^4.2.1",
     "jqcloud2": "^2.0.3",
     "jquery": "^3.6.4",
     "moveto": "^1.8.2",
