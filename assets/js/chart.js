@@ -255,6 +255,10 @@ document.addEventListener('DOMContentLoaded', function () {
     label: 'New repositories',
     chartOptions: {
       scales: {
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index'
       }
     }
   })
@@ -266,6 +270,10 @@ document.addEventListener('DOMContentLoaded', function () {
     startDateYearsAgo: 5,
     chartOptions: {
       scales: {
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index'
       }
     }
   })
@@ -283,6 +291,10 @@ document.addEventListener('DOMContentLoaded', function () {
         y: {
           display: true
         }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index'
       },
       fill: true,
       maintainAspectRatio: false,
@@ -314,6 +326,10 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         }
       },
+      interaction: {
+        intersect: false,
+        mode: 'index'
+      },
       fill: true,
       maintainAspectRatio: false,
       responsive: true
@@ -343,6 +359,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
           }
         }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index'
       },
       fill: true,
       maintainAspectRatio: false,
