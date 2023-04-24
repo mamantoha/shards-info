@@ -14,7 +14,7 @@ html lang="en"
     link rel="stylesheet" href="/dist/application.css?v=#{assets_version}" async="async" defer="defer"
     script src="/dist/application.js?v=#{assets_version}" media="all"
 
-    link rel="icon" sizes="264x168" href="/images/speeddial.png"
+    link rel="icon" sizes="264x168" href="/images/speeddial.png" async="async" defer="defer"
 
     title #{Config.config.page_title}
   body
