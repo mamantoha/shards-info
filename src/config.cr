@@ -28,6 +28,10 @@ class Config
   def self.date
     {{ `date -R`.stringify.chomp }}
   end
+
+  def self.nodejs_version
+    {{ `node -v`.chomp.stringify }}
+  end
 end
 
 struct OpenGraph
