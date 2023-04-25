@@ -19,10 +19,10 @@ div
             .col-auto
               .dropdown
                 button.btn.btn-secondary.btn-sm.dropdown-toggle type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                  = sort_options[sort]
+                  = Helpers::REPOSITORIES_SORT_OPTIONS[sort]
                 ul.dropdown-menu
                   li
-                    - sort_options.each do |key, value|
+                    - Helpers::REPOSITORIES_SORT_OPTIONS.each do |key, value|
                       a.dropdown-item href="/repositories?sort=#{key}" class="#{key == sort ? "disabled" : ""}"
                         = value
 
