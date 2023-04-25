@@ -120,7 +120,7 @@ module Gitlab
 
     property merge_method : String
 
-    property? auto_devops_enabled : Bool
+    property? auto_devops_enabled : Bool?
 
     property auto_devops_deploy_strategy : String
 
