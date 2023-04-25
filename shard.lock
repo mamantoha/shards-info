@@ -140,10 +140,6 @@ shards:
     git: https://github.com/sija/retriable.cr.git
     version: 0.2.4
 
-  sanitize:
-    git: https://github.com/straight-shoota/sanitize.git
-    version: 0.1.0+git.commit.75c141b619c77956e88f557149566cd28876398b
-
   shards_spec:
     git: https://github.com/mamantoha/shards_spec.git
     version: 0.2.4

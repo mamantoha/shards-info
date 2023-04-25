@@ -65,8 +65,6 @@ dependencies:
   noir:
     github: MakeNowJust/noir
     branch: main
-  sanitize:
-    github: straight-shoota/sanitize
   autolink:
     github: crystal-community/autolink.cr
   raven:
