@@ -17,14 +17,17 @@ ul.repository__statistic.not-list
     i.fas.fa-star title="Stars"
     = repository.stars_count
   li
-    i.fas.fa-box title="Used by"
-    = repository.attributes["dependents_count"]
-  li
     i.fas.fa-code-branch title="Forks"
     = repository.forks_count
   li
     i.fas.fa-exclamation-circle title="Open issues"
     = repository.open_issues_count
+  li
+    i.fas.fa-box title="Used by"
+    = repository.attributes["dependents_count"]
+  li
+    i.fas.fa-sitemap title="Dependencies"
+    = repository.attributes["dependencies_count"]
   li
     i.fas.fa-rotate title="Last activity"
     = repository.decorate.last_activity_ago

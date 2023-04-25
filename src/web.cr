@@ -108,7 +108,7 @@ get "/" do |env|
     Repository
       .query
       .join("users") { users.id == repositories.user_id }
-      .with_dependents_count
+      .with_counts
       .with_user
       .with_tags
       .where { users.ignore == false }
@@ -122,7 +122,7 @@ get "/" do |env|
     Repository
       .query
       .join("users") { users.id == repositories.user_id }
-      .with_dependents_count
+      .with_counts
       .with_user
       .with_tags
       .where { users.ignore == false }
@@ -181,7 +181,7 @@ get "/repositories" do |env|
       .query
       .with_tags
       .with_user
-      .with_dependents_count
+      .with_counts
       .published
       .order_by(expression, direction)
       .order_by("repositories.id", :asc)
@@ -314,7 +314,7 @@ get "/search" do |env|
         .query
         .with_tags
         .with_user
-        .with_dependents_count
+        .with_counts
         .published
         .search(query)
         .order_by(stars_count: :desc)
@@ -350,7 +350,7 @@ get "/:provider/:owner" do |env|
         .repositories
         .with_user
         .with_tags
-        .with_dependents_count
+        .with_counts
         .order_by(stars_count: :desc)
 
     repositories_count = repositories.count
@@ -380,21 +380,21 @@ get "/:provider/:owner/:repo" do |env|
         .dependencies
         .with_user
         .where { relationships.development == false }
-        .with_dependents_count
+        .with_counts
 
     development_dependencies =
       repository
         .dependencies
         .with_user
         .where { relationships.development == true }
-        .with_dependents_count
+        .with_counts
 
     dependents =
       repository
         .dependents
         .clear_distinct
         .with_user
-        .with_dependents_count
+        .with_counts
         .order_by("repositories.stars_count", :desc)
         .order_by("repositories.id", :asc)
 
@@ -458,7 +458,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
         .clear_distinct
         .with_tags
         .with_user
-        .with_dependents_count
+        .with_counts
         .order_by("repositories.stars_count", :desc)
         .order_by("repositories.id", :asc)
 
@@ -504,7 +504,7 @@ get "/tags/:name" do |env|
         .with_user
         .where { users.ignore == false }
         .where { repositories.ignore == false }
-        .with_dependents_count
+        .with_counts
         .order_by("repositories.stars_count", :desc)
         .order_by("repositories.id", :asc)
 
@@ -587,7 +587,7 @@ get "/languages/:name" do |env|
         .clear_distinct
         .with_tags
         .with_user
-        .with_dependents_count
+        .with_counts
         .order_by("repositories.stars_count", :desc)
         .order_by("repositories.id", :asc)
 

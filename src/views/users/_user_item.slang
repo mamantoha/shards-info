@@ -13,7 +13,7 @@
       .small.mb-4
         | #{user.attributes["repositories_count"]} repositories
     .col-md-9
-      - if (repository = user.repositories.with_dependents_count.order_by(stars_count: :desc).first(fetch_columns: true))
+      - if (repository = user.repositories.with_counts.order_by(stars_count: :desc).first(fetch_columns: true))
         .small.text-uppercase.mb-2
           i.text-warning.fas.fa-fire
           ' Popular repository
@@ -29,14 +29,17 @@
               i class="fas fa-star" title="Stars"
               = repository.stars_count
             li.list-inline-item
-              i.fas.fa-box title="Used by"
-              = repository.attributes["dependents_count"]
-            li.list-inline-item
               i class="fas fa-code-branch" title="Forks"
               = repository.forks_count
             li.list-inline-item
               i class="fas fa-exclamation-circle" title="Open issues"
               = repository.open_issues_count
+            li.list-inline-item
+              i.fas.fa-box title="Used by"
+              = repository.attributes["dependents_count"]
+            li.list-inline-item
+              i.fas.fa-sitemap title="Dependencies"
+              = repository.attributes["dependencies_count"]
             li.list-inline-item
               i class="fas fa-rotate" title="Last activity"
               = repository.decorate.last_activity_ago
