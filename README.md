@@ -9,7 +9,7 @@ View of all repositories on Github and Gitlab that have Crystal code in them.
 
 [![SWUbanner](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-direct-single.svg)](https://vshymanskyy.github.io/StandWithUkraine)
 
-<p><a href="javascript:alert("XSS attack!")">Hello world!</a></p>
+<p><a href="javascript:alert('XSS attack!')">Hello world!</a></p>
 
 ## Installation
 
