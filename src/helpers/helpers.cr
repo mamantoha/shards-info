@@ -3,6 +3,15 @@ require "../lib/linguist/language"
 module Helpers
   extend self
 
+  REPOSITORIES_SORT_OPTIONS = {
+    "stars"          => "Stars",
+    "alphabetical"   => "Alphabetical",
+    "dependents"     => "Dependents",
+    "dependencies"   => "Dependencies",
+    "recent-updates" => "Recent Updates",
+    "new"            => "Newly Added",
+  }
+
   def sync_repository_by_url(url : String) : Repository?
     uri = URI.parse(url)
 
@@ -131,6 +140,25 @@ module Helpers
         language.color = linguist_language.color
         language.save!
       end
+    end
+  end
+
+  def repositories_sort_expression_direction(sort : String)
+    case sort
+    when "alphabetical"
+      {"name", :asc}
+    when "stars"
+      {"stars_count", :desc}
+    when "dependents"
+      {"(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id)", :desc}
+    when "dependencies"
+      {"(select COUNT(*) from relationships r WHERE r.master_id=repositories.id)", :desc}
+    when "recent-updates"
+      {"last_activity_at", :desc}
+    when "new"
+      {"created_at", :desc}
+    else
+      {"stars_count", :desc}
     end
   end
 end

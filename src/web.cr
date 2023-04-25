@@ -145,36 +145,11 @@ get "/repositories" do |env|
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
-  sort_options = {
-    "stars"          => "Stars",
-    "alphabetical"   => "Alphabetical",
-    "dependents"     => "Dependents",
-    "dependencies"   => "Dependencies",
-    "recent-updates" => "Recent Updates",
-    "new"            => "Newly Added",
-  }
+  sort_param = env.params.query["sort"]? || "stars"
 
-  sort_param = env.params.query["sort"]?
+  sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
 
-  sort = sort_param.in?(sort_options.keys) ? sort_param : "stars"
-
-  expression, direction =
-    case sort
-    when "alphabetical"
-      {"name", :asc}
-    when "stars"
-      {"stars_count", :desc}
-    when "dependents"
-      {"(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id)", :desc}
-    when "dependencies"
-      {"(select COUNT(*) from relationships r WHERE r.master_id=repositories.id)", :desc}
-    when "recent-updates"
-      {"last_activity_at", :desc}
-    when "new"
-      {"created_at", :desc}
-    else
-      {"stars_count", :desc}
-    end
+  expression, direction = Helpers.repositories_sort_expression_direction(sort)
 
   repositories_query =
     Repository
@@ -444,12 +419,20 @@ get "/:provider/:owner/:repo/dependents" do |env|
   owner = env.params.url["owner"]
   repo = env.params.url["repo"]
 
+  route_path = "/#{provider}/#{owner}/#{repo}/dependents"
+
   page = env.params.query["page"]? || ""
   page = page.to_i? || 1
   per_page = 20
   offset = (page - 1) * per_page
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+
+  sort_param = env.params.query["sort"]? || "stars"
+
+  sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
+
+  expression, direction = Helpers.repositories_sort_expression_direction(sort)
 
   if repository = Repository.find_repository(owner, repo, provider)
     repositories_query =
@@ -459,7 +442,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
         .with_tags
         .with_user
         .with_counts
-        .order_by("repositories.stars_count", :desc)
+        .order_by(expression, direction)
         .order_by("repositories.id", :asc)
 
     total_count = repositories_query.count
