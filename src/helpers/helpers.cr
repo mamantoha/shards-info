@@ -116,8 +116,8 @@ module Helpers
   end
 
   def to_markdown(repository : Repository, readme_content : String) : String
-    sanitizer = Sanitize::Policy::HTMLSanitizer.common
-    readme_content = sanitizer.process(readme_content)
+    # sanitizer = Sanitize::Policy::HTMLSanitizer.common
+    # readme_content = sanitizer.process(readme_content)
 
     options = Cmark::Option.flags(Unsafe, Nobreaks, ValidateUTF8)
     extensions = Cmark::Extension.flags(Table, Strikethrough, Autolink, Tagfilter, Tasklist)
