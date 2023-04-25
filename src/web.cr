@@ -16,6 +16,7 @@ require "emoji"
 require "humanize_time"
 require "time_by_example"
 require "autolink"
+require "sanitize"
 require "raven/integrations/kemal"
 
 require "../config/config"
