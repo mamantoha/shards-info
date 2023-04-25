@@ -18,7 +18,7 @@
       .list__heading
         a data-bs-toggle="collapse" href="#collapseDependencies" aria-expanded="true" aria-controls="collapseDependencies"
           i class="fa" aria-hidden="true"
-          | Dependencies
+          | Dependencies (#{dependencies.count})
       .collapse.show#collapseDependencies
         ul.list__items.not-list
           - dependencies.each(fetch_columns: true) do |repository|
@@ -54,7 +54,7 @@
       .list__heading
         a data-bs-toggle="collapse" href="#collapseDevelopmentDependencies" aria-expanded="true" aria-controls="collapseDevelopmentDependencies"
           i class="fa" aria-hidden="true"
-          | Development dependencies
+        | Development dependencies (#{development_dependencies.count})
       .collapse.show#collapseDevelopmentDependencies
         ul.list__items.not-list
           - development_dependencies.each(fetch_columns: true) do |repository|

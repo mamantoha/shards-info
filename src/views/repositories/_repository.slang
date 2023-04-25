@@ -47,5 +47,8 @@
           i.fas.fa-box title="Used by"
           = repository.attributes["dependents_count"]
         li
+          i.fas.fa-sitemap title="Dependencies"
+          = repository.attributes["dependencies_count"]
+        li
           i class="fas fa-rotate" title="Last activity"
           = repository.decorate.last_activity_ago
