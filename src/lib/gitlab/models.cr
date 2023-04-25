@@ -98,7 +98,7 @@ module Gitlab
 
     property? public_jobs : Bool
 
-    property build_timeout : Int32
+    property build_timeout : Int32?
 
     property auto_cancel_pending_pipelines : String
 
