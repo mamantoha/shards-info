@@ -100,7 +100,7 @@ module Gitlab
 
     property build_timeout : Int32?
 
-    property auto_cancel_pending_pipelines : String
+    property auto_cancel_pending_pipelines : String?
 
     property build_coverage_regex : String?
 
