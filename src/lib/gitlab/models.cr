@@ -122,7 +122,7 @@ module Gitlab
 
     property? auto_devops_enabled : Bool?
 
-    property auto_devops_deploy_strategy : String
+    property auto_devops_deploy_strategy : String?
 
     property permissions : Permissions?
 
