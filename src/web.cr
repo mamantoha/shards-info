@@ -876,6 +876,8 @@ end
 
 get "/stats" do |env|
   repositories_count = Repository.query.count
+  users_count = User.query.count
+
   repositories_count_in_last_month = Repository.query.where("created_at >= NOW() - INTERVAL '28 days'").count
 
   users_count = User.query.count
@@ -1056,6 +1058,26 @@ get "/stats/user_repositories_count" do |env|
     .fetch do |hash|
       hsh[hash["repo_count"].as(Int64)] = hash["user_count"].as(Int64)
     end
+
+  hsh.to_json
+end
+
+get "/stats/repositories_provider_count" do |env|
+  hsh = {} of String => Int64
+
+  Repository.query.select("provider, COUNT(*) AS count").group_by("provider").each(fetch_columns: true) do |repository|
+    hsh[repository.provider] = repository.attributes["count"].as(Int64)
+  end
+
+  hsh.to_json
+end
+
+get "/stats/users_provider_count" do |env|
+  hsh = {} of String => Int64
+
+  User.query.select("provider, COUNT(*) AS count").group_by("provider").each(fetch_columns: true) do |user|
+    hsh[user.provider] = user.attributes["count"].as(Int64)
+  end
 
   hsh.to_json
 end

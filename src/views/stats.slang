@@ -8,8 +8,8 @@ div
 
 .container
   .row.mb-4
-    .col-md-3
-      .card
+    .col-md-4
+      .card.h-100#stats-repositories-count
         .card-header
           ' Repositories
         .card-body
@@ -18,8 +18,22 @@ div
           p.card-text
             i.fas.fa-arrow-up
             = "#{repositories_count_in_last_month} from last month"
+            #chartRepositoriesProviderCount
+        .card-footer.text-center
           a.btn.btn-primary href="/repositories"
             ' Browse repositories
+    .col-md-4
+      .card.h-100#stats-users-count
+        .card-header
+          ' Users or teams
+        .card-body
+          h2.cart-title.text-end
+            = users_count
+          p.card-text
+            #chartUsersProviderCount
+        .card-footer.text-center
+          a.btn.btn-primary href="/users"
+            ' Browse users
   .row.mb-4
     .col-md-12
       h3

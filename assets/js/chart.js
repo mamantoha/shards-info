@@ -248,6 +248,70 @@ class RepositoryCountLineChart {
   }
 }
 
+class PieChart {
+  constructor (options) {
+    this.element = document.querySelector(options.element)
+
+    if (!this.element) {
+      return
+    }
+
+    this.options = options
+    this.label = options.label
+    this.chart = null
+    this.data = null
+
+    this.fetchDataAndCreateChart()
+  }
+
+  fetchDataAndCreateChart () {
+    fetch(this.options.apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        this.data = data
+        const chartData = this.processData(data)
+        // create chart
+        const canvas = document.createElement('canvas')
+        this.element.appendChild(canvas)
+        const chartOptions = Object.assign({}, this.options.chartOptions, {
+          plugins: {
+            legend: {
+              position: 'left'
+            },
+            title: {
+              display: false,
+              text: `${this.label}`
+            }
+          }
+        })
+        this.chart = new Chart(canvas, {
+          type: 'pie',
+          data: chartData,
+          options: chartOptions
+        })
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error)
+      })
+  }
+
+  processData (data) {
+    const labels = Object.keys(data)
+    const values = Object.values(data)
+    const chartData = {
+      labels,
+      datasets: [
+        {
+          data: values,
+          backgroundColor: ['#4078c0', '#e2432a'],
+          borderWidth: 0
+        }
+      ]
+    }
+    return chartData
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   const chartCreatedAt = new RepositoryCountBarChart({
     apiUrl: '/stats/created_at',
@@ -389,6 +453,24 @@ document.addEventListener('DOMContentLoaded', function () {
         mode: 'index'
       },
       maintainAspectRatio: false,
+      responsive: true
+    }
+  })
+
+  const chartRepositoriesProviderCount = new PieChart({
+    apiUrl: '/stats/repositories_provider_count',
+    element: '#chartRepositoriesProviderCount',
+    label: 'Providers',
+    chartOptions: {
+      responsive: true
+    }
+  })
+
+  const chartUsersProviderCount = new PieChart({
+    apiUrl: '/stats/users_provider_count',
+    element: '#chartUsersProviderCount',
+    label: 'Users',
+    chartOptions: {
       responsive: true
     }
   })
