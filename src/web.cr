@@ -1065,9 +1065,14 @@ end
 get "/stats/repositories_provider_count" do |env|
   hsh = {} of String => Int64
 
-  Repository.query.select("provider, COUNT(*) AS count").group_by("provider").each(fetch_columns: true) do |repository|
-    hsh[repository.provider] = repository.attributes["count"].as(Int64)
-  end
+  Repository
+    .query
+    .select("provider, COUNT(*) AS count")
+    .group_by("provider")
+    .order_by(count: :desc)
+    .each(fetch_columns: true) do |repository|
+      hsh[repository.provider] = repository.attributes["count"].as(Int64)
+    end
 
   hsh.to_json
 end
@@ -1075,9 +1080,14 @@ end
 get "/stats/users_provider_count" do |env|
   hsh = {} of String => Int64
 
-  User.query.select("provider, COUNT(*) AS count").group_by("provider").each(fetch_columns: true) do |user|
-    hsh[user.provider] = user.attributes["count"].as(Int64)
-  end
+  User
+    .query
+    .select("provider, COUNT(*) AS count")
+    .group_by("provider")
+    .order_by(count: :desc)
+    .each(fetch_columns: true) do |user|
+      hsh[user.provider] = user.attributes["count"].as(Int64)
+    end
 
   hsh.to_json
 end
