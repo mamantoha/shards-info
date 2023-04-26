@@ -954,8 +954,8 @@ get "/stats/repositories_growth" do |env|
       .with_cte({month_series: month_series})
       .from("month_series ms")
       .order_by("ms.year_month")
-      .fetch do |hash|
-        hsh[hash["year_month"].as(Time).to_s("%Y-%m")] = hash["cumulative_count"].as(Int64)
+      .fetch do |attributes|
+        hsh[attributes["year_month"].as(Time).to_s("%Y-%m")] = attributes["cumulative_count"].as(Int64)
       end
 
     hsh.to_json
@@ -987,8 +987,8 @@ get "/stats/direct_dependencies" do |env|
     )
     .group_by("dependency_count")
     .order_by("dependency_count", :asc)
-    .fetch do |hash|
-      hsh[hash["dependency_count"].as(Int64)] = hash["repository_count"].as(Int64)
+    .fetch do |attributes|
+      hsh[attributes["dependency_count"].as(Int64)] = attributes["repository_count"].as(Int64)
     end
 
   hsh.to_json
@@ -1026,8 +1026,8 @@ get "/stats/reverse_dependencies" do |env|
     .group_by("dependency_range")
     .order_by("MIN(dependency_count)")
     .where("dependency_count > 0")
-    .fetch do |hash|
-      hsh[hash["dependency_range"].as(String)] = hash["repository_count"].as(Int64)
+    .fetch do |attributes|
+      hsh[attributes["dependency_range"].as(String)] = attributes["repository_count"].as(Int64)
     end
 
   hsh.to_json
@@ -1055,8 +1055,8 @@ get "/stats/user_repositories_count" do |env|
     )
     .group_by("repo_count")
     .order_by("repo_count")
-    .fetch do |hash|
-      hsh[hash["repo_count"].as(Int64)] = hash["user_count"].as(Int64)
+    .fetch do |attributes|
+      hsh[attributes["repo_count"].as(Int64)] = attributes["user_count"].as(Int64)
     end
 
   hsh.to_json
