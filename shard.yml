@@ -39,6 +39,7 @@ dependencies:
     github: crystal-garage/kemal-kilt
   multi_auth:
     github: msa7/multi_auth
+    branch: master
   clear:
     github: crystal-garage/clear
     branch: develop
