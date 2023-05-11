@@ -42,14 +42,14 @@
     "stylelint-config-standard": "^33.0.0",
     "stylelint-config-standard-scss": "^9.0.0",
     "trim-newlines": ">=5.0.0",
-    "webpack": "^5.82.0",
+    "webpack": "^5.82.1",
     "webpack-cli": "^5.1.1"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
     "chart.js": "^4.3.0",
     "jqcloud2": "^2.0.3",
-    "jquery": "^3.6.4",
+    "jquery": "^3.7.0",
     "moveto": "^1.8.2",
     "popper.js": "^1.16.1"
   }
