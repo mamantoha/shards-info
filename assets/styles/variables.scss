@@ -91,6 +91,8 @@ html.dark {
 
   .card {
     --bs-card-bg: var(--page-heading-bg-color);
+    --bs-card-color: var(--font-color);
+    --bs-card-cap-color: var(--font-color);
   }
 
   .dropdown-menu {
