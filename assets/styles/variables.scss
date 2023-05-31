@@ -90,9 +90,11 @@ html.dark {
   }
 
   .card {
-    --bs-card-bg: var(--page-heading-bg-color);
+    --bs-card-bg: var(--main-bg-color);
+    --bs-card-cap-bg: var(--page-heading-bg-color);
     --bs-card-color: var(--font-color);
     --bs-card-cap-color: var(--font-color);
+    --bs-card-border-color: var(--border-color);
   }
 
   .dropdown-menu {
