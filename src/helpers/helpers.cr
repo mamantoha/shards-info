@@ -161,4 +161,41 @@ module Helpers
       {"stars_count", :desc}
     end
   end
+
+  def day_of_war : String
+    # 1 year is approximately 365.25 days (including leap years)
+    days_in_year = 365.25
+    # 1 month is approximately 30.44 days (average month length)
+    days_in_month = 30.44
+
+    time_zone = TimeZone.new("Kyiv")
+
+    start = time_zone.local(2022, 2, 24, 3, 40)
+    now = time_zone.local
+
+    span = now - start
+
+    # get total days, then calculate years, months, and remaining days
+    total_days = span.days
+    years = (total_days / days_in_year).floor
+    residual_days = total_days - years * days_in_year
+    months = (residual_days / days_in_month).floor
+    remaining_days = (residual_days - months * days_in_month).floor
+
+    hours = span.hours
+    minutes = span.minutes
+
+    total_days_str = pluralize(total_days, "day", "days")
+    years_str = pluralize(years.to_i, "year", "years")
+    months_str = pluralize(months.to_i, "month", "months")
+    remaining_days_str = pluralize(remaining_days.to_i, "day", "days")
+    hours_str = pluralize(hours, "hour", "hours")
+    minutes_str = pluralize(minutes, "minute", "minutes")
+
+    "#{total_days_str} or #{years_str}, #{months_str}, #{remaining_days_str}, #{hours_str}, #{minutes_str}"
+  end
+
+  def pluralize(count : Int32 | Int64, singular : String, plural : String)
+    "#{count} #{count == 1 ? singular : plural}"
+  end
 end
