@@ -156,3 +156,7 @@ shards:
     git: https://github.com/mamantoha/time_by_example.git
     version: 0.1.0
 
+  time_zone:
+    git: https://github.com/mamantoha/time_zone.git
+    version: 0.1.1
+

@@ -78,6 +78,8 @@ dependencies:
     github: mamantoha/shards_spec
   cadmium_transliterator:
     github: cadmiumcr/transliterator
+  time_zone:
+    github: mamantoha/time_zone
 
 development_dependencies:
   spec-kemal:

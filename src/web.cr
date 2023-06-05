@@ -15,6 +15,7 @@ require "crest"
 require "emoji"
 require "humanize_time"
 require "time_by_example"
+require "time_zone"
 require "autolink"
 require "raven/integrations/kemal"
 
