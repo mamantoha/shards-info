@@ -60,6 +60,8 @@ dependencies:
     github: mamantoha/humanize_time
   time_by_example:
     github: mamantoha/time_by_example
+  time_duration:
+    github: mamantoha/time_duration
   cmark:
     github: amauryt/cr-cmark-gfm
     branch: master

@@ -175,24 +175,11 @@ module Helpers
 
     span = now - start
 
-    # get total days, then calculate years, months, and remaining days
-    total_days = span.days
-    years = (total_days / days_in_year).floor
-    residual_days = total_days - years * days_in_year
-    months = (residual_days / days_in_month).floor
-    remaining_days = (residual_days - months * days_in_month).floor
+    duration = Time::Duration.new(span)
 
-    hours = span.hours
-    minutes = span.minutes
+    total_days_str = pluralize(duration.in_days.to_i, "day", "days")
 
-    total_days_str = pluralize(total_days, "day", "days")
-    years_str = pluralize(years.to_i, "year", "years")
-    months_str = pluralize(months.to_i, "month", "months")
-    remaining_days_str = pluralize(remaining_days.to_i, "day", "days")
-    hours_str = pluralize(hours, "hour", "hours")
-    minutes_str = pluralize(minutes, "minute", "minutes")
-
-    "#{total_days_str} or #{years_str}, #{months_str}, #{remaining_days_str}, #{hours_str}, #{minutes_str}"
+    "#{total_days_str} or #{duration.humanize(include_seconds: false, oxford_comma: true)}"
   end
 
   def pluralize(count : Int32 | Int64, singular : String, plural : String)
