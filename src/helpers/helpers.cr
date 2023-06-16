@@ -163,11 +163,6 @@ module Helpers
   end
 
   def day_of_war : String
-    # 1 year is approximately 365.25 days (including leap years)
-    days_in_year = 365.25
-    # 1 month is approximately 30.44 days (average month length)
-    days_in_month = 30.44
-
     time_zone = TimeZone.new("Kyiv")
 
     start = time_zone.local(2022, 2, 24, 3, 40)
