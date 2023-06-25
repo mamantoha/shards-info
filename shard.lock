@@ -30,7 +30,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.15+git.commit.47c99587a3383365dce757cf1c5ad4011f09c1f3
+    version: 0.8.17+git.commit.50b11acd030ecf00abefeb73558bd4ca6dbbbe55
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -42,7 +42,7 @@ shards:
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
-    version: 0.11.0
+    version: 0.12.0
 
   delegator:
     git: https://github.com/schniz/delegator.cr.git
@@ -122,7 +122,7 @@ shards:
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.26.0
+    version: 0.27.0
 
   radix:
     git: https://github.com/luislavena/radix.git
