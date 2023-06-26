@@ -29,7 +29,7 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
           li.nav-item.dropdown
             a.nav-link.dropdown-toggle#navbarDropdown href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               img.rounded-circle src="#{current_user.image}" alt="#{current_user.nickname}" width="20" height="20"
-            ul.dropdown-menu aria-labelledby="navbarDropdown"
+            ul.dropdown-menu.dropdown-menu-end aria-labelledby="navbarDropdown"
               li
                 .ms-2.p-2.fw-lighter.lh-1
                   i.fas.fa-user
@@ -44,7 +44,7 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
               li
                 a.dropdown-item href="/logout"
                   i.fas.fa-right-from-bracket
-                  | Sing out
+                  | Sign out
         - else
           li.nav-item
             a.nav-link href="/auth/github"
