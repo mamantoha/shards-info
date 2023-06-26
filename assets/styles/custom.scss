@@ -166,12 +166,12 @@ a.badge {
     padding-left: 2.375rem;
     border-radius: 2rem;
     border: 0;
-    background-color: #404448;
-    color: #dadadc;
+    background-color: var(--search-input-bg-color);
+    color: var(--search-input-color);
   }
 
   ::placeholder {
-    color: #dadadc !important;
+    color: var(--search-input-color) !important;
   }
 }
 

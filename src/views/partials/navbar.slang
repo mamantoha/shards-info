@@ -1,4 +1,4 @@
-nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
+nav.navbar.navbar-expand-md.fixed-top
   .container-fluid
     button.btn data-bs-toggle="modal" data-bs-target="#sidebar-modal"
       span.navbar-toggler-icon
