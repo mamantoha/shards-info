@@ -11,8 +11,8 @@ div
               | of
               strong= "#{total_count}"
               | total results
-        .col.text-end
-          .row.align-items-center
+        .col
+          .row.justify-content-end
             .col-auto
               label
                 | Sort by
