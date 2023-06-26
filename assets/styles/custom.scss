@@ -805,3 +805,30 @@ ul.not-list {
     height: 24px;
   }
 }
+
+#sidebar-modal {
+  /* CSS to make the modal appear like a sidebar */
+  .modal-dialog {
+    width: 320px;
+    margin: 0;
+    position: absolute;
+  }
+
+  .modal-content {
+    height: 100vh;
+    overflow: auto;
+  }
+
+  .modal-header {
+    border-bottom: none;
+  }
+
+  .modal-footer {
+    border-top: none;
+  }
+
+  .nav-link {
+    color: var(--nav-link-color);
+    padding-left: 1px;
+  }
+}

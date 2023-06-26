@@ -1,5 +1,7 @@
 nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
-  .container
+  .container-fluid
+    button.btn data-bs-toggle="modal" data-bs-target="#sidebar-modal"
+      span.navbar-toggler-icon
     a.navbar-brand href="/"
       img.d-inline-block.align-top src="/images/logo_ua.svg" width="30" height="30" alt=""
       ' shards.info
@@ -8,14 +10,6 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
     .collapse.navbar-collapse#navbarNavDropdown
       .navbar-nav.me-auto.mb-2.mb-lg-0
         ul.navbar-nav.me-auto
-          li.nav-item
-            a.nav-link href="/repositories"
-              i.fas.fa-compass
-              | Browse
-           li.nav-item
-            a.nav-link href="/stats"
-              i.fas.fa-chart-simple
-              | Stats
           li.nav-item
             a.nav-link href="#" data-bs-toggle="modal" data-bs-target="#aboutModal"
               i.fas.fa-circle-info
