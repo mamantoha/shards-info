@@ -133,10 +133,10 @@ a.badge {
 }
 
 .repository-popover {
-  --bs-popover-bg: var(--main-bg-color);
-  --bs-popover-border-color: var(--border-color);
-  --bs-popover-arrow-border: var(--border-color);
-  --bs-popover-body-color: var(--font-color);
+  --#{$prefix}popover-bg: var(--main-bg-color);
+  --#{$prefix}popover-border-color: var(--border-color);
+  --#{$prefix}popover-arrow-border: var(--border-color);
+  --#{$prefix}popover-body-color: var(--font-color);
 }
 
 #stand-with-ukraine {
