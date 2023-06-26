@@ -189,7 +189,7 @@ a.badge {
   line-height: 2.375rem;
   text-align: center;
   pointer-events: none;
-  color: #dadadc;
+  color: var(--search-input-color);
 }
 
 .width-full {
