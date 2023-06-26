@@ -13,6 +13,10 @@
         .navbar-nav.me-auto.mb-2.mb-lg-0
           ul.nav.flex-column
             li.nav-item
+              a.nav-link href="/"
+                i.fa-solid.fa-house
+                | Home
+            li.nav-item
               a.nav-link href="/repositories"
                 i.fas.fa-compass
                 | Browse repositories
@@ -20,6 +24,10 @@
               a.nav-link href="/stats"
                 i.fas.fa-chart-simple
                 | Statistics
+            li.nav-item
+              a.nav-link href="/about"
+                i.fas.fa-circle-info
+                | About
             li.nav-item
               hr
             li.nav-item

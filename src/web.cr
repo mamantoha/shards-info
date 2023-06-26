@@ -105,6 +105,13 @@ error 404 do
   render "src/views/404.slang"
 end
 
+get "/about" do |env|
+  Config.config.page_title = "shards.info"
+  Config.config.page_description = "About"
+
+  render "src/views/about.slang", "src/views/layouts/layout.slang"
+end
+
 get "/" do |env|
   trending_repositories =
     Repository
