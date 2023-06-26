@@ -1,9 +1,13 @@
-.modal#sidebar-modal tabindex="-1"
+#sidebar-modal.modal.fade tabindex="-1"
   .modal-dialog
     .modal-content
       .modal-header
-        .navbar-brand
-          img.d-inline-block.align-top src="/images/logo_ua.svg" width="30" height="30" alt=""
+        button#themeSwitcher.nav-link.pe-2
+        .search-wrap
+          div.form-group.has-search
+            span.fa.fa-search.form-control-feedback
+            form.d-flex.navbar-form.navbar-left#search action="/search" method="GET" autocomplete="off"
+              input.form-control.me-2 aria-label="Search" name="query" type="search" placeholder="Search shards..." onClick="this.select();" value="#{Config.config.query}"
         button type="button" class="btn-close" data-bs-dismiss="modal"
       .modal-body
         .navbar-nav.me-auto.mb-2.mb-lg-0

@@ -9,14 +9,22 @@ $(function () {
     }
   }
 
+  const themeSwitcherElement = document.getElementById('themeSwitcher')
+
   if (localStorage.theme === 'dark') {
-    document.getElementById('switchTheme').checked = true
+    themeSwitcherElement.setAttribute('data-checked', true)
+    themeSwitcherElement.innerHTML = '<i class="fas fa-moon"></i>'
   } else {
-    document.getElementById('switchTheme').checked = false
+    themeSwitcherElement.setAttribute('data-checked', false)
+    themeSwitcherElement.innerHTML = '<i class="fas fa-sun"></i>'
   }
 
-  $('#switchTheme').on('change', function (e) {
-    if (e.currentTarget.checked) {
+  themeSwitcherElement.addEventListener('click', function () {
+    const isChecked = this.getAttribute('data-checked') === 'true'
+    this.setAttribute('data-checked', !isChecked)
+    this.innerHTML = isChecked ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>'
+
+    if (!isChecked) {
       localStorage.theme = 'dark'
       document.documentElement.classList.add('dark')
     } else {

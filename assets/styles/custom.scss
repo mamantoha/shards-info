@@ -110,10 +110,6 @@ a.badge {
   }
 }
 
-.search-wrap {
-  width: 38%;
-}
-
 .alert-success {
   color: var(--alert-success-color);
   background-color: var(--alert-success-bg-color);
@@ -177,7 +173,6 @@ a.badge {
 
 .form-group.has-search {
   margin-bottom: 0;
-  background-color: var(--navbar-bg-color);
 }
 
 .has-search .form-control-feedback {
