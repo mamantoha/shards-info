@@ -1,4 +1,4 @@
-.modal.fade#sidebar-modal tabindex="-1"
+.modal#sidebar-modal tabindex="-1"
   .modal-dialog
     .modal-content
       .modal-header
@@ -17,8 +17,14 @@
                 i.fas.fa-chart-simple
                 | Statistics
             li.nav-item
+              hr
+            li.nav-item
               a.nav-link href="https://stats.uptimerobot.com/m770xt1j6Q" target="_blank"
                 i.fas.fa-wave-square
                 | Service Status
+            li.nav-item
+              a.nav-link href="https://github.com/mamantoha/shards-info" target="_blank"
+                i.fa-brands.fa-github
+                | GitHub repository
       .modal-footer
         | © #{Time.utc.year}
