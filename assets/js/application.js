@@ -127,3 +127,23 @@ $(function () {
     return new window.bootstrap.Popover(popoverTriggerEl)
   })
 })
+
+// Executed upon page load
+document.addEventListener('DOMContentLoaded', function () {
+  scrollToHash()
+})
+
+// This function enables automatic page scrolling to a specific anchor in the "readme" section upon page load.
+function scrollToHash () {
+  const hash = window.location.hash
+
+  if (hash) {
+    const element = document.querySelector('#readme ' + hash)
+
+    if (element) {
+      // Scroll the page to bring the element into view.
+      // In browsers that support it, the scroll will be smooth.
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+}
