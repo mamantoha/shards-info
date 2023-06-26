@@ -6,7 +6,7 @@
         .search-wrap
           div.form-group.has-search
             span.fa.fa-search.form-control-feedback
-            form.d-flex.navbar-form.navbar-left#search action="/search" method="GET" autocomplete="off"
+            form#search action="/search" method="GET" autocomplete="off"
               input.form-control.me-2 aria-label="Search" name="query" type="search" placeholder="Search shards..." onClick="this.select();" value="#{Config.config.query}"
         button type="button" class="btn-close" data-bs-dismiss="modal"
       .modal-body
