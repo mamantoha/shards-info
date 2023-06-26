@@ -1,8 +1,8 @@
 .container.mt-5
   .h1
-    ' About
+    | About
   .h6.font-weight-light
-    ' View of all repositories on Github and Gitlab that have Crystal code in them.
+    | View of all repositories on Github and Gitlab that have Crystal code in them.
 
   ul
     li
@@ -23,7 +23,6 @@
         li
           a href="https://nodejs.org/" Node.js
           = Config.nodejs_version
-
     li
       | Build date #{Time.parse_rfc2822(Config.date).to_s("%Y-%m-%d %H:%M:%S %:z")}
     li
@@ -34,5 +33,3 @@
       a href="mailto:anton.maminov@gmail.com" Anton Maminov
   .px-4.mt-3
     | We hope that this site will encourage you to start your own Crystal projects!
-  .px-4.mt-3
-    | Happy Crystalling ❤️
