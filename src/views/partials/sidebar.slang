@@ -19,6 +19,8 @@
             li.nav-item
               hr
             li.nav-item
+              p.fs-6.fw-lighter External links
+            li.nav-item
               a.nav-link href="https://stats.uptimerobot.com/m770xt1j6Q" target="_blank"
                 i.fas.fa-wave-square
                 | Service Status
