@@ -23,7 +23,6 @@ html lang="en"
       document.documentElement.classList.add(theme);
     == render "src/views/partials/navbar.slang"
     == render "src/views/partials/sidebar.slang"
-    == render "src/views/partials/about.slang"
     == render "src/views/partials/back_to_top.slang"
     div role="main"
       == render "src/views/partials/flash.slang"

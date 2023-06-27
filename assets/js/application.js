@@ -9,14 +9,22 @@ $(function () {
     }
   }
 
+  const themeSwitcherElement = document.getElementById('themeSwitcher')
+
   if (localStorage.theme === 'dark') {
-    document.getElementById('switchTheme').checked = true
+    themeSwitcherElement.setAttribute('data-checked', true)
+    themeSwitcherElement.innerHTML = '<i class="fas fa-moon"></i>'
   } else {
-    document.getElementById('switchTheme').checked = false
+    themeSwitcherElement.setAttribute('data-checked', false)
+    themeSwitcherElement.innerHTML = '<i class="fas fa-sun"></i>'
   }
 
-  $('#switchTheme').on('change', function (e) {
-    if (e.currentTarget.checked) {
+  themeSwitcherElement.addEventListener('click', function () {
+    const isChecked = this.getAttribute('data-checked') === 'true'
+    this.setAttribute('data-checked', !isChecked)
+    this.innerHTML = isChecked ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>'
+
+    if (!isChecked) {
       localStorage.theme = 'dark'
       document.documentElement.classList.add('dark')
     } else {
@@ -127,3 +135,23 @@ $(function () {
     return new window.bootstrap.Popover(popoverTriggerEl)
   })
 })
+
+// Executed upon page load
+document.addEventListener('DOMContentLoaded', function () {
+  scrollToHash()
+})
+
+// This function enables automatic page scrolling to a specific anchor in the "readme" section upon page load.
+function scrollToHash () {
+  const hash = window.location.hash
+
+  if (hash) {
+    const element = document.querySelector('#readme ' + hash)
+
+    if (element) {
+      // Scroll the page to bring the element into view.
+      // In browsers that support it, the scroll will be smooth.
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+}

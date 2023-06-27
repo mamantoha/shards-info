@@ -110,10 +110,6 @@ a.badge {
   }
 }
 
-.search-wrap {
-  width: 38%;
-}
-
 .alert-success {
   color: var(--alert-success-color);
   background-color: var(--alert-success-bg-color);
@@ -122,7 +118,6 @@ a.badge {
 
 @media (max-width: 576px) {
   .search-wrap {
-    margin-top: 10px;
     width: 100%;
   }
 }
@@ -133,10 +128,10 @@ a.badge {
 }
 
 .repository-popover {
-  --bs-popover-bg: var(--main-bg-color);
-  --bs-popover-border-color: var(--border-color);
-  --bs-popover-arrow-border: var(--border-color);
-  --bs-popover-body-color: var(--font-color);
+  --#{$prefix}popover-bg: var(--main-bg-color);
+  --#{$prefix}popover-border-color: var(--border-color);
+  --#{$prefix}popover-arrow-border: var(--border-color);
+  --#{$prefix}popover-body-color: var(--font-color);
 }
 
 #stand-with-ukraine {
@@ -166,18 +161,17 @@ a.badge {
     padding-left: 2.375rem;
     border-radius: 2rem;
     border: 0;
-    background-color: #404448;
-    color: #dadadc;
+    background-color: var(--search-input-bg-color);
+    color: var(--search-input-color);
   }
 
   ::placeholder {
-    color: #dadadc !important;
+    color: var(--search-input-color) !important;
   }
 }
 
 .form-group.has-search {
   margin-bottom: 0;
-  background-color: var(--navbar-bg-color);
 }
 
 .has-search .form-control-feedback {
@@ -189,7 +183,7 @@ a.badge {
   line-height: 2.375rem;
   text-align: center;
   pointer-events: none;
-  color: #dadadc;
+  color: var(--search-input-color);
 }
 
 .width-full {
