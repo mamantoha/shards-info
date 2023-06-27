@@ -2,14 +2,19 @@
   .modal-dialog
     .modal-content
       .modal-header
-        button#themeSwitcher.nav-link.pe-2
-        .search-wrap
-          div.form-group.has-search
-            span.fa.fa-search.form-control-feedback
-            form#search action="/search" method="GET" autocomplete="off"
-              input.form-control.me-2 aria-label="Search" name="query" type="search" placeholder="Search shards..." onClick="this.select();" value="#{Config.config.query}"
+        .navbar-brand
+          img.d-inline-block.align-middle src="/images/logo_ua.svg" width="30" height="30" alt=""
+          ' shards.info
         button type="button" class="btn-close" data-bs-dismiss="modal"
       .modal-body
+        .d-flex
+          button#themeSwitcher.nav-link.pe-2
+          .search-wrap
+            div.form-group.has-search
+              span.fa.fa-search.form-control-feedback
+              form#search action="/search" method="GET" autocomplete="off"
+                input.form-control.me-2 aria-label="Search" name="query" type="search" placeholder="Search shards..." onClick="this.select();" value="#{Config.config.query}"
+        hr
         .navbar-nav.me-auto.mb-2.mb-lg-0
           ul.nav.flex-column
             li.nav-item
