@@ -1,4 +1,4 @@
-#sidebar-modal.modal.fade tabindex="-1"
+#sidebar-modal.modal.fade.slide-from-left tabindex="-1"
   .modal-dialog
     .modal-content
       .modal-header

@@ -800,6 +800,15 @@ ul.not-list {
   }
 }
 
+.modal.slide-from-left .modal-dialog {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+}
+
+.modal.slide-from-left.show .modal-dialog {
+  transform: translateX(0);
+}
+
 #sidebar-modal {
   /* CSS to make the modal appear like a sidebar */
   .modal-dialog {
