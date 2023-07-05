@@ -20,7 +20,7 @@ div
             = "#{repositories_count_in_last_month} from last month"
             #chartRepositoriesProviderCount
         .card-footer.text-center
-          a.btn.btn-primary href="/repositories"
+          a.btn.btn-primary href="/repositories?sort=new"
             ' Browse repositories
     .col-md-4
       .card.h-100#stats-users-count
