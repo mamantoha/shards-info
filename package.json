@@ -38,11 +38,11 @@
     "node-sass": "^9.0.0",
     "sass-loader": "^13.3.2",
     "style-loader": "^3.3.3",
-    "stylelint": "^15.10.1",
+    "stylelint": "^15.10.2",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-config-standard-scss": "^10.0.0",
     "trim-newlines": ">=5.0.0",
-    "webpack": "^5.88.1",
+    "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
