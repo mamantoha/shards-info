@@ -70,7 +70,9 @@ $(function () {
   const searchInput = sidebarModal.querySelector("input[name='query']")
 
   sidebarModal.addEventListener('show.bs.modal', () => {
-    searchInput.focus()
+    setTimeout(() => {
+      document.querySelector('input[name="query"]').focus()
+    }, 500)
   })
 
   $(function () {
