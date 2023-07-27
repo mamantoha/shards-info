@@ -71,7 +71,8 @@ $(function () {
 
   sidebarModal.addEventListener('show.bs.modal', () => {
     setTimeout(() => {
-      document.querySelector('input[name="query"]').focus()
+      searchInput.focus()
+      searchInput.setSelectionRange(searchInput.value.length, searchInput.value.length)
     }, 500)
   })
 
