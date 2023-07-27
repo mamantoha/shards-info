@@ -66,6 +66,13 @@ $(function () {
     })
   })
 
+  const sidebarModal = document.getElementById('sidebar-modal')
+  const searchInput = sidebarModal.querySelector("input[name='query']")
+
+  sidebarModal.addEventListener('show.bs.modal', () => {
+    searchInput.focus()
+  })
+
   $(function () {
     const hash = window.location.hash
     hash && $('.nav a[href="' + hash + '"]').tab('show')
