@@ -4,10 +4,6 @@ shards:
     git: https://github.com/jwaldrip/admiral.cr.git
     version: 1.12.1
 
-  ameba:
-    git: https://github.com/crystal-ameba/ameba.git
-    version: 1.4.3+git.commit.8ef588dc6d9aba9221df928d55858301655170ec
-
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
     version: 0.2.5
