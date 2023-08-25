@@ -26,7 +26,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.17+git.commit.7f85345dca752b0c059b202cb53ee9262e4fac0f
+    version: 0.8.17+git.commit.466b4cdd83377abd029eb0690fabe42eb6f4e561
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -134,7 +134,7 @@ shards:
 
   retriable:
     git: https://github.com/sija/retriable.cr.git
-    version: 0.2.4
+    version: 0.2.5
 
   shards_spec:
     git: https://github.com/mamantoha/shards_spec.git
