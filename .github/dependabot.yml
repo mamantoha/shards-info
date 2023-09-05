@@ -5,14 +5,10 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 5
-    target-branch: main
 
   - package-ecosystem: npm
     directory: "/"
     schedule:
       interval: daily
       time: "10:00"
-    open-pull-requests-limit: 5
-    target-branch: main
     versioning-strategy: increase
