@@ -41,7 +41,9 @@
   .list__heading Links
   ul.shard__links.not-list
     li
-      a href="#{repository.decorate.provider_url}" Homepage
+      a href="#{repository.decorate.provider_url}" Source code
+    li
+      a href="#{repository.decorate.crystal_doc_info_url}" CrystalDoc.info
   .list__heading Synced at
   p.small
     = Time::Format::HTTP_DATE.format(repository.synced_at)

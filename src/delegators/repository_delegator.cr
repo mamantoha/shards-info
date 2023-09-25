@@ -52,6 +52,17 @@ class RepositoryDelegator < Delegator(Repository)
     end
   end
 
+  def crystal_doc_info_url
+    case provider
+    when "gitlab"
+      "https://crystaldoc.info/gitlab/#{full_name}"
+    when "github"
+      "https://crystaldoc.info/github/#{full_name}"
+    else
+      ""
+    end
+  end
+
   def provider_icon
     case provider
     when "gitlab"
