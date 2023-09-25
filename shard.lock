@@ -50,7 +50,7 @@ shards:
 
   emoji:
     git: https://github.com/veelenga/emoji.cr.git
-    version: 0.5.0+git.commit.78b46a18a5672de185690568f6d36d753bd6bacf
+    version: 0.5.0+git.commit.73c984b0c6b41577af42369d1935e0593559895f
 
   exception_page:
     git: https://github.com/crystal-loot/exception_page.git
