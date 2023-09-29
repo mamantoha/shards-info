@@ -42,7 +42,7 @@ body {
   font-size: 238px;
   font-weight: 700;
   margin: 0px;
-  color: #e3e3e3;
+  color: #E53E3E;
   text-transform: uppercase;
   letter-spacing: 7px;
   position: absolute;
@@ -55,11 +55,11 @@ body {
 
 .notfound h2 {
   font-size: 28px;
-  font-weight: 500;
+  font-weight: bold;
   text-transform: uppercase;
-  color: #222;
   margin-top: 12px;
   margin-bottom: 15px;
+  text-shadow: 0 0 1px #fff, 0 0 3px #fff;
 }
 
 .notfound .notfound-search {
