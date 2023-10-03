@@ -15,7 +15,7 @@ View of all repositories on Github and Gitlab that have Crystal code in them.
 - Clone this repository
 - Install dependencies `shards install`
 - Rename `.env.example` to `.env`, and set variables.
-- Run it `crystal src/shards-info.cr`
+- Run Web server as `crystal src/web.cr`
 
 ## Development
 
@@ -32,10 +32,7 @@ Install depencencies:
 npm install
 ```
 
-After modifications:
-
-1. Run `npm run build`
-2. Change version of `application.js` and `application.css` in `src/views/layouts/layout.slang`
+After modifications run `npm run build`
 
 ## Specs
 
