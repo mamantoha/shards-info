@@ -22,7 +22,7 @@ dependencies:
     github: jgaskins/redis
   mosquito:
     github: mosquito-cr/mosquito
-    branch: master
+    branch: restore_runner_thread_lock
   kemal-session:
     github: kemalcr/kemal-session
   kemal-session-redis-engine:
