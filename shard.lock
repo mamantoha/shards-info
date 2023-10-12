@@ -106,7 +106,7 @@ shards:
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
-    version: 1.0.2+git.commit.90767ec85cb988a95c449f5a66aaab2e03798609
+    version: 1.0.2+git.commit.39ddc8402ffb7618cfb820c45139fd70c01629cf
 
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
@@ -130,7 +130,7 @@ shards:
 
   redis:
     git: https://github.com/jgaskins/redis.git
-    version: 0.7.0
+    version: 0.7.1
 
   retriable:
     git: https://github.com/sija/retriable.cr.git
