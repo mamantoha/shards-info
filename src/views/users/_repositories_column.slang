@@ -11,7 +11,7 @@
       ul.dropdown-menu
         li
           - Helpers::REPOSITORIES_SORT_OPTIONS.each do |key, value|
-            a.dropdown-item href="/#{user.provider}/#{user.login}/?sort=#{key}" class="#{key == sort ? "disabled" : ""}"
+            a.dropdown-item href="/#{user.provider}/#{user.login}?sort=#{key}" class="#{key == sort ? "disabled" : ""}"
               = value
 
 - repositories.each(fetch_columns: true) do |repository|

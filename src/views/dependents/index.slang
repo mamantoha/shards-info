@@ -16,7 +16,7 @@ div
               | total results
         .col
           .row.justify-content-end
-            .col-auto
+            .col-auto.vertical-center
               label
                 | Sort by
             .col-auto
