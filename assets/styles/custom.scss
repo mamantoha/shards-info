@@ -134,6 +134,11 @@ a.badge {
   --#{$prefix}popover-body-color: var(--font-color);
 }
 
+.vertical-center {
+  display: flex;
+  align-items: center;
+}
+
 #stand-with-ukraine {
   .blue-band {
     background-color: #0057b8;

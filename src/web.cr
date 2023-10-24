@@ -328,6 +328,10 @@ get "/:provider/:owner" do |env|
   provider = env.params.url["provider"]
   owner = env.params.url["owner"]
 
+  sort_param = env.params.query["sort"]? || "stars"
+  sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
+  expression, direction = Helpers.repositories_sort_expression_direction(sort)
+
   if user = User.query.with_repositories(&.with_tags).find({provider: provider, login: owner})
     repositories =
       user
@@ -335,7 +339,8 @@ get "/:provider/:owner" do |env|
         .with_user
         .with_tags
         .with_counts
-        .order_by(stars_count: :desc)
+        .order_by(expression, direction)
+        .order_by("repositories.id", :asc)
 
     repositories_count = repositories.count
 
