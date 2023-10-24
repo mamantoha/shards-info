@@ -23,7 +23,7 @@ div
                 ul.dropdown-menu
                   li
                     - Helpers::REPOSITORIES_SORT_OPTIONS.each do |key, value|
-                      a.dropdown-item href="/repositories?sort=#{key}" class="#{key == sort ? "disabled" : ""}"
+                      a.dropdown-item href="/repositories?page=#{page}&sort=#{key}" class="#{key == sort ? "disabled" : ""}"
                         = value
 
 .container

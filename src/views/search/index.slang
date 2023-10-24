@@ -22,7 +22,7 @@ div
           ul.dropdown-menu
             li
               - Helpers::REPOSITORIES_SORT_OPTIONS.each do |key, value|
-                a.dropdown-item href="/search?query=#{query_param}&sort=#{key}" class="#{key == sort ? "disabled" : ""}"
+                a.dropdown-item href="/search?query=#{query_param}&page=#{page}&sort=#{key}" class="#{key == sort ? "disabled" : ""}"
                   = value
   == render "src/views/repositories/_list.slang"
 == paginator

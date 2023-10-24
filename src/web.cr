@@ -155,9 +155,7 @@ get "/repositories" do |env|
   raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
   sort_param = env.params.query["sort"]? || "stars"
-
   sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
-
   expression, direction = Helpers.repositories_sort_expression_direction(sort)
 
   repositories_query =
@@ -178,7 +176,7 @@ get "/repositories" do |env|
     page,
     per_page,
     total_count,
-    "/repositories?page=%{page}"
+    "/repositories?page=#{page}&sort=#{sort}"
   ).to_s
 
   repositories = repositories_query.limit(per_page).offset(offset)
@@ -223,7 +221,7 @@ get "/users" do |env|
     page,
     per_page,
     total_count,
-    "/users?page=%{page}"
+    "/users?page=#{page}"
   ).to_s
 
   users = users_query.limit(per_page).offset(offset)
@@ -316,7 +314,7 @@ get "/search" do |env|
       page,
       per_page,
       total_count,
-      "/search?query=#{query}&page=%{page}"
+      "/search?query=#{query}&page=#{page}&sort=#{sort}"
     ).to_s
 
     repositories = repositories_query.limit(per_page).offset(offset)
@@ -447,9 +445,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
   raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
   sort_param = env.params.query["sort"]? || "stars"
-
   sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
-
   expression, direction = Helpers.repositories_sort_expression_direction(sort)
 
   if repository = Repository.find_repository(owner, repo, provider)
@@ -471,7 +467,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
       page,
       per_page,
       total_count,
-      "/#{provider}/#{owner}/#{repo}/dependents?page=%{page}"
+      "/#{provider}/#{owner}/#{repo}/dependents?page=#{page}&sort=#{sort}"
     ).to_s
 
     repositories = repositories_query.limit(per_page).offset(offset)
@@ -600,7 +596,7 @@ get "/languages/:name" do |env|
       page,
       per_page,
       total_count,
-      "/languages/#{name}?page=%{page}"
+      "/languages/#{name}?page=#{page}"
     ).to_s
 
     repositories = repositories_query.limit(per_page).offset(offset)
@@ -638,7 +634,7 @@ get "/admin/admins" do |env|
     page,
     per_page,
     total_count,
-    "/admin/admins&page=%{page}"
+    "/admin/admins&page=#{page}"
   ).to_s
 
   admins = admin_query.limit(per_page).offset(offset)
@@ -695,7 +691,7 @@ get "/admin/hidden_users" do |env|
     page,
     per_page,
     total_count,
-    "/admin/hidden_users&page=%{page}"
+    "/admin/hidden_users&page=#{page}"
   ).to_s
 
   users = users_query.limit(per_page).offset(offset)
@@ -728,7 +724,7 @@ get "/admin/hidden_repositories" do |env|
     page,
     per_page,
     total_count,
-    "/admin/hidden_repositories&page=%{page}"
+    "/admin/hidden_repositories&page=#{page}"
   ).to_s
 
   repositories = repositories_query.limit(per_page).offset(offset)
