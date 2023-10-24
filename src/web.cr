@@ -286,7 +286,11 @@ get "/search" do |env|
 
     raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
-    query = env.params.query["query"].as(String)
+    sort_param = env.params.query["sort"]? || "stars"
+    sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
+    expression, direction = Helpers.repositories_sort_expression_direction(sort)
+
+    query_param = env.params.query["query"].as(String)
     query = URI.decode_www_form(env.params.query["query"].as(String))
 
     # remove dissallowed tsquery characters
@@ -301,7 +305,7 @@ get "/search" do |env|
         .with_counts
         .published
         .search(query)
-        .order_by(stars_count: :desc)
+        .order_by(expression, direction)
         .order_by("repositories.id", :asc)
 
     total_count = repositories_query.count
