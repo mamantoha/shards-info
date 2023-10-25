@@ -293,8 +293,6 @@ get "/search" do |env|
     query_param = env.params.query["query"].as(String)
     query = URI.decode_www_form(env.params.query["query"].as(String))
 
-    route_path = "/search?query=#{query_param}&page=#{page}"
-
     # remove dissallowed tsquery characters
     query = query.gsub(/['?\\:‘’]/, "")
     query = URI.decode(query)
@@ -314,11 +312,13 @@ get "/search" do |env|
 
     raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
 
+    route_path = "/search?query=#{query_param}&page=#{page}"
+
     paginator = ViewHelpers::Paginator.new(
       page,
       per_page,
       total_count,
-      "/search?query=#{query}&page=#{page}&sort=#{sort}"
+      "/search?query=#{query_param}&page=#{page}&sort=#{sort}"
     ).to_s
 
     repositories = repositories_query.limit(per_page).offset(offset)
@@ -448,8 +448,6 @@ get "/:provider/:owner/:repo/dependents" do |env|
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
-  route_path = "/#{provider}/#{owner}/#{repo}/dependents?page=#{page}"
-
   sort_param = env.params.query["sort"]? || "stars"
   sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
   expression, direction = Helpers.repositories_sort_expression_direction(sort)
@@ -468,6 +466,8 @@ get "/:provider/:owner/:repo/dependents" do |env|
     total_count = repositories_query.count
 
     raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+
+    route_path = "/#{provider}/#{owner}/#{repo}/dependents?page=#{page}"
 
     paginator = ViewHelpers::Paginator.new(
       page,
