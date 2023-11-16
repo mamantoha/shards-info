@@ -17,3 +17,12 @@ Lint/UnusedArgument:
     - src/web.cr
   Enabled: true
   Severity: Warning
+
+Naming/BlockParameterName:
+  Enabled: false
+
+Lint/SpecFilename:
+  Enabled: false
+
+Documentation/DocumentationAdmonition:
+  Enabled: false

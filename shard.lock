@@ -4,6 +4,10 @@ shards:
     git: https://github.com/jwaldrip/admiral.cr.git
     version: 1.12.1
 
+  ameba:
+    git: https://github.com/crystal-ameba/ameba.git
+    version: 1.5.0+git.commit.52a3e47a3bf3b3fbb6dc8440213c2c1dccd9a46a
+
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
     version: 0.2.5
@@ -26,7 +30,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.17+git.commit.4ff11966e95b0f7d7a68998b9d0eb3df0faf3df4
+    version: 0.8.17+git.commit.16c83c7b7c77300cfb87e40e9e164c4d21d419e2
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git

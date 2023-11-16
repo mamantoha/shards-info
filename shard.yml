@@ -86,5 +86,8 @@ dependencies:
 development_dependencies:
   spec-kemal:
     github: kemalcr/spec-kemal
+  ameba:
+    github: crystal-ameba/ameba
+    branch: master
 
 license: MIT
