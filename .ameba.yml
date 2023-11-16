@@ -1,6 +1,3 @@
-Excluded:
-  - samples/*
-
 Lint/UselessAssign:
   Description: Disallows useless variable assignments
   Excluded:
