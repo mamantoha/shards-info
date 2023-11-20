@@ -28,7 +28,7 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.4.2",
     "css-loader": "^6.8.1",
-    "eslint": "^8.53.0",
+    "eslint": "^8.54.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-n": "^16.3.1",
