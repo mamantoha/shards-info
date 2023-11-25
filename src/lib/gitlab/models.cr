@@ -307,7 +307,7 @@ module Gitlab
 
     property web_url : String
 
-    property created_at : Time
+    property created_at : Time?
 
     property bio : String
 
