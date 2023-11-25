@@ -1,11 +1,8 @@
-require "../lib/github"
-
 class FetchRepositoryJob < Mosquito::QueuedJob
   param repository_id : Int64
 
   def perform
     repository = Repository.find! repository_id
-    return if repository.synced_at < 1.day.ago
 
     case repository.provider
     when "github"
@@ -15,4 +12,3 @@ class FetchRepositoryJob < Mosquito::QueuedJob
     end
   end
 end
-
