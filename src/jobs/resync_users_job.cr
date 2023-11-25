@@ -2,8 +2,6 @@ class ResyncUsersJob < PeriodicJobWithErrorHandler
   run_every 30.minutes
 
   def perform
-    return unless ENV["KEMAL_ENV"] == "production"
-
     users = User
       .query
       .order_by(synced_at: :asc)
