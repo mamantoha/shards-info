@@ -88,7 +88,7 @@ module Gitlab
 
     property? lfs_enabled : Bool
 
-    property creator_id : Int32
+    property creator_id : Int32?
 
     property import_status : String
 
@@ -313,7 +313,7 @@ module Gitlab
 
     property location : String
 
-    property public_email : String
+    property public_email : String?
 
     property skype : String
 
