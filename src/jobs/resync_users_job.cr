@@ -1,6 +1,6 @@
 require "../lib/github"
 
-class ResyncGithubUsersJob < PeriodicJobWithErrorHandler
+class ResyncUsersJob < PeriodicJobWithErrorHandler
   run_every 30.minutes
 
   def perform
@@ -8,14 +8,11 @@ class ResyncGithubUsersJob < PeriodicJobWithErrorHandler
 
     users = User
       .query
-      .where({provider: "github"})
       .order_by(synced_at: :asc)
       .limit(100)
 
     users.each do |user|
-      GithubHelpers.resync_user(user)
-    rescue
-      next
+      FetchUserJob.new(user.id).enqueue
     end
   end
 end

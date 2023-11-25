@@ -1,6 +1,6 @@
 require "../lib/github"
 
-class ResyncGithubRepositoriesJob < PeriodicJobWithErrorHandler
+class ResyncRepositoriesJob < PeriodicJobWithErrorHandler
   run_every 10.minutes
 
   def perform
@@ -9,14 +9,12 @@ class ResyncGithubRepositoriesJob < PeriodicJobWithErrorHandler
     repositories =
       Repository
         .query
-        .where({provider: "github"})
+        .where{(synced_at == nil) | (synced_at > 1.day.ago) }
         .order_by(synced_at: :asc)
         .limit(50)
 
     repositories.each do |repository|
-      GithubHelpers.resync_repository(repository)
-    rescue
-      next
+      FetchRepositoryJob.new(repository.id).enqueue
     end
   end
 end
