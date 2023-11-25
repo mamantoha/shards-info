@@ -10,6 +10,7 @@ module Helpers
     "dependencies"   => "Dependencies",
     "recent-updates" => "Recent Updates",
     "new"            => "Newly Added",
+    "last-synced"    => "Last Synced",
   }
 
   def sync_repository_by_url(url : String) : Repository?
@@ -155,6 +156,8 @@ module Helpers
       {"(select COUNT(*) from relationships r WHERE r.master_id=repositories.id)", :desc}
     when "recent-updates"
       {"last_activity_at", :desc}
+    when "last-synced"
+      {"synced_at", :desc}
     when "new"
       {"created_at", :desc}
     else
