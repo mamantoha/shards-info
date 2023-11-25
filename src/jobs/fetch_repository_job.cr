@@ -1,4 +1,4 @@
-class FetchRepositoryJob < Mosquito::QueuedJob
+class FetchRepositoryJob < MosquitoQueuedJobWithErrorHandler
   param repository_id : Int64
 
   def perform

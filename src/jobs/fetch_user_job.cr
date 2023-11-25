@@ -1,4 +1,4 @@
-class FetchUserJob < Mosquito::QueuedJob
+class FetchUserJob < MosquitoQueuedJobWithErrorHandler
   param user_id : Int64
 
   def perform
