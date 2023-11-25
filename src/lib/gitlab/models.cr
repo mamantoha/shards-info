@@ -41,7 +41,7 @@ module Gitlab
 
     property star_count : Int32
 
-    property forks_count : Int32
+    property forks_count : Int32?
 
     property last_activity_at : Time
 
@@ -188,7 +188,7 @@ module Gitlab
 
     property star_count : Int32
 
-    property forks_count : Int32
+    property forks_count : Int32?
 
     property last_activity_at : Time
 
