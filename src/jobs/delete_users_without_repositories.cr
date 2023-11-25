@@ -1,5 +1,3 @@
-require "../lib/github"
-
 class DeleteUsersWithoutRepositories < PeriodicJobWithErrorHandler
   run_every 1.day
 

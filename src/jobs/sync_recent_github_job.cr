@@ -1,5 +1,3 @@
-require "../lib/github"
-
 class SyncRecentGithubJob < PeriodicJobWithErrorHandler
   run_every 10.minutes
 

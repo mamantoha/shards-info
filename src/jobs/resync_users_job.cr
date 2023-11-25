@@ -1,5 +1,3 @@
-require "../lib/github"
-
 class ResyncUsersJob < PeriodicJobWithErrorHandler
   run_every 30.minutes
 

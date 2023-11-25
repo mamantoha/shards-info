@@ -1,5 +1,3 @@
-require "../lib/gitlab"
-
 class SyncRecentGitlabJob < PeriodicJobWithErrorHandler
   run_every 30.minutes
 
