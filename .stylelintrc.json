@@ -7,7 +7,6 @@
   ],
   "rules": {
     "selector-class-pattern": null,
-    "max-line-length": null,
     "value-keyword-case": null,
     "media-feature-range-notation": "prefix"
   },
