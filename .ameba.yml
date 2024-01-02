@@ -15,6 +15,9 @@ Lint/UnusedArgument:
   Enabled: true
   Severity: Warning
 
+Lint/UselessAssign:
+  Enabled: false
+
 Naming/BlockParameterName:
   Enabled: false
 
