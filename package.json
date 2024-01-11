@@ -34,7 +34,7 @@
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
     "expose-loader": "^4.1.0",
-    "mini-css-extract-plugin": "^2.7.6",
+    "mini-css-extract-plugin": "^2.7.7",
     "node-sass": "^9.0.0",
     "sass-loader": "^13.3.3",
     "style-loader": "^3.3.4",
