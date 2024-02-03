@@ -22,7 +22,7 @@ dependencies:
     github: jgaskins/redis
   mosquito:
     github: mosquito-cr/mosquito
-    commit: e6b4b0a83e16b626934c10e9f64130fd4597d580
+    branch: master
   kemal-session:
     github: kemalcr/kemal-session
   kemal-session-redis-engine:
