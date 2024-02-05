@@ -126,10 +126,10 @@ $(function () {
     visiblePages: 7,
     href: true,
     pageVariable: 'page',
-    prev: '&laquo;',
-    next: '&raquo;',
-    first: '',
-    last: '',
+    prev: '&larr;',
+    next: '&rarr;',
+    first: '&larrb;',
+    last: '&rarrb;',
     onPageClick: function (event, page) {}
   })
 
