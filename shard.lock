@@ -70,7 +70,7 @@ shards:
 
   http_proxy:
     git: https://github.com/mamantoha/http_proxy.git
-    version: 0.10.2
+    version: 0.10.3
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
