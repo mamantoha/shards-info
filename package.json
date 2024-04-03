@@ -40,7 +40,7 @@
     "style-loader": "^3.3.4",
     "stylelint": "^16.3.1",
     "stylelint-config-standard": "^36.0.0",
-    "stylelint-config-standard-scss": "^13.0.0",
+    "stylelint-config-standard-scss": "^13.1.0",
     "trim-newlines": ">=5.0.0",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
