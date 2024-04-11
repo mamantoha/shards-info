@@ -6,7 +6,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.6.1+git.commit.107c6e0ea635b827ea7ee5d7bd748fc6d8ee947c
+    version: 1.6.1+git.commit.e6a5fa9d71398ac4127148c30bec70bfa9b401ab
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -58,7 +58,7 @@ shards:
 
   exception_page:
     git: https://github.com/crystal-loot/exception_page.git
-    version: 0.3.1
+    version: 0.4.1
 
   generate:
     git: https://github.com/anykeyh/generate.cr.git
@@ -86,7 +86,7 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 1.4.0
+    version: 1.5.0
 
   kemal-flash:
     git: https://github.com/crystal-garage/kemal-flash.git
