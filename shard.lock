@@ -110,7 +110,7 @@ shards:
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
-    version: 1.0.2+git.commit.703a90a71d22c5e0495633e0af1c0b5bbd606c26
+    version: 1.0.2+git.commit.0107dba08b18670832423f8e8d725b9b4f35db81
 
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
@@ -162,5 +162,5 @@ shards:
 
   time_zone:
     git: https://github.com/mamantoha/time_zone.git
-    version: 0.1.1
+    version: 0.1.2
 
