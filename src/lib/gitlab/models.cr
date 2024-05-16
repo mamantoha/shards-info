@@ -62,7 +62,7 @@ module Gitlab
 
     property? container_registry_enabled : Bool?
 
-    property? issues_enabled : Bool
+    property? issues_enabled : Bool?
 
     property? merge_requests_enabled : Bool
 
