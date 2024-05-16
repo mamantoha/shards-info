@@ -64,7 +64,7 @@ module Gitlab
 
     property? issues_enabled : Bool?
 
-    property? merge_requests_enabled : Bool
+    property? merge_requests_enabled : Bool?
 
     property? wiki_enabled : Bool
 
