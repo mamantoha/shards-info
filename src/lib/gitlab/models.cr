@@ -68,7 +68,7 @@ module Gitlab
 
     property? wiki_enabled : Bool?
 
-    property? jobs_enabled : Bool
+    property? jobs_enabled : Bool?
 
     property? snippets_enabled : Bool
 
