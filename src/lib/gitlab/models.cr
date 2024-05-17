@@ -70,33 +70,33 @@ module Gitlab
 
     property? jobs_enabled : Bool?
 
-    property? snippets_enabled : Bool
+    property? snippets_enabled : Bool?
 
-    property issues_access_level : String
+    property issues_access_level : String?
 
-    property repository_access_level : String
+    property repository_access_level : String?
 
-    property merge_requests_access_level : String
+    property merge_requests_access_level : String?
 
-    property wiki_access_level : String
+    property wiki_access_level : String?
 
-    property builds_access_level : String
+    property builds_access_level : String?
 
-    property snippets_access_level : String
+    property snippets_access_level : String?
 
-    property? shared_runners_enabled : Bool
+    property? shared_runners_enabled : Bool?
 
-    property? lfs_enabled : Bool
+    property? lfs_enabled : Bool?
 
-    property creator_id : Int32?
+    property creator_id : Int32??
 
-    property import_status : String
+    property import_status : String?
 
     property open_issues_count : Int32?
 
     property ci_default_git_depth : Int32?
 
-    property? public_jobs : Bool
+    property? public_jobs : Bool?
 
     property build_timeout : Int32?
 
@@ -108,17 +108,17 @@ module Gitlab
 
     property shared_with_groups : Array(JSON::Any?)
 
-    property? only_allow_merge_if_pipeline_succeeds : Bool
+    property? only_allow_merge_if_pipeline_succeeds : Bool?
 
-    property? request_access_enabled : Bool
+    property? request_access_enabled : Bool?
 
     property? only_allow_merge_if_all_discussions_are_resolved : Bool?
 
     property? remove_source_branch_after_merge : Bool?
 
-    property? printing_merge_request_link_enabled : Bool
+    property? printing_merge_request_link_enabled : Bool?
 
-    property merge_method : String
+    property merge_method : String?
 
     property? auto_devops_enabled : Bool?
 
@@ -130,7 +130,7 @@ module Gitlab
 
     property? mirror : Bool?
 
-    property external_authorization_classification_label : String
+    property external_authorization_classification_label : String?
 
     property? packages_enabled : Bool?
 
