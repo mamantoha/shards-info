@@ -25,6 +25,8 @@ module Gitlab
 
     property tag_list : Array(String)
 
+    property topics : Array(String)
+
     property ssh_url_to_repo : String
 
     property http_url_to_repo : String
@@ -58,97 +60,23 @@ module Gitlab
 
     property owner : Owner?
 
-    property? resolve_outdated_diff_discussions : Bool?
-
-    property? container_registry_enabled : Bool?
-
-    property? issues_enabled : Bool?
-
-    property? merge_requests_enabled : Bool?
-
-    property? wiki_enabled : Bool?
-
-    property? jobs_enabled : Bool?
-
-    property? snippets_enabled : Bool?
-
-    property issues_access_level : String?
-
-    property repository_access_level : String?
-
-    property merge_requests_access_level : String?
-
-    property wiki_access_level : String?
-
-    property builds_access_level : String?
-
-    property snippets_access_level : String?
-
-    property? shared_runners_enabled : Bool?
-
-    property? lfs_enabled : Bool?
-
-    property creator_id : Int32??
-
-    property import_status : String?
-
     property open_issues_count : Int32?
 
-    property ci_default_git_depth : Int32?
+    property description_html : String
 
-    property? public_jobs : Bool?
+    property updated_at : String
 
-    property build_timeout : Int32?
-
-    property auto_cancel_pending_pipelines : String?
-
-    property build_coverage_regex : String?
+    property? can_create_merge_request_in : Bool
 
     property ci_config_path : String?
 
     property shared_with_groups : Array(JSON::Any?)
 
-    property? only_allow_merge_if_pipeline_succeeds : Bool?
-
-    property? request_access_enabled : Bool?
-
-    property? only_allow_merge_if_all_discussions_are_resolved : Bool?
-
-    property? remove_source_branch_after_merge : Bool?
-
-    property? printing_merge_request_link_enabled : Bool?
-
-    property merge_method : String?
-
-    property? auto_devops_enabled : Bool?
-
-    property auto_devops_deploy_strategy : String?
-
     property permissions : Permissions?
-
-    property approvals_before_merge : Int32?
 
     property? mirror : Bool?
 
-    property external_authorization_classification_label : String?
-
-    property? packages_enabled : Bool?
-
-    property? service_desk_enabled : Bool?
-
-    property service_desk_address : String?
-
-    property marked_for_deletion_at : String?
-
     property forked_from_project : ForkedFromProject?
-
-    property mirror_user_id : Int32?
-
-    property? mirror_trigger_builds : Bool?
-
-    property? only_mirror_protected_branches : Bool?
-
-    property? mirror_overwrites_diverged_branches : Bool?
 
     def fork? : Bool
       forked_from_project ? true : false
