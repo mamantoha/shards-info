@@ -8,7 +8,8 @@
   "rules": {
     "selector-class-pattern": null,
     "value-keyword-case": null,
-    "media-feature-range-notation": "prefix"
+    "media-feature-range-notation": "prefix",
+    "no-descending-specificity": null
   },
   "ignoreFiles": [
     "**/*.js",
