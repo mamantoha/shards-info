@@ -22,7 +22,7 @@ dependencies:
     github: jgaskins/redis
   mosquito:
     github: mosquito-cr/mosquito
-    branch: master
+    version: "~> 2.0"
   kemal-session:
     github: kemalcr/kemal-session
   kemal-session-redis-engine:
