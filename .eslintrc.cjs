@@ -5,7 +5,6 @@ module.exports = {
     jquery: true
   },
   extends: [
-    'standard'
   ],
   parserOptions: {
     ecmaVersion: 'latest',
