@@ -1,28 +1,28 @@
 class CountBarChart {
   constructor (options) {
-    this.element = document.querySelector(options.element)
+    this.element = document.querySelector(options.element);
 
     if (!this.element) {
-      return
+      return;
     }
 
-    this.options = options
-    this.label = options.label
-    this.chart = null
-    this.data = null
+    this.options = options;
+    this.label = options.label;
+    this.chart = null;
+    this.data = null;
 
-    this.fetchDataAndCreateChart()
+    this.fetchDataAndCreateChart();
   }
 
   fetchDataAndCreateChart () {
     fetch(this.options.apiUrl)
       .then(response => response.json())
       .then(data => {
-        this.data = data
-        const chartData = this.processData(data)
+        this.data = data;
+        const chartData = this.processData(data);
         // create chart
-        const canvas = document.createElement('canvas')
-        this.element.appendChild(canvas)
+        const canvas = document.createElement('canvas');
+        this.element.appendChild(canvas);
         const chartOptions = Object.assign({}, this.options.chartOptions, {
           plugins: {
             legend: {
@@ -33,21 +33,21 @@ class CountBarChart {
               text: `${this.label}`
             }
           }
-        })
+        });
         this.chart = new Chart(canvas, {
           type: 'bar',
           data: chartData,
           options: chartOptions
-        })
+        });
       })
       .catch(error => {
-        console.error('Error fetching data:', error)
-      })
+        console.error('Error fetching data:', error);
+      });
   }
 
   processData (data) {
-    const labels = Object.keys(data)
-    const values = Object.values(data)
+    const labels = Object.keys(data);
+    const values = Object.values(data);
     const chartData = {
       labels,
       datasets: [{
@@ -57,59 +57,59 @@ class CountBarChart {
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1
       }]
-    }
-    return chartData
+    };
+    return chartData;
   }
 }
 
 class RepositoryCountBarChart {
   constructor (options) {
-    this.element = document.querySelector(options.element)
+    this.element = document.querySelector(options.element);
 
     if (!this.element) {
-      return
+      return;
     }
 
-    this.options = options
-    this.label = options.label
-    this.chart = null
-    this.data = null
+    this.options = options;
+    this.label = options.label;
+    this.chart = null;
+    this.data = null;
 
-    const startDateYearsAgo = options.startDateYearsAgo || 2
+    const startDateYearsAgo = options.startDateYearsAgo || 2;
 
     // create div for inputs
-    this.inputContainer = document.createElement('div')
-    this.inputContainer.style.textAlign = 'right'
-    this.element.appendChild(this.inputContainer)
+    this.inputContainer = document.createElement('div');
+    this.inputContainer.style.textAlign = 'right';
+    this.element.appendChild(this.inputContainer);
 
-    const startDate = new Date()
-    startDate.setFullYear(startDate.getFullYear() - startDateYearsAgo)
-    startDate.setDate(1)
-    this.startDateInput = document.createElement('input')
-    this.startDateInput.type = 'month'
-    this.startDateInput.value = startDate.toISOString().slice(0, 7)
-    this.inputContainer.appendChild(this.startDateInput)
+    const startDate = new Date();
+    startDate.setFullYear(startDate.getFullYear() - startDateYearsAgo);
+    startDate.setDate(1);
+    this.startDateInput = document.createElement('input');
+    this.startDateInput.type = 'month';
+    this.startDateInput.value = startDate.toISOString().slice(0, 7);
+    this.inputContainer.appendChild(this.startDateInput);
 
-    this.endDateInput = document.createElement('input')
-    this.endDateInput.type = 'month'
-    this.endDateInput.value = new Date().toISOString().slice(0, 7)
-    this.inputContainer.appendChild(this.endDateInput)
+    this.endDateInput = document.createElement('input');
+    this.endDateInput.type = 'month';
+    this.endDateInput.value = new Date().toISOString().slice(0, 7);
+    this.inputContainer.appendChild(this.endDateInput);
 
-    this.startDateInput.addEventListener('change', this.updateChart.bind(this))
-    this.endDateInput.addEventListener('change', this.updateChart.bind(this))
+    this.startDateInput.addEventListener('change', this.updateChart.bind(this));
+    this.endDateInput.addEventListener('change', this.updateChart.bind(this));
 
-    this.fetchDataAndCreateChart()
+    this.fetchDataAndCreateChart();
   }
 
   fetchDataAndCreateChart () {
     fetch(this.options.apiUrl)
       .then(response => response.json())
       .then(data => {
-        this.data = data
-        const chartData = this.processData(data)
+        this.data = data;
+        const chartData = this.processData(data);
         // create chart
-        const canvas = document.createElement('canvas')
-        this.element.appendChild(canvas)
+        const canvas = document.createElement('canvas');
+        this.element.appendChild(canvas);
         const chartOptions = Object.assign({}, this.options.chartOptions, {
           plugins: {
             legend: {
@@ -124,37 +124,37 @@ class RepositoryCountBarChart {
               text: `${this.startDateInput.value} - ${this.endDateInput.value}`
             }
           }
-        })
+        });
         this.chart = new Chart(canvas, {
           type: 'bar',
           data: chartData,
           options: chartOptions
-        })
+        });
 
-        this.updateChart()
+        this.updateChart();
       })
       .catch(error => {
-        console.error('Error fetching data:', error)
-      })
+        console.error('Error fetching data:', error);
+      });
   }
 
   updateChart () {
-    const startDate = new Date(this.startDateInput.value)
-    const endDate = new Date(this.endDateInput.value)
+    const startDate = new Date(this.startDateInput.value);
+    const endDate = new Date(this.endDateInput.value);
 
-    const filteredData = this.filterDataByDateRange(this.data, startDate, endDate)
-    const chartData = this.processData(filteredData)
-    this.chart.data = chartData
+    const filteredData = this.filterDataByDateRange(this.data, startDate, endDate);
+    const chartData = this.processData(filteredData);
+    this.chart.data = chartData;
 
     // update chart subtitle
-    this.chart.options.plugins.subtitle.text = `${this.startDateInput.value} - ${this.endDateInput.value}`
+    this.chart.options.plugins.subtitle.text = `${this.startDateInput.value} - ${this.endDateInput.value}`;
 
-    this.chart.update()
+    this.chart.update();
   }
 
   processData (data) {
-    const labels = Object.keys(data)
-    const values = Object.values(data)
+    const labels = Object.keys(data);
+    const values = Object.values(data);
     const chartData = {
       labels,
       datasets: [{
@@ -164,50 +164,50 @@ class RepositoryCountBarChart {
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1
       }]
-    }
-    return chartData
+    };
+    return chartData;
   }
 
   filterDataByDateRange (data, startDate, endDate) {
     return Object.keys(data)
       .filter(date => {
-        const d = new Date(date)
-        return d >= startDate && d <= endDate
+        const d = new Date(date);
+        return d >= startDate && d <= endDate;
       })
       .reduce((obj, key) => {
-        obj[key] = data[key]
-        return obj
-      }, {})
+        obj[key] = data[key];
+        return obj;
+      }, {});
   }
 }
 
 class RepositoryCountLineChart {
   constructor (options) {
-    this.element = document.querySelector(options.element)
+    this.element = document.querySelector(options.element);
 
     if (!this.element) {
-      return
+      return;
     }
 
-    this.options = options
-    this.label = options.label
-    this.chart = null
-    this.data = null
+    this.options = options;
+    this.label = options.label;
+    this.chart = null;
+    this.data = null;
 
-    this.fetchDataAndCreateChart()
+    this.fetchDataAndCreateChart();
   }
 
   fetchDataAndCreateChart () {
     fetch(this.options.apiUrl)
       .then(response => response.json())
       .then(data => {
-        this.data = data
-        const chartData = this.processData(data)
+        this.data = data;
+        const chartData = this.processData(data);
 
         // create chart
-        const canvas = document.createElement('canvas')
-        canvas.height = '300'
-        this.element.appendChild(canvas)
+        const canvas = document.createElement('canvas');
+        canvas.height = '300';
+        this.element.appendChild(canvas);
 
         const chartOptions = Object.assign({}, this.options.chartOptions, {
           plugins: {
@@ -219,21 +219,21 @@ class RepositoryCountLineChart {
               text: `${this.label}`
             }
           }
-        })
+        });
         this.chart = new Chart(canvas, {
           type: 'line',
           data: chartData,
           options: chartOptions
-        })
+        });
       })
       .catch(error => {
-        console.error('Error fetching data:', error)
-      })
+        console.error('Error fetching data:', error);
+      });
   }
 
   processData (data) {
-    const labels = Object.keys(data)
-    const values = Object.values(data)
+    const labels = Object.keys(data);
+    const values = Object.values(data);
     const chartData = {
       labels,
       datasets: [{
@@ -243,36 +243,36 @@ class RepositoryCountLineChart {
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1
       }]
-    }
-    return chartData
+    };
+    return chartData;
   }
 }
 
 class PieChart {
   constructor (options) {
-    this.element = document.querySelector(options.element)
+    this.element = document.querySelector(options.element);
 
     if (!this.element) {
-      return
+      return;
     }
 
-    this.options = options
-    this.label = options.label
-    this.chart = null
-    this.data = null
+    this.options = options;
+    this.label = options.label;
+    this.chart = null;
+    this.data = null;
 
-    this.fetchDataAndCreateChart()
+    this.fetchDataAndCreateChart();
   }
 
   fetchDataAndCreateChart () {
     fetch(this.options.apiUrl)
       .then(response => response.json())
       .then(data => {
-        this.data = data
-        const chartData = this.processData(data)
+        this.data = data;
+        const chartData = this.processData(data);
         // create chart
-        const canvas = document.createElement('canvas')
-        this.element.appendChild(canvas)
+        const canvas = document.createElement('canvas');
+        this.element.appendChild(canvas);
         const chartOptions = Object.assign({}, this.options.chartOptions, {
           plugins: {
             legend: {
@@ -283,21 +283,21 @@ class PieChart {
               text: `${this.label}`
             }
           }
-        })
+        });
         this.chart = new Chart(canvas, {
           type: 'pie',
           data: chartData,
           options: chartOptions
-        })
+        });
       })
       .catch(error => {
-        console.error('Error fetching data:', error)
-      })
+        console.error('Error fetching data:', error);
+      });
   }
 
   processData (data) {
-    const labels = Object.keys(data)
-    const values = Object.values(data)
+    const labels = Object.keys(data);
+    const values = Object.values(data);
     const chartData = {
       labels,
       datasets: [
@@ -307,8 +307,8 @@ class PieChart {
           borderWidth: 0
         }
       ]
-    }
-    return chartData
+    };
+    return chartData;
   }
 }
 
@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function () {
         mode: 'index'
       }
     }
-  })
+  });
 
   const chartLastActivityAt = new RepositoryCountBarChart({
     apiUrl: '/stats/last_activity_at',
@@ -340,7 +340,7 @@ document.addEventListener('DOMContentLoaded', function () {
         mode: 'index'
       }
     }
-  })
+  });
 
   const chartRepositoriesCount = new RepositoryCountLineChart({
     apiUrl: '/stats/repositories_growth',
@@ -364,7 +364,7 @@ document.addEventListener('DOMContentLoaded', function () {
       maintainAspectRatio: false,
       responsive: true
     }
-  })
+  });
 
   const chartDirectDependencies = new CountBarChart({
     apiUrl: '/stats/direct_dependencies',
@@ -380,12 +380,12 @@ document.addEventListener('DOMContentLoaded', function () {
           type: 'logarithmic',
           ticks: {
             callback: function (value, index, ticks) {
-              if (value === 10000) return '10k+'
-              if (value === 1000) return '1k+'
-              if (value === 100) return '100+'
-              if (value === 10) return '10+'
-              if (value === 1) return '1+'
-              return null
+              if (value === 10000) return '10k+';
+              if (value === 1000) return '1k+';
+              if (value === 100) return '100+';
+              if (value === 10) return '10+';
+              if (value === 1) return '1+';
+              return null;
             }
           }
         }
@@ -398,7 +398,7 @@ document.addEventListener('DOMContentLoaded', function () {
       maintainAspectRatio: false,
       responsive: true
     }
-  })
+  });
 
   const chartReverseDependencies = new CountBarChart({
     apiUrl: '/stats/reverse_dependencies',
@@ -414,12 +414,12 @@ document.addEventListener('DOMContentLoaded', function () {
           type: 'logarithmic',
           ticks: {
             callback: function (value, index, ticks) {
-              if (value === 10000) return '10k+'
-              if (value === 1000) return '1k+'
-              if (value === 100) return '100+'
-              if (value === 10) return '10+'
-              if (value === 1) return '1+'
-              return null
+              if (value === 10000) return '10k+';
+              if (value === 1000) return '1k+';
+              if (value === 100) return '100+';
+              if (value === 10) return '10+';
+              if (value === 1) return '1+';
+              return null;
             }
           }
         }
@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function () {
       maintainAspectRatio: false,
       responsive: true
     }
-  })
+  });
 
   const chartUserRepositoriesCount = new CountBarChart({
     apiUrl: '/stats/user_repositories_count',
@@ -455,7 +455,7 @@ document.addEventListener('DOMContentLoaded', function () {
       maintainAspectRatio: false,
       responsive: true
     }
-  })
+  });
 
   const chartRepositoriesProviderCount = new PieChart({
     apiUrl: '/stats/repositories_provider_count',
@@ -464,7 +464,7 @@ document.addEventListener('DOMContentLoaded', function () {
     chartOptions: {
       responsive: true
     }
-  })
+  });
 
   const chartUsersProviderCount = new PieChart({
     apiUrl: '/stats/users_provider_count',
@@ -473,5 +473,5 @@ document.addEventListener('DOMContentLoaded', function () {
     chartOptions: {
       responsive: true
     }
-  })
-})
+  });
+});
