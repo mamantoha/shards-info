@@ -1,0 +1,4 @@
+dependencies:
+  redis:
+    github: jgaskins/redis
+    branch: master

@@ -1,3 +1,4 @@
+# NOTICE: This lockfile contains some overrides from shard.override.yml
 version: 2.0
 shards:
   admiral:
@@ -132,9 +133,9 @@ shards:
     git: https://github.com/sija/raven.cr.git
     version: 1.9.3
 
-  redis:
+  redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.7.1
+    version: 0.9.0+git.commit.436ef0749c794baf4350b9e67531cec08a1ac653
 
   retriable:
     git: https://github.com/sija/retriable.cr.git
