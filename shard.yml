@@ -51,7 +51,6 @@ dependencies:
     github: crystal-cache/cache
   crest:
     github: mamantoha/crest
-    version: 1.3.13
   emoji:
     github: veelenga/emoji.cr
     branch: master
