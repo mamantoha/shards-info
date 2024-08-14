@@ -62,6 +62,10 @@ dependencies:
     github: mamantoha/time_by_example
   time_duration:
     github: mamantoha/time_duration
+  time_zone:
+    github: mamantoha/time_zone
+  countdown:
+    github: mamantoha/countdown-crystal
   cmark:
     github: amauryt/cr-cmark-gfm
     version: 0.1.2
@@ -80,10 +84,6 @@ dependencies:
     github: mamantoha/shards_spec
   cadmium_transliterator:
     github: cadmiumcr/transliterator
-  time_zone:
-    github: mamantoha/time_zone
-  countdown:
-    github: mamantoha/countdown-crystal
 
 development_dependencies:
   spec-kemal:
