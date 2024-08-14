@@ -17,6 +17,7 @@ require "humanize_time"
 require "time_by_example"
 require "time_duration"
 require "time_zone"
+require "countdown"
 require "autolink"
 require "raven/integrations/kemal"
 

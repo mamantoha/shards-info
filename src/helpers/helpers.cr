@@ -171,13 +171,15 @@ module Helpers
     start = time_zone.local(2022, 2, 24, 3, 40)
     now = time_zone.local
 
+    countdown = Countdown.new(start, now)
+
     span = now - start
 
     duration = Time::Duration.new(span)
 
     total_days_str = pluralize(duration.in_days.to_i, "day", "days")
 
-    "#{total_days_str} or #{duration.humanize(include_seconds: false, oxford_comma: true)}"
+    "#{total_days_str} or #{countdown.to_s(oxford_comma: true)}"
   end
 
   def pluralize(count : Int32 | Int64, singular : String, plural : String)

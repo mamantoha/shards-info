@@ -37,6 +37,10 @@ shards:
     git: https://github.com/amauryt/cr-cmark-gfm.git
     version: 0.1.2
 
+  countdown:
+    git: https://github.com/mamantoha/countdown-crystal.git
+    version: 0.1.0
+
   crest:
     git: https://github.com/mamantoha/crest.git
     version: 1.4.1

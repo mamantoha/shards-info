@@ -82,6 +82,8 @@ dependencies:
     github: cadmiumcr/transliterator
   time_zone:
     github: mamantoha/time_zone
+  countdown:
+    github: mamantoha/countdown-crystal
 
 development_dependencies:
   spec-kemal:
