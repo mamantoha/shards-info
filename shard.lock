@@ -39,7 +39,7 @@ shards:
 
   countdown:
     git: https://github.com/mamantoha/countdown-crystal.git
-    version: 0.1.0
+    version: 0.1.1
 
   crest:
     git: https://github.com/mamantoha/crest.git
