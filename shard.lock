@@ -39,7 +39,7 @@ shards:
 
   countdown:
     git: https://github.com/mamantoha/countdown-crystal.git
-    version: 0.1.1
+    version: 0.1.2
 
   crest:
     git: https://github.com/mamantoha/crest.git
@@ -139,7 +139,7 @@ shards:
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.9.0+git.commit.436ef0749c794baf4350b9e67531cec08a1ac653
+    version: 0.10.0+git.commit.33e34fa17b29b1666b3433cdfa4170523fed1d27
 
   retriable:
     git: https://github.com/sija/retriable.cr.git
@@ -167,5 +167,5 @@ shards:
 
   time_zone:
     git: https://github.com/mamantoha/time_zone.git
-    version: 0.1.2
+    version: 0.1.3
 
