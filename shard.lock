@@ -21,6 +21,14 @@ shards:
     git: https://github.com/sija/backtracer.cr.git
     version: 1.2.2
 
+  baked_file_system:
+    git: https://github.com/ralsina/baked_file_system.git
+    version: 0.10.0+git.commit.beb373124c7a235cfb9cd94e36849d8168eaa04b
+
+  base58:
+    git: https://github.com/crystal-china/base58.cr.git
+    version: 0.1.0+git.commit.2b0564a975171f4507c33251e0c0ab7990459e23
+
   cache:
     git: https://github.com/crystal-cache/cache.git
     version: 0.14.0
@@ -52,6 +60,10 @@ shards:
   delegator:
     git: https://github.com/schniz/delegator.cr.git
     version: 0.1.0
+
+  docopt:
+    git: https://github.com/chenkovsky/docopt.cr.git
+    version: 0.2.0+git.commit.620fce4f334ff15d7321e5ecb6665ad258fe9297
 
   dotenv:
     git: https://github.com/gdotdesign/cr-dotenv.git
@@ -121,10 +133,6 @@ shards:
     git: https://github.com/msa7/multi_auth.git
     version: 1.1.1+git.commit.7a3244200ec0cc34aef6680783eb3d11ce79d84e
 
-  noir:
-    git: https://github.com/makenowjust/noir.git
-    version: 0.1.0+git.commit.2508cdec22f4ec61e87a19d9ec563b99c0faa1f0
-
   pg:
     git: https://github.com/will/crystal-pg.git
     version: 0.28.0
@@ -149,6 +157,10 @@ shards:
     git: https://github.com/mamantoha/shards_spec.git
     version: 0.2.4
 
+  sixteen:
+    git: https://github.com/ralsina/sixteen.git
+    version: 0.3.1
+
   slang:
     git: https://github.com/jeromegn/slang.git
     version: 1.7.3+git.commit.f038a6c9725065ffd9b035f9c402390a2150d519
@@ -156,6 +168,10 @@ shards:
   spec-kemal:
     git: https://github.com/kemalcr/spec-kemal.git
     version: 1.0.0
+
+  tartrazine:
+    git: https://github.com/ralsina/tartrazine.git
+    version: 0.6.4+git.commit.c011bd8347000130c00582227f885c384c1d4dd7
 
   time_by_example:
     git: https://github.com/mamantoha/time_by_example.git
