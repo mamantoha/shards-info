@@ -34,7 +34,6 @@
     "expose-loader": "^5.0.0",
     "mini-css-extract-plugin": "^2.9.1",
     "neostandard": "^0.11.5",
-    "node-sass": "^9.0.0",
     "sass-loader": "^16.0.1",
     "style-loader": "^4.0.0",
     "stylelint": "^16.9.0",
@@ -50,6 +49,7 @@
     "chart.js": "^4.4.4",
     "jqcloud2": "^2.0.3",
     "jquery": "^3.7.1",
-    "moveto": "^1.8.2"
+    "moveto": "^1.8.2",
+    "sass": "^1.78.0"
   }
 }
