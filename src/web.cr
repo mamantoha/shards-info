@@ -44,9 +44,9 @@ end
 
 Kemal.config.add_handler(Raven::Kemal::ExceptionHandler.new)
 
-static_headers do |response, _filepath, _filestat|
+static_headers do |env, _filepath, _filestat|
   duration = 1.day.total_seconds.to_i
-  response.headers.add "Cache-Control", "public, max-age=#{duration}"
+  env.response.headers.add "Cache-Control", "public, max-age=#{duration}"
 end
 
 before_all "/admin/*" do |env|

@@ -91,7 +91,7 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 1.5.0
+    version: 1.6.0
 
   kemal-flash:
     git: https://github.com/crystal-garage/kemal-flash.git
@@ -135,7 +135,7 @@ shards:
 
   raven:
     git: https://github.com/sija/raven.cr.git
-    version: 1.9.3
+    version: 1.9.4
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
