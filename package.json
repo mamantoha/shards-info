@@ -46,10 +46,10 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
-    "chart.js": "^4.4.4",
+    "chart.js": "^4.4.5",
     "jqcloud2": "^2.0.3",
     "jquery": "^3.7.1",
     "moveto": "^1.8.2",
-    "sass": "^1.79.5"
+    "sass": "^1.80.1"
   }
 }
