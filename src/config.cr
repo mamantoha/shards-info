@@ -43,7 +43,7 @@ struct OpenGraph
     @type = "object",
     @description = "View of all repositories on Github and Gitlab that have Crystal code in them",
     @image = "https://shards.info/images/logo.png",
-    @url = "https://shards.info"
+    @url = "https://shards.info",
   )
   end
 end

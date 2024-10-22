@@ -191,7 +191,7 @@ module Github
       page = 1,
       limit = 100,
       after_date = 1.years.ago,
-      language = "Crystal"
+      language = "Crystal",
     )
       pushed = ""
 
