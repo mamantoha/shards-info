@@ -31,7 +31,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.19+git.commit.2f702b8c37b22c1a864d4b39508245c8bc57c0db
+    version: 0.8.20+git.commit.d37727ab14d7eade1b5842f5044be1a02afd1370
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -127,7 +127,7 @@ shards:
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.28.0
+    version: 0.29.0
 
   radix:
     git: https://github.com/luislavena/radix.git
