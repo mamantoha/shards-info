@@ -109,4 +109,6 @@ repos.each do |repo|
   end
 
   repository.tags = tags
+
+  puts repository.name
 end
