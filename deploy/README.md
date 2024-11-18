@@ -3,6 +3,7 @@
 * <https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04>
 * <https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-with-http-2-support-on-ubuntu-18-04>
 * <https://www.digitalocean.com/community/tutorials/how-to-manage-logfiles-with-logrotate-on-ubuntu-16-04>
+* <https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-20-04>
 
 ## Localhost
 
@@ -19,9 +20,11 @@ sudo apt install nginx postgresql postgresql-contrib redis-server libpq-dev
 ```
 
 ```console
+sudo su postgres
 psql -c 'CREATE DATABASE shards_info_production;' -U postgres
 psql -c 'CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;' -U postgres
 
+pg_restore -d shards_info_production shards_info_production.sql
 pg_restore -d shards_info_production shards_info_development.sql
 ```
 
@@ -29,6 +32,8 @@ pg_restore -d shards_info_production shards_info_development.sql
 psql -c 'DROP DATABASE shards_info_development;' -U postgres
 psql -c 'CREATE DATABASE shards_info_development;' -U postgres
 ```
+
+`pg_hba.conf`
 
 ### Build project
 
