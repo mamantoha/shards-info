@@ -88,6 +88,7 @@ repos.each do |repo|
     u.kind = github_user.kind
     u.avatar_url = github_user.avatar_url
     u.created_at = github_user.created_at
+    u.ignore = false
     u.synced_at = Time.utc
   end
 
