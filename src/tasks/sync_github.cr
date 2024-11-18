@@ -24,15 +24,16 @@ module Github
 
       # Hardcoded periods with less then 1000 results
       periods = [
-        Time.utc(1970, 1, 1)..Time.utc(2016, 1, 1),
-        Time.utc(2016, 1, 1)..Time.utc(2017, 1, 1),
-        Time.utc(2017, 1, 1)..Time.utc(2017, 6, 1),
-        Time.utc(2017, 6, 1)..Time.utc(2018, 1, 1),
-        Time.utc(2018, 1, 1)..Time.utc(2018, 6, 1),
-        Time.utc(2018, 6, 1)..Time.utc(2019, 1, 1),
-        Time.utc(2019, 1, 1)..Time.utc(2019, 6, 1),
-        Time.utc(2019, 6, 1)..Time.utc(2020, 1, 1),
-        Time.utc(2020, 1, 1)..Time.utc,
+        # Time.utc(1970, 1, 1)..Time.utc(2016, 1, 1),
+        # Time.utc(2016, 1, 1)..Time.utc(2017, 1, 1),
+        # Time.utc(2017, 1, 1)..Time.utc(2017, 6, 1),
+        # Time.utc(2017, 6, 1)..Time.utc(2018, 1, 1),
+        # Time.utc(2018, 1, 1)..Time.utc(2018, 6, 1),
+        # Time.utc(2018, 6, 1)..Time.utc(2019, 1, 1),
+        # Time.utc(2019, 1, 1)..Time.utc(2019, 6, 1),
+        # Time.utc(2019, 6, 1)..Time.utc(2020, 1, 1),
+        # Time.utc(2020, 1, 1)..Time.utc,
+        Time.utc(2024, 6, 1)..Time.utc,
       ]
 
       periods = periods.reduce([] of String) do |acc, range|
