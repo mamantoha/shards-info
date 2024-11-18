@@ -101,6 +101,10 @@ repos.each do |repo|
     r.open_issues_count = repo.open_issues_count
     r.created_at = repo.created_at
     r.license = repo.license.try(&.name)
+    r.archived = repo.archived?
+    r.default_branch = repo.default_branch
+    r.fork = repo.fork?
+    r.ignore = false
     r.synced_at = Time.utc
   end
 
