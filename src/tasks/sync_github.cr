@@ -92,6 +92,8 @@ repos.each do |repo|
     u.synced_at = Time.utc
   end
 
+  GithubHelpers.resync_user(user)
+
   repository = Repository.query.find_or_create({provider: "github", provider_id: repo.id}) do |r|
     r.user = user
     r.name = repo.name
@@ -109,7 +111,7 @@ repos.each do |repo|
     r.synced_at = Time.utc
   end
 
-  repository.tags = tags
+  GithubHelpers.resync_repository(repository)
 
   puts repository.name
 end
