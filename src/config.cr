@@ -32,6 +32,14 @@ class Config
   def self.nodejs_version
     {{ `node -v`.chomp.stringify }}
   end
+
+  def self.postgres_version
+    version = DB.connect(ENV["DATABASE_URL"]) do |conn|
+      conn.version
+    end
+
+    "#{version[:major]}.#{version[:minor]}.#{version[:patch]}"
+  end
 end
 
 struct OpenGraph
