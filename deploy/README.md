@@ -29,8 +29,7 @@ pg_restore -d shards_info_production shards_info_development.sql
 ```
 
 ```console
-psql -c 'DROP DATABASE shards_info_development;' -U postgres
-psql -c 'CREATE DATABASE shards_info_development;' -U postgres
+pg_dump "postgres://postgres@localhost/shards_info_production" -Fc > ~/shards_info_production-$(date +%y-%m-%d_%H:%m:%S).sql
 ```
 
 `pg_hba.conf`
