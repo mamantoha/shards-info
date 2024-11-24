@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.6.3+git.commit.c26b5a5b37c1419e73d69d854553ef7222cd422d
+    version: 1.6.3+git.commit.51cb88e4fb9016981beb78726dff881c2c1dac4a
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -75,7 +75,7 @@ shards:
 
   http_proxy:
     git: https://github.com/mamantoha/http_proxy.git
-    version: 0.12.0
+    version: 0.12.1
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
