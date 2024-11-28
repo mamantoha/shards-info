@@ -31,7 +31,7 @@ html {
   --alert-success-border-color: #badbcc;
   --badge-bg-color: #6c757d;
   --pg-color: #212529;
-  --color-primer-border-active: #ec775c;
+  --color-primer-border-active: #F57300;
   --scrollbar-track-color: #fafafa;
   --scrollbar-handle-color: #c1c1c1;
   --scrollbar-handle-hover-color: #7d7d7d;
@@ -41,29 +41,29 @@ html {
 }
 
 html.dark {
-  --main-bg-color: #22272e;
-  --page-heading-bg-color: #2d333b;
-  --navbar-bg-color: #2d333b;
+  --main-bg-color: #292D31;
+  --page-heading-bg-color: #30353A;
+  --navbar-bg-color: #30353A;
   --font-color: #acbac7;
   --link-color: #acbac7;
   --regular-link-color: #549bf5;
   --nav-link-color: white;
   --nav-active-link-color: white;
   --footer-color: #f5f5f5;
-  --footer-bg-color: #2d333b;
-  --border-color: #3d3d3d;
+  --footer-bg-color: #30353A;
+  --border-color: #535A61;
   --code-color: #acbac7;
-  --code-bg-color: #2d333b;
-  --code-inline-bg-color: #3c434d;
+  --code-bg-color: #222528;
+  --code-inline-bg-color: #30353A;
   --alert-success-color: #fff;
   --alert-success-bg-color: #58a6ff;
   --alert-success-border-color: #07693c;
-  --badge-bg-color: #424b5f;
+  --badge-bg-color: #222528;
   --pg-color: #acb2b8;
   --scrollbar-track-color: #2b2b2b;
   --scrollbar-handle-color: #6b6b6b;
   --scrollbar-handle-hover-color: #939393;
-  --search-input-bg-color: #404448;
+  --search-input-bg-color: #222528;
   --search-input-color: #dadadc;
 
   .btn-close {
@@ -83,8 +83,8 @@ html.dark {
 
   .table {
     --#{$prefix}table-color-state: #fff;
-    --#{$prefix}table-bg: #2d333b;
-    --#{$prefix}table-striped-bg: #22272e;
+    --#{$prefix}table-bg: var(--navbar-bg-color);
+    --#{$prefix}table-striped-bg: var(--main-bg-color);
     --#{$prefix}table-striped-color: #fff;
     --#{$prefix}table-active-bg: #373b3e;
     --#{$prefix}table-active-color: #fff;
@@ -103,12 +103,16 @@ html.dark {
 
   .dropdown-menu {
     --#{$prefix}dropdown-color: #acbac7;
-    --#{$prefix}dropdown-bg: #2d333b;
+    --#{$prefix}dropdown-bg: #2F3439;
     --#{$prefix}dropdown-link-color: #acbac7;
     --#{$prefix}dropdown-link-hover-color: #fff;
     --#{$prefix}dropdown-link-hover-bg: #6c757d;
     --#{$prefix}dropdown-link-active-color: #fff;
     --#{$prefix}dropdown-link-active-bg: #0d6efd;
     --#{$prefix}dropdown-link-disabled-color: #72777c;
+  }
+
+  .breadcrumb {
+    --bs-breadcrumb-item-active-color: var(--nav-active-link-color);
   }
 }
