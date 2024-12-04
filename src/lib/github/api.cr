@@ -49,7 +49,10 @@ module Github
     end
 
     def make_request(url)
-      Retriable.retry(on: {IO::TimeoutError}) do
+      Retriable.retry(on: {
+        Crest::GatewayTimeout,
+        IO::TimeoutError,
+      }) do
         client[url].get
       end
     ensure
