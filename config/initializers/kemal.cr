@@ -1,3 +1,4 @@
+require "../../src/ext/http/server/response"
 require "kemal"
 require "kemal-session"
 require "kemal-session-redis-engine"
