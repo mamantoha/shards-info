@@ -49,7 +49,9 @@ module Github
     end
 
     def make_request(url)
-      client[url].get
+      Retriable.retry(on: {IO::TimeoutError}) do
+        client[url].get
+      end
     ensure
       client.http_client.close
     end
