@@ -44,14 +44,14 @@ class Repository
 
   scope(:published) { where({ignore: false}) }
 
-  scope(:without_releases) {
+  scope(:without_releases) do
     where(<<-SQL
       NOT (
         EXISTS (SELECT "releases".* FROM "releases" WHERE (releases.repository_id = repositories.id))
       )
       SQL
     )
-  }
+  end
 
   # ```
   # repositories = Repository.query.with_counts
@@ -61,7 +61,7 @@ class Repository
   #   repository.attributes["dependents_count"]
   # end
   # ```
-  scope(:with_counts) {
+  scope(:with_counts) do
     self
       .select(
         "repositories.*",
@@ -69,18 +69,18 @@ class Repository
         "(select COUNT(*) from relationships r WHERE r.master_id=repositories.id) dependencies_count"
       )
       .group_by("repositories.id")
-  }
+  end
 
   def self.find_repository(user_login : String, repository_name : String, provider : String) : Repository?
     Repository
       .query
       .join("users") { users.id == repositories.user_id }
-      .find {
+      .find do
         (users.login == user_login) &
           (users.provider == provider) &
           (repositories.provider == provider) &
           (repositories.name == repository_name)
-      }
+      end
   end
 
   def decorate
