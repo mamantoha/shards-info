@@ -52,6 +52,7 @@ module Github
       Retriable.retry(on: {
         Crest::GatewayTimeout,
         IO::TimeoutError,
+        OpenSSL::SSL::Error,
       }) do
         client[url].get
       end
