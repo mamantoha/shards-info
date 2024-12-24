@@ -52,6 +52,7 @@ module Gitlab
         Crest::ServiceUnavailable,
         Crest::BadGateway,
         Socket::ConnectError,
+        IO::TimeoutError,
       }) do
         client[url].get(params: params)
       end
