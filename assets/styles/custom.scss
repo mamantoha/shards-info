@@ -208,16 +208,8 @@ a.badge {
 }
 
 .dont-break-out {
-  /* These are technically the same, but use both */
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  -ms-word-break: break-all;
-
-  /* This is the dangerous one in WebKit, as it breaks things wherever */
-  word-break: break-all;
-
-  /* Instead use this non-standard one: */
-  word-break: break-word;
+  word-break: normal;
+  overflow-wrap: anywhere;
 
   /* Adds a hyphen where the word breaks, if supported (No Blink) */
   hyphens: auto;
