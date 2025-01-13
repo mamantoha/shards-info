@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.65f7db0a492598548249778bb8ff69937a5801e8
+    version: 1.7.0-dev+git.commit.e113669f922132b3cfa4b86f72e73644f337989c
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -31,7 +31,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.20+git.commit.c4ac908f773981ba3231d3c42afda942d507c823
+    version: 0.8.21+git.commit.5554e119f7b706474520fed374a1a707a42ac6dd
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -139,7 +139,7 @@ shards:
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.10.0+git.commit.f02724bdbc1c9ed0fd3830ebeab0f59a971d96ed
+    version: 0.10.0+git.commit.7c18c52646d53ec11510b7dfa3a024e3e49e36ef
 
   retriable:
     git: https://github.com/sija/retriable.cr.git

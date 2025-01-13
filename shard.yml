@@ -43,6 +43,7 @@ dependencies:
   clear:
     github: crystal-garage/clear
     branch: develop
+    version: '>= 0.8.21'
   retriable:
     github: Sija/retriable.cr
   delegator:

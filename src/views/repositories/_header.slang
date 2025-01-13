@@ -19,8 +19,8 @@ div
                 a href="#{repository_parent.parent.decorate.show_path}"
                   = repository_parent.parent.decorate.full_name
           .shard__topics.mt-2
-            - repository.tag_names.each do |tag_name|
-              a.badge.bg-secondary.text-monospace href="/tags/#{tag_name}" = tag_name
+            - repository.tags.each do |tag|
+              a.badge.bg-secondary.text-monospace href="/tags/#{tag.name}" = tag.name
           .shard__intro
             span
               == repository.decorate.description_html.to_s

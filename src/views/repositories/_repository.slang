@@ -28,10 +28,8 @@
       p.shards__shard_desc.dont-break-out
         == repository.decorate.description_html.to_s
     .shard__topics
-      / TODO: for some reason repository.tags breaks html template
-      / - repository.tags.each do |tag|
-      - repository.tag_names.each do |tag_name|
-        a href="/tags/#{tag_name}" class="badge bg-secondary text-monospace" = tag_name
+      - repository.tags.each do |tag|
+        a href="/tags/#{tag.name}" class="badge bg-secondary text-monospace" = tag.name
     .shards__shard_github
       ul
         li
