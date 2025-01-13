@@ -28,7 +28,7 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
     "css-loader": "^7.1.2",
-    "eslint": "^9.17.0",
+    "eslint": "^9.18.0",
     "eslint-plugin-n": "^17.15.1",
     "eslint-plugin-promise": "^7.2.1",
     "expose-loader": "^5.0.0",
@@ -37,7 +37,7 @@
     "sass-loader": "^16.0.4",
     "style-loader": "^4.0.0",
     "stylelint": "^16.13.0",
-    "stylelint-config-standard": "^36.0.1",
+    "stylelint-config-standard": "^37.0.0",
     "stylelint-config-standard-scss": "^14.0.0",
     "trim-newlines": ">=5.0.0",
     "webpack": "^5.97.1",
