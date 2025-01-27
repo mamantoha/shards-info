@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.e113669f922132b3cfa4b86f72e73644f337989c
+    version: 1.7.0-dev+git.commit.e61f56f3aefdefa03d6a89d431d63c56daf52e0f
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -31,7 +31,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.21+git.commit.5554e119f7b706474520fed374a1a707a42ac6dd
+    version: 0.8.21+git.commit.f5b5bd07eea38ddb4223d9779b84d0143743a2a6
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -43,7 +43,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 1.4.1
+    version: 1.5.0
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -107,7 +107,7 @@ shards:
 
   kemal-session-redis-engine:
     git: https://github.com/crystal-garage/kemal-session-redis-engine.git
-    version: 1.2.0+git.commit.bb9d92df9552823f5a658516b3fdf60623235341
+    version: 1.2.1+git.commit.e1ace9a50be638e0987efa0cfbaeaedae60d4b33
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
