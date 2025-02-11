@@ -1031,18 +1031,18 @@ get "/stats/reverse_dependencies" do |env|
       "COUNT(*) AS repository_count"
     )
     .from(<<-SQL
-    (
-      SELECT
-        r.id,
-        COUNT(rel.id) AS dependency_count
-      FROM
-        repositories r
-      LEFT JOIN
-        relationships rel ON r.id = rel.dependency_id
-      GROUP BY
-        r.id
-    ) AS repo_dependency_count
-    SQL
+      (
+        SELECT
+          r.id,
+          COUNT(rel.id) AS dependency_count
+        FROM
+          repositories r
+        LEFT JOIN
+          relationships rel ON r.id = rel.dependency_id
+        GROUP BY
+          r.id
+      ) AS repo_dependency_count
+      SQL
     )
     .group_by("dependency_range")
     .order_by("MIN(dependency_count)")

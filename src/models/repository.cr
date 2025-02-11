@@ -87,9 +87,9 @@ class Repository
     @delegator ||= RepositoryDelegator.delegate(self)
   end
 
-  def touch
-    self.updated_on = Time.local
-    self.save!
+  def touch : Repository
+    updated_on = Time.local
+    save!
     self
   end
 

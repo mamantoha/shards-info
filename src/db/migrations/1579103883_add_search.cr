@@ -14,7 +14,7 @@ class AddSearch
           return new;
         end
         $$ LANGUAGE plpgsql;
-      SQL
+        SQL
 
       execute <<-SQL
         CREATE OR REPLACE FUNCTION tsv_trigger_update_repositories() RETURNS trigger AS $$
@@ -31,7 +31,7 @@ class AddSearch
           return new;
         end
         $$ LANGUAGE plpgsql;
-      SQL
+        SQL
 
       # Creates triggers
       #
@@ -40,14 +40,14 @@ class AddSearch
           ON repositories
           FOR EACH ROW
           EXECUTE PROCEDURE tsv_trigger_insert_repositories();
-      SQL
+        SQL
 
       execute <<-SQL
         CREATE TRIGGER tsv_update_repositories BEFORE UPDATE
           ON repositories
           FOR EACH ROW
           EXECUTE PROCEDURE tsv_trigger_update_repositories();
-      SQL
+        SQL
     end
 
     dir.down do
