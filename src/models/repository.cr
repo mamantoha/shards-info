@@ -88,8 +88,8 @@ class Repository
   end
 
   def touch : Repository
-    updated_on = Time.local
-    save!
+    self.updated_on = Time.local
+    self.save!
     self
   end
 
