@@ -402,6 +402,7 @@ get "/:provider/:owner/:repo" do |env|
         .forks
         .clear_distinct
         .with_user
+        .with_counts
         .order_by(
           "(select COUNT(*) from relationships rel WHERE rel.dependency_id=repositories.id)",
           :desc

@@ -78,7 +78,7 @@
             - forks.each(fetch_columns: true) do |repository|
               li.link
                 i class="#{repository.decorate.provider_icon}"
-                a href="#{repository.decorate.show_path}"
+                a href="#{repository.decorate.show_path}" data-bs-toggle="popover" data-bs-custom-class="repository-popover" data-bs-trigger="hover" data-bs-placement="right" data-bs-html="true" data-bs-content="#{render("src/views/repositories/_tooltip.slang")}"
                   = repository.decorate.full_name
 
 - if repository.postinstall_script
