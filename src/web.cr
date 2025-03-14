@@ -396,7 +396,17 @@ get "/:provider/:owner/:repo" do |env|
         .order_by("repositories.stars_count", :desc)
         .order_by("repositories.id", :asc)
 
-    forks = repository.forks.with_user
+    # Forks sorted by dependents count
+    forks =
+      repository
+        .forks
+        .clear_distinct
+        .with_user
+        .with_counts
+        .order_by(
+          "(select COUNT(*) from relationships rel WHERE rel.dependency_id=repositories.id)",
+          :desc
+        )
 
     dependents_count = dependents.count
 
