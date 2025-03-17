@@ -58,7 +58,14 @@ end
 before_all do |env|
   Config.config.open_graph = OpenGraph.new
   Config.config.open_graph.url = "https://shards.info#{env.request.path}"
-  Config.config.query = URI.decode_www_form(env.request.query_params["query"]?.to_s)
+
+  query = env.request.query_params["query"]?.to_s
+
+  unless query.valid_encoding?
+    query = query.scrub("")
+  end
+
+  Config.config.query = URI.decode_www_form(query)
 end
 
 get "/auth/:provider" do |env|
@@ -292,7 +299,12 @@ get "/search" do |env|
     expression, direction = Helpers.repositories_sort_expression_direction(sort)
 
     query_param = env.params.query["query"].as(String)
-    query = URI.decode_www_form(env.params.query["query"].as(String))
+
+    unless query_param.valid_encoding?
+      query_param = query_param.scrub("")
+    end
+
+    query = URI.decode_www_form(query_param)
 
     # remove dissallowed tsquery characters
     query = query.gsub(/['?\\:‘’]/, "")
