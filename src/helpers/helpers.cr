@@ -8,6 +8,7 @@ module Helpers
     "alphabetical"   => "Alphabetical",
     "dependents"     => "Dependents",
     "dependencies"   => "Dependencies",
+    "forks"          => "Forks",
     "recent-updates" => "Recent Updates",
     "new"            => "Newly Added",
     "last-synced"    => "Last Synced",
@@ -154,6 +155,8 @@ module Helpers
       {"(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id)", :desc}
     when "dependencies"
       {"(select COUNT(*) from relationships r WHERE r.master_id=repositories.id)", :desc}
+    when "forks"
+      {"(select COUNT(*) from repository_forks rf WHERE rf.parent_id=repositories.id)", :desc}
     when "recent-updates"
       {"last_activity_at", :desc}
     when "last-synced"
