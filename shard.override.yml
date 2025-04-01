@@ -2,6 +2,3 @@ dependencies:
   redis:
     github: jgaskins/redis
     branch: master
-  cmark:
-    github: mamantoha/cr-cmark-gfm
-    branch: fix-build

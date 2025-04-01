@@ -69,7 +69,7 @@ dependencies:
     github: mamantoha/countdown-crystal
   cmark:
     github: amauryt/cr-cmark-gfm
-    version: 0.1.2
+    branch: master
   noir:
     github: MakeNowJust/noir
     branch: main
