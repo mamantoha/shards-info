@@ -36,7 +36,7 @@
     "neostandard": "^0.12.1",
     "sass-loader": "^16.0.5",
     "style-loader": "^4.0.0",
-    "stylelint": "^16.17.0",
+    "stylelint": "^16.18.0",
     "stylelint-config-standard": "^37.0.0",
     "stylelint-config-standard-scss": "^14.0.0",
     "trim-newlines": ">=5.0.0",
