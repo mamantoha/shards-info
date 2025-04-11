@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.d172478036b313ea9093d1de4e0027f0faf1032c
+    version: 1.7.0-dev+git.commit.fe828c156a1217e723a880144a68d087e1b77471
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -79,7 +79,7 @@ shards:
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
-    version: 0.12.3
+    version: 0.12.4
 
   i18n:
     git: https://github.com/crystal-i18n/i18n.git
@@ -119,7 +119,7 @@ shards:
 
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
-    version: 1.1.1+git.commit.7a3244200ec0cc34aef6680783eb3d11ce79d84e
+    version: 1.1.1+git.commit.fc0c9ae0c56c756a283fad72622a2e2ce2781bfc
 
   noir:
     git: https://github.com/makenowjust/noir.git
@@ -139,7 +139,7 @@ shards:
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.11.3+git.commit.a49a406bca228c48882e31c9f315570face9b1fa
+    version: 0.11.3+git.commit.fe2d89f7abbb09308b74e93a2406914677502f4c
 
   retriable:
     git: https://github.com/sija/retriable.cr.git
