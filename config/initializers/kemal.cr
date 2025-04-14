@@ -12,7 +12,7 @@ log_file =
     STDOUT
   end
 
-Kemal.config.logger = Kemal::LogHandler.new(log_file)
+Log.builder.bind "kemal.*", :debug, Log::IOBackend.new(log_file)
 
 Kemal::Session.config do |config|
   config.cookie_name = "session_id"
