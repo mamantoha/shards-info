@@ -63,7 +63,7 @@ shards:
 
   exception_page:
     git: https://github.com/crystal-loot/exception_page.git
-    version: 0.4.1
+    version: 0.5.0
 
   generate:
     git: https://github.com/anykeyh/generate.cr.git
@@ -79,7 +79,7 @@ shards:
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
-    version: 0.12.4
+    version: 0.12.5
 
   i18n:
     git: https://github.com/crystal-i18n/i18n.git
@@ -91,7 +91,7 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 1.6.0
+    version: 1.7.1
 
   kemal-flash:
     git: https://github.com/crystal-garage/kemal-flash.git
@@ -139,7 +139,7 @@ shards:
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.11.3+git.commit.fe2d89f7abbb09308b74e93a2406914677502f4c
+    version: 0.12.0+git.commit.7aed4f7efa49f4011687de7d03b50125b68df159
 
   retriable:
     git: https://github.com/sija/retriable.cr.git
