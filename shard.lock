@@ -122,8 +122,8 @@ shards:
     version: 1.1.1+git.commit.fc0c9ae0c56c756a283fad72622a2e2ce2781bfc
 
   noir:
-    git: https://github.com/makenowjust/noir.git
-    version: 0.1.0+git.commit.2508cdec22f4ec61e87a19d9ec563b99c0faa1f0
+    git: https://github.com/crystal-garage/noir.git
+    version: 0.1.0+git.commit.33b9ba97de053e5ac3eda105db3a7133afdc35f5
 
   pg:
     git: https://github.com/will/crystal-pg.git
