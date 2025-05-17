@@ -55,7 +55,7 @@ shards:
 
   dotenv:
     git: https://github.com/gdotdesign/cr-dotenv.git
-    version: 1.0.0+git.commit.cb70a7111043fa37e09dce3e4b6db17fd5c6ce54
+    version: 1.0.0+git.commit.8bedfcf5f127c29d85687c7212a47d22cba296a9
 
   emoji:
     git: https://github.com/veelenga/emoji.cr.git
