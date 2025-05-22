@@ -123,7 +123,7 @@ shards:
 
   noir:
     git: https://github.com/crystal-garage/noir.git
-    version: 0.1.0+git.commit.33b9ba97de053e5ac3eda105db3a7133afdc35f5
+    version: 0.1.0+git.commit.c2b6ee7b16e57278cdbc06b3e4bfb84ca27a2b42
 
   pg:
     git: https://github.com/will/crystal-pg.git
