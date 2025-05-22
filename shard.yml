@@ -71,8 +71,8 @@ dependencies:
     github: amauryt/cr-cmark-gfm
     branch: master
   noir:
-    github: MakeNowJust/noir
-    branch: main
+    github: crystal-garage/noir
+    branch: develop
   autolink:
     github: crystal-community/autolink.cr
   raven:
