@@ -10,6 +10,7 @@ require "noir/lexers/xml"
 require "noir/lexers/javascript"
 require "noir/lexers/json"
 require "noir/lexers/yaml"
+require "noir/lexers/sql"
 
 class ReadmeRenderer < Cmark::HTMLRenderer
   VIDEO_EXTENSIONS = [".webm", ".mp4", ".mov"]
