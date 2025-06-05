@@ -5,6 +5,13 @@ class RequestContext
   property current_page : String = "home"
   property open_graph : OpenGraph = OpenGraph.new
 
+  def initialize
+  end
+
+  def initialize(&)
+    yield self
+  end
+
   struct OpenGraph
     property site_name, title, type, description, image, url
 

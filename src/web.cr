@@ -67,11 +67,12 @@ before_all do |env|
 
   query = URI.decode_www_form(query)
 
-  request_context = RequestContext.new
-  request_context.search_query = query
-  request_context.open_graph.url = "https://shards.info#{env.request.path}"
+  RequestContext.new do |request_context|
+    request_context.search_query = query
+    request_context.open_graph.url = "https://shards.info#{env.request.path}"
 
-  env.set "request_context", request_context
+    env.set "request_context", request_context
+  end
 end
 
 get "/auth/:provider" do |env|
@@ -156,11 +157,11 @@ get "/" do |env|
       .limit(20)
 
   # FIXME: before_all is not working for some reason
-  request_context = RequestContext.new
-  request_context.page_title = "shards.info"
-  request_context.page_description = "See what the Crystal community is most excited about today"
-  request_context.current_page = "home"
-  env.set "request_context", request_context
+  RequestContext.new do |request_context|
+    request_context.page_description = "See what the Crystal community is most excited about today"
+
+    env.set "request_context", request_context
+  end
 
   render "src/views/index.slang", "src/views/layouts/layout.slang"
 end
