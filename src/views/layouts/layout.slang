@@ -1,3 +1,5 @@
+- request_context = env.get("request_context").as(RequestContext)
+
 doctype html
 html lang="en"
   head
@@ -5,7 +7,7 @@ html lang="en"
       == render "src/views/partials/google_analytics.slang"
     meta charset="utf-8"
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    meta name="description" content="#{Config.config.page_description}"
+    meta name="description" content="#{request_context.page_description}"
 
     link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"
 
@@ -16,7 +18,7 @@ html lang="en"
 
     link rel="icon" sizes="264x168" href="/images/speeddial.png" async="async" defer="defer"
 
-    title #{Config.config.page_title}
+    title #{request_context.page_title}
   body
     javascript:
       const theme = localStorage.getItem('theme') || 'light';

@@ -13,7 +13,7 @@
             div.form-group.has-search
               span.fa.fa-search.form-control-feedback
               form#search action="/search" method="GET" autocomplete="off"
-                input.form-control.me-2 aria-label="Search" name="query" type="search" placeholder="Search shards..." onClick="this.select();" value="#{Config.config.query}"
+                input.form-control.me-2 aria-label="Search" name="query" type="search" placeholder="Search shards..." onClick="this.select();" value="#{env.get("request_context").as(RequestContext).search_query}"
         hr
         .navbar-nav.me-auto.mb-2.mb-lg-0
           ul.nav.flex-column
