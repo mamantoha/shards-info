@@ -28,6 +28,12 @@ require "./delegators"
 
 require "./lib/cmark/readme_renderer"
 
+macro set_request_context(env, &)
+  request_context = {{env}}.get("request_context").as(RequestContext)
+  {{yield}}
+  {{env}}.set "request_context", request_context
+end
+
 class RequestContext
   property page_title : String = "shards.info"
   property page_description : String = "View of all repositories on Github and Gitlab that have Crystal code in them"
@@ -141,10 +147,10 @@ error 404 do
 end
 
 get "/about" do |env|
-  request_context = env.get("request_context").as(RequestContext)
-  request_context.page_title = "About"
-  request_context.page_description = "About"
-  env.set "request_context", request_context
+  set_request_context(env) do
+    request_context.page_title = "About"
+    request_context.page_description = "About"
+  end
 
   render "src/views/about.slang", "src/views/layouts/layout.slang"
 end
@@ -223,10 +229,10 @@ get "/repositories" do |env|
 
   repositories = repositories_query.limit(per_page).offset(offset)
 
-  request_context = env.get("request_context").as(RequestContext)
-  request_context.page_title = "All Shards"
-  request_context.page_description = "All Shards"
-  env.set "request_context", request_context
+  set_request_context(env) do
+    request_context.page_title = "All Shards"
+    request_context.page_description = "All Shards"
+  end
 
   render "src/views/repositories/index.slang", "src/views/layouts/layout.slang"
 end
@@ -270,11 +276,11 @@ get "/users" do |env|
 
   users = users_query.limit(per_page).offset(offset)
 
-  request_context = env.get("request_context").as(RequestContext)
-  request_context.page_title = "Crystal developers"
-  request_context.page_description = "Crystal developers"
-  request_context.current_page = "users"
-  env.set "request_context", request_context
+  set_request_context(env) do
+    request_context.page_title = "Crystal developers"
+    request_context.page_description = "Crystal developers"
+    request_context.current_page = "users"
+  end
 
   render "src/views/users/index.slang", "src/views/layouts/layout.slang"
 end
@@ -312,11 +318,11 @@ get "/tags" do |env|
     tags_array.to_json
   end
 
-  request_context = env.get("request_context").as(RequestContext)
-  request_context.page_title = "Tags on shards.info"
-  request_context.page_description = "Browse popular tags on shards.info"
-  request_context.current_page = "tags"
-  env.set "request_context", request_context
+  set_request_context(env) do
+    request_context.page_title = "Tags"
+    request_context.page_description = "Browse popular tags on shards.info"
+    request_context.current_page = "tags"
+  end
 
   render "src/views/tags/index.slang", "src/views/layouts/layout.slang"
 end
@@ -374,10 +380,10 @@ get "/search" do |env|
 
     repositories = repositories_query.limit(per_page).offset(offset)
 
-    request_context = env.get("request_context").as(RequestContext)
-    request_context.page_title = "Search for '#{query}'"
-    request_context.page_description = "Search Crystal repositories for '#{query}'"
-    env.set "request_context", request_context
+    set_request_context(env) do
+      request_context.page_title = "Search for '#{query}'"
+      request_context.page_description = "Search Crystal repositories for '#{query}'"
+    end
 
     render "src/views/search/index.slang", "src/views/layouts/layout.slang"
   end
@@ -405,14 +411,14 @@ get "/:provider/:owner" do |env|
 
     route_path = "/#{user.provider}/#{user.login}?"
 
-    request_context = env.get("request_context").as(RequestContext)
-    request_context.page_title = "#{user.login} Crystal repositories"
-    request_context.page_description = "#{user.login} has #{repositories_count} Crystal repositories"
-    request_context.open_graph.title = "#{user.login} (#{user.name})"
-    request_context.open_graph.description = "#{user.login} has #{repositories_count} Crystal repositories"
-    request_context.open_graph.image = "#{user.decorate.avatar}"
-    request_context.open_graph.type = "profile"
-    env.set "request_context", request_context
+    set_request_context(env) do
+      request_context.page_title = "#{user.login} Crystal repositories"
+      request_context.page_description = "#{user.login} has #{repositories_count} Crystal repositories"
+      request_context.open_graph.title = "#{user.login} (#{user.name})"
+      request_context.open_graph.description = "#{user.login} has #{repositories_count} Crystal repositories"
+      request_context.open_graph.image = "#{user.decorate.avatar}"
+      request_context.open_graph.type = "profile"
+    end
 
     render "src/views/users/show.slang", "src/views/layouts/layout.slang"
   else
@@ -463,13 +469,13 @@ get "/:provider/:owner/:repo" do |env|
 
     dependents_count = dependents.count
 
-    request_context = env.get("request_context").as(RequestContext)
-    request_context.page_title = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
-    request_context.page_description = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
-    request_context.open_graph.title = "#{repository.decorate.full_name}"
-    request_context.open_graph.description = "#{repository.decorate.description_with_emoji}"
-    request_context.open_graph.image = "#{repository.user.avatar_url}"
-    env.set "request_context", request_context
+    set_request_context(env) do
+      request_context.page_title = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
+      request_context.page_description = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
+      request_context.open_graph.title = "#{repository.decorate.full_name}"
+      request_context.open_graph.description = "#{repository.decorate.description_with_emoji}"
+      request_context.open_graph.image = "#{repository.user.avatar_url}"
+    end
 
     render "src/views/repositories/show.slang", "src/views/layouts/layout.slang"
   else
@@ -490,13 +496,13 @@ get "/:provider/:owner/:repo/readme" do |env|
         raise Kemal::Exceptions::RouteNotFound.new(env)
       end
 
-    request_context = env.get("request_context").as(RequestContext)
-    request_context.page_title = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
-    request_context.page_description = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
-    request_context.open_graph.title = "#{repository.decorate.full_name}"
-    request_context.open_graph.description = "#{repository.decorate.description_with_emoji}"
-    request_context.open_graph.image = "#{repository.user.avatar_url}"
-    env.set "request_context", request_context
+    set_request_context(env) do
+      request_context.page_title = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
+      request_context.page_description = "#{repository.decorate.full_name}: #{repository.decorate.description_with_emoji}"
+      request_context.open_graph.title = "#{repository.decorate.full_name}"
+      request_context.open_graph.description = "#{repository.decorate.description_with_emoji}"
+      request_context.open_graph.image = "#{repository.user.avatar_url}"
+    end
 
     render "src/views/repositories/readme.slang", "src/views/layouts/layout.slang"
   else
@@ -546,10 +552,10 @@ get "/:provider/:owner/:repo/dependents" do |env|
 
     repositories = repositories_query.limit(per_page).offset(offset)
 
-    request_context = env.get("request_context").as(RequestContext)
-    request_context.page_title = "Depend on '#{repository.decorate.full_name}'"
-    request_context.page_description = "Depend on '#{repository.decorate.full_name}'"
-    env.set "request_context", request_context
+    set_request_context(env) do
+      request_context.page_title = "Depend on '#{repository.decorate.full_name}'"
+      request_context.page_description = "Depend on '#{repository.decorate.full_name}'"
+    end
 
     render "src/views/dependents/index.slang", "src/views/layouts/layout.slang"
   else
@@ -594,10 +600,10 @@ get "/tags/:name" do |env|
 
     repositories = repositories_query.limit(per_page).offset(offset)
 
-    request_context = env.get("request_context").as(RequestContext)
-    request_context.page_title = "Repositories tagged with '#{name}'"
-    request_context.page_description = "Crystal repositories with tag '#{name}'"
-    env.set "request_context", request_context
+    set_request_context(env) do
+      request_context.page_title = "Repositories tagged with '#{name}'"
+      request_context.page_description = "Crystal repositories with tag '#{name}'"
+    end
 
     render "src/views/tags/show.slang", "src/views/layouts/layout.slang"
   else
@@ -632,11 +638,11 @@ get "/languages" do |env|
     languages_array.to_json
   end
 
-  request_context = env.get("request_context").as(RequestContext)
-  request_context.page_title = "Languages on shards.info"
-  request_context.page_description = "Browse languages on shards.info"
-  request_context.current_page = "languages"
-  env.set "request_context", request_context
+  set_request_context(env) do
+    request_context.page_title = "Languages on shards.info"
+    request_context.page_description = "Browse languages on shards.info"
+    request_context.current_page = "languages"
+  end
 
   render "src/views/languages/index.slang", "src/views/layouts/layout.slang"
 end
@@ -681,10 +687,10 @@ get "/languages/:name" do |env|
 
     repositories = repositories_query.limit(per_page).offset(offset)
 
-    request_context = env.get("request_context").as(RequestContext)
-    request_context.page_title = "Repositories with language #{name}"
-    request_context.page_description = "Crystal repositories with language #{name}"
-    env.set "request_context", request_context
+    set_request_context(env) do
+      request_context.page_title = "Repositories with language #{name}"
+      request_context.page_description = "Crystal repositories with language #{name}"
+    end
 
     render "src/views/languages/show.slang", "src/views/layouts/layout.slang"
   else
@@ -723,17 +729,17 @@ get "/admin/admins" do |env|
 
   admins = admin_query.limit(per_page).offset(offset)
 
-  request_context = env.get("request_context").as(RequestContext)
-  request_context.page_title = "Admin: Site Admins"
-  env.set "request_context", request_context
+  set_request_context(env) do
+    request_context.page_title = "Admin: Site Admins"
+  end
 
   render "src/views/admin/admins/index.slang", "src/views/layouts/layout.slang"
 end
 
 get "/admin/repositories/new" do |env|
-  request_context = env.get("request_context").as(RequestContext)
-  request_context.page_title = "Admin: Add new repository"
-  env.set "request_context", request_context
+  set_request_context(env) do
+    request_context.page_title = "Admin: Add new repository"
+  end
 
   render "src/views/admin/repositories/new.slang", "src/views/layouts/layout.slang"
 end
@@ -784,9 +790,9 @@ get "/admin/hidden_users" do |env|
 
   users = users_query.limit(per_page).offset(offset)
 
-  request_context = env.get("request_context").as(RequestContext)
-  request_context.page_title = "Admin: Hidden Users"
-  env.set "request_context", request_context
+  set_request_context(env) do
+    request_context.page_title = "Admin: Hidden Users"
+  end
 
   render "src/views/admin/hidden_users/index.slang", "src/views/layouts/layout.slang"
 end
@@ -819,9 +825,9 @@ get "/admin/hidden_repositories" do |env|
 
   repositories = repositories_query.limit(per_page).offset(offset)
 
-  request_context = env.get("request_context").as(RequestContext)
-  request_context.page_title = "Admin: Hidden Repositories"
-  env.set "request_context", request_context
+  set_request_context(env) do
+    request_context.page_title = "Admin: Hidden Repositories"
+  end
 
   render "src/views/admin/hidden_repositories/index.slang", "src/views/layouts/layout.slang"
 end
@@ -988,10 +994,10 @@ get "/stats" do |env|
 
   users_count = User.query.count
 
-  request_context = env.get("request_context").as(RequestContext)
-  request_context.page_title = "State of the Crystal shards ecosystem // shards.info"
-  request_context.page_description = "Crystal shards and repositories ecosystem statistics"
-  env.set "request_context", request_context
+  set_request_context(env) do
+    request_context.page_title = "State of the Crystal shards ecosystem // shards.info"
+    request_context.page_description = "Crystal shards and repositories ecosystem statistics"
+  end
 
   render "src/views/stats.slang", "src/views/layouts/layout.slang"
 end
