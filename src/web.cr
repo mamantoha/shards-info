@@ -52,13 +52,13 @@ static_headers do |env, _filepath, _filestat|
   env.response.headers.add "Cache-Control", "public, max-age=#{duration}"
 end
 
-before_all "/admin/*" do |env|
-  next if (current_user = current_user(env)) && current_user.admin?
-
-  halt env, status_code: 403, response: "Forbidden"
-end
-
 before_all do |env|
+  if env.request.path.starts_with?("/admin")
+    unless (current_user = current_user(env)) && current_user.admin?
+      halt env, status_code: 403, response: "Forbidden"
+    end
+  end
+
   query = env.request.query_params["query"]?.to_s
 
   unless query.valid_encoding?
@@ -156,11 +156,8 @@ get "/" do |env|
       .order_by(last_activity_at: :desc)
       .limit(20)
 
-  # FIXME: before_all is not working for some reason
-  RequestContext.new do |request_context|
+  set_request_context(env) do
     request_context.page_description = "See what the Crystal community is most excited about today"
-
-    env.set "request_context", request_context
   end
 
   render "src/views/index.slang", "src/views/layouts/layout.slang"
