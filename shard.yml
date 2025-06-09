@@ -30,6 +30,8 @@ dependencies:
     branch: main
   kemal-flash:
     github: crystal-garage/kemal-flash
+  defense:
+    github: defense-cr/defense
   kilt:
     github: jeromegn/kilt
   slang:

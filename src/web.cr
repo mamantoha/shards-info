@@ -10,6 +10,7 @@ require "compress/deflate"
 require "compress/gzip"
 require "compress/zlib"
 
+require "defense"
 require "kilt/slang"
 require "crest"
 require "emoji"
@@ -28,6 +29,19 @@ require "./view_helpers"
 require "./delegators"
 
 require "./lib/cmark/readme_renderer"
+
+Defense.store = Defense::RedisStore.new(url: ENV["DEFENSE_REDIS_URL"])
+
+Defense.throttle("throttle requests per minute", limit: 20, period: 60) do |request|
+  case remote_address = request.remote_address
+  when .is_a?(Socket::IPAddress)
+    remote_address.address
+  else
+    remote_address.to_s
+  end
+end
+
+add_handler Defense::Handler.new
 
 add_context_storage_type(RequestContext)
 
