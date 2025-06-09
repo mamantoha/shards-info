@@ -32,7 +32,7 @@ require "./lib/cmark/readme_renderer"
 
 Defense.store = Defense::RedisStore.new(url: ENV["DEFENSE_REDIS_URL"])
 
-Defense.throttle("throttle requests per minute", limit: 20, period: 60) do |request|
+Defense.throttle("throttle requests per minute", limit: 45, period: 60) do |request|
   # Try to get IP from headers set by NGINX
   real_ip = request.headers["X-Forwarded-For"]?
   real_ip = real_ip.split(",").first.strip if real_ip
