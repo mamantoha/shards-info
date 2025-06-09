@@ -49,6 +49,10 @@ shards:
     git: https://github.com/crystal-lang/crystal-db.git
     version: 0.13.1
 
+  defense:
+    git: https://github.com/defense-cr/defense.git
+    version: 0.5.1
+
   delegator:
     git: https://github.com/schniz/delegator.cr.git
     version: 0.1.0
@@ -139,7 +143,7 @@ shards:
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.12.0+git.commit.7aed4f7efa49f4011687de7d03b50125b68df159
+    version: 0.12.0+git.commit.ddf1039c60b46f7f80dff8986d35068acb3c67d6
 
   retriable:
     git: https://github.com/sija/retriable.cr.git
