@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.d861f4ed0f904e0ecdad11c26f98e968f7d95afa
+    version: 1.7.0-dev+git.commit.d6bf407bff9c0f4d87098637ace208d9476993fc
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -31,7 +31,7 @@ shards:
 
   clear:
     git: https://github.com/crystal-garage/clear.git
-    version: 0.8.21+git.commit.82a27595961824025bdaeaaf2cb32ec31ed2e8d0
+    version: 0.8.23+git.commit.a11745f36fd6d1f1cc71997539bbb484c4c4d447
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
