@@ -32,7 +32,7 @@ require "./lib/cmark/readme_renderer"
 
 Defense.store = Defense::RedisStore.new(url: ENV["DEFENSE_REDIS_URL"])
 
-Defense.throttle("throttle requests per minute", limit: 45, period: 60) do |request|
+def real_ip(request : HTTP::Request)
   # Try to get IP from headers set by NGINX
   real_ip = request.headers["X-Forwarded-For"]?
   real_ip = real_ip.split(",").first.strip if real_ip
@@ -45,8 +45,22 @@ Defense.throttle("throttle requests per minute", limit: 45, period: 60) do |requ
               else
                 remote_address.to_s
               end
+end
 
-  real_ip
+Defense.throttle("throttle requests per minute", limit: 45, period: 60) do |request|
+  real_ip(request)
+end
+
+Defense.blocklist("fail2ban pentesters") do |request|
+  Defense::Fail2Ban.filter("pentesters:#{real_ip(request)}", maxretry: 5, findtime: 60, bantime: 24 * 60 * 60) do
+    [
+      "/wp-admin",
+      "/wp-content",
+      "/wp-includes",
+      "/.git",
+      "/.ssh",
+    ].any? { |path| request.path.starts_with?(path) }
+  end
 end
 
 add_handler Defense::Handler.new
