@@ -31,16 +31,16 @@ Defense.throttled_response = ->(response : HTTP::Server::Response) do
   response.headers.add "Retry-After", "60"
 
   response.print(<<-HTML)
-  <html>
-    <head>
-      <title>Too Many Requests</title>
-    </head>
-    <body>
-      <h1>Too Many Requests</h1>
-      <p>You're doing that too often! Try again later.</p>
-    </body>
-  </html>
-  HTML
+    <html>
+      <head>
+        <title>Too Many Requests</title>
+      </head>
+      <body>
+        <h1>Too Many Requests</h1>
+        <p>You're doing that too often! Try again later.</p>
+      </body>
+    </html>
+    HTML
 end
 
 Defense.blocklist("fail2ban pentesters") do |request|
