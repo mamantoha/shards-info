@@ -15,7 +15,12 @@ class CountBarChart {
   }
 
   fetchDataAndCreateChart () {
-    fetch(this.options.apiUrl)
+    fetch(this.options.apiUrl, {
+      method: 'GET',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    })
       .then(response => response.json())
       .then(data => {
         this.data = data;
@@ -102,7 +107,12 @@ class RepositoryCountBarChart {
   }
 
   fetchDataAndCreateChart () {
-    fetch(this.options.apiUrl)
+    fetch(this.options.apiUrl, {
+      method: 'GET',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    })
       .then(response => response.json())
       .then(data => {
         this.data = data;
@@ -198,7 +208,12 @@ class RepositoryCountLineChart {
   }
 
   fetchDataAndCreateChart () {
-    fetch(this.options.apiUrl)
+    fetch(this.options.apiUrl, {
+      method: 'GET',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    })
       .then(response => response.json())
       .then(data => {
         this.data = data;
@@ -265,7 +280,12 @@ class PieChart {
   }
 
   fetchDataAndCreateChart () {
-    fetch(this.options.apiUrl)
+    fetch(this.options.apiUrl, {
+      method: 'GET',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    })
       .then(response => response.json())
       .then(data => {
         this.data = data;
