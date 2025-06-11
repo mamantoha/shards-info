@@ -1073,18 +1073,18 @@ get "/stats/direct_dependencies" do |env|
         "COUNT(*) AS repository_count"
       )
       .from(<<-SQL
-      (
-        SELECT
-          r.id,
-          COUNT(rel.id) AS dependency_count
-        FROM
-          repositories r
-        LEFT JOIN
-          relationships rel ON r.id = rel.master_id
-        GROUP BY
-          r.id
-      ) AS repo_dependency_count
-      SQL
+        (
+          SELECT
+            r.id,
+            COUNT(rel.id) AS dependency_count
+          FROM
+            repositories r
+          LEFT JOIN
+            relationships rel ON r.id = rel.master_id
+          GROUP BY
+            r.id
+        ) AS repo_dependency_count
+        SQL
       )
       .group_by("dependency_count")
       .order_by("dependency_count", :asc)
@@ -1116,18 +1116,18 @@ get "/stats/reverse_dependencies" do |env|
         "COUNT(*) AS repository_count"
       )
       .from(<<-SQL
-      (
-        SELECT
-          r.id,
-          COUNT(rel.id) AS dependency_count
-        FROM
-          repositories r
-        LEFT JOIN
-          relationships rel ON r.id = rel.dependency_id
-        GROUP BY
-          r.id
-      ) AS repo_dependency_count
-      SQL
+        (
+          SELECT
+            r.id,
+            COUNT(rel.id) AS dependency_count
+          FROM
+            repositories r
+          LEFT JOIN
+            relationships rel ON r.id = rel.dependency_id
+          GROUP BY
+            r.id
+        ) AS repo_dependency_count
+        SQL
       )
       .group_by("dependency_range")
       .order_by("MIN(dependency_count)")
@@ -1153,16 +1153,16 @@ get "/stats/user_repositories_count" do |env|
         "COUNT(*) AS user_count"
       )
       .from(<<-SQL
-      (
-        SELECT
-          user_id,
-          COUNT(*) AS repo_count
-        FROM
-          repositories
-        GROUP BY
-          user_id
-      ) AS user_repos
-      SQL
+        (
+          SELECT
+            user_id,
+            COUNT(*) AS repo_count
+          FROM
+            repositories
+          GROUP BY
+            user_id
+        ) AS user_repos
+        SQL
       )
       .group_by("repo_count")
       .order_by("repo_count")
