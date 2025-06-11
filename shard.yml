@@ -52,6 +52,8 @@ dependencies:
     github: Schniz/delegator.cr
   cache:
     github: crystal-cache/cache
+  redis_cache_store:
+    github: crystal-cache/redis_cache_store
   crest:
     github: mamantoha/crest
   emoji:

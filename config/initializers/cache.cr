@@ -1,3 +1,4 @@
 require "cache"
+require "redis_cache_store"
 
-CACHE = Cache::MemoryStore(String, String).new(expires_in: 30.minutes)
+CACHE = Cache::RedisCacheStore(String, String).new(expires_in: 30.minutes)

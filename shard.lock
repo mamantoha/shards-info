@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.229a36306cc42635c9a7e2e201b4835a21756d26
+    version: 1.7.0-dev+git.commit.6857ec67b1981a9bc503e43b895f15512f156d88
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -144,6 +144,10 @@ shards:
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
     version: 0.12.0+git.commit.ddf1039c60b46f7f80dff8986d35068acb3c67d6
+
+  redis_cache_store:
+    git: https://github.com/crystal-cache/redis_cache_store.git
+    version: 0.5.0
 
   retriable:
     git: https://github.com/sija/retriable.cr.git
