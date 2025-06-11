@@ -22,6 +22,8 @@ def real_ip(request : HTTP::Request)
 end
 
 Defense.throttle("throttle requests per minute", limit: 45, period: 60) do |request|
+  next if request.headers["X-Requested-With"]? == "XMLHttpRequest"
+
   real_ip(request)
 end
 
