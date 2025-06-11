@@ -976,51 +976,59 @@ get "/stats" do |env|
 end
 
 get "/stats/created_at" do |env|
-  repositiries =
-    Repository
-      .query
-      .select(
-        "date_trunc('month', created_at)::date as year_month",
-        "count(*) as count"
-      )
-      .group_by("year_month")
-      .order_by("year_month", :asc)
+  json = CACHE.fetch("stats:created_at", expires_in: 2.hours) do
+    repositiries =
+      Repository
+        .query
+        .select(
+          "date_trunc('month', created_at)::date as year_month",
+          "count(*) as count"
+        )
+        .group_by("year_month")
+        .order_by("year_month", :asc)
 
-  hsh = {} of String => Int64
+    hsh = {} of String => Int64
 
-  repositiries.each(fetch_columns: true) do |repository|
-    hsh[repository["year_month"].as(Time).to_s("%Y-%m")] = repository["count"].as(Int64)
+    repositiries.each(fetch_columns: true) do |repository|
+      hsh[repository["year_month"].as(Time).to_s("%Y-%m")] = repository["count"].as(Int64)
+    end
+
+    hsh.to_json
   end
 
   env.response.content_type = "application/json"
-  hsh.to_json
+  json
 end
 
 get "/stats/last_activity_at" do |env|
-  repositiries =
-    Repository
-      .query
-      .select(
-        "date_trunc('month', last_activity_at)::date as year_month",
-        "count(*) as count"
-      )
-      .group_by("year_month")
-      .order_by("year_month", :asc)
+  json = CACHE.fetch("stats:last_activity_at_json", expires_in: 2.hours) do
+    repositiries =
+      Repository
+        .query
+        .select(
+          "date_trunc('month', last_activity_at)::date as year_month",
+          "count(*) as count"
+        )
+        .group_by("year_month")
+        .order_by("year_month", :asc)
 
-  hsh = {} of String => Int64
+    hsh = {} of String => Int64
 
-  repositiries.each(fetch_columns: true) do |repository|
-    hsh[repository["year_month"].as(Time).to_s("%Y-%m")] = repository["count"].as(Int64)
+    repositiries.each(fetch_columns: true) do |repository|
+      hsh[repository["year_month"].as(Time).to_s("%Y-%m")] = repository["count"].as(Int64)
+    end
+
+    hsh.to_json
   end
 
   env.response.content_type = "application/json"
-  hsh.to_json
+  json
 end
 
 get "/stats/repositories_growth" do |env|
   # Calculates the cumulative count of repositories created before and on each year-month date,
   # including months with no repositories
-  CACHE.fetch("stats_repositories_growth", expires_in: 2.hours) do
+  json = CACHE.fetch("stats:repositories_growth", expires_in: 2.hours) do
     hsh = {} of String => Int64
 
     # https://github.com/crystal-lang/crystal was created on November 27, 2012
@@ -1047,21 +1055,24 @@ get "/stats/repositories_growth" do |env|
         hsh[attributes["year_month"].as(Time).to_s("%Y-%m")] = attributes["cumulative_count"].as(Int64)
       end
 
-    env.response.content_type = "application/json"
     hsh.to_json
   end
+
+  env.response.content_type = "application/json"
+  json
 end
 
 # Number of direct dependencies
 get "/stats/direct_dependencies" do |env|
-  hsh = {} of Int64 => Int64
+  json = CACHE.fetch("stats:direct_dependencies", expires_in: 2.hours) do
+    hsh = {} of Int64 => Int64
 
-  Clear::SQL
-    .select(
-      "dependency_count",
-      "COUNT(*) AS repository_count"
-    )
-    .from(<<-SQL
+    Clear::SQL
+      .select(
+        "dependency_count",
+        "COUNT(*) AS repository_count"
+      )
+      .from(<<-SQL
       (
         SELECT
           r.id,
@@ -1074,33 +1085,37 @@ get "/stats/direct_dependencies" do |env|
           r.id
       ) AS repo_dependency_count
       SQL
-    )
-    .group_by("dependency_count")
-    .order_by("dependency_count", :asc)
-    .fetch do |attributes|
-      hsh[attributes["dependency_count"].as(Int64)] = attributes["repository_count"].as(Int64)
-    end
+      )
+      .group_by("dependency_count")
+      .order_by("dependency_count", :asc)
+      .fetch do |attributes|
+        hsh[attributes["dependency_count"].as(Int64)] = attributes["repository_count"].as(Int64)
+      end
+
+    hsh.to_json
+  end
 
   env.response.content_type = "application/json"
-  hsh.to_json
+  json
 end
 
 # Number of transitive reverse dependencies
 get "/stats/reverse_dependencies" do |env|
-  hsh = {} of String => Int64
+  json = CACHE.fetch("stats:reverse_dependencies", expires_in: 2.hours) do
+    hsh = {} of String => Int64
 
-  Clear::SQL
-    .select(
-      "
+    Clear::SQL
+      .select(
+        "
       CASE
         WHEN dependency_count BETWEEN 1 AND 29 THEN dependency_count::text
         WHEN dependency_count BETWEEN 30 AND 100 THEN CONCAT((dependency_count / 10) * 10, '-', (dependency_count / 10) * 10 + 9)
         ELSE CONCAT((dependency_count / 100) * 100, '-', (dependency_count / 100) * 100 + 99)
       END AS dependency_range
       ",
-      "COUNT(*) AS repository_count"
-    )
-    .from(<<-SQL
+        "COUNT(*) AS repository_count"
+      )
+      .from(<<-SQL
       (
         SELECT
           r.id,
@@ -1113,27 +1128,31 @@ get "/stats/reverse_dependencies" do |env|
           r.id
       ) AS repo_dependency_count
       SQL
-    )
-    .group_by("dependency_range")
-    .order_by("MIN(dependency_count)")
-    .where("dependency_count > 0")
-    .fetch do |attributes|
-      hsh[attributes["dependency_range"].as(String)] = attributes["repository_count"].as(Int64)
-    end
+      )
+      .group_by("dependency_range")
+      .order_by("MIN(dependency_count)")
+      .where("dependency_count > 0")
+      .fetch do |attributes|
+        hsh[attributes["dependency_range"].as(String)] = attributes["repository_count"].as(Int64)
+      end
+
+    hsh.to_json
+  end
 
   env.response.content_type = "application/json"
-  hsh.to_json
+  json
 end
 
 get "/stats/user_repositories_count" do |env|
-  hsh = {} of Int64 => Int64
+  json = CACHE.fetch("stats:user_repositories_count", expires_in: 2.hours) do
+    hsh = {} of Int64 => Int64
 
-  Clear::SQL
-    .select(
-      "repo_count",
-      "COUNT(*) AS user_count"
-    )
-    .from(<<-SQL
+    Clear::SQL
+      .select(
+        "repo_count",
+        "COUNT(*) AS user_count"
+      )
+      .from(<<-SQL
       (
         SELECT
           user_id,
@@ -1144,47 +1163,58 @@ get "/stats/user_repositories_count" do |env|
           user_id
       ) AS user_repos
       SQL
-    )
-    .group_by("repo_count")
-    .order_by("repo_count")
-    .fetch do |attributes|
-      hsh[attributes["repo_count"].as(Int64)] = attributes["user_count"].as(Int64)
-    end
+      )
+      .group_by("repo_count")
+      .order_by("repo_count")
+      .fetch do |attributes|
+        hsh[attributes["repo_count"].as(Int64)] = attributes["user_count"].as(Int64)
+      end
+
+    hsh.to_json
+  end
 
   env.response.content_type = "application/json"
-  hsh.to_json
+  json
 end
 
 get "/stats/repositories_provider_count" do |env|
-  hsh = {} of String => Int64
+  json = CACHE.fetch("stats:repositories_provider_count", expires_in: 2.hours) do
+    hsh = {} of String => Int64
 
-  Repository
-    .query
-    .select("provider, COUNT(*) AS count")
-    .group_by("provider")
-    .order_by(count: :desc)
-    .each(fetch_columns: true) do |repository|
-      hsh[repository.provider] = repository.attributes["count"].as(Int64)
-    end
+    Repository
+      .query
+      .select("provider, COUNT(*) AS count")
+      .group_by("provider")
+      .order_by(count: :desc)
+      .each(fetch_columns: true) do |repository|
+        hsh[repository.provider] = repository.attributes["count"].as(Int64)
+      end
+
+    hsh.to_json
+  end
 
   env.response.content_type = "application/json"
-  hsh.to_json
+  json
 end
 
 get "/stats/users_provider_count" do |env|
-  hsh = {} of String => Int64
+  json = CACHE.fetch("stats:users_provider_count", expires_in: 2.hours) do
+    hsh = {} of String => Int64
 
-  User
-    .query
-    .select("provider, COUNT(*) AS count")
-    .group_by("provider")
-    .order_by(count: :desc)
-    .each(fetch_columns: true) do |user|
-      hsh[user.provider] = user.attributes["count"].as(Int64)
-    end
+    User
+      .query
+      .select("provider, COUNT(*) AS count")
+      .group_by("provider")
+      .order_by(count: :desc)
+      .each(fetch_columns: true) do |user|
+        hsh[user.provider] = user.attributes["count"].as(Int64)
+      end
+
+    hsh.to_json
+  end
 
   env.response.content_type = "application/json"
-  hsh.to_json
+  json
 end
 
 Kemal.run
