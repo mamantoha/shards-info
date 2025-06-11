@@ -992,6 +992,7 @@ get "/stats/created_at" do |env|
     hsh[repository["year_month"].as(Time).to_s("%Y-%m")] = repository["count"].as(Int64)
   end
 
+  env.response.content_type = "application/json"
   hsh.to_json
 end
 
@@ -1012,6 +1013,7 @@ get "/stats/last_activity_at" do |env|
     hsh[repository["year_month"].as(Time).to_s("%Y-%m")] = repository["count"].as(Int64)
   end
 
+  env.response.content_type = "application/json"
   hsh.to_json
 end
 
@@ -1045,6 +1047,7 @@ get "/stats/repositories_growth" do |env|
         hsh[attributes["year_month"].as(Time).to_s("%Y-%m")] = attributes["cumulative_count"].as(Int64)
       end
 
+    env.response.content_type = "application/json"
     hsh.to_json
   end
 end
@@ -1078,6 +1081,7 @@ get "/stats/direct_dependencies" do |env|
       hsh[attributes["dependency_count"].as(Int64)] = attributes["repository_count"].as(Int64)
     end
 
+  env.response.content_type = "application/json"
   hsh.to_json
 end
 
@@ -1117,6 +1121,7 @@ get "/stats/reverse_dependencies" do |env|
       hsh[attributes["dependency_range"].as(String)] = attributes["repository_count"].as(Int64)
     end
 
+  env.response.content_type = "application/json"
   hsh.to_json
 end
 
@@ -1146,6 +1151,7 @@ get "/stats/user_repositories_count" do |env|
       hsh[attributes["repo_count"].as(Int64)] = attributes["user_count"].as(Int64)
     end
 
+  env.response.content_type = "application/json"
   hsh.to_json
 end
 
@@ -1161,6 +1167,7 @@ get "/stats/repositories_provider_count" do |env|
       hsh[repository.provider] = repository.attributes["count"].as(Int64)
     end
 
+  env.response.content_type = "application/json"
   hsh.to_json
 end
 
@@ -1176,6 +1183,7 @@ get "/stats/users_provider_count" do |env|
       hsh[user.provider] = user.attributes["count"].as(Int64)
     end
 
+  env.response.content_type = "application/json"
   hsh.to_json
 end
 
