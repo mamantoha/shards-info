@@ -12,6 +12,13 @@ Disallow: /admin/
 #     | |
 #  |-------|
 #
-# Let robots know I'm looking for a new job.
+#
+#   /\__
+#  (   @\___
+#  /        O
+# /   (____/
+# /____/  U
+#
+# This is dog!
 #
 # Github: https://github.com/mamantoha
