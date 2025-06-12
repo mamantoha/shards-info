@@ -4,16 +4,6 @@ require "kemal-session-redis-engine"
 require "kemal-flash"
 require "kemal-kilt"
 
-log_file =
-  case ENV["KEMAL_ENV"]
-  when "production"
-    File.new("#{__DIR__}/../../log/kemal.log", "a+")
-  else
-    STDOUT
-  end
-
-Log.builder.bind "kemal.*", :debug, Log::IOBackend.new(log_file)
-
 Kemal::Session.config do |config|
   config.cookie_name = "session_id"
   config.secret = ENV["KEMAL_SESSION_SECRET"]
