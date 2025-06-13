@@ -78,10 +78,10 @@ before_all do |env|
 end
 
 get "/auth/:provider" do |env|
-  origin = env.request.headers["Referer"]? || "/"
-  env.session.string("origin", origin)
-
   if auth = multi_auth(env)
+    origin = env.request.headers["Referer"]? || "/"
+    env.session.string("origin", origin)
+
     env.redirect(auth.authorize_uri)
   else
     raise Kemal::Exceptions::RouteNotFound.new(env)
