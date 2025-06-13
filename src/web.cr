@@ -33,10 +33,10 @@ add_handler Defense::Handler.new
 
 add_context_storage_type(RequestContext)
 
-def self.multi_auth(env)
+def self.multi_auth(env) : MultiAuth::Engine?
   provider = env.params.url["provider"]
   redirect_uri = "#{Kemal.config.scheme}://#{env.request.headers["Host"]?}/auth/#{provider}/callback"
-  MultiAuth.make(provider, redirect_uri)
+  MultiAuth.make(provider, redirect_uri) rescue nil
 end
 
 def self.current_user(env) : Admin?
@@ -81,11 +81,19 @@ get "/auth/:provider" do |env|
   origin = env.request.headers["Referer"]? || "/"
   env.session.string("origin", origin)
 
-  env.redirect(multi_auth(env).authorize_uri)
+  if auth = multi_auth(env)
+    env.redirect(auth.authorize_uri)
+  else
+    raise Kemal::Exceptions::RouteNotFound.new(env)
+  end
 end
 
 get "/auth/:provider/callback" do |env|
-  user = multi_auth(env).user(env.params.query)
+  if auth = multi_auth(env)
+    user = auth.user(env.params.query)
+  else
+    raise Kemal::Exceptions::RouteNotFound.new(env)
+  end
 
   admin = Admin.query.find({provider: user.provider, uid: user.uid}) || Admin.new({role: 0})
 
