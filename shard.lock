@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.6857ec67b1981a9bc503e43b895f15512f156d88
+    version: 1.7.0-dev+git.commit.5c550cdea6f7815b2d2ebf4332b0aa0a46610882
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -111,7 +111,7 @@ shards:
 
   kemal-session-redis-engine:
     git: https://github.com/crystal-garage/kemal-session-redis-engine.git
-    version: 1.2.1+git.commit.e1ace9a50be638e0987efa0cfbaeaedae60d4b33
+    version: 1.2.2+git.commit.c8d16a764316aeef6dbf194e5c43ac86ad2888e4
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
@@ -123,7 +123,7 @@ shards:
 
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
-    version: 1.1.1+git.commit.fc0c9ae0c56c756a283fad72622a2e2ce2781bfc
+    version: 1.1.1+git.commit.e82f7b30838fcb5bc2a858bbc5c95008bec29ffe
 
   noir:
     git: https://github.com/crystal-garage/noir.git
@@ -143,7 +143,7 @@ shards:
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.12.0+git.commit.ddf1039c60b46f7f80dff8986d35068acb3c67d6
+    version: 0.12.0+git.commit.da7c80767e482502b55bfa89a7324fb9aadfebd5
 
   redis_cache_store:
     git: https://github.com/crystal-cache/redis_cache_store.git
