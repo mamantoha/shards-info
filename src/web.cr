@@ -36,7 +36,9 @@ add_context_storage_type(RequestContext)
 def self.multi_auth(env) : MultiAuth::Engine?
   provider = env.params.url["provider"]
   redirect_uri = "#{Kemal.config.scheme}://#{env.request.headers["Host"]?}/auth/#{provider}/callback"
-  MultiAuth.make(provider, redirect_uri) rescue nil
+  MultiAuth.make(provider, redirect_uri)
+rescue MultiAuth::Exception
+  nil
 end
 
 def self.current_user(env) : Admin?
