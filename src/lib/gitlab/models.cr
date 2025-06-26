@@ -243,8 +243,6 @@ module Gitlab
 
     property public_email : String?
 
-    property skype : String
-
     property linkedin : String
 
     property twitter : String
