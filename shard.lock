@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.5c550cdea6f7815b2d2ebf4332b0aa0a46610882
+    version: 1.7.0-dev+git.commit.4c099e3718d50d58ac3d1c5a8fe979f2be9b5e33
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -107,11 +107,11 @@ shards:
 
   kemal-session:
     git: https://github.com/kemalcr/kemal-session.git
-    version: 1.0.0
+    version: 1.2.0
 
   kemal-session-redis-engine:
     git: https://github.com/crystal-garage/kemal-session-redis-engine.git
-    version: 1.2.2+git.commit.c8d16a764316aeef6dbf194e5c43ac86ad2888e4
+    version: 1.2.3+git.commit.765856e3c658bf4c02ba22c3996f8e7230e0c11b
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
