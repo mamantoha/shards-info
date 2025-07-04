@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.4c099e3718d50d58ac3d1c5a8fe979f2be9b5e33
+    version: 1.7.0-dev+git.commit.fe12a7566ac6c0f5b7b63ad07b89fb17a5ebf6f7
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -23,7 +23,7 @@ shards:
 
   cache:
     git: https://github.com/crystal-cache/cache.git
-    version: 0.14.0
+    version: 0.15.0
 
   cadmium_transliterator:
     git: https://github.com/cadmiumcr/transliterator.git
@@ -143,7 +143,7 @@ shards:
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.12.0+git.commit.da7c80767e482502b55bfa89a7324fb9aadfebd5
+    version: 0.12.0+git.commit.68dbbc8decee7e001992506eed4a032625461306
 
   redis_cache_store:
     git: https://github.com/crystal-cache/redis_cache_store.git
