@@ -31,7 +31,6 @@ Log.setup do |c|
       STDOUT
     end
 
-
   c.bind "kemal.*", :debug, Log::IOBackend.new(kemal_log_file)
   c.bind "clear.*", :debug, Log::IOBackend.new(clear_log_file)
   c.bind "mosquito.*", :debug, Log::IOBackend.new(mosquito_log_file)
