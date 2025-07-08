@@ -26,6 +26,9 @@
         li
           a href="https://postgresql.org/" PostgreSQL
           = Config.postgres_version
+        li
+          a href="https://redis.io/" Redis
+          = Config.redis_version
     li
       | Build date #{Time.parse_rfc2822(Config.date).to_s("%Y-%m-%d %H:%M:%S %:z")}
     li

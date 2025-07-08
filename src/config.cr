@@ -29,4 +29,9 @@ class Config
 
     "#{version[:major]}.#{version[:minor]}.#{version[:patch]}"
   end
+
+  def self.redis_version
+    redis = Redis::Client.new(URI.parse(ENV.fetch("REDIS_URL", "redis:///")))
+    redis.info["redis_version"]?
+  end
 end
