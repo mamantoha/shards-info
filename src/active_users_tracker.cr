@@ -13,6 +13,7 @@ class ActiveUserTracker
 
     value = {
       "remote_address" => remote_address,
+      "user_agent"     => context.request.headers["User-Agent"]? || "unknown",
     }.to_json
 
     ACTIVE_USERS_CACHE.write(user_id, value)

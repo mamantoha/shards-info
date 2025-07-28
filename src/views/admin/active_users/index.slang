@@ -13,6 +13,7 @@
         tr
           th Key
           th Remote address
+          th User agent
       tbody
         - keys.each do |key|
           - if value = ACTIVE_USERS_CACHE.read(key)
@@ -22,3 +23,5 @@
                 = key
               th
                 = user.try(&.["remote_address"]?)
+              th
+                = user.try(&.["user_agent"]?)
