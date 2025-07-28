@@ -24,12 +24,14 @@ require "raven/integrations/kemal"
 require "../config/config"
 require "./config"
 require "./request_context"
+require "./active_users_tracker"
 require "./view_helpers"
 require "./delegators"
 
 require "./lib/cmark/readme_renderer"
 
 add_handler Defense::Handler.new
+add_handler ActiveUserTracker.new
 
 add_context_storage_type(RequestContext)
 
@@ -813,6 +815,16 @@ get "/admin/hidden_repositories" do |env|
   end
 
   render "src/views/admin/hidden_repositories/index.slang", "src/views/layouts/layout.slang"
+end
+
+get "/admin/active_users" do |env|
+  keys = ACTIVE_USERS_CACHE.keys
+
+  set_request_context(env) do
+    request_context.page_title = "Admin: Active Users"
+  end
+
+  render "src/views/admin/active_users/index.slang", "src/views/layouts/layout.slang"
 end
 
 post "/admin/users/:id/sync" do |env|

@@ -147,7 +147,7 @@ shards:
 
   redis_cache_store:
     git: https://github.com/crystal-cache/redis_cache_store.git
-    version: 0.5.0
+    version: 0.5.2
 
   retriable:
     git: https://github.com/sija/retriable.cr.git

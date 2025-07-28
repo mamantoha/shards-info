@@ -13,3 +13,5 @@
       a href="/admin/hidden_users" Hidden users
     li
       a href="/admin/hidden_repositories" Hidden repositories
+     li
+      a href="/admin/active_users" Active users
