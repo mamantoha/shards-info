@@ -1,0 +1,24 @@
+.container
+    div.mt-3
+      nav aria-label="breadcrumb"
+        ol.breadcrumb
+          li.breadcrumb-item
+            a href="/admin" Admin
+          li.breadcrumb-item.active aria-current="page" Active users
+
+    h2
+      = "Active users: #{keys.size}"
+    table.table.table-striped
+      thead
+        tr
+          th Key
+          th Remote address
+      tbody
+        - keys.each do |key|
+          - if value = ACTIVE_USERS_CACHE.read(key)
+            - user = JSON.parse(value)
+            tr
+              td
+                = key
+              th
+                = user.try(&.["remote_address"]?)
