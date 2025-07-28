@@ -6,25 +6,10 @@ Defense.store = if ENV["DEFENSE_REDIS_URL"]?.nil?
                   Defense::RedisStore.new(url: ENV["DEFENSE_REDIS_URL"])
                 end
 
-def real_ip(request : HTTP::Request)
-  # Try to get IP from headers set by NGINX
-  real_ip = request.headers["X-Forwarded-For"]?
-  real_ip = real_ip.split(",").first.strip if real_ip
-
-  # Fallbacks
-  real_ip ||= request.headers["X-Real-IP"]?
-  real_ip ||= case remote_address = request.remote_address
-              when Socket::IPAddress
-                remote_address.address
-              else
-                remote_address.to_s
-              end
-end
-
 Defense.throttle("throttle requests per minute", limit: 60, period: 60) do |request|
   next if request.headers["X-Requested-With"]? == "XMLHttpRequest"
 
-  real_ip(request)
+  Helpers.real_ip(request)
 end
 
 Defense.throttled_response = ->(response : HTTP::Server::Response) do
@@ -46,7 +31,7 @@ Defense.throttled_response = ->(response : HTTP::Server::Response) do
 end
 
 Defense.blocklist("fail2ban pentesters") do |request|
-  Defense::Fail2Ban.filter("pentesters:#{real_ip(request)}", maxretry: 5, findtime: 60, bantime: 24 * 60 * 60) do
+  Defense::Fail2Ban.filter("pentesters:#{Helpers.real_ip(request)}", maxretry: 5, findtime: 60, bantime: 24 * 60 * 60) do
     [
       "/wp-admin",
       "/wp-content",

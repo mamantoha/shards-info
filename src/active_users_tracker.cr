@@ -9,7 +9,7 @@ class ActiveUserTracker
 
     context.response.cookies["user_id"] = user_id
 
-    remote_address = context.request.remote_address.try(&.to_s) || "0.0.0.0"
+    remote_address = Helpers.real_ip(context.request)
 
     value = {
       "remote_address" => remote_address,

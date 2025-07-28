@@ -188,4 +188,19 @@ module Helpers
   def pluralize(count : Int32 | Int64, singular : String, plural : String)
     "#{count} #{count == 1 ? singular : plural}"
   end
+
+  def real_ip(request : HTTP::Request)
+    # Try to get IP from headers set by NGINX
+    real_ip = request.headers["X-Forwarded-For"]?
+    real_ip = real_ip.split(",").first.strip if real_ip
+
+    # Fallbacks
+    real_ip ||= request.headers["X-Real-IP"]?
+    real_ip ||= case remote_address = request.remote_address
+                when Socket::IPAddress
+                  remote_address.address
+                else
+                  remote_address.to_s
+                end
+  end
 end
