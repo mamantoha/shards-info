@@ -189,7 +189,7 @@ module Helpers
     "#{count} #{count == 1 ? singular : plural}"
   end
 
-  def real_ip(request : HTTP::Request)
+  def real_ip(request : HTTP::Request) : String
     # Try to get IP from headers set by NGINX
     real_ip = request.headers["X-Forwarded-For"]?
     real_ip = real_ip.split(",").first.strip if real_ip
