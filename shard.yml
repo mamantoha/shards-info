@@ -89,6 +89,8 @@ dependencies:
     github: mamantoha/shards_spec
   cadmium_transliterator:
     github: cadmiumcr/transliterator
+  device_detector:
+    github: creadone/device_detector
 
 development_dependencies:
   spec-kemal:

@@ -21,6 +21,10 @@ shards:
     git: https://github.com/sija/backtracer.cr.git
     version: 1.2.4
 
+  baked_file_system:
+    git: https://github.com/creadone/baked_file_system.git
+    version: 0.9.9+git.commit.e12647b724e04e11fe189765f16e0591adc1dbc8
+
   cache:
     git: https://github.com/crystal-cache/cache.git
     version: 0.15.1
@@ -56,6 +60,10 @@ shards:
   delegator:
     git: https://github.com/schniz/delegator.cr.git
     version: 0.1.0
+
+  device_detector:
+    git: https://github.com/creadone/device_detector.git
+    version: 0.3.17
 
   dotenv:
     git: https://github.com/gdotdesign/cr-dotenv.git

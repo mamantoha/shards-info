@@ -1,3 +1,5 @@
+require "device_detector"
+
 class ActiveUserTracker
   include HTTP::Handler
 
@@ -5,6 +7,14 @@ class ActiveUserTracker
   end
 
   def call(context : HTTP::Server::Context)
+    user_agent = context.request.headers["User-Agent"]?
+
+    if user_agent
+      device = DeviceDetector::Detector.new(user_agent).call
+
+      return call_next(context) if device.bot?
+    end
+
     user_id = (context.request.cookies["user_id"]?.try(&.value) || UUID.random).to_s
 
     context.response.cookies["user_id"] = user_id
@@ -13,7 +23,7 @@ class ActiveUserTracker
 
     value = {
       "remote_address" => remote_address,
-      "user_agent"     => context.request.headers["User-Agent"]? || "unknown",
+      "user_agent"     => user_agent || "unknown",
     }.to_json
 
     ACTIVE_USERS_CACHE.write(user_id, value)
