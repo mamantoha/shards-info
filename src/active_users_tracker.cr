@@ -38,11 +38,4 @@ class ActiveUserTracker
 
     call_next(context)
   end
-
-  def call(env)
-    user_id = env.request.cookies["user_id"]? || UUID.random.to_s
-    env.response.cookies["user_id"] = user_id
-
-    call_next env
-  end
 end
