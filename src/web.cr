@@ -20,6 +20,7 @@ require "time_zone"
 require "countdown"
 require "autolink"
 require "raven/integrations/kemal"
+require "ipapi"
 
 require "../config/config"
 require "./config"

@@ -101,6 +101,10 @@ shards:
     git: https://github.com/phoffer/inflector.cr.git
     version: 1.0.0
 
+  ipapi:
+    git: https://github.com/geocrystal/ipapi-crystal.git
+    version: 0.4.0
+
   kemal:
     git: https://github.com/kemalcr/kemal.git
     version: 1.7.1

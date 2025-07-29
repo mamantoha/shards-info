@@ -91,6 +91,8 @@ dependencies:
     github: cadmiumcr/transliterator
   device_detector:
     github: creadone/device_detector
+  ipapi:
+    github: geocrystal/ipapi-crystal
 
 development_dependencies:
   spec-kemal:
