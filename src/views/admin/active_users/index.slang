@@ -26,7 +26,8 @@
               th
                 = user.try(&.["remote_address"]?)
               th
-                - if location_value = user.try(&.["location"]).as_s?.try(&.presence)
+                - location_value = user.try(&.["location"]).as_h?
+                - if location_value && !location_value.empty?
                   - location = Ipapi::Location.from_json(location_value.to_json)
                   = "#{location.city}/#{location.country_name}"
               th

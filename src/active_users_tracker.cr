@@ -25,13 +25,13 @@ class ActiveUserTracker
     location = IPAPI_CACHE.fetch(remote_address) do
       ipapi_client = Ipapi::Client.new
 
-      ipapi_client.locate(remote_address).to_json rescue ""
+      ipapi_client.locate(remote_address).to_json rescue "{}"
     end
 
     value = {
       "remote_address" => remote_address,
       "user_agent"     => user_agent || "unknown",
-      "location"       => location,
+      "location"       => JSON.parse(location),
     }.to_json
 
     ACTIVE_USERS_CACHE.write(user_id, value)
