@@ -376,7 +376,7 @@ ul.not-list {
   padding-bottom: 40px;
   margin-bottom: 30px;
   text-overflow: ellipsis;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
   background-color: var(--page-heading-bg-color) !important;
   border-bottom: 1px solid var(--border-color) !important;
 
@@ -462,7 +462,6 @@ ul.not-list {
 
 .shard__readme {
   overflow-wrap: break-word;
-  word-wrap: break-word;
 
   table {
     thead {
@@ -525,7 +524,7 @@ ul.not-list {
   code {
     font-size: 85%;
     color: var(--code-color);
-    word-wrap: break-word;
+    overflow-wrap: break-word;
     background-color: var(--code-inline-bg-color);
     border-radius: 6px;
     margin: 0;
