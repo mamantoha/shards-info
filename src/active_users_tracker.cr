@@ -16,26 +16,33 @@ class ActiveUserTracker
       return call_next(context) if device.bot?
     end
 
-    user_id = (context.request.cookies["user_id"]?.try(&.value) || UUID.random).to_s
+    if context.request.cookies["user_id"]?
+      user_id = context.request.cookies["user_id"]?.try(&.value)
 
-    context.response.cookies["user_id"] = user_id
+      return call_next(context) unless user_id
 
-    remote_address = Helpers.real_ip(context.request)
+      remote_address = Helpers.real_ip(context.request)
 
-    location = IPAPI_CACHE.fetch(remote_address) do
-      ipapi_client = Ipapi::Client.new
+      location = IPAPI_CACHE.fetch(remote_address) do
+        ipapi_client = Ipapi::Client.new
 
-      ipapi_client.locate(remote_address).to_json rescue "{}"
+        ipapi_client.locate(remote_address).to_json rescue "{}"
+      end
+
+      value = {
+        "remote_address" => remote_address,
+        "user_agent"     => user_agent || "unknown",
+        "location"       => JSON.parse(location),
+      }.to_json
+
+      ACTIVE_USERS_CACHE.write(user_id, value)
+
+      call_next(context)
+    else
+      user_id = UUID.random.to_s
+      context.response.cookies["user_id"] = user_id
+
+      return call_next(context)
     end
-
-    value = {
-      "remote_address" => remote_address,
-      "user_agent"     => user_agent || "unknown",
-      "location"       => JSON.parse(location),
-    }.to_json
-
-    ACTIVE_USERS_CACHE.write(user_id, value)
-
-    call_next(context)
   end
 end
