@@ -42,7 +42,7 @@ class ActiveUserTracker
       user_id = UUID.random.to_s
       context.response.cookies["user_id"] = user_id
 
-      return call_next(context)
+      call_next(context)
     end
   end
 end
