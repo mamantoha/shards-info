@@ -40,8 +40,8 @@ class ActiveUserTracker
       call_next(context)
     else
       user_id = UUID.random.to_s
-      context.response.cookies["user_id"] = user_id
-
+      user_id_cookie = HTTP::Cookie.new("user_id", user_id, path: "/")
+      context.response.cookies["user_id"] = user_id_cookie
       call_next(context)
     end
   end
