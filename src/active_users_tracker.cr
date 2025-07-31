@@ -23,11 +23,7 @@ class ActiveUserTracker
 
       remote_address = Helpers.real_ip(context.request)
 
-      location = IPAPI_CACHE.fetch(remote_address) do
-        ipapi_client = Ipapi::Client.new
-
-        ipapi_client.locate(remote_address).to_json rescue "{}"
-      end
+      location = remote_address_location(remote_address)
 
       value = {
         "remote_address" => remote_address,
@@ -43,6 +39,23 @@ class ActiveUserTracker
       user_id_cookie = HTTP::Cookie.new("user_id", user_id, path: "/")
       context.response.cookies["user_id"] = user_id_cookie
       call_next(context)
+    end
+  end
+
+  private def remote_address_location(remote_address : String) : String
+    if Socket::IPAddress.valid?(remote_address)
+      ip_address = Socket::IPAddress.new(remote_address, 0)
+
+      if ip_address.loopback? || ip_address.private?
+        "{}"
+      else
+        IPAPI_CACHE.fetch(remote_address) do
+          ipapi_client = Ipapi::Client.new
+          ipapi_client.locate(remote_address).to_json rescue "{}"
+        end
+      end
+    else
+      "{}"
     end
   end
 end
