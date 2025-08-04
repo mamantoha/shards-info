@@ -62,8 +62,8 @@ shards:
     version: 0.1.0
 
   device_detector:
-    git: https://github.com/creadone/device_detector.git
-    version: 0.3.17
+    git: https://github.com/mamantoha/device_detector.git
+    version: 0.3.17+git.commit.af109a99795b85294908729538324b6851e886b6
 
   dotenv:
     git: https://github.com/gdotdesign/cr-dotenv.git
@@ -103,7 +103,7 @@ shards:
 
   ipapi:
     git: https://github.com/geocrystal/ipapi-crystal.git
-    version: 0.4.0
+    version: 0.5.0
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
@@ -119,7 +119,7 @@ shards:
 
   kemal-session:
     git: https://github.com/kemalcr/kemal-session.git
-    version: 1.2.0
+    version: 1.3.0
 
   kemal-session-redis-engine:
     git: https://github.com/crystal-garage/kemal-session-redis-engine.git
