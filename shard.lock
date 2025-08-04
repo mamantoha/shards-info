@@ -22,8 +22,8 @@ shards:
     version: 1.2.4
 
   baked_file_system:
-    git: https://github.com/creadone/baked_file_system.git
-    version: 0.9.9+git.commit.e12647b724e04e11fe189765f16e0591adc1dbc8
+    git: https://github.com/schovi/baked_file_system.git
+    version: 0.11.0
 
   cache:
     git: https://github.com/crystal-cache/cache.git
@@ -62,8 +62,8 @@ shards:
     version: 0.1.0
 
   device_detector:
-    git: https://github.com/mamantoha/device_detector.git
-    version: 0.3.17+git.commit.af109a99795b85294908729538324b6851e886b6
+    git: https://github.com/crystal-garage/device_detector.git
+    version: 0.3.17+git.commit.23f7c230a86fc1e21a037d363764ed12cea0a23b
 
   dotenv:
     git: https://github.com/gdotdesign/cr-dotenv.git

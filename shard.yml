@@ -90,7 +90,7 @@ dependencies:
   cadmium_transliterator:
     github: cadmiumcr/transliterator
   device_detector:
-    github: mamantoha/device_detector
+    github: crystal-garage/device_detector
     branch: develop
   ipapi:
     github: geocrystal/ipapi-crystal
