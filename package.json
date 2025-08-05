@@ -32,7 +32,7 @@
     "eslint-plugin-n": "^17.21.3",
     "eslint-plugin-promise": "^7.2.1",
     "expose-loader": "^5.0.1",
-    "mini-css-extract-plugin": "^2.9.2",
+    "mini-css-extract-plugin": "^2.9.3",
     "neostandard": "^0.12.2",
     "sass-loader": "^16.0.5",
     "style-loader": "^4.0.0",
