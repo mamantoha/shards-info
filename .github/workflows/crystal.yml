@@ -13,7 +13,7 @@ jobs:
       - name: Install Crystal
         uses: crystal-lang/install-crystal@v1
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Check format
         run: crystal tool format --check
 
@@ -23,7 +23,7 @@ jobs:
       - name: Install Crystal
         uses: crystal-lang/install-crystal@v1
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install dependencies
         run: shards install
       - name: Check ameba
@@ -74,7 +74,7 @@ jobs:
           crystal: ${{ matrix.crystal }}
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       # Performs a clean installation of all dependencies in the `shard.yml` file
       - name: Install shard dependencies
         run: shards install
