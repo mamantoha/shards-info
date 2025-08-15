@@ -464,6 +464,10 @@ ul.not-list {
   overflow-wrap: break-word;
 
   table {
+    @extend .table;
+    @extend .table-bordered;
+    @extend .table-striped;
+
     thead {
       text-align: center;
     }
