@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.a49f9573a5a984e21b05a39d4e1da17e103b0925
+    version: 1.7.0-dev+git.commit.be7c7fcab108d8857987ef86a4dc97006e533c4f
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -63,7 +63,7 @@ shards:
 
   device_detector:
     git: https://github.com/crystal-garage/device_detector.git
-    version: 0.3.17+git.commit.23f7c230a86fc1e21a037d363764ed12cea0a23b
+    version: 0.4.0+git.commit.7faef7a1c9224bfa2261a8b448c6c28a6a5f1c7d
 
   dotenv:
     git: https://github.com/gdotdesign/cr-dotenv.git
@@ -107,7 +107,7 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 1.7.1
+    version: 1.7.2
 
   kemal-flash:
     git: https://github.com/crystal-garage/kemal-flash.git
