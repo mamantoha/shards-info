@@ -516,9 +516,12 @@ ul.not-list {
     font-size: 1em;
   }
 
-  img {
-    max-width: 100%;
+  img:not([height]) {
     height: auto;
+  }
+
+  img:not([width]) {
+    max-width: 100%;
   }
 
   video {
