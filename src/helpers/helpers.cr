@@ -12,6 +12,7 @@ module Helpers
     "recent-updates" => "Recent Updates",
     "new"            => "Newly Added",
     "last-synced"    => "Last Synced",
+    "new-release"    => "New Release",
   }
 
   def sync_repository_by_url(url : String) : Repository?
@@ -145,26 +146,29 @@ module Helpers
     end
   end
 
+  # Returns: {expression:, direction:, nulls}
   def repositories_sort_expression_direction(sort : String)
     case sort
     when "alphabetical"
-      {"name", :asc}
+      {"name", :asc, nil}
     when "stars"
-      {"stars_count", :desc}
+      {"stars_count", :desc, nil}
     when "dependents"
-      {"(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id)", :desc}
+      {"(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id)", :desc, nil}
     when "dependencies"
-      {"(select COUNT(*) from relationships r WHERE r.master_id=repositories.id)", :desc}
+      {"(select COUNT(*) from relationships r WHERE r.master_id=repositories.id)", :desc, nil}
     when "forks"
-      {"(select COUNT(*) from repository_forks rf WHERE rf.parent_id=repositories.id)", :desc}
+      {"(select COUNT(*) from repository_forks rf WHERE rf.parent_id=repositories.id)", :desc, nil}
     when "recent-updates"
-      {"last_activity_at", :desc}
+      {"last_activity_at", :desc, nil}
     when "last-synced"
-      {"synced_at", :desc}
+      {"synced_at", :desc, nil}
     when "new"
-      {"created_at", :desc}
+      {"created_at", :desc, nil}
+    when "new-release"
+      {"(select MAX(r.created_at) from releases r WHERE r.repository_id=repositories.id)", :desc, :nulls_last}
     else
-      {"stars_count", :desc}
+      {"stars_count", :desc, nil}
     end
   end
 

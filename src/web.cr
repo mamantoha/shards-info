@@ -188,7 +188,7 @@ get "/repositories" do |env|
 
   sort_param = env.params.query["sort"]? || "stars"
   sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
-  expression, direction = Helpers.repositories_sort_expression_direction(sort)
+  expression, direction, nulls = Helpers.repositories_sort_expression_direction(sort)
 
   repositories_query =
     Repository
@@ -197,7 +197,7 @@ get "/repositories" do |env|
       .with_user
       .with_counts
       .published
-      .order_by(expression, direction)
+      .order_by(expression, direction, nulls)
       .order_by("repositories.id", :asc)
 
   total_count = repositories_query.count
