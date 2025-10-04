@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.46c90ebffecfbc3191cf207fc76f0a8c2722a5fd
+    version: 1.7.0-dev+git.commit.2af21d60c0ea707f6785a849a95a22ebd88f5aa2
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -32,10 +32,6 @@ shards:
   cadmium_transliterator:
     git: https://github.com/cadmiumcr/transliterator.git
     version: 0.1.0+git.commit.46c4c14594057dbcfaf27e7e7c8c164d3f0ce3f1
-
-  clear:
-    git: https://github.com/crystal-garage/clear.git
-    version: 0.8.23+git.commit.a11745f36fd6d1f1cc71997539bbb484c4c4d447
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -107,7 +103,7 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 1.7.2
+    version: 1.7.3
 
   kemal-flash:
     git: https://github.com/crystal-garage/kemal-flash.git
@@ -128,6 +124,10 @@ shards:
   kilt:
     git: https://github.com/jeromegn/kilt.git
     version: 0.6.1
+
+  lustra:
+    git: https://github.com/crystal-garage/clear.git
+    version: 0.8.24+git.commit.e7574f88c0a543b5358e9e0d01dbd9bb3a71cfe8
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git

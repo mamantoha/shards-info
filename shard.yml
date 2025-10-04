@@ -44,8 +44,7 @@ dependencies:
     branch: master
   lustra:
     github: crystal-garage/clear
-    branch: develop
-    version: '>= 0.8.21'
+    branch: lustra
   retriable:
     github: Sija/retriable.cr
   delegator:
