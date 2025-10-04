@@ -1,5 +1,5 @@
 class RepositoryTag
-  include Clear::Model
+  include Lustra::Model
 
   primary_key
 

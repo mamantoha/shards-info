@@ -16,7 +16,7 @@
           = Kemal::VERSION
         li
           a href="https://github.com/mamantoha/clear" Clear
-          = Clear::VERSION
+          = Lustra::VERSION
         li
           a href="https://github.com/mosquito-cr/mosquito" Mosquito
           = Mosquito::VERSION

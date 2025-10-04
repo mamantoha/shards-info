@@ -1,5 +1,5 @@
 class AddColorToLanguages
-  include Clear::Migration
+  include Lustra::Migration
 
   def change(dir)
     dir.up do

@@ -42,7 +42,7 @@ dependencies:
   multi_auth:
     github: msa7/multi_auth
     branch: master
-  clear:
+  lustra:
     github: crystal-garage/clear
     branch: develop
     version: '>= 0.8.21'

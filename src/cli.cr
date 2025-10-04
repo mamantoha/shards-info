@@ -1,14 +1,14 @@
-require "clear/cli"
+require "lustra/cli"
 require "./cli/tools"
 
 require "../config/config"
 
-module Clear
+module Lustra
   module CLI
     class Base < Admiral::Command
-      register_sub_command tools, type: Clear::CLI::Tools
+      register_sub_command tools, type: Lustra::CLI::Tools
     end
   end
 end
 
-Clear::CLI.run
+Lustra::CLI.run
