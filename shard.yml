@@ -43,8 +43,7 @@ dependencies:
     github: msa7/multi_auth
     branch: master
   lustra:
-    github: crystal-garage/clear
-    branch: lustra
+    github: crystal-garage/lustra
   retriable:
     github: Sija/retriable.cr
   delegator:
