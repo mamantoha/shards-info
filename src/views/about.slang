@@ -15,7 +15,7 @@
           a href="https://kemalcr.com/" Kemal
           = Kemal::VERSION
         li
-          a href="https://github.com/mamantoha/clear" Clear
+          a href="https://github.com/crystal-garage/lustra" Lustra
           = Lustra::VERSION
         li
           a href="https://github.com/mosquito-cr/mosquito" Mosquito

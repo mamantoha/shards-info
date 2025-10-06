@@ -51,7 +51,7 @@ KEMAL_ENV=test crystal spec
 ## Special thanks
 
 - [Crystal language](https://crystal-lang.org/)
-- [Clear](https://github.com/anykeyh/clear) - Advanced ORM between PostgreSQL and Crystal
+- [Lustra](https://github.com/crystal-garage/lustra) - Advanced ORM between PostgreSQL and Crystal
 - [Kemal](https://github.com/kemalcr/kemal) - Web microframework for Crystal
 - [Mosquito](https://github.com/robacarp/mosquito) - A generic background task runner for Crystal applications
 - [raven.cr](https://github.com/Sija/raven.cr) - Crystal client for [Sentry](https://sentry.io)
