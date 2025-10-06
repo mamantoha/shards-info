@@ -1,5 +1,5 @@
 class Repository
-  include Clear::Model
+  include Lustra::Model
 
   primary_key
 

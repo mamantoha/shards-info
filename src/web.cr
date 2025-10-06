@@ -1057,7 +1057,7 @@ get "/stats/repositories_growth" do |env|
     # https://github.com/crystal-lang/crystal was created on November 27, 2012
     date_start = "2012-11-01"
 
-    month_series = Clear::SQL.select(<<-SQL
+    month_series = Lustra::SQL.select(<<-SQL
       generate_series(
         '#{date_start}'::date,
         (SELECT date_trunc('month', MAX(created_at)) FROM repositories),
@@ -1066,7 +1066,7 @@ get "/stats/repositories_growth" do |env|
       SQL
     )
 
-    Clear::SQL
+    Lustra::SQL
       .select({
         cumulative_count: "(SELECT COUNT(*) FROM repositories WHERE date_trunc('month', created_at)::date <= ms.year_month)",
         year_month:       "ms.year_month",
@@ -1090,7 +1090,7 @@ get "/stats/direct_dependencies" do |env|
   json = CACHE.fetch("stats:direct_dependencies", expires_in: 2.hours) do
     hsh = {} of Int64 => Int64
 
-    Clear::SQL
+    Lustra::SQL
       .select(
         "dependency_count",
         "COUNT(*) AS repository_count"
@@ -1127,7 +1127,7 @@ get "/stats/reverse_dependencies" do |env|
   json = CACHE.fetch("stats:reverse_dependencies", expires_in: 2.hours) do
     hsh = {} of String => Int64
 
-    Clear::SQL
+    Lustra::SQL
       .select(
         "
       CASE
@@ -1170,7 +1170,7 @@ get "/stats/user_repositories_count" do |env|
   json = CACHE.fetch("stats:user_repositories_count", expires_in: 2.hours) do
     hsh = {} of Int64 => Int64
 
-    Clear::SQL
+    Lustra::SQL
       .select(
         "repo_count",
         "COUNT(*) AS user_count"

@@ -1,4 +1,4 @@
-require "clear"
+require "lustra"
 require "../src/db/migrations/**"
 require "../src/models/**"
 
@@ -6,9 +6,9 @@ def initdb
   pg.exec("DROP DATABASE IF EXISTS shards_info_test;")
   pg.exec("CREATE DATABASE shards_info_test;")
 
-  Clear::SQL.init(database_url)
+  Lustra::SQL.init(database_url)
 
-  Clear::Migration::Manager.instance.apply_all
+  Lustra::Migration::Manager.instance.apply_all
 
   create_user_with_repository
 end

@@ -1,10 +1,10 @@
-class Clear::CLI::Tools < Admiral::Command
-  include Clear::CLI::Command
+class Lustra::CLI::Tools < Admiral::Command
+  include Lustra::CLI::Command
 
   define_help description: "Various tools"
 
   class UpdateLanguagesColor < Admiral::Command
-    include Clear::CLI::Command
+    include Lustra::CLI::Command
 
     define_help description: "Update languages color"
 

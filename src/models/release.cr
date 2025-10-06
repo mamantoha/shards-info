@@ -1,5 +1,5 @@
 class Release
-  include Clear::Model
+  include Lustra::Model
 
   primary_key
 

@@ -1,6 +1,6 @@
-require "clear"
+require "lustra"
 require "../../src/models/**"
 require "../../src/db/seeds"
 require "../../src/db/migrations/**"
 
-Clear::SQL.init(ENV["DATABASE_URL"])
+Lustra::SQL.init(ENV["DATABASE_URL"])

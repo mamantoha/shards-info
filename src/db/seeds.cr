@@ -1,2 +1,2 @@
-Clear.seed do
+Lustra.seed do
 end
