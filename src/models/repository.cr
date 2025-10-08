@@ -75,7 +75,7 @@ class Repository
   def self.find_repository(user_login : String, repository_name : String, provider : String) : Repository?
     Repository
       .query
-      .join("users") { users.id == repositories.user_id }
+      .join(:user)
       .find do
         (users.login == user_login) &
           (users.provider == provider) &

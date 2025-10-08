@@ -148,7 +148,7 @@ get "/" do |env|
   trending_repositories =
     Repository
       .query
-      .join("users") { users.id == repositories.user_id }
+      .join(:user)
       .with_counts
       .with_user
       .with_tags
@@ -162,7 +162,7 @@ get "/" do |env|
   recently_repositories =
     Repository
       .query
-      .join("users") { users.id == repositories.user_id }
+      .join(:user)
       .with_counts
       .with_user
       .with_tags
@@ -234,7 +234,7 @@ get "/users" do |env|
   users_query =
     User
       .query
-      .join("repositories") { var("repositories", "user_id") == var("users", "id") }
+      .join(:repositories)
       .where { users.ignore == false }
       .where { repositories.ignore == false }
       .select(
@@ -282,7 +282,7 @@ get "/tags" do |env|
       Tag
         .query
         .where { ~(name.in? skipped_tags) }
-        .join("repository_tags") { repository_tags.tag_id == var("tags", "id") }
+        .join(:repository_tags)
         .group_by("tags.id")
         .order_by(tagging_count: :desc)
         .limit(200)
@@ -563,7 +563,7 @@ get "/tags/:name" do |env|
     repositories_query =
       tag
         .repositories
-        .join("users") { users.id == repositories.user_id }
+        .join(:user)
         .clear_distinct
         .with_tags
         .with_user
@@ -602,7 +602,7 @@ get "/languages" do |env|
     languages =
       Language
         .query
-        .join("repository_languages") { var("repository_languages", "language_id") == var("languages", "id") }
+        .join(:repository_languages)
         .select(
           "languages.*",
           "COUNT(repository_languages.*) AS languages_count"
@@ -652,7 +652,7 @@ get "/languages/:name" do |env|
     repositories_query =
       language
         .repositories
-        .join("users") { users.id == repositories.user_id }
+        .join(:user)
         .clear_distinct
         .with_tags
         .with_user
@@ -755,7 +755,7 @@ get "/admin/hidden_users" do |env|
   users_query =
     User
       .query
-      .join("repositories") { var("repositories", "user_id") == var("users", "id") }
+      .join(:repositories)
       .where { users.ignore == true }
       .select(
         "users.*",
