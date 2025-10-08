@@ -282,7 +282,7 @@ get "/tags" do |env|
       Tag
         .query
         .where { ~(name.in? skipped_tags) }
-        .join(:repository_tags)
+        .join(:repository_tags) { var("repository_tags", "tag_id") == var("tags", "id") }
         .group_by("tags.id")
         .order_by(tagging_count: :desc)
         .limit(200)
@@ -602,7 +602,7 @@ get "/languages" do |env|
     languages =
       Language
         .query
-        .join(:repository_languages)
+        .join(:repository_languages) { var("repository_languages", "language_id") == var("languages", "id") }
         .select(
           "languages.*",
           "COUNT(repository_languages.*) AS languages_count"

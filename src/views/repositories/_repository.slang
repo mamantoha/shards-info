@@ -12,9 +12,9 @@
       .small.text-secondary
         - if repository.fork
           | forked from
-          - if (repository_parent = repository.repository_parent)
-            a href="#{repository_parent.parent.decorate.show_path}"
-              = repository_parent.parent.decorate.full_name
+          - if (upstream_repository = repository.upstream_repository)
+            a href="#{upstream_repository.parent.decorate.show_path}"
+              = upstream_repository.parent.decorate.full_name
       h2.shards__shard_name.css-truncate
         a href="/#{repository.provider}/#{repository.decorate.full_name}/"
           - if additional_info
