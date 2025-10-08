@@ -15,9 +15,9 @@ div
           span.small
             - if repository.fork
               | forked from
-              - if (repository_parent = repository.repository_parent)
-                a href="#{repository_parent.parent.decorate.show_path}"
-                  = repository_parent.parent.decorate.full_name
+              - if (upstream_repository = repository.upstream_repository)
+                a href="#{upstream_repository.parent.decorate.show_path}"
+                  = upstream_repository.parent.decorate.full_name
           .shard__topics.mt-2
             - repository.tags.each do |tag|
               a.badge.bg-secondary.text-monospace href="/tags/#{tag.name}" = tag.name

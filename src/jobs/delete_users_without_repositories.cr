@@ -5,7 +5,7 @@ class DeleteUsersWithoutRepositories < PeriodicJobWithErrorHandler
     users =
       User
         .query
-        .left_join("repositories") { var("repositories", "user_id") == var("users", "id") }
+        .left_join(:repositories)
         .where { repositories.id == nil }
 
     users.each(&.delete)

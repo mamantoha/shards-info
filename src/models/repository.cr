@@ -34,12 +34,10 @@ class Repository
 
   has_many releases : Release
 
-  has_many relationships : Relationship, foreign_key: "master_id"
   has_many dependencies : Repository, through: Relationship, foreign_key: "dependency_id", own_key: "master_id"
   has_many dependents : Repository, through: Relationship, foreign_key: "master_id", own_key: "dependency_id"
 
-  has_many repository_forks : RepositoryFork, foreign_key: "parent_id"
-  has_one repository_parent : RepositoryFork, foreign_key: "fork_id"
+  has_one upstream_repository : RepositoryFork, foreign_key: "fork_id"
   has_many forks : Repository, through: RepositoryFork, own_key: "parent_id", foreign_key: "fork_id"
 
   scope(:published) { where({ignore: false}) }
@@ -75,7 +73,7 @@ class Repository
   def self.find_repository(user_login : String, repository_name : String, provider : String) : Repository?
     Repository
       .query
-      .join("users") { users.id == repositories.user_id }
+      .join(:user)
       .find do
         (users.login == user_login) &
           (users.provider == provider) &
