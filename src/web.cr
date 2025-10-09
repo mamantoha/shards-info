@@ -281,7 +281,7 @@ get "/tags" do |env|
     tags =
       Tag
         .query
-        .where { ~(name.in? skipped_tags) }
+        .where.not { name.in? skipped_tags }
         .join(:repository_tags) { var("repository_tags", "tag_id") == var("tags", "id") }
         .group_by("tags.id")
         .order_by(tagging_count: :desc)
