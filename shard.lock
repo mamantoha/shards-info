@@ -127,7 +127,7 @@ shards:
 
   lustra:
     git: https://github.com/crystal-garage/lustra.git
-    version: 0.11.0+git.commit.fbe3a6c82e1acbce081e980b4877c3c175e550a0
+    version: 0.11.0+git.commit.a4c1a456868bb89328178f60f0e674c004d3c9fa
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
@@ -135,7 +135,7 @@ shards:
 
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
-    version: 1.1.1+git.commit.e82f7b30838fcb5bc2a858bbc5c95008bec29ffe
+    version: 1.2.0+git.commit.7827c57215ca76ce27cd01304741d66d9054b266
 
   noir:
     git: https://github.com/crystal-garage/noir.git
