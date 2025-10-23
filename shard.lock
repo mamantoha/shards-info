@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.8ef2fddeca26336e0eeee6acf5d17c6d05772524
+    version: 1.7.0-dev+git.commit.b11d3b4f7c057c30aa660125be7e82208495a15a
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -99,7 +99,7 @@ shards:
 
   ipapi:
     git: https://github.com/geocrystal/ipapi-crystal.git
-    version: 0.5.0
+    version: 0.6.0
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
