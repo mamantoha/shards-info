@@ -99,7 +99,7 @@ shards:
 
   ipapi:
     git: https://github.com/geocrystal/ipapi-crystal.git
-    version: 0.6.0
+    version: 0.6.1
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
@@ -127,7 +127,7 @@ shards:
 
   lustra:
     git: https://github.com/crystal-garage/lustra.git
-    version: 0.12.0+git.commit.941496e8cb529e4106d43b54d768291c2fda6235
+    version: 0.12.0+git.commit.d271f646b05d6768abe865adb30ba73c30070b1f
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
