@@ -28,7 +28,7 @@ class RequestContext
 end
 
 macro set_request_context(env, &)
-  request_context = {{env}}.get("request_context").as(RequestContext)
-  {{yield}}
-  {{env}}.set "request_context", request_context
+  request_context = {{ env }}.get("request_context").as(RequestContext)
+  {{ yield }}
+  {{ env }}.set "request_context", request_context
 end

@@ -24,8 +24,8 @@ class Admin
   }
 
   {% for value, name in ROLES %}
-    def {{name.id}}? : Bool
-      role == {{value.id}}
+    def {{ name.id }}? : Bool
+      role == {{ value.id }}
     end
   {% end %}
 
