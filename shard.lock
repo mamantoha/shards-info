@@ -73,6 +73,10 @@ shards:
     git: https://github.com/crystal-loot/exception_page.git
     version: 0.5.0
 
+  flag_emoji:
+    git: https://github.com/mamantoha/flag_emoji.git
+    version: 0.1.0
+
   generate:
     git: https://github.com/anykeyh/generate.cr.git
     version: 0.1.0+git.commit.f5dafc934a70e0ee2f246dddf3df44686f844da2
@@ -99,7 +103,7 @@ shards:
 
   ipapi:
     git: https://github.com/geocrystal/ipapi-crystal.git
-    version: 0.6.1
+    version: 0.7.0
 
   kemal:
     git: https://github.com/kemalcr/kemal.git

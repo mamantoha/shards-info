@@ -30,6 +30,6 @@
                   - location_value = user.try(&.["location"]).as_h?
                   - if location_value && !location_value.empty?
                     - location = Ipapi::Location.from_json(location_value.to_json)
-                    = "#{location.city}/#{location.country_name}"
+                    = "#{FlagEmoji.from_country_code(location.country_code)} #{location.city}/#{location.country_name}"
                 th
                   = user.try(&.["user_agent"]?)

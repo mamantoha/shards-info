@@ -96,6 +96,8 @@ dependencies:
     branch: develop
   ipapi:
     github: geocrystal/ipapi-crystal
+  flag_emoji:
+    github: mamantoha/flag_emoji
 
 development_dependencies:
   spec-kemal:

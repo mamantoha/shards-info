@@ -21,6 +21,7 @@ require "countdown"
 require "autolink"
 require "raven/integrations/kemal"
 require "ipapi"
+require "flag_emoji"
 
 require "../config/config"
 require "./config"
