@@ -116,6 +116,12 @@ a.badge {
   border-color: var(--alert-success-border-color);
 }
 
+@media (max-width: 767px) {
+  #stats-repositories-count {
+    padding-bottom: 1.5rem;
+  }
+}
+
 @media (max-width: 576px) {
   .search-wrap {
     width: 100%;

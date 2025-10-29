@@ -8,8 +8,8 @@ div
 
 .container
   .row.mb-4
-    .col-md-4
-      .card.h-100#stats-repositories-count
+    .col-md-4#stats-repositories-count
+      .card.h-100
         .card-header
           ' Repositories
         .card-body
@@ -22,8 +22,8 @@ div
         .card-footer.text-center
           a.btn.btn-primary href="/repositories?sort=new"
             ' Browse repositories
-    .col-md-4
-      .card.h-100#stats-users-count
+    .col-md-4#stats-users-count
+      .card.h-100
         .card-header
           ' Users or teams
         .card-body
