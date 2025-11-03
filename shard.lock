@@ -87,7 +87,7 @@ shards:
 
   http_proxy:
     git: https://github.com/mamantoha/http_proxy.git
-    version: 0.13.0
+    version: 0.13.1
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
@@ -131,7 +131,7 @@ shards:
 
   lustra:
     git: https://github.com/crystal-garage/lustra.git
-    version: 0.12.0+git.commit.d271f646b05d6768abe865adb30ba73c30070b1f
+    version: 0.12.0+git.commit.a1021aef1ec35416184320deb48ca3b55575a92a
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
@@ -155,11 +155,11 @@ shards:
 
   raven:
     git: https://github.com/sija/raven.cr.git
-    version: 1.9.4
+    version: 1.9.5
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.13.0+git.commit.100e1a5a8e3a78d01677fe6509d3eda04aaada23
+    version: 0.13.0+git.commit.2df2b5778cde1147428c9397cb40a40c9ba372cc
 
   redis_cache_store:
     git: https://github.com/crystal-cache/redis_cache_store.git
