@@ -32,6 +32,11 @@ class Config
 
   def self.redis_version
     redis = Redis::Client.new(URI.parse(ENV.fetch("REDIS_URL", "redis:///")))
-    redis.info["redis_version"]?
+    info = redis.info
+
+    server_name = info["server_name"]?
+    version = server_name == "valkey" ? info["valkey_version"]? : info["redis_version"]?
+
+    "#{server_name}/#{version}"
   end
 end
