@@ -43,7 +43,7 @@ class Config
       server_name = info["server_name"]?
       version = server_name == "valkey" ? info["valkey_version"]? : info["redis_version"]?
 
-      "#{server_name}/#{version}"
+      [server_name, version].compact.join('/')
     end
   end
 end
