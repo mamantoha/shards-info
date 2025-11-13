@@ -42,7 +42,6 @@ dependencies:
   multi_auth:
     github: msa7/multi_auth
     branch: master
-    commit: e82f7b30838fcb5bc2a858bbc5c95008bec29ffe
   lustra:
     github: crystal-garage/lustra
     version: ">= 0.10.0"

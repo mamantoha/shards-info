@@ -139,7 +139,7 @@ shards:
 
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
-    version: 1.1.1+git.commit.e82f7b30838fcb5bc2a858bbc5c95008bec29ffe
+    version: 1.2.0+git.commit.3f20e5acebfacab5a82c79992329bbf60d177360
 
   noir:
     git: https://github.com/crystal-garage/noir.git
@@ -192,3 +192,4 @@ shards:
   time_zone:
     git: https://github.com/mamantoha/time_zone.git
     version: 0.1.3
+
