@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.4987ba8b192b383982a3b4491bcb06a1d3154e4f
+    version: 1.7.0-dev+git.commit.5c8c5033d314cb1c4c9d7ec8c4954bd308253586
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -23,7 +23,7 @@ shards:
 
   baked_file_system:
     git: https://github.com/schovi/baked_file_system.git
-    version: 0.12.0
+    version: 0.13.0
 
   cache:
     git: https://github.com/crystal-cache/cache.git
