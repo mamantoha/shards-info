@@ -232,6 +232,14 @@ get "/users" do |env|
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
+  select_stars_count = <<-SQL
+    SUM(repositories.stars_count * CASE
+      WHEN repositories.last_activity_at > '#{1.year.ago}' THEN 1
+      ELSE 0.25
+    END
+    ) AS stars_count
+    SQL
+
   users_query =
     User
       .query
@@ -240,11 +248,7 @@ get "/users" do |env|
       .where { repositories.ignore == false }
       .select(
         "users.*",
-        "SUM(repositories.stars_count * CASE
-          WHEN repositories.last_activity_at > '#{1.year.ago}' THEN 1
-          ELSE 0.25
-        END
-        ) AS stars_count",
+        select_stars_count,
         "COUNT(repositories.*) AS repositories_count",
       )
       .group_by("users.id")
@@ -1128,15 +1132,17 @@ get "/stats/reverse_dependencies" do |env|
   json = CACHE.fetch("stats:reverse_dependencies", expires_in: 2.hours) do
     hsh = {} of String => Int64
 
+    select_dependency_range = <<-SQL
+        CASE
+          WHEN dependency_count BETWEEN 1 AND 29 THEN dependency_count::text
+          WHEN dependency_count BETWEEN 30 AND 100 THEN CONCAT((dependency_count / 10) * 10, '-', (dependency_count / 10) * 10 + 9)
+          ELSE CONCAT((dependency_count / 100) * 100, '-', (dependency_count / 100) * 100 + 99)
+        END AS dependency_range
+      SQL
+
     Lustra::SQL
       .select(
-        "
-      CASE
-        WHEN dependency_count BETWEEN 1 AND 29 THEN dependency_count::text
-        WHEN dependency_count BETWEEN 30 AND 100 THEN CONCAT((dependency_count / 10) * 10, '-', (dependency_count / 10) * 10 + 9)
-        ELSE CONCAT((dependency_count / 100) * 100, '-', (dependency_count / 100) * 100 + 99)
-      END AS dependency_range
-      ",
+        select_dependency_range,
         "COUNT(*) AS repository_count"
       )
       .from(<<-SQL
