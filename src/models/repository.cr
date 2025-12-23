@@ -105,13 +105,13 @@ class Repository
     new_tags = names - tag_names
     new_tags.each do |name|
       tag = Tag.query.find_or_create(name: name)
-      self.tags << tag
+      tags << tag
     end
 
     unlink_tags = tag_names - names
     unlink_tags.each do |name|
       if tag = Tag.query.find!({name: name})
-        self.tags.unlink(tag)
+        tags.unlink(tag)
       end
     end
 
@@ -119,10 +119,10 @@ class Repository
   end
 
   def tag_names
-    self.tags.map(&.name)
+    tags.map(&.name)
   end
 
   def language_names
-    self.languages.map(&.name)
+    languages.map(&.name)
   end
 end
