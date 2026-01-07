@@ -1,6 +1,9 @@
 Naming/BlockParameterName:
   Enabled: false
 
+Lint/UselessAssign:
+  ExcludeTypeDeclarations: true
+
 Lint/SpecFilename:
   Excluded:
     - spec/initdb.cr
