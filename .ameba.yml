@@ -1,28 +1,11 @@
-Lint/UselessAssign:
-  Description: Disallows useless variable assignments
-  Excluded:
-    - src/web.cr
-  Enabled: true
-  Severity: Warning
-
-Lint/UnusedArgument:
-  Description: Disallows unused arguments
-  IgnoreDefs: true
-  IgnoreBlocks: false
-  IgnoreProcs: false
-  Excluded:
-    - src/web.cr
-  Enabled: true
-  Severity: Warning
-
-Lint/UselessAssign:
-  Enabled: false
-
 Naming/BlockParameterName:
   Enabled: false
 
-Lint/SpecFilename:
-  Enabled: false
+Lint/UselessAssign:
+  ExcludeTypeDeclarations: true
+  Excluded:
+    - src/web.cr
 
-Documentation/DocumentationAdmonition:
-  Enabled: false
+Lint/SpecFilename:
+  Excluded:
+    - spec/initdb.cr

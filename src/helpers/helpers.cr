@@ -206,5 +206,6 @@ module Helpers
                 else
                   remote_address.to_s
                 end
+    real_ip
   end
 end
