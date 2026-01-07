@@ -3,6 +3,8 @@ Naming/BlockParameterName:
 
 Lint/UselessAssign:
   ExcludeTypeDeclarations: true
+  Excluded:
+    - src/web.cr
 
 Lint/SpecFilename:
   Excluded:

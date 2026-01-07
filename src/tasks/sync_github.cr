@@ -79,7 +79,6 @@ repos = github_client.all
 puts "OK!"
 
 repos.each do |repo|
-  tags = repo.tags
   github_user = repo.user
 
   user = User.query.find_or_create({provider: "github", provider_id: github_user.id}) do |u|
