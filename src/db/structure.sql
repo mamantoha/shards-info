@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict Dk8Wf14icSTGHeODPY8KOAiw9zSdOWsWgYuIcwmnNYd8gNelPfm6RUh0K3yvZ9b
+\restrict gqVAIbqR5pxA3Ndei6Hdabezvozwk8idw8y3PMlni4cvRIpYmhQ7cy6XxWg6h2v
 
 -- Dumped from database version 18.1
 -- Dumped by pg_dump version 18.1
@@ -596,6 +596,13 @@ CREATE UNIQUE INDEX __clear_metadatas_idx ON public.__lustra_metadatas USING btr
 
 
 --
+-- Name: __lustra_metadatas_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX __lustra_metadatas_idx ON public.__lustra_metadatas USING btree (metatype, value);
+
+
+--
 -- Name: admins_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -882,5 +889,5 @@ ALTER TABLE ONLY public.repository_tags
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Dk8Wf14icSTGHeODPY8KOAiw9zSdOWsWgYuIcwmnNYd8gNelPfm6RUh0K3yvZ9b
+\unrestrict gqVAIbqR5pxA3Ndei6Hdabezvozwk8idw8y3PMlni4cvRIpYmhQ7cy6XxWg6h2v
 
