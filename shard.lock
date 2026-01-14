@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.94ff379e8f3b5677944ab9a97a01aebcfadc2fc1
+    version: 1.7.0-dev+git.commit.aa737d890696f3a700a80a273c6a4ec6f1cb0ca4
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -31,7 +31,7 @@ shards:
 
   cadmium_transliterator:
     git: https://github.com/cadmiumcr/transliterator.git
-    version: 0.1.0+git.commit.46c4c14594057dbcfaf27e7e7c8c164d3f0ce3f1
+    version: 0.1.0+git.commit.0dcedb98cbac7dd5827f204a0714b62f25c6515a
 
   cmark:
     git: https://github.com/amauryt/cr-cmark-gfm.git
@@ -131,7 +131,7 @@ shards:
 
   lustra:
     git: https://github.com/crystal-garage/lustra.git
-    version: 0.14.4+git.commit.fc0cf4725a0b1cce04b8ab908c810b59c34c5fba
+    version: 0.15.0+git.commit.c2ef17b90e220f7978339690f4950a13a938f1e2
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
@@ -159,7 +159,7 @@ shards:
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.14.1+git.commit.9510278ec1b17797f3e4c6df3beb6d1503fd15fc
+    version: 0.14.1+git.commit.0fa7a88df33a0067509cd05c734a640ad1a122af
 
   redis_cache_store:
     git: https://github.com/crystal-cache/redis_cache_store.git
