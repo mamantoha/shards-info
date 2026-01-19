@@ -101,7 +101,7 @@ get "/auth/:provider/callback" do |env|
     raise Kemal::Exceptions::RouteNotFound.new(env)
   end
 
-  admin = Admin.query.find({provider: user.provider, uid: user.uid}) || Admin.new({role: 0})
+  admin = Admin.query.find_by({provider: user.provider, uid: user.uid}) || Admin.new({role: 0})
 
   admin.set({
     provider:   user.provider,
@@ -388,7 +388,7 @@ get "/:provider/:owner" do |env|
   sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
   expression, direction = Helpers.repositories_sort_expression_direction(sort)
 
-  if user = User.query.with_repositories(&.with_tags).find({provider: provider, login: owner})
+  if user = User.query.with_repositories(&.with_tags).find_by({provider: provider, login: owner})
     repositories =
       user
         .repositories
@@ -564,7 +564,7 @@ get "/tags/:name" do |env|
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
-  if tag = Tag.query.find({name: name})
+  if tag = Tag.query.find_by({name: name})
     repositories_query =
       tag
         .repositories
@@ -653,7 +653,7 @@ get "/languages/:name" do |env|
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
-  if language = Language.query.find({name: name})
+  if language = Language.query.find_by({name: name})
     repositories_query =
       language
         .repositories

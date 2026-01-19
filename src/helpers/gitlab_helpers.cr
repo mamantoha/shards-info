@@ -219,7 +219,7 @@ module GitlabHelpers
 
   def create_releases(repository : Repository, gitlab_releases : Array(Gitlab::Release))
     gitlab_releases.each do |gitlab_release|
-      unless repository.releases.find({tag_name: gitlab_release.tag_name})
+      unless repository.releases.find_by({tag_name: gitlab_release.tag_name})
         Release.create!({
           repository_id: repository.id,
           provider:      "gitlab",
@@ -263,7 +263,7 @@ module GitlabHelpers
     end
 
     unlink_languages.each do |language_name|
-      if language = Language.query.find({name: language_name})
+      if language = Language.query.find_by({name: language_name})
         repository.languages.unlink(language)
       end
     end
@@ -271,7 +271,7 @@ module GitlabHelpers
 
   def sync_project_fork(repository : Repository, gitlab_project : Gitlab::Project)
     if parent_gitlab_project = gitlab_project.forked_from_project
-      if parent_repository = Repository.query.find({provider: "gitlab", provider_id: parent_gitlab_project.id})
+      if parent_repository = Repository.query.find_by({provider: "gitlab", provider_id: parent_gitlab_project.id})
         RepositoryFork.query.find_or_create(parent_id: parent_repository.id, fork_id: repository.id)
       end
     end

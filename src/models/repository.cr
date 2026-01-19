@@ -74,7 +74,7 @@ class Repository
     Repository
       .query
       .join(:user)
-      .find do
+      .find_by do
         (users.login == user_login) &
           (users.provider == provider) &
           (repositories.provider == provider) &
@@ -110,7 +110,7 @@ class Repository
 
     unlink_tags = tag_names - names
     unlink_tags.each do |name|
-      if tag = Tag.query.find!({name: name})
+      if tag = Tag.query.find_by({name: name})
         tags.unlink(tag)
       end
     end

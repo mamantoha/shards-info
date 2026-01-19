@@ -167,7 +167,7 @@ module GithubHelpers
 
   def create_releases(repository : Repository, github_releases : Array(Github::Release))
     github_releases.each do |github_release|
-      unless repository.releases.find({tag_name: github_release.tag_name})
+      unless repository.releases.find_by({tag_name: github_release.tag_name})
         Release.create!({
           repository_id: repository.id,
           provider:      "github",
@@ -216,7 +216,7 @@ module GithubHelpers
     end
 
     unlink_languages.each do |language_name|
-      if language = Language.query.find({name: language_name})
+      if language = Language.query.find_by({name: language_name})
         repository.languages.unlink(language)
       end
     end
@@ -224,7 +224,7 @@ module GithubHelpers
 
   def sync_repository_fork(repository : Repository, github_repo : Github::Repo)
     if parent_github_repo = github_repo.parent
-      if parent_repository = Repository.query.find({provider: "github", provider_id: parent_github_repo.id})
+      if parent_repository = Repository.query.find_by({provider: "github", provider_id: parent_github_repo.id})
         RepositoryFork.query.find_or_create(parent_id: parent_repository.id, fork_id: repository.id)
       end
     end
