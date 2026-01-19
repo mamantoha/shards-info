@@ -263,7 +263,7 @@ module GitlabHelpers
     end
 
     unlink_languages.each do |language_name|
-      if language = Language.query.find_by({name: language_name})
+      if language = Language.find_by({name: language_name})
         repository.languages.unlink(language)
       end
     end
@@ -271,7 +271,7 @@ module GitlabHelpers
 
   def sync_project_fork(repository : Repository, gitlab_project : Gitlab::Project)
     if parent_gitlab_project = gitlab_project.forked_from_project
-      if parent_repository = Repository.query.find_by({provider: "gitlab", provider_id: parent_gitlab_project.id})
+      if parent_repository = Repository.find_by({provider: "gitlab", provider_id: parent_gitlab_project.id})
         RepositoryFork.query.find_or_create(parent_id: parent_repository.id, fork_id: repository.id)
       end
     end

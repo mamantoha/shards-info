@@ -89,7 +89,7 @@ module Helpers
 
           next unless dependency_repository
 
-          unless Relationship.query.find_by({
+          unless Relationship.find_by({
                    master_id:     master_repository.id,
                    dependency_id: dependency_repository.id,
                    development:   development,

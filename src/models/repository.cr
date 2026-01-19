@@ -110,7 +110,7 @@ class Repository
 
     unlink_tags = tag_names - names
     unlink_tags.each do |name|
-      if tag = Tag.query.find_by({name: name})
+      if tag = Tag.find_by({name: name})
         tags.unlink(tag)
       end
     end

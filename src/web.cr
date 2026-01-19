@@ -101,7 +101,7 @@ get "/auth/:provider/callback" do |env|
     raise Kemal::Exceptions::RouteNotFound.new(env)
   end
 
-  admin = Admin.query.find_by({provider: user.provider, uid: user.uid}) || Admin.new({role: 0})
+  admin = Admin.find_by({provider: user.provider, uid: user.uid}) || Admin.new({role: 0})
 
   admin.set({
     provider:   user.provider,
@@ -564,7 +564,7 @@ get "/tags/:name" do |env|
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
-  if tag = Tag.query.find_by({name: name})
+  if tag = Tag.find_by({name: name})
     repositories_query =
       tag
         .repositories
@@ -653,7 +653,7 @@ get "/languages/:name" do |env|
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
 
-  if language = Language.query.find_by({name: name})
+  if language = Language.find_by({name: name})
     repositories_query =
       language
         .repositories
