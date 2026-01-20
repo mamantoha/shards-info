@@ -117,7 +117,7 @@ module Forgejo
       params = {
         "ref" => ref,
       }
-      response = make_request(url)
+      response = make_request(url, params)
 
       response.body
     end
