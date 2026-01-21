@@ -3,6 +3,10 @@ require "shards_spec"
 module CodebergHelpers
   extend self
 
+  def codeberg_client
+    Forgejo::API.new("https://codeberg.org/api/v1", ENV["CODEBERG_TOKEN"])
+  end
+
   def resync_repository(repository : Repository)
     return unless repository.provider == "codeberg"
   end
@@ -72,8 +76,6 @@ module CodebergHelpers
   end
 
   def sync_repo_shard_yml(repository)
-    codeberg_client = Forgejo::API.new("https://codeberg.org/api/v1", ENV["CODEBERG_TOKEN"])
-
     content = codeberg_client.get_file(repository.user.login, repository.name, "shard.yml")
 
     repository.shard_yml = content
@@ -86,8 +88,6 @@ module CodebergHelpers
   end
 
   def sync_repo_readme(repository : Repository, readme_file : String = "README.md")
-    codeberg_client = Forgejo::API.new("https://codeberg.org/api/v1", ENV["CODEBERG_TOKEN"])
-
     content = codeberg_client.get_file(repository.user.login, repository.name, readme_file)
 
     repository.readme = content
@@ -100,8 +100,6 @@ module CodebergHelpers
   end
 
   def sync_repo_releases(repository : Repository)
-    codeberg_client = Forgejo::API.new("https://codeberg.org/api/v1", ENV["CODEBERG_TOKEN"])
-
     codeberg_releases = codeberg_client.repo_releases(repository.user.login, repository.name)
 
     create_releases(repository, codeberg_releases)
@@ -140,8 +138,6 @@ module CodebergHelpers
   end
 
   def sync_repo_languages(repository : Repository)
-    codeberg_client = Forgejo::API.new("https://codeberg.org/api/v1", ENV["CODEBERG_TOKEN"])
-
     languages = codeberg_client.repo_languages(repository.user.login, repository.name)
 
     unlink_languages = repository.language_names - languages.keys
