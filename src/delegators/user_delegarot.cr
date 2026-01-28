@@ -36,6 +36,8 @@ class UserDelegator < Delegator(User)
       "https://gitlab.com/#{provider_path}"
     when "github"
       "https://github.com/#{provider_path}"
+    when "codeberg"
+      "https://codeberg.org/#{provider_path}"
     else
       ""
     end
