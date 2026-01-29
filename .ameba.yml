@@ -2,7 +2,7 @@ Naming/BlockParameterName:
   Enabled: false
 
 Lint/UselessAssign:
-  ExcludeTypeDeclarations: true
+  Enabled: true
   Excluded:
     - src/web.cr
 
