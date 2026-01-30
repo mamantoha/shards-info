@@ -10,7 +10,7 @@ class SyncRecentGitlabJob < PeriodicJobWithErrorHandler
   end
 
   private def gitlab_client
-    @gilab_client ||= Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
+    @gilab_client ||= GitlabHelpers.gitlab_client
   end
 
   private def sync_project(_gitlab_project : Gitlab::Project)

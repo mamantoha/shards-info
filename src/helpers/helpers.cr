@@ -71,7 +71,7 @@ module Helpers
           unless dependency_repository
             case provider_name
             when "github"
-              github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+              github_client = GithubHelpers.github_client
 
               begin
                 if github_repo = github_client.repo(user_name, repository_name)
@@ -81,7 +81,7 @@ module Helpers
                 next
               end
             when "gitlab"
-              gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
+              gitlab_client = GitlabHelpers.gitlab_client
 
               begin
                 if gitlab_project = gitlab_client.project(user_name, repository_name)
