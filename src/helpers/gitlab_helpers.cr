@@ -3,10 +3,12 @@ require "shards_spec"
 module GitlabHelpers
   extend self
 
+  def gitlab_client
+    Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
+  end
+
   def resync_repository(repository : Repository)
     return unless repository.provider == "gitlab"
-
-    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
 
     gitlab_project = gitlab_client.project(repository.provider_id)
 
@@ -84,8 +86,6 @@ module GitlabHelpers
   def sync_user_with_kind_user(user : User)
     return unless user.provider == "gitlab" && user.kind == "user"
 
-    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
-
     gitlab_user = gitlab_client.user(user.provider_id)
 
     assign_user_attributes(user, gitlab_user)
@@ -97,8 +97,6 @@ module GitlabHelpers
 
   def sync_user_with_kind_group(user : User)
     return unless user.provider == "gitlab" && user.kind == "group"
-
-    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
 
     gitlab_group = gitlab_client.group(user.provider_id)
 
@@ -163,8 +161,6 @@ module GitlabHelpers
   end
 
   def sync_project_shard_yml(repository : Repository)
-    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
-
     response = gitlab_client.get_file(repository.provider_id, "shard.yml")
     content = Base64.decode_string(response.content)
 
@@ -178,8 +174,6 @@ module GitlabHelpers
   end
 
   def sync_project_readme(repository : Repository, readme_url = "README.md")
-    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
-
     response = gitlab_client.get_file(repository.provider_id, readme_url)
     content = Base64.decode_string(response.content)
 
@@ -205,7 +199,6 @@ module GitlabHelpers
   end
 
   def sync_project_releases(repository : Repository)
-    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
     gitlab_releases = gitlab_client.project_releases(repository.provider_id)
 
     create_releases(repository, gitlab_releases)
@@ -244,8 +237,6 @@ module GitlabHelpers
   end
 
   def sync_project_languages(repository : Repository)
-    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
-
     languages = gitlab_client.project_languages(repository.provider_id)
 
     unlink_languages = repository.language_names - languages.keys
