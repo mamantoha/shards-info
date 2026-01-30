@@ -19,7 +19,7 @@
           tr
             td
               a href="#{admin.decorate.provider_url}"
-                i class="#{admin.decorate.provider_icon}"
+                i class="#{admin.provider_icon}"
             td
               = admin.nickname
               = "(#{admin.name})"

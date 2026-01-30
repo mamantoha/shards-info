@@ -1,5 +1,6 @@
 class Admin
   include Lustra::Model
+  include HasProvider
 
   primary_key
 

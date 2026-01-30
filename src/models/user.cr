@@ -1,5 +1,6 @@
 class User
   include Lustra::Model
+  include HasProvider
 
   primary_key
 

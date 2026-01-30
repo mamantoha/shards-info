@@ -1,5 +1,6 @@
 class Repository
   include Lustra::Model
+  include HasProvider
 
   primary_key
 

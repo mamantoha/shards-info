@@ -66,15 +66,4 @@ class RepositoryDelegator < Delegator(Repository)
       ""
     end
   end
-
-  def provider_icon
-    case provider
-    when "gitlab"
-      "fab fa-gitlab"
-    when "github"
-      "fab fa-github"
-    else
-      ""
-    end
-  end
 end

@@ -23,7 +23,7 @@
         ul.list__items.not-list
           - dependencies.each(fetch_columns: true) do |repository|
             li.link
-              i class="#{repository.decorate.provider_icon}"
+              i class="#{repository.provider_icon}"
               a href="#{repository.decorate.show_path}" data-bs-toggle="popover" data-bs-custom-class="repository-popover" data-bs-trigger="hover" data-bs-placement="right" data-bs-html="true" data-bs-content="#{render("src/views/repositories/_tooltip.slang")}"
                 = repository.name
               - if repository.fork
@@ -40,7 +40,7 @@
         ul.list__items.not-list
           - dependents.limit(10).each(fetch_columns: true) do |repository|
             li.link
-              i class="#{repository.decorate.provider_icon}"
+              i class="#{repository.provider_icon}"
               a href="#{repository.decorate.show_path}" data-bs-toggle="popover" data-bs-custom-class="repository-popover" data-bs-trigger="hover" data-bs-placement="right" data-bs-html="true" data-bs-content="#{render("src/views/repositories/_tooltip.slang")}"
                 = repository.name
               - if repository.fork
@@ -59,7 +59,7 @@
         ul.list__items.not-list
           - development_dependencies.each(fetch_columns: true) do |repository|
             li.link
-              i class="#{repository.decorate.provider_icon}"
+              i class="#{repository.provider_icon}"
               a href="#{repository.decorate.show_path}" data-bs-toggle="popover" data-bs-custom-class="repository-popover" data-bs-trigger="hover" data-bs-placement="right" data-bs-html="true" data-bs-content="#{render("src/views/repositories/_tooltip.slang")}"
                 = repository.name
               - if repository.fork
@@ -77,7 +77,7 @@
           ul.list__items.not-list
             - forks.each(fetch_columns: true) do |repository|
               li.link
-                i class="#{repository.decorate.provider_icon}"
+                i class="#{repository.provider_icon}"
                 a href="#{repository.decorate.show_path}" data-bs-toggle="popover" data-bs-custom-class="repository-popover" data-bs-trigger="hover" data-bs-placement="right" data-bs-html="true" data-bs-content="#{render("src/views/repositories/_tooltip.slang")}"
                   = repository.decorate.full_name
 
