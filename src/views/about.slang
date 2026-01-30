@@ -2,7 +2,7 @@
   .h1
     | About
   .h6.font-weight-light
-    | View of all repositories on Github, Gitlab, and Codeberg that have Crystal code in them.
+    | View of all repositories on GitHub, GitLab and Codeberg that have Crystal code in them.
 
   ul
     li
@@ -33,7 +33,7 @@
       | Build date #{Time.parse_rfc2822(Config.date).to_s("%Y-%m-%d %H:%M:%S %:z")}
     li
       | Official code repository is on
-      a href="https://github.com/mamantoha/shards-info" Github
+      a href="https://github.com/mamantoha/shards-info" GitHub
     li
       | Developed and maintained by
       a href="mailto:anton.maminov@gmail.com" Anton Maminov
