@@ -1,4 +1,5 @@
 require "lustra"
+require "../../src/models/concerns/**"
 require "../../src/models/**"
 require "../../src/db/seeds"
 require "../../src/db/migrations/**"

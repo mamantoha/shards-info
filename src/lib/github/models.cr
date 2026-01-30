@@ -441,7 +441,7 @@ module Github
 
     def user
       _user = CACHE.fetch("github_user_#{owner.login}") do
-        github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+        github_client = GithubHelpers.github_client
         github_client.user(owner.login).to_json
       end
 
@@ -460,7 +460,7 @@ module Github
 
     def releases
       releases = CACHE.fetch("releases_#{full_name}") do
-        github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+        github_client = GithubHelpers.github_client
         github_client.repo_releases(full_name).to_json
       end
 

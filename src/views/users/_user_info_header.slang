@@ -31,7 +31,7 @@
     .user__login
       span.middle-dot-divider
         a href="#{user.decorate.provider_url}"
-          i class="#{user.decorate.provider_icon}"
+          i class="#{user.provider_icon}"
           = user.login
       - if (created_at = user.created_at)
         span.middle-dot-divider

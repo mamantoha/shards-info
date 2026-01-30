@@ -36,6 +36,8 @@ class UserDelegator < Delegator(User)
       "https://gitlab.com/#{provider_path}"
     when "github"
       "https://github.com/#{provider_path}"
+    when "codeberg"
+      "https://codeberg.org/#{provider_path}"
     else
       ""
     end
@@ -46,17 +48,6 @@ class UserDelegator < Delegator(User)
       return if _website.empty?
 
       _website.starts_with?(/http(s)?:/i) ? _website : "https://" + _website
-    end
-  end
-
-  def provider_icon
-    case provider
-    when "gitlab"
-      "fab fa-gitlab"
-    when "github"
-      "fab fa-github"
-    else
-      ""
     end
   end
 

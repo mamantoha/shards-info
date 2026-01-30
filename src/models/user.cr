@@ -1,5 +1,6 @@
 class User
   include Lustra::Model
+  include HasProvider
 
   primary_key
 
@@ -25,5 +26,16 @@ class User
 
   def decorate
     @delegator ||= UserDelegator.delegate(self)
+  end
+
+  def resync!
+    case provider
+    when "github"
+      GithubHelpers.resync_user(self)
+    when "gitlab"
+      GitlabHelpers.resync_user(self)
+    when "codeberg"
+      CodebergHelpers.resync_user(self)
+    end
   end
 end

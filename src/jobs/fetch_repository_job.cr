@@ -3,12 +3,7 @@ class FetchRepositoryJob < MosquitoQueuedJobWithErrorHandler
 
   def perform
     if repository = Repository.find(repository_id)
-      case repository.provider
-      when "github"
-        GithubHelpers.resync_repository repository
-      when "gitlab"
-        GitlabHelpers.resync_repository repository
-      end
+      repository.resync!
     end
   end
 end

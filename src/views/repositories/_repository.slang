@@ -6,7 +6,7 @@
         span.badge
           span class="fa-stack"
             i class="fas fa-circle fa-stack-2x"
-            i class="fab fa-#{repository.provider} fa-stack-1x fa-inverse"
+            i class="#{repository.provider_icon} fa-stack-1x fa-inverse"
   .width-full
     .shards__shard_info
       .small.text-secondary

@@ -6,8 +6,4 @@ class AdminDelegator < Delegator(Admin)
   def provider_url
     "https://github.com/#{nickname}"
   end
-
-  def provider_icon
-    "fab fa-github"
-  end
 end

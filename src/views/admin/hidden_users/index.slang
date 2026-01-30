@@ -16,7 +16,7 @@
         - users.each(fetch_columns: true) do |user|
           tr
             td
-              i class="#{user.decorate.provider_icon}"
+              i class="#{user.provider_icon}"
             td
               a href="/#{user.provider}/#{user.login}/"
                 = user.login

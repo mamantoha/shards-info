@@ -17,7 +17,7 @@
         - repositories.each(fetch_columns: true) do |repository|
           tr
             td
-              i class="#{repository.decorate.provider_icon}"
+              i class="#{repository.provider_icon}"
             td
               a href="/#{repository.provider}/#{repository.decorate.full_name}/" = repository.name
             td

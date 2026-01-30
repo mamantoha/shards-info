@@ -1,5 +1,6 @@
 require "lustra"
 require "../src/db/migrations/**"
+require "../src/models/concerns/**"
 require "../src/models/**"
 
 def initdb

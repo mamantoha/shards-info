@@ -1,5 +1,6 @@
 class Repository
   include Lustra::Model
+  include HasProvider
 
   primary_key
 
@@ -84,6 +85,17 @@ class Repository
 
   def decorate
     @delegator ||= RepositoryDelegator.delegate(self)
+  end
+
+  def resync!
+    case provider
+    when "github"
+      GithubHelpers.resync_repository(self)
+    when "gitlab"
+      GitlabHelpers.resync_repository(self)
+    when "codeberg"
+      CodebergHelpers.resync_repository(self)
+    end
   end
 
   def touch : Repository

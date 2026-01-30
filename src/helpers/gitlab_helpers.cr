@@ -3,36 +3,16 @@ require "shards_spec"
 module GitlabHelpers
   extend self
 
+  def gitlab_client
+    Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
+  end
+
   def resync_repository(repository : Repository)
     return unless repository.provider == "gitlab"
 
-    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
-
     gitlab_project = gitlab_client.project(repository.provider_id)
 
-    owner = gitlab_project.owner || gitlab_project.namespace
-    tags = gitlab_project.tag_list
-
-    user = User.query.find_or_build(provider: "gitlab", provider_id: owner.id)
-    assign_project_owner_attributes(user, owner)
-    user.synced_at = Time.utc
-    user.ignore = false unless user.persisted?
-    user.save!
-
-    repository.user = user
-    assign_project_attributes(repository, gitlab_project)
-    repository.synced_at = Time.utc
-    repository.save!
-
-    repository.tags = tags
-
-    sync_project_shard_yml(repository)
-    sync_project_readme(repository, readme_file(gitlab_project))
-    sync_project_releases(repository)
-    sync_project_languages(repository)
-    sync_project_fork(repository, gitlab_project)
-
-    Helpers.update_dependecies(repository)
+    sync_project(gitlab_project)
   rescue Crest::NotFound
     repository.delete
   end
@@ -84,8 +64,6 @@ module GitlabHelpers
   def sync_user_with_kind_user(user : User)
     return unless user.provider == "gitlab" && user.kind == "user"
 
-    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
-
     gitlab_user = gitlab_client.user(user.provider_id)
 
     assign_user_attributes(user, gitlab_user)
@@ -97,8 +75,6 @@ module GitlabHelpers
 
   def sync_user_with_kind_group(user : User)
     return unless user.provider == "gitlab" && user.kind == "group"
-
-    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
 
     gitlab_group = gitlab_client.group(user.provider_id)
 
@@ -163,8 +139,6 @@ module GitlabHelpers
   end
 
   def sync_project_shard_yml(repository : Repository)
-    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
-
     response = gitlab_client.get_file(repository.provider_id, "shard.yml")
     content = Base64.decode_string(response.content)
 
@@ -178,8 +152,6 @@ module GitlabHelpers
   end
 
   def sync_project_readme(repository : Repository, readme_url = "README.md")
-    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
-
     response = gitlab_client.get_file(repository.provider_id, readme_url)
     content = Base64.decode_string(response.content)
 
@@ -205,7 +177,6 @@ module GitlabHelpers
   end
 
   def sync_project_releases(repository : Repository)
-    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
     gitlab_releases = gitlab_client.project_releases(repository.provider_id)
 
     create_releases(repository, gitlab_releases)
@@ -244,8 +215,6 @@ module GitlabHelpers
   end
 
   def sync_project_languages(repository : Repository)
-    gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
-
     languages = gitlab_client.project_languages(repository.provider_id)
 
     unlink_languages = repository.language_names - languages.keys

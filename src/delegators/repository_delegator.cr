@@ -47,6 +47,8 @@ class RepositoryDelegator < Delegator(Repository)
       "https://gitlab.com/#{provider_path}"
     when "github"
       "https://github.com/#{provider_path}"
+    when "codeberg"
+      "https://codeberg.org/#{provider_path}"
     else
       ""
     end
@@ -58,17 +60,8 @@ class RepositoryDelegator < Delegator(Repository)
       "https://crystaldoc.info/gitlab/#{full_name}"
     when "github"
       "https://crystaldoc.info/github/#{full_name}"
-    else
-      ""
-    end
-  end
-
-  def provider_icon
-    case provider
-    when "gitlab"
-      "fab fa-gitlab"
-    when "github"
-      "fab fa-github"
+    when "codeberg"
+      "https://crystaldoc.info/codeberg-org/#{full_name}"
     else
       ""
     end

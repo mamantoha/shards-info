@@ -8,7 +8,7 @@
       a href="/#{user.provider}/#{user.login}/"
         = user.decorate.full_name
       div
-        i class="fab #{user.decorate.provider_icon}"
+        i class="fab #{user.provider_icon}"
         = user.login
       .small.mb-4
         | #{user.attributes["repositories_count"]} repositories
@@ -18,7 +18,7 @@
           i.text-warning.fas.fa-fire
           ' Popular repository
         div.users__popular_repository
-          i class="#{repository.decorate.provider_icon}"
+          i class="#{repository.provider_icon}"
           a href="/#{user.provider}/#{user.login}/#{repository.name}/"
             = repository.name
         .mb-2
