@@ -24,16 +24,22 @@ module Helpers
 
       case uri.host
       when "github.com"
-        github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+        github_client = GithubHelpers.github_client
 
         if github_repo = github_client.repo(user_name, repository_name)
           GithubHelpers.sync_github_repo(github_repo)
         end
       when "gitlab.com"
-        gitlab_client = Gitlab::API.new(ENV["GITLAB_ACCESS_TOKEN"])
+        gitlab_client = GitlabHelpers.gitlab_client
 
         if gitlab_project = gitlab_client.project(user_name, repository_name)
           GitlabHelpers.sync_project(gitlab_project)
+        end
+      when "codeberg.org"
+        codeberg_client = CodebergHelpers.codeberg_client
+
+        if codeberg_repo = codeberg_client.repo(user_name, repository_name)
+          CodebergHelpers.sync_repo(codeberg_repo)
         end
       end
     end
