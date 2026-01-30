@@ -12,29 +12,7 @@ module GithubHelpers
 
     github_repo = github_client.repo(repository.provider_id)
 
-    tags = github_repo.tags
-    github_user = github_repo.user
-
-    user = User.query.find_or_build(provider: "github", provider_id: github_user.id)
-    assign_repository_user_attributes(user, github_user)
-    user.synced_at = Time.utc
-    user.ignore = false unless user.persisted?
-    user.save!
-
-    repository.user = user
-    assign_repository_attributes(repository, github_repo)
-    repository.synced_at = Time.utc
-    repository.save!
-
-    repository.tags = tags
-
-    sync_repository_shard_yml(repository)
-    sync_repository_readme(repository)
-    sync_repository_releases(repository)
-    sync_repository_languages(repository)
-    sync_repository_fork(repository, github_repo)
-
-    Helpers.update_dependecies(repository)
+    sync_github_repo(github_repo)
   rescue Crest::NotFound
     repository.delete
   end
