@@ -9,6 +9,12 @@ module CodebergHelpers
 
   def resync_repository(repository : Repository)
     return unless repository.provider == "codeberg"
+
+    codeberg_repo = codeberg_client.repo(repository.user.login, repository.name)
+
+    sync_repo(codeberg_repo)
+  rescue Crest::NotFound
+    repository.delete
   end
 
   def sync_repo(codeberg_repo : Forgejo::Repository) : Repository?

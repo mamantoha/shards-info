@@ -919,6 +919,8 @@ post "/admin/repositories/:id/sync" do |env|
       GithubHelpers.resync_repository(repository)
     when "gitlab"
       GitlabHelpers.resync_repository(repository)
+    when "codeberg"
+      CodebergHelpers.resync_repository(repository)
     end
 
     env.response.content_type = "application/json"
