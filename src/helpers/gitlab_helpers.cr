@@ -12,29 +12,7 @@ module GitlabHelpers
 
     gitlab_project = gitlab_client.project(repository.provider_id)
 
-    owner = gitlab_project.owner || gitlab_project.namespace
-    tags = gitlab_project.tag_list
-
-    user = User.query.find_or_build(provider: "gitlab", provider_id: owner.id)
-    assign_project_owner_attributes(user, owner)
-    user.synced_at = Time.utc
-    user.ignore = false unless user.persisted?
-    user.save!
-
-    repository.user = user
-    assign_project_attributes(repository, gitlab_project)
-    repository.synced_at = Time.utc
-    repository.save!
-
-    repository.tags = tags
-
-    sync_project_shard_yml(repository)
-    sync_project_readme(repository, readme_file(gitlab_project))
-    sync_project_releases(repository)
-    sync_project_languages(repository)
-    sync_project_fork(repository, gitlab_project)
-
-    Helpers.update_dependecies(repository)
+    sync_project(gitlab_project)
   rescue Crest::NotFound
     repository.delete
   end
