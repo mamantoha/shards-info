@@ -58,6 +58,14 @@ module Forgejo
       client.http_client.close
     end
 
+    def user(username : String)
+      url = "/users/#{username}"
+
+      response = make_request(url)
+
+      Forgejo::User.from_json(response.body)
+    end
+
     def repo(owner : String, repo_name : String)
       url = "/repos/#{owner}/#{repo_name}"
 

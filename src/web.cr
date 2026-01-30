@@ -837,12 +837,7 @@ post "/admin/users/:id/sync" do |env|
   id = env.params.url["id"]
 
   if user = User.find(id)
-    case user.provider
-    when "github"
-      GithubHelpers.resync_user(user)
-    when "gitlab"
-      GitlabHelpers.resync_user(user)
-    end
+    user.resync!
 
     env.response.content_type = "application/json"
     env.flash["notice"] = "User was successfully synced."
@@ -914,14 +909,7 @@ post "/admin/repositories/:id/sync" do |env|
   id = env.params.url["id"]
 
   if repository = Repository.find(id)
-    case repository.provider
-    when "github"
-      GithubHelpers.resync_repository(repository)
-    when "gitlab"
-      GitlabHelpers.resync_repository(repository)
-    when "codeberg"
-      CodebergHelpers.resync_repository(repository)
-    end
+    repository.resync!
 
     env.response.content_type = "application/json"
     env.flash["notice"] = "Repository was successfully synced."

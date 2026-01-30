@@ -51,6 +51,18 @@ module CodebergHelpers
     repository
   end
 
+  def resync_user(user : User)
+    return unless user.provider == "codeberg"
+
+    codeberg_user = codeberg_client.user(user.login)
+
+    assign_user_attributes(user, codeberg_user)
+    user.synced_at = Time.utc
+    user.save
+  rescue Crest::NotFound
+    user.delete
+  end
+
   def assign_user_attributes(user : User, codeberg_owner : Forgejo::User)
     user.set({
       login:      codeberg_owner.login,

@@ -87,6 +87,17 @@ class Repository
     @delegator ||= RepositoryDelegator.delegate(self)
   end
 
+  def resync!
+    case provider
+    when "github"
+      GithubHelpers.resync_repository(self)
+    when "gitlab"
+      GitlabHelpers.resync_repository(self)
+    when "codeberg"
+      CodebergHelpers.resync_repository(self)
+    end
+  end
+
   def touch : Repository
     self.updated_on = Time.local
     save!
