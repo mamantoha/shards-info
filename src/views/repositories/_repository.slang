@@ -30,7 +30,7 @@
     .shard__topics
       - repository.tags.each do |tag|
         a href="/tags/#{tag.name}" class="badge bg-secondary text-monospace" = tag.name
-    .shards__shard_github
+    .shards__shard_stats
       ul
         li
           i class="fas fa-star" title="Stars"
