@@ -2,7 +2,7 @@
   .h1
     | About
   .h6.font-weight-light
-    | View of all repositories on Github and Gitlab that have Crystal code in them.
+    | View of all repositories on Github, Gitlab, and Codeberg that have Crystal code in them.
 
   ul
     li

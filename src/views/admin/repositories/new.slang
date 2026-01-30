@@ -11,6 +11,6 @@
         | URL
       input.form-control#inputUrl aria-describedby="urlHelp" name="repository[url]" required="required"
       .form-text#urlHelp
-        | Enter full path to Github/Gitlab repository
+        | Enter full path to Github/Gitlab/Codeberg repository
     button.btn.btn-primary type="submit"
       | Submit
