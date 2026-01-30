@@ -62,7 +62,7 @@ module Helpers
       branch = spec_dependency.refs
       version = spec_dependency.version
 
-      if provider_name = (spec_dependency.keys & ["github", "gitlab"]).first?
+      if provider_name = (spec_dependency.keys & ["github", "gitlab", "codeberg"]).first?
         if repository_path = spec_dependency[provider_name]
           user_name, repository_name = repository_path.split("/")
 
@@ -86,6 +86,16 @@ module Helpers
               begin
                 if gitlab_project = gitlab_client.project(user_name, repository_name)
                   dependency_repository = GitlabHelpers.sync_project(gitlab_project)
+                end
+              rescue Crest::NotFound
+                next
+              end
+            when "codeberg"
+              codeberg_client = CodebergHelpers.codeberg_client
+
+              begin
+                if codeberg_repo = codeberg_client.repo(user_name, repository_name)
+                  dependency_repository = CodebergHelpers.sync_repo(codeberg_repo)
                 end
               rescue Crest::NotFound
                 next
