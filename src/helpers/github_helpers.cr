@@ -3,10 +3,12 @@ require "shards_spec"
 module GithubHelpers
   extend self
 
+  def github_client
+    Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
+  end
+
   def resync_repository(repository : Repository)
     return unless repository.provider == "github"
-
-    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
     github_repo = github_client.repo(repository.provider_id)
 
@@ -39,8 +41,6 @@ module GithubHelpers
 
   def resync_user(user : User)
     return unless user.provider == "github"
-
-    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
 
     github_user = github_client.user(user.login)
 
@@ -124,8 +124,6 @@ module GithubHelpers
   end
 
   def sync_repository_shard_yml(repository : Repository)
-    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
-
     response = github_client.repo_content(repository.user.login, repository.name, "shard.yml")
     shard_file = Base64.decode_string(response.content)
 
@@ -139,8 +137,6 @@ module GithubHelpers
   end
 
   def sync_repository_readme(repository : Repository)
-    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
-
     response = github_client.repo_readme(repository.user.login, repository.name)
     readme_file = Base64.decode_string(response.content)
 
@@ -154,8 +150,6 @@ module GithubHelpers
   end
 
   def sync_repository_releases(repository : Repository)
-    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
-
     github_releases = github_client.repo_releases(repository.user.login, repository.name)
 
     create_releases(repository, github_releases)
@@ -193,8 +187,6 @@ module GithubHelpers
   end
 
   def sync_repository_languages(repository : Repository)
-    github_client = Github::API.new(ENV["GITHUB_USER"], ENV["GITHUB_KEY"])
-
     languages = github_client.repo_languages(repository.user.login, repository.name)
 
     unlink_languages = repository.language_names - languages.keys
