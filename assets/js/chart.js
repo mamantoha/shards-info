@@ -323,7 +323,7 @@ class PieChart {
       datasets: [
         {
           data: values,
-          backgroundColor: ['#4078c0', '#e2432a'],
+          backgroundColor: ['#4078c0', '#e2432a', '#4793cc'],
           borderWidth: 0
         }
       ]
