@@ -2,3 +2,6 @@ dependencies:
   redis:
     github: jgaskins/redis
     branch: master
+  kemal-session:
+    github: kemalcr/kemal-session
+    branch: flash
