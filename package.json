@@ -47,7 +47,8 @@
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.8",
     "chart.js": "^4.5.1",
-    "jqcloud2": "^2.0.3",
+    "d3": "^7.9.0",
+    "d3-cloud": "^1.2.5",
     "jquery": "^3.7.1",
     "moveto": "^1.8.2",
     "sass": "^1.97.3"

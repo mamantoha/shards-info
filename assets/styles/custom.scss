@@ -792,6 +792,60 @@ ul.not-list {
   height: 50vh;
 }
 
+.word-cloud {
+  position: relative;
+  overflow: hidden;
+  font: 10px Helvetica, Arial, sans-serif;
+  line-height: normal;
+}
+
+.word-cloud__svg {
+  width: 100%;
+  height: 100%;
+}
+
+.word-cloud__word {
+  cursor: pointer;
+}
+
+.word-cloud__word.w1 {
+  fill: #aab5f0;
+}
+
+.word-cloud__word.w2 {
+  fill: #9ce;
+}
+
+.word-cloud__word.w3 {
+  fill: #a0ddff;
+}
+
+.word-cloud__word.w4 {
+  fill: #90c5f0;
+}
+
+.word-cloud__word.w5 {
+  fill: #90a0dd;
+}
+
+.word-cloud__word.w6 {
+  fill: #90c5f0;
+}
+
+.word-cloud__word.w7 {
+  fill: #39d;
+}
+
+.word-cloud__word.w8,
+.word-cloud__word.w9,
+.word-cloud__word.w10 {
+  fill: #0cf;
+}
+
+.word-cloud__link:hover text {
+  fill: #0cf;
+}
+
 .badge-info {
   color: #fff;
   background-color: var(--badge-bg-color);

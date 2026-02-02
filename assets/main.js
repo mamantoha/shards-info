@@ -7,7 +7,7 @@ import 'bootstrap/js/dist/scrollspy';
 import 'bootstrap/js/dist/tooltip';
 import 'bootstrap/js/dist/popover';
 
-import 'jqcloud2/src/jqcloud';
+import './js/word-cloud.js';
 
 import Chart from 'chart.js/auto';
 import moveto from 'moveto/src/moveTo';
