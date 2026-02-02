@@ -13,7 +13,7 @@ div#tags data-tags="#{tags_json}"
 javascript:
   $(function() {
     tags = $("#tags").data("tags");
-    $('#tags-cloud').jQCloud(tags, {
+    window.renderWordCloud('#tags-cloud', tags, {
       autoResize: true,
       fontSize: {
         from: 0.04,

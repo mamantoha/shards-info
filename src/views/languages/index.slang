@@ -13,7 +13,7 @@ div#languages data-languages="#{languages_json}"
 javascript:
   $(function() {
     languages = $("#languages").data("languages");
-    $('#languages-cloud').jQCloud(languages, {
+    window.renderWordCloud('#languages-cloud', languages, {
       autoResize: true,
       fontSize: {
         from: 0.04,
