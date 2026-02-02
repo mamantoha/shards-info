@@ -4,4 +4,4 @@ dependencies:
     branch: master
   kemal-session:
     github: kemalcr/kemal-session
-    branch: flash
+    branch: master
