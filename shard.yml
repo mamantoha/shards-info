@@ -28,8 +28,6 @@ dependencies:
   kemal-session-redis-engine:
     github: crystal-garage/kemal-session-redis-engine
     branch: main
-  kemal-flash:
-    github: crystal-garage/kemal-flash
   defense:
     github: defense-cr/defense
   kilt:

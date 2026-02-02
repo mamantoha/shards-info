@@ -1,7 +1,6 @@
 require "kemal"
 require "kemal-session"
 require "kemal-session-redis-engine"
-require "kemal-flash"
 require "kemal-kilt"
 
 Kemal::Session.config do |config|
