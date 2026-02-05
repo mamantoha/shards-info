@@ -30,6 +30,7 @@ dependencies:
     branch: main
   defense:
     github: defense-cr/defense
+    branch: master
   kilt:
     github: jeromegn/kilt
   slang:

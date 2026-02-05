@@ -51,7 +51,7 @@ shards:
 
   defense:
     git: https://github.com/defense-cr/defense.git
-    version: 0.6.0
+    version: 0.6.0+git.commit.52e6430dc1c772497650a725b3bb4e568db02b2f
 
   delegator:
     git: https://github.com/schniz/delegator.cr.git
@@ -115,7 +115,7 @@ shards:
 
   kemal-session: # Overridden
     git: https://github.com/kemalcr/kemal-session.git
-    version: 1.3.0+git.commit.b3c3be4c291afbf99a4c5c4144b53b4fc14aca17
+    version: 1.4.0+git.commit.a97d053f0e467874170211f4f78b4b11db45f33d
 
   kemal-session-redis-engine:
     git: https://github.com/crystal-garage/kemal-session-redis-engine.git
@@ -155,7 +155,7 @@ shards:
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.15.0+git.commit.c7ced1fe9db4585ead059f073c5381a30b012dd7
+    version: 0.15.1+git.commit.298364ff07e7163acc5d99b3634c31c266aa16da
 
   redis_cache_store:
     git: https://github.com/crystal-cache/redis_cache_store.git
