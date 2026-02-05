@@ -87,7 +87,7 @@ shards:
 
   http_proxy:
     git: https://github.com/mamantoha/http_proxy.git
-    version: 0.13.1
+    version: 0.14.0
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
@@ -115,7 +115,7 @@ shards:
 
   kemal-session: # Overridden
     git: https://github.com/kemalcr/kemal-session.git
-    version: 1.4.0+git.commit.a97d053f0e467874170211f4f78b4b11db45f33d
+    version: 1.4.0+git.commit.fac5c18b95f9c1097e7ce044956d7298ff38c8ad
 
   kemal-session-redis-engine:
     git: https://github.com/crystal-garage/kemal-session-redis-engine.git
