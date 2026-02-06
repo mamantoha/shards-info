@@ -32,8 +32,8 @@ require "./delegators"
 
 require "./lib/cmark/readme_renderer"
 
-add_handler Defense::Handler.new
-add_handler ActiveUserTracker.new
+use Defense::Handler.new
+use ActiveUserTracker.new
 
 add_context_storage_type(RequestContext)
 
