@@ -24,6 +24,49 @@ psql -c 'CREATE DATABASE shards_info_development;' -U postgres
 crystal src/cli.cr migrate
 ```
 
+### Database Operations (Makefile)
+
+We use a Makefile to automate database schema dumps and restoration. Available commands:
+
+#### Dump database schema and migrations
+
+```
+make db-dump
+```
+
+This dumps both the schema and migration metadata (__lustra_metadatas table) into `src/db/structure.sql`.
+
+#### Dump schema only
+
+```
+make db-dump-schema
+```
+
+#### Dump migrations metadata only
+
+```
+make db-dump-migrations
+```
+
+#### Restore from dump
+
+```
+make db-restore
+```
+
+#### Using a different database
+
+```
+make db-dump DB_NAME=your_database_name
+make db-restore DB_NAME=your_database_name
+```
+
+#### View all available commands
+
+```
+make help
+```
+
 ### Frontend
 
 Install depencencies:
