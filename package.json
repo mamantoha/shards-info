@@ -34,7 +34,7 @@
     "expose-loader": "^5.0.1",
     "mini-css-extract-plugin": "^2.9.4",
     "neostandard": "^0.12.2",
-    "sass-loader": "^16.0.6",
+    "sass-loader": "^16.0.7",
     "style-loader": "^4.0.0",
     "stylelint": "^16.26.1",
     "stylelint-config-standard": "^39.0.1",
