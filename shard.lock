@@ -105,9 +105,9 @@ shards:
     git: https://github.com/geocrystal/ipapi-crystal.git
     version: 0.7.0
 
-  kemal:
+  kemal: # Overridden
     git: https://github.com/kemalcr/kemal.git
-    version: 1.9.0
+    version: 1.9.0+git.commit.83ae194d7c01716706d0e8702755ef5abd6d68e2
 
   kemal-kilt:
     git: https://github.com/crystal-garage/kemal-kilt.git
