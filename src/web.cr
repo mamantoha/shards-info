@@ -853,15 +853,14 @@ post "/admin/users/:id/sync" do |env|
   if user = User.find(id)
     user.resync!
 
-    env.response.content_type = "application/json"
     env.flash["notice"] = "User was successfully synced."
 
-    {
+    env.json({
       "status" => "success",
       "data"   => {
         "redirect_url" => "/#{user.provider}/#{user.login}",
       },
-    }.to_json
+    })
   end
 end
 
@@ -871,15 +870,14 @@ delete "/admin/users/:id" do |env|
   if user = User.find(id)
     user.delete
 
-    env.response.content_type = "application/json"
     env.flash["notice"] = "User was successfully destroyed."
 
-    {
+    env.json({
       "status" => "success",
       "data"   => {
         "redirect_url" => "/",
       },
-    }.to_json
+    })
   end
 end
 
@@ -889,15 +887,14 @@ post "/admin/users/:id/show" do |env|
   if user = User.find(id)
     user.update(ignore: false)
 
-    env.response.content_type = "application/json"
     env.flash["notice"] = "User was successfully shown."
 
-    {
+    env.json({
       "status" => "success",
       "data"   => {
         "redirect_url" => "/#{user.provider}/#{user.login}",
       },
-    }.to_json
+    })
   end
 end
 
@@ -907,15 +904,14 @@ post "/admin/users/:id/hide" do |env|
   if user = User.find(id)
     user.update(ignore: true)
 
-    env.response.content_type = "application/json"
     env.flash["notice"] = "User was successfully hidden."
 
-    {
+    env.json({
       "status" => "success",
       "data"   => {
         "redirect_url" => "/#{user.provider}/#{user.login}",
       },
-    }.to_json
+    })
   end
 end
 
@@ -925,15 +921,14 @@ post "/admin/repositories/:id/sync" do |env|
   if repository = Repository.find(id)
     repository.resync!
 
-    env.response.content_type = "application/json"
     env.flash["notice"] = "Repository was successfully synced."
 
-    {
+    env.json({
       "status" => "success",
       "data"   => {
         "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
       },
-    }.to_json
+    })
   end
 end
 
@@ -943,15 +938,14 @@ post "/admin/repositories/:id/show" do |env|
   if repository = Repository.find(id)
     repository.update(ignore: false)
 
-    env.response.content_type = "application/json"
     env.flash["notice"] = "Repository was successfully shown."
 
-    {
+    env.json({
       "status" => "success",
       "data"   => {
         "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
       },
-    }.to_json
+    })
   end
 end
 
@@ -961,15 +955,14 @@ post "/admin/repositories/:id/hide" do |env|
   if repository = Repository.find(id)
     repository.update(ignore: true)
 
-    env.response.content_type = "application/json"
     env.flash["notice"] = "Repository was successfully hidden."
 
-    {
+    env.json({
       "status" => "success",
       "data"   => {
         "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
       },
-    }.to_json
+    })
   end
 end
 
@@ -979,15 +972,14 @@ delete "/admin/repositories/:id" do |env|
   if repository = Repository.find(id)
     repository.delete
 
-    env.response.content_type = "application/json"
     env.flash["notice"] = "Repository was successfully destroyed."
 
-    {
+    env.json({
       "status" => "success",
       "data"   => {
         "redirect_url" => "/",
       },
-    }.to_json
+    })
   end
 end
 
