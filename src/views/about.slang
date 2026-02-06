@@ -32,6 +32,8 @@
     li
       | Build date #{Time.parse_rfc2822(Config.date).to_s("%Y-%m-%d %H:%M:%S %:z")}
     li
+      | Last data sync at #{last_sync_time}
+    li
       | Official code repository is on
       a href="https://github.com/mamantoha/shards-info" GitHub
     li
