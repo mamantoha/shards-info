@@ -115,11 +115,11 @@ shards:
 
   kemal-session: # Overridden
     git: https://github.com/kemalcr/kemal-session.git
-    version: 1.4.0+git.commit.b31c930ccb5d8053723b5717007c73de3671c90d
+    version: 1.4.0+git.commit.6b0f5d2f984e86282cfa12a91d67758542afccc8
 
   kemal-session-redis-engine:
     git: https://github.com/crystal-garage/kemal-session-redis-engine.git
-    version: 1.4.0+git.commit.bfc216a45df39779798d41e13c9d14d41df85b21
+    version: 1.4.0+git.commit.58bd15cf61ea75dae6f5caaa9259f3ecdfb08ba6
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
