@@ -43,7 +43,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 1.6.0
+    version: 1.6.1
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -115,11 +115,11 @@ shards:
 
   kemal-session: # Overridden
     git: https://github.com/kemalcr/kemal-session.git
-    version: 1.4.0+git.commit.fac5c18b95f9c1097e7ce044956d7298ff38c8ad
+    version: 1.4.0+git.commit.b31c930ccb5d8053723b5717007c73de3671c90d
 
   kemal-session-redis-engine:
     git: https://github.com/crystal-garage/kemal-session-redis-engine.git
-    version: 1.3.0+git.commit.148e33e926b355322e16e96f8023ac59b4ce7527
+    version: 1.4.0+git.commit.bfc216a45df39779798d41e13c9d14d41df85b21
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
@@ -155,7 +155,7 @@ shards:
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.15.1+git.commit.298364ff07e7163acc5d99b3634c31c266aa16da
+    version: 0.15.2+git.commit.8d7064f844ecd51d7fd38d48b18860e0813c0788
 
   redis_cache_store:
     git: https://github.com/crystal-cache/redis_cache_store.git
