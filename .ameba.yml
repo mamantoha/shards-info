@@ -10,6 +10,7 @@ Lint/UselessAssign:
   Enabled: true
   Excluded:
     - src/web.cr
+    - src/routes/*
 
 Lint/SpecFilename:
   Excluded:
