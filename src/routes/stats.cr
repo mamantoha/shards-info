@@ -1,6 +1,8 @@
 router = Kemal::Router.new
 
 router.namespace "/stats" do
+  expires_in = 2.hours
+
   before do |env|
     if env.request.headers["X-Requested-With"]? != "XMLHttpRequest"
       halt env.status(403).text("Forbidden: Access via XHR only.")
@@ -10,7 +12,7 @@ router.namespace "/stats" do
   end
 
   get "/created_at" do
-    CACHE.fetch("stats:created_at", expires_in: 2.hours) do
+    CACHE.fetch("stats:created_at", expires_in: expires_in) do
       repositiries =
         Repository
           .query
@@ -32,7 +34,7 @@ router.namespace "/stats" do
   end
 
   get "/last_activity_at" do
-    CACHE.fetch("stats:last_activity_at_json", expires_in: 2.hours) do
+    CACHE.fetch("stats:last_activity_at_json", expires_in: expires_in) do
       repositiries =
         Repository
           .query
@@ -56,7 +58,7 @@ router.namespace "/stats" do
   get "/repositories_growth" do
     # Calculates the cumulative count of repositories created before and on each year-month date,
     # including months with no repositories
-    CACHE.fetch("stats:repositories_growth", expires_in: 2.hours) do
+    CACHE.fetch("stats:repositories_growth", expires_in: expires_in) do
       hsh = {} of String => Int64
 
       # https://github.com/crystal-lang/crystal was created on November 27, 2012
@@ -89,7 +91,7 @@ router.namespace "/stats" do
 
   # Number of direct dependencies
   get "/direct_dependencies" do
-    CACHE.fetch("stats:direct_dependencies", expires_in: 2.hours) do
+    CACHE.fetch("stats:direct_dependencies", expires_in: expires_in) do
       hsh = {} of Int64 => Int64
 
       Lustra::SQL
@@ -123,7 +125,7 @@ router.namespace "/stats" do
 
   # Number of transitive reverse dependencies
   get "/reverse_dependencies" do
-    CACHE.fetch("stats:reverse_dependencies", expires_in: 2.hours) do
+    CACHE.fetch("stats:reverse_dependencies", expires_in: expires_in) do
       hsh = {} of String => Int64
 
       select_dependency_range = <<-SQL
@@ -165,7 +167,7 @@ router.namespace "/stats" do
   end
 
   get "/user_repositories_count" do
-    CACHE.fetch("stats:user_repositories_count", expires_in: 2.hours) do
+    CACHE.fetch("stats:user_repositories_count", expires_in: expires_in) do
       hsh = {} of Int64 => Int64
 
       Lustra::SQL
@@ -196,7 +198,7 @@ router.namespace "/stats" do
   end
 
   get "/repositories_provider_count" do
-    CACHE.fetch("stats:repositories_provider_count", expires_in: 2.hours) do
+    CACHE.fetch("stats:repositories_provider_count", expires_in: expires_in) do
       hsh = {} of String => Int64
 
       Repository
@@ -213,7 +215,7 @@ router.namespace "/stats" do
   end
 
   get "/users_provider_count" do
-    CACHE.fetch("stats:users_provider_count", expires_in: 2.hours) do
+    CACHE.fetch("stats:users_provider_count", expires_in: expires_in) do
       hsh = {} of String => Int64
 
       User
