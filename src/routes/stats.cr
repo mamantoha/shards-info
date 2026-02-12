@@ -2,6 +2,10 @@ router = Kemal::Router.new
 
 router.namespace "/stats" do
   before do |env|
+    if env.request.headers["X-Requested-With"]? != "XMLHttpRequest"
+      halt env.status(403).text("Forbidden: Access via XHR only.")
+    end
+
     env.response.content_type = "application/json"
   end
 
