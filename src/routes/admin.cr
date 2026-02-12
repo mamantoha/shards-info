@@ -45,25 +45,95 @@ router.namespace "/admin" do
     render "src/views/admin/admins/index.slang", "src/views/layouts/layout.slang"
   end
 
-  get "/repositories/new" do |env|
-    set_request_context(env) do
-      request_context.page_title = "Admin: Add new repository"
+  namespace "/repositories" do
+    get "/new" do |env|
+      set_request_context(env) do
+        request_context.page_title = "Admin: Add new repository"
+      end
+
+      render "src/views/admin/repositories/new.slang", "src/views/layouts/layout.slang"
     end
 
-    render "src/views/admin/repositories/new.slang", "src/views/layouts/layout.slang"
-  end
+    post "/" do |env|
+      url = env.params.body["repository[url]"].as(String)
 
-  post "/repositories" do |env|
-    url = env.params.body["repository[url]"].as(String)
+      if repository = Helpers.sync_repository_by_url(url)
+        env.flash["notice"] = "Repository was successfully added."
 
-    if repository = Helpers.sync_repository_by_url(url)
-      env.flash["notice"] = "Repository was successfully added."
+        env.redirect(repository.decorate.show_path)
+      else
+        env.flash["notice"] = "Something went wrong."
 
-      env.redirect(repository.decorate.show_path)
-    else
-      env.flash["notice"] = "Something went wrong."
+        env.redirect("/admin/repositories/new")
+      end
+    end
 
-      env.redirect("/admin/repositories/new")
+    post "/:id/sync" do |env|
+      id = env.params.url["id"]
+
+      if repository = Repository.find(id)
+        repository.resync!
+
+        env.flash["notice"] = "Repository was successfully synced."
+
+        env.json({
+          "status" => "success",
+          "data"   => {
+            "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
+          },
+        })
+      end
+    end
+
+    post "/:id/show" do |env|
+      id = env.params.url["id"]
+
+      if repository = Repository.find(id)
+        repository.update(ignore: false)
+
+        env.flash["notice"] = "Repository was successfully shown."
+
+        env.json({
+          "status" => "success",
+          "data"   => {
+            "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
+          },
+        })
+      end
+    end
+
+    post "/:id/hide" do |env|
+      id = env.params.url["id"]
+
+      if repository = Repository.find(id)
+        repository.update(ignore: true)
+
+        env.flash["notice"] = "Repository was successfully hidden."
+
+        env.json({
+          "status" => "success",
+          "data"   => {
+            "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
+          },
+        })
+      end
+    end
+
+    delete "/:id" do |env|
+      id = env.params.url["id"]
+
+      if repository = Repository.find(id)
+        repository.delete
+
+        env.flash["notice"] = "Repository was successfully destroyed."
+
+        env.json({
+          "status" => "success",
+          "data"   => {
+            "redirect_url" => "/",
+          },
+        })
+      end
     end
   end
 
@@ -151,139 +221,73 @@ router.namespace "/admin" do
     render "src/views/admin/active_users/index.slang", "src/views/layouts/layout.slang"
   end
 
-  post "/users/:id/sync" do |env|
-    id = env.params.url["id"]
+  namespace "/users" do
+    post "/:id/sync" do |env|
+      id = env.params.url["id"]
 
-    if user = User.find(id)
-      user.resync!
+      if user = User.find(id)
+        user.resync!
 
-      env.flash["notice"] = "User was successfully synced."
+        env.flash["notice"] = "User was successfully synced."
 
-      env.json({
-        "status" => "success",
-        "data"   => {
-          "redirect_url" => "/#{user.provider}/#{user.login}",
-        },
-      })
+        env.json({
+          "status" => "success",
+          "data"   => {
+            "redirect_url" => "/#{user.provider}/#{user.login}",
+          },
+        })
+      end
     end
-  end
 
-  delete "/users/:id" do |env|
-    id = env.params.url["id"]
+    delete "/:id" do |env|
+      id = env.params.url["id"]
 
-    if user = User.find(id)
-      user.delete
+      if user = User.find(id)
+        user.delete
 
-      env.flash["notice"] = "User was successfully destroyed."
+        env.flash["notice"] = "User was successfully destroyed."
 
-      env.json({
-        "status" => "success",
-        "data"   => {
-          "redirect_url" => "/",
-        },
-      })
+        env.json({
+          "status" => "success",
+          "data"   => {
+            "redirect_url" => "/",
+          },
+        })
+      end
     end
-  end
 
-  post "/users/:id/show" do |env|
-    id = env.params.url["id"]
+    post "/:id/show" do |env|
+      id = env.params.url["id"]
 
-    if user = User.find(id)
-      user.update(ignore: false)
+      if user = User.find(id)
+        user.update(ignore: false)
 
-      env.flash["notice"] = "User was successfully shown."
+        env.flash["notice"] = "User was successfully shown."
 
-      env.json({
-        "status" => "success",
-        "data"   => {
-          "redirect_url" => "/#{user.provider}/#{user.login}",
-        },
-      })
+        env.json({
+          "status" => "success",
+          "data"   => {
+            "redirect_url" => "/#{user.provider}/#{user.login}",
+          },
+        })
+      end
     end
-  end
 
-  post "/users/:id/hide" do |env|
-    id = env.params.url["id"]
+    post "/:id/hide" do |env|
+      id = env.params.url["id"]
 
-    if user = User.find(id)
-      user.update(ignore: true)
+      if user = User.find(id)
+        user.update(ignore: true)
 
-      env.flash["notice"] = "User was successfully hidden."
+        env.flash["notice"] = "User was successfully hidden."
 
-      env.json({
-        "status" => "success",
-        "data"   => {
-          "redirect_url" => "/#{user.provider}/#{user.login}",
-        },
-      })
-    end
-  end
-
-  post "/repositories/:id/sync" do |env|
-    id = env.params.url["id"]
-
-    if repository = Repository.find(id)
-      repository.resync!
-
-      env.flash["notice"] = "Repository was successfully synced."
-
-      env.json({
-        "status" => "success",
-        "data"   => {
-          "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
-        },
-      })
-    end
-  end
-
-  post "/repositories/:id/show" do |env|
-    id = env.params.url["id"]
-
-    if repository = Repository.find(id)
-      repository.update(ignore: false)
-
-      env.flash["notice"] = "Repository was successfully shown."
-
-      env.json({
-        "status" => "success",
-        "data"   => {
-          "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
-        },
-      })
-    end
-  end
-
-  post "/repositories/:id/hide" do |env|
-    id = env.params.url["id"]
-
-    if repository = Repository.find(id)
-      repository.update(ignore: true)
-
-      env.flash["notice"] = "Repository was successfully hidden."
-
-      env.json({
-        "status" => "success",
-        "data"   => {
-          "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
-        },
-      })
-    end
-  end
-
-  delete "/repositories/:id" do |env|
-    id = env.params.url["id"]
-
-    if repository = Repository.find(id)
-      repository.delete
-
-      env.flash["notice"] = "Repository was successfully destroyed."
-
-      env.json({
-        "status" => "success",
-        "data"   => {
-          "redirect_url" => "/",
-        },
-      })
+        env.json({
+          "status" => "success",
+          "data"   => {
+            "redirect_url" => "/#{user.provider}/#{user.login}",
+          },
+        })
+      end
     end
   end
 end
