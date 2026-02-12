@@ -106,8 +106,8 @@ shards:
     version: 0.7.0
 
   kemal: # Overridden
-    git: https://github.com/kemalcr/kemal.git
-    version: 1.9.0+git.commit.676a35f0893d8d754ece6fc008e937c202872670
+    git: https://github.com/mamantoha/kemal.git
+    version: 1.9.0+git.commit.ead4fe16c443033ca1d3a781edef21ddc39f00da
 
   kemal-kilt:
     git: https://github.com/crystal-garage/kemal-kilt.git

@@ -3,8 +3,10 @@ dependencies:
     github: jgaskins/redis
     branch: master
   kemal:
-    github: kemalcr/kemal
-    branch: master
+    # github: kemalcr/kemal
+    # branch: master
+    github: mamantoha/kemal
+    branch: fix-namespace-filters-isolated
   kemal-session:
     github: kemalcr/kemal-session
     branch: master
