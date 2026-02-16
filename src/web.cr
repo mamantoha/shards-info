@@ -160,8 +160,8 @@ get "/" do |env|
       .with_counts
       .with_user
       .with_tags
-      .where { users.ignore == false }
-      .where { repositories.ignore == false }
+      .where { users.ignore.false? }
+      .where { repositories.ignore.false? }
       .where { repositories.last_activity_at > 1.week.ago }
       .order_by(stars_count: :desc)
       .order_by("repositories.id", :asc)
@@ -174,8 +174,8 @@ get "/" do |env|
       .with_counts
       .with_user
       .with_tags
-      .where { users.ignore == false }
-      .where { repositories.ignore == false }
+      .where { users.ignore.false? }
+      .where { repositories.ignore.false? }
       .order_by(last_activity_at: :desc)
       .limit(20)
 
@@ -251,8 +251,8 @@ get "/users" do |env|
     User
       .query
       .join(:repositories)
-      .where { users.ignore == false }
-      .where { repositories.ignore == false }
+      .where { users.ignore.false? }
+      .where { repositories.ignore.false? }
       .select(
         "users.*",
         select_stars_count,
@@ -434,14 +434,14 @@ get "/:provider/:owner/:repo" do |env|
       repository
         .dependencies
         .with_user
-        .where { relationships.development == false }
+        .where { relationships.development.false? }
         .with_counts
 
     development_dependencies =
       repository
         .dependencies
         .with_user
-        .where { relationships.development == true }
+        .where { relationships.development.true? }
         .with_counts
 
     dependents =
@@ -579,8 +579,8 @@ get "/tags/:name" do |env|
         .clear_distinct
         .with_tags
         .with_user
-        .where { users.ignore == false }
-        .where { repositories.ignore == false }
+        .where { users.ignore.false? }
+        .where { repositories.ignore.false? }
         .with_counts
         .order_by("repositories.stars_count", :desc)
         .order_by("repositories.id", :asc)
@@ -768,7 +768,7 @@ get "/admin/hidden_users" do |env|
     User
       .query
       .join(:repositories)
-      .where { users.ignore == true }
+      .where { users.ignore.true? }
       .select(
         "users.*",
         "COUNT(repositories.*) AS repositories_count",
@@ -807,7 +807,7 @@ get "/admin/hidden_repositories" do |env|
     Repository
       .query
       .with_user
-      .where { repositories.ignore == true }
+      .where { repositories.ignore.true? }
       .order_by(stars_count: :desc)
 
   total_count = repositories_query.count
