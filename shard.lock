@@ -127,11 +127,11 @@ shards:
 
   lustra:
     git: https://github.com/crystal-garage/lustra.git
-    version: 0.16.2+git.commit.5fd346c73548f05b6920fc55230d42d8b331ff1d
+    version: 0.16.2+git.commit.883dfbfa5c9fd12c69f00a1217e0a5a3ec41af90
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
-    version: 2.0.0
+    version: 2.0.0+git.commit.7d45a10936a2872eba2212fb60891b632279fc86
 
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
@@ -155,7 +155,7 @@ shards:
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.15.2+git.commit.8d7064f844ecd51d7fd38d48b18860e0813c0788
+    version: 0.15.3+git.commit.d38bd79ed2c96d3f53f774485b4f5e1e8400e089
 
   redis_cache_store:
     git: https://github.com/crystal-cache/redis_cache_store.git

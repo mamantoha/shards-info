@@ -23,6 +23,7 @@ dependencies:
   mosquito:
     github: mosquito-cr/mosquito
     version: "~> 2.0"
+    branch: master
   kemal-session:
     github: kemalcr/kemal-session
   kemal-session-redis-engine:
