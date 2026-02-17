@@ -149,7 +149,7 @@ router.namespace "/admin" do
       User
         .query
         .join(:repositories)
-        .where { users.ignore == true }
+        .where { users.ignore.true? }
         .select(
           "users.*",
           "COUNT(repositories.*) AS repositories_count",
@@ -188,7 +188,7 @@ router.namespace "/admin" do
       Repository
         .query
         .with_user
-        .where { repositories.ignore == true }
+        .where { repositories.ignore.true? }
         .order_by(stars_count: :desc)
 
     total_count = repositories_query.count
