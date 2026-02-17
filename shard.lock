@@ -107,7 +107,7 @@ shards:
 
   kemal: # Overridden
     git: https://github.com/kemalcr/kemal.git
-    version: 1.9.0+git.commit.1460c68d5f70b7472851a931bd95bc19c0e21a2d
+    version: 1.9.0+git.commit.89966f6f7b4c3ce8e39def4aafa9b33257232a82
 
   kemal-kilt:
     git: https://github.com/crystal-garage/kemal-kilt.git
@@ -155,7 +155,7 @@ shards:
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.15.2+git.commit.8d7064f844ecd51d7fd38d48b18860e0813c0788
+    version: 0.15.3+git.commit.d38bd79ed2c96d3f53f774485b4f5e1e8400e089
 
   redis_cache_store:
     git: https://github.com/crystal-cache/redis_cache_store.git
