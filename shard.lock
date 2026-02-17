@@ -107,7 +107,7 @@ shards:
 
   kemal: # Overridden
     git: https://github.com/kemalcr/kemal.git
-    version: 1.9.0+git.commit.1460c68d5f70b7472851a931bd95bc19c0e21a2d
+    version: 1.9.0+git.commit.89966f6f7b4c3ce8e39def4aafa9b33257232a82
 
   kemal-kilt:
     git: https://github.com/crystal-garage/kemal-kilt.git
@@ -188,4 +188,3 @@ shards:
   time_zone:
     git: https://github.com/mamantoha/time_zone.git
     version: 0.1.3
-
