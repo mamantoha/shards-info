@@ -1,6 +1,7 @@
 require "yaml"
 
 # https://github.com/github/linguist
+# https://raw.githubusercontent.com/github-linguist/linguist/refs/heads/main/lib/linguist/languages.yml
 module Linguist
   # Languages are defined in `languages.yml`.
   class Language
