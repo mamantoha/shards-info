@@ -49,8 +49,11 @@ module Forgejo
     def make_request(url, params = {} of String => String)
       Retriable.retry(on: {
         Crest::GatewayTimeout,
+        Crest::BadGateway,
         IO::TimeoutError,
+        IO::Error,
         OpenSSL::SSL::Error,
+        Socket::ConnectError,
       }) do
         client[url].get(params: params)
       end
