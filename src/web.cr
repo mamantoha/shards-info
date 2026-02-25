@@ -95,6 +95,15 @@ get "/auth/:provider" do |env|
 end
 
 get "/auth/:provider/callback" do |env|
+  origin = env.session.string?("origin") || "/"
+
+  if env.params.query["error"]?
+    error_description = env.params.query["error_description"]? || "Unknown error."
+    env.flash["notice"] = error_description
+
+    next env.redirect(origin)
+  end
+
   if auth = multi_auth(env)
     user = auth.user(env.params.query)
   else
@@ -120,8 +129,6 @@ get "/auth/:provider/callback" do |env|
   if admin.save
     env.session.bigint("user_id", admin.id)
   end
-
-  origin = env.session.string?("origin") || "/"
 
   env.redirect(origin)
 end
