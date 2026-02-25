@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.95277396e615f0c216f2cbb7993d968d250d3071
+    version: 1.7.0-dev+git.commit.0bc878de36c1f10afde766bdae74d6c74f265c70
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -131,7 +131,7 @@ shards:
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
-    version: 2.0.0+git.commit.d3fae4a8556d7431baba773b57bb33458437f524
+    version: 2.0.0+git.commit.e2bcc8b01c53342c43eb0c0d500f0150b5c073bf
 
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
@@ -175,7 +175,7 @@ shards:
 
   spec-kemal:
     git: https://github.com/kemalcr/spec-kemal.git
-    version: 1.1.0
+    version: 1.1.1
 
   time_by_example:
     git: https://github.com/mamantoha/time_by_example.git
