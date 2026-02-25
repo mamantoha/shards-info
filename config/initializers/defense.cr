@@ -6,7 +6,7 @@ Defense.store = if ENV["DEFENSE_REDIS_URL"]?.nil?
                   Defense::RedisStore.new(url: ENV["DEFENSE_REDIS_URL"])
                 end
 
-Defense.throttle("throttle requests per minute", limit: 60, period: 60) do |request|
+Defense.throttle("throttle requests per minute", limit: 120, period: 60) do |request|
   next if request.headers["X-Requested-With"]? == "XMLHttpRequest"
 
   Helpers.real_ip(request)
