@@ -34,10 +34,17 @@ Defense.blocklist("fail2ban pentesters") do |request|
   Defense::Fail2Ban.filter("pentesters:#{Helpers.real_ip(request)}", maxretry: 5, findtime: 60, bantime: 24 * 60 * 60) do
     [
       "/wp-admin",
+      "/wp-login.php",
       "/wp-content",
       "/wp-includes",
+      "/xmlrpc.php",
+      "/phpmyadmin",
+      "/.env",
       "/.git",
+      "/.svn",
+      "/.hg",
       "/.ssh",
+      "/vendor/phpunit",
     ].any? { |path| request.path.starts_with?(path) }
   end
 end
