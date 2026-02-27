@@ -30,7 +30,8 @@
       = repository.dependencies.count
     li
       i.fas.fa-rotate title="Last activity"
-      = repository.decorate.last_activity_ago
+      span title="#{repository.last_activity_at}"
+        = repository.decorate.last_activity_ago
     li
       i.fas.fa-hourglass-start title="Created"
       = repository.created_at.try(&.to_s("%B %-d, %Y"))

@@ -49,4 +49,5 @@
           = repository.attributes["dependencies_count"]
         li
           i class="fas fa-rotate" title="Last activity"
-          = repository.decorate.last_activity_ago
+          span title="#{repository.last_activity_at}"
+            = repository.decorate.last_activity_ago
