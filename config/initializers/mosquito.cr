@@ -21,5 +21,5 @@ end
 
 Mosquito.configure do |settings|
   settings.idle_wait = 10.seconds
-  settings.redis_url = ENV["MOSQUITO_REDIS_URL"]
+  settings.backend_connection_string = ENV["MOSQUITO_REDIS_URL"]
 end
