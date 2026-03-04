@@ -2,9 +2,3 @@ dependencies:
   redis:
     github: jgaskins/redis
     branch: master
-  kemal:
-    github: kemalcr/kemal
-    branch: master
-  kemal-session:
-    github: kemalcr/kemal-session
-    branch: master
