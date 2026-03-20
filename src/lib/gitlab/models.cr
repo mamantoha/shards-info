@@ -263,7 +263,7 @@ module Gitlab
 
     property path : String
 
-    property description : String
+    property description : String?
 
     property visibility : String
 
