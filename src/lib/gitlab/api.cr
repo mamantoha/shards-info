@@ -3,14 +3,19 @@ require "retriable"
 
 module Gitlab
   class Logger < Crest::Logger
+    def initialize(io : IO = STDOUT)
+      super
+      filter(/(access_token=)([^&]+)/, "\\1[REMOVED]")
+    end
+
     def request(request) : Nil
       message = ">> | %s | %s" % [request.method, request.url]
-      @logger.info { message }
+      info(message)
     end
 
     def response(response) : Nil
       message = "<< | %s | %s" % [response.status_code, response.url]
-      @logger.info { message }
+      info(message)
     end
   end
 
