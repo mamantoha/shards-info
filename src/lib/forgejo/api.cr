@@ -5,12 +5,12 @@ module Forgejo
   class Logger < Crest::Logger
     def request(request) : Nil
       message = ">> | %s | %s" % [request.method, request.url]
-      @logger.info { message }
+      info(message)
     end
 
     def response(response) : Nil
       message = "<< | %s | %s" % [response.status_code, response.url]
-      @logger.info { message }
+      info(message)
     end
   end
 
