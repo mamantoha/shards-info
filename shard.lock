@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.8c4ff4929d2025b079026ced6df61b66dbe8ee2b
+    version: 1.7.0-dev+git.commit.77bf37bb5d3f7751bb531d2e5e67d66a28474579
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -119,7 +119,7 @@ shards:
 
   kemal-session:
     git: https://github.com/kemalcr/kemal-session.git
-    version: 1.4.0
+    version: 1.5.0
 
   kemal-session-redis-engine:
     git: https://github.com/crystal-garage/kemal-session-redis-engine.git
@@ -159,7 +159,7 @@ shards:
 
   redis: # Overridden
     git: https://github.com/jgaskins/redis.git
-    version: 0.15.3+git.commit.70886dff16ba9cce745de6af2ec61cca179c31cc
+    version: 0.15.3+git.commit.773f2597b9203ff77d688f7395b30d90e992a325
 
   redis_cache_store:
     git: https://github.com/crystal-cache/redis_cache_store.git
