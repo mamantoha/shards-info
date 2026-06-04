@@ -2,8 +2,7 @@
 
 [![Built with Crystal](https://img.shields.io/badge/built%20with-Crystal-000000.svg?logo=appveyor)](https://crystal-lang.org/)
 [![Crystal CI](https://github.com/mamantoha/shards-info/actions/workflows/crystal.yml/badge.svg)](https://github.com/mamantoha/shards-info/actions/workflows/crystal.yml)
-[![ESLint](https://github.com/mamantoha/shards-info/actions/workflows/eslint.yml/badge.svg)](https://github.com/mamantoha/shards-info/actions/workflows/eslint.yml)
-[![Stylelint](https://github.com/mamantoha/shards-info/actions/workflows/stylelint.yml/badge.svg)](https://github.com/mamantoha/shards-info/actions/workflows/stylelint.yml)
+[![Oxc](https://github.com/mamantoha/shards-info/actions/workflows/oxc.yml/badge.svg)](https://github.com/mamantoha/shards-info/actions/workflows/oxc.yml)
 
 View of all repositories on Github and Gitlab that have Crystal code in them.
 
@@ -75,7 +74,7 @@ Install depencencies:
 npm install
 ```
 
-After modifications run `npm run build`
+After modifications run `npm run build`, `npm run oxlint`, and `npm run oxfmt`.
 
 ## Specs
 
