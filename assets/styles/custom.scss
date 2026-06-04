@@ -795,7 +795,10 @@ ul.not-list {
 .word-cloud {
   position: relative;
   overflow: hidden;
-  font: 10px Helvetica, Arial, sans-serif;
+  font:
+    10px Helvetica,
+    Arial,
+    sans-serif;
   line-height: normal;
 }
 

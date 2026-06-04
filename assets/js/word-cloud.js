@@ -1,5 +1,5 @@
-import cloud from 'd3-cloud';
-import * as d3 from 'd3';
+import cloud from "d3-cloud";
+import * as d3 from "d3";
 
 const DEFAULTS = {
   steps: 5,
@@ -9,27 +9,27 @@ const DEFAULTS = {
     return angles[Math.floor(Math.random() * angles.length)];
   },
   autoResize: false,
-  classPattern: 'w{n}',
+  classPattern: "w{n}",
   fontSize: {
     from: 0.04,
-    to: 0.01
-  }
+    to: 0.01,
+  },
 };
 
-function resolveElement (container) {
-  if (typeof container === 'string') {
+function resolveElement(container) {
+  if (typeof container === "string") {
     return document.querySelector(container);
   }
 
   return container;
 }
 
-function ensureNumber (value, fallback = 0) {
+function ensureNumber(value, fallback = 0) {
   const parsed = Number.parseFloat(value);
   return Number.isFinite(parsed) ? parsed : fallback;
 }
 
-function computeStep (weight, minWeight, maxWeight, steps) {
+function computeStep(weight, minWeight, maxWeight, steps) {
   if (maxWeight === minWeight) {
     return Math.floor(steps / 2);
   }
@@ -42,7 +42,7 @@ function computeStep (weight, minWeight, maxWeight, steps) {
   return Math.round(((logWeight - logMin) * (steps - 1)) / (logMax - logMin)) + 1;
 }
 
-function computeSize (width, step, steps, fontSize) {
+function computeSize(width, step, steps, fontSize) {
   const maxSize = width * fontSize.from;
   const minSize = width * fontSize.to;
   const size = minSize + ((maxSize - minSize) / (steps - 1)) * (step - 1);
@@ -50,19 +50,19 @@ function computeSize (width, step, steps, fontSize) {
   return Math.max(1, Math.round(size));
 }
 
-function normalizeLink (link) {
+function normalizeLink(link) {
   if (!link) {
     return null;
   }
 
-  if (typeof link === 'string') {
+  if (typeof link === "string") {
     return { href: link };
   }
 
   return link;
 }
 
-function drawWordCloud (container, words, options = {}) {
+function drawWordCloud(container, words, options = {}) {
   const element = resolveElement(container);
 
   if (!element) {
@@ -74,12 +74,12 @@ function drawWordCloud (container, words, options = {}) {
     ...options,
     fontSize: {
       ...DEFAULTS.fontSize,
-      ...(options.fontSize || {})
-    }
+      ...(options.fontSize || {}),
+    },
   };
 
   // Ensure rotate is a function
-  if (typeof settings.rotate !== 'function') {
+  if (typeof settings.rotate !== "function") {
     const fixedRotation = settings.rotate;
     settings.rotate = () => fixedRotation;
   }
@@ -114,46 +114,44 @@ function drawWordCloud (container, words, options = {}) {
       step,
       color: word.color,
       link: normalizeLink(word.link),
-      raw: word
+      raw: word,
     };
   });
 
-  element.classList.add('word-cloud');
-  element.innerHTML = '';
+  element.classList.add("word-cloud");
+  element.innerHTML = "";
 
   const layout = cloud()
     .size([width, height])
     .words(layoutWords)
     .padding(settings.padding)
     .rotate(settings.rotate)
-    .font('Helvetica, Arial, sans-serif')
+    .font("Helvetica, Arial, sans-serif")
     .fontSize((d) => d.size)
-    .on('end', (renderedWords) => {
+    .on("end", (renderedWords) => {
       const svg = d3
         .select(element)
-        .append('svg')
-        .attr('class', 'word-cloud__svg')
-        .attr('width', width)
-        .attr('height', height)
-        .attr('viewBox', `0 0 ${width} ${height}`);
+        .append("svg")
+        .attr("class", "word-cloud__svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", `0 0 ${width} ${height}`);
 
-      const group = svg
-        .append('g')
-        .attr('transform', `translate(${width / 2},${height / 2})`);
+      const group = svg.append("g").attr("transform", `translate(${width / 2},${height / 2})`);
 
       const nodes = group
-        .selectAll('g')
+        .selectAll("g")
         .data(renderedWords)
         .enter()
-        .append('g')
-        .attr('transform', (d) => `translate(${d.x},${d.y})rotate(${d.rotate})`);
+        .append("g")
+        .attr("transform", (d) => `translate(${d.x},${d.y})rotate(${d.rotate})`);
 
       const addText = (selection) => {
         selection
-          .attr('class', (d) => `word-cloud__word ${settings.classPattern.replace('{n}', d.step)}`)
-          .style('font-size', (d) => `${d.size}px`)
-          .style('fill', (d) => d.color || null)
-          .attr('text-anchor', 'middle')
+          .attr("class", (d) => `word-cloud__word ${settings.classPattern.replace("{n}", d.step)}`)
+          .style("font-size", (d) => `${d.size}px`)
+          .style("fill", (d) => d.color || null)
+          .attr("text-anchor", "middle")
           .text((d) => d.text);
       };
 
@@ -161,21 +159,21 @@ function drawWordCloud (container, words, options = {}) {
         if (d.link && d.link.href) {
           const link = d3
             .select(this)
-            .append('a')
-            .attr('class', 'word-cloud__link')
-            .attr('href', d.link.href);
+            .append("a")
+            .attr("class", "word-cloud__link")
+            .attr("href", d.link.href);
 
           if (d.link.target) {
-            link.attr('target', d.link.target);
+            link.attr("target", d.link.target);
           }
 
           if (d.link.rel) {
-            link.attr('rel', d.link.rel);
+            link.attr("rel", d.link.rel);
           }
 
-          addText(link.append('text'));
+          addText(link.append("text"));
         } else {
-          addText(d3.select(this).append('text'));
+          addText(d3.select(this).append("text"));
         }
       });
     });

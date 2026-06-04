@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": [
+    "assets/vendor/*"
+  ],
+  "categories": {
+    "correctness": "off",
+    "suspicious": "off",
+    "pedantic": "off",
+    "perf": "off",
+    "style": "off",
+    "restriction": "off"
+  },
+  "rules": {
+    "eslint/prefer-const": "error",
+    "eslint/no-unused-vars": "off",
+    "eslint/no-undef": "off"
+  }
+}
