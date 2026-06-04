@@ -11,8 +11,8 @@
     "build": "webpack",
     "oxlint": "oxlint assets/",
     "oxlint:fix": "oxlint --fix assets/",
-    "oxfmt": "oxfmt --check assets/main.js assets/js assets/main.scss assets/styles",
-    "oxfmt:fix": "oxfmt --write assets/main.js assets/js assets/main.scss assets/styles"
+    "oxfmt": "oxfmt --check assets/main.js assets/js assets/main.scss assets/styles assets/vendor/code.scss public/css",
+    "oxfmt:fix": "oxfmt --write assets/main.js assets/js assets/main.scss assets/styles assets/vendor/code.scss public/css"
   },
   "repository": {
     "type": "git",

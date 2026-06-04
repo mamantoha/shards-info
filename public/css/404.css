@@ -1,6 +1,6 @@
 * {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
@@ -19,8 +19,8 @@ body {
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .notfound {
@@ -42,15 +42,15 @@ body {
   font-size: 238px;
   font-weight: 700;
   margin: 0px;
-  color: #E53E3E;
+  color: #e53e3e;
   text-transform: uppercase;
   letter-spacing: 7px;
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50% , -50%);
-      -ms-transform: translate(-50% , -50%);
-          transform: translate(-50% , -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .notfound h2 {
@@ -59,7 +59,9 @@ body {
   text-transform: uppercase;
   margin-top: 12px;
   margin-bottom: 15px;
-  text-shadow: 0 0 1px #fff, 0 0 3px #fff;
+  text-shadow:
+    0 0 1px #fff,
+    0 0 3px #fff;
 }
 
 .notfound .notfound-search {
@@ -114,7 +116,7 @@ body {
   color: #57a3f8;
 }
 
-.notfound a>.arrow {
+.notfound a > .arrow {
   position: relative;
   top: -2px;
   border: solid #57a3f8;
@@ -122,8 +124,8 @@ body {
   display: inline-block;
   padding: 3px;
   -webkit-transform: rotate(135deg);
-      -ms-transform: rotate(135deg);
-          transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  transform: rotate(135deg);
 }
 
 @media only screen and (max-width: 767px) {
