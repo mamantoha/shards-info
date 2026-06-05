@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.cb5bbb28c00b03a7b6dd3e70b9e15c438c0588cc
+    version: 1.7.0-dev+git.commit.db6d92839f8b8204b90360b479d50939e7d7502a
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -91,7 +91,7 @@ shards:
 
   http_proxy:
     git: https://github.com/mamantoha/http_proxy.git
-    version: 0.14.0
+    version: 0.15.1
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
@@ -119,7 +119,7 @@ shards:
 
   kemal-session:
     git: https://github.com/kemalcr/kemal-session.git
-    version: 1.5.0
+    version: 1.6.0
 
   kemal-session-redis-engine:
     git: https://github.com/crystal-garage/kemal-session-redis-engine.git
@@ -131,7 +131,7 @@ shards:
 
   lustra:
     git: https://github.com/crystal-garage/lustra.git
-    version: 0.17.2+git.commit.ea19cfcd9be40131fc942a14fa40a07f0e142540
+    version: 0.18.0+git.commit.c28c398f1ed41ea4209fd2391a07813b9abb39a7
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
