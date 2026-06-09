@@ -30,13 +30,13 @@
     "css-loader": "^7.1.4",
     "expose-loader": "^5.0.1",
     "mini-css-extract-plugin": "^2.10.2",
-    "oxfmt": "^0.53.0",
-    "oxlint": "^1.68.0",
+    "oxfmt": "^0.54.0",
+    "oxlint": "^1.69.0",
     "sass-loader": "^17.0.0",
     "style-loader": "^4.0.0",
     "trim-newlines": ">=5.0.0",
     "webpack": "^5.107.2",
-    "webpack-cli": "^7.0.2"
+    "webpack-cli": "^7.0.3"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
