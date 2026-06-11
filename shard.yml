@@ -45,8 +45,7 @@ dependencies:
   lustra:
     github: crystal-garage/lustra
     version: ">= 0.18.2"
-    # branch: main
-    branch: fix-non-mutating-pluck
+    branch: main
   retriable:
     github: Sija/retriable.cr
   delegator:
