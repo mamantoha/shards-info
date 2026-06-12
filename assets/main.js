@@ -1,4 +1,4 @@
-import "jquery";
+import $ from "jquery";
 
 import "bootstrap/js/dist/modal";
 import "bootstrap/js/dist/tab";
@@ -12,11 +12,13 @@ import "./js/word-cloud.js";
 import Chart from "chart.js/auto";
 import moveto from "moveto/src/moveTo";
 
-import "./vendor/jquery.twbsPagination.js";
-import "./js/application.js";
-import "./js/chart.js";
-
+window.$ = $;
+window.jQuery = $;
 window.MoveTo = moveto;
 window.Chart = Chart;
 
 window.bootstrap = require("bootstrap/dist/js/bootstrap.bundle.js");
+
+require("./vendor/jquery.twbsPagination.js");
+require("./js/application.js");
+require("./js/chart.js");
