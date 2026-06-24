@@ -44,26 +44,24 @@ module Github
         page = 1
 
         loop do
-          begin
-            url = "/search/repositories?q=#{word}+language:#{language}+created:#{period}&per_page=#{per_page}&page=#{page}"
+          url = "/search/repositories?q=#{word}+language:#{language}+created:#{period}&per_page=#{per_page}&page=#{page}"
 
-            response = make_request(url)
-            github_repos = Github::Repos.from_json(response.body)
+          response = make_request(url)
+          github_repos = Github::Repos.from_json(response.body)
 
-            break if github_repos.items.empty?
+          break if github_repos.items.empty?
 
-            repos = repos + github_repos.items
-            page += 1
-          rescue ex
-            # Only the first 1000 search results are available
-            # otherwise Github returns 422 error
-            #
-            # TODO: in case we notice that more than 1000 results are returned for a period,
-            # we would have to narrow the period even more.
-            puts "[ERROR]"
-            puts ex.message
-            break
-          end
+          repos = repos + github_repos.items
+          page += 1
+        rescue ex
+          # Only the first 1000 search results are available
+          # otherwise Github returns 422 error
+          #
+          # TODO: in case we notice that more than 1000 results are returned for a period,
+          # we would have to narrow the period even more.
+          puts "[ERROR]"
+          puts ex.message
+          break
         end
       end
 
