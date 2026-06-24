@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.7c62b0c9720f2c8ed3ea5acee2a4db9ff94562e2
+    version: 1.7.0-dev+git.commit.d4533b13b6470d08b49982defdcc3ac8231a028c
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -131,7 +131,7 @@ shards:
 
   lustra:
     git: https://github.com/crystal-garage/lustra.git
-    version: 0.18.3+git.commit.3681d1512369e6fbedccff2f4ed2599aaee145fe
+    version: 0.18.3+git.commit.b336fdbef25ecde5dfed18850254d33d692d3a25
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
