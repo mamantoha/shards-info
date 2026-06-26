@@ -178,6 +178,25 @@ sudo systemctl enable shards.info_worker
 sudo systemctl start shards.info_worker
 ```
 
+### Restart services from deploy workflow
+
+Allow the deploy user to restart the application services without entering a
+sudo password:
+
+```console
+sudo visudo -f /etc/sudoers.d/shards-info-deploy
+```
+
+```text
+sammy ALL=(root) NOPASSWD: /usr/bin/systemctl restart shards.info_web.service shards.info_worker.service
+```
+
+Test it:
+
+```console
+sudo -n systemctl restart shards.info_web.service shards.info_worker.service
+```
+
 ### Logs
 
 `/etc/logrotate.d/shards.info`
