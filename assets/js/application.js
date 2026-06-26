@@ -255,52 +255,77 @@ $(function () {
     );
   };
 
-  const workerRowId = function (overseer, executor) {
-    return `${overseer.instance_id}:${executor ? executor.instance_id : ""}`;
-  };
-
   const workerRow = function (overseer, executor) {
-    if (!executor) {
-      return `
-        <tr class="js-mosquito-worker-row" data-worker-row-id="${workerRowId(overseer, null)}">
-          <td>${overseer.instance_id}</td>
-          <td>${overseer.last_heartbeat || ""}</td>
-          <td class="text-muted" colspan="4">No executors.</td>
-        </tr>
-      `;
-    }
-
     return `
-      <tr class="js-mosquito-worker-row" data-worker-row-id="${workerRowId(overseer, executor)}">
-        <td>${overseer.instance_id}</td>
-        <td>${overseer.last_heartbeat || ""}</td>
+      <tr class="js-mosquito-worker-row" data-overseer-id="${overseer.instance_id}" data-executor-id="${executor.instance_id}">
         <td>${executor.instance_id}</td>
         <td>${executor.heartbeat || ""}</td>
-        <td>${executor.current_job || ""}</td>
+        <td>${executor.current_job || "Idle"}</td>
         <td>${executor.current_job_queue || ""}</td>
       </tr>
     `;
   };
 
+  const workerGroup = function (overseer) {
+    if (!overseer.executors.length) {
+      return `
+        <div class="mb-4 js-mosquito-worker-group" data-overseer-id="${overseer.instance_id}">
+          <h3 class="h5">${overseer.instance_id}</h3>
+          <dl class="row">
+            <dt class="col-sm-3">Last heartbeat</dt>
+            <dd class="col-sm-9">${overseer.last_heartbeat || ""}</dd>
+            <dt class="col-sm-3">Executors</dt>
+            <dd class="col-sm-9">0</dd>
+          </dl>
+          <p class="text-muted">No executors.</p>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="mb-4 js-mosquito-worker-group" data-overseer-id="${overseer.instance_id}">
+        <h3 class="h5">${overseer.instance_id}</h3>
+        <dl class="row">
+          <dt class="col-sm-3">Last heartbeat</dt>
+          <dd class="col-sm-9">${overseer.last_heartbeat || ""}</dd>
+          <dt class="col-sm-3">Executors</dt>
+          <dd class="col-sm-9">${overseer.executors.length}</dd>
+        </dl>
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Executor</th>
+                <th>Heartbeat</th>
+                <th>Current job</th>
+                <th>Current queue</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${overseer.executors
+                .map(function (executor) {
+                  return workerRow(overseer, executor);
+                })
+                .join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  };
+
   const refreshMosquitoWorkers = function (workers) {
     const body = $(".js-mosquito-workers");
-    const rows = [];
-
-    workers.forEach(function (overseer) {
-      if (!overseer.executors.length) {
-        rows.push(workerRow(overseer, null));
-        return;
-      }
-
-      overseer.executors.forEach(function (executor) {
-        rows.push(workerRow(overseer, executor));
-      });
-    });
 
     body.html(
-      rows.length
-        ? rows.join("")
-        : '<tr class="js-mosquito-empty-row"><td class="text-muted" colspan="6">No workers found.</td></tr>',
+      workers.length
+        ? workers
+            .map(function (overseer) {
+              return workerGroup(overseer);
+            })
+            .join("")
+        : '<p class="text-muted">No workers found.</p>',
     );
   };
 
