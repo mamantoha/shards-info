@@ -3,7 +3,7 @@ require "../../src/lib/forgejo"
 log_file =
   case ENV["KEMAL_ENV"]
   when "production"
-    File.new("#{__DIR__}/../../log/codeberg.log", "a+")
+    File.new("log/codeberg.log", "a+")
   else
     STDOUT
   end
