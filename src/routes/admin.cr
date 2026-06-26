@@ -231,6 +231,36 @@ router.namespace "/admin" do
     render "src/views/admin/mosquito/index.slang", "src/views/layouts/layout.slang"
   end
 
+  post "/mosquito/dead_jobs" do |env|
+    queue_name = env.params.body["queue[name]"].as(String)
+    queue = Mosquito::Api::Queue.new(queue_name)
+    dead_job_runs = queue.dead_job_runs
+
+    dead_job_runs.each do |job_run|
+      Mosquito.backend.delete(Mosquito::JobRun.config_key(job_run.id))
+    end
+
+    Mosquito.backend.delete(Mosquito.backend.build_key("dead", queue_name))
+
+    env.flash["notice"] = "Deleted #{dead_job_runs.size} dead jobs from #{queue_name}."
+    env.redirect("/admin/mosquito")
+  end
+
+  post "/mosquito/dead_jobs/:id" do |env|
+    id = env.params.url["id"]
+    queue_name = env.params.body["queue[name]"].as(String)
+
+    Mosquito.backend.delete(Mosquito::JobRun.config_key(id))
+    Mosquito.backend.connection.not_nil!.lrem(
+      Mosquito.backend.build_key("dead", queue_name),
+      0,
+      id
+    )
+
+    env.flash["notice"] = "Deleted dead job #{id} from #{queue_name}."
+    env.redirect("/admin/mosquito")
+  end
+
   namespace "/users" do
     post "/:id/sync" do |env|
       id = env.params.url["id"]

@@ -21,6 +21,7 @@
             th Pending
             th Dead
             th Paused
+            th
         tbody
           - queues.each do |queue|
             - sizes = queue.size_details
@@ -31,6 +32,11 @@
               td = sizes["pending"]
               td = sizes["dead"]
               td = queue.paused? ? "yes" : "no"
+              td
+                - if sizes["dead"] > 0
+                  form action="/admin/mosquito/dead_jobs" method="post"
+                    input type="hidden" name="queue[name]" value="#{queue.name}"
+                    button.btn.btn-sm.btn-danger type="submit" Delete dead jobs
 
     - queues.each do |queue|
       h3.mt-4 = queue.name
