@@ -3,7 +3,7 @@ require "../../src/lib/github"
 log_file =
   case ENV["KEMAL_ENV"]
   when "production"
-    File.new("#{__DIR__}/../../log/github.log", "a+")
+    File.new("log/github.log", "a+")
   else
     STDOUT
   end

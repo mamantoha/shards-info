@@ -48,9 +48,7 @@ module Linguist
     end
   end
 
-  languages = File.open("#{__DIR__}/languages.yml") do |file|
-    YAML.parse(file)
-  end
+  languages = YAML.parse({{ read_file("src/lib/linguist/languages.yml").stringify }})
 
   languages.as_h.each do |name, options|
     color = options["color"]? ? options["color"].to_s : nil

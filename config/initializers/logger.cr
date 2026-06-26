@@ -2,7 +2,7 @@ Log.setup do |c|
   lustra_log_file =
     case ENV["KEMAL_ENV"]
     when "production"
-      File.new("#{__DIR__}/../../log/lustra.log", "a+")
+      File.new("log/lustra.log", "a+")
     else
       STDOUT
     end
@@ -10,7 +10,7 @@ Log.setup do |c|
   mosquito_log_file =
     case ENV["KEMAL_ENV"]
     when "production"
-      File.new("#{__DIR__}/../../log/mosquito.log", "a+")
+      File.new("log/mosquito.log", "a+")
     else
       STDOUT
     end
@@ -18,7 +18,7 @@ Log.setup do |c|
   kemal_log_file =
     case ENV["KEMAL_ENV"]
     when "production"
-      File.new("#{__DIR__}/../../log/kemal.log", "a+")
+      File.new("log/kemal.log", "a+")
     else
       STDOUT
     end
@@ -26,7 +26,7 @@ Log.setup do |c|
   cache_log_file =
     case ENV["KEMAL_ENV"]
     when "production"
-      File.new("#{__DIR__}/../../log/cache.log", "a+")
+      File.new("log/cache.log", "a+")
     else
       STDOUT
     end
