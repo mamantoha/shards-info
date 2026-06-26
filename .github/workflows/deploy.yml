@@ -37,9 +37,9 @@ jobs:
       - name: Build Crystal binaries
         run: |
           if [ "${{ inputs.run_migrations }}" = "true" ]; then
-            shards build --release web worker cli
+            shards build web worker cli --release -Dpreview_mt -Dexecution_context
           else
-            shards build --release web worker
+            shards build web worker --release -Dpreview_mt -Dexecution_context
           fi
 
       - name: Set up Node
