@@ -22,7 +22,7 @@
             th Scheduled
             th Pending
             th Dead
-            th Paused
+            th
             th
         tbody.js-mosquito-queues
           - queues.each do |queue|
@@ -34,7 +34,13 @@
               td.js-mosquito-scheduled-count = sizes["scheduled"]
               td.js-mosquito-pending-count = sizes["pending"]
               td.js-mosquito-dead-count data-queue-name="#{queue.name}" = sizes["dead"]
-              td.js-mosquito-paused = queue.paused? ? "yes" : "no"
+              td.js-mosquito-pause
+                - if queue.paused?
+                  form.js-mosquito-queue-action action="/admin/mosquito/queues/#{queue.name}/resume" method="post"
+                    button.btn.btn-sm.btn-secondary type="submit" Resume
+                - else
+                  form.js-mosquito-queue-action action="/admin/mosquito/queues/#{queue.name}/pause" method="post"
+                    button.btn.btn-sm.btn-warning type="submit" Pause
               td.js-mosquito-delete-dead
                 - if sizes["dead"] > 0
                   form action="/admin/mosquito/dead_jobs" method="post"

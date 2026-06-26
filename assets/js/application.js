@@ -138,12 +138,24 @@ $(function () {
     `;
   };
 
+  const pauseQueueForm = function (queue) {
+    const action = queue.paused ? "resume" : "pause";
+    const label = queue.paused ? "Resume" : "Pause";
+    const buttonClass = queue.paused ? "btn-secondary" : "btn-warning";
+
+    return `
+      <form class="js-mosquito-queue-action" action="/admin/mosquito/queues/${queue.name}/${action}" method="post">
+        <button class="btn btn-sm ${buttonClass}" type="submit">${label}</button>
+      </form>
+    `;
+  };
+
   const updateQueueRow = function (row, queue) {
     row.find(".js-mosquito-waiting-count").text(queue.sizes.waiting);
     row.find(".js-mosquito-scheduled-count").text(queue.sizes.scheduled);
     row.find(".js-mosquito-pending-count").text(queue.sizes.pending);
     row.find(".js-mosquito-dead-count").text(queue.sizes.dead);
-    row.find(".js-mosquito-paused").text(queue.paused ? "yes" : "no");
+    row.find(".js-mosquito-pause").html(pauseQueueForm(queue));
     row
       .find(".js-mosquito-delete-dead")
       .html(queue.sizes.dead > 0 ? deleteDeadJobsForm(queue.name) : "");
@@ -157,7 +169,7 @@ $(function () {
         <td class="js-mosquito-scheduled-count"></td>
         <td class="js-mosquito-pending-count"></td>
         <td class="js-mosquito-dead-count" data-queue-name="${queue.name}"></td>
-        <td class="js-mosquito-paused"></td>
+        <td class="js-mosquito-pause"></td>
         <td class="js-mosquito-delete-dead"></td>
       </tr>
     `);
@@ -298,6 +310,30 @@ $(function () {
   if (livePollButton() && localStorage.getItem(livePollStorageKey()) === "true") {
     startLivePoll();
   }
+
+  $(document).on("submit", ".js-mosquito-queue-action", function (e) {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const button = form.querySelector("button[type='submit']");
+    const row = form.closest(".js-mosquito-queue-row");
+
+    button.disabled = true;
+
+    $.ajax({
+      url: form.action,
+      method: form.method,
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+      success: function (resp) {
+        updateQueueRow($(row), resp.data.queue);
+      },
+      error: function () {
+        button.disabled = false;
+      },
+    });
+  });
 
   const sidebarModal = document.getElementById("sidebar-modal");
   const searchInput = sidebarModal.querySelector("input[name='query']");

@@ -338,6 +338,40 @@ router.namespace "/admin" do
     end
   end
 
+  post "/mosquito/queues/:name/pause" do |env|
+    queue_name = env.params.url["name"]
+    Mosquito::Queue.new(queue_name).pause
+
+    if env.request.headers["X-Requested-With"]? == "XMLHttpRequest"
+      env.json({
+        "status" => "success",
+        "data"   => {
+          "queue" => mosquito_queue_json(Mosquito::Api::Queue.new(queue_name)),
+        },
+      })
+    else
+      env.flash["notice"] = "Paused #{queue_name}."
+      env.redirect(env.request.headers["Referer"]? || "/admin/mosquito")
+    end
+  end
+
+  post "/mosquito/queues/:name/resume" do |env|
+    queue_name = env.params.url["name"]
+    Mosquito::Queue.new(queue_name).resume
+
+    if env.request.headers["X-Requested-With"]? == "XMLHttpRequest"
+      env.json({
+        "status" => "success",
+        "data"   => {
+          "queue" => mosquito_queue_json(Mosquito::Api::Queue.new(queue_name)),
+        },
+      })
+    else
+      env.flash["notice"] = "Resumed #{queue_name}."
+      env.redirect(env.request.headers["Referer"]? || "/admin/mosquito")
+    end
+  end
+
   namespace "/users" do
     post "/:id/sync" do |env|
       id = env.params.url["id"]
