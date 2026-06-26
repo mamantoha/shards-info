@@ -66,6 +66,39 @@ $(function () {
     });
   });
 
+  $(".js-delete-dead-job").on("submit", function (e) {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const button = form.querySelector("button[type='submit']");
+    const row = form.closest(".js-mosquito-job-row");
+    const queueName = row.dataset.queueName;
+
+    button.disabled = true;
+
+    $.ajax({
+      url: form.action,
+      method: form.method,
+      data: $(form).serialize(),
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+      success: function () {
+        row.remove();
+
+        const deadCount = $(`.js-mosquito-dead-count[data-queue-name="${queueName}"]`);
+        const deadSectionCount = $(`.js-mosquito-dead-section-count[data-queue-name="${queueName}"]`);
+        const count = Math.max(parseInt(deadCount.text(), 10) - 1, 0);
+
+        deadCount.text(count);
+        deadSectionCount.text(count);
+      },
+      error: function () {
+        button.disabled = false;
+      },
+    });
+  });
+
   const sidebarModal = document.getElementById("sidebar-modal");
   const searchInput = sidebarModal.querySelector("input[name='query']");
 

@@ -257,8 +257,18 @@ router.namespace "/admin" do
       id
     )
 
-    env.flash["notice"] = "Deleted dead job #{id} from #{queue_name}."
-    env.redirect("/admin/mosquito")
+    if env.request.headers["X-Requested-With"]? == "XMLHttpRequest"
+      env.json({
+        "status" => "success",
+        "data"   => {
+          "id"         => id,
+          "queue_name" => queue_name,
+        },
+      })
+    else
+      env.flash["notice"] = "Deleted dead job #{id} from #{queue_name}."
+      env.redirect("/admin/mosquito")
+    end
   end
 
   namespace "/users" do

@@ -1,4 +1,7 @@
-h4.mt-3 = "#{state.capitalize} (#{job_runs.size})"
+h4.mt-3
+  = "#{state.capitalize} ("
+  span class="#{state == "dead" ? "js-mosquito-dead-section-count" : ""}" data-queue-name="#{queue.name}" = job_runs.size
+  = ")"
 
 - if job_runs.empty?
   p.text-muted No jobs.
@@ -16,7 +19,7 @@ h4.mt-3 = "#{state.capitalize} (#{job_runs.size})"
           th
       tbody
         - job_runs.each do |job_run|
-          tr
+          tr.js-mosquito-job-row data-queue-name="#{queue.name}" data-job-state="#{state}" data-job-id="#{job_run.id}"
             td = job_run.id
             - if job_run.found?
               td = job_run.type
@@ -28,6 +31,6 @@ h4.mt-3 = "#{state.capitalize} (#{job_runs.size})"
               td colspan="5" Missing metadata
             td
               - if state == "dead"
-                form action="/admin/mosquito/dead_jobs/#{job_run.id}" method="post"
+                form.js-delete-dead-job action="/admin/mosquito/dead_jobs/#{job_run.id}" method="post"
                   input type="hidden" name="queue[name]" value="#{queue.name}"
                   button.btn.btn-sm.btn-danger type="submit" Delete

@@ -30,7 +30,7 @@
               td = sizes["waiting"]
               td = sizes["scheduled"]
               td = sizes["pending"]
-              td = sizes["dead"]
+              td.js-mosquito-dead-count data-queue-name="#{queue.name}" = sizes["dead"]
               td = queue.paused? ? "yes" : "no"
               td
                 - if sizes["dead"] > 0
