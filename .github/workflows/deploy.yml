@@ -24,7 +24,7 @@ jobs:
       - name: Install Crystal
         uses: crystal-lang/install-crystal@v1
         with:
-          crystal: 1.20.0
+          crystal: 1.20.2
 
       - name: Install shard dependencies
         run: shards install --production
