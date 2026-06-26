@@ -280,6 +280,13 @@ router.namespace "/admin" do
     })
   end
 
+  get "/mosquito/queues/:name/data" do |env|
+    queue_name = env.params.url["name"]
+    queue = Mosquito::Api::Queue.new(queue_name)
+
+    env.json(mosquito_queue_details_json(queue))
+  end
+
   get "/mosquito/queues/:name" do |env|
     queue_name = env.params.url["name"]
     queue = Mosquito::Api::Queue.new(queue_name)
@@ -289,13 +296,6 @@ router.namespace "/admin" do
     end
 
     render "src/views/admin/mosquito/show.slang", "src/views/layouts/layout.slang"
-  end
-
-  get "/mosquito/queues/:name.json" do |env|
-    queue_name = env.params.url["name"]
-    queue = Mosquito::Api::Queue.new(queue_name)
-
-    env.json(mosquito_queue_details_json(queue))
   end
 
   post "/mosquito/dead_jobs" do |env|

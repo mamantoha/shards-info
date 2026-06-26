@@ -10,7 +10,7 @@
 
   .d-flex.align-items-center.justify-content-between
     h2 = queue.name
-    button.btn.btn-sm.btn-outline-secondary.js-live-poll type="button" data-interval="5000" Live Poll
+    button.btn.btn-sm.btn-outline-secondary.js-live-poll type="button" data-interval="5000" data-url="/admin/mosquito/queues/#{queue.name}/data" Live Poll
 
   - sizes = queue.size_details
   .table-responsive

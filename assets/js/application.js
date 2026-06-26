@@ -122,11 +122,7 @@ $(function () {
   };
 
   const mosquitoJsonUrl = function () {
-    if (window.location.pathname === "/admin/mosquito") {
-      return "/admin/mosquito.json";
-    }
-
-    return `${window.location.pathname}.json`;
+    return livePollButton().dataset.url;
   };
 
   const deleteDeadJobsForm = function (queueName) {

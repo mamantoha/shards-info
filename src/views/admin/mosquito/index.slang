@@ -8,7 +8,7 @@
 
   .d-flex.align-items-center.justify-content-between
     h2 Mosquito
-    button.btn.btn-sm.btn-outline-secondary.js-live-poll type="button" data-interval="5000" Live Poll
+    button.btn.btn-sm.btn-outline-secondary.js-live-poll type="button" data-interval="5000" data-url="/admin/mosquito.json" Live Poll
 
   - if queues.empty?
     p No queues found.
