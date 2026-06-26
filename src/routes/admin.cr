@@ -40,6 +40,23 @@ private def mosquito_queue_details_json(queue : Mosquito::Api::Queue)
   }
 end
 
+private def mosquito_executor_json(executor : Mosquito::Api::Executor)
+  {
+    "instance_id"       => executor.instance_id,
+    "heartbeat"         => executor.heartbeat.try(&.by_example("January 2, 2006 @ 15:04")),
+    "current_job"       => executor.current_job,
+    "current_job_queue" => executor.current_job_queue,
+  }
+end
+
+private def mosquito_overseer_json(overseer : Mosquito::Api::Overseer)
+  {
+    "instance_id"    => overseer.instance_id,
+    "last_heartbeat" => overseer.last_heartbeat.try(&.by_example("January 2, 2006 @ 15:04")),
+    "executors"      => overseer.executors.map { |executor| mosquito_executor_json(executor) },
+  }
+end
+
 router = Kemal::Router.new
 
 router.namespace "/admin" do
@@ -278,6 +295,24 @@ router.namespace "/admin" do
 
     env.json({
       "queues" => queues.map { |queue| mosquito_queue_json(queue) },
+    })
+  end
+
+  get "/mosquito/workers" do |env|
+    overseers = Mosquito::Api::Overseer.all
+
+    set_request_context(env) do
+      request_context.page_title = "Admin: Mosquito: Workers"
+    end
+
+    render "src/views/admin/mosquito/workers.slang", "src/views/layouts/layout.slang"
+  end
+
+  get "/mosquito/workers.json" do |env|
+    overseers = Mosquito::Api::Overseer.all
+
+    env.json({
+      "workers" => overseers.map { |overseer| mosquito_overseer_json(overseer) },
     })
   end
 

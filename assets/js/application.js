@@ -255,6 +255,55 @@ $(function () {
     );
   };
 
+  const workerRowId = function (overseer, executor) {
+    return `${overseer.instance_id}:${executor ? executor.instance_id : ""}`;
+  };
+
+  const workerRow = function (overseer, executor) {
+    if (!executor) {
+      return `
+        <tr class="js-mosquito-worker-row" data-worker-row-id="${workerRowId(overseer, null)}">
+          <td>${overseer.instance_id}</td>
+          <td>${overseer.last_heartbeat || ""}</td>
+          <td class="text-muted" colspan="4">No executors.</td>
+        </tr>
+      `;
+    }
+
+    return `
+      <tr class="js-mosquito-worker-row" data-worker-row-id="${workerRowId(overseer, executor)}">
+        <td>${overseer.instance_id}</td>
+        <td>${overseer.last_heartbeat || ""}</td>
+        <td>${executor.instance_id}</td>
+        <td>${executor.heartbeat || ""}</td>
+        <td>${executor.current_job || ""}</td>
+        <td>${executor.current_job_queue || ""}</td>
+      </tr>
+    `;
+  };
+
+  const refreshMosquitoWorkers = function (workers) {
+    const body = $(".js-mosquito-workers");
+    const rows = [];
+
+    workers.forEach(function (overseer) {
+      if (!overseer.executors.length) {
+        rows.push(workerRow(overseer, null));
+        return;
+      }
+
+      overseer.executors.forEach(function (executor) {
+        rows.push(workerRow(overseer, executor));
+      });
+    });
+
+    body.html(
+      rows.length
+        ? rows.join("")
+        : '<tr class="js-mosquito-empty-row"><td class="text-muted" colspan="6">No workers found.</td></tr>',
+    );
+  };
+
   const refreshMosquitoContent = function () {
     $.ajax({
       url: mosquitoJsonUrl(),
@@ -265,6 +314,11 @@ $(function () {
       success: function (data) {
         if (data.queues) {
           refreshMosquitoQueues(data.queues);
+          return;
+        }
+
+        if (data.workers) {
+          refreshMosquitoWorkers(data.workers);
           return;
         }
 
