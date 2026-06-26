@@ -96,12 +96,3 @@ jobs:
         run: |
           ssh -i ~/.ssh/deploy_key -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "cd '$DEPLOY_PATH' && ./bin/cli migrate"
-
-      - name: Restart services
-        env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
-        run: |
-          ssh -i ~/.ssh/deploy_key -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "sudo systemctl restart shards.info_web.service shards.info_worker.service"
