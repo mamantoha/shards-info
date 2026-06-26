@@ -231,6 +231,17 @@ router.namespace "/admin" do
     render "src/views/admin/mosquito/index.slang", "src/views/layouts/layout.slang"
   end
 
+  get "/mosquito/queues/:name" do |env|
+    queue_name = env.params.url["name"]
+    queue = Mosquito::Api::Queue.new(queue_name)
+
+    set_request_context(env) do
+      request_context.page_title = "Admin: Mosquito: #{queue_name}"
+    end
+
+    render "src/views/admin/mosquito/show.slang", "src/views/layouts/layout.slang"
+  end
+
   post "/mosquito/dead_jobs" do |env|
     queue_name = env.params.body["queue[name]"].as(String)
     queue = Mosquito::Api::Queue.new(queue_name)

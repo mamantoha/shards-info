@@ -26,7 +26,8 @@
           - queues.each do |queue|
             - sizes = queue.size_details
             tr
-              td = queue.name
+              td
+                a href="/admin/mosquito/queues/#{queue.name}" = queue.name
               td = sizes["waiting"]
               td = sizes["scheduled"]
               td = sizes["pending"]
@@ -37,22 +38,3 @@
                   form action="/admin/mosquito/dead_jobs" method="post"
                     input type="hidden" name="queue[name]" value="#{queue.name}"
                     button.btn.btn-sm.btn-danger type="submit" Delete dead jobs
-
-    - queues.each do |queue|
-      h3.mt-4 = queue.name
-
-      - state = "waiting"
-      - job_runs = queue.waiting_job_runs
-      == render "src/views/admin/mosquito/_job_runs.slang"
-
-      - state = "scheduled"
-      - job_runs = queue.scheduled_job_runs
-      == render "src/views/admin/mosquito/_job_runs.slang"
-
-      - state = "pending"
-      - job_runs = queue.pending_job_runs
-      == render "src/views/admin/mosquito/_job_runs.slang"
-
-      - state = "dead"
-      - job_runs = queue.dead_job_runs
-      == render "src/views/admin/mosquito/_job_runs.slang"
