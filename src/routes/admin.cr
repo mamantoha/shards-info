@@ -221,6 +221,16 @@ router.namespace "/admin" do
     render "src/views/admin/active_users/index.slang", "src/views/layouts/layout.slang"
   end
 
+  get "/mosquito" do |env|
+    queues = Mosquito::Api::Queue.all.sort
+
+    set_request_context(env) do
+      request_context.page_title = "Admin: Mosquito"
+    end
+
+    render "src/views/admin/mosquito/index.slang", "src/views/layouts/layout.slang"
+  end
+
   namespace "/users" do
     post "/:id/sync" do |env|
       id = env.params.url["id"]

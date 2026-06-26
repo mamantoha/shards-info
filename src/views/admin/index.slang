@@ -15,3 +15,5 @@
       a href="/admin/hidden_repositories" Hidden repositories
      li
       a href="/admin/active_users" Active users
+    li
+      a href="/admin/mosquito" Mosquito
