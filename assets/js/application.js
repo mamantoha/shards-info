@@ -66,6 +66,358 @@ $(function () {
     });
   });
 
+  $(document).on("submit", ".js-delete-dead-job", function (e) {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const button = form.querySelector("button[type='submit']");
+    const row = form.closest(".js-mosquito-job-row");
+    const queueName = row.dataset.queueName;
+
+    button.disabled = true;
+
+    $.ajax({
+      url: form.action,
+      method: form.method,
+      data: $(form).serialize(),
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+      success: function () {
+        row.remove();
+
+        const deadCount = $(`.js-mosquito-dead-count[data-queue-name="${queueName}"]`);
+        const deadSectionCount = $(
+          `.js-mosquito-dead-section-count[data-queue-name="${queueName}"]`,
+        );
+        const count = Math.max(parseInt(deadCount.text(), 10) - 1, 0);
+
+        deadCount.text(count);
+        deadSectionCount.text(count);
+      },
+      error: function () {
+        button.disabled = false;
+      },
+    });
+  });
+
+  const livePollButton = function () {
+    return document.querySelector(".js-live-poll");
+  };
+
+  const livePollStorageKey = function () {
+    return `livePoll:${window.location.pathname}`;
+  };
+
+  const updateLivePollButton = function () {
+    const button = livePollButton();
+    if (!button) {
+      return;
+    }
+
+    const enabled = localStorage.getItem(livePollStorageKey()) === "true";
+    button.textContent = enabled ? "Stop Live Poll" : "Live Poll";
+    button.classList.toggle("btn-secondary", enabled);
+    button.classList.toggle("btn-outline-secondary", !enabled);
+  };
+
+  const mosquitoJsonUrl = function () {
+    return livePollButton().dataset.url;
+  };
+
+  const deleteDeadJobsForm = function (queueName) {
+    return `
+      <form action="/admin/mosquito/dead_jobs" method="post">
+        <input type="hidden" name="queue[name]" value="${queueName}">
+        <button class="btn btn-sm btn-danger" type="submit">Delete dead jobs</button>
+      </form>
+    `;
+  };
+
+  const pauseQueueForm = function (queue) {
+    const action = queue.paused ? "resume" : "pause";
+    const label = queue.paused ? "Resume" : "Pause";
+    const buttonClass = queue.paused ? "btn-secondary" : "btn-warning";
+
+    return `
+      <form class="js-mosquito-queue-action" action="/admin/mosquito/queues/${queue.name}/${action}" method="post">
+        <button class="btn btn-sm ${buttonClass}" type="submit">${label}</button>
+      </form>
+    `;
+  };
+
+  const updateQueueRow = function (row, queue) {
+    row.find(".js-mosquito-waiting-count").text(queue.sizes.waiting);
+    row.find(".js-mosquito-scheduled-count").text(queue.sizes.scheduled);
+    row.find(".js-mosquito-pending-count").text(queue.sizes.pending);
+    row.find(".js-mosquito-dead-count").text(queue.sizes.dead);
+    row.find(".js-mosquito-pause").html(pauseQueueForm(queue));
+    row
+      .find(".js-mosquito-delete-dead")
+      .html(queue.sizes.dead > 0 ? deleteDeadJobsForm(queue.name) : "");
+  };
+
+  const queueRow = function (queue) {
+    return $(`
+      <tr class="js-mosquito-queue-row" data-queue-name="${queue.name}">
+        <td><a href="/admin/mosquito/queues/${queue.name}">${queue.name}</a></td>
+        <td class="js-mosquito-waiting-count"></td>
+        <td class="js-mosquito-scheduled-count"></td>
+        <td class="js-mosquito-pending-count"></td>
+        <td class="js-mosquito-dead-count" data-queue-name="${queue.name}"></td>
+        <td class="js-mosquito-pause"></td>
+        <td class="js-mosquito-delete-dead"></td>
+      </tr>
+    `);
+  };
+
+  const refreshMosquitoQueues = function (queues) {
+    const body = $(".js-mosquito-queues");
+
+    queues.forEach(function (queue) {
+      let row = body.find(`.js-mosquito-queue-row[data-queue-name="${queue.name}"]`);
+
+      if (!row.length) {
+        row = queueRow(queue);
+        body.append(row);
+      }
+
+      updateQueueRow(row, queue);
+    });
+
+    body.find(".js-mosquito-queue-row").each(function () {
+      const row = $(this);
+      const queueName = row.data("queueName");
+      const exists = queues.some(function (queue) {
+        return queue.name === queueName;
+      });
+
+      if (!exists) {
+        row.remove();
+      }
+    });
+  };
+
+  const deadJobDeleteForm = function (queueName, jobId) {
+    return `
+      <form class="js-delete-dead-job" action="/admin/mosquito/dead_jobs/${jobId}" method="post">
+        <input type="hidden" name="queue[name]" value="${queueName}">
+        <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+      </form>
+    `;
+  };
+
+  const jobRow = function (queueName, state, job) {
+    const action = state === "dead" ? deadJobDeleteForm(queueName, job.id) : "";
+    const parameters = job.runtime_parameters
+      ? Object.entries(job.runtime_parameters)
+          .map(function ([key, value]) {
+            return `<div><code>${key}=${value}</code></div>`;
+          })
+          .join("")
+      : "";
+    const cells = job.found
+      ? `
+        <td>${job.type}</td>
+        <td>${job.retry_count}</td>
+        <td>${job.enqueue_time}</td>
+        <td>${job.started_at || ""}</td>
+        <td>${job.finished_at || ""}</td>
+        <td>${parameters}</td>
+      `
+      : '<td colspan="6">Missing metadata</td>';
+
+    return `
+      <tr class="js-mosquito-job-row" data-queue-name="${queueName}" data-job-state="${state}" data-job-id="${job.id}">
+        <td>${job.id}</td>
+        ${cells}
+        <td>${action}</td>
+      </tr>
+    `;
+  };
+
+  const refreshMosquitoJobs = function (queueName, state, jobs) {
+    const body = $(`.js-mosquito-jobs[data-queue-name="${queueName}"][data-job-state="${state}"]`);
+
+    if (!jobs.length) {
+      body.html(
+        '<tr class="js-mosquito-empty-row"><td class="text-muted" colspan="8">No jobs.</td></tr>',
+      );
+      return;
+    }
+
+    body.html(
+      jobs
+        .map(function (job) {
+          return jobRow(queueName, state, job);
+        })
+        .join(""),
+    );
+  };
+
+  const workerRow = function (overseer, executor) {
+    return `
+      <tr class="js-mosquito-worker-row" data-overseer-id="${overseer.instance_id}" data-executor-id="${executor.instance_id}">
+        <td>${executor.instance_id}</td>
+        <td>${executor.heartbeat || ""}</td>
+        <td>${executor.current_job || "Idle"}</td>
+        <td>${executor.current_job_queue || ""}</td>
+      </tr>
+    `;
+  };
+
+  const workerGroup = function (overseer) {
+    if (!overseer.executors.length) {
+      return `
+        <div class="mb-4 js-mosquito-worker-group" data-overseer-id="${overseer.instance_id}">
+          <h3 class="h5">${overseer.instance_id}</h3>
+          <dl class="row">
+            <dt class="col-sm-3">Last heartbeat</dt>
+            <dd class="col-sm-9">${overseer.last_heartbeat || ""}</dd>
+            <dt class="col-sm-3">Executors</dt>
+            <dd class="col-sm-9">0</dd>
+          </dl>
+          <p class="text-muted">No executors.</p>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="mb-4 js-mosquito-worker-group" data-overseer-id="${overseer.instance_id}">
+        <h3 class="h5">${overseer.instance_id}</h3>
+        <dl class="row">
+          <dt class="col-sm-3">Last heartbeat</dt>
+          <dd class="col-sm-9">${overseer.last_heartbeat || ""}</dd>
+          <dt class="col-sm-3">Executors</dt>
+          <dd class="col-sm-9">${overseer.executors.length}</dd>
+        </dl>
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Executor</th>
+                <th>Heartbeat</th>
+                <th>Current job</th>
+                <th>Current queue</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${overseer.executors
+                .map(function (executor) {
+                  return workerRow(overseer, executor);
+                })
+                .join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  };
+
+  const refreshMosquitoWorkers = function (workers) {
+    const body = $(".js-mosquito-workers");
+
+    body.html(
+      workers.length
+        ? workers
+            .map(function (overseer) {
+              return workerGroup(overseer);
+            })
+            .join("")
+        : '<p class="text-muted">No workers found.</p>',
+    );
+  };
+
+  const refreshMosquitoContent = function () {
+    $.ajax({
+      url: mosquitoJsonUrl(),
+      method: "GET",
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+      success: function (data) {
+        if (data.queues) {
+          refreshMosquitoQueues(data.queues);
+          return;
+        }
+
+        if (data.workers) {
+          refreshMosquitoWorkers(data.workers);
+          return;
+        }
+
+        updateQueueRow($(".js-mosquito-queue-row"), data.queue);
+        refreshMosquitoJobs(data.queue.name, "waiting", data.jobs.waiting);
+        refreshMosquitoJobs(data.queue.name, "scheduled", data.jobs.scheduled);
+        refreshMosquitoJobs(data.queue.name, "pending", data.jobs.pending);
+        refreshMosquitoJobs(data.queue.name, "dead", data.jobs.dead);
+      },
+    });
+  };
+
+  let livePollTimer = null;
+
+  const startLivePoll = function () {
+    const button = livePollButton();
+    if (!button || livePollTimer) {
+      return;
+    }
+
+    const storageKey = `livePoll:${window.location.pathname}`;
+    const interval = parseInt(button.dataset.interval, 10);
+    localStorage.setItem(storageKey, "true");
+    updateLivePollButton();
+    livePollTimer = window.setInterval(refreshMosquitoContent, interval);
+  };
+
+  const stopLivePoll = function () {
+    localStorage.setItem(livePollStorageKey(), "false");
+    updateLivePollButton();
+    window.clearInterval(livePollTimer);
+    livePollTimer = null;
+  };
+
+  $(document).on("click", ".js-live-poll", function () {
+    const enabled = localStorage.getItem(livePollStorageKey()) === "true";
+
+    if (enabled) {
+      stopLivePoll();
+    } else {
+      startLivePoll();
+    }
+  });
+
+  updateLivePollButton();
+
+  if (livePollButton() && localStorage.getItem(livePollStorageKey()) === "true") {
+    startLivePoll();
+  }
+
+  $(document).on("submit", ".js-mosquito-queue-action", function (e) {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const button = form.querySelector("button[type='submit']");
+    const row = form.closest(".js-mosquito-queue-row");
+
+    button.disabled = true;
+
+    $.ajax({
+      url: form.action,
+      method: form.method,
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+      success: function (resp) {
+        updateQueueRow($(row), resp.data.queue);
+      },
+      error: function () {
+        button.disabled = false;
+      },
+    });
+  });
+
   const sidebarModal = document.getElementById("sidebar-modal");
   const searchInput = sidebarModal.querySelector("input[name='query']");
 
