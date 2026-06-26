@@ -1,3 +1,44 @@
+private def mosquito_job_run_json(job_run : Mosquito::Api::JobRun)
+  found = job_run.found?
+
+  {
+    "id"          => job_run.id,
+    "found"       => found,
+    "type"        => found ? job_run.type : nil,
+    "retry_count" => found ? job_run.retry_count : nil,
+    "enqueue_time" => found ? job_run.enqueue_time.by_example("January 2, 2006 @ 15:04") : nil,
+    "started_at"  => found ? job_run.started_at.try(&.by_example("January 2, 2006 @ 15:04")) : nil,
+    "finished_at" => found ? job_run.finished_at.try(&.by_example("January 2, 2006 @ 15:04")) : nil,
+  }
+end
+
+private def mosquito_queue_json(queue : Mosquito::Api::Queue)
+  sizes = queue.size_details
+
+  {
+    "name"   => queue.name,
+    "paused" => queue.paused?,
+    "sizes"  => {
+      "waiting"   => sizes["waiting"],
+      "scheduled" => sizes["scheduled"],
+      "pending"   => sizes["pending"],
+      "dead"      => sizes["dead"],
+    },
+  }
+end
+
+private def mosquito_queue_details_json(queue : Mosquito::Api::Queue)
+  {
+    "queue" => mosquito_queue_json(queue),
+    "jobs"  => {
+      "waiting"   => queue.waiting_job_runs.map { |job_run| mosquito_job_run_json(job_run) },
+      "scheduled" => queue.scheduled_job_runs.map { |job_run| mosquito_job_run_json(job_run) },
+      "pending"   => queue.pending_job_runs.map { |job_run| mosquito_job_run_json(job_run) },
+      "dead"      => queue.dead_job_runs.map { |job_run| mosquito_job_run_json(job_run) },
+    },
+  }
+end
+
 router = Kemal::Router.new
 
 router.namespace "/admin" do
@@ -231,6 +272,14 @@ router.namespace "/admin" do
     render "src/views/admin/mosquito/index.slang", "src/views/layouts/layout.slang"
   end
 
+  get "/mosquito.json" do |env|
+    queues = Mosquito::Api::Queue.all.sort
+
+    env.json({
+      "queues" => queues.map { |queue| mosquito_queue_json(queue) },
+    })
+  end
+
   get "/mosquito/queues/:name" do |env|
     queue_name = env.params.url["name"]
     queue = Mosquito::Api::Queue.new(queue_name)
@@ -240,6 +289,13 @@ router.namespace "/admin" do
     end
 
     render "src/views/admin/mosquito/show.slang", "src/views/layouts/layout.slang"
+  end
+
+  get "/mosquito/queues/:name.json" do |env|
+    queue_name = env.params.url["name"]
+    queue = Mosquito::Api::Queue.new(queue_name)
+
+    env.json(mosquito_queue_details_json(queue))
   end
 
   post "/mosquito/dead_jobs" do |env|

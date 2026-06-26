@@ -3,21 +3,22 @@ h4.mt-3
   span class="#{state == "dead" ? "js-mosquito-dead-section-count" : ""}" data-queue-name="#{queue.name}" = job_runs.size
   = ")"
 
-- if job_runs.empty?
-  p.text-muted No jobs.
-- else
-  .table-responsive
-    table.table.table-sm.table-striped
-      thead
-        tr
-          th ID
-          th Type
-          th Retries
-          th Enqueued
-          th Started
-          th Finished
-          th
-      tbody
+.table-responsive
+  table.table.table-sm.table-striped
+    thead
+      tr
+        th ID
+        th Type
+        th Retries
+        th Enqueued
+        th Started
+        th Finished
+        th
+    tbody.js-mosquito-jobs data-queue-name="#{queue.name}" data-job-state="#{state}"
+      - if job_runs.empty?
+        tr.js-mosquito-empty-row
+          td.text-muted colspan="7" No jobs.
+      - else
         - job_runs.each do |job_run|
           tr.js-mosquito-job-row data-queue-name="#{queue.name}" data-job-state="#{state}" data-job-id="#{job_run.id}"
             td = job_run.id
