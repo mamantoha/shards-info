@@ -8,6 +8,11 @@ on:
         required: true
         type: boolean
         default: false
+      restart_services:
+        description: Restart systemd services after uploading artifacts
+        required: true
+        type: boolean
+        default: false
 
 jobs:
   deploy:
@@ -96,3 +101,13 @@ jobs:
         run: |
           ssh -i ~/.ssh/deploy_key -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "cd '$DEPLOY_PATH' && ./bin/cli migrate"
+
+      - name: Restart services
+        if: ${{ inputs.restart_services }}
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "sudo -n systemctl restart shards.info_web.service shards.info_worker.service"
