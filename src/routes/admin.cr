@@ -9,6 +9,7 @@ private def mosquito_job_run_json(job_run : Mosquito::Api::JobRun)
     "enqueue_time" => found ? job_run.enqueue_time.by_example("January 2, 2006 @ 15:04") : nil,
     "started_at"  => found ? job_run.started_at.try(&.by_example("January 2, 2006 @ 15:04")) : nil,
     "finished_at" => found ? job_run.finished_at.try(&.by_example("January 2, 2006 @ 15:04")) : nil,
+    "runtime_parameters" => found ? job_run.runtime_parameters : nil,
   }
 end
 

@@ -13,6 +13,7 @@ h4.mt-3
         th Enqueued
         th Started
         th Finished
+        th Parameters
         th
     tbody.js-mosquito-jobs data-queue-name="#{queue.name}" data-job-state="#{state}"
       - if job_runs.empty?
@@ -28,8 +29,12 @@ h4.mt-3
               td = job_run.enqueue_time.by_example("January 2, 2006 @ 15:04")
               td = job_run.started_at.try(&.by_example("January 2, 2006 @ 15:04"))
               td = job_run.finished_at.try(&.by_example("January 2, 2006 @ 15:04"))
+              td
+                - job_run.runtime_parameters.each do |key, value|
+                  div
+                    code = "#{key}=#{value}"
             - else
-              td colspan="5" Missing metadata
+              td colspan="6" Missing metadata
             td
               - if state == "dead"
                 form.js-delete-dead-job action="/admin/mosquito/dead_jobs/#{job_run.id}" method="post"
