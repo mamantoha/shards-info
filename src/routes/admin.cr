@@ -2,13 +2,13 @@ private def mosquito_job_run_json(job_run : Mosquito::Api::JobRun)
   found = job_run.found?
 
   {
-    "id"          => job_run.id,
-    "found"       => found,
-    "type"        => found ? job_run.type : nil,
-    "retry_count" => found ? job_run.retry_count : nil,
-    "enqueue_time" => found ? job_run.enqueue_time.by_example("January 2, 2006 @ 15:04") : nil,
-    "started_at"  => found ? job_run.started_at.try(&.by_example("January 2, 2006 @ 15:04")) : nil,
-    "finished_at" => found ? job_run.finished_at.try(&.by_example("January 2, 2006 @ 15:04")) : nil,
+    "id"                 => job_run.id,
+    "found"              => found,
+    "type"               => found ? job_run.type : nil,
+    "retry_count"        => found ? job_run.retry_count : nil,
+    "enqueue_time"       => found ? job_run.enqueue_time.by_example("January 2, 2006 @ 15:04") : nil,
+    "started_at"         => found ? job_run.started_at.try(&.by_example("January 2, 2006 @ 15:04")) : nil,
+    "finished_at"        => found ? job_run.finished_at.try(&.by_example("January 2, 2006 @ 15:04")) : nil,
     "runtime_parameters" => found ? job_run.runtime_parameters : nil,
   }
 end
@@ -319,11 +319,13 @@ router.namespace "/admin" do
     queue_name = env.params.body["queue[name]"].as(String)
 
     Mosquito.backend.delete(Mosquito::JobRun.config_key(id))
-    Mosquito.backend.connection.not_nil!.lrem(
-      Mosquito.backend.build_key("dead", queue_name),
-      0,
-      id
-    )
+    if connection = Mosquito.backend.connection
+      connection.lrem(
+        Mosquito.backend.build_key("dead", queue_name),
+        0,
+        id
+      )
+    end
 
     if env.request.headers["X-Requested-With"]? == "XMLHttpRequest"
       env.json({
