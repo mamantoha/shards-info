@@ -30,9 +30,15 @@
           a href="https://redis.io/" Redis
           = Config.redis_version
     li
-      | Build date #{Time.parse_rfc2822(Config.date).to_s("%Y-%m-%d %H:%M:%S %:z")}
+      - build_time = Time.parse_rfc2822(Config.date)
+      | Build date
+      span.js-local-datetime datetime="#{build_time.to_rfc3339}" = build_time.to_s("%Y-%m-%d %H:%M:%S %:z")
     li
-      | Last data sync at #{last_sync_time}
+      | Last data sync at
+      - if last_sync_time
+        span.js-local-datetime datetime="#{last_sync_time.to_rfc3339}" = last_sync_time.to_s("%Y-%m-%d %H:%M:%S %:z")
+      - else
+        | N/A
     li
       | Official code repository is on
       a href="https://github.com/mamantoha/shards-info" GitHub

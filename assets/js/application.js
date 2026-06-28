@@ -66,6 +66,19 @@ $(function () {
     });
   });
 
+  document.querySelectorAll(".js-local-datetime").forEach(function (element) {
+    const date = new Date(element.getAttribute("datetime"));
+
+    if (Number.isNaN(date.getTime())) {
+      return;
+    }
+
+    element.textContent = new Intl.DateTimeFormat(undefined, {
+      dateStyle: "medium",
+      timeStyle: "medium",
+    }).format(date);
+  });
+
   $(document).on("submit", ".js-delete-dead-job", function (e) {
     e.preventDefault();
 

@@ -147,9 +147,7 @@ get "/about" do |env|
 
   last_sync_time =
     if repository = Repository.query.order_by(synced_at: :desc).first
-      repository.synced_at.to_s("%Y-%m-%d %H:%M:%S %:z")
-    else
-      "N/A"
+      repository.synced_at
     end
 
   render "src/views/about.slang", "src/views/layouts/layout.slang"
