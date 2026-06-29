@@ -78,16 +78,37 @@ After modifications run `npm run build`, `npm run oxlint`, and `npm run oxfmt`.
 
 ## Specs
 
-Prepare a database:
+Specs create and migrate their own PostgreSQL test database via `spec/initdb.cr`.
+The default connection settings are:
 
 ```console
-crystal spec/initdb.cr
+DATABASE_URL=postgres://postgres:postgres@localhost/shards_info_test
+POSTGRES_HOST=localhost
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=postgres
 ```
 
-Run specs:
+Redis must also be running locally for cache/session/Mosquito/Defense dependencies.
+The app uses these defaults in test:
+
+```console
+REDIS_URL=redis://localhost:6379/0
+SESSION_REDIS_URL=redis://localhost:6379/1
+MOSQUITO_REDIS_URL=redis://localhost:6379/2
+DEFENSE_REDIS_URL=redis://localhost:6379/3
+```
+
+Run specs with:
 
 ```console
 KEMAL_ENV=test crystal spec
+```
+
+To only recreate the test database:
+
+```console
+KEMAL_ENV=test crystal spec/initdb.cr
 ```
 
 ## Special thanks
