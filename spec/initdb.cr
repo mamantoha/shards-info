@@ -24,7 +24,7 @@ def create_user_with_repository
     synced_at:   Time.local,
   })
 
-  Repository.create({
+  repository = Repository.create({
     user_id:          user.id,
     provider:         "github",
     provider_id:      "1",
@@ -38,6 +38,43 @@ def create_user_with_repository
     fork:             false,
     last_activity_at: Time.local,
     synced_at:        Time.local,
+  })
+
+  shard_tag = Tag.create({name: "shard"})
+  cli_tag = Tag.create({name: "cli"})
+
+  RepositoryTag.create({repository_id: repository.id, tag_id: shard_tag.id})
+  RepositoryTag.create({repository_id: repository.id, tag_id: cli_tag.id})
+
+  dependent_user = User.create({
+    provider:    "github",
+    provider_id: "2",
+    login:       "mamantoha",
+    kind:        "user",
+    ignore:      false,
+    synced_at:   Time.local,
+  })
+
+  dependent_repository = Repository.create({
+    user_id:          dependent_user.id,
+    provider:         "github",
+    provider_id:      "2",
+    name:             "crest",
+    default_branch:   "master",
+    shard_yml:        "name: crest\nversion: 0.1.0\ndependencies:\n  crystal:\n    github: crystal-lang/crystal",
+    stars_count:      1,
+    forks_count:      1,
+    archived:         false,
+    ignore:           false,
+    fork:             false,
+    last_activity_at: Time.local,
+    synced_at:        Time.local,
+  })
+
+  Relationship.create({
+    master_id:     dependent_repository.id,
+    dependency_id: repository.id,
+    development:   false,
   })
 end
 
