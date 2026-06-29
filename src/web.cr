@@ -188,12 +188,8 @@ get "/" do |env|
 end
 
 get "/repositories" do |env|
-  page = env.params.query["page"]? || ""
-  page = page.to_i? || 1
   per_page = 20
-  offset = (page - 1) * per_page
-
-  raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+  page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
   sort_param = env.params.query["sort"]? || "stars"
   sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
@@ -211,7 +207,7 @@ get "/repositories" do |env|
 
   total_count = repositories_query.count
 
-  raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+  raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
   route_path = "/repositories?page=#{page}"
 
@@ -233,12 +229,8 @@ get "/repositories" do |env|
 end
 
 get "/users" do |env|
-  page = env.params.query["page"]? || ""
-  page = page.to_i? || 1
   per_page = 20
-  offset = (page - 1) * per_page
-
-  raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+  page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
   select_stars_count = <<-SQL
     SUM(repositories.stars_count * CASE
@@ -264,7 +256,7 @@ get "/users" do |env|
 
   total_count = users_query.count
 
-  raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+  raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
   paginator = ViewHelpers::Paginator.new(
     page,
@@ -330,12 +322,8 @@ get "/search" do |env|
   if env.params.query.[]?("query").nil? || env.params.query.[]?("query").try(&.empty?)
     env.redirect "/"
   else
-    page = env.params.query["page"]? || ""
-    page = page.to_i? || 1
     per_page = 20
-    offset = (page - 1) * per_page
-
-    raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+    page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
     sort_param = env.params.query["sort"]? || "stars"
     sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
@@ -366,7 +354,7 @@ get "/search" do |env|
 
     total_count = repositories_query.count
 
-    raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+    raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
     route_path = "/search?query=#{query_param}&page=#{page}"
 
@@ -514,12 +502,8 @@ get "/:provider/:owner/:repo/dependents" do |env|
   owner = env.params.url["owner"]
   repo = env.params.url["repo"]
 
-  page = env.params.query["page"]? || ""
-  page = page.to_i? || 1
   per_page = 20
-  offset = (page - 1) * per_page
-
-  raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+  page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
   sort_param = env.params.query["sort"]? || "stars"
   sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
@@ -538,7 +522,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
 
     total_count = repositories_query.count
 
-    raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+    raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
     route_path = "/#{provider}/#{owner}/#{repo}/dependents?page=#{page}"
 
@@ -565,12 +549,8 @@ end
 get "/tags/:name" do |env|
   name = env.params.url["name"]
 
-  page = env.params.query["page"]? || ""
-  page = page.to_i? || 1
   per_page = 20
-  offset = (page - 1) * per_page
-
-  raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+  page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
   if tag = Tag.find_by({name: name})
     repositories_query =
@@ -588,7 +568,7 @@ get "/tags/:name" do |env|
 
     total_count = repositories_query.count
 
-    raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+    raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
     paginator = ViewHelpers::Paginator.new(
       page,
@@ -654,12 +634,8 @@ get "/languages/:name" do |env|
     name = language.name
   end
 
-  page = env.params.query["page"]? || ""
-  page = page.to_i? || 1
   per_page = 20
-  offset = (page - 1) * per_page
-
-  raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+  page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
   if language = Language.find_by({name: name})
     repositories_query =
@@ -675,7 +651,7 @@ get "/languages/:name" do |env|
 
     total_count = repositories_query.count
 
-    raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+    raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
     paginator = ViewHelpers::Paginator.new(
       page,

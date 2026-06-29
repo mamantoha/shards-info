@@ -75,18 +75,14 @@ router.namespace "/admin" do
   end
 
   get "/admins" do |env|
-    page = env.params.query["page"]? || ""
-    page = page.to_i? || 1
     per_page = 20
-    offset = (page - 1) * per_page
-
-    raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+    page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
     admin_query = Admin.query.order_by(created_at: :desc)
 
     total_count = admin_query.count
 
-    raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+    raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
     paginator = ViewHelpers::Paginator.new(
       page,
@@ -197,12 +193,8 @@ router.namespace "/admin" do
   end
 
   get "/hidden_users" do |env|
-    page = env.params.query["page"]? || ""
-    page = page.to_i? || 1
     per_page = 20
-    offset = (page - 1) * per_page
-
-    raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+    page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
     users_query =
       User
@@ -217,7 +209,7 @@ router.namespace "/admin" do
 
     total_count = users_query.count
 
-    raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+    raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
     paginator = ViewHelpers::Paginator.new(
       page,
@@ -236,12 +228,8 @@ router.namespace "/admin" do
   end
 
   get "/hidden_repositories" do |env|
-    page = env.params.query["page"]? || ""
-    page = page.to_i? || 1
     per_page = 20
-    offset = (page - 1) * per_page
-
-    raise Kemal::Exceptions::RouteNotFound.new(env) if page < 1
+    page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
     repositories_query =
       Repository
@@ -252,7 +240,7 @@ router.namespace "/admin" do
 
     total_count = repositories_query.count
 
-    raise Kemal::Exceptions::RouteNotFound.new(env) if (page - 1) * per_page > total_count
+    raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
     paginator = ViewHelpers::Paginator.new(
       page,

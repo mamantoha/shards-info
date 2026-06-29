@@ -15,6 +15,17 @@ module Helpers
     "new-release"    => "New Release",
   }
 
+  def pagination(env, per_page : Int32) : Tuple(Int32, Int32)?
+    page = (env.params.query["page"]? || "").to_i64? || 1_i64
+    return if page < 1
+
+    max_page = (Int32::MAX // per_page) + 1
+    return if page > max_page
+
+    offset = (page - 1) * per_page
+    {page.to_i32, offset.to_i32}
+  end
+
   def sync_repository_by_url(url : String) : Repository?
     uri = URI.parse(url)
 
