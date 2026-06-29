@@ -95,7 +95,7 @@ shards:
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
-    version: 0.12.5
+    version: 0.12.6
 
   i18n:
     git: https://github.com/crystal-i18n/i18n.git
@@ -131,7 +131,7 @@ shards:
 
   lustra:
     git: https://github.com/crystal-garage/lustra.git
-    version: 0.18.3+git.commit.b336fdbef25ecde5dfed18850254d33d692d3a25
+    version: 0.18.3+git.commit.4b15a406ada3999bb04aa0d95703eb0cc206ab9d
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
