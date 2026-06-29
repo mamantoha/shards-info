@@ -87,7 +87,7 @@ def postgres_user
 end
 
 def postgres_password
-  ENV["POSTGRES_PASSWORD"]? || ""
+  ENV["POSTGRES_PASSWORD"]? || "postgres"
 end
 
 def postgres_host
