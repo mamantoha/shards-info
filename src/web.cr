@@ -287,14 +287,11 @@ get "/tags" do |env|
       Tag
         .query
         .where.not { name.in? skipped_tags }
-        .join(:repository_tags) { var("repository_tags", "tag_id") == var("tags", "id") }
+        .where.associated(:repository_tags)
+        .with_count(:repository_tags, alias_name: "tagging_count")
         .group_by("tags.id")
         .order_by(tagging_count: :desc)
         .limit(200)
-        .select(
-          "tags.*",
-          "COUNT(repository_tags.*) AS tagging_count"
-        )
 
     tags_array = [] of Hash(String, String)
 
@@ -595,13 +592,10 @@ get "/languages" do |env|
     languages =
       Language
         .query
-        .join(:repository_languages) { var("repository_languages", "language_id") == var("languages", "id") }
-        .select(
-          "languages.*",
-          "COUNT(repository_languages.*) AS languages_count"
-        )
-        .order_by(languages_count: :desc)
+        .where.associated(:repository_languages)
+        .with_count(:repository_languages, alias_name: "languages_count")
         .group_by("languages.id")
+        .order_by(languages_count: :desc)
 
     languages_array = [] of Hash(String, String)
 

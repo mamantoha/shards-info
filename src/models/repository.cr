@@ -62,12 +62,9 @@ class Repository
   # ```
   scope(:with_counts) do
     self
-      .select(
-        "repositories.*",
-        "(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id) dependents_count",
-        "(select COUNT(*) from relationships r WHERE r.master_id=repositories.id) dependencies_count",
-        "(select COUNT(*) from repository_forks rf WHERE rf.parent_id=repositories.id) forks_count"
-      )
+      .with_count(:dependents, alias_name: "dependents_count")
+      .with_count(:dependencies, alias_name: "dependencies_count")
+      .with_count(:forks, alias_name: "forks_count")
       .group_by("repositories.id")
   end
 
