@@ -61,11 +61,10 @@ class Repository
   # end
   # ```
   scope(:with_counts) do
-    self
+    group_by("repositories.id")
       .with_count(:dependents, alias_name: "dependents_count")
       .with_count(:dependencies, alias_name: "dependencies_count")
       .with_count(:forks, alias_name: "forks_count")
-      .group_by("repositories.id")
   end
 
   def self.find_repository(user_login : String, repository_name : String, provider : String) : Repository?
