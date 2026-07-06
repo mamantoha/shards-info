@@ -35,7 +35,7 @@
     "sass-loader": "^17.0.0",
     "style-loader": "^4.0.0",
     "trim-newlines": ">=5.0.0",
-    "webpack": "^5.108.3",
+    "webpack": "^5.108.4",
     "webpack-cli": "^7.2.1"
   },
   "dependencies": {
