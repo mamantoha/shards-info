@@ -31,7 +31,7 @@
     "expose-loader": "^5.0.1",
     "mini-css-extract-plugin": "^2.10.2",
     "oxfmt": "^0.57.0",
-    "oxlint": "^1.72.0",
+    "oxlint": "^1.73.0",
     "sass-loader": "^17.0.0",
     "style-loader": "^4.0.0",
     "trim-newlines": ">=5.0.0",
