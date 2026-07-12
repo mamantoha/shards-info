@@ -178,6 +178,7 @@ get "/" do |env|
       .where { users.ignore.false? }
       .where { repositories.ignore.false? }
       .order_by(last_activity_at: :desc)
+      .order_by("repositories.id", :asc)
       .limit(20)
 
   set_request_context(env) do
