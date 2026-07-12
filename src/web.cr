@@ -146,7 +146,10 @@ get "/about" do |env|
   end
 
   last_sync_time =
-    if repository = Repository.query.order_by(synced_at: :desc).first
+    if repository = Repository.query
+         .order_by(synced_at: :desc)
+         .order_by("repositories.id", :asc)
+         .first
       repository.synced_at
     end
 
@@ -254,6 +257,7 @@ get "/users" do |env|
       )
       .group_by("users.id")
       .order_by(stars_count: :desc)
+      .order_by("users.id", :asc)
 
   total_count = users_query.count
 
@@ -292,6 +296,7 @@ get "/tags" do |env|
         .with_count(:repository_tags, alias_name: "tagging_count")
         .group_by("tags.id")
         .order_by(tagging_count: :desc)
+        .order_by("tags.id", :asc)
         .limit(200)
 
     tags_array = [] of Hash(String, String)
@@ -451,6 +456,7 @@ get "/:provider/:owner/:repo" do |env|
           "(select COUNT(*) from relationships rel WHERE rel.dependency_id=repositories.id)",
           :desc
         )
+        .order_by("repositories.id", :asc)
 
     dependents_count = dependents.count
 
@@ -597,6 +603,7 @@ get "/languages" do |env|
         .with_count(:repository_languages, alias_name: "languages_count")
         .group_by("languages.id")
         .order_by(languages_count: :desc)
+        .order_by("languages.id", :asc)
 
     languages_array = [] of Hash(String, String)
 

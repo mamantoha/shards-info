@@ -78,7 +78,9 @@ router.namespace "/admin" do
     per_page = 20
     page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
-    admin_query = Admin.query.order_by(created_at: :desc)
+    admin_query = Admin.query
+      .order_by(created_at: :desc)
+      .order_by("admins.id", :asc)
 
     total_count = admin_query.count
 
@@ -206,6 +208,7 @@ router.namespace "/admin" do
           "COUNT(repositories.*) AS repositories_count",
         )
         .group_by("users.id")
+        .order_by("users.id", :asc)
 
     total_count = users_query.count
 
@@ -237,6 +240,7 @@ router.namespace "/admin" do
         .with_user
         .where { repositories.ignore.true? }
         .order_by(stars_count: :desc)
+        .order_by("repositories.id", :asc)
 
     total_count = repositories_query.count
 

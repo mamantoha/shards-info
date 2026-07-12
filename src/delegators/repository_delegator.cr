@@ -16,7 +16,12 @@ class RepositoryDelegator < Delegator(Repository)
   end
 
   def latest_release : String
-    releases.published.order_by(published_at: :desc).first.try(&.tag_name) || ""
+    releases
+      .published
+      .order_by(published_at: :desc)
+      .order_by("releases.id", :asc)
+      .first
+      .try(&.tag_name) || ""
   end
 
   def last_activity_ago

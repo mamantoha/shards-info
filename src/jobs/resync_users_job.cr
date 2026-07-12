@@ -5,6 +5,7 @@ class ResyncUsersJob < PeriodicJobWithErrorHandler
     users = User
       .query
       .order_by(synced_at: :asc)
+      .order_by("users.id", :asc)
       .limit(100)
 
     users.each do |user|

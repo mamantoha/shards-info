@@ -6,6 +6,7 @@ class ResyncRepositoriesJob < PeriodicJobWithErrorHandler
       Repository
         .query
         .order_by(synced_at: :asc)
+        .order_by("repositories.id", :asc)
         .limit(50)
 
     repositories.each do |repository|
