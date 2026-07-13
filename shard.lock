@@ -131,7 +131,7 @@ shards:
 
   lustra:
     git: https://github.com/crystal-garage/lustra.git
-    version: 0.18.3+git.commit.ff6bc188d375c4c08bea694741624d23a8a5c91d
+    version: 0.18.3+git.commit.e6efd40ad0c0ad46ad52df64ff65dd12c890b80b
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
