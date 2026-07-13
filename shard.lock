@@ -129,9 +129,9 @@ shards:
     git: https://github.com/jeromegn/kilt.git
     version: 0.6.1
 
-  lustra: # Overridden
+  lustra:
     git: https://github.com/crystal-garage/lustra.git
-    version: 0.18.3+git.commit.7fbc5e1a2c832caf464de79c70bc2a4dbbb41c18
+    version: 0.18.3+git.commit.ff6bc188d375c4c08bea694741624d23a8a5c91d
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git

@@ -2,7 +2,3 @@ dependencies:
   redis:
     github: jgaskins/redis
     branch: master
-  lustra:
-    github: crystal-garage/lustra
-    version: ">= 0.18.2"
-    branch: fix/non-mutating-collection-terminals
