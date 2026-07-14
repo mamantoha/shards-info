@@ -4,4 +4,7 @@ require "../../src/models/**"
 require "../../src/db/seeds"
 require "../../src/db/migrations/**"
 
-Lustra::SQL.init(ENV["DATABASE_URL"])
+database_url = ENV["DATABASE_URL"]
+
+Lustra::SQL.init(database_url)
+Lustra::SQL.add_connection("monitoring", database_url)

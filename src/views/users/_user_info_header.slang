@@ -1,6 +1,6 @@
 .page__heading.user_heading
   .container.text-center
-    - if (current_user = current_user(env)) && current_user.admin?
+    - if current_admin?(env)
       .text-end
         .dropdown#userActions
           button.btn.btn-danger.dropdown-toggle type="button" id="dropdownUserActionsMenuButton" data-bs-toggle="dropdown" aria-expanded="false"

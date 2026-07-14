@@ -40,6 +40,39 @@ h3 {
   font-size: 20px;
 }
 
+.admin-database-activity {
+  table-layout: fixed;
+  width: 100%;
+
+  th,
+  td {
+    vertical-align: top;
+  }
+
+  th:nth-child(1),
+  td:nth-child(1) {
+    width: 7rem;
+  }
+
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 6rem;
+  }
+
+  th:nth-child(3),
+  td:nth-child(3) {
+    width: 9rem;
+  }
+
+  pre {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    white-space: pre;
+  }
+}
+
 a {
   color: var(--regular-link-color);
   text-decoration: none;

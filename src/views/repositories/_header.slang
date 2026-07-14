@@ -24,7 +24,7 @@ div
           .shard__intro
             span
               == repository.decorate.description_html.to_s
-        - if (current_user = current_user(env)) && current_user.admin?
+        - if current_admin?(env)
           .col.text-end
             .dropdown#repositoryActions
               button.btn.btn-danger.dropdown-toggle type="button" id="dropdownRepositoryActionsMenuButton" data-bs-toggle="dropdown" aria-expanded="false"

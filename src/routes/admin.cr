@@ -57,11 +57,62 @@ private def mosquito_overseer_json(overseer : Mosquito::Api::Overseer)
   }
 end
 
+private def database_activity
+  monitoring_connection = "monitoring"
+  pg_stat_activity_filter = "datname = current_database() AND pid <> pg_backend_pid()"
+
+  database_size = Lustra::SQL
+    .select("pg_size_pretty(pg_database_size(current_database()))")
+    .use_connection(monitoring_connection)
+    .scalar(String)
+
+  activity_rows = Lustra::SQL
+    .select
+    .from("pg_stat_activity")
+    .where(pg_stat_activity_filter)
+    .order_by("query_start", :desc)
+    .use_connection(monitoring_connection)
+    .pluck(
+      pid: Int32,
+      state: String?,
+      query_start: Time?,
+      query: String?
+    )
+
+  activity_counts = {} of String => Int64
+  activity_rows.each do |row|
+    state = row[1] || "unknown"
+    activity_counts[state] = (activity_counts[state]? || 0_i64) + 1
+  end
+
+  {database_size, activity_rows, activity_counts}
+end
+
+private def database_activity_json(database_size, activity_rows, activity_counts)
+  {
+    "database_size" => database_size,
+    "counts"        => activity_counts.map do |state, count|
+      {
+        "state" => state,
+        "count" => count,
+      }
+    end,
+    "activity" => activity_rows.map do |row|
+      {
+        "pid"         => row[0],
+        "state"       => row[1],
+        "query_start" => row[2].try(&.to_s("%Y-%m-%d %H:%M:%S %:z")),
+        "query"       => row[3],
+      }
+    end,
+  }
+end
+
 router = Kemal::Router.new
 
 router.namespace "/admin" do
   before do |env|
-    unless (current_user = current_user(env)) && current_user.admin?
+    unless current_admin?(env)
       halt env, status_code: 403, response: "Forbidden"
     end
   end
@@ -270,6 +321,22 @@ router.namespace "/admin" do
     end
 
     render "src/views/admin/active_users/index.slang", "src/views/layouts/layout.slang"
+  end
+
+  get "/database" do |env|
+    database_size, activity_rows, activity_counts = database_activity
+
+    set_request_context(env) do
+      request_context.page_title = "Admin: Database"
+    end
+
+    render "src/views/admin/database/index.slang", "src/views/layouts/layout.slang"
+  end
+
+  get "/database.json" do |env|
+    database_size, activity_rows, activity_counts = database_activity
+
+    env.json(database_activity_json(database_size, activity_rows, activity_counts))
   end
 
   get "/mosquito" do |env|

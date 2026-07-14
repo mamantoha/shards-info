@@ -34,6 +34,8 @@ require "./lib/cmark/readme_renderer"
 
 require "./routes/*"
 
+ADMIN_SESSION_REFRESH_INTERVAL_SECONDS = 5_i64 * 60
+
 use Defense::Handler.new
 use ActiveUserTracker.new
 
@@ -53,6 +55,36 @@ def self.current_user(env) : Admin?
   end
 rescue
   nil
+end
+
+def self.store_admin_session(env, admin : Admin)
+  env.session.bigint("user_id", admin.id)
+  env.session.int("admin_role", admin.role)
+  env.session.bigint("admin_session_version", admin.updated_at.to_unix)
+  env.session.bigint("admin_verified_at", Time.utc.to_unix)
+  env.session.string("admin_nickname", admin.nickname || "")
+  env.session.string("admin_image", admin.image || "")
+end
+
+def self.current_admin?(env) : Bool
+  return false unless env.session.bigint?("user_id")
+
+  role = env.session.int?("admin_role")
+  session_version = env.session.bigint?("admin_session_version")
+  verified_at = env.session.bigint?("admin_verified_at")
+
+  if role && session_version && verified_at
+    recently_verified = Time.utc.to_unix - verified_at < ADMIN_SESSION_REFRESH_INTERVAL_SECONDS
+    return role == 1 if recently_verified
+  end
+
+  if admin = current_user(env)
+    store_admin_session(env, admin)
+
+    return admin.admin?
+  end
+
+  false
 end
 
 Kemal.config.add_handler(Raven::Kemal::ExceptionHandler.new)
@@ -123,7 +155,8 @@ get "/auth/:provider/callback" do |env|
   })
 
   if admin.save
-    env.session.bigint("user_id", admin.id)
+    env.session.reset
+    store_admin_session(env, admin)
   end
 
   env.redirect(origin)
