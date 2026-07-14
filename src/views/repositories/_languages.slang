@@ -1,5 +1,3 @@
-- repository_languages = repository.repository_languages.with_language.order_by(score: :desc)
-
 .repository__languages
   .progress style="height: 8px;"
     - repository_languages.each do |repository_language|

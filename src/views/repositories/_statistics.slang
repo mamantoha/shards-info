@@ -48,6 +48,7 @@
   .list__heading Synced at
   p.small
     = Time::Format::HTTP_DATE.format(repository.synced_at)
-  - if repository.languages.any?
+  - repository_languages = repository.repository_languages.with_language.order_by(score: :desc).to_a
+  - if repository_languages.any?
     .list__heading Languages
     == render "src/views/repositories/_languages.slang"
