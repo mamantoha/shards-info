@@ -61,6 +61,11 @@ private def database_activity
   monitoring_connection = "monitoring"
   pg_stat_activity_filter = "datname = current_database() AND pid <> pg_backend_pid()"
 
+  database_size = Lustra::SQL
+    .select("pg_size_pretty(pg_database_size(current_database()))")
+    .use_connection(monitoring_connection)
+    .scalar(String)
+
   activity_rows = Lustra::SQL
     .select
     .from("pg_stat_activity")
@@ -80,12 +85,13 @@ private def database_activity
     activity_counts[state] = (activity_counts[state]? || 0_i64) + 1
   end
 
-  {activity_rows, activity_counts}
+  {database_size, activity_rows, activity_counts}
 end
 
-private def database_activity_json(activity_rows, activity_counts)
+private def database_activity_json(database_size, activity_rows, activity_counts)
   {
-    "counts" => activity_counts.map do |state, count|
+    "database_size" => database_size,
+    "counts"        => activity_counts.map do |state, count|
       {
         "state" => state,
         "count" => count,
@@ -318,7 +324,7 @@ router.namespace "/admin" do
   end
 
   get "/database" do |env|
-    activity_rows, activity_counts = database_activity
+    database_size, activity_rows, activity_counts = database_activity
 
     set_request_context(env) do
       request_context.page_title = "Admin: Database"
@@ -328,9 +334,9 @@ router.namespace "/admin" do
   end
 
   get "/database.json" do |env|
-    activity_rows, activity_counts = database_activity
+    database_size, activity_rows, activity_counts = database_activity
 
-    env.json(database_activity_json(activity_rows, activity_counts))
+    env.json(database_activity_json(database_size, activity_rows, activity_counts))
   end
 
   get "/mosquito" do |env|

@@ -393,6 +393,7 @@ $(function () {
   };
 
   const refreshDatabaseContent = function (data) {
+    $(".js-database-size").text(data.database_size);
     refreshDatabaseCounts(data.counts);
     refreshDatabaseActivity(data.activity);
   };

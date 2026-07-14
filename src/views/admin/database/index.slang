@@ -10,6 +10,10 @@
     h2 Database
     button.btn.btn-sm.btn-outline-secondary.js-live-poll type="button" data-interval="5000" data-url="/admin/database.json" Live Poll
 
+  dl.row
+    dt.col-sm-3 Database size
+    dd.col-sm-9.js-database-size = database_size
+
   h3.h5 Connections
   .table-responsive
     table.table.table-striped
