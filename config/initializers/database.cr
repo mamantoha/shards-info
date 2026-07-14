@@ -7,4 +7,3 @@ require "../../src/db/migrations/**"
 database_url = ENV["DATABASE_URL"]
 
 Lustra::SQL.init(database_url)
-Lustra::SQL.add_connection("monitoring", database_url)

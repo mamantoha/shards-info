@@ -32,6 +32,8 @@ require "./delegators"
 
 require "./lib/cmark/readme_renderer"
 
+Lustra::SQL.add_connection("monitoring", ENV["DATABASE_URL"])
+
 require "./routes/*"
 
 ADMIN_SESSION_REFRESH_INTERVAL_SECONDS = 5_i64 * 60
