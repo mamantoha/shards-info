@@ -134,8 +134,17 @@ $(function () {
     button.classList.toggle("btn-outline-secondary", !enabled);
   };
 
-  const mosquitoJsonUrl = function () {
+  const livePollJsonUrl = function () {
     return livePollButton().dataset.url;
+  };
+
+  const escapeHtml = function (value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
   };
 
   const deleteDeadJobsForm = function (queueName) {
@@ -342,9 +351,55 @@ $(function () {
     );
   };
 
-  const refreshMosquitoContent = function () {
+  const refreshDatabaseCounts = function (counts) {
+    const body = $(".js-database-counts");
+
+    body.html(
+      counts
+        .map(function (item) {
+          return `
+            <tr>
+              <td>${escapeHtml(item.state)}</td>
+              <td>${item.count}</td>
+            </tr>
+          `;
+        })
+        .join(""),
+    );
+  };
+
+  const refreshDatabaseActivity = function (activity) {
+    const body = $(".js-database-activity");
+
+    if (!activity.length) {
+      body.html('<tr><td class="text-muted" colspan="4">No activity.</td></tr>');
+      return;
+    }
+
+    body.html(
+      activity
+        .map(function (row) {
+          return `
+            <tr>
+              <td>${row.pid}</td>
+              <td>${escapeHtml(row.state)}</td>
+              <td>${escapeHtml(row.query_start)}</td>
+              <td><pre class="mb-0">${escapeHtml(row.query)}</pre></td>
+            </tr>
+          `;
+        })
+        .join(""),
+    );
+  };
+
+  const refreshDatabaseContent = function (data) {
+    refreshDatabaseCounts(data.counts);
+    refreshDatabaseActivity(data.activity);
+  };
+
+  const refreshLivePollContent = function () {
     $.ajax({
-      url: mosquitoJsonUrl(),
+      url: livePollJsonUrl(),
       method: "GET",
       headers: {
         "X-Requested-With": "XMLHttpRequest",
@@ -357,6 +412,11 @@ $(function () {
 
         if (data.workers) {
           refreshMosquitoWorkers(data.workers);
+          return;
+        }
+
+        if (data.counts && data.activity) {
+          refreshDatabaseContent(data);
           return;
         }
 
@@ -381,7 +441,7 @@ $(function () {
     const interval = parseInt(button.dataset.interval, 10);
     localStorage.setItem(storageKey, "true");
     updateLivePollButton();
-    livePollTimer = window.setInterval(refreshMosquitoContent, interval);
+    livePollTimer = window.setInterval(refreshLivePollContent, interval);
   };
 
   const stopLivePoll = function () {
