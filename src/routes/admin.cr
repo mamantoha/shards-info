@@ -61,7 +61,7 @@ router = Kemal::Router.new
 
 router.namespace "/admin" do
   before do |env|
-    unless (current_user = current_user(env)) && current_user.admin?
+    unless current_admin?(env)
       halt env, status_code: 403, response: "Forbidden"
     end
   end
