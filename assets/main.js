@@ -1,12 +1,7 @@
 import $ from "jquery";
+import * as bootstrap from "bootstrap";
 
-import "bootstrap/js/dist/modal";
-import "bootstrap/js/dist/tab";
-import "bootstrap/js/dist/alert";
-import "bootstrap/js/dist/scrollspy";
-import "bootstrap/js/dist/tooltip";
-import "bootstrap/js/dist/popover";
-
+import "./main.scss";
 import "./js/word-cloud.js";
 
 import Chart from "chart.js/auto";
@@ -16,9 +11,9 @@ window.$ = $;
 window.jQuery = $;
 window.MoveTo = moveto;
 window.Chart = Chart;
+window.bootstrap = bootstrap;
 
-window.bootstrap = require("bootstrap/dist/js/bootstrap.bundle.js");
-
-require("./vendor/jquery.twbsPagination.js");
-require("./js/application.js");
-require("./js/chart.js");
+import("./vendor/jquery.twbsPagination.js").then(() => {
+  import("./js/application.js");
+  import("./js/chart.js");
+});

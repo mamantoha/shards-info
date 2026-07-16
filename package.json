@@ -8,11 +8,11 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build": "vite build",
     "oxlint": "oxlint assets/",
     "oxlint:fix": "oxlint --fix assets/",
-    "oxfmt": "oxfmt --check assets/main.js assets/js assets/main.scss assets/styles assets/vendor/code.scss public/css",
-    "oxfmt:fix": "oxfmt --write assets/main.js assets/js assets/main.scss assets/styles assets/vendor/code.scss public/css"
+    "oxfmt": "oxfmt --check vite.config.js assets/main.js assets/js assets/main.scss assets/styles assets/vendor/code.scss public/css",
+    "oxfmt:fix": "oxfmt --write vite.config.js assets/main.js assets/js assets/main.scss assets/styles assets/vendor/code.scss public/css"
   },
   "repository": {
     "type": "git",
@@ -27,16 +27,10 @@
   "homepage": "https://github.com/mamantoha/shards-info#readme",
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^7.3.1",
-    "css-loader": "^7.1.4",
-    "expose-loader": "^5.0.1",
-    "mini-css-extract-plugin": "^2.10.2",
     "oxfmt": "^0.59.0",
     "oxlint": "^1.73.0",
-    "sass-loader": "^17.0.0",
-    "style-loader": "^4.0.0",
     "trim-newlines": ">=5.0.0",
-    "webpack": "^5.108.4",
-    "webpack-cli": "^7.2.1"
+    "vite": "^7.0.0"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
