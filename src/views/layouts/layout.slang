@@ -14,7 +14,7 @@ html lang="en"
     == render "src/views/partials/open_graph.slang"
 
     link rel="stylesheet" href="/dist/application.css?v=#{assets_version}" async="async" defer="defer"
-    script src="/dist/application.js?v=#{assets_version}" media="all"
+    script type="module" src="/dist/application.js?v=#{assets_version}" media="all"
 
     link rel="icon" sizes="264x168" href="/images/speeddial.png" async="async" defer="defer"
 
