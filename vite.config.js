@@ -3,6 +3,13 @@ import { defineConfig } from "vite";
 export default defineConfig({
   base: "/dist/",
   publicDir: false,
+  css: {
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: ["color-functions", "global-builtin", "if-function", "import"],
+      },
+    },
+  },
   build: {
     outDir: "public/dist",
     emptyOutDir: true,
