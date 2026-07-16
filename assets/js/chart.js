@@ -338,7 +338,7 @@ class PieChart {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+const initializeStatsCharts = function () {
   const chartCreatedAt = new RepositoryCountBarChart({
     apiUrl: "/stats/created_at",
     element: "#chartCreatedAt",
@@ -498,4 +498,10 @@ document.addEventListener("DOMContentLoaded", function () {
       responsive: true,
     },
   });
-});
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeStatsCharts);
+} else {
+  initializeStatsCharts();
+}
