@@ -11,8 +11,8 @@ div#tags data-tags="#{tags_json}"
 #tags-cloud
 
 javascript:
-  $(function() {
-    tags = $("#tags").data("tags");
+  document.addEventListener("DOMContentLoaded", function() {
+    const tags = JSON.parse(document.getElementById("tags").dataset.tags);
     window.renderWordCloud('#tags-cloud', tags, {
       autoResize: true,
       fontSize: {

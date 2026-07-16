@@ -11,8 +11,8 @@ div#languages data-languages="#{languages_json}"
 #languages-cloud
 
 javascript:
-  $(function() {
-    languages = $("#languages").data("languages");
+  document.addEventListener("DOMContentLoaded", function() {
+    const languages = JSON.parse(document.getElementById("languages").dataset.languages);
     window.renderWordCloud('#languages-cloud', languages, {
       autoResize: true,
       fontSize: {
