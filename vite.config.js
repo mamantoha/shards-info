@@ -15,6 +15,9 @@ export default defineConfig({
     emptyOutDir: true,
     cssCodeSplit: false,
     rollupOptions: {
+      checks: {
+        pluginTimings: false,
+      },
       input: "assets/main.js",
       output: {
         entryFileNames: "application.js",
