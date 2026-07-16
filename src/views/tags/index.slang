@@ -9,15 +9,3 @@ div
 
 div#tags data-tags="#{tags_json}"
 #tags-cloud
-
-javascript:
-  document.addEventListener("DOMContentLoaded", function() {
-    const tags = JSON.parse(document.getElementById("tags").dataset.tags);
-    window.renderWordCloud('#tags-cloud', tags, {
-      autoResize: true,
-      fontSize: {
-        from: 0.04,
-        to: 0.01
-      }
-    });
-  });

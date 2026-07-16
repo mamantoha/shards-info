@@ -9,15 +9,3 @@ div
 
 div#languages data-languages="#{languages_json}"
 #languages-cloud
-
-javascript:
-  document.addEventListener("DOMContentLoaded", function() {
-    const languages = JSON.parse(document.getElementById("languages").dataset.languages);
-    window.renderWordCloud('#languages-cloud', languages, {
-      autoResize: true,
-      fontSize: {
-        from: 0.04,
-        to: 0.01
-      }
-    });
-  });

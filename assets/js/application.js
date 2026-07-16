@@ -6,6 +6,24 @@ const showTab = function (element) {
   window.bootstrap.Tab.getOrCreateInstance(element).show();
 };
 
+const renderWordCloudFromDataElement = function (dataElementId, dataAttribute, cloudSelector) {
+  const element = document.getElementById(dataElementId);
+
+  if (!element) {
+    return;
+  }
+
+  const words = JSON.parse(element.dataset[dataAttribute]);
+
+  window.renderWordCloud(cloudSelector, words, {
+    autoResize: true,
+    fontSize: {
+      from: 0.04,
+      to: 0.01,
+    },
+  });
+};
+
 $(function () {
   if (!("theme" in localStorage)) {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -578,6 +596,9 @@ $(function () {
   popoverTriggerList.map(function (popoverTriggerEl) {
     return new window.bootstrap.Popover(popoverTriggerEl);
   });
+
+  renderWordCloudFromDataElement("tags", "tags", "#tags-cloud");
+  renderWordCloudFromDataElement("languages", "languages", "#languages-cloud");
 });
 
 // Executed upon page load
