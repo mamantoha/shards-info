@@ -1,3 +1,29 @@
+const showTab = function (element) {
+  if (!element) {
+    return;
+  }
+
+  window.bootstrap.Tab.getOrCreateInstance(element).show();
+};
+
+const renderWordCloudFromDataElement = function (dataElementId, dataAttribute, cloudSelector) {
+  const element = document.getElementById(dataElementId);
+
+  if (!element) {
+    return;
+  }
+
+  const words = JSON.parse(element.dataset[dataAttribute]);
+
+  window.renderWordCloud(cloudSelector, words, {
+    autoResize: true,
+    fontSize: {
+      from: 0.04,
+      to: 0.01,
+    },
+  });
+};
+
 $(function () {
   if (!("theme" in localStorage)) {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -39,9 +65,9 @@ $(function () {
     const activeTab = $('.nav a[href="' + hash + '"]');
 
     if (activeTab.length) {
-      activeTab.tab("show");
+      showTab(activeTab[0]);
     } else {
-      $(".nav-tabs a:first").tab("show");
+      showTab($(".nav-tabs a:first")[0]);
     }
   });
 
@@ -504,7 +530,7 @@ $(function () {
 
   $(function () {
     const hash = window.location.hash;
-    hash && $('.nav a[href="' + hash + '"]').tab("show");
+    hash && showTab($('.nav a[href="' + hash + '"]')[0]);
 
     // add a hash to the URL when the user clicks on a tab
     $(".home_repositories__container .nav-tabs a").on("click", function (e) {
@@ -570,6 +596,9 @@ $(function () {
   popoverTriggerList.map(function (popoverTriggerEl) {
     return new window.bootstrap.Popover(popoverTriggerEl);
   });
+
+  renderWordCloudFromDataElement("tags", "tags", "#tags-cloud");
+  renderWordCloudFromDataElement("languages", "languages", "#languages-cloud");
 });
 
 // Executed upon page load

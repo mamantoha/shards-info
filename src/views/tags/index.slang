@@ -9,15 +9,3 @@ div
 
 div#tags data-tags="#{tags_json}"
 #tags-cloud
-
-javascript:
-  $(function() {
-    tags = $("#tags").data("tags");
-    window.renderWordCloud('#tags-cloud', tags, {
-      autoResize: true,
-      fontSize: {
-        from: 0.04,
-        to: 0.01
-      }
-    });
-  });
