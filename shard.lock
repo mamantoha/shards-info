@@ -111,7 +111,7 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 1.11.0
+    version: 1.12.0
 
   kemal-kilt:
     git: https://github.com/crystal-garage/kemal-kilt.git
