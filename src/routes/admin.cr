@@ -101,7 +101,7 @@ private def database_activity_json(database_size, activity_rows, activity_counts
       {
         "pid"         => row[0],
         "state"       => row[1],
-        "query_start" => row[2].try(&.to_s("%Y-%m-%d %H:%M:%S %:z")),
+        "query_start" => row[2].try(&.to_rfc3339),
         "query"       => row[3],
       }
     end,

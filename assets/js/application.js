@@ -24,6 +24,29 @@ const renderWordCloudFromDataElement = function (dataElementId, dataAttribute, c
   });
 };
 
+const formatLocalDatetime = function (value) {
+  if (!value) {
+    return "";
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat(undefined, {
+    dateStyle: "medium",
+    timeStyle: "medium",
+  }).format(date);
+};
+
+const formatLocalDatetimes = function (root = document) {
+  root.querySelectorAll(".js-local-datetime").forEach(function (element) {
+    element.textContent = formatLocalDatetime(element.getAttribute("datetime"));
+  });
+};
+
 $(function () {
   if (!("theme" in localStorage)) {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -92,18 +115,7 @@ $(function () {
     });
   });
 
-  document.querySelectorAll(".js-local-datetime").forEach(function (element) {
-    const date = new Date(element.getAttribute("datetime"));
-
-    if (Number.isNaN(date.getTime())) {
-      return;
-    }
-
-    element.textContent = new Intl.DateTimeFormat(undefined, {
-      dateStyle: "medium",
-      timeStyle: "medium",
-    }).format(date);
-  });
+  formatLocalDatetimes();
 
   $(document).on("submit", ".js-delete-dead-job", function (e) {
     e.preventDefault();
@@ -409,7 +421,7 @@ $(function () {
             <tr>
               <td>${row.pid}</td>
               <td>${escapeHtml(row.state)}</td>
-              <td>${escapeHtml(row.query_start)}</td>
+              <td>${escapeHtml(formatLocalDatetime(row.query_start))}</td>
               <td><pre class="mb-0">${escapeHtml(row.query)}</pre></td>
             </tr>
           `;
