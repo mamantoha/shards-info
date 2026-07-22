@@ -27,7 +27,7 @@
   "homepage": "https://github.com/mamantoha/shards-info#readme",
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^7.3.1",
-    "oxfmt": "^0.59.0",
+    "oxfmt": "^0.60.0",
     "oxlint": "^1.75.0",
     "trim-newlines": ">=5.0.0",
     "vite": "^8.1.5"
