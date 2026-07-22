@@ -28,22 +28,23 @@
             td = count
 
   h3.h5 Activity
-  table.table.table-striped.admin-database-activity
-    thead
-      tr
-        th PID
-        th State
-        th Query started
-        th Query
-    tbody.js-database-activity
-      - if activity_rows.empty?
+  .table-responsive
+    table.table.table-striped.admin-database-activity
+      thead
         tr
-          td.text-muted colspan="4" No activity.
-      - else
-        - activity_rows.each do |row|
+          th PID
+          th State
+          th Query started
+          th Query
+      tbody.js-database-activity
+        - if activity_rows.empty?
           tr
-            td = row[0]
-            td = row[1] || ""
-            td = row[2].try(&.to_s("%Y-%m-%d %H:%M:%S %:z")) || ""
-            td
-              pre.mb-0 = row[3] || ""
+            td.text-muted colspan="4" No activity.
+        - else
+          - activity_rows.each do |row|
+            tr
+              td = row[0]
+              td = row[1] || ""
+              td = row[2].try(&.to_s("%Y-%m-%d %H:%M:%S %:z")) || ""
+              td
+                pre.mb-0 = row[3] || ""

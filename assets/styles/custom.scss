@@ -43,6 +43,7 @@ h3 {
 .admin-database-activity {
   table-layout: fixed;
   width: 100%;
+  min-width: 54rem;
 
   th,
   td {
@@ -62,6 +63,11 @@ h3 {
   th:nth-child(3),
   td:nth-child(3) {
     width: 9rem;
+  }
+
+  th:nth-child(4),
+  td:nth-child(4) {
+    width: 32rem;
   }
 
   pre {
