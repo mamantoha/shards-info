@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 /*!
  * jQuery pagination plugin v1.4.2
  * http://josecebe.github.io/twbs-pagination/
@@ -364,4 +366,4 @@
 
     $.fn.twbsPagination.version = "1.4.2";
 
-})(window.jQuery, window, document);
+})($, window, document);
