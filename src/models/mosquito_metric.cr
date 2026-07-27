@@ -98,7 +98,7 @@ class MosquitoMetric
     query = summary_query
     query.where({queue_name: queue_name}) if queue_name
 
-    summary_from(query.first!)
+    summary_from(query.fetch_first!)
   end
 
   def self.summaries_by_queue : Hash(String, Summary)
@@ -118,13 +118,12 @@ class MosquitoMetric
     start_day = Time.utc - (days - 1).days
     points_by_day = {} of String => HistoryPoint
 
-    query = Lustra::SQL
+    query = self.query
       .select({
         day:       "day",
         succeeded: "SUM(succeeded)::bigint",
         failed:    "SUM(failed)::bigint",
       })
-      .from(full_table_name)
       .where("day >= ?", start_day.to_s("%F"))
       .group_by("day")
       .order_by("day")
@@ -145,7 +144,7 @@ class MosquitoMetric
   end
 
   private def self.summary_query
-    Lustra::SQL
+    query
       .select({
         succeeded:  "COALESCE(SUM(succeeded), 0)::bigint",
         failed:     "COALESCE(SUM(failed), 0)::bigint",
@@ -153,7 +152,6 @@ class MosquitoMetric
         aborted:    "COALESCE(SUM(aborted), 0)::bigint",
         runtime_ms: "COALESCE(SUM(runtime_ms), 0)::bigint",
       })
-      .from(full_table_name)
   end
 
   private def self.summary_from(row) : Summary
