@@ -114,6 +114,7 @@ html.dark {
   }
 
   .breadcrumb {
+    --bs-breadcrumb-divider-color: var(--font-color);
     --bs-breadcrumb-item-active-color: var(--nav-active-link-color);
   }
 }
