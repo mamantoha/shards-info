@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
-\restrict 0PikJCj6o8DaaoISNabYG3g4yOruwHQRJ8syAW2BDw4kfAJ1FLqh4Nk3F8Fhslt
+\restrict 58V4mu3q8CMBSl9UGrzq4Oz1rwZ1tU4b3Zww5BjnJqpmFfMjKR49Mumb4ufdify
 
--- Dumped from database version 18.1
--- Dumped by pg_dump version 18.1
+-- Dumped from database version 18.4
+-- Dumped by pg_dump version 18.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -155,6 +155,43 @@ CREATE SEQUENCE public.languages_id_seq
 --
 
 ALTER SEQUENCE public.languages_id_seq OWNED BY public.languages.id;
+
+
+--
+-- Name: mosquito_metrics; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.mosquito_metrics (
+    id bigint NOT NULL,
+    day date NOT NULL,
+    queue_name text NOT NULL,
+    succeeded bigint DEFAULT 0 NOT NULL,
+    failed bigint DEFAULT 0 NOT NULL,
+    preempted bigint DEFAULT 0 NOT NULL,
+    aborted bigint DEFAULT 0 NOT NULL,
+    runtime_ms bigint DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+--
+-- Name: mosquito_metrics_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.mosquito_metrics_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mosquito_metrics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.mosquito_metrics_id_seq OWNED BY public.mosquito_metrics.id;
 
 
 --
@@ -453,6 +490,13 @@ ALTER TABLE ONLY public.languages ALTER COLUMN id SET DEFAULT nextval('public.la
 
 
 --
+-- Name: mosquito_metrics id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mosquito_metrics ALTER COLUMN id SET DEFAULT nextval('public.mosquito_metrics_id_seq'::regclass);
+
+
+--
 -- Name: relationships id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -522,6 +566,14 @@ ALTER TABLE ONLY public.admins
 
 ALTER TABLE ONLY public.languages
     ADD CONSTRAINT languages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mosquito_metrics mosquito_metrics_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mosquito_metrics
+    ADD CONSTRAINT mosquito_metrics_pkey PRIMARY KEY (id);
 
 
 --
@@ -635,6 +687,34 @@ CREATE INDEX index_repositories_on_synced_at ON public.repositories USING btree 
 --
 
 CREATE UNIQUE INDEX languages_name ON public.languages USING btree (name);
+
+
+--
+-- Name: mosquito_metrics_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mosquito_metrics_created_at ON public.mosquito_metrics USING btree (created_at);
+
+
+--
+-- Name: mosquito_metrics_day; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mosquito_metrics_day ON public.mosquito_metrics USING btree (day);
+
+
+--
+-- Name: mosquito_metrics_queue_name_day; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX mosquito_metrics_queue_name_day ON public.mosquito_metrics USING btree (queue_name, day);
+
+
+--
+-- Name: mosquito_metrics_updated_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX mosquito_metrics_updated_at ON public.mosquito_metrics USING btree (updated_at);
 
 
 --
@@ -896,16 +976,16 @@ ALTER TABLE ONLY public.repository_tags
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 0PikJCj6o8DaaoISNabYG3g4yOruwHQRJ8syAW2BDw4kfAJ1FLqh4Nk3F8Fhslt
+\unrestrict 58V4mu3q8CMBSl9UGrzq4Oz1rwZ1tU4b3Zww5BjnJqpmFfMjKR49Mumb4ufdify
 
 --
 -- PostgreSQL database dump
 --
 
-\restrict M8hYc2AZQIT6BAEoUi358lTsBbVHh8s3WbQ3LWKH5owS7FA83F6i8gbLOWQQzK6
+\restrict Y36BqRzooFgOLMgKUGgHMJH4a4Rb0dMl3E7jCMR67XWeMbNf490YfaCEaWpkzYq
 
--- Dumped from database version 18.1
--- Dumped by pg_dump version 18.1
+-- Dumped from database version 18.4
+-- Dumped by pg_dump version 18.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -940,11 +1020,12 @@ INSERT INTO public.__lustra_metadatas VALUES ('migration', '1669032560');
 INSERT INTO public.__lustra_metadatas VALUES ('migration', '1669543469');
 INSERT INTO public.__lustra_metadatas VALUES ('migration', '1669546346');
 INSERT INTO public.__lustra_metadatas VALUES ('migration', '1770374223');
+INSERT INTO public.__lustra_metadatas VALUES ('migration', '1785151135');
 
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict M8hYc2AZQIT6BAEoUi358lTsBbVHh8s3WbQ3LWKH5owS7FA83F6i8gbLOWQQzK6
+\unrestrict Y36BqRzooFgOLMgKUGgHMJH4a4Rb0dMl3E7jCMR67XWeMbNf490YfaCEaWpkzYq
 
