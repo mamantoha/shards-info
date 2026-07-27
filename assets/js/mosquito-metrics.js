@@ -1,5 +1,10 @@
 import $ from "jquery";
 
+let metricsChart = null;
+let metricsChartCanvas = null;
+let metricsHistoryDays = 7;
+let metricsHistoryRequest = null;
+
 export const formatMetricNumber = function (value) {
   return new Intl.NumberFormat().format(Number(value) || 0);
 };
@@ -53,17 +58,55 @@ export const refreshMosquitoSummary = function (metrics, queues) {
   $(".js-mosquito-live-dead").text(formatMetricNumber(live.dead));
 };
 
-const initializeChart = function () {
-  const canvas = document.querySelector(".js-mosquito-metrics-chart");
+export const refreshMosquitoMetricsChart = function () {
+  if (!metricsChart || !metricsChartCanvas) {
+    return;
+  }
 
-  if (!canvas) {
+  metricsHistoryRequest?.abort();
+  metricsHistoryRequest = new AbortController();
+
+  const request = metricsHistoryRequest;
+  const url = new URL(metricsChartCanvas.dataset.url, window.location.origin);
+  url.searchParams.set("days", metricsHistoryDays);
+
+  fetch(url, {
+    cache: "no-store",
+    headers: {
+      "X-Requested-With": "XMLHttpRequest",
+    },
+    signal: request.signal,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      metricsChart.data.labels = data.history.map((point) => point.day);
+      metricsChart.data.datasets[0].data = data.history.map((point) => point.processed);
+      metricsChart.data.datasets[1].data = data.history.map((point) => point.failed);
+      metricsChart.update();
+    })
+    .catch((error) => {
+      if (error.name !== "AbortError") {
+        console.error("Error fetching Mosquito metrics history:", error);
+      }
+    })
+    .finally(() => {
+      if (metricsHistoryRequest === request) {
+        metricsHistoryRequest = null;
+      }
+    });
+};
+
+const initializeChart = function () {
+  metricsChartCanvas = document.querySelector(".js-mosquito-metrics-chart");
+
+  if (!metricsChartCanvas) {
     return;
   }
 
   const styles = getComputedStyle(document.documentElement);
   const textColor = styles.getPropertyValue("--font-color").trim();
   const gridColor = styles.getPropertyValue("--border-color").trim();
-  const chart = new window.Chart(canvas, {
+  metricsChart = new window.Chart(metricsChartCanvas, {
     type: "line",
     data: {
       labels: [],
@@ -126,27 +169,6 @@ const initializeChart = function () {
     },
   });
 
-  const loadHistory = function (days) {
-    const url = new URL(canvas.dataset.url, window.location.origin);
-    url.searchParams.set("days", days);
-
-    fetch(url, {
-      headers: {
-        "X-Requested-With": "XMLHttpRequest",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        chart.data.labels = data.history.map((point) => point.day);
-        chart.data.datasets[0].data = data.history.map((point) => point.processed);
-        chart.data.datasets[1].data = data.history.map((point) => point.failed);
-        chart.update();
-      })
-      .catch((error) => {
-        console.error("Error fetching Mosquito metrics history:", error);
-      });
-  };
-
   document.querySelectorAll(".js-mosquito-history-range").forEach(function (button) {
     button.addEventListener("click", function () {
       document.querySelectorAll(".js-mosquito-history-range").forEach(function (item) {
@@ -154,11 +176,12 @@ const initializeChart = function () {
         item.classList.toggle("btn-outline-secondary", item !== button);
       });
 
-      loadHistory(button.dataset.days);
+      metricsHistoryDays = button.dataset.days;
+      refreshMosquitoMetricsChart();
     });
   });
 
-  loadHistory(7);
+  refreshMosquitoMetricsChart();
 };
 
 export const initializeMosquitoMetricsDashboard = function () {

@@ -2,6 +2,7 @@ import {
   formatMetricNumber,
   formatRuntime,
   initializeMosquitoMetricsDashboard,
+  refreshMosquitoMetricsChart,
   refreshMosquitoSummary,
 } from "./mosquito-metrics.js";
 
@@ -466,6 +467,7 @@ $(function () {
         if (data.queues) {
           refreshMosquitoQueues(data.queues);
           refreshMosquitoSummary(data.metrics, data.queues);
+          refreshMosquitoMetricsChart();
           return;
         }
 
@@ -481,6 +483,7 @@ $(function () {
 
         updateQueueRow($(".js-mosquito-queue-row"), data.queue);
         refreshMosquitoSummary(data.metrics, [data.queue]);
+        refreshMosquitoMetricsChart();
         refreshMosquitoJobs(data.queue.name, "waiting", data.jobs.waiting);
         refreshMosquitoJobs(data.queue.name, "scheduled", data.jobs.scheduled);
         refreshMosquitoJobs(data.queue.name, "pending", data.jobs.pending);
