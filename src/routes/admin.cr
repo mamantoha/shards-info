@@ -13,13 +13,29 @@ private def mosquito_job_run_json(job_run : Mosquito::Api::JobRun)
   }
 end
 
-private def mosquito_queue_json(queue : Mosquito::Api::Queue)
+private def mosquito_metric_json(summary : MosquitoMetric::Summary)
+  {
+    "processed"          => summary.processed,
+    "succeeded"          => summary.succeeded,
+    "failed"             => summary.failed,
+    "preempted"          => summary.preempted,
+    "aborted"            => summary.aborted,
+    "runtime_ms"         => summary.runtime_ms,
+    "average_runtime_ms" => summary.average_runtime_ms.round(2),
+  }
+end
+
+private def mosquito_queue_json(
+  queue : Mosquito::Api::Queue,
+  metrics : MosquitoMetric::Summary? = nil,
+)
   sizes = queue.size_details
 
   {
-    "name"   => queue.name,
-    "paused" => queue.paused?,
-    "sizes"  => {
+    "name"    => queue.name,
+    "paused"  => queue.paused?,
+    "metrics" => metrics.try { |summary| mosquito_metric_json(summary) },
+    "sizes"   => {
       "waiting"   => sizes["waiting"],
       "scheduled" => sizes["scheduled"],
       "pending"   => sizes["pending"],
@@ -28,10 +44,14 @@ private def mosquito_queue_json(queue : Mosquito::Api::Queue)
   }
 end
 
-private def mosquito_queue_details_json(queue : Mosquito::Api::Queue)
+private def mosquito_queue_details_json(
+  queue : Mosquito::Api::Queue,
+  metrics : MosquitoMetric::Summary,
+)
   {
-    "queue" => mosquito_queue_json(queue),
-    "jobs"  => {
+    "queue"   => mosquito_queue_json(queue),
+    "metrics" => mosquito_metric_json(metrics),
+    "jobs"    => {
       "waiting"   => queue.waiting_job_runs.map { |job_run| mosquito_job_run_json(job_run) },
       "scheduled" => queue.scheduled_job_runs.map { |job_run| mosquito_job_run_json(job_run) },
       "pending"   => queue.pending_job_runs.map { |job_run| mosquito_job_run_json(job_run) },
@@ -55,6 +75,26 @@ private def mosquito_overseer_json(overseer : Mosquito::Api::Overseer)
     "last_heartbeat" => overseer.last_heartbeat.try(&.by_example("January 2, 2006 @ 15:04")),
     "executors"      => overseer.executors.map { |executor| mosquito_executor_json(executor) },
   }
+end
+
+private def mosquito_live_counts(queue_sizes : Array(Hash(String, Int64)))
+  counts = {
+    waiting:   0_i64,
+    scheduled: 0_i64,
+    pending:   0_i64,
+    dead:      0_i64,
+  }
+
+  queue_sizes.each do |sizes|
+    counts = {
+      waiting:   counts[:waiting] + sizes["waiting"],
+      scheduled: counts[:scheduled] + sizes["scheduled"],
+      pending:   counts[:pending] + sizes["pending"],
+      dead:      counts[:dead] + sizes["dead"],
+    }
+  end
+
+  counts
 end
 
 private def database_activity
@@ -341,6 +381,10 @@ router.namespace "/admin" do
 
   get "/mosquito" do |env|
     queues = Mosquito::Api::Queue.all.sort
+    queue_rows = queues.map { |queue| {queue: queue, sizes: queue.size_details} }
+    live_counts = mosquito_live_counts(queue_rows.map(&.[:sizes]))
+    metrics_summary = MosquitoMetric.summary
+    metrics_by_queue = MosquitoMetric.summaries_by_queue
 
     set_request_context(env) do
       request_context.page_title = "Admin: Mosquito"
@@ -351,9 +395,30 @@ router.namespace "/admin" do
 
   get "/mosquito.json" do |env|
     queues = Mosquito::Api::Queue.all.sort
+    metrics_summary = MosquitoMetric.summary
+    metrics_by_queue = MosquitoMetric.summaries_by_queue
 
     env.json({
-      "queues" => queues.map { |queue| mosquito_queue_json(queue) },
+      "metrics" => mosquito_metric_json(metrics_summary),
+      "queues"  => queues.map do |queue|
+        mosquito_queue_json(queue, metrics_by_queue[queue.name]?)
+      end,
+    })
+  end
+
+  get "/mosquito/metrics.json" do |env|
+    days = env.params.query["days"]?.try(&.to_i?) || 7
+    days = 7 unless {7, 30, 90, 180}.includes?(days)
+    queue_name = env.params.query["queue"]?
+
+    env.json({
+      "history" => MosquitoMetric.history(days, queue_name).map do |point|
+        {
+          "day"       => point.day,
+          "processed" => point.processed,
+          "failed"    => point.failed,
+        }
+      end,
     })
   end
 
@@ -378,13 +443,17 @@ router.namespace "/admin" do
   get "/mosquito/queues/:name/data" do |env|
     queue_name = env.params.url["name"]
     queue = Mosquito::Api::Queue.new(queue_name)
+    metrics_summary = MosquitoMetric.summary(queue_name)
 
-    env.json(mosquito_queue_details_json(queue))
+    env.json(mosquito_queue_details_json(queue, metrics_summary))
   end
 
   get "/mosquito/queues/:name" do |env|
     queue_name = env.params.url["name"]
     queue = Mosquito::Api::Queue.new(queue_name)
+    sizes = queue.size_details
+    live_counts = mosquito_live_counts([sizes])
+    metrics_summary = MosquitoMetric.summary(queue_name)
 
     set_request_context(env) do
       request_context.page_title = "Admin: Mosquito: #{queue_name}"

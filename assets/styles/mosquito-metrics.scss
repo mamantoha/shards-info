@@ -1,0 +1,42 @@
+.mosquito-metrics-summary {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border: 1px solid var(--border-color);
+  background: var(--page-heading-bg-color);
+}
+
+.mosquito-metric {
+  min-width: 0;
+  padding: 0.75rem;
+  text-align: center;
+
+  strong,
+  span {
+    display: block;
+  }
+
+  strong {
+    overflow-wrap: anywhere;
+    font-size: 1.2rem;
+  }
+
+  span {
+    color: var(--nav-link-color);
+    font-size: 0.875rem;
+  }
+}
+
+.mosquito-metrics-chart {
+  position: relative;
+  height: 20rem;
+}
+
+@media (max-width: 575.98px) {
+  .mosquito-metrics-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mosquito-metrics-chart {
+    height: 16rem;
+  }
+}

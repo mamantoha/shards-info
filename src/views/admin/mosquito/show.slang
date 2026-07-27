@@ -12,7 +12,9 @@
     h2 = queue.name
     button.btn.btn-sm.btn-outline-secondary.js-live-poll type="button" data-interval="5000" data-url="/admin/mosquito/queues/#{queue.name}/data" Live Poll
 
-  - sizes = queue.size_details
+  - metrics_history_url = "/admin/mosquito/metrics.json?queue=#{queue.name}"
+  == render "src/views/admin/mosquito/_metrics_summary.slang"
+
   .table-responsive
     table.table.table-striped
       thead

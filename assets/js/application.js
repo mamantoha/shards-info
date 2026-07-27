@@ -1,3 +1,10 @@
+import {
+  formatMetricNumber,
+  formatRuntime,
+  initializeMosquitoMetricsDashboard,
+  refreshMosquitoSummary,
+} from "./mosquito-metrics.js";
+
 const showTab = function (element) {
   if (!element) {
     return;
@@ -211,6 +218,15 @@ $(function () {
     row.find(".js-mosquito-scheduled-count").text(queue.sizes.scheduled);
     row.find(".js-mosquito-pending-count").text(queue.sizes.pending);
     row.find(".js-mosquito-dead-count").text(queue.sizes.dead);
+
+    if (queue.metrics) {
+      row.find(".js-mosquito-processed-count").text(formatMetricNumber(queue.metrics.processed));
+      row.find(".js-mosquito-failed-count").text(formatMetricNumber(queue.metrics.failed));
+      row
+        .find(".js-mosquito-average-runtime")
+        .text(formatRuntime(queue.metrics.average_runtime_ms));
+    }
+
     row.find(".js-mosquito-pause").html(pauseQueueForm(queue));
     row
       .find(".js-mosquito-delete-dead")
@@ -225,6 +241,9 @@ $(function () {
         <td class="js-mosquito-scheduled-count"></td>
         <td class="js-mosquito-pending-count"></td>
         <td class="js-mosquito-dead-count" data-queue-name="${queue.name}"></td>
+        <td class="js-mosquito-processed-count"></td>
+        <td class="js-mosquito-failed-count"></td>
+        <td class="js-mosquito-average-runtime"></td>
         <td class="js-mosquito-pause"></td>
         <td class="js-mosquito-delete-dead"></td>
       </tr>
@@ -446,6 +465,7 @@ $(function () {
       success: function (data) {
         if (data.queues) {
           refreshMosquitoQueues(data.queues);
+          refreshMosquitoSummary(data.metrics, data.queues);
           return;
         }
 
@@ -460,6 +480,7 @@ $(function () {
         }
 
         updateQueueRow($(".js-mosquito-queue-row"), data.queue);
+        refreshMosquitoSummary(data.metrics, [data.queue]);
         refreshMosquitoJobs(data.queue.name, "waiting", data.jobs.waiting);
         refreshMosquitoJobs(data.queue.name, "scheduled", data.jobs.scheduled);
         refreshMosquitoJobs(data.queue.name, "pending", data.jobs.pending);
@@ -501,6 +522,7 @@ $(function () {
   });
 
   updateLivePollButton();
+  initializeMosquitoMetricsDashboard();
 
   if (livePollButton() && localStorage.getItem(livePollStorageKey()) === "true") {
     startLivePoll();

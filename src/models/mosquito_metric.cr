@@ -8,6 +8,28 @@ class MosquitoMetric
     Aborted
   end
 
+  record Summary,
+    succeeded : Int64,
+    failed : Int64,
+    preempted : Int64,
+    aborted : Int64,
+    runtime_ms : Int64 do
+    def processed : Int64
+      succeeded + failed
+    end
+
+    def average_runtime_ms : Float64
+      return 0.0 if processed.zero?
+
+      runtime_ms.to_f / processed
+    end
+  end
+
+  record HistoryPoint,
+    day : String,
+    processed : Int64,
+    failed : Int64
+
   primary_key
 
   column day : Time
@@ -56,5 +78,77 @@ class MosquitoMetric
           SQL
       end
       .execute
+  end
+
+  def self.summary(queue_name : String? = nil) : Summary
+    query = summary_query
+    query.where({queue_name: queue_name}) if queue_name
+
+    summary_from(query.first!)
+  end
+
+  def self.summaries_by_queue : Hash(String, Summary)
+    summaries = {} of String => Summary
+
+    summary_query
+      .select("queue_name")
+      .group_by("queue_name")
+      .fetch do |row|
+        summaries[row["queue_name"].as(String)] = summary_from(row)
+      end
+
+    summaries
+  end
+
+  def self.history(days : Int32, queue_name : String? = nil) : Array(HistoryPoint)
+    start_day = Time.utc - (days - 1).days
+    points_by_day = {} of String => HistoryPoint
+
+    query = Lustra::SQL
+      .select({
+        day:       "day",
+        succeeded: "SUM(succeeded)::bigint",
+        failed:    "SUM(failed)::bigint",
+      })
+      .from(full_table_name)
+      .where("day >= ?", start_day.to_s("%F"))
+      .group_by("day")
+      .order_by("day")
+
+    query.where({queue_name: queue_name}) if queue_name
+
+    query.fetch do |row|
+      day = row["day"].as(Time).to_s("%F")
+      succeeded = row["succeeded"].as(Int64)
+      failed = row["failed"].as(Int64)
+      points_by_day[day] = HistoryPoint.new(day, succeeded + failed, failed)
+    end
+
+    Array.new(days) do |offset|
+      day = (start_day + offset.days).to_s("%F")
+      points_by_day[day]? || HistoryPoint.new(day, 0_i64, 0_i64)
+    end
+  end
+
+  private def self.summary_query
+    Lustra::SQL
+      .select({
+        succeeded:  "COALESCE(SUM(succeeded), 0)::bigint",
+        failed:     "COALESCE(SUM(failed), 0)::bigint",
+        preempted:  "COALESCE(SUM(preempted), 0)::bigint",
+        aborted:    "COALESCE(SUM(aborted), 0)::bigint",
+        runtime_ms: "COALESCE(SUM(runtime_ms), 0)::bigint",
+      })
+      .from(full_table_name)
+  end
+
+  private def self.summary_from(row) : Summary
+    Summary.new(
+      succeeded: row["succeeded"].as(Int64),
+      failed: row["failed"].as(Int64),
+      preempted: row["preempted"].as(Int64),
+      aborted: row["aborted"].as(Int64),
+      runtime_ms: row["runtime_ms"].as(Int64)
+    )
   end
 end
