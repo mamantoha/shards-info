@@ -69,29 +69,29 @@ class MosquitoMetric
   def self.record(queue_name : String, outcome : Outcome, runtime : Time::Span) : Nil
     processed = outcome.succeeded? || outcome.failed?
 
-    query = Lustra::SQL.insert_into(full_table_name, {
-      day:        Time.utc.to_s("%F"),
-      queue_name: queue_name,
-      succeeded:  outcome.succeeded? ? 1_i64 : 0_i64,
-      failed:     outcome.failed? ? 1_i64 : 0_i64,
-      preempted:  outcome.preempted? ? 1_i64 : 0_i64,
-      aborted:    outcome.aborted? ? 1_i64 : 0_i64,
-      runtime_ms: processed ? runtime.total_milliseconds.round.to_i64 : 0_i64,
-    })
+    upsert(
+      {
+        day:        Time.utc,
+        queue_name: queue_name,
+        succeeded:  outcome.succeeded? ? 1_i64 : 0_i64,
+        failed:     outcome.failed? ? 1_i64 : 0_i64,
+        preempted:  outcome.preempted? ? 1_i64 : 0_i64,
+        aborted:    outcome.aborted? ? 1_i64 : 0_i64,
+        runtime_ms: processed ? runtime.total_milliseconds.round.to_i64 : 0_i64,
+      },
+      unique_by: {:queue_name, :day},
+      on_duplicate: Lustra::SQL.unsafe(<<-SQL),
+        "succeeded" = #{full_table_name}."succeeded" + excluded."succeeded",
+        "failed" = #{full_table_name}."failed" + excluded."failed",
+        "preempted" = #{full_table_name}."preempted" + excluded."preempted",
+        "aborted" = #{full_table_name}."aborted" + excluded."aborted",
+        "runtime_ms" = #{full_table_name}."runtime_ms" + excluded."runtime_ms",
+        "updated_at" = NOW()
+        SQL
+      returning: false
+    )
 
-    query
-      .on_conflict(%(("queue_name", "day")))
-      .do_update do |update|
-        update.set(<<-SQL)
-          "succeeded" = #{full_table_name}."succeeded" + excluded."succeeded",
-          "failed" = #{full_table_name}."failed" + excluded."failed",
-          "preempted" = #{full_table_name}."preempted" + excluded."preempted",
-          "aborted" = #{full_table_name}."aborted" + excluded."aborted",
-          "runtime_ms" = #{full_table_name}."runtime_ms" + excluded."runtime_ms",
-          "updated_at" = NOW()
-          SQL
-      end
-      .execute
+    nil
   end
 
   def self.summary(queue_name : String? = nil) : Summary
