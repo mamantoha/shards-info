@@ -11,11 +11,48 @@ module ErrorHandler
   end
 end
 
+module MosquitoMetricsHandler
+  Log = ::Log.for("mosquito.metrics")
+
+  macro included
+    @mosquito_metrics_started_at : Time::Span?
+
+    before do
+      @mosquito_metrics_started_at = Time.monotonic
+    end
+
+    after do
+      outcome =
+        if succeeded?
+          MosquitoMetric::Outcome::Succeeded
+        elsif failed?
+          MosquitoMetric::Outcome::Failed
+        elsif preempted?
+          MosquitoMetric::Outcome::Preempted
+        elsif aborted?
+          MosquitoMetric::Outcome::Aborted
+        end
+
+      if outcome && (started_at = @mosquito_metrics_started_at)
+        begin
+          MosquitoMetric.record(self.class.queue_name, outcome, Time.monotonic - started_at)
+        rescue error
+          MosquitoMetricsHandler::Log.error(exception: error) do
+            "Failed to record metrics for #{self.class.queue_name}"
+          end
+        end
+      end
+    end
+  end
+end
+
 class PeriodicJobWithErrorHandler < Mosquito::PeriodicJob
+  include MosquitoMetricsHandler
   include ErrorHandler
 end
 
 class MosquitoQueuedJobWithErrorHandler < Mosquito::QueuedJob
+  include MosquitoMetricsHandler
   include ErrorHandler
 end
 

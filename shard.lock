@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.0-dev+git.commit.fcbd5703c50b47a5f280a11ab1c3416f5f3a9ea9
+    version: 1.7.0-dev+git.commit.cdd58b34b0d8a9c785d67183a7a8f07541549e55
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -23,7 +23,7 @@ shards:
 
   baked_file_system:
     git: https://github.com/schovi/baked_file_system.git
-    version: 0.14.0
+    version: 0.14.1
 
   cache:
     git: https://github.com/crystal-cache/cache.git
@@ -47,7 +47,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 1.8.1+git.commit.39740dc7e9927c6ee95d1c38d0b5c5acea1613d9
+    version: 1.8.1+git.commit.c965ab3d2e8cd0eb47675fd8e011b103cb5a10c2
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -131,7 +131,7 @@ shards:
 
   lustra:
     git: https://github.com/crystal-garage/lustra.git
-    version: 0.18.3+git.commit.e6efd40ad0c0ad46ad52df64ff65dd12c890b80b
+    version: 0.18.3+git.commit.0f0cd1535a14fe9aa6f7a8984923798e47ec689b
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
