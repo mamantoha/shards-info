@@ -8,12 +8,22 @@ class MosquitoMetric
     Aborted
   end
 
-  record Summary,
-    succeeded : Int64,
-    failed : Int64,
-    preempted : Int64,
-    aborted : Int64,
-    runtime_ms : Int64 do
+  struct Summary
+    getter succeeded : Int64
+    getter failed : Int64
+    getter preempted : Int64
+    getter aborted : Int64
+    getter runtime_ms : Int64
+
+    def initialize(
+      @succeeded : Int64,
+      @failed : Int64,
+      @preempted : Int64,
+      @aborted : Int64,
+      @runtime_ms : Int64,
+    )
+    end
+
     def processed : Int64
       succeeded + failed
     end
@@ -25,10 +35,14 @@ class MosquitoMetric
     end
   end
 
-  record HistoryPoint,
-    day : String,
-    processed : Int64,
-    failed : Int64
+  struct HistoryPoint
+    getter day : String
+    getter processed : Int64
+    getter failed : Int64
+
+    def initialize(@day : String, @processed : Int64, @failed : Int64)
+    end
+  end
 
   primary_key
 
