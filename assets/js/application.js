@@ -319,6 +319,16 @@ $(function () {
 
   const jobRow = function (queueName, state, job) {
     const action = state === "dead" ? deadJobDeleteForm(queueName, job.id) : "";
+    const failure =
+      state === "dead"
+        ? `
+          <td>${escapeHtml(job.failed_at)}</td>
+          <td>
+            ${job.error_class ? `<code>${escapeHtml(job.error_class)}</code>` : ""}
+            ${job.error_message ? `<div>${escapeHtml(job.error_message)}</div>` : ""}
+          </td>
+        `
+        : "";
     const parameters = job.runtime_parameters
       ? Object.entries(job.runtime_parameters)
           .map(function ([key, value]) {
@@ -333,9 +343,10 @@ $(function () {
         <td>${job.enqueue_time}</td>
         <td>${job.started_at || ""}</td>
         <td>${job.finished_at || ""}</td>
+        ${failure}
         <td>${parameters}</td>
       `
-      : '<td colspan="6">Missing metadata</td>';
+      : `<td colspan="${state === "dead" ? 8 : 6}">Missing metadata</td>`;
 
     return `
       <tr class="js-mosquito-job-row" data-queue-name="${queueName}" data-job-state="${state}" data-job-id="${job.id}">
@@ -351,7 +362,7 @@ $(function () {
 
     if (!jobs.length) {
       body.html(
-        '<tr class="js-mosquito-empty-row"><td class="text-muted" colspan="8">No jobs.</td></tr>',
+        `<tr class="js-mosquito-empty-row"><td class="text-muted" colspan="${state === "dead" ? 10 : 8}">No jobs.</td></tr>`,
       );
       return;
     }

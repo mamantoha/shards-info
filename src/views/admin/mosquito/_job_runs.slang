@@ -13,12 +13,15 @@ h4.mt-3
         th Enqueued
         th Started
         th Finished
+        - if state == "dead"
+          th Failed
+          th Error
         th Parameters
         th
     tbody.js-mosquito-jobs data-queue-name="#{queue.name}" data-job-state="#{state}"
       - if job_runs.empty?
         tr.js-mosquito-empty-row
-          td.text-muted colspan="7" No jobs.
+          td.text-muted colspan="#{state == "dead" ? 10 : 8}" No jobs.
       - else
         - job_runs.each do |job_run|
           tr.js-mosquito-job-row data-queue-name="#{queue.name}" data-job-state="#{state}" data-job-id="#{job_run.id}"
@@ -29,12 +32,19 @@ h4.mt-3
               td = job_run.enqueue_time.by_example("January 2, 2006 @ 15:04")
               td = job_run.started_at.try(&.by_example("January 2, 2006 @ 15:04"))
               td = job_run.finished_at.try(&.by_example("January 2, 2006 @ 15:04"))
+              - if state == "dead"
+                td = job_run.failed_at.try(&.by_example("January 2, 2006 @ 15:04"))
+                td
+                  - if error_class = job_run.error_class
+                    code = error_class
+                  - if error_message = job_run.error_message
+                    div = error_message
               td
                 - job_run.runtime_parameters.each do |key, value|
                   div
                     code = "#{key}=#{value}"
             - else
-              td colspan="6" Missing metadata
+              td colspan="#{state == "dead" ? 8 : 6}" Missing metadata
             td
               - if state == "dead"
                 form.js-delete-dead-job action="/admin/mosquito/dead_jobs/#{job_run.id}" method="post"
