@@ -1,5 +1,4 @@
 import $ from "jquery";
-import { Dropdown } from "bootstrap";
 
 import {
   formatMetricNumber,
@@ -15,31 +14,6 @@ const showTab = function (element) {
   }
 
   window.bootstrap.Tab.getOrCreateInstance(element).show();
-};
-
-const initializeAdminDropdown = function () {
-  const toggle = document.getElementById("navbarDropdown");
-
-  if (!toggle) {
-    return;
-  }
-
-  toggle.removeAttribute("data-bs-toggle");
-
-  const dropdown = Dropdown.getOrCreateInstance(toggle);
-  const menu = document.querySelector('[aria-labelledby="navbarDropdown"]');
-
-  toggle.addEventListener("click", function (event) {
-    event.preventDefault();
-    event.stopPropagation();
-    dropdown.toggle();
-  });
-
-  document.addEventListener("click", function (event) {
-    if (!toggle.contains(event.target) && !menu?.contains(event.target)) {
-      dropdown.hide();
-    }
-  });
 };
 
 const renderWordCloudFromDataElement = function (dataElementId, dataAttribute, cloudSelector) {
@@ -84,8 +58,6 @@ const formatLocalDatetimes = function (root = document) {
 };
 
 $(function () {
-  initializeAdminDropdown();
-
   if (!("theme" in localStorage)) {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       localStorage.theme = "dark";
