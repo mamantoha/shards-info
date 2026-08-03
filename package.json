@@ -11,8 +11,8 @@
     "build": "vite build",
     "oxlint": "oxlint assets/",
     "oxlint:fix": "oxlint --fix assets/",
-    "oxfmt": "oxfmt --check vite.config.js assets/main.js assets/js assets/main.scss assets/styles assets/vendor/code.scss public/css",
-    "oxfmt:fix": "oxfmt --write vite.config.js assets/main.js assets/js assets/main.scss assets/styles assets/vendor/code.scss public/css"
+    "oxfmt": "oxfmt --check vite.config.mjs assets/main.js assets/js assets/main.scss assets/styles assets/vendor/code.scss public/css",
+    "oxfmt:fix": "oxfmt --write vite.config.mjs assets/main.js assets/js assets/main.scss assets/styles assets/vendor/code.scss public/css"
   },
   "repository": {
     "type": "git",
