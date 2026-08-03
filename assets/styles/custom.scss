@@ -566,12 +566,12 @@ ul.not-list {
     font-size: 1em;
   }
 
-  img:not([height]) {
-    height: auto;
+  img {
+    max-width: 100%;
   }
 
-  img:not([width]) {
-    max-width: 100%;
+  img:not([height]) {
+    height: auto;
   }
 
   video {
