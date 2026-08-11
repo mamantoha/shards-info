@@ -61,9 +61,21 @@ sudo systemctl restart shards.info_web.service
 
 ### nginx
 
+Add the shared rate-limit zones inside the `http` block in `/etc/nginx/nginx.conf`:
+
+```nginx
+http {
+  limit_req_zone $binary_remote_addr zone=reqperip:10m rate=5r/s;
+  limit_conn_zone $binary_remote_addr zone=perip:10m;
+  limit_conn_zone $server_name zone=perserver:10m;
+
+  # ...
+}
+```
+
 `/etc/nginx/sites-available/default`
 
-```text
+```nginx
 server {
   listen       80  default_server;
   server_name  _; # some invalid name that won't match anything
@@ -71,13 +83,15 @@ server {
 }
 
 server {
-  listen       80;
+  listen 80;
+  listen [::]:80;
   server_name  shards.info;
   return 301 https://$host$request_uri;
 }
 
 server {
-  listen 443 http2 ssl;
+  listen 443 ssl http2;
+  listen [::]:443 ssl http2;
   server_name  shards.info;
 
   server_tokens off;
@@ -92,25 +106,46 @@ server {
   add_header X-Permitted-Cross-Domain-Policies "none";
   add_header X-Xss-Protection "1; mode=block";
 
-  ssl on;
   ssl_certificate /etc/letsencrypt/live/shards.info/fullchain.pem;
   ssl_certificate_key /etc/letsencrypt/live/shards.info/privkey.pem;
 
   include /etc/letsencrypt/options-ssl-nginx.conf;
 
+  # Limit sustained request rates and concurrent requests from one IP.
+  limit_req zone=reqperip burst=20 nodelay;
+  limit_conn perip 10;
+
+  # Protect the application from distributed traffic across many IPs.
+  limit_conn perserver 50;
+
+  limit_req_status 429;
+  limit_conn_status 429;
+
+  keepalive_timeout 10s;
+
   location / {
-    proxy_pass          http://localhost:3000;
-    proxy_set_header    Host             $host;
-    proxy_set_header    X-Real-IP        $remote_addr;
-    proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
-    proxy_set_header    X-Client-Verify  SUCCESS;
-    proxy_set_header    X-Client-DN      $ssl_client_s_dn;
-    proxy_set_header    X-SSL-Subject    $ssl_client_s_dn;
-    proxy_set_header    X-SSL-Issuer     $ssl_client_i_dn;
-    proxy_read_timeout 1800;
-    proxy_connect_timeout 1800;
+    proxy_pass http://localhost:3000;
+
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+
+    proxy_set_header Host              $host;
+    proxy_set_header X-Real-IP         $remote_addr;
+    proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    proxy_connect_timeout 5s;
+    proxy_send_timeout 30s;
+    proxy_read_timeout 60s;
   }
 }
+```
+
+Validate and reload nginx after applying the configuration:
+
+```console
+sudo nginx -t
+sudo systemctl reload nginx
 ```
 
 ### systemd
