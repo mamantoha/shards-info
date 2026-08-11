@@ -172,6 +172,26 @@ a.badge {
   background-color: var(--navbar-bg-color) !important;
 }
 
+.site-navbar > .container-fluid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+
+  > .btn {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  > .site-navbar-brand {
+    grid-column: 2;
+    margin: 0;
+  }
+
+  > .navbar-nav {
+    grid-column: 3;
+    justify-self: end;
+  }
+}
+
 .repository-popover {
   --#{$prefix}popover-bg: var(--main-bg-color);
   --#{$prefix}popover-border-color: var(--border-color);

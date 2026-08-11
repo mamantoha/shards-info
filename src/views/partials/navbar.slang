@@ -1,8 +1,8 @@
-nav.navbar.fixed-top
+nav.navbar.fixed-top.site-navbar
   .container-fluid
     button.btn data-bs-toggle="modal" data-bs-target="#sidebar-modal"
       span.navbar-toggler-icon
-    a.navbar-brand.mx-auto href="/"
+    a.navbar-brand.site-navbar-brand href="/"
       img.d-inline-block.align-top src="/images/logo_ua.svg" width="30" height="30" alt=""
       ' shards.info
     ul.navbar-nav.me
