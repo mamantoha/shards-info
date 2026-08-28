@@ -80,7 +80,7 @@ class MosquitoMetric
         runtime_ms: processed ? runtime.total_milliseconds.round.to_i64 : 0_i64,
       },
       unique_by: {:queue_name, :day},
-      on_duplicate: Lustra::SQL.unsafe(<<-SQL),
+      on_duplicate: Lustra::SQL.unsafe(<<-SQL)
         "succeeded" = #{full_table_name}."succeeded" + excluded."succeeded",
         "failed" = #{full_table_name}."failed" + excluded."failed",
         "preempted" = #{full_table_name}."preempted" + excluded."preempted",
@@ -88,7 +88,6 @@ class MosquitoMetric
         "runtime_ms" = #{full_table_name}."runtime_ms" + excluded."runtime_ms",
         "updated_at" = NOW()
         SQL
-      returning: false
     )
 
     nil
