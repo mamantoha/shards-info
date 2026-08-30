@@ -23,8 +23,8 @@ router.namespace "/stats" do
           "date_trunc('month', created_at)::date AS year_month": Time,
           "COUNT(*) AS count": Int64
         ).each do |year_month, count|
-          hsh[year_month.to_s("%Y-%m")] = count
-        end
+        hsh[year_month.to_s("%Y-%m")] = count
+      end
 
       hsh.to_json
     end
@@ -42,8 +42,8 @@ router.namespace "/stats" do
           "date_trunc('month', last_activity_at)::date AS year_month": Time,
           "COUNT(*) AS count": Int64
         ).each do |year_month, count|
-          hsh[year_month.to_s("%Y-%m")] = count
-        end
+        hsh[year_month.to_s("%Y-%m")] = count
+      end
 
       hsh.to_json
     end
