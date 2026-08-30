@@ -181,11 +181,11 @@ module Helpers
     when "stars"
       {"stars_count", :desc, nil}
     when "dependents"
-      {"(select COUNT(*) from relationships r WHERE r.dependency_id=repositories.id)", :desc, nil}
+      {"dependents_count", :desc, nil}
     when "dependencies"
-      {"(select COUNT(*) from relationships r WHERE r.master_id=repositories.id)", :desc, nil}
+      {"dependencies_count", :desc, nil}
     when "forks"
-      {"(select COUNT(*) from repository_forks rf WHERE rf.parent_id=repositories.id)", :desc, nil}
+      {"repository_forks_count", :desc, nil}
     when "recent-updates"
       {"last_activity_at", :desc, nil}
     when "last-synced"

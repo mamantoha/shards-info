@@ -37,7 +37,7 @@
           = repository.stars_count
         li
           i class="fas fa-code-branch" title="Forks"
-          = repository.attributes["forks_count"]
+          = repository.attributes["repository_forks_count"]
         li
           i class="fas fa-exclamation-circle" title="Open issues"
           = repository.open_issues_count

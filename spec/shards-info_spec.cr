@@ -38,6 +38,14 @@ describe "shards.info" do
     response.body.should contain("crest")
   end
 
+  it "sorts repositories by association counts" do
+    %w[dependents dependencies forks].each do |sort|
+      get "/repositories?sort=#{sort}"
+
+      response.status_code.should eq(200)
+    end
+  end
+
   it "renders 404 if repository not found" do
     get "/github/undefined/undefined"
 

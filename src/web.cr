@@ -487,10 +487,7 @@ get "/:provider/:owner/:repo" do |env|
         .clear_distinct
         .with_user
         .with_counts
-        .order_by(
-          "(select COUNT(*) from relationships rel WHERE rel.dependency_id=repositories.id)",
-          :desc
-        )
+        .order_by("dependents_count", :desc)
         .order_by("repositories.id", :asc)
 
     dependents_count = dependents.count
