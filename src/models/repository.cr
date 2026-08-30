@@ -43,14 +43,7 @@ class Repository
 
   scope(:published) { where({ignore: false}) }
 
-  scope(:without_releases) do
-    where(<<-SQL
-      NOT (
-        EXISTS (SELECT "releases".* FROM "releases" WHERE (releases.repository_id = repositories.id))
-      )
-      SQL
-    )
-  end
+  scope(:without_releases) { where.missing(:releases) }
 
   # ```
   # repositories = Repository.query.with_counts

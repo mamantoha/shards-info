@@ -713,8 +713,6 @@ get "/stats" do |env|
 
   repositories_count_in_last_month = Repository.query.where("created_at >= NOW() - INTERVAL '28 days'").count
 
-  users_count = User.query.count
-
   set_request_context(env) do
     request_context.page_title = "State of the Crystal shards ecosystem // shards.info"
     request_context.page_description = "Crystal shards and repositories ecosystem statistics"

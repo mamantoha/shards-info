@@ -13,21 +13,18 @@ router.namespace "/stats" do
 
   get "/created_at" do
     CACHE.fetch("stats:created_at", expires_in: expires_in) do
-      repositiries =
-        Repository
-          .query
-          .select(
-            "date_trunc('month', created_at)::date as year_month",
-            "count(*) as count"
-          )
-          .group_by("year_month")
-          .order_by("year_month", :asc)
-
       hsh = {} of String => Int64
 
-      repositiries.each(fetch_columns: true) do |repository|
-        hsh[repository["year_month"].as(Time).to_s("%Y-%m")] = repository["count"].as(Int64)
-      end
+      Repository
+        .query
+        .group_by("year_month")
+        .order_by("year_month", :asc)
+        .pluck(
+          "date_trunc('month', created_at)::date AS year_month": Time,
+          "COUNT(*) AS count": Int64
+        ).each do |year_month, count|
+          hsh[year_month.to_s("%Y-%m")] = count
+        end
 
       hsh.to_json
     end
@@ -35,21 +32,18 @@ router.namespace "/stats" do
 
   get "/last_activity_at" do
     CACHE.fetch("stats:last_activity_at_json", expires_in: expires_in) do
-      repositiries =
-        Repository
-          .query
-          .select(
-            "date_trunc('month', last_activity_at)::date as year_month",
-            "count(*) as count"
-          )
-          .group_by("year_month")
-          .order_by("year_month", :asc)
-
       hsh = {} of String => Int64
 
-      repositiries.each(fetch_columns: true) do |repository|
-        hsh[repository["year_month"].as(Time).to_s("%Y-%m")] = repository["count"].as(Int64)
-      end
+      Repository
+        .query
+        .group_by("year_month")
+        .order_by("year_month", :asc)
+        .pluck(
+          "date_trunc('month', last_activity_at)::date AS year_month": Time,
+          "COUNT(*) AS count": Int64
+        ).each do |year_month, count|
+          hsh[year_month.to_s("%Y-%m")] = count
+        end
 
       hsh.to_json
     end
@@ -94,25 +88,18 @@ router.namespace "/stats" do
     CACHE.fetch("stats:direct_dependencies", expires_in: expires_in) do
       hsh = {} of Int64 => Int64
 
+      repository_dependency_counts = Lustra::SQL
+        .select({dependency_count: "COUNT(relationships.id)"})
+        .from(:repositories)
+        .left_join(:relationships) { repositories.id == relationships.master_id }
+        .group_by("repositories.id")
+
       Lustra::SQL
         .select(
           "dependency_count",
           "COUNT(*) AS repository_count"
         )
-        .from(<<-SQL
-          (
-            SELECT
-              r.id,
-              COUNT(rel.id) AS dependency_count
-            FROM
-              repositories r
-            LEFT JOIN
-              relationships rel ON r.id = rel.master_id
-            GROUP BY
-              r.id
-          ) AS repo_dependency_count
-          SQL
-        )
+        .from({repo_dependency_count: repository_dependency_counts})
         .group_by("dependency_count")
         .order_by("dependency_count", :asc)
         .fetch do |attributes|
@@ -136,25 +123,18 @@ router.namespace "/stats" do
         END AS dependency_range
         SQL
 
+      repository_dependency_counts = Lustra::SQL
+        .select({dependency_count: "COUNT(relationships.id)"})
+        .from(:repositories)
+        .left_join(:relationships) { repositories.id == relationships.dependency_id }
+        .group_by("repositories.id")
+
       Lustra::SQL
         .select(
           select_dependency_range,
           "COUNT(*) AS repository_count"
         )
-        .from(<<-SQL
-          (
-            SELECT
-              r.id,
-              COUNT(rel.id) AS dependency_count
-            FROM
-              repositories r
-            LEFT JOIN
-              relationships rel ON r.id = rel.dependency_id
-            GROUP BY
-              r.id
-          ) AS repo_dependency_count
-          SQL
-        )
+        .from({repo_dependency_count: repository_dependency_counts})
         .group_by("dependency_range")
         .order_by("MIN(dependency_count)")
         .where("dependency_count > 0")
@@ -170,23 +150,17 @@ router.namespace "/stats" do
     CACHE.fetch("stats:user_repositories_count", expires_in: expires_in) do
       hsh = {} of Int64 => Int64
 
+      user_repository_counts = Lustra::SQL
+        .select({repo_count: "COUNT(*)"})
+        .from(:repositories)
+        .group_by("user_id")
+
       Lustra::SQL
         .select(
           "repo_count",
           "COUNT(*) AS user_count"
         )
-        .from(<<-SQL
-          (
-            SELECT
-              user_id,
-              COUNT(*) AS repo_count
-            FROM
-              repositories
-            GROUP BY
-              user_id
-          ) AS user_repos
-          SQL
-        )
+        .from({user_repos: user_repository_counts})
         .group_by("repo_count")
         .order_by("repo_count")
         .fetch do |attributes|
@@ -203,11 +177,11 @@ router.namespace "/stats" do
 
       Repository
         .query
-        .select("provider, COUNT(*) AS count")
         .group_by("provider")
         .order_by(count: :desc)
-        .each(fetch_columns: true) do |repository|
-          hsh[repository.provider] = repository.attributes["count"].as(Int64)
+        .pluck(provider: String, "COUNT(*) AS count": Int64)
+        .each do |provider, count|
+          hsh[provider] = count
         end
 
       hsh.to_json
@@ -220,11 +194,11 @@ router.namespace "/stats" do
 
       User
         .query
-        .select("provider, COUNT(*) AS count")
         .group_by("provider")
         .order_by(count: :desc)
-        .each(fetch_columns: true) do |user|
-          hsh[user.provider] = user.attributes["count"].as(Int64)
+        .pluck(provider: String, "COUNT(*) AS count": Int64)
+        .each do |provider, count|
+          hsh[provider] = count
         end
 
       hsh.to_json
