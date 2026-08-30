@@ -117,9 +117,9 @@ shards:
     git: https://github.com/crystal-garage/kemal-kilt.git
     version: 0.1.1
 
-  kemal-session:
+  kemal-session: # Overridden
     git: https://github.com/kemalcr/kemal-session.git
-    version: 1.6.0
+    version: 1.6.0+git.commit.49eb60e9756f534ac439fb505306b79597d24ab9
 
   kemal-session-redis-engine:
     git: https://github.com/crystal-garage/kemal-session-redis-engine.git

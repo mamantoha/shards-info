@@ -26,6 +26,7 @@ dependencies:
     branch: master
   kemal-session:
     github: kemalcr/kemal-session
+    branch: master
   kemal-session-redis-engine:
     github: crystal-garage/kemal-session-redis-engine
     branch: main
