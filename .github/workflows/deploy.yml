@@ -16,7 +16,8 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-26.04
+    # install-crystal still requires libpcre3-dev, which Ubuntu 26.04 removed.
+    runs-on: ubuntu-24.04
     environment: production
 
     steps:
