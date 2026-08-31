@@ -32,11 +32,17 @@ module GitlabHelpers
     owner = gitlab_project.owner || gitlab_project.namespace
     tags = gitlab_project.tag_list
 
-    user = User.query.find_or_build(provider: "gitlab", provider_id: owner.id)
+    user = User.query.find_or_build(
+      provider: "gitlab",
+      provider_id: owner.id
+    )
+
     assign_project_owner_attributes(user, owner)
+
     user.synced_at = Time.utc if user.changed?
     user.ignore = false unless user.persisted?
-    user.save!
+
+    user.save! if user.changed? || !user.persisted?
 
     repository = Repository.query.find_or_build(provider: "gitlab", provider_id: gitlab_project.id)
     repository.ignore = false unless repository.persisted?
@@ -228,7 +234,7 @@ module GitlabHelpers
           .find_or_build(repository_id: repository.id, language_id: language.id)
 
       repository_language.score = score
-      repository_language.save!
+      repository_language.save! if repository_language.changed? || !repository_language.persisted?
     end
 
     unlink_languages.each do |language_name|

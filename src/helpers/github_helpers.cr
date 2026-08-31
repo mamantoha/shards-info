@@ -33,11 +33,17 @@ module GithubHelpers
     tags = github_repo.tags
     github_user = github_repo.user
 
-    user = User.query.find_or_build(provider: "github", provider_id: github_user.id)
+    user = User.query.find_or_build(
+      provider: "github",
+      provider_id: github_user.id
+    )
+
     assign_repository_user_attributes(user, github_user)
+
     user.synced_at = Time.utc if user.changed?
     user.ignore = false unless user.persisted?
-    user.save!
+
+    user.save! if user.changed? || !user.persisted?
 
     repository = Repository.query.find_or_build(provider: "github", provider_id: github_repo.id)
     repository.ignore = false unless repository.persisted?
@@ -182,7 +188,7 @@ module GithubHelpers
           .find_or_build(repository_id: repository.id, language_id: language.id)
 
       repository_language.score = score
-      repository_language.save!
+      repository_language.save! if repository_language.changed? || !repository_language.persisted?
     end
 
     unlink_languages.each do |language_name|
