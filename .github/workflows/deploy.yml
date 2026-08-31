@@ -16,8 +16,7 @@ on:
 
 jobs:
   deploy:
-    # install-crystal still requires libpcre3-dev, which Ubuntu 26.04 removed.
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     environment: production
 
     steps:
@@ -27,8 +26,19 @@ jobs:
       - name: Install system dependencies
         run: sudo apt-get update && sudo apt-get install -y libpq-dev rsync
 
+      - name: Check out install-crystal branch
+        uses: actions/checkout@v7
+        with:
+          repository: mamantoha/install-crystal
+          ref: ubuntu-26.04-support
+          path: .github/actions/install-crystal
+
+      - name: Install install-crystal dependencies
+        working-directory: .github/actions/install-crystal
+        run: npm ci --omit=dev
+
       - name: Install Crystal
-        uses: crystal-lang/install-crystal@v1
+        uses: ./.github/actions/install-crystal
         with:
           crystal: 1.21.0
       - name: Install shard dependencies
