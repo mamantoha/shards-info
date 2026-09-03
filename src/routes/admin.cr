@@ -356,14 +356,17 @@ router.namespace "/admin" do
     render "src/views/admin/hidden_repositories/index.slang", "src/views/layouts/layout.slang"
   end
 
-  get "/active_users" do |env|
-    keys = ACTIVE_USERS_CACHE.keys
+  get "/visitors" do |env|
+    visitors = Visitor
+      .query
+      .order_by(updated_at: :desc)
+      .to_a
 
     set_request_context(env) do
-      request_context.page_title = "Admin: Active Users"
+      request_context.page_title = "Admin: Visitors"
     end
 
-    render "src/views/admin/active_users/index.slang", "src/views/layouts/layout.slang"
+    render "src/views/admin/visitors/index.slang", "src/views/layouts/layout.slang"
   end
 
   get "/database" do |env|
