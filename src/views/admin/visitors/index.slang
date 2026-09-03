@@ -17,6 +17,8 @@
             th Location
             th User agent
             th Events
+            th Firt seen
+            th Last seen
         tbody
           - visitors.each do |visitor|
             tr
@@ -33,4 +35,8 @@
                 = visitor.user_agent
               td
                 = visitor.events_count
+              td
+                = visitor.created_at.by_example("January 2, 2006 @ 15:04")
+              td
+                = visitor.updated_at.by_example("January 2, 2006 @ 15:04")
 == paginator

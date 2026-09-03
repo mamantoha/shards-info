@@ -32,6 +32,7 @@ class VisitorTracker
         remote_address: remote_address,
         user_agent:     user_agent,
         location:       location,
+        updated_at:     Time.local,
       })
     else
       visitor = Visitor.create!({
