@@ -3,7 +3,7 @@ class Event
 
   primary_key
 
-  belongs_to visitor : Visitor, foreign_key_type: UUID, counter_cache: true
+  belongs_to visitor : Visitor, foreign_key_type: UUID, counter_cache: true, touch: true
 
   column path : String
   column method : String

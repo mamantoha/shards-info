@@ -31,8 +31,7 @@ class VisitorTracker
       visitor.update!({
         remote_address: remote_address,
         user_agent:     user_agent,
-        location:       location,
-        updated_at:     Time.local,
+        location:       location
       })
     else
       visitor = Visitor.create!({
