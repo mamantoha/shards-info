@@ -26,8 +26,19 @@ jobs:
       - name: Install system dependencies
         run: sudo apt-get update && sudo apt-get install -y libpq-dev rsync
 
+      - name: Check out install-crystal
+        uses: actions/checkout@v7
+        with:
+          repository: crystal-lang/install-crystal
+          ref: master
+          path: .github/actions/install-crystal
+
+      - name: Install install-crystal dependencies
+        working-directory: .github/actions/install-crystal
+        run: npm ci --omit=dev
+
       - name: Install Crystal
-        uses: crystal-lang/install-crystal@master
+        uses: ./.github/actions/install-crystal
         with:
           crystal: 1.21.0
 
