@@ -33,3 +33,4 @@
                 = visitor.user_agent
               td
                 = visitor.events_count
+== paginator

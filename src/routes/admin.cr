@@ -357,10 +357,25 @@ router.namespace "/admin" do
   end
 
   get "/visitors" do |env|
-    visitors = Visitor
+    per_page = 20
+    page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
+
+    visitors_query = Visitor
       .query
       .order_by(updated_at: :desc)
-      .to_a
+
+    total_count = visitors_query.count
+
+    raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
+
+    paginator = ViewHelpers::Paginator.new(
+      page,
+      per_page,
+      total_count,
+      "/admin/visitors?page=#{page}"
+    ).to_s
+
+    visitors = visitors_query.limit(per_page).offset(offset)
 
     set_request_context(env) do
       request_context.page_title = "Admin: Visitors"
