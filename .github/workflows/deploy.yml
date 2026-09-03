@@ -26,21 +26,11 @@ jobs:
       - name: Install system dependencies
         run: sudo apt-get update && sudo apt-get install -y libpq-dev rsync
 
-      - name: Check out install-crystal branch
-        uses: actions/checkout@v7
-        with:
-          repository: mamantoha/install-crystal
-          ref: ubuntu-26.04-support
-          path: .github/actions/install-crystal
-
-      - name: Install install-crystal dependencies
-        working-directory: .github/actions/install-crystal
-        run: npm ci --omit=dev
-
       - name: Install Crystal
-        uses: ./.github/actions/install-crystal
+        uses: crystal-lang/install-crystal@master
         with:
           crystal: 1.21.0
+
       - name: Install shard dependencies
         run: shards install --production
 
