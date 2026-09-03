@@ -45,11 +45,10 @@ class VisitorTracker
       context.response.cookies["visitor_id"] = visitor_id_cookie
     end
 
-    Event.create!({
-      visitor_id: visitor.id,
-      path:       request.path,
-      method:     request.method,
-      params:     JSON.parse(request.query_params.to_h.to_json),
+    visitor.events.create!({
+      path:   request.path,
+      method: request.method,
+      params: JSON.parse(request.query_params.to_h.to_json),
     })
   rescue
   end
