@@ -192,3 +192,4 @@ shards:
   time_zone:
     git: https://github.com/mamantoha/time_zone.git
     version: 0.1.3
+
