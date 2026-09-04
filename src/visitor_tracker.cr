@@ -47,7 +47,7 @@ class VisitorTracker
     visitor.events.create!({
       path:   request.path,
       method: request.method,
-      params: JSON.parse(request.query_params.to_h.to_json),
+      params: request.query_params.to_h,
     })
   rescue error
     if ENV["KEMAL_ENV"]? == "production"
