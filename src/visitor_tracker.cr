@@ -49,7 +49,12 @@ class VisitorTracker
       method: request.method,
       params: JSON.parse(request.query_params.to_h.to_json),
     })
-  rescue
+  rescue error
+    if ENV["KEMAL_ENV"]? == "production"
+      Raven.capture(error)
+    else
+      raise error
+    end
   end
 
   private def find_visitor(request : HTTP::Request) : Visitor?
