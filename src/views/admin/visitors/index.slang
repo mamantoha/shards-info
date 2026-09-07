@@ -23,7 +23,8 @@
           - visitors.each do |visitor|
             tr
               td
-                = visitor.id
+                a href="/admin/visitors/#{visitor.id}"
+                  = visitor.id
               td
                 = visitor.remote_address
               td

@@ -384,6 +384,38 @@ router.namespace "/admin" do
     render "src/views/admin/visitors/index.slang", "src/views/layouts/layout.slang"
   end
 
+  get "/visitors/:id" do |env|
+    visitor_id = UUID.parse?(env.params.url["id"]) || raise Kemal::Exceptions::RouteNotFound.new(env)
+    visitor = Visitor.find(visitor_id) || raise Kemal::Exceptions::RouteNotFound.new(env)
+
+    per_page = 20
+    page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
+
+    events_query = visitor
+      .events
+      .order_by(created_at: :desc)
+      .order_by("events.id", :desc)
+
+    total_count = visitor.events_count
+
+    raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
+
+    paginator = ViewHelpers::Paginator.new(
+      page,
+      per_page,
+      total_count,
+      "/admin/visitors/#{visitor.id}?page=#{page}"
+    ).to_s
+
+    events = events_query.limit(per_page).offset(offset)
+
+    set_request_context(env) do
+      request_context.page_title = "Admin: Visitor #{visitor.id}"
+    end
+
+    render "src/views/admin/visitors/show.slang", "src/views/layouts/layout.slang"
+  end
+
   get "/database" do |env|
     database_size, activity_rows, activity_counts = database_activity
 
