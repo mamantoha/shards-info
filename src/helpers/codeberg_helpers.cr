@@ -12,6 +12,11 @@ module CodebergHelpers
 
     codeberg_repo = codeberg_client.repo(repository.user.login, repository.name)
 
+    if codeberg_repo.id != repository.provider_id
+      repository.delete
+      return
+    end
+
     sync_repo(codeberg_repo)
   rescue Crest::NotFound
     repository.delete
