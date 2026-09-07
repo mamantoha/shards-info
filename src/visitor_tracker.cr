@@ -39,10 +39,18 @@ class VisitorTracker
         user_agent:     user_agent,
         location:       remote_address_location(remote_address),
       })
-
-      visitor_id_cookie = HTTP::Cookie.new("visitor_id", visitor.id.to_s, path: "/")
-      context.response.cookies["visitor_id"] = visitor_id_cookie
     end
+
+    visitor_id_cookie = HTTP::Cookie.new(
+      name: "visitor_id",
+      value: visitor.id.to_s,
+      path: "/",
+      expires: Time.utc + 365.days,
+      secure: ENV["KEMAL_ENV"]? == "production",
+      http_only: true,
+      samesite: HTTP::Cookie::SameSite::Lax
+    )
+    context.response.cookies["visitor_id"] = visitor_id_cookie
 
     visitor.events.create!({
       path:   request.path,
