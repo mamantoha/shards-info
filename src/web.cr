@@ -201,7 +201,7 @@ get "/" do |env|
       .with_tags
       .where { users.ignore.false? }
       .where { repositories.ignore.false? }
-      .where { repositories.last_activity_at > 1.week.ago }
+      .where { repositories.last_activity_at.after?(1.week.ago) }
       .order_by(stars_count: :desc)
       .order_by("repositories.id", :asc)
       .limit(20)
