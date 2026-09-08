@@ -43,18 +43,24 @@
         tr
           th Time
           th Method
+          th Duration
+          th Route
           th Path
           th Parameters
+          th Referrer
       tbody
         - events.each do |event|
           tr
             td.text-nowrap
               time.js-local-datetime datetime=event.created_at.to_rfc3339 = event.created_at.to_s("%Y-%m-%d %H:%M:%S")
             td = event.method
+            td.text-nowrap = "#{event.duration_ms} ms"
+            td.text-break = event.route
             td.text-break = event.path
             td.text-break
               - params = event.params.as_h?
               - if params && !params.empty?
                 code = event.params.to_json
+            td.text-break = event.referrer
 
   == paginator

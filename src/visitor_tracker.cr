@@ -16,11 +16,17 @@ class VisitorTracker
       return call_next(context) if device.bot?
     end
 
-    track(context, user_agent) if trackable?(context.request)
+    return call_next(context) unless trackable?(context.request)
+
+    visitor = track_visitor(context, user_agent)
+    started_at = Time.instant
+
     call_next(context)
+
+    track_event(context, visitor, Time.instant - started_at) if visitor
   end
 
-  private def track(context : HTTP::Server::Context, user_agent : String?) : Nil
+  private def track_visitor(context : HTTP::Server::Context, user_agent : String?) : Visitor?
     request = context.request
     remote_address = Helpers.real_ip(request)
     visitor = find_visitor(request)
@@ -52,12 +58,28 @@ class VisitorTracker
     )
     context.response.cookies["visitor_id"] = visitor_id_cookie
 
+    visitor
+  rescue error
+    handle_tracking_error(error)
+    nil
+  end
+
+  private def track_event(context : HTTP::Server::Context, visitor : Visitor, duration : Time::Span) : Nil
+    request = context.request
+
     visitor.events.create!({
-      path:   request.path,
-      method: request.method,
-      params: request.query_params.to_h,
+      path:        request.path,
+      route:       context.route.path,
+      method:      request.method,
+      params:      request.query_params.to_h,
+      referrer:    request.headers["Referer"]?,
+      duration_ms: duration.total_milliseconds.round.to_i64,
     })
   rescue error
+    handle_tracking_error(error)
+  end
+
+  private def handle_tracking_error(error : Exception) : Nil
     if ENV["KEMAL_ENV"]? == "production"
       Raven.capture(error)
     else

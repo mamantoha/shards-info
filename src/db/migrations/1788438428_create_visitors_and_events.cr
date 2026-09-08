@@ -15,8 +15,11 @@ class CreateVisitorsAndEvents
     create_table(:events) do |t|
       t.references to: "visitors", name: "visitor_id", type: "uuid", on_delete: "cascade", null: false
       t.column :path, :string, null: false, index: true
+      t.column :route, :string, null: false, index: true
       t.column :method, :string, null: false
       t.column :params, :jsonb, null: false, default: "'{}'::jsonb"
+      t.column :referrer, :string
+      t.column :duration_ms, :int64, null: false
 
       t.timestamps
     end
