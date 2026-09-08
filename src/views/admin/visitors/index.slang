@@ -7,7 +7,7 @@
           li.breadcrumb-item.active aria-current="page" Visitors
 
     h2
-      = "Visitors: #{visitors.count}"
+      = "Visitors: #{total_count}"
     .table-responsive
       table.table.table-striped
         thead
