@@ -17,7 +17,7 @@
             th Location
             th User agent
             th Events
-            th Firt seen
+            th First seen
             th Last seen
         tbody
           - visitors.each do |visitor|
