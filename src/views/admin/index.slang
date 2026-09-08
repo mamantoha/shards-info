@@ -14,7 +14,7 @@
     li
       a href="/admin/hidden_repositories" Hidden repositories
     li
-      a href="/admin/active_users" Active users
+      a href="/admin/visitors" Visitors
     li
       a href="/admin/database" Database
     li

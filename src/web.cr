@@ -26,7 +26,7 @@ require "flag_emoji"
 require "../config/config"
 require "./config"
 require "./request_context"
-require "./active_users_tracker"
+require "./visitor_tracker"
 require "./view_helpers"
 require "./delegators"
 
@@ -39,7 +39,7 @@ require "./routes/*"
 ADMIN_SESSION_REFRESH_INTERVAL_SECONDS = 5_i64 * 60
 
 use Defense::Handler.new
-use ActiveUserTracker.new
+use VisitorTracker.new
 
 add_context_storage_type(RequestContext)
 
