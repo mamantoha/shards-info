@@ -28,8 +28,15 @@ class VisitorTracker
 
   private def track_visitor(context : HTTP::Server::Context, user_agent : String?) : Visitor?
     request = context.request
+    visitor_id = visitor_id(request)
+
+    unless visitor_id
+      set_visitor_cookie(context, UUID.random)
+      return
+    end
+
     remote_address = Helpers.real_ip(request)
-    visitor = find_visitor(request)
+    visitor = Visitor.find(visitor_id)
 
     if visitor
       location = visitor.remote_address == remote_address ? visitor.location : remote_address_location(remote_address)
@@ -47,9 +54,18 @@ class VisitorTracker
       })
     end
 
+    set_visitor_cookie(context, visitor.id)
+
+    visitor
+  rescue error
+    handle_tracking_error(error)
+    nil
+  end
+
+  private def set_visitor_cookie(context : HTTP::Server::Context, visitor_id : UUID) : Nil
     visitor_id_cookie = HTTP::Cookie.new(
       name: "visitor_id",
-      value: visitor.id.to_s,
+      value: visitor_id.to_s,
       path: "/",
       expires: Time.utc + 365.days,
       secure: ENV["KEMAL_ENV"]? == "production",
@@ -57,11 +73,6 @@ class VisitorTracker
       samesite: HTTP::Cookie::SameSite::Lax
     )
     context.response.cookies["visitor_id"] = visitor_id_cookie
-
-    visitor
-  rescue error
-    handle_tracking_error(error)
-    nil
   end
 
   private def track_event(context : HTTP::Server::Context, visitor : Visitor, duration : Time::Span) : Nil
@@ -87,11 +98,10 @@ class VisitorTracker
     end
   end
 
-  private def find_visitor(request : HTTP::Request) : Visitor?
+  private def visitor_id(request : HTTP::Request) : UUID?
     cookie = request.cookies["visitor_id"]?
-    visitor_id = cookie.try { |value| UUID.parse?(value.value) }
 
-    Visitor.find(visitor_id) if visitor_id
+    cookie.try { |value| UUID.parse?(value.value) }
   end
 
   private def trackable?(request : HTTP::Request) : Bool
