@@ -28,15 +28,11 @@ class VisitorTracker
 
   private def track_visitor(context : HTTP::Server::Context, user_agent : String?) : Visitor?
     request = context.request
-    visitor_id = visitor_id(request)
 
-    unless visitor_id
-      set_visitor_cookie(context, UUID.random)
-      return
-    end
+    return unless valid_session?(context)
 
     remote_address = Helpers.real_ip(request)
-    visitor = Visitor.find(visitor_id)
+    visitor = find_visitor(request)
 
     if visitor
       location = visitor.remote_address == remote_address ? visitor.location : remote_address_location(remote_address)
@@ -98,10 +94,18 @@ class VisitorTracker
     end
   end
 
-  private def visitor_id(request : HTTP::Request) : UUID?
+  private def find_visitor(request : HTTP::Request) : Visitor?
     cookie = request.cookies["visitor_id"]?
+    visitor_id = cookie.try { |value| UUID.parse?(value.value) }
 
-    cookie.try { |value| UUID.parse?(value.value) }
+    Visitor.find(visitor_id) if visitor_id
+  end
+
+  private def valid_session?(context : HTTP::Server::Context) : Bool
+    session = context.session
+    cookie = context.request.cookies[Kemal::Session.config.cookie_name]?
+
+    cookie ? URI.decode(cookie.value) == Kemal::Session.encode(session.id) : false
   end
 
   private def trackable?(request : HTTP::Request) : Bool
