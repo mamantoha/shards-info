@@ -1,3 +1,7 @@
+private def visitor_id(env : HTTP::Server::Context) : UUID
+  UUID.parse?(env.params.url["id"]) || raise Kemal::Exceptions::RouteNotFound.new(env)
+end
+
 private def mosquito_job_run_json(job_run : Mosquito::Api::JobRun)
   found = job_run.found?
 
@@ -385,8 +389,9 @@ router.namespace "/admin" do
   end
 
   get "/visitors/:id" do |env|
-    visitor_id = UUID.parse?(env.params.url["id"]) || raise Kemal::Exceptions::RouteNotFound.new(env)
-    visitor = Visitor.find(visitor_id) || raise Kemal::Exceptions::RouteNotFound.new(env)
+    visitor_id = visitor_id(env)
+
+    visitor = Visitor.find!(visitor_id)
 
     per_page = 20
     page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
@@ -417,10 +422,8 @@ router.namespace "/admin" do
   end
 
   post "/visitors/:id/delete" do |env|
-    visitor_id = UUID.parse?(env.params.url["id"]) || raise Kemal::Exceptions::RouteNotFound.new(env)
-    visitor = Visitor.find(visitor_id) || raise Kemal::Exceptions::RouteNotFound.new(env)
-
-    visitor.delete
+    visitor_id = visitor_id(env)
+    Visitor.find!(visitor_id).delete
 
     env.flash["notice"] = "Visitor was successfully deleted."
     env.redirect("/admin/visitors")

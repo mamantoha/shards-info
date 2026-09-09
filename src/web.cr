@@ -174,6 +174,11 @@ error 404 do
   render "src/views/404.slang"
 end
 
+error Lustra::SQL::RecordNotFoundError do |env, _error|
+  env.response.status_code = 404
+  render "src/views/404.slang"
+end
+
 get "/about" do |env|
   set_request_context(env) do
     request_context.page_title = "About"
