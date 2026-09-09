@@ -416,6 +416,16 @@ router.namespace "/admin" do
     render "src/views/admin/visitors/show.slang", "src/views/layouts/layout.slang"
   end
 
+  post "/visitors/:id/delete" do |env|
+    visitor_id = UUID.parse?(env.params.url["id"]) || raise Kemal::Exceptions::RouteNotFound.new(env)
+    visitor = Visitor.find(visitor_id) || raise Kemal::Exceptions::RouteNotFound.new(env)
+
+    visitor.delete
+
+    env.flash["notice"] = "Visitor was successfully deleted."
+    env.redirect("/admin/visitors")
+  end
+
   get "/database" do |env|
     database_size, activity_rows, activity_counts = database_activity
 

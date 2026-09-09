@@ -8,7 +8,12 @@
           a href="/admin/visitors" Visitors
         li.breadcrumb-item.active aria-current="page" = visitor.id
 
-  h2 Visitor
+  .d-flex.justify-content-between.align-items-center.gap-3
+    h2 Visitor
+    form action="/admin/visitors/#{visitor.id}/delete" method="post" onsubmit="return confirm('Delete this visitor and all events?')"
+      button.btn.btn-danger type="submit"
+        i.fa-solid.fa-trash.me-2
+        | Delete visitor
 
   dl.row
     dt.col-sm-3 ID
