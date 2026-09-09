@@ -37,7 +37,7 @@
               td
                 = visitor.events_count
               td
-                time.js-local-datetime datetime=visitor.created_at.to_rfc3339 = visitor.created_at.to_s("%Y-%m-%d %H:%M:%S")
+                == ViewHelpers.local_datetime(visitor.created_at)
               td
-                time.js-local-datetime datetime=visitor.updated_at.to_rfc3339 = visitor.updated_at.to_s("%Y-%m-%d %H:%M:%S")
+                == ViewHelpers.local_datetime(visitor.updated_at)
 == paginator

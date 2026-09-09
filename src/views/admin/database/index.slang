@@ -47,6 +47,6 @@
               td = row[1] || ""
               td
                 - if query_start = row[2]
-                  time.js-local-datetime datetime=query_start.to_rfc3339 = query_start.to_s("%Y-%m-%d %H:%M:%S")
+                  == ViewHelpers.local_datetime(query_start)
               td
                 pre.mb-0 = row[3] || ""

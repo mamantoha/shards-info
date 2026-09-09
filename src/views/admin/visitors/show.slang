@@ -29,11 +29,11 @@
 
     dt.col-sm-3 First seen
     dd.col-sm-9
-      time.js-local-datetime datetime=visitor.created_at.to_rfc3339 = visitor.created_at.to_s("%Y-%m-%d %H:%M:%S")
+      == ViewHelpers.local_datetime(visitor.created_at)
 
     dt.col-sm-3 Last seen
     dd.col-sm-9
-      time.js-local-datetime datetime=visitor.updated_at.to_rfc3339 = visitor.updated_at.to_s("%Y-%m-%d %H:%M:%S")
+      == ViewHelpers.local_datetime(visitor.updated_at)
 
   h3 = "Events: #{visitor.events_count}"
 
@@ -52,7 +52,7 @@
         - events.each do |event|
           tr
             td.text-nowrap
-              time.js-local-datetime datetime=event.created_at.to_rfc3339 = event.created_at.to_s("%Y-%m-%d %H:%M:%S")
+              == ViewHelpers.local_datetime(event.created_at)
             td = event.method
             td.text-nowrap = "#{event.duration_ms} ms"
             td.text-break = event.route
