@@ -3,11 +3,6 @@ require "retriable"
 
 module Gitlab
   class Logger < Crest::Logger
-    def initialize(io : IO = STDOUT)
-      super
-      filter(/(access_token=)([^&]+)/, "\\1[REMOVED]")
-    end
-
     def request(request) : Nil
       message = ">> | %s | %s" % [request.method, request.url]
       info(message)
@@ -21,9 +16,9 @@ module Gitlab
 
   class API
     property client
-    property logging
+    property? logging
 
-    def initialize(@access_token : String, @logging = true)
+    def initialize(@access_token : String, *, @logging = true)
       @base_url = "https://gitlab.com/api/v4"
     end
 
@@ -37,19 +32,17 @@ module Gitlab
         Crest::Resource.new(
           @base_url,
           headers: {
-            "Content-Type" => "application/json",
-          },
-          params: {
-            "access_token" => @access_token,
+            "Content-Type"  => "application/json",
+            "PRIVATE-TOKEN" => @access_token,
           },
           http_client: http_client,
-          logging: @logging,
-          logger: Gitlab.logger
+          logging: logging?,
+          logger: Gitlab.logger,
         )
       end
     end
 
-    def make_request(url : String, params = {} of String => String)
+    def make_request(url : String, params = {} of String => String) : Crest::Response
       Retriable.retry(on: {
         Crest::InternalServerError,
         Crest::ServiceUnavailable,
@@ -91,6 +84,7 @@ module Gitlab
 
       params = {
         "with_programming_language" => "Crystal",
+        "topic"                     => "crystal",
         "order_by"                  => "last_activity_at",
         "visibility"                => "public",
         "per_page"                  => per_page,
