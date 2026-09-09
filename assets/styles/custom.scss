@@ -159,6 +159,42 @@ a.badge {
   #stats-repositories-count {
     padding-bottom: 1.5rem;
   }
+
+  .stacked-table-responsive {
+    overflow: visible;
+  }
+
+  .stacked-table {
+    thead {
+      display: none;
+    }
+
+    tbody,
+    tr,
+    td {
+      display: block;
+      width: 100%;
+    }
+
+    tr {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    td {
+      display: grid;
+      grid-template-columns: minmax(6.5rem, 35%) minmax(0, 1fr);
+      gap: 0.75rem;
+      padding: 0.375rem 0.75rem;
+      border: 0;
+      overflow-wrap: anywhere;
+
+      &::before {
+        content: attr(data-label);
+        font-weight: 600;
+      }
+    }
+  }
 }
 
 @media (max-width: 576px) {

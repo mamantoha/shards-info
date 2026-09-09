@@ -8,8 +8,8 @@
 
     h2
       = "Visitors: #{total_count}"
-    .table-responsive
-      table.table.table-striped
+    .table-responsive.stacked-table-responsive
+      table.table.table-striped.stacked-table
         thead
           tr
             th Visitor ID
@@ -22,22 +22,22 @@
         tbody
           - visitors.each do |visitor|
             tr
-              td
+              td data-label="Visitor ID"
                 a href="/admin/visitors/#{visitor.id}"
                   = visitor.id
-              td
+              td data-label="Address"
                 = visitor.remote_address
-              td
+              td data-label="Location"
                 - location_value = visitor.location.as_h?
                 - if location_value && !location_value.empty?
                   - location = Ipapi::Location.from_json(visitor.location.to_json)
                   = "#{FlagEmoji.from_country_code(location.country_code)} #{location.city}/#{location.country_name}"
-              td
+              td data-label="User agent"
                 = visitor.user_agent
-              td
+              td data-label="Events"
                 = visitor.events_count
-              td
+              td data-label="First seen"
                 == ViewHelpers.local_datetime(visitor.created_at)
-              td
+              td data-label="Last seen"
                 == ViewHelpers.local_datetime(visitor.updated_at)
 == paginator

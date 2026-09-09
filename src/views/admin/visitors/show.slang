@@ -37,8 +37,8 @@
 
   h3 = "Events: #{visitor.events_count}"
 
-  .table-responsive
-    table.table.table-striped
+  .table-responsive.stacked-table-responsive
+    table.table.table-striped.stacked-table
       thead
         tr
           th Time
@@ -51,16 +51,16 @@
       tbody
         - events.each do |event|
           tr
-            td.text-nowrap
+            td.text-nowrap data-label="Time"
               == ViewHelpers.local_datetime(event.created_at)
-            td = event.method
-            td.text-nowrap = "#{event.duration_ms} ms"
-            td.text-break = event.route
-            td.text-break = event.path
-            td.text-break
+            td data-label="Method" = event.method
+            td.text-nowrap data-label="Duration" = "#{event.duration_ms} ms"
+            td.text-break data-label="Route" = event.route
+            td.text-break data-label="Path" = event.path
+            td.text-break data-label="Parameters"
               - params = event.params.as_h?
               - if params && !params.empty?
                 code = event.params.to_json
-            td.text-break = event.referrer
+            td.text-break data-label="Referrer" = event.referrer
 
   == paginator
