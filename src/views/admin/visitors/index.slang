@@ -37,7 +37,7 @@
               td
                 = visitor.events_count
               td
-                = visitor.created_at.by_example("January 2, 2006 @ 15:04")
+                time.js-local-datetime datetime=visitor.created_at.to_rfc3339 = visitor.created_at.to_s("%Y-%m-%d %H:%M:%S")
               td
-                = visitor.updated_at.by_example("January 2, 2006 @ 15:04")
+                time.js-local-datetime datetime=visitor.updated_at.to_rfc3339 = visitor.updated_at.to_s("%Y-%m-%d %H:%M:%S")
 == paginator
