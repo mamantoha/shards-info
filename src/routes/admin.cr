@@ -74,11 +74,14 @@ router.namespace "/admin" do
     per_page = 20
     page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
-    admin_query = Admin.query
-      .order_by(created_at: :desc)
-      .order_by("admins.id", :asc)
+    admins =
+      Admin
+        .query
+        .order_by(created_at: :desc)
+        .order_by("admins.id", :asc)
+        .paginate(page, per_page)
 
-    total_count = admin_query.count
+    total_count = admins.total_entries || 0_i64
 
     raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
@@ -88,8 +91,6 @@ router.namespace "/admin" do
       total_count,
       "/admin/admins&page=#{page}"
     ).to_s
-
-    admins = admin_query.limit(per_page).offset(offset)
 
     set_request_context(env) do
       request_context.page_title = "Admin: Site Admins"
@@ -194,19 +195,20 @@ router.namespace "/admin" do
     per_page = 20
     page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
-    users_query =
+    users =
       User
         .query
         .join(:repositories)
-        .where { users.ignore.true? }
+        .where { var("users", "ignore").true? }
         .select(
           "users.*",
           "COUNT(repositories.*) AS repositories_count",
         )
         .group_by("users.id")
         .order_by("users.id", :asc)
+        .paginate(page, per_page)
 
-    total_count = users_query.count
+    total_count = users.total_entries || 0_i64
 
     raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
@@ -216,8 +218,6 @@ router.namespace "/admin" do
       total_count,
       "/admin/hidden_users&page=#{page}"
     ).to_s
-
-    users = users_query.limit(per_page).offset(offset)
 
     set_request_context(env) do
       request_context.page_title = "Admin: Hidden Users"
@@ -230,15 +230,16 @@ router.namespace "/admin" do
     per_page = 20
     page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
-    repositories_query =
+    repositories =
       Repository
         .query
         .with_user
-        .where { repositories.ignore.true? }
+        .where { var("repositories", "ignore").true? }
         .order_by(stars_count: :desc)
         .order_by("repositories.id", :asc)
+        .paginate(page, per_page)
 
-    total_count = repositories_query.count
+    total_count = repositories.total_entries || 0_i64
 
     raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
@@ -248,8 +249,6 @@ router.namespace "/admin" do
       total_count,
       "/admin/hidden_repositories&page=#{page}"
     ).to_s
-
-    repositories = repositories_query.limit(per_page).offset(offset)
 
     set_request_context(env) do
       request_context.page_title = "Admin: Hidden Repositories"
@@ -262,11 +261,13 @@ router.namespace "/admin" do
     per_page = 20
     page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
-    visitors_query = Visitor
-      .query
-      .order_by(updated_at: :desc)
+    visitors =
+      Visitor
+        .query
+        .order_by(updated_at: :desc)
+        .paginate(page, per_page)
 
-    total_count = visitors_query.count
+    total_count = visitors.total_entries || 0_i64
 
     raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
@@ -276,8 +277,6 @@ router.namespace "/admin" do
       total_count,
       "/admin/visitors?page=#{page}"
     ).to_s
-
-    visitors = visitors_query.limit(per_page).offset(offset)
 
     set_request_context(env) do
       request_context.page_title = "Admin: Visitors"
@@ -294,12 +293,14 @@ router.namespace "/admin" do
     per_page = 20
     page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
-    events_query = visitor
-      .events
-      .order_by(created_at: :desc)
-      .order_by("events.id", :desc)
+    events =
+      visitor
+        .events
+        .order_by(created_at: :desc)
+        .order_by("events.id", :desc)
+        .paginate(page, per_page)
 
-    total_count = visitor.events_count
+    total_count = events.total_entries || 0_i64
 
     raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
@@ -309,8 +310,6 @@ router.namespace "/admin" do
       total_count,
       "/admin/visitors/#{visitor.id}?page=#{page}"
     ).to_s
-
-    events = events_query.limit(per_page).offset(offset)
 
     set_request_context(env) do
       request_context.page_title = "Admin: Visitor #{visitor.id}"

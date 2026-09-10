@@ -239,7 +239,7 @@ get "/repositories" do |env|
   sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
   expression, direction, nulls = Helpers.repositories_sort_expression_direction(sort)
 
-  repositories_query =
+  repositories =
     Repository
       .query
       .with_tags
@@ -248,8 +248,9 @@ get "/repositories" do |env|
       .published
       .order_by(expression, direction, nulls)
       .order_by("repositories.id", :asc)
+      .paginate(page, per_page)
 
-  total_count = repositories_query.count
+  total_count = repositories.total_entries || 0_i64
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
@@ -261,8 +262,6 @@ get "/repositories" do |env|
     total_count,
     "/repositories?page=#{page}&sort=#{sort}"
   ).to_s
-
-  repositories = repositories_query.limit(per_page).offset(offset)
 
   set_request_context(env) do
     request_context.page_title = "All Shards"
@@ -284,11 +283,11 @@ get "/users" do |env|
     ) AS stars_count
     SQL
 
-  users_query =
+  users =
     User
       .query
       .join(:repositories)
-      .where { users.ignore.false? }
+      .where { var("users", "ignore").false? }
       .where { repositories.ignore.false? }
       .select(
         "users.*",
@@ -298,8 +297,9 @@ get "/users" do |env|
       .group_by("users.id")
       .order_by(stars_count: :desc)
       .order_by("users.id", :asc)
+      .paginate(page, per_page)
 
-  total_count = users_query.count
+  total_count = users.total_entries || 0_i64
 
   raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
@@ -309,8 +309,6 @@ get "/users" do |env|
     total_count,
     "/users?page=#{page}"
   ).to_s
-
-  users = users_query.limit(per_page).offset(offset)
 
   set_request_context(env) do
     request_context.page_title = "Crystal developers"
@@ -384,7 +382,7 @@ get "/search" do |env|
     query = query.gsub(/['?\\:‘’]/, "")
     query = URI.decode(query)
 
-    repositories_query =
+    repositories =
       Repository
         .query
         .with_tags
@@ -394,8 +392,9 @@ get "/search" do |env|
         .search(query)
         .order_by(expression, direction)
         .order_by("repositories.id", :asc)
+        .paginate(page, per_page)
 
-    total_count = repositories_query.count
+    total_count = repositories.total_entries || 0_i64
 
     raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
@@ -407,8 +406,6 @@ get "/search" do |env|
       total_count,
       "/search?query=#{query_param}&page=#{page}&sort=#{sort}"
     ).to_s
-
-    repositories = repositories_query.limit(per_page).offset(offset)
 
     set_request_context(env) do
       request_context.page_title = "Search for '#{query}'"
@@ -551,7 +548,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
   expression, direction = Helpers.repositories_sort_expression_direction(sort)
 
   if repository = Repository.find_repository(owner, repo, provider)
-    repositories_query =
+    repositories =
       repository
         .dependents
         .clear_distinct
@@ -560,8 +557,9 @@ get "/:provider/:owner/:repo/dependents" do |env|
         .with_counts
         .order_by(expression, direction)
         .order_by("repositories.id", :asc)
+        .paginate(page, per_page)
 
-    total_count = repositories_query.count
+    total_count = repositories.total_entries || 0_i64
 
     raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
@@ -573,8 +571,6 @@ get "/:provider/:owner/:repo/dependents" do |env|
       total_count,
       "/#{provider}/#{owner}/#{repo}/dependents?page=#{page}&sort=#{sort}"
     ).to_s
-
-    repositories = repositories_query.limit(per_page).offset(offset)
 
     set_request_context(env) do
       request_context.page_title = "Depend on '#{repository.decorate.full_name}'"
@@ -594,7 +590,7 @@ get "/tags/:name" do |env|
   page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
   if tag = Tag.find_by({name: name})
-    repositories_query =
+    repositories =
       tag
         .repositories
         .join(:user)
@@ -602,12 +598,13 @@ get "/tags/:name" do |env|
         .with_tags
         .with_user
         .where { users.ignore.false? }
-        .where { repositories.ignore.false? }
+        .where { var("repositories", "ignore").false? }
         .with_counts
         .order_by("repositories.stars_count", :desc)
         .order_by("repositories.id", :asc)
+        .paginate(page, per_page)
 
-    total_count = repositories_query.count
+    total_count = repositories.total_entries || 0_i64
 
     raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
@@ -617,8 +614,6 @@ get "/tags/:name" do |env|
       total_count,
       "/tags/#{name}?page=%{page}"
     ).to_s
-
-    repositories = repositories_query.limit(per_page).offset(offset)
 
     set_request_context(env) do
       request_context.page_title = "Repositories tagged with '#{name}'"
@@ -677,7 +672,7 @@ get "/languages/:name" do |env|
   page, offset = Helpers.pagination(env, per_page) || raise Kemal::Exceptions::RouteNotFound.new(env)
 
   if language = Language.find_by({name: name})
-    repositories_query =
+    repositories =
       language
         .repositories
         .join(:user)
@@ -687,8 +682,9 @@ get "/languages/:name" do |env|
         .with_counts
         .order_by("repositories.stars_count", :desc)
         .order_by("repositories.id", :asc)
+        .paginate(page, per_page)
 
-    total_count = repositories_query.count
+    total_count = repositories.total_entries || 0_i64
 
     raise Kemal::Exceptions::RouteNotFound.new(env) if offset > total_count
 
@@ -698,8 +694,6 @@ get "/languages/:name" do |env|
       total_count,
       "/languages/#{name}?page=#{page}"
     ).to_s
-
-    repositories = repositories_query.limit(per_page).offset(offset)
 
     set_request_context(env) do
       request_context.page_title = "Repositories with language #{name}"
