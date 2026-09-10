@@ -49,7 +49,6 @@
           th Time
           th Method
           th Duration
-          th Route
           th Path
           th Parameters
           th Referrer
@@ -60,7 +59,6 @@
               == ViewHelpers.local_datetime(event.created_at)
             td data-label="Method" = event.method
             td.text-nowrap data-label="Duration" = "#{event.duration_ms} ms"
-            td.text-break data-label="Route" = event.route
             td.text-break data-label="Path" = event.path
             td.text-break data-label="Parameters"
               - params = event.params.as_h?
