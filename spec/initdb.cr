@@ -12,6 +12,8 @@ def initdb
   Lustra::Migration::Manager.instance.apply_all
 
   create_user_with_repository
+
+  Lustra::SQL.execute("REFRESH MATERIALIZED VIEW public.repository_statistics")
 end
 
 def create_user_with_repository

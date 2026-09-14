@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict UDxSfUfTANNP07rQnXbCOgwUGl04DyCExvbrT9wCCLu5nsYNKSvbbuhscEfBnIs
+\restrict e1GM2QdWJc4zE5me0r44uH91JQBf9URh23eW2XYzalRoIG4DBw9MGWccCCoZN7K
 
 -- Dumped from database version 18.6
 -- Dumped by pg_dump version 18.6
@@ -408,6 +408,31 @@ CREATE SEQUENCE public.repository_languages_id_seq
 --
 
 ALTER SEQUENCE public.repository_languages_id_seq OWNED BY public.repository_languages.id;
+
+
+--
+-- Name: repository_statistics; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+--
+
+CREATE MATERIALIZED VIEW public.repository_statistics AS
+ SELECT repositories.id AS repository_id,
+    COALESCE(dependents.count, (0)::bigint) AS dependents_count,
+    COALESCE(dependencies.count, (0)::bigint) AS dependencies_count,
+    COALESCE(forks.count, (0)::bigint) AS repository_forks_count
+   FROM (((public.repositories
+     LEFT JOIN ( SELECT relationships.dependency_id,
+            count(*) AS count
+           FROM public.relationships
+          GROUP BY relationships.dependency_id) dependents ON ((dependents.dependency_id = repositories.id)))
+     LEFT JOIN ( SELECT relationships.master_id,
+            count(*) AS count
+           FROM public.relationships
+          GROUP BY relationships.master_id) dependencies ON ((dependencies.master_id = repositories.id)))
+     LEFT JOIN ( SELECT repository_forks.parent_id,
+            count(*) AS count
+           FROM public.repository_forks
+          GROUP BY repository_forks.parent_id) forks ON ((forks.parent_id = repositories.id)))
+  WITH NO DATA;
 
 
 --
@@ -940,6 +965,13 @@ CREATE INDEX repository_languages_repository_id ON public.repository_languages U
 
 
 --
+-- Name: repository_statistics_repository_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX repository_statistics_repository_id ON public.repository_statistics USING btree (repository_id);
+
+
+--
 -- Name: repository_tags_repository_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1108,13 +1140,13 @@ ALTER TABLE ONLY public.repository_tags
 -- PostgreSQL database dump complete
 --
 
-\unrestrict UDxSfUfTANNP07rQnXbCOgwUGl04DyCExvbrT9wCCLu5nsYNKSvbbuhscEfBnIs
+\unrestrict e1GM2QdWJc4zE5me0r44uH91JQBf9URh23eW2XYzalRoIG4DBw9MGWccCCoZN7K
 
 --
 -- PostgreSQL database dump
 --
 
-\restrict 6OLcD2FRFKHXm6P4MngHbM4SLnehqoioSSrxE32rrS9yUwIZmDvV0sd9ml2tW9j
+\restrict w4jUtnUlohFyHerYfrAfjNsj0gMN0cVNrqY1tCcv7rQY3LzfWoZGQzwZzde0k4s
 
 -- Dumped from database version 18.6
 -- Dumped by pg_dump version 18.6
@@ -1154,11 +1186,12 @@ INSERT INTO public.__lustra_metadatas VALUES ('migration', '1669546346');
 INSERT INTO public.__lustra_metadatas VALUES ('migration', '1770374223');
 INSERT INTO public.__lustra_metadatas VALUES ('migration', '1785151135');
 INSERT INTO public.__lustra_metadatas VALUES ('migration', '1788438428');
+INSERT INTO public.__lustra_metadatas VALUES ('migration', '1789372613');
 
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 6OLcD2FRFKHXm6P4MngHbM4SLnehqoioSSrxE32rrS9yUwIZmDvV0sd9ml2tW9j
+\unrestrict w4jUtnUlohFyHerYfrAfjNsj0gMN0cVNrqY1tCcv7rQY3LzfWoZGQzwZzde0k4s
 

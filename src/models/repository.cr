@@ -45,6 +45,7 @@ class Repository
 
   scope(:without_releases) { where.missing(:releases) }
 
+  # Counts are refreshed by RefreshRepositoryStatisticsJob every 10 minutes.
   # ```
   # repositories = Repository.query.with_counts
   #
@@ -54,10 +55,18 @@ class Repository
   # end
   # ```
   scope(:with_counts) do
-    group_by("repositories.id")
-      .with_count(:dependents, alias_name: "dependents_count")
-      .with_count(:dependencies, alias_name: "dependencies_count")
-      .with_count(:forks, alias_name: "repository_forks_count")
+    self.select("repositories.*") if columns.empty?
+
+    left_join(:repository_statistics) { repository_statistics.repository_id == repositories.id }
+      .select(
+        "COALESCE(repository_statistics.dependents_count, 0) AS dependents_count",
+        "COALESCE(repository_statistics.dependencies_count, 0) AS dependencies_count",
+        "COALESCE(repository_statistics.repository_forks_count, 0) AS repository_forks_count",
+      )
+      .group_by("repositories.id")
+      .group_by("repository_statistics.dependents_count")
+      .group_by("repository_statistics.dependencies_count")
+      .group_by("repository_statistics.repository_forks_count")
   end
 
   def self.find_repository(user_login : String, repository_name : String, provider : String) : Repository?
