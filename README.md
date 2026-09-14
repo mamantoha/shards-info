@@ -23,6 +23,25 @@ psql -c 'CREATE DATABASE shards_info_development;' -U postgres
 crystal src/cli.cr migrate
 ```
 
+### Repository counts
+
+Repository listings read dependency, dependent, and fork counts from the
+`repository_statistics` materialized view. A Mosquito job refreshes it every
+10 minutes; the worker must be running for counts to stay current. Newly added
+repositories show zero counts until the next successful refresh. Repository
+details and visibility still come from the live tables.
+
+Run migrations before starting the updated web and worker binaries. The Lustra
+migration creates and populates the view together with the unique index needed
+for concurrent refreshes. The view is managed by migrations, rather than
+`Lustra::View.register`, so subsequent migration runs preserve its index.
+
+To refresh counts manually:
+
+```sql
+REFRESH MATERIALIZED VIEW CONCURRENTLY public.repository_statistics;
+```
+
 ### Database Operations (Makefile)
 
 We use a Makefile to automate database schema dumps and restoration. Available commands:
