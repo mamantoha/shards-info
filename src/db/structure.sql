@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
-\restrict 58V4mu3q8CMBSl9UGrzq4Oz1rwZ1tU4b3Zww5BjnJqpmFfMjKR49Mumb4ufdify
+\restrict UDxSfUfTANNP07rQnXbCOgwUGl04DyCExvbrT9wCCLu5nsYNKSvbbuhscEfBnIs
 
--- Dumped from database version 18.4
--- Dumped by pg_dump version 18.4
+-- Dumped from database version 18.6
+-- Dumped by pg_dump version 18.6
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -125,6 +125,43 @@ CREATE SEQUENCE public.admins_id_seq
 --
 
 ALTER SEQUENCE public.admins_id_seq OWNED BY public.admins.id;
+
+
+--
+-- Name: events; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.events (
+    id bigint NOT NULL,
+    visitor_id uuid NOT NULL,
+    path text NOT NULL,
+    route text NOT NULL,
+    method text NOT NULL,
+    params jsonb DEFAULT '{}'::jsonb NOT NULL,
+    referrer text,
+    duration_ms bigint NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.events_id_seq OWNED BY public.events.id;
 
 
 --
@@ -476,10 +513,32 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: visitors; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.visitors (
+    id uuid DEFAULT uuidv7() NOT NULL,
+    remote_address text NOT NULL,
+    user_agent text,
+    location jsonb DEFAULT '{}'::jsonb NOT NULL,
+    events_count bigint DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+--
 -- Name: admins id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.admins ALTER COLUMN id SET DEFAULT nextval('public.admins_id_seq'::regclass);
+
+
+--
+-- Name: events id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.events ALTER COLUMN id SET DEFAULT nextval('public.events_id_seq'::regclass);
 
 
 --
@@ -558,6 +617,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.admins
     ADD CONSTRAINT admins_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.events
+    ADD CONSTRAINT events_pkey PRIMARY KEY (id);
 
 
 --
@@ -641,6 +708,14 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: visitors visitors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.visitors
+    ADD CONSTRAINT visitors_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: __clear_metadatas_idx; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -673,6 +748,41 @@ CREATE UNIQUE INDEX admins_provider_uid ON public.admins USING btree (provider, 
 --
 
 CREATE INDEX admins_updated_at ON public.admins USING btree (updated_at);
+
+
+--
+-- Name: events_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX events_created_at ON public.events USING btree (created_at);
+
+
+--
+-- Name: events_path; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX events_path ON public.events USING btree (path);
+
+
+--
+-- Name: events_route; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX events_route ON public.events USING btree (route);
+
+
+--
+-- Name: events_updated_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX events_updated_at ON public.events USING btree (updated_at);
+
+
+--
+-- Name: events_visitor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX events_visitor_id ON public.events USING btree (visitor_id);
 
 
 --
@@ -879,6 +989,20 @@ CREATE UNIQUE INDEX users_provider_provider_id ON public.users USING btree (prov
 
 
 --
+-- Name: visitors_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX visitors_created_at ON public.visitors USING btree (created_at);
+
+
+--
+-- Name: visitors_updated_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX visitors_updated_at ON public.visitors USING btree (updated_at);
+
+
+--
 -- Name: repositories tsv_insert_repositories; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -890,6 +1014,14 @@ CREATE TRIGGER tsv_insert_repositories BEFORE INSERT ON public.repositories FOR 
 --
 
 CREATE TRIGGER tsv_update_repositories BEFORE UPDATE ON public.repositories FOR EACH ROW EXECUTE FUNCTION public.tsv_trigger_update_repositories();
+
+
+--
+-- Name: events events_visitor_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.events
+    ADD CONSTRAINT events_visitor_id_fkey FOREIGN KEY (visitor_id) REFERENCES public.visitors(id) ON DELETE CASCADE;
 
 
 --
@@ -976,16 +1108,16 @@ ALTER TABLE ONLY public.repository_tags
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 58V4mu3q8CMBSl9UGrzq4Oz1rwZ1tU4b3Zww5BjnJqpmFfMjKR49Mumb4ufdify
+\unrestrict UDxSfUfTANNP07rQnXbCOgwUGl04DyCExvbrT9wCCLu5nsYNKSvbbuhscEfBnIs
 
 --
 -- PostgreSQL database dump
 --
 
-\restrict Y36BqRzooFgOLMgKUGgHMJH4a4Rb0dMl3E7jCMR67XWeMbNf490YfaCEaWpkzYq
+\restrict 6OLcD2FRFKHXm6P4MngHbM4SLnehqoioSSrxE32rrS9yUwIZmDvV0sd9ml2tW9j
 
--- Dumped from database version 18.4
--- Dumped by pg_dump version 18.4
+-- Dumped from database version 18.6
+-- Dumped by pg_dump version 18.6
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1021,11 +1153,12 @@ INSERT INTO public.__lustra_metadatas VALUES ('migration', '1669543469');
 INSERT INTO public.__lustra_metadatas VALUES ('migration', '1669546346');
 INSERT INTO public.__lustra_metadatas VALUES ('migration', '1770374223');
 INSERT INTO public.__lustra_metadatas VALUES ('migration', '1785151135');
+INSERT INTO public.__lustra_metadatas VALUES ('migration', '1788438428');
 
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Y36BqRzooFgOLMgKUGgHMJH4a4Rb0dMl3E7jCMR67XWeMbNf490YfaCEaWpkzYq
+\unrestrict 6OLcD2FRFKHXm6P4MngHbM4SLnehqoioSSrxE32rrS9yUwIZmDvV0sd9ml2tW9j
 
