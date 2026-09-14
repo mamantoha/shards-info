@@ -55,7 +55,7 @@ shards:
 
   defense:
     git: https://github.com/defense-cr/defense.git
-    version: 0.6.0+git.commit.52e6430dc1c772497650a725b3bb4e568db02b2f
+    version: 0.7.0+git.commit.27d4839a0750ba6ddcd491505920bae0367b4683
 
   delegator:
     git: https://github.com/schniz/delegator.cr.git
