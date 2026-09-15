@@ -47,7 +47,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 1.8.1+git.commit.c965ab3d2e8cd0eb47675fd8e011b103cb5a10c2
+    version: 1.8.1+git.commit.347fe94939b881596187d38e84c32b953864177e
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -131,7 +131,7 @@ shards:
 
   lustra:
     git: https://github.com/crystal-garage/lustra.git
-    version: 0.18.3+git.commit.fcfbe3cbacffc17d6cf537757398738089d33f5c
+    version: 0.18.3+git.commit.fbf440d832613d5d1c312c1ee1161b2cd8d406ff
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
