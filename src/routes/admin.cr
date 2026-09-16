@@ -130,10 +130,14 @@ router.namespace "/admin" do
 
         env.flash["notice"] = "Repository was successfully synced."
 
+        redirect_url =
+          env.request.headers["Referer"]? ||
+            "/#{repository.provider}/#{repository.user.login}/#{repository.name}"
+
         env.json({
           "status" => "success",
           "data"   => {
-            "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
+            "redirect_url" => redirect_url,
           },
         })
       end
@@ -147,10 +151,14 @@ router.namespace "/admin" do
 
         env.flash["notice"] = "Repository was successfully shown."
 
+        redirect_url =
+          env.request.headers["Referer"]? ||
+            "/#{repository.provider}/#{repository.user.login}/#{repository.name}"
+
         env.json({
           "status" => "success",
           "data"   => {
-            "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
+            "redirect_url" => redirect_url,
           },
         })
       end
@@ -164,10 +172,14 @@ router.namespace "/admin" do
 
         env.flash["notice"] = "Repository was successfully hidden."
 
+        redirect_url =
+          env.request.headers["Referer"]? ||
+            "/#{repository.provider}/#{repository.user.login}/#{repository.name}"
+
         env.json({
           "status" => "success",
           "data"   => {
-            "redirect_url" => "/#{repository.provider}/#{repository.user.login}/#{repository.name}",
+            "redirect_url" => redirect_url,
           },
         })
       end
@@ -351,10 +363,14 @@ router.namespace "/admin" do
 
         env.flash["notice"] = "User was successfully synced."
 
+        redirect_url =
+          env.request.headers["Referer"]? ||
+            "/#{user.provider}/#{user.login}"
+
         env.json({
           "status" => "success",
           "data"   => {
-            "redirect_url" => "/#{user.provider}/#{user.login}",
+            "redirect_url" => redirect_url,
           },
         })
       end
@@ -385,10 +401,14 @@ router.namespace "/admin" do
 
         env.flash["notice"] = "User was successfully shown."
 
+        redirect_url =
+          env.request.headers["Referer"]? ||
+            "/#{user.provider}/#{user.login}"
+
         env.json({
           "status" => "success",
           "data"   => {
-            "redirect_url" => "/#{user.provider}/#{user.login}",
+            "redirect_url" => redirect_url,
           },
         })
       end
@@ -402,10 +422,14 @@ router.namespace "/admin" do
 
         env.flash["notice"] = "User was successfully hidden."
 
+        redirect_url =
+          env.request.headers["Referer"]? ||
+            "/#{user.provider}/#{user.login}"
+
         env.json({
           "status" => "success",
           "data"   => {
-            "redirect_url" => "/#{user.provider}/#{user.login}",
+            "redirect_url" => redirect_url,
           },
         })
       end
