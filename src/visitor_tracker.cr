@@ -18,15 +18,17 @@ class VisitorTracker
 
     return call_next(context) unless trackable?(context.request)
 
-    visitor = track_visitor(context, user_agent)
+    event = track_visit(context, user_agent)
     started_at = Time.instant
 
-    call_next(context)
-
-    track_event(context, visitor, Time.instant - started_at) if visitor
+    begin
+      call_next(context)
+    ensure
+      update_event_duration(event, Time.instant - started_at) if event
+    end
   end
 
-  private def track_visitor(context : HTTP::Server::Context, user_agent : String?) : Visitor?
+  private def track_visit(context : HTTP::Server::Context, user_agent : String?) : Event?
     request = context.request
 
     return unless valid_session?(context)
@@ -37,22 +39,34 @@ class VisitorTracker
     if visitor
       location = visitor.remote_address == remote_address ? visitor.location : remote_address_location(remote_address)
 
-      visitor.update!({
+      visitor.set({
         remote_address: remote_address,
         user_agent:     user_agent,
         location:       location,
       })
     else
-      visitor = Visitor.create!({
+      visitor = Visitor.new({
         remote_address: remote_address,
         user_agent:     user_agent,
         location:       remote_address_location(remote_address),
       })
     end
 
+    event = Lustra::SQL.transaction do
+      visitor.save!
+      visitor.events.create!({
+        path:        request.path,
+        route:       context.route_found? ? context.route.path : request.path,
+        method:      request.method,
+        params:      request.query_params.to_h,
+        referrer:    request.headers["Referer"]?,
+        duration_ms: 0_i64,
+      })
+    end
+
     set_visitor_cookie(context, visitor.id)
 
-    visitor
+    event
   rescue error
     handle_tracking_error(error)
     nil
@@ -71,17 +85,8 @@ class VisitorTracker
     context.response.cookies["visitor_id"] = visitor_id_cookie
   end
 
-  private def track_event(context : HTTP::Server::Context, visitor : Visitor, duration : Time::Span) : Nil
-    request = context.request
-
-    visitor.events.create!({
-      path:        request.path,
-      route:       context.route.path,
-      method:      request.method,
-      params:      request.query_params.to_h,
-      referrer:    request.headers["Referer"]?,
-      duration_ms: duration.total_milliseconds.round.to_i64,
-    })
+  private def update_event_duration(event : Event, duration : Time::Span) : Nil
+    event.update!(duration_ms: duration.total_milliseconds.round.to_i64)
   rescue error
     handle_tracking_error(error)
   end
