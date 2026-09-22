@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.1-dev+git.commit.71e2dec1f26d412a7e3b14d39eba0e57b46f9aa0
+    version: 1.7.1-dev+git.commit.2a64b92d3dce2a1d895780a5ff4e5cde32f071d5
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -111,7 +111,7 @@ shards:
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
-    version: 1.13.0
+    version: 1.14.0
 
   kemal-kilt:
     git: https://github.com/crystal-garage/kemal-kilt.git
@@ -131,7 +131,7 @@ shards:
 
   lustra:
     git: https://github.com/crystal-garage/lustra.git
-    version: 0.18.3+git.commit.fbf440d832613d5d1c312c1ee1161b2cd8d406ff
+    version: 0.18.3+git.commit.6d117db1f50acc7a4bb477440928ab299b59f3cd
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
