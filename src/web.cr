@@ -174,6 +174,10 @@ error 404 do
   render "src/views/404.slang"
 end
 
+error 405 do
+  render "src/views/405.slang"
+end
+
 error Lustra::SQL::RecordNotFoundError do |env, _error|
   env.response.status_code = 404
   render "src/views/404.slang"

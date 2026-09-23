@@ -7,5 +7,6 @@ Raven.configure do |config|
   config.connect_timeout = 5.seconds
   config.read_timeout = 5.seconds
   config.excluded_exceptions << "HTTP::Server::ClientError"
+  config.excluded_exceptions << "Kemal::Exceptions::MethodNotAllowed"
   config.excluded_exceptions << "Lustra::SQL::RecordNotFoundError"
 end
