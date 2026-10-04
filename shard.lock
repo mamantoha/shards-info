@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.1-dev+git.commit.73fa42498087750606ab9216e86d71df5c0309b6
+    version: 1.7.1-dev+git.commit.69ff46f0de0fc80cea6c1d63130f609935c5616a
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -47,7 +47,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 1.8.1+git.commit.347fe94939b881596187d38e84c32b953864177e
+    version: 1.8.1+git.commit.c3a41891db839f523d685abecc2d035eaa84deaa
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -91,7 +91,7 @@ shards:
 
   http_proxy:
     git: https://github.com/mamantoha/http_proxy.git
-    version: 0.15.1
+    version: 0.16.0
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
