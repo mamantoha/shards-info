@@ -128,7 +128,16 @@ class VisitorTracker
       else
         location = IPAPI_CACHE.fetch(remote_address) do
           ipapi_client = Ipapi::Client.new
-          ipapi_client.locate(remote_address).to_json rescue "{}"
+
+          begin
+            ipapi_client.locate(remote_address).to_json
+          rescue ex
+            if ENV["KEMAL_ENV"]? == "production"
+              Raven.capture(ex)
+            end
+
+            "{}"
+          end
         end
 
         JSON.parse(location)
