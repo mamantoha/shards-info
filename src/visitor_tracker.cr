@@ -126,19 +126,20 @@ class VisitorTracker
       if ip_address.loopback? || ip_address.private?
         JSON.parse("{}")
       else
-        location = IPAPI_CACHE.fetch(remote_address) do
-          ipapi_client = Ipapi::Client.new
+        location =
+          IPAPI_CACHE.fetch(remote_address) do
+            ipapi_client = Ipapi::Client.new
 
-          begin
-            ipapi_client.locate(remote_address).to_json
-          rescue ex
-            if ENV["KEMAL_ENV"]? == "production"
-              Raven.capture(ex)
+            begin
+              ipapi_client.locate(remote_address).to_json
+            rescue ex
+              if ENV["KEMAL_ENV"]? == "production"
+                Raven.capture(ex)
+              end
+
+              "{}"
             end
-
-            "{}"
           end
-        end
 
         JSON.parse(location)
       end
