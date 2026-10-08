@@ -107,7 +107,7 @@ shards:
 
   ipapi:
     git: https://github.com/geocrystal/ipapi-crystal.git
-    version: 0.8.0
+    version: 0.8.1
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
@@ -135,7 +135,7 @@ shards:
 
   mosquito:
     git: https://github.com/mosquito-cr/mosquito.git
-    version: 2.0.0+git.commit.7cfcba8890b8df455d08e399219197976b46e49d
+    version: 2.0.0+git.commit.07fbbb2725c3cf28a6b7c07596be55ae93c57a5b
 
   multi_auth:
     git: https://github.com/msa7/multi_auth.git
