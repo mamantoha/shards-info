@@ -107,7 +107,7 @@ shards:
 
   ipapi:
     git: https://github.com/geocrystal/ipapi-crystal.git
-    version: 0.8.1
+    version: 0.8.2
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
