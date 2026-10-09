@@ -132,11 +132,13 @@ class VisitorTracker
 
             begin
               ipapi_client.locate(remote_address).to_json
-            rescue ex
+            rescue ex : JSON::SerializableError
               if ENV["KEMAL_ENV"]? == "production"
                 Raven.capture(ex)
               end
 
+              "{}"
+            rescue
               "{}"
             end
           end
