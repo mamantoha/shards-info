@@ -28,10 +28,13 @@
               td data-label="Address"
                 = visitor.remote_address
               td data-label="Location"
-                - location_value = visitor.location.as_h?
-                - if location_value && !location_value.empty?
-                  - location = Ipapi::Location.from_json(visitor.location.to_json)
-                  = "#{FlagEmoji.from_country_code(location.country_code)} #{location.city}/#{location.country_name}"
+                .js-visitor-location
+                  - location_value = visitor.location.as_h?
+                  - if location_value && !location_value.empty?
+                    - location = Ipapi::Location.from_json(visitor.location.to_json)
+                    = "#{FlagEmoji.from_country_code(location.country_code)} #{location.city}/#{location.country_name}"
+                button.btn.btn-sm.btn-outline-secondary.js-update-visitor-location type="button" data-url="/admin/visitors/#{visitor.id}/location" Update location
+                .small.text-danger.js-visitor-location-error role="status"
               td data-label="User agent"
                 = visitor.user_agent
               td data-label="Events"

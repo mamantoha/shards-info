@@ -37,7 +37,7 @@ class VisitorTracker
     visitor = find_visitor(request)
 
     if visitor
-      location = visitor.remote_address == remote_address ? visitor.location : remote_address_location(remote_address)
+      location = visitor.remote_address == remote_address ? visitor.location : VisitorTracker.remote_address_location(remote_address)
 
       visitor.set({
         remote_address: remote_address,
@@ -48,7 +48,7 @@ class VisitorTracker
       visitor = Visitor.new({
         remote_address: remote_address,
         user_agent:     user_agent,
-        location:       remote_address_location(remote_address),
+        location:       VisitorTracker.remote_address_location(remote_address),
       })
     end
 
@@ -119,13 +119,15 @@ class VisitorTracker
     request.headers["Accept"]?.try(&.includes?("text/html")) || false
   end
 
-  private def remote_address_location(remote_address : String) : JSON::Any
+  def self.remote_address_location(remote_address : String, *, refresh : Bool = false) : JSON::Any
     if Socket::IPAddress.valid?(remote_address)
       ip_address = Socket::IPAddress.new(remote_address, 0)
 
       if ip_address.loopback? || ip_address.private?
         JSON.parse("{}")
       else
+        IPAPI_CACHE.delete(remote_address) if refresh
+
         location =
           IPAPI_CACHE.fetch(remote_address) do
             ipapi_client = Ipapi::Client.new

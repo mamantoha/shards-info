@@ -125,6 +125,30 @@ $(function () {
     });
   });
 
+  $(".js-update-visitor-location").on("click", function (e) {
+    const button = e.currentTarget;
+    const cell = $(button).closest("td");
+    const error = cell.find(".js-visitor-location-error");
+
+    button.disabled = true;
+    error.text("");
+
+    $.ajax({
+      url: button.dataset.url,
+      method: "POST",
+      dataType: "json",
+      success: function (resp) {
+        cell.find(".js-visitor-location").text(resp.location);
+      },
+      error: function (resp) {
+        error.text(resp.responseJSON?.message || "Could not update location. Please try again.");
+      },
+      complete: function () {
+        button.disabled = false;
+      },
+    });
+  });
+
   formatLocalDatetimes();
 
   $(document).on("submit", ".js-delete-dead-job", function (e) {
