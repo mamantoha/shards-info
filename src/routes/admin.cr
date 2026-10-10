@@ -330,6 +330,22 @@ router.namespace "/admin" do
     render "src/views/admin/visitors/show.slang", "src/views/layouts/layout.slang"
   end
 
+  post "/visitors/:id/location" do |env|
+    visitor = Visitor.find!(visitor_id(env))
+    location = VisitorTracker.remote_address_location(visitor.remote_address, refresh: true)
+
+    if location.as_h.empty?
+      env.response.status_code = 422
+      env.json({"message" => "Could not get visitor location. Please try again later."})
+    else
+      visitor.update_column(:location, location.to_json)
+      visitor_location = Ipapi::Location.from_json(location.to_json)
+      env.json({
+        "location" => "#{FlagEmoji.from_country_code(visitor_location.country_code)} #{visitor_location.city}/#{visitor_location.country_name}",
+      })
+    end
+  end
+
   post "/visitors/:id/delete" do |env|
     visitor_id = visitor_id(env)
     Visitor.find!(visitor_id).delete
