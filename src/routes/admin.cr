@@ -338,7 +338,7 @@ router.namespace "/admin" do
       env.response.status_code = 422
       env.json({"message" => "Could not get visitor location. Please try again later."})
     else
-      visitor.update_column(:location, location.to_json)
+      visitor.update_column(:location, location)
       visitor_location = Ipapi::Location.from_json(location.to_json)
       env.json({
         "location" => "#{FlagEmoji.from_country_code(visitor_location.country_code)} #{visitor_location.city}/#{visitor_location.country_name}",
