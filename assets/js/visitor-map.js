@@ -1,4 +1,4 @@
-import { geoNaturalEarth1, geoPath, interpolateRgb, select } from "d3";
+import { geoNaturalEarth1, geoPath, interpolateRgb, select, zoom, zoomIdentity } from "d3";
 
 export async function initializeVisitorMap() {
   const container = document.getElementById("visitor-map");
@@ -30,7 +30,35 @@ export async function initializeVisitorMap() {
       .append("svg")
       .attr("viewBox", `0 0 ${width} ${height}`)
       .attr("aria-label", "Visitor counts by country");
-    const paths = svg
+    const layer = svg.append("g");
+    const zoomIn = document.querySelector(".js-visitor-map-zoom-in");
+    const zoomOut = document.querySelector(".js-visitor-map-zoom-out");
+    const reset = document.querySelector(".js-visitor-map-reset");
+    const mapZoom = zoom()
+      .extent([
+        [0, 0],
+        [width, height],
+      ])
+      .translateExtent([
+        [0, 0],
+        [width, height],
+      ])
+      .scaleExtent([1, 8])
+      .filter((event) => event.type !== "wheel" && event.type !== "dblclick" && !event.button)
+      .on("zoom", ({ transform }) => {
+        layer.attr("transform", transform);
+        svg.classed("is-zoomed", transform.k > 1);
+        zoomIn.disabled = transform.k >= 8;
+        zoomOut.disabled = transform.k <= 1;
+        reset.disabled = transform.k <= 1;
+      });
+    svg.call(mapZoom);
+    zoomIn.disabled = false;
+    zoomIn.addEventListener("click", () => svg.call(mapZoom.scaleBy, 2));
+    zoomOut.addEventListener("click", () => svg.call(mapZoom.scaleBy, 0.5));
+    reset.addEventListener("click", () => svg.call(mapZoom.transform, zoomIdentity));
+
+    const paths = layer
       .selectAll("path")
       .data(countries.features)
       .join("path")

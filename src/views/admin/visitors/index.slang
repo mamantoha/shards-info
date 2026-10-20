@@ -15,6 +15,10 @@
             button.btn.btn-outline-secondary type="button" data-days="30" aria-pressed="false" 30 days
             button.btn.btn-secondary type="button" data-days="90" aria-pressed="true" 90 days
         p.small Unique tracked visitors with at least 2 total events, active during the selected period, using their latest known country.
+        .btn-group.mb-2 role="group" aria-label="Map zoom controls"
+          button.btn.btn-sm.btn-outline-secondary.js-visitor-map-zoom-in type="button" aria-label="Zoom in" aria-controls="visitor-map" disabled="disabled" +
+          button.btn.btn-sm.btn-outline-secondary.js-visitor-map-zoom-out type="button" aria-label="Zoom out" aria-controls="visitor-map" disabled="disabled" −
+          button.btn.btn-sm.btn-outline-secondary.js-visitor-map-reset type="button" aria-controls="visitor-map" disabled="disabled" Reset
         #visitor-map.visitor-map data-url="/admin/visitors/countries.json" role="region" aria-label="World map of visitors by country"
         .small.mt-2.js-visitor-map-status role="status" Loading visitor map…
         .d-flex.align-items-center.gap-2.small.mt-2
