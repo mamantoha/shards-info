@@ -480,7 +480,6 @@ get "/:provider/:owner/:repo" do |env|
     dependents =
       repository
         .dependents
-        .clear_distinct
         .with_user
         .with_counts
         .order_by("repositories.stars_count", :desc)
@@ -490,7 +489,6 @@ get "/:provider/:owner/:repo" do |env|
     forks =
       repository
         .forks
-        .clear_distinct
         .with_user
         .with_counts
         .order_by("dependents_count", :desc)
@@ -555,7 +553,6 @@ get "/:provider/:owner/:repo/dependents" do |env|
     repositories =
       repository
         .dependents
-        .clear_distinct
         .with_tags
         .with_user
         .with_counts
@@ -598,7 +595,6 @@ get "/tags/:name" do |env|
       tag
         .repositories
         .join(:user)
-        .clear_distinct
         .with_tags
         .with_user
         .where { users.ignore.false? }
@@ -680,7 +676,6 @@ get "/languages/:name" do |env|
       language
         .repositories
         .join(:user)
-        .clear_distinct
         .with_tags
         .with_user
         .with_counts
