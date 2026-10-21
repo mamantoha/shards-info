@@ -39,7 +39,7 @@ shards:
 
   cookie_jar:
     git: https://github.com/mamantoha/http-cookie_jar.git
-    version: 0.1.0
+    version: 0.2.0
 
   countdown:
     git: https://github.com/mamantoha/countdown-crystal.git
@@ -47,7 +47,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 1.8.1+git.commit.c3a41891db839f523d685abecc2d035eaa84deaa
+    version: 1.9.0+git.commit.45377e3fc3f0b97d455a20990b74d920dc8397b1
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -91,7 +91,7 @@ shards:
 
   http_proxy:
     git: https://github.com/mamantoha/http_proxy.git
-    version: 0.16.0
+    version: 0.17.0
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
