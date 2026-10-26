@@ -13,8 +13,6 @@ router.namespace "/stats" do
 
   get "/created_at" do
     CACHE.fetch("stats:created_at", expires_in: expires_in) do
-      hsh = {} of String => Int64
-
       Repository
         .query
         .group_by("year_month")
@@ -22,18 +20,16 @@ router.namespace "/stats" do
         .pluck(
           "date_trunc('month', created_at)::date AS year_month": Time,
           "COUNT(*) AS count": Int64
-        ).each do |year_month, count|
+        )
+        .each_with_object({} of String => Int64) do |(year_month, count), hsh|
           hsh[year_month.to_s("%Y-%m")] = count
         end
-
-      hsh.to_json
+        .to_json
     end
   end
 
   get "/last_activity_at" do
     CACHE.fetch("stats:last_activity_at_json", expires_in: expires_in) do
-      hsh = {} of String => Int64
-
       Repository
         .query
         .group_by("year_month")
@@ -41,11 +37,11 @@ router.namespace "/stats" do
         .pluck(
           "date_trunc('month', last_activity_at)::date AS year_month": Time,
           "COUNT(*) AS count": Int64
-        ).each do |year_month, count|
+        )
+        .each_with_object({} of String => Int64) do |(year_month, count), hsh|
           hsh[year_month.to_s("%Y-%m")] = count
         end
-
-      hsh.to_json
+        .to_json
     end
   end
 
@@ -173,35 +169,29 @@ router.namespace "/stats" do
 
   get "/repositories_provider_count" do
     CACHE.fetch("stats:repositories_provider_count", expires_in: expires_in) do
-      hsh = {} of String => Int64
-
       Repository
         .query
         .group_by("provider")
         .order_by(count: :desc)
         .pluck(provider: String, "COUNT(*) AS count": Int64)
-        .each do |provider, count|
+        .each_with_object({} of String => Int64) do |(provider, count), hsh|
           hsh[provider] = count
         end
-
-      hsh.to_json
+        .to_json
     end
   end
 
   get "/users_provider_count" do
     CACHE.fetch("stats:users_provider_count", expires_in: expires_in) do
-      hsh = {} of String => Int64
-
       User
         .query
         .group_by("provider")
         .order_by(count: :desc)
         .pluck(provider: String, "COUNT(*) AS count": Int64)
-        .each do |provider, count|
+        .each_with_object({} of String => Int64) do |(provider, count), hsh|
           hsh[provider] = count
         end
-
-      hsh.to_json
+        .to_json
     end
   end
 end
