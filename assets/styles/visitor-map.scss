@@ -1,0 +1,43 @@
+.visitor-map {
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  background: var(--page-heading-bg-color);
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 480px;
+    overflow: hidden;
+    touch-action: none;
+
+    &.is-zoomed {
+      cursor: grab;
+
+      &:active {
+        cursor: grabbing;
+      }
+    }
+  }
+}
+
+.visitor-map-country {
+  fill: var(--border-color);
+  stroke: var(--main-bg-color);
+  stroke-width: 0.6;
+  vector-effect: non-scaling-stroke;
+
+  &:hover,
+  &:focus {
+    stroke: var(--font-color);
+    stroke-width: 1.5;
+    outline: none;
+  }
+}
+
+.visitor-map-legend {
+  width: 140px;
+  height: 10px;
+  background: linear-gradient(to right, var(--border-color), #b6d9f5, #08519c);
+  border: 1px solid var(--border-color);
+}

@@ -15,3 +15,7 @@ window.jQuery = $;
 window.MoveTo = moveto;
 window.Chart = Chart;
 window.bootstrap = bootstrap;
+
+if (document.getElementById("visitor-map")) {
+  import("./js/visitor-map.js").then(({ initializeVisitorMap }) => initializeVisitorMap());
+}
