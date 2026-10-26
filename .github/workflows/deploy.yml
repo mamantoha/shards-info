@@ -40,7 +40,7 @@ jobs:
       - name: Install Crystal
         uses: ./.github/actions/install-crystal
         with:
-          crystal: 1.22.0
+          crystal: 1.22.1
 
       - name: Install shard dependencies
         run: shards install --production
