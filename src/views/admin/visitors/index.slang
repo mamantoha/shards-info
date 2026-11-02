@@ -28,8 +28,15 @@
         .small.mt-2
           | Boundaries: Natural Earth
 
-    h2
-      = "Visitors: #{total_count}"
+    .d-flex.flex-wrap.justify-content-between.align-items-center.gap-2.mb-2
+      h2.mb-0
+        = "Visitors: #{total_count}"
+      .dropdown
+        button.btn.btn-outline-secondary.dropdown-toggle type="button" data-bs-toggle="dropdown" aria-expanded="false" Actions
+        ul.dropdown-menu.dropdown-menu-end
+          li
+            form action="/admin/visitors/delete_low_activity" method="post" onsubmit="return confirm('Delete all visitors with 1 or fewer total events and their events? This applies to all dates and pages.')"
+              button.dropdown-item.text-danger type="submit" Remove visitors with 1 or fewer events
     .table-responsive.stacked-table-responsive
       table.table.table-striped.stacked-table
         thead

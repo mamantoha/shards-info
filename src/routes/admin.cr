@@ -354,6 +354,13 @@ router.namespace "/admin" do
     end
   end
 
+  post "/visitors/delete_low_activity" do |env|
+    deleted_count = Visitor.query.where { events_count <= 1 }.delete_all
+
+    env.flash["notice"] = "Deleted #{Helpers.pluralize(deleted_count, "visitor", "visitors")} with 1 or fewer events."
+    env.redirect("/admin/visitors")
+  end
+
   post "/visitors/:id/delete" do |env|
     visitor_id = visitor_id(env)
     Visitor.find!(visitor_id).delete

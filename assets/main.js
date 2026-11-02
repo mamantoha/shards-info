@@ -9,6 +9,7 @@ import moveto from "moveto/src/moveTo";
 import "./vendor/jquery.twbsPagination.js";
 import "./js/application.js";
 import "./js/chart.js";
+import { initializeVisitorMap } from "./js/visitor-map.js";
 
 window.$ = $;
 window.jQuery = $;
@@ -17,5 +18,5 @@ window.Chart = Chart;
 window.bootstrap = bootstrap;
 
 if (document.getElementById("visitor-map")) {
-  import("./js/visitor-map.js").then(({ initializeVisitorMap }) => initializeVisitorMap());
+  initializeVisitorMap();
 }
