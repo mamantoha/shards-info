@@ -37,6 +37,9 @@
           li
             form action="/admin/visitors/delete_low_activity" method="post" onsubmit="return confirm('Delete all visitors with 1 or fewer total events and their events? This applies to all dates and pages.')"
               button.dropdown-item.text-danger type="submit" Remove visitors with 1 or fewer events
+          li
+            form action="/admin/visitors/delete_empty_location" method="post" onsubmit="return confirm('Delete all visitors with empty location and their events? This applies to all dates and pages, regardless of event count.')"
+              button.dropdown-item.text-danger type="submit" Remove visitors with empty location
     .table-responsive.stacked-table-responsive
       table.table.table-striped.stacked-table
         thead

@@ -361,6 +361,13 @@ router.namespace "/admin" do
     env.redirect("/admin/visitors")
   end
 
+  post "/visitors/delete_empty_location" do |env|
+    deleted_count = Visitor.query.where("location = '{}'::jsonb").delete_all
+
+    env.flash["notice"] = "Deleted #{Helpers.pluralize(deleted_count, "visitor", "visitors")} with empty location."
+    env.redirect("/admin/visitors")
+  end
+
   post "/visitors/:id/delete" do |env|
     visitor_id = visitor_id(env)
     Visitor.find!(visitor_id).delete
