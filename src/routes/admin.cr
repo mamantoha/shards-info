@@ -298,8 +298,8 @@ router.namespace "/admin" do
   end
 
   get "/visitors/countries.json" do |env|
-    days = env.params.query["days"]?.try(&.to_i?) || 90
-    days = 90 unless {7, 30, 90}.includes?(days)
+    days = env.params.query["days"]?.try(&.to_i?) || 7
+    days = 7 unless {7, 30, 90}.includes?(days)
 
     env.response.headers["Cache-Control"] = "no-store"
     env.json({"days" => days, "countries" => Visitor.country_counts(days)})
