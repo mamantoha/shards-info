@@ -127,7 +127,7 @@ export async function initializeVisitorMap() {
     buttons.forEach((button) =>
       button.addEventListener("click", () => update(Number(button.dataset.days))),
     );
-    update(90);
+    update(7);
   } catch (error) {
     status.textContent = "Could not load the visitor map. Please reload to try again.";
   }
