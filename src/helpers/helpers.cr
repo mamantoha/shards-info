@@ -116,19 +116,13 @@ module Helpers
 
           next unless dependency_repository
 
-          unless Relationship.find_by({
-                   master_id:     master_repository.id,
-                   dependency_id: dependency_repository.id,
-                   development:   development,
-                 })
-            Relationship.create!({
-              master_id:     master_repository.id,
-              dependency_id: dependency_repository.id,
-              development:   development,
-              branch:        branch,
-              version:       version,
-            })
-          end
+          relationship = Relationship.query.find_or_build(
+            master_id: master_repository.id,
+            dependency_id: dependency_repository.id,
+            development: development
+          )
+          relationship.set({branch: branch, version: version})
+          relationship.save! if relationship.modified?
         end
       end
     end
