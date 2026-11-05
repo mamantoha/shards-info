@@ -1,4 +1,4 @@
-import cloud from "d3-cloud";
+import CloudLayout from "d3-cloud";
 import * as d3 from "d3";
 
 const DEFAULTS = {
@@ -121,64 +121,71 @@ function drawWordCloud(container, words, options = {}) {
   element.classList.add("word-cloud");
   element.innerHTML = "";
 
-  const layout = cloud()
-    .size([width, height])
-    .words(layoutWords)
-    .padding(settings.padding)
-    .rotate(settings.rotate)
-    .font("Helvetica, Arial, sans-serif")
-    .fontSize((d) => d.size)
-    .on("end", (renderedWords) => {
-      const svg = d3
-        .select(element)
-        .append("svg")
-        .attr("class", "word-cloud__svg")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("viewBox", `0 0 ${width} ${height}`);
+  const layout = new CloudLayout().size([width, height]).overflow(false);
+  const renderedWords = [];
 
-      const group = svg.append("g").attr("transform", `translate(${width / 2},${height / 2})`);
-
-      const nodes = group
-        .selectAll("g")
-        .data(renderedWords)
-        .enter()
-        .append("g")
-        .attr("transform", (d) => `translate(${d.x},${d.y})rotate(${d.rotate})`);
-
-      const addText = (selection) => {
-        selection
-          .attr("class", (d) => `word-cloud__word ${settings.classPattern.replace("{n}", d.step)}`)
-          .style("font-size", (d) => `${d.size}px`)
-          .style("fill", (d) => d.color || null)
-          .attr("text-anchor", "middle")
-          .text((d) => d.text);
-      };
-
-      nodes.each(function (d) {
-        if (d.link && d.link.href) {
-          const link = d3
-            .select(this)
-            .append("a")
-            .attr("class", "word-cloud__link")
-            .attr("href", d.link.href);
-
-          if (d.link.target) {
-            link.attr("target", d.link.target);
-          }
-
-          if (d.link.rel) {
-            link.attr("rel", d.link.rel);
-          }
-
-          addText(link.append("text"));
-        } else {
-          addText(d3.select(this).append("text"));
-        }
-      });
+  layoutWords.sort((a, b) => b.size - a.size);
+  for (const word of layoutWords) {
+    const sprite = layout.getSprite(word.text, {
+      datum: word,
+      font: "Helvetica, Arial, sans-serif",
+      size: word.size,
+      padding: settings.padding,
+      rotate: settings.rotate(word),
     });
+    if (!sprite) continue;
 
-  layout.start();
+    const placed = layout.place(sprite);
+    if (placed) renderedWords.push({ ...word, ...placed });
+  }
+
+  const svg = d3
+    .select(element)
+    .append("svg")
+    .attr("class", "word-cloud__svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", `0 0 ${width} ${height}`);
+
+  const group = svg.append("g").attr("transform", `translate(${width / 2},${height / 2})`);
+
+  const nodes = group
+    .selectAll("g")
+    .data(renderedWords)
+    .enter()
+    .append("g")
+    .attr("transform", (d) => `translate(${d.x},${d.y})rotate(${d.rotate})`);
+
+  const addText = (selection) => {
+    selection
+      .attr("class", (d) => `word-cloud__word ${settings.classPattern.replace("{n}", d.step)}`)
+      .style("font-size", (d) => `${d.size}px`)
+      .style("fill", (d) => d.color || null)
+      .attr("text-anchor", "middle")
+      .text((d) => d.text);
+  };
+
+  nodes.each(function (d) {
+    if (d.link && d.link.href) {
+      const link = d3
+        .select(this)
+        .append("a")
+        .attr("class", "word-cloud__link")
+        .attr("href", d.link.href);
+
+      if (d.link.target) {
+        link.attr("target", d.link.target);
+      }
+
+      if (d.link.rel) {
+        link.attr("rel", d.link.rel);
+      }
+
+      addText(link.append("text"));
+    } else {
+      addText(d3.select(this).append("text"));
+    }
+  });
 
   if (settings.autoResize) {
     if (element._wordCloudObserver) {
