@@ -372,7 +372,7 @@ get "/search" do |env|
 
     sort_param = env.params.query["sort"]? || "stars"
     sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
-    expression, direction = Helpers.repositories_sort_expression_direction(sort)
+    expression, direction, nulls = Helpers.repositories_sort_expression_direction(sort)
 
     query_param = env.params.query["query"].as(String)
 
@@ -394,7 +394,7 @@ get "/search" do |env|
         .with_counts
         .published
         .search(query)
-        .order_by(expression, direction)
+        .order_by(expression, direction, nulls)
         .order_by("repositories.id", :asc)
         .paginate(page, per_page)
 
@@ -426,7 +426,7 @@ get "/:provider/:owner" do |env|
 
   sort_param = env.params.query["sort"]? || "stars"
   sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
-  expression, direction = Helpers.repositories_sort_expression_direction(sort)
+  expression, direction, nulls = Helpers.repositories_sort_expression_direction(sort)
 
   if user = User.query.with_repositories(&.with_tags).find_by({provider: provider, login: owner})
     repositories =
@@ -435,7 +435,7 @@ get "/:provider/:owner" do |env|
         .with_user
         .with_tags
         .with_counts
-        .order_by(expression, direction)
+        .order_by(expression, direction, nulls)
         .order_by("repositories.id", :asc)
 
     repositories_count = repositories.count
@@ -547,7 +547,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
 
   sort_param = env.params.query["sort"]? || "stars"
   sort = sort_param.in?(Helpers::REPOSITORIES_SORT_OPTIONS.keys) ? sort_param : "stars"
-  expression, direction = Helpers.repositories_sort_expression_direction(sort)
+  expression, direction, nulls = Helpers.repositories_sort_expression_direction(sort)
 
   if repository = Repository.find_repository(owner, repo, provider)
     repositories =
@@ -556,7 +556,7 @@ get "/:provider/:owner/:repo/dependents" do |env|
         .with_tags
         .with_user
         .with_counts
-        .order_by(expression, direction)
+        .order_by(expression, direction, nulls)
         .order_by("repositories.id", :asc)
         .paginate(page, per_page)
 
