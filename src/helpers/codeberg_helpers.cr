@@ -142,17 +142,16 @@ module CodebergHelpers
 
   def create_releases(repository : Repository, codeberg_releases : Array(Forgejo::Release))
     codeberg_releases.each do |codeberg_release|
-      unless repository.releases.find_by({tag_name: codeberg_release.tag_name})
-        Release.create!({
-          repository_id: repository.id,
-          provider:      "codeberg",
-          tag_name:      codeberg_release.tag_name,
-          name:          codeberg_release.name,
-          body:          codeberg_release.body,
-          created_at:    codeberg_release.created_at,
-          published_at:  codeberg_release.published_at,
-        })
-      end
+      release = repository.releases.find_or_build(tag_name: codeberg_release.tag_name)
+      release.set({
+        provider:     "codeberg",
+        tag_name:     codeberg_release.tag_name,
+        name:         codeberg_release.name,
+        body:         codeberg_release.body,
+        created_at:   codeberg_release.created_at,
+        published_at: codeberg_release.published_at,
+      })
+      release.save! if release.modified?
     end
   end
 

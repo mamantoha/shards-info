@@ -145,18 +145,17 @@ module GithubHelpers
 
   def create_releases(repository : Repository, github_releases : Array(Github::Release))
     github_releases.each do |github_release|
-      unless repository.releases.find_by({tag_name: github_release.tag_name})
-        Release.create!({
-          repository_id: repository.id,
-          provider:      "github",
-          provider_id:   github_release.id,
-          tag_name:      github_release.tag_name,
-          name:          github_release.name,
-          body:          github_release.body,
-          created_at:    github_release.created_at,
-          published_at:  github_release.published_at,
-        })
-      end
+      release = repository.releases.find_or_build(tag_name: github_release.tag_name)
+      release.set({
+        provider:     "github",
+        provider_id:  github_release.id,
+        tag_name:     github_release.tag_name,
+        name:         github_release.name,
+        body:         github_release.body,
+        created_at:   github_release.created_at,
+        published_at: github_release.published_at,
+      })
+      release.save! if release.modified?
     end
   end
 
