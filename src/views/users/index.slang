@@ -11,6 +11,6 @@ div
         | total results
 .container
   .users
-    - users.each(fetch_columns: true) do |user|
+    - users_page.each do |user|
       == render "src/views/users/_user_item.slang"
 == paginator

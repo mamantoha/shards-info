@@ -13,7 +13,7 @@
       .small.mb-4
         | #{user.attributes["repositories_count"]} repositories
     .col-md-9
-      - if (repository = user.repositories.with_counts.order_by(stars_count: :desc).first(fetch_columns: true))
+      - if (repository = popular_repositories[user.id]?)
         .small.text-uppercase.mb-2
           i.text-warning.fas.fa-fire
           ' Popular repository

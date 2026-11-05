@@ -314,6 +314,20 @@ get "/users" do |env|
     "/users?page=#{page}"
   ).to_s
 
+  users_page = users.to_a(fetch_columns: true)
+  user_ids = users_page.map(&.id)
+  popular_repositories =
+    Repository
+      .query
+      .where { user_id.in?(user_ids) }
+      .with_counts
+      .distinct("repositories.user_id")
+      .order_by("repositories.user_id", :asc)
+      .order_by("repositories.stars_count", :desc)
+      .order_by("repositories.id", :asc)
+      .to_a(fetch_columns: true)
+      .to_h { |repository| {repository.user_id, repository} }
+
   set_request_context(env) do
     request_context.page_title = "Crystal developers"
     request_context.page_description = "Crystal developers"
