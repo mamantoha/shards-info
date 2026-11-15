@@ -41,5 +41,8 @@
     "jquery": "^4.0.0",
     "moveto": "^1.8.2",
     "sass": "^1.108.1"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": true
   }
 }
