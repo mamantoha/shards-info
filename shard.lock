@@ -7,7 +7,7 @@ shards:
 
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.7.1-dev+git.commit.8c7db9d071b796c87400320f4a844260eb249f2f
+    version: 1.7.1-dev+git.commit.6ac36d2b3a6b778d09dac5edf265f8174a753a38
 
   any_hash:
     git: https://github.com/sija/any_hash.cr.git
@@ -47,7 +47,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 1.9.0+git.commit.45377e3fc3f0b97d455a20990b74d920dc8397b1
+    version: 1.9.0+git.commit.16f09c13ae2eaef5f73a1277889c3580bb4e1d47
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -107,7 +107,7 @@ shards:
 
   ipapi:
     git: https://github.com/geocrystal/ipapi-crystal.git
-    version: 0.8.2
+    version: 0.8.3
 
   kemal:
     git: https://github.com/kemalcr/kemal.git
