@@ -35,7 +35,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.9",
-    "chart.js": "^4.6.1",
+    "chart.js": "^4.6.2",
     "d3": "^7.9.2",
     "d3-cloud": "^2.0.0",
     "jquery": "^4.1.0",
